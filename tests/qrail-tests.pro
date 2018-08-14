@@ -1,69 +1,54 @@
-#
-#   This file is part of QRail.
-#
-#   QRail is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   QRail is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
-#
 
 TARGET = qrail-tests
-VERSION = 0.0.1
-TEMPLATE = app
-
-# Qt modules
-QT += testlib
-QT -= gui
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 # QMake config
-CONFIG += console \
-        testcase
-CONFIG -= app_bundle
+CONFIG += sailfishapp \
+        c++11
 
-# Compiler configuration
-!msvc {
-    # Flags for GCC compilers
-    CONFIG += warn_on
-    QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self \
-            -Wmissing-include-dirs -Wswitch-enum -Wundef -Wpointer-arith \
-            -Wdisabled-optimization -Wcast-align -Wcast-qual
+# Qt modules
+QT += core \
+    network \
+    positioning \
+    concurrent \
+    sql \
+    testlib
+
+# Set QRail library location (static linked due Jolla Harbour restrictions)
+CONFIG(debug, debug|release) {
+    QRAIL_LOCATION = $$PWD/../build/debug
 }
-
-# Sets the location of the QRail library for the linker
-# DEFAULT: The same location as the qrail-tests binary
-QRAIL_LOCATION = $$OUT_PWD
-LIBS += -L$$QRAIL_LOCATION -lqrail
-
-# Header include path of the QRail library
-INCLUDEPATH += $$PWD/../include
+else {
+    QRAIL_LOCATION = $$PWD/../build/release
+}
+LIBS += $$QRAIL_LOCATION/libqrail.a
+INCLUDEPATH += $$PWD/../src/include \
+            $$PWD/../qtcsv/include
 
 SOURCES += \
-    $$PWD/qrail-tests.cpp \
-    $$PWD/database/databasemanagertest.cpp \
-    $$PWD/network/networkmanagertest.cpp \
-    $$PWD/fragments/fragmentsfragmenttest.cpp \
-    $$PWD/fragments/fragmentspagetest.cpp \
-    $$PWD/fragments/fragmentsfactorytest.cpp \
-    $$PWD/csa/csaplannertest.cpp
+    src/qrail-tests.cpp \
+    src/database/databasemanagertest.cpp \
+    src/network/networkmanagertest.cpp \
+    src/fragments/fragmentsfragmenttest.cpp \
+    src/fragments/fragmentspagetest.cpp \
+    src/fragments/fragmentsfactorytest.cpp \
+    src/csa/csaplannertest.cpp
 
 HEADERS += \
-    $$PWD/database/databasemanagertest.h \
-    $$PWD/network/networkmanagertest.h \
-    $$PWD/fragments/fragmentsfragmenttest.h \
-    $$PWD/fragments/fragmentspagetest.h \
-    $$PWD/fragments/fragmentsfactorytest.h \
-    $$PWD/csa/csaplannertest.h
+    src/database/databasemanagertest.h \
+    src/network/networkmanagertest.h \
+    src/fragments/fragmentsfragmenttest.h \
+    src/fragments/fragmentspagetest.h \
+    src/fragments/fragmentsfactorytest.h \
+    src/csa/csaplannertest.h
+
+DISTFILES += \
+    rpm/qrail-tests.changes \
+    rpm/qrail-tests.spec \
+    qrail-tests.desktop
 
 # Print out configuration information
 message(=== QRail tests configuration ===)
 message(Qt version: $$[QT_VERSION])
-message(qrail-tests binary will be created in folder: $$OUT_PWD)
-message(Expected location of the QRail library: $$QRAIL_LOCATION)
+message(QRail static library path: $$QRAIL_LOCATION/libqrail.a)
+message(QRail include path: $$INCLUDEPATH)

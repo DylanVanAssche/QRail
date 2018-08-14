@@ -22,12 +22,14 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
+
+#include "../qrail.h"
 #include "../csa/csarouteleg.h"
 #include "csatransfer.h"
 #include "csamessage.h"
 
 namespace CSA {
-class Route : public QObject
+class QRAIL_SHARED_EXPORT Route : public QObject
 {
     Q_OBJECT
 public:

@@ -29,7 +29,7 @@
 #include <QtCore/QDebug>
 #include "fragmentsfragment.h"
 #include "fragmentspage.h"
-#include "../../network/networkmanager.h"
+#include "network/networkmanager.h"
 #define BASE_URL "https://graph.irail.be/sncb/connections"
 
 // Factory pattern to generate Linked Connections fragments on the fly

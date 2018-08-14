@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "networkmanager.h"
+#include "../include/network/networkmanager.h"
 Network::Manager* Network::Manager::m_instance = nullptr;
 
 /**

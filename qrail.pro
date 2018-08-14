@@ -18,8 +18,8 @@
 TARGET = qrail
 VERSION = 0.0.1
 
-# Uncomment this setting if you want to build static library
-#CONFIG += staticlib
+# Uncomment this config if you want to build a static library
+CONFIG += staticlib
 
 # Library mode
 CONFIG(staticlib): DEFINES += QRAIL_STATIC_LIB
@@ -47,7 +47,20 @@ include(qtcsv/qtcsv.pri)
 # Include QRail library files
 include(qrail.pri)
 
-# Compiler configuration
+# Compiler & build configuration
+CONFIG(debug, debug|release) {
+    DESTDIR = $$PWD/build/debug
+    OBJECTS_DIR = $$PWD/build/debug/.obj
+    MOC_DIR = $$PWD/build/debug/.moc
+    RCC_DIR = $$PWD/build/debug/.rcc
+}
+else {
+    DESTDIR = $$PWD/build/release
+    OBJECTS_DIR = $$PWD/build/release/.obj
+    MOC_DIR = $$PWD/build/release/.moc
+    RCC_DIR = $$PWD/build/release/.rcc
+}
+
 !msvc {
     # Flags for GCC compilers
     CONFIG += warn_on

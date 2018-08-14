@@ -32,8 +32,10 @@
 #include <QtPositioning/QGeoCoordinate>
 #include <QtPositioning/QGeoAddress>
 
+#include "../qrail.h"
+
 namespace CSA {
-class Station : public QObject
+class QRAIL_SHARED_EXPORT Station : public QObject
 {
     Q_OBJECT
 public:

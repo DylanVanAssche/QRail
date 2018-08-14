@@ -23,11 +23,13 @@
 #include <QtCore/QObject>
 #include <QtCore/QMetaType>
 #include <QtCore/QDebug>
+
+#include "../qrail.h"
 #include "../csa/csarouteleg.h"
 #include "../csa/csaroutelegend.h"
 
 namespace CSA {
-class Transfer : public QObject
+class QRAIL_SHARED_EXPORT Transfer : public QObject
 {
     Q_OBJECT
 public:

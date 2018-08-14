@@ -27,17 +27,20 @@
 #include <QtCore/QUrl>
 #include <QtCore/QMap>
 #include <QtSql/QSqlQuery>
+
+#include "../qrail.h"
 #include "csastation.h"
 #include "csanullstation.h"
-#include "../../database/databasemanager.h"
-#include "../qtcsv/include/qtcsv/stringdata.h"
-#include "../qtcsv/include/qtcsv/reader.h"
-#include "../qtcsv/include/qtcsv/writer.h"
+#include "database/databasemanager.h"
+#include "../../qtcsv/include/qtcsv/stringdata.h"
+#include "../../qtcsv/include/qtcsv/stringdata.h"
+#include "../../qtcsv/include/qtcsv/reader.h"
+#include "../../qtcsv/include/qtcsv/writer.h"
 
 #define DB_PATH "/home/nemo/.local/share/harbour-berail/db/stations.db"
 
 namespace CSA {
-class StationFactory : public QObject
+class QRAIL_SHARED_EXPORT StationFactory : public QObject
 {
     Q_OBJECT
 public:

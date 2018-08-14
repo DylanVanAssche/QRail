@@ -28,10 +28,12 @@
 #include <QtCore/QPair>
 #include <QtPositioning/QGeoAddress>
 #include <QtPositioning/QGeoCoordinate>
+
 #include "csastation.h"
+#include "../qrail.h"
 
 namespace CSA {
-class NullStation: public Station
+class QRAIL_SHARED_EXPORT NullStation: public Station
 {
 public:
     static NullStation *getInstance(QObject *parent = nullptr);

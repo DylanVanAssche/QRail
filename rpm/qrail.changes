@@ -1,0 +1,12 @@
+# Rename this file as qrail.changes to include changelog
+# entries in your RPM file.
+#
+# Add new changelog entries following the format below.
+# Add newest entries to the top of the list.
+# Separate entries from eachother with a blank line.
+
+# * date Author's Name <author's email> version-release
+# - Summary of changes
+
+* Thu Aug 14 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.1-1
+- [RELEASE] First public release

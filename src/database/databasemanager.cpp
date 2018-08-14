@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "databasemanager.h"
+#include "../include/database/databasemanager.h"
 
 Database::Manager* Database::Manager::m_instance = nullptr;
 

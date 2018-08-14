@@ -5,7 +5,7 @@
 #include <QtCore/QDateTime>
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
-#include "../src/linkedconnections/csa/csaplanner.h"
+#include "csa/csaplanner.h"
 
 namespace CSA {
 class PlannerTest : public QObject

@@ -6,9 +6,9 @@
 #include <QSignalSpy>
 #include <QMetaType>
 #include <QtSql/QSqlQuery>
-#include "../src/linkedconnections/fragments/fragmentsfactory.h"
-#include "../src/database/databasemanager.h"
-#include "../src/linkedconnections/fragments/fragmentspage.h"
+#include "fragments/fragmentsfactory.h"
+#include "database/databasemanager.h"
+#include "fragments/fragmentspage.h"
 
 #define SIGNAL_WAIT_TIME 3000
 

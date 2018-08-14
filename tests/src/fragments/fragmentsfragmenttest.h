@@ -17,31 +17,27 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#ifndef NetworkManagerTEST_H
-#define NetworkManagerTEST_H
+#ifndef LINKEDCONNECTIONFRAGMENTTEST_H
+#define LINKEDCONNECTIONFRAGMENTTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include "../src/network/networkmanager.h"
+#include <QSignalSpy>
+#include "fragments/fragmentsfragment.h"
 
-#define SIGNAL_WAIT_TIME 3000
-
-namespace Network {
-class ManagerTest : public QObject
+namespace Fragments {
+class FragmentTest: public QObject
 {
     Q_OBJECT
 private slots:
-    void initNetworkManager();
-    void runNetworkManager();
-    void cleanNetworkManager();
-
-public slots:
-    void processReply(QNetworkReply *reply);
+    void initLinkedConnectionFragment();
+    void runLinkedConnectionFragment();
+    void cleanLinkedConnectionFragment();
 
 private:
-    Network::Manager *http;
+    Fragments::Fragment *lcWithoutDelay;
+    Fragments::Fragment *lcWithDelay;
 };
 }
 
-#endif // NetworkManagerTEST_H
+#endif // LINKEDCONNECTIONFRAGMENTTEST_H

@@ -25,11 +25,13 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
 #include <QtCore/QMetaType>
+
+#include "../qrail.h"
 #include "csavehicle.h"
 #include "csastation.h"
 
 namespace CSA {
-class VehicleStop : public QObject
+class QRAIL_SHARED_EXPORT VehicleStop : public QObject
 {
     Q_OBJECT
 public:

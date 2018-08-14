@@ -17,27 +17,26 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#ifndef LINKEDCONNECTIONFRAGMENTTEST_H
-#define LINKEDCONNECTIONFRAGMENTTEST_H
+#ifndef LINKEDCONNECTIONPAGETEST_H
+#define LINKEDCONNECTIONPAGETEST_H
 
 #include <QObject>
 #include <QtTest/QtTest>
 #include <QSignalSpy>
-#include "../src/linkedconnections/fragments/fragmentsfragment.h"
+#include "fragments/fragmentspage.h"
 
 namespace Fragments {
-class FragmentTest: public QObject
+class PageTest: public QObject
 {
     Q_OBJECT
 private slots:
-    void initLinkedConnectionFragment();
-    void runLinkedConnectionFragment();
-    void cleanLinkedConnectionFragment();
+    void initLinkedConnectionPageTest();
+    void runLinkedConnectionPageTest();
+    void cleanLinkedConnectionPageTest();
 
 private:
-    Fragments::Fragment *lcWithoutDelay;
-    Fragments::Fragment *lcWithDelay;
+    Fragments::Page *page;
 };
 }
 
-#endif // LINKEDCONNECTIONFRAGMENTTEST_H
+#endif // LINKEDCONNECTIONPAGETEST_H

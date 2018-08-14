@@ -31,6 +31,8 @@
 #include <QtCore/QMutexLocker>
 #include <QtConcurrent/QtConcurrent>
 #include <algorithm> // C++ header needed for std:sort function
+
+#include "../qrail.h"
 #include "../fragments/fragmentsfactory.h"
 #include "../csa/csastationstopprofile.h"
 #include "../csa/csatrainprofile.h"
@@ -60,7 +62,7 @@
 
 // Singleton pattern
 namespace CSA {
-class Planner: public QObject
+class QRAIL_SHARED_EXPORT Planner: public QObject
 {
     Q_OBJECT
 public:

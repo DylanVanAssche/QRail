@@ -24,8 +24,10 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
+#include "../qrail.h"
+
 namespace CSA {
-class Message : public QObject
+class QRAIL_SHARED_EXPORT Message : public QObject
 {
     Q_OBJECT
 public:

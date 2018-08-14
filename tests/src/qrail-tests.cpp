@@ -30,15 +30,6 @@
 // Unittest main method
 int main(int argc, char *argv[])
 {
-    /*
-     * QtCreator tests setup:
-     *   - CONFIG+=tests in the harbour-berail.pro file
-     *   - Clone the debug kit and name it 'tests'
-     *   - Select the tests kit in QtCreator
-     *
-     * TUTORIAL: http://xilexio.org/?p=125
-     */
-
     // Allow QEventLoops for QSignalSpy
     QCoreApplication app(argc, argv);
 

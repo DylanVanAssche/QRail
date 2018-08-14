@@ -25,7 +25,7 @@
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
 #include <QtSql/QSqlQuery>
-#include "../src/database/databasemanager.h"
+#include "database/databasemanager.h"
 
 namespace Database {
 class ManagerTest : public QObject

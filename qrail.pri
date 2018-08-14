@@ -20,6 +20,7 @@ QT *= core
 
 # Public header files are kept in a separate 'include' folder
 INCLUDEPATH += $$PWD/src/include \
+            $$PWD/qtcsv/include/qtcsv \
             $$PWD
 
 SOURCES += \
@@ -43,8 +44,9 @@ SOURCES += \
     $$PWD/src/csa/csatrainprofile.cpp
 
 HEADERS += \
-    $$PWD/src/database/databasemanager.h \
-    $$PWD/src/network/networkmanager.h \
+    $$PWD/src/qrail.h \
+    $$PWD/src/include/database/databasemanager.h \
+    $$PWD/src/include/network/networkmanager.h \
     $$PWD/src/include/csa/csaplanner.h \
     $$PWD/src/include/csa/csaroute.h \
     $$PWD/src/include/csa/csavehicle.h \
@@ -60,4 +62,11 @@ HEADERS += \
     $$PWD/src/csa/csatrainprofile.h \
     $$PWD/src/include/fragments/fragmentsfragment.h \
     $$PWD/src/include/fragments/fragmentspage.h \
-    $$PWD/src/include/fragments/fragmentsfactory.h
+    $$PWD/src/include/fragments/fragmentsfactory.h \
+    $$PWD/qtcsv/include/qtcsv/stringdata.h \
+
+DISTFILES += \
+    $$PWD/rpm/qrail.changes
+
+OTHER_FILES += \
+    $$PWD/rpm/qrail.spec

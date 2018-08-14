@@ -25,8 +25,10 @@
 #include <QtCore/QString>
 #include <QtCore/QMetaType>
 
+#include "../qrail.h"
+
 namespace CSA {
-class Vehicle : public QObject
+class QRAIL_SHARED_EXPORT Vehicle : public QObject
 {
     Q_OBJECT
 public:

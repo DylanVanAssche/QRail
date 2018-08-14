@@ -1,0 +1,114 @@
+\hypertarget{classDatabase_1_1Manager}{}\section{Database\+:\+:Manager Class Reference}
+\label{classDatabase_1_1Manager}\index{Database\+::\+Manager@{Database\+::\+Manager}}
+
+
+{\ttfamily \#include $<$databasemanager.\+h$>$}
+
+Inheritance diagram for Database\+:\+:Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDatabase_1_1Manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classDatabase_1_1Manager_a0afd7a0884097a8dcff61b0444f39fb4}{execute}} (Q\+Sql\+Query \&query)
+\item 
+bool \mbox{\hyperlink{classDatabase_1_1Manager_adbe8be75b47c9770556464859bcc3017}{start\+Transaction}} ()
+\item 
+bool \mbox{\hyperlink{classDatabase_1_1Manager_a08dc190a448c555f8334bdd60d32b26e}{end\+Transaction}} ()
+\item 
+Q\+Sql\+Database \mbox{\hyperlink{classDatabase_1_1Manager_aecc5a00737bf6392cccda37a99138d8c}{database}} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classDatabase_1_1Manager_a6f8f8635c67e8d6e3ee86410006d22f3}{get\+Instance}} (const Q\+String \&path, Q\+Object $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDatabase_1_1Manager_a3046834f78e2c3c5bce479b8eba31df4}{Manager}} (const Q\+String \&path, Q\+Object $\ast$parent)
+\item 
+void \mbox{\hyperlink{classDatabase_1_1Manager_af7f86ed5807bd6299fe4aa594b72013c}{set\+Database}} (const Q\+Sql\+Database \&\mbox{\hyperlink{classDatabase_1_1Manager_aecc5a00737bf6392cccda37a99138d8c}{database}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Sql\+Database \mbox{\hyperlink{classDatabase_1_1Manager_a4de33edd790c0d8320c0a2a5990f5169}{m\+\_\+database}}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classDatabase_1_1Manager_a35e8446687862c34ae818636f953f54e}{m\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDatabase_1_1Manager_a3046834f78e2c3c5bce479b8eba31df4}\label{classDatabase_1_1Manager_a3046834f78e2c3c5bce479b8eba31df4}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{Manager()}{Manager()}}
+{\footnotesize\ttfamily Database\+::\+Manager\+::\+Manager (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{path,  }\item[{Q\+Object $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classDatabase_1_1Manager_aecc5a00737bf6392cccda37a99138d8c}\label{classDatabase_1_1Manager_aecc5a00737bf6392cccda37a99138d8c}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!database@{database}}
+\index{database@{database}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{database()}{database()}}
+{\footnotesize\ttfamily Q\+Sql\+Database Database\+::\+Manager\+::database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_a08dc190a448c555f8334bdd60d32b26e}\label{classDatabase_1_1Manager_a08dc190a448c555f8334bdd60d32b26e}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!end\+Transaction@{end\+Transaction}}
+\index{end\+Transaction@{end\+Transaction}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{end\+Transaction()}{endTransaction()}}
+{\footnotesize\ttfamily bool Database\+::\+Manager\+::end\+Transaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_a0afd7a0884097a8dcff61b0444f39fb4}\label{classDatabase_1_1Manager_a0afd7a0884097a8dcff61b0444f39fb4}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!execute@{execute}}
+\index{execute@{execute}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Database\+::\+Manager\+::execute (\begin{DoxyParamCaption}\item[{Q\+Sql\+Query \&}]{query }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_a6f8f8635c67e8d6e3ee86410006d22f3}\label{classDatabase_1_1Manager_a6f8f8635c67e8d6e3ee86410006d22f3}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$ Database\+::\+Manager\+::get\+Instance (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{path,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_af7f86ed5807bd6299fe4aa594b72013c}\label{classDatabase_1_1Manager_af7f86ed5807bd6299fe4aa594b72013c}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!set\+Database@{set\+Database}}
+\index{set\+Database@{set\+Database}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+Database()}{setDatabase()}}
+{\footnotesize\ttfamily void Database\+::\+Manager\+::set\+Database (\begin{DoxyParamCaption}\item[{const Q\+Sql\+Database \&}]{database }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_adbe8be75b47c9770556464859bcc3017}\label{classDatabase_1_1Manager_adbe8be75b47c9770556464859bcc3017}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!start\+Transaction@{start\+Transaction}}
+\index{start\+Transaction@{start\+Transaction}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{start\+Transaction()}{startTransaction()}}
+{\footnotesize\ttfamily bool Database\+::\+Manager\+::start\+Transaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classDatabase_1_1Manager_a4de33edd790c0d8320c0a2a5990f5169}\label{classDatabase_1_1Manager_a4de33edd790c0d8320c0a2a5990f5169}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!m\+\_\+database@{m\+\_\+database}}
+\index{m\+\_\+database@{m\+\_\+database}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+database}{m\_database}}
+{\footnotesize\ttfamily Q\+Sql\+Database Database\+::\+Manager\+::m\+\_\+database\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDatabase_1_1Manager_a35e8446687862c34ae818636f953f54e}\label{classDatabase_1_1Manager_a35e8446687862c34ae818636f953f54e}} 
+\index{Database\+::\+Manager@{Database\+::\+Manager}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!Database\+::\+Manager@{Database\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$ Database\+::\+Manager\+::m\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/database/\mbox{\hyperlink{databasemanager_8h}{databasemanager.\+h}}\item 
+src/database/\mbox{\hyperlink{databasemanager_8cpp}{databasemanager.\+cpp}}\end{DoxyCompactItemize}

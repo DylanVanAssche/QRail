@@ -1,0 +1,345 @@
+\hypertarget{namespaceCSA}{}\section{C\+SA Namespace Reference}
+\label{namespaceCSA}\index{C\+SA@{C\+SA}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Message}{Message}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1NullStation}{Null\+Station}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Planner}{Planner}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Route}{Route}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1RouteLeg}{Route\+Leg}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1RouteLegEnd}{Route\+Leg\+End}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Station}{Station}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1StationFactory}{Station\+Factory}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1StationStopProfile}{Station\+Stop\+Profile}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1TrainProfile}{Train\+Profile}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Transfer}{Transfer}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1Vehicle}{Vehicle}}
+\item 
+class \mbox{\hyperlink{classCSA_1_1VehicleStop}{Vehicle\+Stop}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a \mbox{\hyperlink{classCSA_1_1Message}{Message}} to store the information about a disturbance, remark or anything else that might be usefull for the user.
+
+Gets the header of the message and returns it.
+
+Sets the header of the message to the given Q\+String \&header
+
+Gets the description of the message and returns it.
+
+Sets the description of the message to the given Q\+String \&description
+
+Gets the lead of the message and returns it.
+
+Sets the lead of the message to the given Q\+String \&lead
+
+Gets the link of the message and returns it.
+
+Sets the link of the message to the given Q\+Url \&link
+
+Constructs a \mbox{\hyperlink{classCSA_1_1NullStation}{C\+S\+A\+::\+Null\+Station}} according to the Null design pattern.
+
+Constructs a \mbox{\hyperlink{classCSA_1_1NullStation}{C\+S\+A\+::\+Null\+Station}} if none exists and returns the instance.
+
+Constructs a \mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} with the given parent.
+
+\begin{DoxyReturn}{Returns}
+Q\+Url U\+RI
+\end{DoxyReturn}
+Gets the U\+RI of the station and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
+\hline
+\end{DoxyParams}
+Sets the U\+RI of the station to the given Q\+Url \&url.
+
+\begin{DoxyReturn}{Returns}
+const Q\+Map$<$\+Q\+Locale\+::\+Language, Q\+String$>$ name
+\end{DoxyReturn}
+Gets the name of the station and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Map$<$\+Q\+Locale\+::\+Language, Q\+String$>$ \&name\\
+\hline
+\end{DoxyParams}
+Sets the name of the station to the given Q\+Map$<$\+Q\+Locale\+::\+Language, Q\+String$>$ \&name.
+
+\begin{DoxyReturn}{Returns}
+const Q\+Locale\+::\+Country country
+\end{DoxyReturn}
+Gets the country of the station and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Locale\+::\+Country \&country\\
+\hline
+\end{DoxyParams}
+Sets the country of the station to the given Q\+Locale\+::\+Country \&country.
+
+\begin{DoxyReturn}{Returns}
+const Q\+Geo\+Coordinate position
+\end{DoxyReturn}
+Gets the position of the station and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Geo\+Coordinate \&position\\
+\hline
+\end{DoxyParams}
+Sets the position of the station to the given Q\+Geo\+Coordinate \&position.
+
+\begin{DoxyReturn}{Returns}
+const Q\+Geo\+Address address
+\end{DoxyReturn}
+Gets the address of the station and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Geo\+Address \&address\\
+\hline
+\end{DoxyParams}
+Sets the address of the station to the given Q\+Geo\+Address \&address.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Ticket\+Vending\+Machine
+\end{DoxyReturn}
+Gets the has\+Ticket\+Vending\+Machine and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Ticket\+Vending\+Machine\\
+\hline
+\end{DoxyParams}
+Sets the has\+Ticket\+Vending\+Machine to the given bool \&has\+Ticket\+Vending\+Machine.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Luggage\+Lockers
+\end{DoxyReturn}
+Gets the has\+Luggage\+Lockers and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Luggage\+Lockers\\
+\hline
+\end{DoxyParams}
+Sets the has\+Luggage\+Lockers to the given bool \&has\+Luggage\+Lockers.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Free\+Parking
+\end{DoxyReturn}
+Gets the has\+Free\+Parking and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Free\+Parking\\
+\hline
+\end{DoxyParams}
+Sets the has\+Free\+Parking to the given bool \&has\+Free\+Parking.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Taxi
+\end{DoxyReturn}
+Gets the has\+Taxi and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Taxi\\
+\hline
+\end{DoxyParams}
+Sets the has\+Taxi to the given bool \&has\+Taxi.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Bicycle\+Spots
+\end{DoxyReturn}
+Gets the has\+Bicycle\+Spots and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Bicycle\+Spots\\
+\hline
+\end{DoxyParams}
+Sets the has\+Bicycle\+Spots to the given bool \&has\+Bicycle\+Spots.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Blue\+Bike
+\end{DoxyReturn}
+Gets the has\+Blue\+Bike and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Blue\+Bike\\
+\hline
+\end{DoxyParams}
+Sets the has\+Blue\+Bike to the given bool \&has\+Blue\+Bike.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Bus
+\end{DoxyReturn}
+Gets the has\+Bus and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Bus\\
+\hline
+\end{DoxyParams}
+Sets the has\+Bus to the given Q\+Url \&url.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Tram
+\end{DoxyReturn}
+Gets the has\+Tram and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Tram\\
+\hline
+\end{DoxyParams}
+Sets the has\+Tram to the given Q\+Url \&url.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Metro
+\end{DoxyReturn}
+Gets the has\+Metro and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Metro\\
+\hline
+\end{DoxyParams}
+Sets the has\+Metro to the given bool \&has\+Metro.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Wheelchair\+Available
+\end{DoxyReturn}
+Gets the has\+Wheelchair\+Available and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Wheelchair\+Available\\
+\hline
+\end{DoxyParams}
+Sets the has\+Wheelchair\+Available to the given bool \&has\+Wheelchair\+Available.
+
+\begin{DoxyReturn}{Returns}
+const bool has\+Ramp
+\end{DoxyReturn}
+Gets the has\+Ramp and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Ramp\\
+\hline
+\end{DoxyParams}
+Sets the has\+Ramp to the given bool \&has\+Ramp.
+
+\begin{DoxyReturn}{Returns}
+const qint16 disabled\+Parking\+Spots
+\end{DoxyReturn}
+Gets the disabled\+Parking\+Spots and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qint16 \&disabled\+Parking\+Spots\\
+\hline
+\end{DoxyParams}
+Sets the disabled\+Parking\+Spots to the given qint16 \&disabled\+Parking\+Spots.
+
+\begin{DoxyReturn}{Returns}
+bool has\+Elevated\+Platform
+\end{DoxyReturn}
+Gets the has\+Elevated\+Platform and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Elevated\+Platform\\
+\hline
+\end{DoxyParams}
+Sets the has\+Elevated\+Platform to the given bool \&has\+Elevated\+Platform.
+
+\begin{DoxyReturn}{Returns}
+bool has\+Escalator\+Up
+\end{DoxyReturn}
+Gets the has\+Escalator\+Up and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Escalator\+Up\\
+\hline
+\end{DoxyParams}
+Sets the has\+Escalator\+Up to the given bool \&has\+Escalator\+Up. Emit the has\+Escalator\+Up\+Changed signal.
+
+\begin{DoxyReturn}{Returns}
+bool has\+Escalator\+Down
+\end{DoxyReturn}
+Gets the has\+Escalator\+Down and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Escalator\+Down\\
+\hline
+\end{DoxyParams}
+Sets the has\+Escalator\+Down to the given bool \&has\+Escalator\+Down. Emit the has\+Escalator\+Down\+Changed signal.
+
+\begin{DoxyReturn}{Returns}
+bool has\+Elevator\+Platform
+\end{DoxyReturn}
+Gets the has\+Elevator\+Platform and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Elevator\+Platform\\
+\hline
+\end{DoxyParams}
+Sets the has\+Elevator\+Platform to the given bool \&has\+Elevator\+Platform.
+
+\begin{DoxyReturn}{Returns}
+bool has\+Hearing\+Aid\+Signal
+\end{DoxyReturn}
+Gets the has\+Hearing\+Aid\+Signal and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Hearing\+Aid\+Signal\\
+\hline
+\end{DoxyParams}
+Sets the has\+Hearing\+Aid\+Signal to the given bool \&has\+Hearing\+Aid\+Signal. Emit the has\+Hearing\+Aid\+Signal\+Changed signal.
+
+\begin{DoxyReturn}{Returns}
+Q\+Map$<$\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{Station\+::\+Day}}, Q\+Pair$<$\+Q\+Time, Q\+Time$>$ $>$ opening\+Hours
+\end{DoxyReturn}
+Gets the opening\+Hours and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Map$<$\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{Station\+::\+Day}}, Q\+Pair$<$\+Q\+Time, Q\+Time$>$ $>$ \&opening\+Hours\\
+\hline
+\end{DoxyParams}
+Sets the openinghours to the given Q\+Map$<$\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{Station\+::\+Day}}, Q\+Pair$<$\+Q\+Time, Q\+Time$>$ $>$ \&opening\+Hours. Emits the opening\+Hours\+Changed signal.
+
+\begin{DoxyReturn}{Returns}
+qreal average\+Stop\+Times
+\end{DoxyReturn}
+Gets the average stop times and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qreal \&average\+Stop\+Times\\
+\hline
+\end{DoxyParams}
+Sets the average stop times to the given qreal \&average\+Stop\+Times. Emits the average\+Stop\+Times\+Changed signal. 

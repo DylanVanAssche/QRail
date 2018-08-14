@@ -1,0 +1,144 @@
+\hypertarget{fragmentsfactory_8cpp}{}\section{src/linkedconnections/fragments/fragmentsfactory.cpp File Reference}
+\label{fragmentsfactory_8cpp}\index{src/linkedconnections/fragments/fragmentsfactory.\+cpp@{src/linkedconnections/fragments/fragmentsfactory.\+cpp}}
+
+
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} constructor\+: empty.  
+
+
+{\ttfamily \#include \char`\"{}fragmentsfactory.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceFragments}{Fragments}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} constructor\+: empty. 
+
+Sets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+
+Gets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+
+Processes the network reply.
+
+Validates J\+S\+O\+N-\/\+LD data.
+
+Parses the J\+S\+O\+N-\/\+LD fragment.
+
+Requests the page by U\+RI from the network.
+
+Requests a page by departure time.
+
+Requests a page by U\+RI.
+
+Gets a \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Fragment\+::\+Factory $\ast$factory
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Json\+Object \&connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$frag;
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Json\+Object \&data \\
+\hline
+{\em const} & Q\+String\+List \&properties \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool \&valid
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Network\+Reply} & $\ast$reply\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$manager
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}}} & $\ast$http \\
+\hline
+\end{DoxyParams}

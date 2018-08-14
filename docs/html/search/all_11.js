@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['tarray',['TArray',['../classCSA_1_1Planner.html#a0e8ccca51c26f77086bddaf28ec521a2',1,'CSA::Planner']]],
+  ['taxi',['TAXI',['../classCSA_1_1RouteLeg.html#a464547cf160a77a2014d101560b1f77ba7086a7774c0003961e43955ec716cb9f',1,'CSA::RouteLeg']]],
+  ['thursday',['THURSDAY',['../classCSA_1_1Station.html#aa160d0de40db0583099b5986dea1cd67a7a61b324afb4dd8b2fb4a38afc34f755',1,'CSA::Station']]],
+  ['time',['time',['../classCSA_1_1RouteLegEnd.html#af4543d06eb45cb23ef27d76f75a34ba7',1,'CSA::RouteLegEnd::time()'],['../classCSA_1_1Transfer.html#a260cf9330952c162d943d65deffcf5bc',1,'CSA::Transfer::time()']]],
+  ['timechanged',['timeChanged',['../classCSA_1_1RouteLegEnd.html#a3e72a28f87df8e3b87c8216faf183985',1,'CSA::RouteLegEnd']]],
+  ['timestamp',['timestamp',['../classFragments_1_1Page.html#a44cf4faf8776d3344bc4296d37b1f7ae',1,'Fragments::Page']]],
+  ['timestampchanged',['timestampChanged',['../classFragments_1_1Page.html#acfdd19abc8342361f975b4d9d10e2e64',1,'Fragments::Page']]],
+  ['train',['TRAIN',['../classCSA_1_1RouteLeg.html#a464547cf160a77a2014d101560b1f77bacf72425b33c7bcc6d1692b0793e1a8b1',1,'CSA::RouteLeg']]],
+  ['trainprofile',['TrainProfile',['../classCSA_1_1TrainProfile.html',1,'CSA::TrainProfile'],['../classCSA_1_1TrainProfile.html#ac939a2e59e0b5ef149225af1b1c4b0f9',1,'CSA::TrainProfile::TrainProfile()']]],
+  ['tram',['TRAM',['../classCSA_1_1RouteLeg.html#a464547cf160a77a2014d101560b1f77ba0d8fcfacbca6d7ab6fa25ebadb85aa88',1,'CSA::RouteLeg']]],
+  ['transfer',['Transfer',['../classCSA_1_1Transfer.html',1,'CSA::Transfer'],['../classCSA_1_1Transfer.html#a827daaa28edc2c4b10ddfa70762355eaaeb5ddb3b6096fb90ff720d9c3e2a6628',1,'CSA::Transfer::TRANSFER()'],['../classCSA_1_1Transfer.html#a899f767d520735fccc3389da77d8f7ae',1,'CSA::Transfer::Transfer(CSA::RouteLeg *departureLeg=nullptr, CSA::RouteLeg *arrivalLeg=nullptr, QObject *parent=nullptr)']]],
+  ['transfer_5fequivalent_5ftravel_5ftime',['TRANSFER_EQUIVALENT_TRAVEL_TIME',['../csaplanner_8h.html#a787017c6118cb210d90bc7709b09b7d4',1,'csaplanner.h']]],
+  ['transfercount',['transferCount',['../classCSA_1_1Route.html#ac8e18cd796c135d453e57c1ed0bf4bb9',1,'CSA::Route']]],
+  ['transfers',['transfers',['../classCSA_1_1Route.html#a4a476195f30a740680bd3b61df7a5540',1,'CSA::Route::transfers()'],['../classCSA_1_1StationStopProfile.html#a10a03b9f10dec06eac01f970c77b3ada',1,'CSA::StationStopProfile::transfers()'],['../classCSA_1_1TrainProfile.html#a9e0520e5ebf6ad00c0462a428300caad',1,'CSA::TrainProfile::transfers()']]],
+  ['transferschanged',['transfersChanged',['../classCSA_1_1Route.html#adce4cb4749b3f2668efe082f011a2e47',1,'CSA::Route::transfersChanged()'],['../classCSA_1_1StationStopProfile.html#a7035ce1d247c7feff5b1df96e654110f',1,'CSA::StationStopProfile::transfersChanged()'],['../classCSA_1_1TrainProfile.html#aec2a0ddcf55785288eede5b45013a344',1,'CSA::TrainProfile::transfersChanged()']]],
+  ['tripalerts',['tripAlerts',['../classCSA_1_1Route.html#a6e5c03d04237cea4167239b201f2d40b',1,'CSA::Route']]],
+  ['tripalertschanged',['tripAlertsChanged',['../classCSA_1_1Route.html#afe760a3c1e840dfde35219466fa8c5c3',1,'CSA::Route']]],
+  ['tripuri',['tripURI',['../classFragments_1_1Fragment.html#aa3b1beb97e501bfa8ecb2127c2729803',1,'Fragments::Fragment']]],
+  ['tripurichanged',['tripURIChanged',['../classFragments_1_1Fragment.html#a80a2dcba09a29a4d375b8900bb6b6be0',1,'Fragments::Fragment']]],
+  ['tuesday',['TUESDAY',['../classCSA_1_1Station.html#aa160d0de40db0583099b5986dea1cd67a5f5140afce13197a89e848004f292f14',1,'CSA::Station']]],
+  ['type',['type',['../classCSA_1_1RouteLeg.html#abbea7d9d097dbf9b7c87543b2a2e8aac',1,'CSA::RouteLeg::type()'],['../classCSA_1_1Transfer.html#a52d56463fa87816353419a55cc3753de',1,'CSA::Transfer::type()'],['../classCSA_1_1VehicleStop.html#ae104457c93d6b341b140d730cead4bc6',1,'CSA::VehicleStop::type()'],['../classCSA_1_1RouteLeg.html#a464547cf160a77a2014d101560b1f77b',1,'CSA::RouteLeg::Type()'],['../classCSA_1_1Transfer.html#a827daaa28edc2c4b10ddfa70762355ea',1,'CSA::Transfer::Type()'],['../classCSA_1_1VehicleStop.html#a7c2030d5a49808cb8e6fefaa691a76e0',1,'CSA::VehicleStop::Type()']]],
+  ['typechanged',['typeChanged',['../classCSA_1_1RouteLeg.html#a5ea5eef9f78700d451ddd2f0ad0ac208',1,'CSA::RouteLeg::typeChanged()'],['../classCSA_1_1Transfer.html#ae404455a073e9bbd3d10fa513c284bb4',1,'CSA::Transfer::typeChanged()'],['../classCSA_1_1VehicleStop.html#a8a5cffb45c9ea23129662d91fff26385',1,'CSA::VehicleStop::typeChanged()']]]
+];

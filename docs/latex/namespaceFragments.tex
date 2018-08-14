@@ -1,0 +1,101 @@
+\hypertarget{namespaceFragments}{}\section{Fragments Namespace Reference}
+\label{namespaceFragments}\index{Fragments@{Fragments}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFragments_1_1Factory}{Factory}}
+\item 
+class \mbox{\hyperlink{classFragments_1_1Fragment}{Fragment}}
+\item 
+class \mbox{\hyperlink{classFragments_1_1Page}{Page}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} to generate Linked Connections fragments on the fly.
+
+Constructs a \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} if none exists and returns the instance.
+
+Starts the generation process of a \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} object by requesting a page by U\+RI. When the page is ready, the page\+Ready signal will be emitted.
+
+Starts the generation process of a \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} object by requesting a page by departure time. When the page is ready, the page\+Ready signal will be emitted.
+
+Sends a request to the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} to retrieve a Linked Connections page by U\+RI.
+
+Converts the J\+S\+O\+N-\/\+LD into a Fragments\+::\+Fragments object and returns it.
+
+Checks the J\+S\+O\+N-\/\+LD data by comparing the expected properties with the received ones.
+
+Reads the network reply, parses it using the helper methods. When the reply is completed parsed and no errors were encountered, the page\+Ready signal is emitted. In case we faced an error, the error signal is emitted with an error message.
+
+Gets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance and returns it.
+
+Sets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance to the given \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$http.
+
+Constructs a \mbox{\hyperlink{classFragments_1_1Fragment}{Fragment}} to store the information about a Linked Connection fragment for the Connection Scan Algorithm (\mbox{\hyperlink{namespaceCSA}{C\+SA}}).
+
+Retrieves the U\+RI of the linked connection fragment and returns it.
+
+Sets the U\+RI of the linked connection fragment to the given Q\+Url \&uri. Emits the uri\+Changed signal.
+
+Retrieves the departure station U\+RI of the linked connection fragment and returns it.
+
+Sets the departure station U\+RI of the linked connection fragment to the given Q\+Url \&departure\+Station\+U\+RI. Emits the departure\+Station\+U\+R\+I\+Changed signal.
+
+Retrieves the arrival station U\+RI of the linked connection fragment and returns it.
+
+Sets the arrival station U\+RI of the linked connection fragment to the given Q\+Url \&arrival\+Station\+U\+RI. Emits the arrival\+Station\+U\+R\+I\+Changed signal.
+
+Retrieves the departure time of the linked connection fragment and returns it.
+
+Sets the departure time of the linked connection fragment to the given Q\+Date\+Time \&departure\+Time. Emits the departure\+Time\+Changed signal.
+
+Retrieves the arrival time of the linked connection fragment and returns it.
+
+Sets the arrival time of the linked connection fragment to the given Q\+Date\+Time \&arrival\+Time. Emits the arrival\+Time\+Changed signal.
+
+Retrieves the departure delay (in seconds) of the linked connection fragment and returns it.
+
+Sets the departure delay (in seconds) of the linked connection fragment to the given qint16 \&departure\+Delay. Emits the departure\+Delay\+Changed signal.
+
+Retrieves the arrival delay (in seconds) of the linked connection fragment and returns it.
+
+Sets the arrival delay (in seconds) of the linked connection fragment to the given qint16 \&arrival\+Delay. Emits the arrival\+Delay\+Changed signal.
+
+Retrieves the delayed departure time of the linked connection fragment and returns it.
+
+Retrieves the delayed arrival time of the linked connection fragment and returns it.
+
+Retrieves the trip U\+RI of the linked connection fragment and returns it.
+
+Sets the trip U\+RI of the linked connection fragment to the given Q\+Url \&trip\+U\+RI. Emits the trip\+U\+R\+I\+Changed signal.
+
+Retrieves the route U\+RI of the linked connection fragment and returns it.
+
+Sets the route U\+RI of the linked connection fragment to the given Q\+Url \&route\+U\+RI. Emits the route\+U\+R\+I\+Changed signal.
+
+Retrieves the direction of the vehicle in this linked connection fragment and returns it.
+
+Sets the direction of the vehicle in this linked connection fragment to the given Q\+String \&direction. Emits the direction\+Changed signal.
+
+Constructs a \mbox{\hyperlink{classFragments_1_1Page}{Page}} to store the information about a Linked Connection page for the Connection Scan Algorithm (\mbox{\hyperlink{namespaceCSA}{C\+SA}}).
+
+Retrieves the U\+RI of the linked connection page and returns it.
+
+Sets the U\+RI of the linked connection page to the given Q\+Url \&uri. Emits the uri\+Changed signal.
+
+Retrieves the timestamp of the linked connection page and returns it.
+
+Sets the timestamp of the linked connection fragment to the given Q\+Date\+Time \&timestamp. Emits the timestamp\+Changed signal.
+
+Retrieves the U\+RI of the next linked connection page and returns it.
+
+Sets the U\+RI of the linked connection next page to the given Q\+Url \&hydra\+Previous. Emits the hydra\+Previous\+Changed signal.
+
+Retrieves the U\+RI of the previous linked connection page and returns it.
+
+Sets the U\+RI of the linked connection previous page to the given Q\+Url \&hydra\+Previous. Emits the hydra\+Previous\+Changed signal.
+
+Gets the list of fragments associated with this page and return it.
+
+Sets the list of fragments associated with this page to the given Q\+List$<$\+Fragment $\ast$$>$ \&fragments. Emits the fragments\+Changed signal. 

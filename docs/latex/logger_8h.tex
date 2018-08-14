@@ -1,0 +1,103 @@
+\hypertarget{logger_8h}{}\section{src/logger.h File Reference}
+\label{logger_8h}\index{src/logger.\+h@{src/logger.\+h}}
+{\ttfamily \#include $<$Qt\+Global$>$}\newline
+{\ttfamily \#include $<$Qt\+Debug$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Core\+Application$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+String$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Text\+Stream$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Debug$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Date\+Time$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+File$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Dir$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+I\+O\+Device$>$}\newline
+{\ttfamily \#include \char`\"{}os.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{logger_8h_ad5131de0b5004c64db5e79e8aac7471e}{L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}}~100
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{logger_8h_ad1cb0381c7ff42a54e3dce226f28fd4b}{handler}} (Qt\+Msg\+Type type, const Q\+Message\+Log\+Context \&context, const Q\+String \&msg)
+\item 
+bool \mbox{\hyperlink{logger_8h_a81a6f3731fb25029c4becb1efb01f03a}{enable\+Logger}} (bool enabled)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{logger_8h_a26cae0c4cc54e11ee80f1ea0755029ad}{clear\+Log}} = true
+\item 
+static Q\+String \mbox{\hyperlink{logger_8h_abc29e461e01cc0c712944f8f47f91331}{name}}
+\item 
+static Q\+String \mbox{\hyperlink{logger_8h_accb344ff518c8d35f4e2a0df6fe3a6d1}{version}}
+\item 
+static Q\+String \mbox{\hyperlink{logger_8h_a19f55e2cbf403262f65fc5da8d9211f8}{compile\+Date}}
+\item 
+static Q\+String \mbox{\hyperlink{logger_8h_a1ec3066591d4bb1971d3a04377c4279a}{compile\+Time}}
+\item 
+static Q\+String \mbox{\hyperlink{logger_8h_a7c841b2c89a4df4d9136f65e395a44b5}{logpath}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{logger_8h_ad5131de0b5004c64db5e79e8aac7471e}\label{logger_8h_ad5131de0b5004c64db5e79e8aac7471e}} 
+\index{logger.\+h@{logger.\+h}!L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH@{L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}}
+\index{L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH@{L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH}{LINE\_LENGTH}}
+{\footnotesize\ttfamily \#define L\+I\+N\+E\+\_\+\+L\+E\+N\+G\+TH~100}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{logger_8h_a81a6f3731fb25029c4becb1efb01f03a}\label{logger_8h_a81a6f3731fb25029c4becb1efb01f03a}} 
+\index{logger.\+h@{logger.\+h}!enable\+Logger@{enable\+Logger}}
+\index{enable\+Logger@{enable\+Logger}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{enable\+Logger()}{enableLogger()}}
+{\footnotesize\ttfamily bool enable\+Logger (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{logger_8h_ad1cb0381c7ff42a54e3dce226f28fd4b}\label{logger_8h_ad1cb0381c7ff42a54e3dce226f28fd4b}} 
+\index{logger.\+h@{logger.\+h}!handler@{handler}}
+\index{handler@{handler}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{handler()}{handler()}}
+{\footnotesize\ttfamily void handler (\begin{DoxyParamCaption}\item[{Qt\+Msg\+Type}]{type,  }\item[{const Q\+Message\+Log\+Context \&}]{context,  }\item[{const Q\+String \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{logger_8h_a26cae0c4cc54e11ee80f1ea0755029ad}\label{logger_8h_a26cae0c4cc54e11ee80f1ea0755029ad}} 
+\index{logger.\+h@{logger.\+h}!clear\+Log@{clear\+Log}}
+\index{clear\+Log@{clear\+Log}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{clear\+Log}{clearLog}}
+{\footnotesize\ttfamily bool clear\+Log = true\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{logger_8h_a19f55e2cbf403262f65fc5da8d9211f8}\label{logger_8h_a19f55e2cbf403262f65fc5da8d9211f8}} 
+\index{logger.\+h@{logger.\+h}!compile\+Date@{compile\+Date}}
+\index{compile\+Date@{compile\+Date}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{compile\+Date}{compileDate}}
+{\footnotesize\ttfamily Q\+String compile\+Date\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{logger_8h_a1ec3066591d4bb1971d3a04377c4279a}\label{logger_8h_a1ec3066591d4bb1971d3a04377c4279a}} 
+\index{logger.\+h@{logger.\+h}!compile\+Time@{compile\+Time}}
+\index{compile\+Time@{compile\+Time}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{compile\+Time}{compileTime}}
+{\footnotesize\ttfamily Q\+String compile\+Time\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{logger_8h_a7c841b2c89a4df4d9136f65e395a44b5}\label{logger_8h_a7c841b2c89a4df4d9136f65e395a44b5}} 
+\index{logger.\+h@{logger.\+h}!logpath@{logpath}}
+\index{logpath@{logpath}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{logpath}{logpath}}
+{\footnotesize\ttfamily Q\+String logpath\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{logger_8h_abc29e461e01cc0c712944f8f47f91331}\label{logger_8h_abc29e461e01cc0c712944f8f47f91331}} 
+\index{logger.\+h@{logger.\+h}!name@{name}}
+\index{name@{name}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily Q\+String name\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{logger_8h_accb344ff518c8d35f4e2a0df6fe3a6d1}\label{logger_8h_accb344ff518c8d35f4e2a0df6fe3a6d1}} 
+\index{logger.\+h@{logger.\+h}!version@{version}}
+\index{version@{version}!logger.\+h@{logger.\+h}}
+\subsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily Q\+String version\hspace{0.3cm}{\ttfamily [static]}}
+

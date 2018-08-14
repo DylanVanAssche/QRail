@@ -1,0 +1,523 @@
+\hypertarget{classCSA_1_1VehicleStop}{}\section{C\+SA\+:\+:Vehicle\+Stop Class Reference}
+\label{classCSA_1_1VehicleStop}\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+
+
+{\ttfamily \#include $<$csavehiclestop.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Vehicle\+Stop\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1VehicleStop}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{Type}} \{ \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ad5f52d91ac49fd146727f4710767dd08}{Type\+::\+A\+R\+R\+I\+V\+AL}}, 
+\mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ae7cc381a17e714e7ba15ef6f9858304e}{Type\+::\+D\+E\+P\+A\+R\+T\+U\+RE}}, 
+\mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0a615a46af313786fc4e349f34118be111}{Type\+::\+S\+T\+OP}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ae7a43ee3fc70d2359ff12de44b38e6d2}{vehicle\+Information\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a8cee8183966bb993b1dcc3ca26a483a9}{station\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a827783ce6df243615d065d5ec49605a6}{platform\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_adbe85cb67383f19a9330160046adf8ab}{is\+Platform\+Normal\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a009c43f5a3c905a7dcce7b164b75bba4}{has\+Left\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a0bf965ffe19e1bb16ed3fce5031f56ed}{departure\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_afba5878d8d99cb87db9d5ce549c2e429}{departure\+Delay\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a85491b7004511491a9782b6f2bd1155f}{departure\+Canceled\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ae9f705db514276be05baa892241f797d}{arrival\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a371e833cad3ce70195dae5e6917043ee}{arrival\+Delay\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ad5de2913078d75e0445652cb3e688dc7}{arrival\+Canceled\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a201e105bb8c1afc2e149c414298c7f52}{departure\+U\+R\+I\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ae0e96512e3c84393e7d7e641d3163baa}{occupancy\+Level\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a8a5cffb45c9ea23129662d91fff26385}{type\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1VehicleStop_a63f372612a68275d78307b9293339525}{Vehicle\+Stop}} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}} $\ast$ \mbox{\hyperlink{classCSA_1_1VehicleStop_ace091d4626e1d5a113f84e9c2b0d07f5}{vehicle\+Information}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ac5985077bb7570364bac137c4888c859}{set\+Vehicle\+Information}} (\mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}} $\ast$\mbox{\hyperlink{classCSA_1_1VehicleStop_ace091d4626e1d5a113f84e9c2b0d07f5}{vehicle\+Information}})
+\item 
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ \mbox{\hyperlink{classCSA_1_1VehicleStop_ae1c6e68ec554e65041a2f577433f314d}{station}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ae4a990a9e2c462461cf6cdccb129466c}{set\+Station}} (\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$\mbox{\hyperlink{classCSA_1_1VehicleStop_ae1c6e68ec554e65041a2f577433f314d}{station}})
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1VehicleStop_a41eaa371b831197436e9250e5699819a}{platform}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a8ef5b90a559539e2a7b46ceed701e06d}{set\+Platform}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1VehicleStop_a41eaa371b831197436e9250e5699819a}{platform}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1VehicleStop_a77b08114a893c3dba935f07496cdb49a}{is\+Platform\+Normal}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a55d1d0894b469a1c0018b7a0429a88c0}{set\+Is\+Platform\+Normal}} (bool \mbox{\hyperlink{classCSA_1_1VehicleStop_a77b08114a893c3dba935f07496cdb49a}{is\+Platform\+Normal}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1VehicleStop_aeaaf6234293faa5263981162bcc375a7}{has\+Left}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ad85c1ed32b7fca5587ec5c64061781a6}{set\+Has\+Left}} (bool \mbox{\hyperlink{classCSA_1_1VehicleStop_aeaaf6234293faa5263981162bcc375a7}{has\+Left}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_af7ffcbe1b8db9a40a6cb1c438e6d7a88}{departure\+Time}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a29ada511d6218e2421db889a9ef054be}{set\+Departure\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_af7ffcbe1b8db9a40a6cb1c438e6d7a88}{departure\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_afc861cba10fcf05779c222fd57f6beeb}{departure\+Delay}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_aaa5f7c51e5352715fb0e701b3d7560f0}{set\+Departure\+Delay}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_afc861cba10fcf05779c222fd57f6beeb}{departure\+Delay}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_aa02b0117621a7e90a2c38ed10f19a9ee}{departure\+Canceled}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_afb79c95edf287cd5b40064d1cc94957e}{set\+Departure\+Canceled}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_aa02b0117621a7e90a2c38ed10f19a9ee}{departure\+Canceled}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_af28bb79013b8a29ffedfdd0cc0c96ec7}{arrival\+Time}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a96a162d068673f455660531ad549400e}{set\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_af28bb79013b8a29ffedfdd0cc0c96ec7}{arrival\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_aa60b346aae368af817fdc0e5d6e3fe30}{arrival\+Delay}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ada38acdf633877ba25fa3ada9961c0f6}{set\+Arrival\+Delay}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_aa60b346aae368af817fdc0e5d6e3fe30}{arrival\+Delay}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a62b0692553adc574939b90a64e91858d}{arrival\+Canceled}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a2e5b2e1f111d09a7be6acd933604cd51}{set\+Arrival\+Canceled}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1VehicleStop_a62b0692553adc574939b90a64e91858d}{arrival\+Canceled}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1VehicleStop_a936f754a9b2fd03fd6f4772947f20678}{departure\+U\+RI}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_afcf73c63b48ba26d8c8df85ca6056177}{set\+Departure\+U\+RI}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1VehicleStop_a936f754a9b2fd03fd6f4772947f20678}{departure\+U\+RI}})
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} \mbox{\hyperlink{classCSA_1_1VehicleStop_a2b1ae10dc6c7b77e5c28ebf646dab03c}{occupancy\+Level}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_ad23be128248c8d41b64dd60d66877204}{set\+Occupancy\+Level}} (const \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} \&\mbox{\hyperlink{classCSA_1_1VehicleStop_a2b1ae10dc6c7b77e5c28ebf646dab03c}{occupancy\+Level}})
+\item 
+\mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} \mbox{\hyperlink{classCSA_1_1VehicleStop_ae104457c93d6b341b140d730cead4bc6}{type}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1VehicleStop_a90bc20355abad4463180a923b3bc3055}{set\+Type}} (const \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} \&\mbox{\hyperlink{classCSA_1_1VehicleStop_ae104457c93d6b341b140d730cead4bc6}{type}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}} $\ast$ \mbox{\hyperlink{classCSA_1_1VehicleStop_adb8e903136887bad1106057bea070849}{m\+\_\+vehicle\+Information}}
+\item 
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ \mbox{\hyperlink{classCSA_1_1VehicleStop_a9c9d4bf0d0afb8d354cf1a462018848a}{m\+\_\+station}}
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1VehicleStop_ab8838a2e66e088cb22697429f42fb095}{m\+\_\+platform}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1VehicleStop_a80917f349cb1f69d6b45bec5a3ed1348}{m\+\_\+is\+Platform\+Normal}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1VehicleStop_a1ad41c255976580494bdd14e86455bdd}{m\+\_\+has\+Left}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a9454125f6563f6a2141850472f33d546}{m\+\_\+departure\+Time}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_accc9b62415d4bbf78cb6516c5eb69547}{m\+\_\+departure\+Delay}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a978fcad0cb055cf1ab030cb44d2cf582}{m\+\_\+departure\+Canceled}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a97c5db58b20c001c2eca1d0360339230}{m\+\_\+arrival\+Time}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a5d372323cdccfdb7fc124f1804afe6d6}{m\+\_\+arrival\+Delay}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1VehicleStop_a38c286c3c0be82c46956589774ee218f}{m\+\_\+arrival\+Canceled}}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1VehicleStop_aec621f0a6ce68e2fa31ddf359e416771}{m\+\_\+departure\+U\+RI}}
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} \mbox{\hyperlink{classCSA_1_1VehicleStop_acb0674aa6848c6e7b183d9c516210cbb}{m\+\_\+occupancy\+Level}}
+\item 
+\mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} \mbox{\hyperlink{classCSA_1_1VehicleStop_a3a162e84b6ca51f7296d65f542e53f44}{m\+\_\+type}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}\label{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!Type@{Type}}
+\index{Type@{Type}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+R\+R\+I\+V\+AL@{A\+R\+R\+I\+V\+AL}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!A\+R\+R\+I\+V\+AL@{A\+R\+R\+I\+V\+AL}}}\mbox{\Hypertarget{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ad5f52d91ac49fd146727f4710767dd08}\label{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ad5f52d91ac49fd146727f4710767dd08}} 
+A\+R\+R\+I\+V\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P\+A\+R\+T\+U\+RE@{D\+E\+P\+A\+R\+T\+U\+RE}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!D\+E\+P\+A\+R\+T\+U\+RE@{D\+E\+P\+A\+R\+T\+U\+RE}}}\mbox{\Hypertarget{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ae7cc381a17e714e7ba15ef6f9858304e}\label{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0ae7cc381a17e714e7ba15ef6f9858304e}} 
+D\+E\+P\+A\+R\+T\+U\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+OP@{S\+T\+OP}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!S\+T\+OP@{S\+T\+OP}}}\mbox{\Hypertarget{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0a615a46af313786fc4e349f34118be111}\label{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0a615a46af313786fc4e349f34118be111}} 
+S\+T\+OP&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a63f372612a68275d78307b9293339525}\label{classCSA_1_1VehicleStop_a63f372612a68275d78307b9293339525}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!Vehicle\+Stop@{Vehicle\+Stop}}
+\index{Vehicle\+Stop@{Vehicle\+Stop}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{Vehicle\+Stop()}{VehicleStop()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Vehicle\+Stop\+::\+Vehicle\+Stop (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a62b0692553adc574939b90a64e91858d}\label{classCSA_1_1VehicleStop_a62b0692553adc574939b90a64e91858d}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Canceled@{arrival\+Canceled}}
+\index{arrival\+Canceled@{arrival\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Canceled()}{arrivalCanceled()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ad5de2913078d75e0445652cb3e688dc7}\label{classCSA_1_1VehicleStop_ad5de2913078d75e0445652cb3e688dc7}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Canceled\+Changed@{arrival\+Canceled\+Changed}}
+\index{arrival\+Canceled\+Changed@{arrival\+Canceled\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Canceled\+Changed}{arrivalCanceledChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Canceled\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_aa60b346aae368af817fdc0e5d6e3fe30}\label{classCSA_1_1VehicleStop_aa60b346aae368af817fdc0e5d6e3fe30}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Delay@{arrival\+Delay}}
+\index{arrival\+Delay@{arrival\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Delay()}{arrivalDelay()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a371e833cad3ce70195dae5e6917043ee}\label{classCSA_1_1VehicleStop_a371e833cad3ce70195dae5e6917043ee}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Delay\+Changed@{arrival\+Delay\+Changed}}
+\index{arrival\+Delay\+Changed@{arrival\+Delay\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Delay\+Changed}{arrivalDelayChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Delay\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_af28bb79013b8a29ffedfdd0cc0c96ec7}\label{classCSA_1_1VehicleStop_af28bb79013b8a29ffedfdd0cc0c96ec7}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Time@{arrival\+Time}}
+\index{arrival\+Time@{arrival\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Time()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae9f705db514276be05baa892241f797d}\label{classCSA_1_1VehicleStop_ae9f705db514276be05baa892241f797d}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!arrival\+Time\+Changed@{arrival\+Time\+Changed}}
+\index{arrival\+Time\+Changed@{arrival\+Time\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{arrival\+Time\+Changed}{arrivalTimeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::arrival\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_aa02b0117621a7e90a2c38ed10f19a9ee}\label{classCSA_1_1VehicleStop_aa02b0117621a7e90a2c38ed10f19a9ee}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Canceled@{departure\+Canceled}}
+\index{departure\+Canceled@{departure\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Canceled()}{departureCanceled()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a85491b7004511491a9782b6f2bd1155f}\label{classCSA_1_1VehicleStop_a85491b7004511491a9782b6f2bd1155f}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Canceled\+Changed@{departure\+Canceled\+Changed}}
+\index{departure\+Canceled\+Changed@{departure\+Canceled\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Canceled\+Changed}{departureCanceledChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Canceled\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_afc861cba10fcf05779c222fd57f6beeb}\label{classCSA_1_1VehicleStop_afc861cba10fcf05779c222fd57f6beeb}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Delay@{departure\+Delay}}
+\index{departure\+Delay@{departure\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Delay()}{departureDelay()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_afba5878d8d99cb87db9d5ce549c2e429}\label{classCSA_1_1VehicleStop_afba5878d8d99cb87db9d5ce549c2e429}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Delay\+Changed@{departure\+Delay\+Changed}}
+\index{departure\+Delay\+Changed@{departure\+Delay\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Delay\+Changed}{departureDelayChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Delay\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_af7ffcbe1b8db9a40a6cb1c438e6d7a88}\label{classCSA_1_1VehicleStop_af7ffcbe1b8db9a40a6cb1c438e6d7a88}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Time@{departure\+Time}}
+\index{departure\+Time@{departure\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Time()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a0bf965ffe19e1bb16ed3fce5031f56ed}\label{classCSA_1_1VehicleStop_a0bf965ffe19e1bb16ed3fce5031f56ed}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+Time\+Changed@{departure\+Time\+Changed}}
+\index{departure\+Time\+Changed@{departure\+Time\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+Time\+Changed}{departureTimeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::departure\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a936f754a9b2fd03fd6f4772947f20678}\label{classCSA_1_1VehicleStop_a936f754a9b2fd03fd6f4772947f20678}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+U\+RI@{departure\+U\+RI}}
+\index{departure\+U\+RI@{departure\+U\+RI}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+U\+R\+I()}{departureURI()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+Stop\+::departure\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a201e105bb8c1afc2e149c414298c7f52}\label{classCSA_1_1VehicleStop_a201e105bb8c1afc2e149c414298c7f52}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!departure\+U\+R\+I\+Changed@{departure\+U\+R\+I\+Changed}}
+\index{departure\+U\+R\+I\+Changed@{departure\+U\+R\+I\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{departure\+U\+R\+I\+Changed}{departureURIChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::departure\+U\+R\+I\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_aeaaf6234293faa5263981162bcc375a7}\label{classCSA_1_1VehicleStop_aeaaf6234293faa5263981162bcc375a7}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!has\+Left@{has\+Left}}
+\index{has\+Left@{has\+Left}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{has\+Left()}{hasLeft()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Vehicle\+Stop\+::has\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a009c43f5a3c905a7dcce7b164b75bba4}\label{classCSA_1_1VehicleStop_a009c43f5a3c905a7dcce7b164b75bba4}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!has\+Left\+Changed@{has\+Left\+Changed}}
+\index{has\+Left\+Changed@{has\+Left\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{has\+Left\+Changed}{hasLeftChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::has\+Left\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a77b08114a893c3dba935f07496cdb49a}\label{classCSA_1_1VehicleStop_a77b08114a893c3dba935f07496cdb49a}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!is\+Platform\+Normal@{is\+Platform\+Normal}}
+\index{is\+Platform\+Normal@{is\+Platform\+Normal}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{is\+Platform\+Normal()}{isPlatformNormal()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Vehicle\+Stop\+::is\+Platform\+Normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_adbe85cb67383f19a9330160046adf8ab}\label{classCSA_1_1VehicleStop_adbe85cb67383f19a9330160046adf8ab}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!is\+Platform\+Normal\+Changed@{is\+Platform\+Normal\+Changed}}
+\index{is\+Platform\+Normal\+Changed@{is\+Platform\+Normal\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{is\+Platform\+Normal\+Changed}{isPlatformNormalChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::is\+Platform\+Normal\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a2b1ae10dc6c7b77e5c28ebf646dab03c}\label{classCSA_1_1VehicleStop_a2b1ae10dc6c7b77e5c28ebf646dab03c}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!occupancy\+Level@{occupancy\+Level}}
+\index{occupancy\+Level@{occupancy\+Level}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{occupancy\+Level()}{occupancyLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} C\+S\+A\+::\+Vehicle\+Stop\+::occupancy\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae0e96512e3c84393e7d7e641d3163baa}\label{classCSA_1_1VehicleStop_ae0e96512e3c84393e7d7e641d3163baa}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!occupancy\+Level\+Changed@{occupancy\+Level\+Changed}}
+\index{occupancy\+Level\+Changed@{occupancy\+Level\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{occupancy\+Level\+Changed}{occupancyLevelChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::occupancy\+Level\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a41eaa371b831197436e9250e5699819a}\label{classCSA_1_1VehicleStop_a41eaa371b831197436e9250e5699819a}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!platform@{platform}}
+\index{platform@{platform}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{platform()}{platform()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Vehicle\+Stop\+::platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a827783ce6df243615d065d5ec49605a6}\label{classCSA_1_1VehicleStop_a827783ce6df243615d065d5ec49605a6}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!platform\+Changed@{platform\+Changed}}
+\index{platform\+Changed@{platform\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{platform\+Changed}{platformChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::platform\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a2e5b2e1f111d09a7be6acd933604cd51}\label{classCSA_1_1VehicleStop_a2e5b2e1f111d09a7be6acd933604cd51}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Arrival\+Canceled@{set\+Arrival\+Canceled}}
+\index{set\+Arrival\+Canceled@{set\+Arrival\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Canceled()}{setArrivalCanceled()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Arrival\+Canceled (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Canceled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ada38acdf633877ba25fa3ada9961c0f6}\label{classCSA_1_1VehicleStop_ada38acdf633877ba25fa3ada9961c0f6}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Arrival\+Delay@{set\+Arrival\+Delay}}
+\index{set\+Arrival\+Delay@{set\+Arrival\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Delay()}{setArrivalDelay()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Arrival\+Delay (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Delay }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a96a162d068673f455660531ad549400e}\label{classCSA_1_1VehicleStop_a96a162d068673f455660531ad549400e}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Arrival\+Time@{set\+Arrival\+Time}}
+\index{set\+Arrival\+Time@{set\+Arrival\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Time()}{setArrivalTime()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_afb79c95edf287cd5b40064d1cc94957e}\label{classCSA_1_1VehicleStop_afb79c95edf287cd5b40064d1cc94957e}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Departure\+Canceled@{set\+Departure\+Canceled}}
+\index{set\+Departure\+Canceled@{set\+Departure\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Departure\+Canceled()}{setDepartureCanceled()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Departure\+Canceled (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Canceled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_aaa5f7c51e5352715fb0e701b3d7560f0}\label{classCSA_1_1VehicleStop_aaa5f7c51e5352715fb0e701b3d7560f0}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Departure\+Delay@{set\+Departure\+Delay}}
+\index{set\+Departure\+Delay@{set\+Departure\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Departure\+Delay()}{setDepartureDelay()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Departure\+Delay (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Delay }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a29ada511d6218e2421db889a9ef054be}\label{classCSA_1_1VehicleStop_a29ada511d6218e2421db889a9ef054be}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Departure\+Time@{set\+Departure\+Time}}
+\index{set\+Departure\+Time@{set\+Departure\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Departure\+Time()}{setDepartureTime()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Departure\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_afcf73c63b48ba26d8c8df85ca6056177}\label{classCSA_1_1VehicleStop_afcf73c63b48ba26d8c8df85ca6056177}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Departure\+U\+RI@{set\+Departure\+U\+RI}}
+\index{set\+Departure\+U\+RI@{set\+Departure\+U\+RI}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Departure\+U\+R\+I()}{setDepartureURI()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Departure\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{departure\+U\+RI }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ad85c1ed32b7fca5587ec5c64061781a6}\label{classCSA_1_1VehicleStop_ad85c1ed32b7fca5587ec5c64061781a6}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Has\+Left@{set\+Has\+Left}}
+\index{set\+Has\+Left@{set\+Has\+Left}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Has\+Left()}{setHasLeft()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Has\+Left (\begin{DoxyParamCaption}\item[{bool}]{has\+Left }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a55d1d0894b469a1c0018b7a0429a88c0}\label{classCSA_1_1VehicleStop_a55d1d0894b469a1c0018b7a0429a88c0}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Is\+Platform\+Normal@{set\+Is\+Platform\+Normal}}
+\index{set\+Is\+Platform\+Normal@{set\+Is\+Platform\+Normal}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Is\+Platform\+Normal()}{setIsPlatformNormal()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Is\+Platform\+Normal (\begin{DoxyParamCaption}\item[{bool}]{is\+Platform\+Normal }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ad23be128248c8d41b64dd60d66877204}\label{classCSA_1_1VehicleStop_ad23be128248c8d41b64dd60d66877204}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Occupancy\+Level@{set\+Occupancy\+Level}}
+\index{set\+Occupancy\+Level@{set\+Occupancy\+Level}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Occupancy\+Level()}{setOccupancyLevel()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Occupancy\+Level (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} \&}]{occupancy\+Level }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a8ef5b90a559539e2a7b46ceed701e06d}\label{classCSA_1_1VehicleStop_a8ef5b90a559539e2a7b46ceed701e06d}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Platform@{set\+Platform}}
+\index{set\+Platform@{set\+Platform}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Platform()}{setPlatform()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Platform (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae4a990a9e2c462461cf6cdccb129466c}\label{classCSA_1_1VehicleStop_ae4a990a9e2c462461cf6cdccb129466c}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Station@{set\+Station}}
+\index{set\+Station@{set\+Station}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Station()}{setStation()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Station (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$}]{station }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a90bc20355abad4463180a923b3bc3055}\label{classCSA_1_1VehicleStop_a90bc20355abad4463180a923b3bc3055}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ac5985077bb7570364bac137c4888c859}\label{classCSA_1_1VehicleStop_ac5985077bb7570364bac137c4888c859}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!set\+Vehicle\+Information@{set\+Vehicle\+Information}}
+\index{set\+Vehicle\+Information@{set\+Vehicle\+Information}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{set\+Vehicle\+Information()}{setVehicleInformation()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::set\+Vehicle\+Information (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}} $\ast$}]{vehicle\+Information }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae1c6e68ec554e65041a2f577433f314d}\label{classCSA_1_1VehicleStop_ae1c6e68ec554e65041a2f577433f314d}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!station@{station}}
+\index{station@{station}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{station()}{station()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ C\+S\+A\+::\+Vehicle\+Stop\+::station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a8cee8183966bb993b1dcc3ca26a483a9}\label{classCSA_1_1VehicleStop_a8cee8183966bb993b1dcc3ca26a483a9}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!station\+Changed@{station\+Changed}}
+\index{station\+Changed@{station\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{station\+Changed}{stationChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::station\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae104457c93d6b341b140d730cead4bc6}\label{classCSA_1_1VehicleStop_ae104457c93d6b341b140d730cead4bc6}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!type@{type}}
+\index{type@{type}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} C\+S\+A\+::\+Vehicle\+Stop\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a8a5cffb45c9ea23129662d91fff26385}\label{classCSA_1_1VehicleStop_a8a5cffb45c9ea23129662d91fff26385}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!type\+Changed@{type\+Changed}}
+\index{type\+Changed@{type\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{type\+Changed}{typeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::type\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ace091d4626e1d5a113f84e9c2b0d07f5}\label{classCSA_1_1VehicleStop_ace091d4626e1d5a113f84e9c2b0d07f5}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!vehicle\+Information@{vehicle\+Information}}
+\index{vehicle\+Information@{vehicle\+Information}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{vehicle\+Information()}{vehicleInformation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}} $\ast$ C\+S\+A\+::\+Vehicle\+Stop\+::vehicle\+Information (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ae7a43ee3fc70d2359ff12de44b38e6d2}\label{classCSA_1_1VehicleStop_ae7a43ee3fc70d2359ff12de44b38e6d2}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!vehicle\+Information\+Changed@{vehicle\+Information\+Changed}}
+\index{vehicle\+Information\+Changed@{vehicle\+Information\+Changed}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{vehicle\+Information\+Changed}{vehicleInformationChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+Stop\+::vehicle\+Information\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a38c286c3c0be82c46956589774ee218f}\label{classCSA_1_1VehicleStop_a38c286c3c0be82c46956589774ee218f}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+arrival\+Canceled@{m\+\_\+arrival\+Canceled}}
+\index{m\+\_\+arrival\+Canceled@{m\+\_\+arrival\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Canceled}{m\_arrivalCanceled}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+arrival\+Canceled\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a5d372323cdccfdb7fc124f1804afe6d6}\label{classCSA_1_1VehicleStop_a5d372323cdccfdb7fc124f1804afe6d6}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+arrival\+Delay@{m\+\_\+arrival\+Delay}}
+\index{m\+\_\+arrival\+Delay@{m\+\_\+arrival\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Delay}{m\_arrivalDelay}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+arrival\+Delay\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a97c5db58b20c001c2eca1d0360339230}\label{classCSA_1_1VehicleStop_a97c5db58b20c001c2eca1d0360339230}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}}
+\index{m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Time}{m\_arrivalTime}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+arrival\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a978fcad0cb055cf1ab030cb44d2cf582}\label{classCSA_1_1VehicleStop_a978fcad0cb055cf1ab030cb44d2cf582}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+departure\+Canceled@{m\+\_\+departure\+Canceled}}
+\index{m\+\_\+departure\+Canceled@{m\+\_\+departure\+Canceled}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Canceled}{m\_departureCanceled}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+departure\+Canceled\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_accc9b62415d4bbf78cb6516c5eb69547}\label{classCSA_1_1VehicleStop_accc9b62415d4bbf78cb6516c5eb69547}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+departure\+Delay@{m\+\_\+departure\+Delay}}
+\index{m\+\_\+departure\+Delay@{m\+\_\+departure\+Delay}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Delay}{m\_departureDelay}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+departure\+Delay\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a9454125f6563f6a2141850472f33d546}\label{classCSA_1_1VehicleStop_a9454125f6563f6a2141850472f33d546}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+departure\+Time@{m\+\_\+departure\+Time}}
+\index{m\+\_\+departure\+Time@{m\+\_\+departure\+Time}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Time}{m\_departureTime}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+departure\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_aec621f0a6ce68e2fa31ddf359e416771}\label{classCSA_1_1VehicleStop_aec621f0a6ce68e2fa31ddf359e416771}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+departure\+U\+RI@{m\+\_\+departure\+U\+RI}}
+\index{m\+\_\+departure\+U\+RI@{m\+\_\+departure\+U\+RI}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+U\+RI}{m\_departureURI}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+departure\+U\+RI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a1ad41c255976580494bdd14e86455bdd}\label{classCSA_1_1VehicleStop_a1ad41c255976580494bdd14e86455bdd}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+has\+Left@{m\+\_\+has\+Left}}
+\index{m\+\_\+has\+Left@{m\+\_\+has\+Left}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Left}{m\_hasLeft}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+has\+Left\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a80917f349cb1f69d6b45bec5a3ed1348}\label{classCSA_1_1VehicleStop_a80917f349cb1f69d6b45bec5a3ed1348}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+is\+Platform\+Normal@{m\+\_\+is\+Platform\+Normal}}
+\index{m\+\_\+is\+Platform\+Normal@{m\+\_\+is\+Platform\+Normal}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+is\+Platform\+Normal}{m\_isPlatformNormal}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+is\+Platform\+Normal\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_acb0674aa6848c6e7b183d9c516210cbb}\label{classCSA_1_1VehicleStop_acb0674aa6848c6e7b183d9c516210cbb}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+occupancy\+Level@{m\+\_\+occupancy\+Level}}
+\index{m\+\_\+occupancy\+Level@{m\+\_\+occupancy\+Level}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+occupancy\+Level}{m\_occupancyLevel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+occupancy\+Level\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_ab8838a2e66e088cb22697429f42fb095}\label{classCSA_1_1VehicleStop_ab8838a2e66e088cb22697429f42fb095}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+platform@{m\+\_\+platform}}
+\index{m\+\_\+platform@{m\+\_\+platform}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+platform}{m\_platform}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+platform\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a9c9d4bf0d0afb8d354cf1a462018848a}\label{classCSA_1_1VehicleStop_a9c9d4bf0d0afb8d354cf1a462018848a}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+station@{m\+\_\+station}}
+\index{m\+\_\+station@{m\+\_\+station}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+station}{m\_station}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}}$\ast$ C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+station\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_a3a162e84b6ca51f7296d65f542e53f44}\label{classCSA_1_1VehicleStop_a3a162e84b6ca51f7296d65f542e53f44}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+type@{m\+\_\+type}}
+\index{m\+\_\+type@{m\+\_\+type}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+type}{m\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1VehicleStop_a7c2030d5a49808cb8e6fefaa691a76e0}{C\+S\+A\+::\+Vehicle\+Stop\+::\+Type}} C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1VehicleStop_adb8e903136887bad1106057bea070849}\label{classCSA_1_1VehicleStop_adb8e903136887bad1106057bea070849}} 
+\index{C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}!m\+\_\+vehicle\+Information@{m\+\_\+vehicle\+Information}}
+\index{m\+\_\+vehicle\+Information@{m\+\_\+vehicle\+Information}!C\+S\+A\+::\+Vehicle\+Stop@{C\+S\+A\+::\+Vehicle\+Stop}}
+\subsubsection{\texorpdfstring{m\+\_\+vehicle\+Information}{m\_vehicleInformation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Vehicle}{C\+S\+A\+::\+Vehicle}}$\ast$ C\+S\+A\+::\+Vehicle\+Stop\+::m\+\_\+vehicle\+Information\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csavehiclestop_8h}{csavehiclestop.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csavehiclestop_8cpp}{csavehiclestop.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,168 @@
+\hypertarget{classFragments_1_1Factory}{}\section{Fragments\+:\+:Factory Class Reference}
+\label{classFragments_1_1Factory}\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+
+
+{\ttfamily \#include $<$fragmentsfactory.\+h$>$}
+
+Inheritance diagram for Fragments\+:\+:Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFragments_1_1Factory}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_a9559b78a9960c0d4981bf752b47d710a}{page\+Ready}} (\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$page)
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_ac65f072a6cc48bb340e89a61c30688d6}{get\+Resource}} (const Q\+Url \&uri)
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_ab8bdc67290ccbc5444d551fbebc68b17}{error}} (const Q\+String \&message)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_a37e59ac23a1a4889a5ef9348f1dfd0bc}{get\+Page}} (const Q\+Url \&uri)
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_a3c9b46f2158e91190305b25616a4bc34}{get\+Page}} (const Q\+Date\+Time \&departure\+Time)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ \mbox{\hyperlink{classFragments_1_1Factory_a32614388e70b2737a28c045ebbe58e55}{get\+Instance}} (Q\+Object $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_a0ee4ef4c4521a4bce9fe901236a14c84}{process\+H\+T\+T\+P\+Reply}} (Q\+Network\+Reply $\ast$reply)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_a9a5923caf97c4e8dba24e23539328deb}{get\+Page\+By\+U\+R\+I\+From\+Network\+Manager}} (const Q\+Url \&uri)
+\item 
+\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$ \mbox{\hyperlink{classFragments_1_1Factory_a8f78a634fbeec2b7edb731d778947e97}{generate\+Fragment\+From\+J\+S\+ON}} (const Q\+Json\+Object \&connection)
+\item 
+bool \mbox{\hyperlink{classFragments_1_1Factory_a62a60fd81fec95b794a8b27188b51824}{validate\+Data}} (const Q\+Json\+Object \&data, const Q\+String\+List \&properties)
+\item 
+\mbox{\hyperlink{classFragments_1_1Factory_a04aefdf80a3318302fbb839b9322a12e}{Factory}} (Q\+Object $\ast$parent)
+\item 
+\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$ \mbox{\hyperlink{classFragments_1_1Factory_ae9f54ac342a7fd5010689d80ef343424}{http}} () const
+\item 
+void \mbox{\hyperlink{classFragments_1_1Factory_ae5738a3e881b1791dda120e34be3cea9}{set\+Http}} (\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$\mbox{\hyperlink{classFragments_1_1Factory_ae9f54ac342a7fd5010689d80ef343424}{http}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$ \mbox{\hyperlink{classFragments_1_1Factory_aa98b2097fdc55511bdf4fc3bda37e98e}{m\+\_\+http}}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ \mbox{\hyperlink{classFragments_1_1Factory_a7e07aaa093813ab0e1cb50e92ac1386e}{m\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFragments_1_1Factory_a04aefdf80a3318302fbb839b9322a12e}\label{classFragments_1_1Factory_a04aefdf80a3318302fbb839b9322a12e}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!Factory@{Factory}}
+\index{Factory@{Factory}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{Factory()}{Factory()}}
+{\footnotesize\ttfamily Fragments\+::\+Factory\+::\+Factory (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classFragments_1_1Factory_ab8bdc67290ccbc5444d551fbebc68b17}\label{classFragments_1_1Factory_ab8bdc67290ccbc5444d551fbebc68b17}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!error@{error}}
+\index{error@{error}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a8f78a634fbeec2b7edb731d778947e97}\label{classFragments_1_1Factory_a8f78a634fbeec2b7edb731d778947e97}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!generate\+Fragment\+From\+J\+S\+ON@{generate\+Fragment\+From\+J\+S\+ON}}
+\index{generate\+Fragment\+From\+J\+S\+ON@{generate\+Fragment\+From\+J\+S\+ON}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{generate\+Fragment\+From\+J\+S\+O\+N()}{generateFragmentFromJSON()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$ Fragments\+::\+Factory\+::generate\+Fragment\+From\+J\+S\+ON (\begin{DoxyParamCaption}\item[{const Q\+Json\+Object \&}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a32614388e70b2737a28c045ebbe58e55}\label{classFragments_1_1Factory_a32614388e70b2737a28c045ebbe58e55}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ Fragments\+::\+Factory\+::get\+Instance (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a37e59ac23a1a4889a5ef9348f1dfd0bc}\label{classFragments_1_1Factory_a37e59ac23a1a4889a5ef9348f1dfd0bc}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!get\+Page@{get\+Page}}
+\index{get\+Page@{get\+Page}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{get\+Page()}{getPage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::get\+Page (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a3c9b46f2158e91190305b25616a4bc34}\label{classFragments_1_1Factory_a3c9b46f2158e91190305b25616a4bc34}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!get\+Page@{get\+Page}}
+\index{get\+Page@{get\+Page}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{get\+Page()}{getPage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::get\+Page (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a9a5923caf97c4e8dba24e23539328deb}\label{classFragments_1_1Factory_a9a5923caf97c4e8dba24e23539328deb}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!get\+Page\+By\+U\+R\+I\+From\+Network\+Manager@{get\+Page\+By\+U\+R\+I\+From\+Network\+Manager}}
+\index{get\+Page\+By\+U\+R\+I\+From\+Network\+Manager@{get\+Page\+By\+U\+R\+I\+From\+Network\+Manager}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{get\+Page\+By\+U\+R\+I\+From\+Network\+Manager()}{getPageByURIFromNetworkManager()}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::get\+Page\+By\+U\+R\+I\+From\+Network\+Manager (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_ac65f072a6cc48bb340e89a61c30688d6}\label{classFragments_1_1Factory_ac65f072a6cc48bb340e89a61c30688d6}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!get\+Resource@{get\+Resource}}
+\index{get\+Resource@{get\+Resource}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{get\+Resource}{getResource}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_ae9f54ac342a7fd5010689d80ef343424}\label{classFragments_1_1Factory_ae9f54ac342a7fd5010689d80ef343424}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!http@{http}}
+\index{http@{http}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{http()}{http()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$ Fragments\+::\+Factory\+::http (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a9559b78a9960c0d4981bf752b47d710a}\label{classFragments_1_1Factory_a9559b78a9960c0d4981bf752b47d710a}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!page\+Ready@{page\+Ready}}
+\index{page\+Ready@{page\+Ready}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{page\+Ready}{pageReady}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::page\+Ready (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$}]{page }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a0ee4ef4c4521a4bce9fe901236a14c84}\label{classFragments_1_1Factory_a0ee4ef4c4521a4bce9fe901236a14c84}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!process\+H\+T\+T\+P\+Reply@{process\+H\+T\+T\+P\+Reply}}
+\index{process\+H\+T\+T\+P\+Reply@{process\+H\+T\+T\+P\+Reply}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{process\+H\+T\+T\+P\+Reply}{processHTTPReply}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::process\+H\+T\+T\+P\+Reply (\begin{DoxyParamCaption}\item[{Q\+Network\+Reply $\ast$}]{reply }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_ae5738a3e881b1791dda120e34be3cea9}\label{classFragments_1_1Factory_ae5738a3e881b1791dda120e34be3cea9}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!set\+Http@{set\+Http}}
+\index{set\+Http@{set\+Http}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{set\+Http()}{setHttp()}}
+{\footnotesize\ttfamily void Fragments\+::\+Factory\+::set\+Http (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$}]{http }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a62a60fd81fec95b794a8b27188b51824}\label{classFragments_1_1Factory_a62a60fd81fec95b794a8b27188b51824}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!validate\+Data@{validate\+Data}}
+\index{validate\+Data@{validate\+Data}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{validate\+Data()}{validateData()}}
+{\footnotesize\ttfamily bool Fragments\+::\+Factory\+::validate\+Data (\begin{DoxyParamCaption}\item[{const Q\+Json\+Object \&}]{data,  }\item[{const Q\+String\+List \&}]{properties }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classFragments_1_1Factory_aa98b2097fdc55511bdf4fc3bda37e98e}\label{classFragments_1_1Factory_aa98b2097fdc55511bdf4fc3bda37e98e}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!m\+\_\+http@{m\+\_\+http}}
+\index{m\+\_\+http@{m\+\_\+http}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{m\+\_\+http}{m\_http}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}}$\ast$ Fragments\+::\+Factory\+::m\+\_\+http\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFragments_1_1Factory_a7e07aaa093813ab0e1cb50e92ac1386e}\label{classFragments_1_1Factory_a7e07aaa093813ab0e1cb50e92ac1386e}} 
+\index{Fragments\+::\+Factory@{Fragments\+::\+Factory}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!Fragments\+::\+Factory@{Fragments\+::\+Factory}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ Fragments\+::\+Factory\+::m\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/fragments/\mbox{\hyperlink{fragmentsfactory_8h}{fragmentsfactory.\+h}}\item 
+src/linkedconnections/fragments/\mbox{\hyperlink{fragmentsfactory_8cpp}{fragmentsfactory.\+cpp}}\end{DoxyCompactItemize}

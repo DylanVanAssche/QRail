@@ -1,0 +1,209 @@
+\hypertarget{csastation_8cpp}{}\section{src/linkedconnections/csa/csastation.cpp File Reference}
+\label{csastation_8cpp}\index{src/linkedconnections/csa/csastation.\+cpp@{src/linkedconnections/csa/csastation.\+cpp}}
+
+
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} constructor\+: empty.  
+
+
+{\ttfamily \#include \char`\"{}csastation.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceCSA}{C\+SA}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} constructor\+: empty. 
+
+Sets the average stop times.
+
+Gets the average stop times.
+
+Sets the opening\+Hours.
+
+Sets the has\+Hearing\+Aid\+Signal.
+
+Gets the has\+Hearing\+Aid\+Signal.
+
+Sets the has\+Elevator\+Platform.
+
+Gets the has\+Elevator\+Platform.
+
+Sets the has\+Escalator\+Down.
+
+Gets the has\+Escalator\+Down.
+
+Sets the has\+Escalator\+Up.
+
+Gets the has\+Escalator\+Up.
+
+Sets the has\+Elevated\+Platform.
+
+Gets the has\+Elevated\+Platform.
+
+Sets the number of disabled parking spots.
+
+Gets the number of disabled parking spots.
+
+Sets the has\+Ramp.
+
+Gets the has\+Ramp.
+
+Sets the has\+Wheelchair\+Available.
+
+Sets the has\+Metro.
+
+Gets the has\+Metro.
+
+Sets the has\+Tram.
+
+Gets the has\+Tram.
+
+Sets the has\+Bus.
+
+Gets the has\+Bus.
+
+Sets the has\+Blue\+Bike.
+
+Gets the has\+Blue\+Bike.
+
+Sets the has\+Bicycle\+Spots.
+
+Gets the has\+Bicycle\+Spots.
+
+Sets the has\+Taxi.
+
+Gets the has\+Taxi.
+
+Sets the has\+Free\+Parking.
+
+Gets the has\+Free\+Parking.
+
+Sets the has\+Luggage\+Lockers.
+
+Gets the has\+Luggage\+Lockers.
+
+Sets the has\+Ticket\+Vending\+Machine.
+
+Gets the has\+Ticket\+Vending\+Machine.
+
+Sets the address.
+
+Gets the address.
+
+Sets the position.
+
+Gets the position.
+
+Sets the country.
+
+Gets the country.
+
+Sets the name.
+
+Gets the name.
+
+Sets the U\+RI.
+
+Gets the U\+RI.
+
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} constructor\+: full.
+
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} constructor\+: minimal.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em const} & Q\+Map$<$\+Q\+Locale\+::\+Language, Q\+String$>$ \&name \\
+\hline
+{\em const} & Q\+Locale\+::\+Country \&country \\
+\hline
+{\em const} & Q\+Geo\+Coordinate \&position \\
+\hline
+{\em const} & qreal \&average\+Stop\+Times \\
+\hline
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em const} & Q\+Map$<$\+Q\+Locale\+::\+Language, Q\+String$>$ \&name \\
+\hline
+{\em const} & Q\+Locale\+::\+Country \&country \\
+\hline
+{\em const} & Q\+Geo\+Coordinate \&position \\
+\hline
+{\em const} & Q\+Geo\+Address \&address \\
+\hline
+{\em const} & bool \&has\+Ticket\+Vending\+Machine \\
+\hline
+{\em const} & bool \&has\+Luggage\+Lockers \\
+\hline
+{\em const} & bool \&has\+Free\+Parking \\
+\hline
+{\em const} & bool \&has\+Taxi \\
+\hline
+{\em const} & bool \&has\+Bicycl\+Spots \\
+\hline
+{\em const} & bool \&has\+Bus \\
+\hline
+{\em const} & bool \&has\+Tram \\
+\hline
+{\em const} & bool \&has\+Metro \\
+\hline
+{\em const} & bool \&has\+Wheelchair\+Available \\
+\hline
+{\em const} & bool \&has\+Ramp \\
+\hline
+{\em const} & qint16 \&disabled\+Parking\+Spots \\
+\hline
+{\em const} & bool \&has\+Elevated\+Platform \\
+\hline
+{\em const} & bool \&has\+Escalator\+Up \\
+\hline
+{\em const} & bool \&has\+Escalator\+Down \\
+\hline
+{\em const} & bool \&has\+Elevator\+Platform \\
+\hline
+{\em const} & bool \&has\+Hearing\+Aid\+Signal \\
+\hline
+{\em const} & Q\+Map$<$\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$\+Q\+Time, Q\+Time$>$$>$ \&opening\+Hours \\
+\hline
+{\em const} & qreal \&average\+Stop\+Times \\
+\hline
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}

@@ -1,0 +1,267 @@
+\hypertarget{classNetwork_1_1Manager}{}\section{Network\+:\+:Manager Class Reference}
+\label{classNetwork_1_1Manager}\index{Network\+::\+Manager@{Network\+::\+Manager}}
+
+
+{\ttfamily \#include $<$networkmanager.\+h$>$}
+
+Inheritance diagram for Network\+:\+:Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNetwork_1_1Manager}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_aa8df583727aa598ee39e6de18b438abe}{get\+Resource}} (const Q\+Url \&url)
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_a88e7de8604594cf6c2689e8b7a0a6e6e}{post\+Resource}} (const Q\+Url \&url, const Q\+Byte\+Array \&data)
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_adef1a35e5066157068800847c9366c09}{delete\+Resource}} (const Q\+Url \&url)
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_a42ef9df33cf238b62e66a5759c316432}{head\+Resource}} (const Q\+Url \&url)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_a1863c9a52ea6587387c8a688b92a2204}{request\+Completed}} (Q\+Network\+Reply $\ast$reply)
+\item 
+Q\+List$<$ Q\+Ssl\+Error $>$ \mbox{\hyperlink{classNetwork_1_1Manager_a4fd0af58f8fcd61b2c17d2dd368693c6}{ssl\+Errors\+Received}} (Q\+Network\+Reply $\ast$reply, Q\+List$<$ Q\+Ssl\+Error $>$ ssl\+Error)
+\item 
+Q\+Network\+Access\+Manager\+::\+Network\+Accessibility \mbox{\hyperlink{classNetwork_1_1Manager_a39de38077117c92e1e9d6aea325b9537}{network\+Accessible\+Changed}} (Q\+Network\+Access\+Manager\+::\+Network\+Accessibility state)
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_ad8dd2cecf77ca5869e46b4268e6e0c9a}{user\+Agent\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_a1f37b9f5fe58a613d5095893e7c9ddb7}{accept\+Header\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{classNetwork_1_1Manager_aa4f7e5630c9c95932146f0f97eb38ca1}{user\+Agent}} () const
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_acb21aaf997144be186e7e07043cd04ba}{set\+User\+Agent}} (const Q\+String \&\mbox{\hyperlink{classNetwork_1_1Manager_aa4f7e5630c9c95932146f0f97eb38ca1}{user\+Agent}})
+\item 
+Q\+String \mbox{\hyperlink{classNetwork_1_1Manager_ac0db9092d325d920fff7a2d095cf506b}{accept\+Header}} () const
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_ab2c4f941034a92beae89f5657777f992}{set\+Accept\+Header}} (const Q\+String \&\mbox{\hyperlink{classNetwork_1_1Manager_ac0db9092d325d920fff7a2d095cf506b}{accept\+Header}})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a68811ddc10729959c5a58b6f293f52f1}{get\+Instance}} (Q\+Object $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNetwork_1_1Manager_a27a2bbafd7cc4cd15d04c4a00afaae95}{Manager}} (Q\+Object $\ast$parent)
+\item 
+Q\+Network\+Request \mbox{\hyperlink{classNetwork_1_1Manager_aa9c1081a6e3ec9b937c3bbb9a7f7202f}{prepare\+Request}} (const Q\+Url \&url)
+\item 
+Q\+Network\+Access\+Manager $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a105b541b83fa32472b40730a885154ef}{Q\+N\+AM}} () const
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_aaf5a945f52e51e357b53cacdc7319ab2}{set\+Q\+N\+AM}} (Q\+Network\+Access\+Manager $\ast$value)
+\item 
+Q\+Abstract\+Network\+Cache $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a4aea14959afca0afd4b91208033da401}{cache}} () const
+\item 
+void \mbox{\hyperlink{classNetwork_1_1Manager_ab73570326de530e3cdd09f6bf3f195d0}{set\+Cache}} (Q\+Abstract\+Network\+Cache $\ast$\mbox{\hyperlink{classNetwork_1_1Manager_a4aea14959afca0afd4b91208033da401}{cache}})
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a42c71474900c4d1e68740ae8d73db848}{manager}} ()
+\item 
+static void \mbox{\hyperlink{classNetwork_1_1Manager_a1bc97c8b2dc5a4be751005d6a5dcf0a0}{set\+Manager}} (const \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}} $\ast$\mbox{\hyperlink{classNetwork_1_1Manager_a42c71474900c4d1e68740ae8d73db848}{manager}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Network\+Access\+Manager $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a6f69f8099c8706abebd1a4497e5038f8}{m\+\_\+\+Q\+N\+AM}}
+\item 
+Q\+Abstract\+Network\+Cache $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_aa99fb56d9b2a75b5f5a63a191002f461}{m\+\_\+cache}}
+\item 
+Q\+String \mbox{\hyperlink{classNetwork_1_1Manager_a59e8c58e1efd376525f400750ee87943}{m\+\_\+user\+Agent}}
+\item 
+Q\+String \mbox{\hyperlink{classNetwork_1_1Manager_a04138b3a1b6b6d9a0c8816de74ab50a2}{m\+\_\+accept\+Header}}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classNetwork_1_1Manager_a02ab401c85b17ffca2b9f3f69a4bae3b}{m\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNetwork_1_1Manager_a27a2bbafd7cc4cd15d04c4a00afaae95}\label{classNetwork_1_1Manager_a27a2bbafd7cc4cd15d04c4a00afaae95}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{Manager()}{Manager()}}
+{\footnotesize\ttfamily Network\+::\+Manager\+::\+Manager (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classNetwork_1_1Manager_ac0db9092d325d920fff7a2d095cf506b}\label{classNetwork_1_1Manager_ac0db9092d325d920fff7a2d095cf506b}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!accept\+Header@{accept\+Header}}
+\index{accept\+Header@{accept\+Header}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{accept\+Header()}{acceptHeader()}}
+{\footnotesize\ttfamily Q\+String Network\+::\+Manager\+::accept\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a1f37b9f5fe58a613d5095893e7c9ddb7}\label{classNetwork_1_1Manager_a1f37b9f5fe58a613d5095893e7c9ddb7}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!accept\+Header\+Changed@{accept\+Header\+Changed}}
+\index{accept\+Header\+Changed@{accept\+Header\+Changed}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{accept\+Header\+Changed}{acceptHeaderChanged}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::accept\+Header\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a4aea14959afca0afd4b91208033da401}\label{classNetwork_1_1Manager_a4aea14959afca0afd4b91208033da401}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!cache@{cache}}
+\index{cache@{cache}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{cache()}{cache()}}
+{\footnotesize\ttfamily Q\+Abstract\+Network\+Cache $\ast$ Network\+::\+Manager\+::cache (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_adef1a35e5066157068800847c9366c09}\label{classNetwork_1_1Manager_adef1a35e5066157068800847c9366c09}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!delete\+Resource@{delete\+Resource}}
+\index{delete\+Resource@{delete\+Resource}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{delete\+Resource}{deleteResource}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::delete\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a68811ddc10729959c5a58b6f293f52f1}\label{classNetwork_1_1Manager_a68811ddc10729959c5a58b6f293f52f1}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$ Network\+::\+Manager\+::get\+Instance (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_aa8df583727aa598ee39e6de18b438abe}\label{classNetwork_1_1Manager_aa8df583727aa598ee39e6de18b438abe}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!get\+Resource@{get\+Resource}}
+\index{get\+Resource@{get\+Resource}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{get\+Resource}{getResource}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a42ef9df33cf238b62e66a5759c316432}\label{classNetwork_1_1Manager_a42ef9df33cf238b62e66a5759c316432}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!head\+Resource@{head\+Resource}}
+\index{head\+Resource@{head\+Resource}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{head\+Resource}{headResource}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::head\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a42c71474900c4d1e68740ae8d73db848}\label{classNetwork_1_1Manager_a42c71474900c4d1e68740ae8d73db848}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!manager@{manager}}
+\index{manager@{manager}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{manager()}{manager()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}}$\ast$ Network\+::\+Manager\+::manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a39de38077117c92e1e9d6aea325b9537}\label{classNetwork_1_1Manager_a39de38077117c92e1e9d6aea325b9537}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!network\+Accessible\+Changed@{network\+Accessible\+Changed}}
+\index{network\+Accessible\+Changed@{network\+Accessible\+Changed}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{network\+Accessible\+Changed}{networkAccessibleChanged}}
+{\footnotesize\ttfamily Q\+Network\+Access\+Manager\+::\+Network\+Accessibility Network\+::\+Manager\+::network\+Accessible\+Changed (\begin{DoxyParamCaption}\item[{Q\+Network\+Access\+Manager\+::\+Network\+Accessibility}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a88e7de8604594cf6c2689e8b7a0a6e6e}\label{classNetwork_1_1Manager_a88e7de8604594cf6c2689e8b7a0a6e6e}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!post\+Resource@{post\+Resource}}
+\index{post\+Resource@{post\+Resource}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{post\+Resource}{postResource}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::post\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{const Q\+Byte\+Array \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_aa9c1081a6e3ec9b937c3bbb9a7f7202f}\label{classNetwork_1_1Manager_aa9c1081a6e3ec9b937c3bbb9a7f7202f}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!prepare\+Request@{prepare\+Request}}
+\index{prepare\+Request@{prepare\+Request}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{prepare\+Request()}{prepareRequest()}}
+{\footnotesize\ttfamily Q\+Network\+Request Network\+::\+Manager\+::prepare\+Request (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a105b541b83fa32472b40730a885154ef}\label{classNetwork_1_1Manager_a105b541b83fa32472b40730a885154ef}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!Q\+N\+AM@{Q\+N\+AM}}
+\index{Q\+N\+AM@{Q\+N\+AM}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{Q\+N\+A\+M()}{QNAM()}}
+{\footnotesize\ttfamily Q\+Network\+Access\+Manager $\ast$ Network\+::\+Manager\+::\+Q\+N\+AM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a1863c9a52ea6587387c8a688b92a2204}\label{classNetwork_1_1Manager_a1863c9a52ea6587387c8a688b92a2204}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!request\+Completed@{request\+Completed}}
+\index{request\+Completed@{request\+Completed}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{request\+Completed}{requestCompleted}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::request\+Completed (\begin{DoxyParamCaption}\item[{Q\+Network\+Reply $\ast$}]{reply }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_ab2c4f941034a92beae89f5657777f992}\label{classNetwork_1_1Manager_ab2c4f941034a92beae89f5657777f992}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!set\+Accept\+Header@{set\+Accept\+Header}}
+\index{set\+Accept\+Header@{set\+Accept\+Header}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+Accept\+Header()}{setAcceptHeader()}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::set\+Accept\+Header (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{accept\+Header }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_ab73570326de530e3cdd09f6bf3f195d0}\label{classNetwork_1_1Manager_ab73570326de530e3cdd09f6bf3f195d0}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!set\+Cache@{set\+Cache}}
+\index{set\+Cache@{set\+Cache}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+Cache()}{setCache()}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::set\+Cache (\begin{DoxyParamCaption}\item[{Q\+Abstract\+Network\+Cache $\ast$}]{cache }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a1bc97c8b2dc5a4be751005d6a5dcf0a0}\label{classNetwork_1_1Manager_a1bc97c8b2dc5a4be751005d6a5dcf0a0}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!set\+Manager@{set\+Manager}}
+\index{set\+Manager@{set\+Manager}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+Manager()}{setManager()}}
+{\footnotesize\ttfamily static void Network\+::\+Manager\+::set\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}} $\ast$}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_aaf5a945f52e51e357b53cacdc7319ab2}\label{classNetwork_1_1Manager_aaf5a945f52e51e357b53cacdc7319ab2}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!set\+Q\+N\+AM@{set\+Q\+N\+AM}}
+\index{set\+Q\+N\+AM@{set\+Q\+N\+AM}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+Q\+N\+A\+M()}{setQNAM()}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::set\+Q\+N\+AM (\begin{DoxyParamCaption}\item[{Q\+Network\+Access\+Manager $\ast$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_acb21aaf997144be186e7e07043cd04ba}\label{classNetwork_1_1Manager_acb21aaf997144be186e7e07043cd04ba}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!set\+User\+Agent@{set\+User\+Agent}}
+\index{set\+User\+Agent@{set\+User\+Agent}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{set\+User\+Agent()}{setUserAgent()}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::set\+User\+Agent (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{user\+Agent }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a4fd0af58f8fcd61b2c17d2dd368693c6}\label{classNetwork_1_1Manager_a4fd0af58f8fcd61b2c17d2dd368693c6}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!ssl\+Errors\+Received@{ssl\+Errors\+Received}}
+\index{ssl\+Errors\+Received@{ssl\+Errors\+Received}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{ssl\+Errors\+Received}{sslErrorsReceived}}
+{\footnotesize\ttfamily Q\+List$<$Q\+Ssl\+Error$>$ Network\+::\+Manager\+::ssl\+Errors\+Received (\begin{DoxyParamCaption}\item[{Q\+Network\+Reply $\ast$}]{reply,  }\item[{Q\+List$<$ Q\+Ssl\+Error $>$}]{ssl\+Error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_aa4f7e5630c9c95932146f0f97eb38ca1}\label{classNetwork_1_1Manager_aa4f7e5630c9c95932146f0f97eb38ca1}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!user\+Agent@{user\+Agent}}
+\index{user\+Agent@{user\+Agent}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{user\+Agent()}{userAgent()}}
+{\footnotesize\ttfamily Q\+String Network\+::\+Manager\+::user\+Agent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_ad8dd2cecf77ca5869e46b4268e6e0c9a}\label{classNetwork_1_1Manager_ad8dd2cecf77ca5869e46b4268e6e0c9a}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!user\+Agent\+Changed@{user\+Agent\+Changed}}
+\index{user\+Agent\+Changed@{user\+Agent\+Changed}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{user\+Agent\+Changed}{userAgentChanged}}
+{\footnotesize\ttfamily void Network\+::\+Manager\+::user\+Agent\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classNetwork_1_1Manager_a04138b3a1b6b6d9a0c8816de74ab50a2}\label{classNetwork_1_1Manager_a04138b3a1b6b6d9a0c8816de74ab50a2}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!m\+\_\+accept\+Header@{m\+\_\+accept\+Header}}
+\index{m\+\_\+accept\+Header@{m\+\_\+accept\+Header}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+accept\+Header}{m\_acceptHeader}}
+{\footnotesize\ttfamily Q\+String Network\+::\+Manager\+::m\+\_\+accept\+Header\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_aa99fb56d9b2a75b5f5a63a191002f461}\label{classNetwork_1_1Manager_aa99fb56d9b2a75b5f5a63a191002f461}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!m\+\_\+cache@{m\+\_\+cache}}
+\index{m\+\_\+cache@{m\+\_\+cache}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+cache}{m\_cache}}
+{\footnotesize\ttfamily Q\+Abstract\+Network\+Cache$\ast$ Network\+::\+Manager\+::m\+\_\+cache\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a02ab401c85b17ffca2b9f3f69a4bae3b}\label{classNetwork_1_1Manager_a02ab401c85b17ffca2b9f3f69a4bae3b}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$ Network\+::\+Manager\+::m\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a6f69f8099c8706abebd1a4497e5038f8}\label{classNetwork_1_1Manager_a6f69f8099c8706abebd1a4497e5038f8}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!m\+\_\+\+Q\+N\+AM@{m\+\_\+\+Q\+N\+AM}}
+\index{m\+\_\+\+Q\+N\+AM@{m\+\_\+\+Q\+N\+AM}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Q\+N\+AM}{m\_QNAM}}
+{\footnotesize\ttfamily Q\+Network\+Access\+Manager$\ast$ Network\+::\+Manager\+::m\+\_\+\+Q\+N\+AM\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classNetwork_1_1Manager_a59e8c58e1efd376525f400750ee87943}\label{classNetwork_1_1Manager_a59e8c58e1efd376525f400750ee87943}} 
+\index{Network\+::\+Manager@{Network\+::\+Manager}!m\+\_\+user\+Agent@{m\+\_\+user\+Agent}}
+\index{m\+\_\+user\+Agent@{m\+\_\+user\+Agent}!Network\+::\+Manager@{Network\+::\+Manager}}
+\subsubsection{\texorpdfstring{m\+\_\+user\+Agent}{m\_userAgent}}
+{\footnotesize\ttfamily Q\+String Network\+::\+Manager\+::m\+\_\+user\+Agent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/network/\mbox{\hyperlink{networkmanager_8h}{networkmanager.\+h}}\item 
+src/network/\mbox{\hyperlink{networkmanager_8cpp}{networkmanager.\+cpp}}\end{DoxyCompactItemize}

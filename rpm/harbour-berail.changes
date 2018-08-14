@@ -1,0 +1,64 @@
+# Rename this file as harbour-berail.changes to include changelog
+# entries in your RPM file.
+#
+# Add new changelog entries following the format below.
+# Add newest entries to the top of the list.
+# Separate entries from eachother with a blank line.
+
+# * date Author's Name <author's email> version-release
+# - Summary of changes
+
+* Mon Jan 8 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 2.0-2
+- [MINOR BUGFIX] Workaround for iRail API issue #335
+
+* Sun Jan 7 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 2.0-1
+- [NEW] C++ backend with automatically caching and concurrent HTTPS requests
+- [NEW] Refreshed QML UI following the Model-Delegate-View principles by Qt
+- [NEW] Enforced Sailfish OS coding convention
+- [NEW] Occupancy level for every connection and vehicle
+- [NEW] Follow the progress of your connection
+- [NEW] Select the type of trains (locale or all trains) you would like to see
+- [NEW] Disturbances are parsed based on their title, description and the affected location
+- [NEW] Via connection missing due delays is now shown in the UI
+- [IMPROVEMENT] Time and date selectors provide a button to select the current time and date
+- [IMPROVEMENT] Parsing time and date improved
+- [IMPROVEMENT] Disturbances moved to a seperate page
+- [IMPROVEMENT] ID based translations to follow the Sailfish OS code of conduct
+- [IMPROVEMENT] User-Agent is now set correctly
+- [IMPROVEMENT] Better shown which the departure and arrival station is
+- [IMPROVEMENT] Errors messages are now correctly shown to the user
+- [IMPROVEMENT] The train type and direction of the train is now also visible for vias
+- [IMPROVEMENT] Via arrival and departure time is now displayed
+- [IMPROVEMENT] Via delays are merged within their arrival and departure times
+- [IMPROVEMENT] Duration of a connection is shown
+- [DEVELOPMENT] KDE Umbrello taken in use to generate the class diagrams for the C++ backend
+- [DEVELOPMENT] Updated README file with contribution guidelines, translation status, etc.
+- [TRANSLATIONS] Moved to ID based translations
+- [TRANSLATIONS] Automatically updating translations on Transifex after each merge request
+- [TRANSLATIONS] Updated translations
+- [STORE] Fetching version from RPM YAML file
+- [STORE] Fixed RPM changelog e-mail
+
+* Mon Jun 12 2017 Dylan Van Assche <dylan.van.assche@protonmail.com> 1.2-1
+- [MINOR BUGFIX] Fixed NL translation
+- [IMPROVEMENT] Updated to the latest station list
+- [STORE] Fix harbour issues
+
+* Mon Jun 06 2017 Dylan Van Assche <dylan.van.assche@protonmail.com> 1.1-2
+- [MINOR BUGFIX] Remove disturbances duplicates in Liveboard
+
+* Mon Jun 06 2017 Dylan Van Assche <dylan.van.assche@protonmail.com> 1.1-1
+- [MINOR BUGFIX] Recovering after a wrong connection in the routeplanner fixed
+- [MINOR BUGFIX] Liveboard shows information twice fixed
+- [IMPROVEMENT] Translation strings improved
+- [IMPROVEMENT] Code polishing
+- [NEW] Select if your given time in the routeplanner is either the arrival time or the departure one
+- [NEW] Full language support for stations and other API calls, BeRail translation itself is depending on the community
+- [NEW] Automatically switch between arrival and departure station (work <-> home)
+- [NEW] Added version information in About
+
+* Mon Jun 04 2017 Dylan Van Assche <dylan.van.assche@protonmail.com> 1.0-2
+- [MINOR BUGFIX] Picking a date works now correctly
+
+* Mon Jun 03 2017 Dylan Van Assche <dylan.van.assche@protonmail.com> 1.0-1
+- Initial BETA release

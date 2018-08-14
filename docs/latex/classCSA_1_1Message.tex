@@ -1,0 +1,180 @@
+\hypertarget{classCSA_1_1Message}{}\section{C\+SA\+:\+:Message Class Reference}
+\label{classCSA_1_1Message}\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+
+
+{\ttfamily \#include $<$csamessage.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Message\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1Message}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_a2d58350e147ba775ea6e4984d4ac0bd9}{header\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_a3aa4f9f897726496236f8f44e62a2e98}{description\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_a07926969b6de9fcea2a41de78d53a8db}{lead\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_a570a510caf83d71d37b8e8a3d625be54}{link\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Message_aca2e81acce38bd7ac3e2b44669c41e9e}{Message}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}{header}}, const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}{description}}, const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_ade0403777364c446f7cee8ba1897a75c}{lead}}, const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Message_a7ddadacf05fdaa5d973025bc3892f517}{link}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1Message_ae1abb7c31a0f40f3601b7d2b21d2fec9}{Message}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}{header}}, const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}{description}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}{header}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_aaa162792bac73c4f20d718c546c7cf5d}{set\+Header}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}{header}})
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}{description}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_a6f67e046c556922e1d3a477215f1bcec}{set\+Description}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}{description}})
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_ade0403777364c446f7cee8ba1897a75c}{lead}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_aa70caaac5d69af259fb838f0dd6fde01}{set\+Lead}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Message_ade0403777364c446f7cee8ba1897a75c}{lead}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Message_a7ddadacf05fdaa5d973025bc3892f517}{link}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Message_aa5443c2828acafd1b31d9c042dbc52f1}{set\+Link}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Message_a7ddadacf05fdaa5d973025bc3892f517}{link}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_a3c274902f4b87b5acd6e15e60d8909eb}{m\+\_\+header}}
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_ae91f8d05186178670a26d8acf9279b14}{m\+\_\+description}}
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Message_a89d011c48a82f63384531d1af495ab79}{m\+\_\+lead}}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Message_a8d8f7f50df05a4f0ae80e9cd40c4435b}{m\+\_\+link}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Message_aca2e81acce38bd7ac3e2b44669c41e9e}\label{classCSA_1_1Message_aca2e81acce38bd7ac3e2b44669c41e9e}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!Message@{Message}}
+\index{Message@{Message}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{Message()}{Message()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Message\+::\+Message (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{header,  }\item[{const Q\+String \&}]{description,  }\item[{const Q\+String \&}]{lead,  }\item[{const Q\+Url \&}]{link,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_ae1abb7c31a0f40f3601b7d2b21d2fec9}\label{classCSA_1_1Message_ae1abb7c31a0f40f3601b7d2b21d2fec9}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!Message@{Message}}
+\index{Message@{Message}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{Message()}{Message()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Message\+::\+Message (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{header,  }\item[{const Q\+String \&}]{description,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}\label{classCSA_1_1Message_ad5ab91547afc7777c9921c2973418d19}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!description@{description}}
+\index{description@{description}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a3aa4f9f897726496236f8f44e62a2e98}\label{classCSA_1_1Message_a3aa4f9f897726496236f8f44e62a2e98}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!description\+Changed@{description\+Changed}}
+\index{description\+Changed@{description\+Changed}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{description\+Changed}{descriptionChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::description\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}\label{classCSA_1_1Message_a4400bbedbca391321c94e3620c743c0d}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!header@{header}}
+\index{header@{header}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{header()}{header()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a2d58350e147ba775ea6e4984d4ac0bd9}\label{classCSA_1_1Message_a2d58350e147ba775ea6e4984d4ac0bd9}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!header\+Changed@{header\+Changed}}
+\index{header\+Changed@{header\+Changed}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{header\+Changed}{headerChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::header\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_ade0403777364c446f7cee8ba1897a75c}\label{classCSA_1_1Message_ade0403777364c446f7cee8ba1897a75c}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!lead@{lead}}
+\index{lead@{lead}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{lead()}{lead()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::lead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a07926969b6de9fcea2a41de78d53a8db}\label{classCSA_1_1Message_a07926969b6de9fcea2a41de78d53a8db}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!lead\+Changed@{lead\+Changed}}
+\index{lead\+Changed@{lead\+Changed}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{lead\+Changed}{leadChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::lead\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a7ddadacf05fdaa5d973025bc3892f517}\label{classCSA_1_1Message_a7ddadacf05fdaa5d973025bc3892f517}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!link@{link}}
+\index{link@{link}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{link()}{link()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Message\+::link (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a570a510caf83d71d37b8e8a3d625be54}\label{classCSA_1_1Message_a570a510caf83d71d37b8e8a3d625be54}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!link\+Changed@{link\+Changed}}
+\index{link\+Changed@{link\+Changed}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{link\+Changed}{linkChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::link\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a6f67e046c556922e1d3a477215f1bcec}\label{classCSA_1_1Message_a6f67e046c556922e1d3a477215f1bcec}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!set\+Description@{set\+Description}}
+\index{set\+Description@{set\+Description}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{set\+Description()}{setDescription()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::set\+Description (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{description }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Message_aaa162792bac73c4f20d718c546c7cf5d}\label{classCSA_1_1Message_aaa162792bac73c4f20d718c546c7cf5d}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!set\+Header@{set\+Header}}
+\index{set\+Header@{set\+Header}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{set\+Header()}{setHeader()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::set\+Header (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{header }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Message_aa70caaac5d69af259fb838f0dd6fde01}\label{classCSA_1_1Message_aa70caaac5d69af259fb838f0dd6fde01}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!set\+Lead@{set\+Lead}}
+\index{set\+Lead@{set\+Lead}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{set\+Lead()}{setLead()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::set\+Lead (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{lead }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Message_aa5443c2828acafd1b31d9c042dbc52f1}\label{classCSA_1_1Message_aa5443c2828acafd1b31d9c042dbc52f1}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!set\+Link@{set\+Link}}
+\index{set\+Link@{set\+Link}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{set\+Link()}{setLink()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Message\+::set\+Link (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{link }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Message_ae91f8d05186178670a26d8acf9279b14}\label{classCSA_1_1Message_ae91f8d05186178670a26d8acf9279b14}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!m\+\_\+description@{m\+\_\+description}}
+\index{m\+\_\+description@{m\+\_\+description}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{m\+\_\+description}{m\_description}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::m\+\_\+description\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a3c274902f4b87b5acd6e15e60d8909eb}\label{classCSA_1_1Message_a3c274902f4b87b5acd6e15e60d8909eb}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!m\+\_\+header@{m\+\_\+header}}
+\index{m\+\_\+header@{m\+\_\+header}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{m\+\_\+header}{m\_header}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::m\+\_\+header\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a89d011c48a82f63384531d1af495ab79}\label{classCSA_1_1Message_a89d011c48a82f63384531d1af495ab79}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!m\+\_\+lead@{m\+\_\+lead}}
+\index{m\+\_\+lead@{m\+\_\+lead}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{m\+\_\+lead}{m\_lead}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Message\+::m\+\_\+lead\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Message_a8d8f7f50df05a4f0ae80e9cd40c4435b}\label{classCSA_1_1Message_a8d8f7f50df05a4f0ae80e9cd40c4435b}} 
+\index{C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}!m\+\_\+link@{m\+\_\+link}}
+\index{m\+\_\+link@{m\+\_\+link}!C\+S\+A\+::\+Message@{C\+S\+A\+::\+Message}}
+\subsubsection{\texorpdfstring{m\+\_\+link}{m\_link}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Message\+::m\+\_\+link\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csamessage_8h}{csamessage.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csamessage_8cpp}{csamessage.\+cpp}}\end{DoxyCompactItemize}

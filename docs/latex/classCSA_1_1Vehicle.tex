@@ -1,0 +1,183 @@
+\hypertarget{classCSA_1_1Vehicle}{}\section{C\+SA\+:\+:Vehicle Class Reference}
+\label{classCSA_1_1Vehicle}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+
+
+{\ttfamily \#include $<$csavehicle.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Vehicle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1Vehicle}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{Occupancy\+Level}} \{ \newline
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa40aa75f8e8cfdf7b660c5620e953229f}{Occupancy\+Level\+::\+U\+N\+S\+U\+P\+P\+O\+R\+T\+ED}}, 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa696b031073e74bf2cb98e5ef201d4aa3}{Occupancy\+Level\+::\+U\+N\+K\+N\+O\+WN}}, 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa41bc94cbd8eebea13ce0491b2ac11b88}{Occupancy\+Level\+::\+L\+OW}}, 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaac87f3be66ffc3c0d4249f1c2cc5f3cce}{Occupancy\+Level\+::\+M\+E\+D\+I\+UM}}, 
+\newline
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaab89de3b4b81c4facfac906edf29aec8c}{Occupancy\+Level\+::\+H\+I\+GH}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_ab473f2c81f6e0a0894e525466bfac43f}{uri\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_a4db7ec27aa6ef10cf09ac41cfabd2642}{id\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_a2de3755a1458b3790852b3fd759136b7}{headsign\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a3697b0944b1b62366b0ab4b3011ff60f}{Vehicle}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Vehicle_a580c5dc0cf95552ae0dc20cfdb04d84a}{uri}}, const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Vehicle_a99b2869ea0bee81d0bff5e32259146e6}{id}}, const Q\+String \&\mbox{\hyperlink{classCSA_1_1Vehicle_a7d8e773759fc99129669be053a731e95}{headsign}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Vehicle_a580c5dc0cf95552ae0dc20cfdb04d84a}{uri}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_a8988c6bd084f1385695d73ad80ffd67b}{set\+Uri}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Vehicle_a580c5dc0cf95552ae0dc20cfdb04d84a}{uri}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Vehicle_a99b2869ea0bee81d0bff5e32259146e6}{id}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_a65c6be2cd36fd59ba454e105452be1ee}{set\+Id}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Vehicle_a99b2869ea0bee81d0bff5e32259146e6}{id}})
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Vehicle_a7d8e773759fc99129669be053a731e95}{headsign}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Vehicle_ab47b72449154d72055cf506b6fc9a90a}{set\+Headsign}} (const Q\+String \&\mbox{\hyperlink{classCSA_1_1Vehicle_a7d8e773759fc99129669be053a731e95}{headsign}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Vehicle_a9ac31c6900099e172d8eae31f04849e4}{m\+\_\+uri}}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Vehicle_ac1d751db24a92a8b38efae09d7759fc8}{m\+\_\+id}}
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Vehicle_ab6764acaa95b5493b276e28a179952fd}{m\+\_\+headsign}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!Occupancy\+Level@{Occupancy\+Level}}
+\index{Occupancy\+Level@{Occupancy\+Level}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{Occupancy\+Level}{OccupancyLevel}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+S\+U\+P\+P\+O\+R\+T\+ED@{U\+N\+S\+U\+P\+P\+O\+R\+T\+ED}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!U\+N\+S\+U\+P\+P\+O\+R\+T\+ED@{U\+N\+S\+U\+P\+P\+O\+R\+T\+ED}}}\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa40aa75f8e8cfdf7b660c5620e953229f}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa40aa75f8e8cfdf7b660c5620e953229f}} 
+U\+N\+S\+U\+P\+P\+O\+R\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+K\+N\+O\+WN@{U\+N\+K\+N\+O\+WN}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!U\+N\+K\+N\+O\+WN@{U\+N\+K\+N\+O\+WN}}}\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa696b031073e74bf2cb98e5ef201d4aa3}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa696b031073e74bf2cb98e5ef201d4aa3}} 
+U\+N\+K\+N\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+OW@{L\+OW}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!L\+OW@{L\+OW}}}\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa41bc94cbd8eebea13ce0491b2ac11b88}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaa41bc94cbd8eebea13ce0491b2ac11b88}} 
+L\+OW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+E\+D\+I\+UM@{M\+E\+D\+I\+UM}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!M\+E\+D\+I\+UM@{M\+E\+D\+I\+UM}}}\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaac87f3be66ffc3c0d4249f1c2cc5f3cce}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaac87f3be66ffc3c0d4249f1c2cc5f3cce}} 
+M\+E\+D\+I\+UM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{H\+I\+GH@{H\+I\+GH}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!H\+I\+GH@{H\+I\+GH}}}\mbox{\Hypertarget{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaab89de3b4b81c4facfac906edf29aec8c}\label{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bdaab89de3b4b81c4facfac906edf29aec8c}} 
+H\+I\+GH&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a3697b0944b1b62366b0ab4b3011ff60f}\label{classCSA_1_1Vehicle_a3697b0944b1b62366b0ab4b3011ff60f}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!Vehicle@{Vehicle}}
+\index{Vehicle@{Vehicle}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{Vehicle()}{Vehicle()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Vehicle\+::\+Vehicle (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Url \&}]{id,  }\item[{const Q\+String \&}]{headsign,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a7d8e773759fc99129669be053a731e95}\label{classCSA_1_1Vehicle_a7d8e773759fc99129669be053a731e95}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!headsign@{headsign}}
+\index{headsign@{headsign}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{headsign()}{headsign()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Vehicle\+::headsign (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a2de3755a1458b3790852b3fd759136b7}\label{classCSA_1_1Vehicle_a2de3755a1458b3790852b3fd759136b7}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!headsign\+Changed@{headsign\+Changed}}
+\index{headsign\+Changed@{headsign\+Changed}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{headsign\+Changed}{headsignChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::headsign\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a99b2869ea0bee81d0bff5e32259146e6}\label{classCSA_1_1Vehicle_a99b2869ea0bee81d0bff5e32259146e6}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!id@{id}}
+\index{id@{id}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+::id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a4db7ec27aa6ef10cf09ac41cfabd2642}\label{classCSA_1_1Vehicle_a4db7ec27aa6ef10cf09ac41cfabd2642}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!id\+Changed@{id\+Changed}}
+\index{id\+Changed@{id\+Changed}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{id\+Changed}{idChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::id\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_ab47b72449154d72055cf506b6fc9a90a}\label{classCSA_1_1Vehicle_ab47b72449154d72055cf506b6fc9a90a}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!set\+Headsign@{set\+Headsign}}
+\index{set\+Headsign@{set\+Headsign}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{set\+Headsign()}{setHeadsign()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::set\+Headsign (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{headsign }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a65c6be2cd36fd59ba454e105452be1ee}\label{classCSA_1_1Vehicle_a65c6be2cd36fd59ba454e105452be1ee}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!set\+Id@{set\+Id}}
+\index{set\+Id@{set\+Id}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{set\+Id()}{setId()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::set\+Id (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a8988c6bd084f1385695d73ad80ffd67b}\label{classCSA_1_1Vehicle_a8988c6bd084f1385695d73ad80ffd67b}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!set\+Uri@{set\+Uri}}
+\index{set\+Uri@{set\+Uri}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{set\+Uri()}{setUri()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::set\+Uri (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a580c5dc0cf95552ae0dc20cfdb04d84a}\label{classCSA_1_1Vehicle_a580c5dc0cf95552ae0dc20cfdb04d84a}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!uri@{uri}}
+\index{uri@{uri}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_ab473f2c81f6e0a0894e525466bfac43f}\label{classCSA_1_1Vehicle_ab473f2c81f6e0a0894e525466bfac43f}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!uri\+Changed@{uri\+Changed}}
+\index{uri\+Changed@{uri\+Changed}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{uri\+Changed}{uriChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Vehicle\+::uri\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Vehicle_ab6764acaa95b5493b276e28a179952fd}\label{classCSA_1_1Vehicle_ab6764acaa95b5493b276e28a179952fd}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!m\+\_\+headsign@{m\+\_\+headsign}}
+\index{m\+\_\+headsign@{m\+\_\+headsign}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{m\+\_\+headsign}{m\_headsign}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Vehicle\+::m\+\_\+headsign\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_ac1d751db24a92a8b38efae09d7759fc8}\label{classCSA_1_1Vehicle_ac1d751db24a92a8b38efae09d7759fc8}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!m\+\_\+id@{m\+\_\+id}}
+\index{m\+\_\+id@{m\+\_\+id}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{m\+\_\+id}{m\_id}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+::m\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Vehicle_a9ac31c6900099e172d8eae31f04849e4}\label{classCSA_1_1Vehicle_a9ac31c6900099e172d8eae31f04849e4}} 
+\index{C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}!m\+\_\+uri@{m\+\_\+uri}}
+\index{m\+\_\+uri@{m\+\_\+uri}!C\+S\+A\+::\+Vehicle@{C\+S\+A\+::\+Vehicle}}
+\subsubsection{\texorpdfstring{m\+\_\+uri}{m\_uri}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Vehicle\+::m\+\_\+uri\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csavehicle_8h}{csavehicle.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csavehicle_8cpp}{csavehicle.\+cpp}}\end{DoxyCompactItemize}

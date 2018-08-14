@@ -1,0 +1,182 @@
+\hypertarget{networkmanager_8cpp}{}\section{src/network/networkmanager.cpp File Reference}
+\label{networkmanager_8cpp}\index{src/network/networkmanager.\+cpp@{src/network/networkmanager.\+cpp}}
+
+
+\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade constructor.  
+
+
+{\ttfamily \#include \char`\"{}networkmanager.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceNetwork}{Network}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade constructor. 
+
+Sets the Q\+N\+AM cache instance.
+
+Gets the Q\+N\+AM cache instance.
+
+Sets the Q\+N\+AM instance.
+
+Gets the Q\+N\+AM instance.
+
+Sets the current accept header.
+
+Get the current accept header.
+
+Sets the current user agent.
+
+Gets the current user agent.
+
+Prepare the H\+T\+TP request.
+
+Head a resource.
+
+Delete a resource.
+
+Post to a resource.
+
+Get a resource.
+
+Get a \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+9 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$manager
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&url\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&url\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&url \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Q\+Network\+Request request
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+String user\+Agent
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&user\+Agent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+String accept\+Header
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&accept\+Header\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Network\+Access\+Manager $\ast$\+Q\+N\+AM
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Network\+Access\+Manager} & $\ast$value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Abstract\+Network\+Cache $\ast$cache
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Abstract\+Network\+Cache} & $\ast$cache \\
+\hline
+\end{DoxyParams}

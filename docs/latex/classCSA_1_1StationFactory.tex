@@ -1,0 +1,130 @@
+\hypertarget{classCSA_1_1StationFactory}{}\section{C\+SA\+:\+:Station\+Factory Class Reference}
+\label{classCSA_1_1StationFactory}\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+
+
+{\ttfamily \#include $<$csastationfactory.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Station\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1StationFactory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Station}{Station}} $\ast$ \mbox{\hyperlink{classCSA_1_1StationFactory_ac2abd919e955f56a2c7a2cdba6198160}{get\+Station\+By\+U\+RI}} (const Q\+Url \&uri)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classCSA_1_1StationFactory}{Station\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1StationFactory_a445c2886c5ee20b1d86f0d5ed132a53f}{get\+Instance}} (Q\+Object $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1StationFactory_a35a69c0ff6abaefbec286ddb775aa41f}{init\+Database}} ()
+\item 
+bool \mbox{\hyperlink{classCSA_1_1StationFactory_a955892172d726e701332bdd51b4d8c53}{insert\+Station\+With\+Facilities\+Into\+Database}} (const Q\+String\+List \&station, const Q\+String\+List \&facilities)
+\item 
+bool \mbox{\hyperlink{classCSA_1_1StationFactory_a3edfb2b4e1067ba6d85799784f3df68f}{insert\+Station\+Without\+Facilities\+Into\+Database}} (const Q\+String\+List \&station)
+\item 
+bool \mbox{\hyperlink{classCSA_1_1StationFactory_a0b7c8552c6e1f389b483daf7ee76d2b3}{insert\+Stop\+Into\+Database}} (const Q\+String\+List \&stop)
+\item 
+\mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$ \mbox{\hyperlink{classCSA_1_1StationFactory_a402c022930515de30ed15233647b8b72}{db}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1StationFactory_a9f55492093df763b743500a9243c242b}{set\+Db}} (\mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$\mbox{\hyperlink{classCSA_1_1StationFactory_a402c022930515de30ed15233647b8b72}{db}})
+\item 
+\mbox{\hyperlink{classCSA_1_1StationFactory_ae24ebd450d0a02bc0d431c5fb91f0aa5}{Station\+Factory}} (Q\+Object $\ast$parent)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$ \mbox{\hyperlink{classCSA_1_1StationFactory_a62dfd390a1c9430d131e0dc72106603c}{m\+\_\+db}}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1StationFactory_a23e50080f272055c906807d809334b1b}{m\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1StationFactory_ae24ebd450d0a02bc0d431c5fb91f0aa5}\label{classCSA_1_1StationFactory_ae24ebd450d0a02bc0d431c5fb91f0aa5}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!Station\+Factory@{Station\+Factory}}
+\index{Station\+Factory@{Station\+Factory}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{Station\+Factory()}{StationFactory()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Station\+Factory\+::\+Station\+Factory (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a402c022930515de30ed15233647b8b72}\label{classCSA_1_1StationFactory_a402c022930515de30ed15233647b8b72}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!db@{db}}
+\index{db@{db}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{db()}{db()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$ C\+S\+A\+::\+Station\+Factory\+::db (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a445c2886c5ee20b1d86f0d5ed132a53f}\label{classCSA_1_1StationFactory_a445c2886c5ee20b1d86f0d5ed132a53f}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ C\+S\+A\+::\+Station\+Factory\+::get\+Instance (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_ac2abd919e955f56a2c7a2cdba6198160}\label{classCSA_1_1StationFactory_ac2abd919e955f56a2c7a2cdba6198160}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!get\+Station\+By\+U\+RI@{get\+Station\+By\+U\+RI}}
+\index{get\+Station\+By\+U\+RI@{get\+Station\+By\+U\+RI}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{get\+Station\+By\+U\+R\+I()}{getStationByURI()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ C\+S\+A\+::\+Station\+Factory\+::get\+Station\+By\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a35a69c0ff6abaefbec286ddb775aa41f}\label{classCSA_1_1StationFactory_a35a69c0ff6abaefbec286ddb775aa41f}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!init\+Database@{init\+Database}}
+\index{init\+Database@{init\+Database}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{init\+Database()}{initDatabase()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+Factory\+::init\+Database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a955892172d726e701332bdd51b4d8c53}\label{classCSA_1_1StationFactory_a955892172d726e701332bdd51b4d8c53}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!insert\+Station\+With\+Facilities\+Into\+Database@{insert\+Station\+With\+Facilities\+Into\+Database}}
+\index{insert\+Station\+With\+Facilities\+Into\+Database@{insert\+Station\+With\+Facilities\+Into\+Database}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{insert\+Station\+With\+Facilities\+Into\+Database()}{insertStationWithFacilitiesIntoDatabase()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+Factory\+::insert\+Station\+With\+Facilities\+Into\+Database (\begin{DoxyParamCaption}\item[{const Q\+String\+List \&}]{station,  }\item[{const Q\+String\+List \&}]{facilities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a3edfb2b4e1067ba6d85799784f3df68f}\label{classCSA_1_1StationFactory_a3edfb2b4e1067ba6d85799784f3df68f}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!insert\+Station\+Without\+Facilities\+Into\+Database@{insert\+Station\+Without\+Facilities\+Into\+Database}}
+\index{insert\+Station\+Without\+Facilities\+Into\+Database@{insert\+Station\+Without\+Facilities\+Into\+Database}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{insert\+Station\+Without\+Facilities\+Into\+Database()}{insertStationWithoutFacilitiesIntoDatabase()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+Factory\+::insert\+Station\+Without\+Facilities\+Into\+Database (\begin{DoxyParamCaption}\item[{const Q\+String\+List \&}]{station }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a0b7c8552c6e1f389b483daf7ee76d2b3}\label{classCSA_1_1StationFactory_a0b7c8552c6e1f389b483daf7ee76d2b3}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!insert\+Stop\+Into\+Database@{insert\+Stop\+Into\+Database}}
+\index{insert\+Stop\+Into\+Database@{insert\+Stop\+Into\+Database}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{insert\+Stop\+Into\+Database()}{insertStopIntoDatabase()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+Factory\+::insert\+Stop\+Into\+Database (\begin{DoxyParamCaption}\item[{const Q\+String\+List \&}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a9f55492093df763b743500a9243c242b}\label{classCSA_1_1StationFactory_a9f55492093df763b743500a9243c242b}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!set\+Db@{set\+Db}}
+\index{set\+Db@{set\+Db}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{set\+Db()}{setDb()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+Factory\+::set\+Db (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$}]{db }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a62dfd390a1c9430d131e0dc72106603c}\label{classCSA_1_1StationFactory_a62dfd390a1c9430d131e0dc72106603c}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!m\+\_\+db@{m\+\_\+db}}
+\index{m\+\_\+db@{m\+\_\+db}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{m\+\_\+db}{m\_db}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}}$\ast$ C\+S\+A\+::\+Station\+Factory\+::m\+\_\+db\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1StationFactory_a23e50080f272055c906807d809334b1b}\label{classCSA_1_1StationFactory_a23e50080f272055c906807d809334b1b}} 
+\index{C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!C\+S\+A\+::\+Station\+Factory@{C\+S\+A\+::\+Station\+Factory}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ C\+S\+A\+::\+Station\+Factory\+::m\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csastationfactory_8h}{csastationfactory.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csastationfactory_8cpp}{csastationfactory.\+cpp}}\end{DoxyCompactItemize}

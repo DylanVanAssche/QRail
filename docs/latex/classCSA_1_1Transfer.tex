@@ -1,0 +1,320 @@
+\hypertarget{classCSA_1_1Transfer}{}\section{C\+SA\+:\+:Transfer Class Reference}
+\label{classCSA_1_1Transfer}\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+
+
+{\ttfamily \#include $<$csatransfer.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Transfer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1Transfer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{Type}} \{ \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaad5f52d91ac49fd146727f4710767dd08}{Type\+::\+A\+R\+R\+I\+V\+AL}}, 
+\mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaae7cc381a17e714e7ba15ef6f9858304e}{Type\+::\+D\+E\+P\+A\+R\+T\+U\+RE}}, 
+\mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaeb5ddb3b6096fb90ff720d9c3e2a6628}{Type\+::\+T\+R\+A\+N\+S\+F\+ER}}, 
+\mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaccc0377a8afbf50e7094f5c23a8af223}{Type\+::\+I\+N\+V\+A\+L\+ID}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a6bf33c893850532081dd563cead50e71}{departure\+Leg\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_ae000de6c0ce8829c7da6a963d9d705ba}{arrival\+Leg\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_aa7bd4b7ccdba500719b18b0e0f534cb3}{departure\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_aea7072a6fe1de31c0c783539a879ef73}{arrival\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_ae404455a073e9bbd3d10fa513c284bb4}{type\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Transfer_a899f767d520735fccc3389da77d8f7ae}{Transfer}} (\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_a7f2d02a0a1fe7ca96f57fc7864ebfdb8}{departure\+Leg}}=nullptr, \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_acf5d711e3c206ff0da0cae8146a08beb}{arrival\+Leg}}=nullptr, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a7f2d02a0a1fe7ca96f57fc7864ebfdb8}{departure\+Leg}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a70a78662a0ef74bb5d88b7796130f001}{set\+Departure\+Leg}} (\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_a7f2d02a0a1fe7ca96f57fc7864ebfdb8}{departure\+Leg}})
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_acf5d711e3c206ff0da0cae8146a08beb}{arrival\+Leg}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a3143da004508fa9c75e265054001e7bf}{set\+Arrival\+Leg}} (\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_acf5d711e3c206ff0da0cae8146a08beb}{arrival\+Leg}})
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a1442b93dece142706ed8657f1fa9e093}{departure}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a284812274e48e89abae09e8ab37e5670}{set\+Departure}} (\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_a1442b93dece142706ed8657f1fa9e093}{departure}})
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a1b651e08402cf33cf12d65ad9b6f8011}{arrival}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a0d139f6475fc5d791cf24e964777d9a5}{set\+Arrival}} (\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$\mbox{\hyperlink{classCSA_1_1Transfer_a1b651e08402cf33cf12d65ad9b6f8011}{arrival}})
+\item 
+\mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} \mbox{\hyperlink{classCSA_1_1Transfer_a52d56463fa87816353419a55cc3753de}{type}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Transfer_a56fb2f1effd38b42800ba341c15564a5}{set\+Type}} (const \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} \&\mbox{\hyperlink{classCSA_1_1Transfer_a52d56463fa87816353419a55cc3753de}{type}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Transfer_a0878390aa8e48d679b4ceae14cdfd6d7}{uri}} () const
+\item 
+\mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a345bb6fed54db1a5ed9ca8292ab4a57a}{station}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Transfer_a260cf9330952c162d943d65deffcf5bc}{time}} () const
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Transfer_af2447a3224c016dbb36905b87db0a31e}{delay}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Transfer_acd43c880d4964a65cf148d0128a7224e}{delayed\+Time}} () const
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Transfer_a6b3d8d41cbe77793366243ac6902766f}{platform}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Transfer_acd29a86e4dbb281ded35cb4e3f9f3000}{is\+Canceled}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Transfer_a007baf97e02698d23c86b9c0a6b32350}{is\+Normal\+Platform}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Transfer_a7ef5bea75d092ec379d21f5329766343}{is\+Passed}} () const
+\item 
+\mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} \mbox{\hyperlink{classCSA_1_1Transfer_a7d5855f37a04c5e0dab60d87ef38f2ef}{occupancy\+Level}} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_afa7316db40bb5467407ea4cf564e2bc8}{m\+\_\+departure\+Leg}}
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a744932ae13de04fdf196f3ab82195521}{m\+\_\+arrival\+Leg}}
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_a5cbccf660e2eeb3235d43fae553b6143}{m\+\_\+departure}}
+\item 
+\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classCSA_1_1Transfer_af073c99651592dd83611889e1d1b7677}{m\+\_\+arrival}}
+\item 
+\mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} \mbox{\hyperlink{classCSA_1_1Transfer_a491227791f327d6a2a19ce6e91db37f6}{m\+\_\+type}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}\label{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!Type@{Type}}
+\index{Type@{Type}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+R\+R\+I\+V\+AL@{A\+R\+R\+I\+V\+AL}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!A\+R\+R\+I\+V\+AL@{A\+R\+R\+I\+V\+AL}}}\mbox{\Hypertarget{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaad5f52d91ac49fd146727f4710767dd08}\label{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaad5f52d91ac49fd146727f4710767dd08}} 
+A\+R\+R\+I\+V\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P\+A\+R\+T\+U\+RE@{D\+E\+P\+A\+R\+T\+U\+RE}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!D\+E\+P\+A\+R\+T\+U\+RE@{D\+E\+P\+A\+R\+T\+U\+RE}}}\mbox{\Hypertarget{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaae7cc381a17e714e7ba15ef6f9858304e}\label{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaae7cc381a17e714e7ba15ef6f9858304e}} 
+D\+E\+P\+A\+R\+T\+U\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+R\+A\+N\+S\+F\+ER@{T\+R\+A\+N\+S\+F\+ER}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!T\+R\+A\+N\+S\+F\+ER@{T\+R\+A\+N\+S\+F\+ER}}}\mbox{\Hypertarget{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaeb5ddb3b6096fb90ff720d9c3e2a6628}\label{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaeb5ddb3b6096fb90ff720d9c3e2a6628}} 
+T\+R\+A\+N\+S\+F\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+V\+A\+L\+ID@{I\+N\+V\+A\+L\+ID}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!I\+N\+V\+A\+L\+ID@{I\+N\+V\+A\+L\+ID}}}\mbox{\Hypertarget{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaccc0377a8afbf50e7094f5c23a8af223}\label{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355eaaccc0377a8afbf50e7094f5c23a8af223}} 
+I\+N\+V\+A\+L\+ID&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Transfer_a899f767d520735fccc3389da77d8f7ae}\label{classCSA_1_1Transfer_a899f767d520735fccc3389da77d8f7ae}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!Transfer@{Transfer}}
+\index{Transfer@{Transfer}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{Transfer()}{Transfer()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Transfer\+::\+Transfer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$}]{departure\+Leg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$}]{arrival\+Leg = {\ttfamily nullptr},  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Transfer_a1b651e08402cf33cf12d65ad9b6f8011}\label{classCSA_1_1Transfer_a1b651e08402cf33cf12d65ad9b6f8011}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!arrival@{arrival}}
+\index{arrival@{arrival}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{arrival()}{arrival()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ C\+S\+A\+::\+Transfer\+::arrival (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_aea7072a6fe1de31c0c783539a879ef73}\label{classCSA_1_1Transfer_aea7072a6fe1de31c0c783539a879ef73}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!arrival\+Changed@{arrival\+Changed}}
+\index{arrival\+Changed@{arrival\+Changed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{arrival\+Changed}{arrivalChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::arrival\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_acf5d711e3c206ff0da0cae8146a08beb}\label{classCSA_1_1Transfer_acf5d711e3c206ff0da0cae8146a08beb}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!arrival\+Leg@{arrival\+Leg}}
+\index{arrival\+Leg@{arrival\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{arrival\+Leg()}{arrivalLeg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ C\+S\+A\+::\+Transfer\+::arrival\+Leg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_ae000de6c0ce8829c7da6a963d9d705ba}\label{classCSA_1_1Transfer_ae000de6c0ce8829c7da6a963d9d705ba}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!arrival\+Leg\+Changed@{arrival\+Leg\+Changed}}
+\index{arrival\+Leg\+Changed@{arrival\+Leg\+Changed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{arrival\+Leg\+Changed}{arrivalLegChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::arrival\+Leg\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_af2447a3224c016dbb36905b87db0a31e}\label{classCSA_1_1Transfer_af2447a3224c016dbb36905b87db0a31e}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!delay@{delay}}
+\index{delay@{delay}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{delay()}{delay()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Transfer\+::delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_acd43c880d4964a65cf148d0128a7224e}\label{classCSA_1_1Transfer_acd43c880d4964a65cf148d0128a7224e}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!delayed\+Time@{delayed\+Time}}
+\index{delayed\+Time@{delayed\+Time}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{delayed\+Time()}{delayedTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Transfer\+::delayed\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a1442b93dece142706ed8657f1fa9e093}\label{classCSA_1_1Transfer_a1442b93dece142706ed8657f1fa9e093}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!departure@{departure}}
+\index{departure@{departure}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{departure()}{departure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$ C\+S\+A\+::\+Transfer\+::departure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_aa7bd4b7ccdba500719b18b0e0f534cb3}\label{classCSA_1_1Transfer_aa7bd4b7ccdba500719b18b0e0f534cb3}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!departure\+Changed@{departure\+Changed}}
+\index{departure\+Changed@{departure\+Changed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{departure\+Changed}{departureChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::departure\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a7f2d02a0a1fe7ca96f57fc7864ebfdb8}\label{classCSA_1_1Transfer_a7f2d02a0a1fe7ca96f57fc7864ebfdb8}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!departure\+Leg@{departure\+Leg}}
+\index{departure\+Leg@{departure\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{departure\+Leg()}{departureLeg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ C\+S\+A\+::\+Transfer\+::departure\+Leg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a6bf33c893850532081dd563cead50e71}\label{classCSA_1_1Transfer_a6bf33c893850532081dd563cead50e71}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!departure\+Leg\+Changed@{departure\+Leg\+Changed}}
+\index{departure\+Leg\+Changed@{departure\+Leg\+Changed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{departure\+Leg\+Changed}{departureLegChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::departure\+Leg\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_acd29a86e4dbb281ded35cb4e3f9f3000}\label{classCSA_1_1Transfer_acd29a86e4dbb281ded35cb4e3f9f3000}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!is\+Canceled@{is\+Canceled}}
+\index{is\+Canceled@{is\+Canceled}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{is\+Canceled()}{isCanceled()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Transfer\+::is\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a007baf97e02698d23c86b9c0a6b32350}\label{classCSA_1_1Transfer_a007baf97e02698d23c86b9c0a6b32350}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!is\+Normal\+Platform@{is\+Normal\+Platform}}
+\index{is\+Normal\+Platform@{is\+Normal\+Platform}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{is\+Normal\+Platform()}{isNormalPlatform()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Transfer\+::is\+Normal\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a7ef5bea75d092ec379d21f5329766343}\label{classCSA_1_1Transfer_a7ef5bea75d092ec379d21f5329766343}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!is\+Passed@{is\+Passed}}
+\index{is\+Passed@{is\+Passed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{is\+Passed()}{isPassed()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Transfer\+::is\+Passed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a7d5855f37a04c5e0dab60d87ef38f2ef}\label{classCSA_1_1Transfer_a7d5855f37a04c5e0dab60d87ef38f2ef}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!occupancy\+Level@{occupancy\+Level}}
+\index{occupancy\+Level@{occupancy\+Level}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{occupancy\+Level()}{occupancyLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Vehicle_a331cc81107e5f0a8f37f894729dd9bda}{C\+S\+A\+::\+Vehicle\+::\+Occupancy\+Level}} C\+S\+A\+::\+Transfer\+::occupancy\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a6b3d8d41cbe77793366243ac6902766f}\label{classCSA_1_1Transfer_a6b3d8d41cbe77793366243ac6902766f}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!platform@{platform}}
+\index{platform@{platform}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{platform()}{platform()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Transfer\+::platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a0d139f6475fc5d791cf24e964777d9a5}\label{classCSA_1_1Transfer_a0d139f6475fc5d791cf24e964777d9a5}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!set\+Arrival@{set\+Arrival}}
+\index{set\+Arrival@{set\+Arrival}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{set\+Arrival()}{setArrival()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::set\+Arrival (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$}]{arrival }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a3143da004508fa9c75e265054001e7bf}\label{classCSA_1_1Transfer_a3143da004508fa9c75e265054001e7bf}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!set\+Arrival\+Leg@{set\+Arrival\+Leg}}
+\index{set\+Arrival\+Leg@{set\+Arrival\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Leg()}{setArrivalLeg()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::set\+Arrival\+Leg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$}]{arrival\+Leg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a284812274e48e89abae09e8ab37e5670}\label{classCSA_1_1Transfer_a284812274e48e89abae09e8ab37e5670}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!set\+Departure@{set\+Departure}}
+\index{set\+Departure@{set\+Departure}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{set\+Departure()}{setDeparture()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::set\+Departure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}} $\ast$}]{departure }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a70a78662a0ef74bb5d88b7796130f001}\label{classCSA_1_1Transfer_a70a78662a0ef74bb5d88b7796130f001}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!set\+Departure\+Leg@{set\+Departure\+Leg}}
+\index{set\+Departure\+Leg@{set\+Departure\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{set\+Departure\+Leg()}{setDepartureLeg()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::set\+Departure\+Leg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$}]{departure\+Leg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a56fb2f1effd38b42800ba341c15564a5}\label{classCSA_1_1Transfer_a56fb2f1effd38b42800ba341c15564a5}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::set\+Type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a345bb6fed54db1a5ed9ca8292ab4a57a}\label{classCSA_1_1Transfer_a345bb6fed54db1a5ed9ca8292ab4a57a}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!station@{station}}
+\index{station@{station}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{station()}{station()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Station}{C\+S\+A\+::\+Station}} $\ast$ C\+S\+A\+::\+Transfer\+::station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a260cf9330952c162d943d65deffcf5bc}\label{classCSA_1_1Transfer_a260cf9330952c162d943d65deffcf5bc}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!time@{time}}
+\index{time@{time}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{time()}{time()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Transfer\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a52d56463fa87816353419a55cc3753de}\label{classCSA_1_1Transfer_a52d56463fa87816353419a55cc3753de}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!type@{type}}
+\index{type@{type}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} C\+S\+A\+::\+Transfer\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_ae404455a073e9bbd3d10fa513c284bb4}\label{classCSA_1_1Transfer_ae404455a073e9bbd3d10fa513c284bb4}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!type\+Changed@{type\+Changed}}
+\index{type\+Changed@{type\+Changed}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{type\+Changed}{typeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Transfer\+::type\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a0878390aa8e48d679b4ceae14cdfd6d7}\label{classCSA_1_1Transfer_a0878390aa8e48d679b4ceae14cdfd6d7}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!uri@{uri}}
+\index{uri@{uri}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Transfer\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Transfer_af073c99651592dd83611889e1d1b7677}\label{classCSA_1_1Transfer_af073c99651592dd83611889e1d1b7677}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!m\+\_\+arrival@{m\+\_\+arrival}}
+\index{m\+\_\+arrival@{m\+\_\+arrival}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival}{m\_arrival}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}}$\ast$ C\+S\+A\+::\+Transfer\+::m\+\_\+arrival\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a744932ae13de04fdf196f3ab82195521}\label{classCSA_1_1Transfer_a744932ae13de04fdf196f3ab82195521}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!m\+\_\+arrival\+Leg@{m\+\_\+arrival\+Leg}}
+\index{m\+\_\+arrival\+Leg@{m\+\_\+arrival\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Leg}{m\_arrivalLeg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}}$\ast$ C\+S\+A\+::\+Transfer\+::m\+\_\+arrival\+Leg\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a5cbccf660e2eeb3235d43fae553b6143}\label{classCSA_1_1Transfer_a5cbccf660e2eeb3235d43fae553b6143}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!m\+\_\+departure@{m\+\_\+departure}}
+\index{m\+\_\+departure@{m\+\_\+departure}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{m\+\_\+departure}{m\_departure}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLegEnd}{C\+S\+A\+::\+Route\+Leg\+End}}$\ast$ C\+S\+A\+::\+Transfer\+::m\+\_\+departure\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_afa7316db40bb5467407ea4cf564e2bc8}\label{classCSA_1_1Transfer_afa7316db40bb5467407ea4cf564e2bc8}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!m\+\_\+departure\+Leg@{m\+\_\+departure\+Leg}}
+\index{m\+\_\+departure\+Leg@{m\+\_\+departure\+Leg}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Leg}{m\_departureLeg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}}$\ast$ C\+S\+A\+::\+Transfer\+::m\+\_\+departure\+Leg\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Transfer_a491227791f327d6a2a19ce6e91db37f6}\label{classCSA_1_1Transfer_a491227791f327d6a2a19ce6e91db37f6}} 
+\index{C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}!m\+\_\+type@{m\+\_\+type}}
+\index{m\+\_\+type@{m\+\_\+type}!C\+S\+A\+::\+Transfer@{C\+S\+A\+::\+Transfer}}
+\subsubsection{\texorpdfstring{m\+\_\+type}{m\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Transfer_a827daaa28edc2c4b10ddfa70762355ea}{C\+S\+A\+::\+Transfer\+::\+Type}} C\+S\+A\+::\+Transfer\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csatransfer_8h}{csatransfer.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csatransfer_8cpp}{csatransfer.\+cpp}}\end{DoxyCompactItemize}

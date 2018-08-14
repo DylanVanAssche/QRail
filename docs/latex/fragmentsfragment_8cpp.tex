@@ -1,0 +1,324 @@
+\hypertarget{fragmentsfragment_8cpp}{}\section{src/linkedconnections/fragments/fragmentsfragment.cpp File Reference}
+\label{fragmentsfragment_8cpp}\index{src/linkedconnections/fragments/fragmentsfragment.\+cpp@{src/linkedconnections/fragments/fragmentsfragment.\+cpp}}
+
+
+Fragment constructor\+: empty.  
+
+
+{\ttfamily \#include \char`\"{}fragmentsfragment.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceFragments}{Fragments}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fragment constructor\+: empty. 
+
+Sets the direction of the linked connection fragment.
+
+Gets the direction of the linked connection fragment.
+
+Sets the route U\+RI of the linked connection fragment.
+
+Gets the route U\+RI of the linked connection fragment.
+
+Sets the trip U\+RI of the linked connection fragment.
+
+Gets the trip U\+RI of the linked connection fragment.
+
+Gets the delayed arrival time of the linked connection fragment.
+
+Gets the delayed departure time of the linked connection fragment.
+
+Sets the arrival delay of the linked connection fragment.
+
+Gets the arrival delay of the linked connection fragment.
+
+Sets the departure delay of the linked connection fragment.
+
+Gets the departure delay of the linked connection fragment.
+
+Sets the arrival time of the linked connection fragment.
+
+Gets the arrival time of the linked connection fragment.
+
+Sets the departure time of the linked connection fragment.
+
+Gets the departure time of the linked connection fragment.
+
+Sets the arrival station U\+RI of the linked connection fragment.
+
+Gets the arrival station U\+RI of the linked connection fragment.
+
+Sets the departure station U\+RI of the linked connection fragment.
+
+Gets the departure station U\+RI of the linked connection fragment.
+
+Sets the U\+RI of the linked connection fragment.
+
+Gets the U\+RI of the linked connection fragment.
+
+Fragment constructor\+: arrival and departure.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em const} & Q\+Url \&departure\+Station\+U\+RI \\
+\hline
+{\em const} & Q\+Url \&arrival\+Station\+U\+RI \\
+\hline
+{\em const} & Q\+Date\+Time \&departure\+Time \\
+\hline
+{\em const} & Q\+Date\+Time \&arrival\+Time \\
+\hline
+{\em const} & qint16 \&departure\+Delay \\
+\hline
+{\em const} & qint16 \&arrival\+Delay \\
+\hline
+{\em const} & Q\+Url \&trip\+U\+RI \\
+\hline
+{\em const} & Q\+Url \&route\+U\+RI \\
+\hline
+{\em const} & Q\+String \&direction \\
+\hline
+{\em Q\+Object} & $\ast$parent = nullptr\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url departure\+Station\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&departure\+Station\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url arrival\+Station\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&arrival\+Station\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time departure\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time arrival\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&arrival\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 departure\+Delay
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Delay\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 arrival\+Delay
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&arrival\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+30 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time departure\+Delayed\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+30 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time arrival\+Delayed\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url trip\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&trip\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url route\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&route\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+String direction
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&direction \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,140 @@
+\hypertarget{classCSA_1_1TrainProfile}{}\section{C\+SA\+:\+:Train\+Profile Class Reference}
+\label{classCSA_1_1TrainProfile}\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+
+
+{\ttfamily \#include $<$csatrainprofile.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Train\+Profile\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1TrainProfile}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_a0acb40ad012f423a6312616ee7598265}{arrival\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_ab5fdfaa36c183f15300d4c61286440e9}{arrival\+Connection\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_aec2a0ddcf55785288eede5b45013a344}{transfers\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1TrainProfile_ac939a2e59e0b5ef149225af1b1c4b0f9}{Train\+Profile}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1TrainProfile_a3892c881f8a4ce8fd7a9366011ccc4b1}{arrival\+Time}}, \mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classCSA_1_1TrainProfile_a2a7907625e22799ad36acc22ef23c7ae}{arrival\+Connection}}, const qint16 \mbox{\hyperlink{classCSA_1_1TrainProfile_a9e0520e5ebf6ad00c0462a428300caad}{transfers}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1TrainProfile_a3892c881f8a4ce8fd7a9366011ccc4b1}{arrival\+Time}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_ae2701384d61bd3ed4dbc7b3b1beeb02e}{set\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1TrainProfile_a3892c881f8a4ce8fd7a9366011ccc4b1}{arrival\+Time}})
+\item 
+\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$ \mbox{\hyperlink{classCSA_1_1TrainProfile_a2a7907625e22799ad36acc22ef23c7ae}{arrival\+Connection}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_a18c7b5ea923eededaa6965d0e89b1770}{set\+Arrival\+Connection}} (\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classCSA_1_1TrainProfile_a2a7907625e22799ad36acc22ef23c7ae}{arrival\+Connection}})
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1TrainProfile_a9e0520e5ebf6ad00c0462a428300caad}{transfers}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1TrainProfile_a5507b82c5ef60c32682e662dc6a113f2}{set\+Transfers}} (const qint16 \&\mbox{\hyperlink{classCSA_1_1TrainProfile_a9e0520e5ebf6ad00c0462a428300caad}{transfers}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1TrainProfile_adba3b60fe32bdd008973662cd4c0a722}{m\+\_\+arrival\+Time}}
+\item 
+\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$ \mbox{\hyperlink{classCSA_1_1TrainProfile_ae0987377d3eb8bdedf29c866a8d2a1e3}{m\+\_\+arrival\+Connection}}
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1TrainProfile_af0a6f25b6a87259edfe8a4024176d2fd}{m\+\_\+transfers}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_ac939a2e59e0b5ef149225af1b1c4b0f9}\label{classCSA_1_1TrainProfile_ac939a2e59e0b5ef149225af1b1c4b0f9}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!Train\+Profile@{Train\+Profile}}
+\index{Train\+Profile@{Train\+Profile}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{Train\+Profile()}{TrainProfile()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Train\+Profile\+::\+Train\+Profile (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time,  }\item[{\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$}]{arrival\+Connection,  }\item[{const qint16}]{transfers,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a2a7907625e22799ad36acc22ef23c7ae}\label{classCSA_1_1TrainProfile_a2a7907625e22799ad36acc22ef23c7ae}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!arrival\+Connection@{arrival\+Connection}}
+\index{arrival\+Connection@{arrival\+Connection}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{arrival\+Connection()}{arrivalConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$ C\+S\+A\+::\+Train\+Profile\+::arrival\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_ab5fdfaa36c183f15300d4c61286440e9}\label{classCSA_1_1TrainProfile_ab5fdfaa36c183f15300d4c61286440e9}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!arrival\+Connection\+Changed@{arrival\+Connection\+Changed}}
+\index{arrival\+Connection\+Changed@{arrival\+Connection\+Changed}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{arrival\+Connection\+Changed}{arrivalConnectionChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::arrival\+Connection\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a3892c881f8a4ce8fd7a9366011ccc4b1}\label{classCSA_1_1TrainProfile_a3892c881f8a4ce8fd7a9366011ccc4b1}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!arrival\+Time@{arrival\+Time}}
+\index{arrival\+Time@{arrival\+Time}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{arrival\+Time()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Train\+Profile\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a0acb40ad012f423a6312616ee7598265}\label{classCSA_1_1TrainProfile_a0acb40ad012f423a6312616ee7598265}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!arrival\+Time\+Changed@{arrival\+Time\+Changed}}
+\index{arrival\+Time\+Changed@{arrival\+Time\+Changed}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{arrival\+Time\+Changed}{arrivalTimeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::arrival\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a18c7b5ea923eededaa6965d0e89b1770}\label{classCSA_1_1TrainProfile_a18c7b5ea923eededaa6965d0e89b1770}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!set\+Arrival\+Connection@{set\+Arrival\+Connection}}
+\index{set\+Arrival\+Connection@{set\+Arrival\+Connection}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Connection()}{setArrivalConnection()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::set\+Arrival\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$}]{arrival\+Connection }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_ae2701384d61bd3ed4dbc7b3b1beeb02e}\label{classCSA_1_1TrainProfile_ae2701384d61bd3ed4dbc7b3b1beeb02e}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!set\+Arrival\+Time@{set\+Arrival\+Time}}
+\index{set\+Arrival\+Time@{set\+Arrival\+Time}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Time()}{setArrivalTime()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::set\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a5507b82c5ef60c32682e662dc6a113f2}\label{classCSA_1_1TrainProfile_a5507b82c5ef60c32682e662dc6a113f2}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!set\+Transfers@{set\+Transfers}}
+\index{set\+Transfers@{set\+Transfers}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{set\+Transfers()}{setTransfers()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::set\+Transfers (\begin{DoxyParamCaption}\item[{const qint16 \&}]{transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_a9e0520e5ebf6ad00c0462a428300caad}\label{classCSA_1_1TrainProfile_a9e0520e5ebf6ad00c0462a428300caad}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!transfers@{transfers}}
+\index{transfers@{transfers}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{transfers()}{transfers()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Train\+Profile\+::transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_aec2a0ddcf55785288eede5b45013a344}\label{classCSA_1_1TrainProfile_aec2a0ddcf55785288eede5b45013a344}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!transfers\+Changed@{transfers\+Changed}}
+\index{transfers\+Changed@{transfers\+Changed}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{transfers\+Changed}{transfersChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Train\+Profile\+::transfers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_ae0987377d3eb8bdedf29c866a8d2a1e3}\label{classCSA_1_1TrainProfile_ae0987377d3eb8bdedf29c866a8d2a1e3}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!m\+\_\+arrival\+Connection@{m\+\_\+arrival\+Connection}}
+\index{m\+\_\+arrival\+Connection@{m\+\_\+arrival\+Connection}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Connection}{m\_arrivalConnection}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}}$\ast$ C\+S\+A\+::\+Train\+Profile\+::m\+\_\+arrival\+Connection\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_adba3b60fe32bdd008973662cd4c0a722}\label{classCSA_1_1TrainProfile_adba3b60fe32bdd008973662cd4c0a722}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}}
+\index{m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Time}{m\_arrivalTime}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Train\+Profile\+::m\+\_\+arrival\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1TrainProfile_af0a6f25b6a87259edfe8a4024176d2fd}\label{classCSA_1_1TrainProfile_af0a6f25b6a87259edfe8a4024176d2fd}} 
+\index{C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}!m\+\_\+transfers@{m\+\_\+transfers}}
+\index{m\+\_\+transfers@{m\+\_\+transfers}!C\+S\+A\+::\+Train\+Profile@{C\+S\+A\+::\+Train\+Profile}}
+\subsubsection{\texorpdfstring{m\+\_\+transfers}{m\_transfers}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Train\+Profile\+::m\+\_\+transfers\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csatrainprofile_8h}{csatrainprofile.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csatrainprofile_8cpp}{csatrainprofile.\+cpp}}\end{DoxyCompactItemize}

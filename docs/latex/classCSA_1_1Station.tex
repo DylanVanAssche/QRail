@@ -1,0 +1,873 @@
+\hypertarget{classCSA_1_1Station}{}\section{C\+SA\+:\+:Station Class Reference}
+\label{classCSA_1_1Station}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+
+
+{\ttfamily \#include $<$csastation.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Station\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classCSA_1_1Station}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{Day}} \{ \newline
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a98617021b249af0ace0f84ee92ccc7cd}{Day\+::\+M\+O\+N\+D\+AY}}, 
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a5f5140afce13197a89e848004f292f14}{Day\+::\+T\+U\+E\+S\+D\+AY}}, 
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67aaaebdc947e9f7d4ea362e5dc4fe7f825}{Day\+::\+W\+E\+D\+N\+E\+S\+D\+AY}}, 
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a7a61b324afb4dd8b2fb4a38afc34f755}{Day\+::\+T\+H\+U\+R\+S\+D\+AY}}, 
+\newline
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a86fb6d343289267f3e9edb9b7403d936}{Day\+::\+F\+R\+I\+D\+AY}}, 
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67afd5ae113ac00b67f69541bc8c7f21ef7}{Day\+::\+S\+A\+T\+U\+R\+D\+AY}}, 
+\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a95fa12cb2100ce7081b71f7c44bc12a5}{Day\+::\+S\+U\+N\+D\+AY}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a7e1a832bc1ecff5811df303f907e9e04}{uri\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a86679a79fbe6a84b9890fcb15b5caa5e}{name\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ae7225d37accec94cf815e977b76109df}{country\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_aceeec2e80a0a991acb3b74c539769bd8}{position\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a3d5070aa6b5fdb6adc893a51a0a1be2d}{address\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a269399db17611ed21b9a768cdc49159c}{has\+Ticket\+Vending\+Machine\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ad5cb28f158877e9c6f808bdc8a3b673c}{has\+Luggage\+Lockers\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_af221724a180a08b013aae387a4234b41}{has\+Free\+Parking\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a06c0a1439cc5bfcbe8e065842f17f800}{has\+Taxi\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a2a974d267038288ae10200962f84eba5}{has\+Bicylce\+Spots\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a87ad9a5b8c69aca367ed1a5d65616ddb}{has\+Blue\+Bike\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a23a60c0e5b98f15e68d6fb71ee3bdd56}{has\+Bus\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ad997e9362b40f0f932e1a5d280dd42dc}{has\+Tram\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a1f006709983169db5059954aaeb868a4}{has\+Metro\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ad00b74e9cd7820e5f54a46efc006ff6a}{has\+Wheelchair\+Available\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a66bd1b6a58cd065fce51c8448019eab1}{has\+Ramp\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ad47a8ed217f646cce8661181dd4abcb8}{disabled\+Parking\+Spots\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a691c6d02127421821b41cfb40381781c}{has\+Elevated\+Platform\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a281adc596cffb53280beb8276ce9b0c5}{has\+Escalator\+Up\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a10898e5f4146f47f734c19708f614361}{has\+Escalator\+Down\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a21cce284fffaf5d90806c87eb827e021}{has\+Hearing\+Aid\+Signal\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a3f709e2a3661ed162d888aebff54144f}{opening\+Hours\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a96d22182cdb97e5c6ebe8468ffd5d8e7}{average\+Stop\+Times\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Station_a1ad546688826ab32a6451de33a5f20ca}{Station}} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1Station_ab3703dee8550b5b6b72b83f4bc09cddc}{Station}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}{position}}, const qreal \&\mbox{\hyperlink{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}{average\+Stop\+Times}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1Station_a2f28ea537ee63de36ef8b10ef4b17826}{Station}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}{position}}, const Q\+Geo\+Address \&\mbox{\hyperlink{classCSA_1_1Station_a82482b7595c3a587be4d2473eeff2d42}{address}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a9e3f2a57d2e3793a375b8c3a7182ec7b}{has\+Ticket\+Vending\+Machine}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_aaa684a525fd9cef75108a1fe52ea5053}{has\+Luggage\+Lockers}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a89e7b6e8612bef71f123986164aa1ba4}{has\+Free\+Parking}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a886f635564cc01430552529d07527343}{has\+Taxi}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a659f45a05d2920e6141db42d0fe9c7ff}{has\+Bicycle\+Spots}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_af3be093b4e7bbad8c76de068804765e6}{has\+Blue\+Bike}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a02fa7a1b47bc2b7170f8817d49d6f992}{has\+Bus}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_ab01f8eb60d105cd77b5489e5b6746671}{has\+Tram}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_af51e8389ffadbbe19ef2d485434d94b5}{has\+Metro}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a72be06dc6901f2707b22aa055e783a9f}{has\+Wheelchair\+Available}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a07526fe7c2d2f0c47b8920d830f2935c}{has\+Ramp}}, const qint16 \&\mbox{\hyperlink{classCSA_1_1Station_a89962b963e33d1a5db45f22d6a60834e}{disabled\+Parking\+Spots}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a883e232e28352571f41095b31e3cac0e}{has\+Elevated\+Platform}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_ae6fa7ccf3c6ca7e819d5e795841afb08}{has\+Escalator\+Up}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_ac0cb1e889a3c323dca9679902a9ac1c8}{has\+Escalator\+Down}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_a7924a558376c91a293e0bfe0cc76c13b}{has\+Elevator\+Platform}}, const bool \&\mbox{\hyperlink{classCSA_1_1Station_ae60274e5ab0ce2e983067122900389a4}{has\+Hearing\+Aid\+Signal}}, const Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&\mbox{\hyperlink{classCSA_1_1Station_aafe81d261ad07910a07dab3e21264174}{opening\+Hours}}, const qreal \&\mbox{\hyperlink{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}{average\+Stop\+Times}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}{uri}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ab0b854987e84b4961583f8d07d8d47f1}{set\+Uri}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}{uri}})
+\item 
+Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \mbox{\hyperlink{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}{name}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_adfcb40ad6f0e7a0011232475fa3aa11c}{set\+Name}} (const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}{name}})
+\item 
+Q\+Locale\+::\+Country \mbox{\hyperlink{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}{country}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_aeac902ec03b70cdba939fd59cd2c96c7}{set\+Country}} (const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}{country}})
+\item 
+Q\+Geo\+Coordinate \mbox{\hyperlink{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}{position}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a127e1d7548fc144395b0a07b17565d12}{set\+Position}} (const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}{position}})
+\item 
+Q\+Geo\+Address \mbox{\hyperlink{classCSA_1_1Station_a82482b7595c3a587be4d2473eeff2d42}{address}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a1dccb38e4df4c82b6db033df6366ccfb}{set\+Address}} (const Q\+Geo\+Address \&\mbox{\hyperlink{classCSA_1_1Station_a82482b7595c3a587be4d2473eeff2d42}{address}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a9e3f2a57d2e3793a375b8c3a7182ec7b}{has\+Ticket\+Vending\+Machine}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a4de05066e5d95e0d996bd788cd9e0e73}{set\+Has\+Ticket\+Vending\+Machine}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a9e3f2a57d2e3793a375b8c3a7182ec7b}{has\+Ticket\+Vending\+Machine}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_aaa684a525fd9cef75108a1fe52ea5053}{has\+Luggage\+Lockers}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a849d4ee2f249fb171351c0efacd0d6b2}{set\+Has\+Luggage\+Lockers}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_aaa684a525fd9cef75108a1fe52ea5053}{has\+Luggage\+Lockers}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a89e7b6e8612bef71f123986164aa1ba4}{has\+Free\+Parking}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a8472580715e78df4ec426490bcec4b19}{set\+Has\+Free\+Parking}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a89e7b6e8612bef71f123986164aa1ba4}{has\+Free\+Parking}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a886f635564cc01430552529d07527343}{has\+Taxi}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a480c4fad15dd1ed88feb2be98432a436}{set\+Has\+Taxi}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a886f635564cc01430552529d07527343}{has\+Taxi}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a659f45a05d2920e6141db42d0fe9c7ff}{has\+Bicycle\+Spots}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a036e40b21656d73e4d76549e36af1567}{set\+Has\+Bicycle\+Spots}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a659f45a05d2920e6141db42d0fe9c7ff}{has\+Bicycle\+Spots}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_af3be093b4e7bbad8c76de068804765e6}{has\+Blue\+Bike}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ac660be21dfbeddb70441b042224fa7d0}{set\+Has\+Blue\+Bike}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_af3be093b4e7bbad8c76de068804765e6}{has\+Blue\+Bike}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a02fa7a1b47bc2b7170f8817d49d6f992}{has\+Bus}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a574926d415770120466052ffedf7a2f1}{set\+Has\+Bus}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a02fa7a1b47bc2b7170f8817d49d6f992}{has\+Bus}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_ab01f8eb60d105cd77b5489e5b6746671}{has\+Tram}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ac702668609e34b8cdfa398aa6c17661f}{set\+Has\+Tram}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_ab01f8eb60d105cd77b5489e5b6746671}{has\+Tram}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_af51e8389ffadbbe19ef2d485434d94b5}{has\+Metro}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a61289a7c2d50ded5d95602af684115da}{set\+Has\+Metro}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_af51e8389ffadbbe19ef2d485434d94b5}{has\+Metro}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a72be06dc6901f2707b22aa055e783a9f}{has\+Wheelchair\+Available}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_aaa5f121511df327da6e26336e84cef1f}{set\+Has\+Wheelchair\+Available}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a72be06dc6901f2707b22aa055e783a9f}{has\+Wheelchair\+Available}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a07526fe7c2d2f0c47b8920d830f2935c}{has\+Ramp}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_af535e367d1594de04abf85945195d710}{set\+Has\+Ramp}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a07526fe7c2d2f0c47b8920d830f2935c}{has\+Ramp}})
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Station_a89962b963e33d1a5db45f22d6a60834e}{disabled\+Parking\+Spots}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_afcb97a1bc6cdaa4d1b27400cff131149}{set\+Disabled\+Parking\+Spots}} (const qint16 \&\mbox{\hyperlink{classCSA_1_1Station_a89962b963e33d1a5db45f22d6a60834e}{disabled\+Parking\+Spots}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a883e232e28352571f41095b31e3cac0e}{has\+Elevated\+Platform}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a09b1e4b5b85af7b99575790dc61725e6}{set\+Has\+Elevated\+Platform}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a883e232e28352571f41095b31e3cac0e}{has\+Elevated\+Platform}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_ae6fa7ccf3c6ca7e819d5e795841afb08}{has\+Escalator\+Up}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a6aec9de8031ede9620494d3373aa44b2}{set\+Has\+Escalator\+Up}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_ae6fa7ccf3c6ca7e819d5e795841afb08}{has\+Escalator\+Up}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_ac0cb1e889a3c323dca9679902a9ac1c8}{has\+Escalator\+Down}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a36395b7b65578a3bdb30609f3c5760df}{set\+Has\+Escalator\+Down}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_ac0cb1e889a3c323dca9679902a9ac1c8}{has\+Escalator\+Down}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a7924a558376c91a293e0bfe0cc76c13b}{has\+Elevator\+Platform}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_aa9879de9abbf50115b0681c3c9383c63}{set\+Has\+Elevator\+Platform}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_a7924a558376c91a293e0bfe0cc76c13b}{has\+Elevator\+Platform}})
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_ae60274e5ab0ce2e983067122900389a4}{has\+Hearing\+Aid\+Signal}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_a1745bfdffbe8ac1097f83bcbacc553dd}{set\+Has\+Hearing\+Aid\+Signal}} (const bool \&\mbox{\hyperlink{classCSA_1_1Station_ae60274e5ab0ce2e983067122900389a4}{has\+Hearing\+Aid\+Signal}})
+\item 
+Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \mbox{\hyperlink{classCSA_1_1Station_aafe81d261ad07910a07dab3e21264174}{opening\+Hours}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_aa925896cc36685bc5d27c66d437cc12f}{set\+Opening\+Hours}} (const Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \&\mbox{\hyperlink{classCSA_1_1Station_aafe81d261ad07910a07dab3e21264174}{opening\+Hours}})
+\item 
+qreal \mbox{\hyperlink{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}{average\+Stop\+Times}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Station_ae6ddb9860d6e0128c89fa23e03a45c6e}{set\+Average\+Stop\+Times}} (const qreal \&\mbox{\hyperlink{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}{average\+Stop\+Times}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Station_a01e636d3257400f9748ed7060333990c}{m\+\_\+uri}}
+\item 
+Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \mbox{\hyperlink{classCSA_1_1Station_ac4f2d9d4a144e62b1a16cb3ecea57730}{m\+\_\+name}}
+\item 
+Q\+Locale\+::\+Country \mbox{\hyperlink{classCSA_1_1Station_afe87600b50102ea34f95a6af2cb123a3}{m\+\_\+country}}
+\item 
+Q\+Geo\+Coordinate \mbox{\hyperlink{classCSA_1_1Station_ae8f2de64fc98f099e23e0bf8cb117dc0}{m\+\_\+position}}
+\item 
+Q\+Geo\+Address \mbox{\hyperlink{classCSA_1_1Station_aa62d0b53ab56f702aa036fe36224e717}{m\+\_\+address}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a8da1484b9982379a0b8e07a4331aa1ec}{m\+\_\+has\+Ticket\+Vending\+Machine}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a21ecc0f7cdc71ab5c15bb8fc922b0a8a}{m\+\_\+has\+Luggage\+Lockers}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_afc34176857b787cf3a1337d90fd21232}{m\+\_\+has\+Free\+Parking}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a165c04ccc0072c11a1dab515f8e82aa9}{m\+\_\+has\+Taxi}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a696c72ddd3115794f253cfda5c7fbd06}{m\+\_\+has\+Bicycle\+Spots}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_af89e446a2cadd47a70ff85d4a1605476}{m\+\_\+has\+Blue\+Bike}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a657f9381af7d972fb0a256a2bd7f7c38}{m\+\_\+has\+Bus}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_aec86731656727f5395da624ae51f47dc}{m\+\_\+has\+Tram}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a591ebe8b8f8ff846e364b96e98cabc9f}{m\+\_\+has\+Metro}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a918ff279b54d1b4ff72a68949089a521}{m\+\_\+has\+Wheelchair\+Available}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_aa192bc17d3e887e98a2f3499e4cdc7c7}{m\+\_\+has\+Ramp}}
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Station_a76023bf63f30f57b722c7816742caa26}{m\+\_\+disabled\+Parking\+Spots}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a190b2f5b5df699b52e9319f1edfc65fb}{m\+\_\+has\+Elevated\+Platform}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a855114e1459342bb7d6e66eb2922ea69}{m\+\_\+has\+Escalator\+Up}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_a9da4053b1055e4eb7de68f0c584aa2ff}{m\+\_\+has\+Escalator\+Down}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_acc76b2fa0b1ca83cddd34c0914816ac2}{m\+\_\+has\+Elevator\+Platform}}
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Station_ad52021cd3bdc9742fbec826af32d9821}{m\+\_\+has\+Hearing\+Aid\+Signal}}
+\item 
+Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \mbox{\hyperlink{classCSA_1_1Station_ad822c4beb04f1b4739a4c17603e54bbb}{m\+\_\+opening\+Hours}}
+\item 
+qreal \mbox{\hyperlink{classCSA_1_1Station_a8ced92ad1d4e39e269435fcb7603c841}{m\+\_\+average\+Stop\+Times}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!Day@{Day}}
+\index{Day@{Day}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{Day}{Day}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+O\+N\+D\+AY@{M\+O\+N\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!M\+O\+N\+D\+AY@{M\+O\+N\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a98617021b249af0ace0f84ee92ccc7cd}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a98617021b249af0ace0f84ee92ccc7cd}} 
+M\+O\+N\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+U\+E\+S\+D\+AY@{T\+U\+E\+S\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!T\+U\+E\+S\+D\+AY@{T\+U\+E\+S\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a5f5140afce13197a89e848004f292f14}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a5f5140afce13197a89e848004f292f14}} 
+T\+U\+E\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+E\+D\+N\+E\+S\+D\+AY@{W\+E\+D\+N\+E\+S\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!W\+E\+D\+N\+E\+S\+D\+AY@{W\+E\+D\+N\+E\+S\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67aaaebdc947e9f7d4ea362e5dc4fe7f825}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67aaaebdc947e9f7d4ea362e5dc4fe7f825}} 
+W\+E\+D\+N\+E\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+H\+U\+R\+S\+D\+AY@{T\+H\+U\+R\+S\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!T\+H\+U\+R\+S\+D\+AY@{T\+H\+U\+R\+S\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a7a61b324afb4dd8b2fb4a38afc34f755}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a7a61b324afb4dd8b2fb4a38afc34f755}} 
+T\+H\+U\+R\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+R\+I\+D\+AY@{F\+R\+I\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!F\+R\+I\+D\+AY@{F\+R\+I\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a86fb6d343289267f3e9edb9b7403d936}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a86fb6d343289267f3e9edb9b7403d936}} 
+F\+R\+I\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+A\+T\+U\+R\+D\+AY@{S\+A\+T\+U\+R\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!S\+A\+T\+U\+R\+D\+AY@{S\+A\+T\+U\+R\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67afd5ae113ac00b67f69541bc8c7f21ef7}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67afd5ae113ac00b67f69541bc8c7f21ef7}} 
+S\+A\+T\+U\+R\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+U\+N\+D\+AY@{S\+U\+N\+D\+AY}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!S\+U\+N\+D\+AY@{S\+U\+N\+D\+AY}}}\mbox{\Hypertarget{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a95fa12cb2100ce7081b71f7c44bc12a5}\label{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67a95fa12cb2100ce7081b71f7c44bc12a5}} 
+S\+U\+N\+D\+AY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Station_a1ad546688826ab32a6451de33a5f20ca}\label{classCSA_1_1Station_a1ad546688826ab32a6451de33a5f20ca}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!Station@{Station}}
+\index{Station@{Station}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ab3703dee8550b5b6b72b83f4bc09cddc}\label{classCSA_1_1Station_ab3703dee8550b5b6b72b83f4bc09cddc}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!Station@{Station}}
+\index{Station@{Station}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a2f28ea537ee63de36ef8b10ef4b17826}\label{classCSA_1_1Station_a2f28ea537ee63de36ef8b10ef4b17826}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!Station@{Station}}
+\index{Station@{Station}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const Q\+Geo\+Address \&}]{address,  }\item[{const bool \&}]{has\+Ticket\+Vending\+Machine,  }\item[{const bool \&}]{has\+Luggage\+Lockers,  }\item[{const bool \&}]{has\+Free\+Parking,  }\item[{const bool \&}]{has\+Taxi,  }\item[{const bool \&}]{has\+Bicycle\+Spots,  }\item[{const bool \&}]{has\+Blue\+Bike,  }\item[{const bool \&}]{has\+Bus,  }\item[{const bool \&}]{has\+Tram,  }\item[{const bool \&}]{has\+Metro,  }\item[{const bool \&}]{has\+Wheelchair\+Available,  }\item[{const bool \&}]{has\+Ramp,  }\item[{const qint16 \&}]{disabled\+Parking\+Spots,  }\item[{const bool \&}]{has\+Elevated\+Platform,  }\item[{const bool \&}]{has\+Escalator\+Up,  }\item[{const bool \&}]{has\+Escalator\+Down,  }\item[{const bool \&}]{has\+Elevator\+Platform,  }\item[{const bool \&}]{has\+Hearing\+Aid\+Signal,  }\item[{const Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&}]{opening\+Hours,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Station_a82482b7595c3a587be4d2473eeff2d42}\label{classCSA_1_1Station_a82482b7595c3a587be4d2473eeff2d42}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!address@{address}}
+\index{address@{address}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{address()}{address()}}
+{\footnotesize\ttfamily Q\+Geo\+Address C\+S\+A\+::\+Station\+::address (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a3d5070aa6b5fdb6adc893a51a0a1be2d}\label{classCSA_1_1Station_a3d5070aa6b5fdb6adc893a51a0a1be2d}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!address\+Changed@{address\+Changed}}
+\index{address\+Changed@{address\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{address\+Changed}{addressChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::address\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}\label{classCSA_1_1Station_aa8f1c3bfa7b4a3ad9ccc805ff7a2b931}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!average\+Stop\+Times@{average\+Stop\+Times}}
+\index{average\+Stop\+Times@{average\+Stop\+Times}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{average\+Stop\+Times()}{averageStopTimes()}}
+{\footnotesize\ttfamily qreal C\+S\+A\+::\+Station\+::average\+Stop\+Times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a96d22182cdb97e5c6ebe8468ffd5d8e7}\label{classCSA_1_1Station_a96d22182cdb97e5c6ebe8468ffd5d8e7}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!average\+Stop\+Times\+Changed@{average\+Stop\+Times\+Changed}}
+\index{average\+Stop\+Times\+Changed@{average\+Stop\+Times\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{average\+Stop\+Times\+Changed}{averageStopTimesChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::average\+Stop\+Times\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}\label{classCSA_1_1Station_ac54cea5fde8ba6e2367f0317965d9147}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!country@{country}}
+\index{country@{country}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{country()}{country()}}
+{\footnotesize\ttfamily Q\+Locale\+::\+Country C\+S\+A\+::\+Station\+::country (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ae7225d37accec94cf815e977b76109df}\label{classCSA_1_1Station_ae7225d37accec94cf815e977b76109df}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!country\+Changed@{country\+Changed}}
+\index{country\+Changed@{country\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{country\+Changed}{countryChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::country\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a89962b963e33d1a5db45f22d6a60834e}\label{classCSA_1_1Station_a89962b963e33d1a5db45f22d6a60834e}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!disabled\+Parking\+Spots@{disabled\+Parking\+Spots}}
+\index{disabled\+Parking\+Spots@{disabled\+Parking\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{disabled\+Parking\+Spots()}{disabledParkingSpots()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Station\+::disabled\+Parking\+Spots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad47a8ed217f646cce8661181dd4abcb8}\label{classCSA_1_1Station_ad47a8ed217f646cce8661181dd4abcb8}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!disabled\+Parking\+Spots\+Changed@{disabled\+Parking\+Spots\+Changed}}
+\index{disabled\+Parking\+Spots\+Changed@{disabled\+Parking\+Spots\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{disabled\+Parking\+Spots\+Changed}{disabledParkingSpotsChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::disabled\+Parking\+Spots\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a659f45a05d2920e6141db42d0fe9c7ff}\label{classCSA_1_1Station_a659f45a05d2920e6141db42d0fe9c7ff}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Bicycle\+Spots@{has\+Bicycle\+Spots}}
+\index{has\+Bicycle\+Spots@{has\+Bicycle\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Bicycle\+Spots()}{hasBicycleSpots()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Bicycle\+Spots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a2a974d267038288ae10200962f84eba5}\label{classCSA_1_1Station_a2a974d267038288ae10200962f84eba5}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Bicylce\+Spots\+Changed@{has\+Bicylce\+Spots\+Changed}}
+\index{has\+Bicylce\+Spots\+Changed@{has\+Bicylce\+Spots\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Bicylce\+Spots\+Changed}{hasBicylceSpotsChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Bicylce\+Spots\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_af3be093b4e7bbad8c76de068804765e6}\label{classCSA_1_1Station_af3be093b4e7bbad8c76de068804765e6}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Blue\+Bike@{has\+Blue\+Bike}}
+\index{has\+Blue\+Bike@{has\+Blue\+Bike}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Blue\+Bike()}{hasBlueBike()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Blue\+Bike (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a87ad9a5b8c69aca367ed1a5d65616ddb}\label{classCSA_1_1Station_a87ad9a5b8c69aca367ed1a5d65616ddb}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Blue\+Bike\+Changed@{has\+Blue\+Bike\+Changed}}
+\index{has\+Blue\+Bike\+Changed@{has\+Blue\+Bike\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Blue\+Bike\+Changed}{hasBlueBikeChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Blue\+Bike\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a02fa7a1b47bc2b7170f8817d49d6f992}\label{classCSA_1_1Station_a02fa7a1b47bc2b7170f8817d49d6f992}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Bus@{has\+Bus}}
+\index{has\+Bus@{has\+Bus}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Bus()}{hasBus()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Bus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a23a60c0e5b98f15e68d6fb71ee3bdd56}\label{classCSA_1_1Station_a23a60c0e5b98f15e68d6fb71ee3bdd56}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Bus\+Changed@{has\+Bus\+Changed}}
+\index{has\+Bus\+Changed@{has\+Bus\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Bus\+Changed}{hasBusChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Bus\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a883e232e28352571f41095b31e3cac0e}\label{classCSA_1_1Station_a883e232e28352571f41095b31e3cac0e}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Elevated\+Platform@{has\+Elevated\+Platform}}
+\index{has\+Elevated\+Platform@{has\+Elevated\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Elevated\+Platform()}{hasElevatedPlatform()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Elevated\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a691c6d02127421821b41cfb40381781c}\label{classCSA_1_1Station_a691c6d02127421821b41cfb40381781c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Elevated\+Platform\+Changed@{has\+Elevated\+Platform\+Changed}}
+\index{has\+Elevated\+Platform\+Changed@{has\+Elevated\+Platform\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Elevated\+Platform\+Changed}{hasElevatedPlatformChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Elevated\+Platform\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a7924a558376c91a293e0bfe0cc76c13b}\label{classCSA_1_1Station_a7924a558376c91a293e0bfe0cc76c13b}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Elevator\+Platform@{has\+Elevator\+Platform}}
+\index{has\+Elevator\+Platform@{has\+Elevator\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Elevator\+Platform()}{hasElevatorPlatform()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Elevator\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ac0cb1e889a3c323dca9679902a9ac1c8}\label{classCSA_1_1Station_ac0cb1e889a3c323dca9679902a9ac1c8}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Escalator\+Down@{has\+Escalator\+Down}}
+\index{has\+Escalator\+Down@{has\+Escalator\+Down}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Escalator\+Down()}{hasEscalatorDown()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Escalator\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a10898e5f4146f47f734c19708f614361}\label{classCSA_1_1Station_a10898e5f4146f47f734c19708f614361}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Escalator\+Down\+Changed@{has\+Escalator\+Down\+Changed}}
+\index{has\+Escalator\+Down\+Changed@{has\+Escalator\+Down\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Escalator\+Down\+Changed}{hasEscalatorDownChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Escalator\+Down\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ae6fa7ccf3c6ca7e819d5e795841afb08}\label{classCSA_1_1Station_ae6fa7ccf3c6ca7e819d5e795841afb08}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Escalator\+Up@{has\+Escalator\+Up}}
+\index{has\+Escalator\+Up@{has\+Escalator\+Up}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Escalator\+Up()}{hasEscalatorUp()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Escalator\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a281adc596cffb53280beb8276ce9b0c5}\label{classCSA_1_1Station_a281adc596cffb53280beb8276ce9b0c5}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Escalator\+Up\+Changed@{has\+Escalator\+Up\+Changed}}
+\index{has\+Escalator\+Up\+Changed@{has\+Escalator\+Up\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Escalator\+Up\+Changed}{hasEscalatorUpChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Escalator\+Up\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a89e7b6e8612bef71f123986164aa1ba4}\label{classCSA_1_1Station_a89e7b6e8612bef71f123986164aa1ba4}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Free\+Parking@{has\+Free\+Parking}}
+\index{has\+Free\+Parking@{has\+Free\+Parking}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Free\+Parking()}{hasFreeParking()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Free\+Parking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_af221724a180a08b013aae387a4234b41}\label{classCSA_1_1Station_af221724a180a08b013aae387a4234b41}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Free\+Parking\+Changed@{has\+Free\+Parking\+Changed}}
+\index{has\+Free\+Parking\+Changed@{has\+Free\+Parking\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Free\+Parking\+Changed}{hasFreeParkingChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Free\+Parking\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ae60274e5ab0ce2e983067122900389a4}\label{classCSA_1_1Station_ae60274e5ab0ce2e983067122900389a4}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Hearing\+Aid\+Signal@{has\+Hearing\+Aid\+Signal}}
+\index{has\+Hearing\+Aid\+Signal@{has\+Hearing\+Aid\+Signal}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Hearing\+Aid\+Signal()}{hasHearingAidSignal()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Hearing\+Aid\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a21cce284fffaf5d90806c87eb827e021}\label{classCSA_1_1Station_a21cce284fffaf5d90806c87eb827e021}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Hearing\+Aid\+Signal\+Changed@{has\+Hearing\+Aid\+Signal\+Changed}}
+\index{has\+Hearing\+Aid\+Signal\+Changed@{has\+Hearing\+Aid\+Signal\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Hearing\+Aid\+Signal\+Changed}{hasHearingAidSignalChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Hearing\+Aid\+Signal\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aaa684a525fd9cef75108a1fe52ea5053}\label{classCSA_1_1Station_aaa684a525fd9cef75108a1fe52ea5053}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Luggage\+Lockers@{has\+Luggage\+Lockers}}
+\index{has\+Luggage\+Lockers@{has\+Luggage\+Lockers}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Luggage\+Lockers()}{hasLuggageLockers()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Luggage\+Lockers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad5cb28f158877e9c6f808bdc8a3b673c}\label{classCSA_1_1Station_ad5cb28f158877e9c6f808bdc8a3b673c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Luggage\+Lockers\+Changed@{has\+Luggage\+Lockers\+Changed}}
+\index{has\+Luggage\+Lockers\+Changed@{has\+Luggage\+Lockers\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Luggage\+Lockers\+Changed}{hasLuggageLockersChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Luggage\+Lockers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_af51e8389ffadbbe19ef2d485434d94b5}\label{classCSA_1_1Station_af51e8389ffadbbe19ef2d485434d94b5}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Metro@{has\+Metro}}
+\index{has\+Metro@{has\+Metro}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Metro()}{hasMetro()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Metro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a1f006709983169db5059954aaeb868a4}\label{classCSA_1_1Station_a1f006709983169db5059954aaeb868a4}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Metro\+Changed@{has\+Metro\+Changed}}
+\index{has\+Metro\+Changed@{has\+Metro\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Metro\+Changed}{hasMetroChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Metro\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a07526fe7c2d2f0c47b8920d830f2935c}\label{classCSA_1_1Station_a07526fe7c2d2f0c47b8920d830f2935c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Ramp@{has\+Ramp}}
+\index{has\+Ramp@{has\+Ramp}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Ramp()}{hasRamp()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Ramp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a66bd1b6a58cd065fce51c8448019eab1}\label{classCSA_1_1Station_a66bd1b6a58cd065fce51c8448019eab1}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Ramp\+Changed@{has\+Ramp\+Changed}}
+\index{has\+Ramp\+Changed@{has\+Ramp\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Ramp\+Changed}{hasRampChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Ramp\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a886f635564cc01430552529d07527343}\label{classCSA_1_1Station_a886f635564cc01430552529d07527343}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Taxi@{has\+Taxi}}
+\index{has\+Taxi@{has\+Taxi}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Taxi()}{hasTaxi()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Taxi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a06c0a1439cc5bfcbe8e065842f17f800}\label{classCSA_1_1Station_a06c0a1439cc5bfcbe8e065842f17f800}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Taxi\+Changed@{has\+Taxi\+Changed}}
+\index{has\+Taxi\+Changed@{has\+Taxi\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Taxi\+Changed}{hasTaxiChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Taxi\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a9e3f2a57d2e3793a375b8c3a7182ec7b}\label{classCSA_1_1Station_a9e3f2a57d2e3793a375b8c3a7182ec7b}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Ticket\+Vending\+Machine@{has\+Ticket\+Vending\+Machine}}
+\index{has\+Ticket\+Vending\+Machine@{has\+Ticket\+Vending\+Machine}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Ticket\+Vending\+Machine()}{hasTicketVendingMachine()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Ticket\+Vending\+Machine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a269399db17611ed21b9a768cdc49159c}\label{classCSA_1_1Station_a269399db17611ed21b9a768cdc49159c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Ticket\+Vending\+Machine\+Changed@{has\+Ticket\+Vending\+Machine\+Changed}}
+\index{has\+Ticket\+Vending\+Machine\+Changed@{has\+Ticket\+Vending\+Machine\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Ticket\+Vending\+Machine\+Changed}{hasTicketVendingMachineChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Ticket\+Vending\+Machine\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ab01f8eb60d105cd77b5489e5b6746671}\label{classCSA_1_1Station_ab01f8eb60d105cd77b5489e5b6746671}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Tram@{has\+Tram}}
+\index{has\+Tram@{has\+Tram}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Tram()}{hasTram()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Tram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad997e9362b40f0f932e1a5d280dd42dc}\label{classCSA_1_1Station_ad997e9362b40f0f932e1a5d280dd42dc}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Tram\+Changed@{has\+Tram\+Changed}}
+\index{has\+Tram\+Changed@{has\+Tram\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Tram\+Changed}{hasTramChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Tram\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a72be06dc6901f2707b22aa055e783a9f}\label{classCSA_1_1Station_a72be06dc6901f2707b22aa055e783a9f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Wheelchair\+Available@{has\+Wheelchair\+Available}}
+\index{has\+Wheelchair\+Available@{has\+Wheelchair\+Available}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Wheelchair\+Available()}{hasWheelchairAvailable()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::has\+Wheelchair\+Available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad00b74e9cd7820e5f54a46efc006ff6a}\label{classCSA_1_1Station_ad00b74e9cd7820e5f54a46efc006ff6a}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!has\+Wheelchair\+Available\+Changed@{has\+Wheelchair\+Available\+Changed}}
+\index{has\+Wheelchair\+Available\+Changed@{has\+Wheelchair\+Available\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{has\+Wheelchair\+Available\+Changed}{hasWheelchairAvailableChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::has\+Wheelchair\+Available\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}\label{classCSA_1_1Station_ad4442763fc108cde8368260119c007da}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!name@{name}}
+\index{name@{name}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ C\+S\+A\+::\+Station\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a86679a79fbe6a84b9890fcb15b5caa5e}\label{classCSA_1_1Station_a86679a79fbe6a84b9890fcb15b5caa5e}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!name\+Changed@{name\+Changed}}
+\index{name\+Changed@{name\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{name\+Changed}{nameChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::name\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aafe81d261ad07910a07dab3e21264174}\label{classCSA_1_1Station_aafe81d261ad07910a07dab3e21264174}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!opening\+Hours@{opening\+Hours}}
+\index{opening\+Hours@{opening\+Hours}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{opening\+Hours()}{openingHours()}}
+{\footnotesize\ttfamily Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ C\+S\+A\+::\+Station\+::opening\+Hours (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a3f709e2a3661ed162d888aebff54144f}\label{classCSA_1_1Station_a3f709e2a3661ed162d888aebff54144f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!opening\+Hours\+Changed@{opening\+Hours\+Changed}}
+\index{opening\+Hours\+Changed@{opening\+Hours\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{opening\+Hours\+Changed}{openingHoursChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::opening\+Hours\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}\label{classCSA_1_1Station_a94249de9cc38d704eb6e77aca24daaea}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!position@{position}}
+\index{position@{position}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{position()}{position()}}
+{\footnotesize\ttfamily Q\+Geo\+Coordinate C\+S\+A\+::\+Station\+::position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aceeec2e80a0a991acb3b74c539769bd8}\label{classCSA_1_1Station_aceeec2e80a0a991acb3b74c539769bd8}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!position\+Changed@{position\+Changed}}
+\index{position\+Changed@{position\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{position\+Changed}{positionChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::position\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a1dccb38e4df4c82b6db033df6366ccfb}\label{classCSA_1_1Station_a1dccb38e4df4c82b6db033df6366ccfb}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Address@{set\+Address}}
+\index{set\+Address@{set\+Address}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Address()}{setAddress()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Address (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Address \&}]{address }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ae6ddb9860d6e0128c89fa23e03a45c6e}\label{classCSA_1_1Station_ae6ddb9860d6e0128c89fa23e03a45c6e}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Average\+Stop\+Times@{set\+Average\+Stop\+Times}}
+\index{set\+Average\+Stop\+Times@{set\+Average\+Stop\+Times}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Average\+Stop\+Times()}{setAverageStopTimes()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Average\+Stop\+Times (\begin{DoxyParamCaption}\item[{const qreal \&}]{average\+Stop\+Times }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aeac902ec03b70cdba939fd59cd2c96c7}\label{classCSA_1_1Station_aeac902ec03b70cdba939fd59cd2c96c7}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Country@{set\+Country}}
+\index{set\+Country@{set\+Country}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Country()}{setCountry()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Country (\begin{DoxyParamCaption}\item[{const Q\+Locale\+::\+Country \&}]{country }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_afcb97a1bc6cdaa4d1b27400cff131149}\label{classCSA_1_1Station_afcb97a1bc6cdaa4d1b27400cff131149}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Disabled\+Parking\+Spots@{set\+Disabled\+Parking\+Spots}}
+\index{set\+Disabled\+Parking\+Spots@{set\+Disabled\+Parking\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Disabled\+Parking\+Spots()}{setDisabledParkingSpots()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Disabled\+Parking\+Spots (\begin{DoxyParamCaption}\item[{const qint16 \&}]{disabled\+Parking\+Spots }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a036e40b21656d73e4d76549e36af1567}\label{classCSA_1_1Station_a036e40b21656d73e4d76549e36af1567}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Bicycle\+Spots@{set\+Has\+Bicycle\+Spots}}
+\index{set\+Has\+Bicycle\+Spots@{set\+Has\+Bicycle\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Bicycle\+Spots()}{setHasBicycleSpots()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Bicycle\+Spots (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Bicycle\+Spots }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ac660be21dfbeddb70441b042224fa7d0}\label{classCSA_1_1Station_ac660be21dfbeddb70441b042224fa7d0}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Blue\+Bike@{set\+Has\+Blue\+Bike}}
+\index{set\+Has\+Blue\+Bike@{set\+Has\+Blue\+Bike}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Blue\+Bike()}{setHasBlueBike()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Blue\+Bike (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Blue\+Bike }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a574926d415770120466052ffedf7a2f1}\label{classCSA_1_1Station_a574926d415770120466052ffedf7a2f1}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Bus@{set\+Has\+Bus}}
+\index{set\+Has\+Bus@{set\+Has\+Bus}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Bus()}{setHasBus()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Bus (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Bus }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a09b1e4b5b85af7b99575790dc61725e6}\label{classCSA_1_1Station_a09b1e4b5b85af7b99575790dc61725e6}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Elevated\+Platform@{set\+Has\+Elevated\+Platform}}
+\index{set\+Has\+Elevated\+Platform@{set\+Has\+Elevated\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Elevated\+Platform()}{setHasElevatedPlatform()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Elevated\+Platform (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Elevated\+Platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aa9879de9abbf50115b0681c3c9383c63}\label{classCSA_1_1Station_aa9879de9abbf50115b0681c3c9383c63}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Elevator\+Platform@{set\+Has\+Elevator\+Platform}}
+\index{set\+Has\+Elevator\+Platform@{set\+Has\+Elevator\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Elevator\+Platform()}{setHasElevatorPlatform()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Elevator\+Platform (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Elevator\+Platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a36395b7b65578a3bdb30609f3c5760df}\label{classCSA_1_1Station_a36395b7b65578a3bdb30609f3c5760df}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Escalator\+Down@{set\+Has\+Escalator\+Down}}
+\index{set\+Has\+Escalator\+Down@{set\+Has\+Escalator\+Down}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Escalator\+Down()}{setHasEscalatorDown()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Escalator\+Down (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Escalator\+Down }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a6aec9de8031ede9620494d3373aa44b2}\label{classCSA_1_1Station_a6aec9de8031ede9620494d3373aa44b2}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Escalator\+Up@{set\+Has\+Escalator\+Up}}
+\index{set\+Has\+Escalator\+Up@{set\+Has\+Escalator\+Up}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Escalator\+Up()}{setHasEscalatorUp()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Escalator\+Up (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Escalator\+Up }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a8472580715e78df4ec426490bcec4b19}\label{classCSA_1_1Station_a8472580715e78df4ec426490bcec4b19}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Free\+Parking@{set\+Has\+Free\+Parking}}
+\index{set\+Has\+Free\+Parking@{set\+Has\+Free\+Parking}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Free\+Parking()}{setHasFreeParking()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Free\+Parking (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Free\+Parking }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a1745bfdffbe8ac1097f83bcbacc553dd}\label{classCSA_1_1Station_a1745bfdffbe8ac1097f83bcbacc553dd}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Hearing\+Aid\+Signal@{set\+Has\+Hearing\+Aid\+Signal}}
+\index{set\+Has\+Hearing\+Aid\+Signal@{set\+Has\+Hearing\+Aid\+Signal}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Hearing\+Aid\+Signal()}{setHasHearingAidSignal()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Hearing\+Aid\+Signal (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Hearing\+Aid\+Signal }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a849d4ee2f249fb171351c0efacd0d6b2}\label{classCSA_1_1Station_a849d4ee2f249fb171351c0efacd0d6b2}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Luggage\+Lockers@{set\+Has\+Luggage\+Lockers}}
+\index{set\+Has\+Luggage\+Lockers@{set\+Has\+Luggage\+Lockers}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Luggage\+Lockers()}{setHasLuggageLockers()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Luggage\+Lockers (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Luggage\+Lockers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a61289a7c2d50ded5d95602af684115da}\label{classCSA_1_1Station_a61289a7c2d50ded5d95602af684115da}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Metro@{set\+Has\+Metro}}
+\index{set\+Has\+Metro@{set\+Has\+Metro}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Metro()}{setHasMetro()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Metro (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Metro }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_af535e367d1594de04abf85945195d710}\label{classCSA_1_1Station_af535e367d1594de04abf85945195d710}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Ramp@{set\+Has\+Ramp}}
+\index{set\+Has\+Ramp@{set\+Has\+Ramp}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Ramp()}{setHasRamp()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Ramp (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Ramp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a480c4fad15dd1ed88feb2be98432a436}\label{classCSA_1_1Station_a480c4fad15dd1ed88feb2be98432a436}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Taxi@{set\+Has\+Taxi}}
+\index{set\+Has\+Taxi@{set\+Has\+Taxi}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Taxi()}{setHasTaxi()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Taxi (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Taxi }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a4de05066e5d95e0d996bd788cd9e0e73}\label{classCSA_1_1Station_a4de05066e5d95e0d996bd788cd9e0e73}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Ticket\+Vending\+Machine@{set\+Has\+Ticket\+Vending\+Machine}}
+\index{set\+Has\+Ticket\+Vending\+Machine@{set\+Has\+Ticket\+Vending\+Machine}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Ticket\+Vending\+Machine()}{setHasTicketVendingMachine()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Ticket\+Vending\+Machine (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Ticket\+Vending\+Machine }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ac702668609e34b8cdfa398aa6c17661f}\label{classCSA_1_1Station_ac702668609e34b8cdfa398aa6c17661f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Tram@{set\+Has\+Tram}}
+\index{set\+Has\+Tram@{set\+Has\+Tram}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Tram()}{setHasTram()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Tram (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Tram }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aaa5f121511df327da6e26336e84cef1f}\label{classCSA_1_1Station_aaa5f121511df327da6e26336e84cef1f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Has\+Wheelchair\+Available@{set\+Has\+Wheelchair\+Available}}
+\index{set\+Has\+Wheelchair\+Available@{set\+Has\+Wheelchair\+Available}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Has\+Wheelchair\+Available()}{setHasWheelchairAvailable()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Has\+Wheelchair\+Available (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Wheelchair\+Available }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_adfcb40ad6f0e7a0011232475fa3aa11c}\label{classCSA_1_1Station_adfcb40ad6f0e7a0011232475fa3aa11c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Name (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aa925896cc36685bc5d27c66d437cc12f}\label{classCSA_1_1Station_aa925896cc36685bc5d27c66d437cc12f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Opening\+Hours@{set\+Opening\+Hours}}
+\index{set\+Opening\+Hours@{set\+Opening\+Hours}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Opening\+Hours()}{setOpeningHours()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Opening\+Hours (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ \mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \&}]{opening\+Hours }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a127e1d7548fc144395b0a07b17565d12}\label{classCSA_1_1Station_a127e1d7548fc144395b0a07b17565d12}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Position@{set\+Position}}
+\index{set\+Position@{set\+Position}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Position()}{setPosition()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ab0b854987e84b4961583f8d07d8d47f1}\label{classCSA_1_1Station_ab0b854987e84b4961583f8d07d8d47f1}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!set\+Uri@{set\+Uri}}
+\index{set\+Uri@{set\+Uri}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{set\+Uri()}{setUri()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::set\+Uri (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}\label{classCSA_1_1Station_addca2c54d5e9ce61c4ef9c3ee9ff4100}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!uri@{uri}}
+\index{uri@{uri}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Station\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a7e1a832bc1ecff5811df303f907e9e04}\label{classCSA_1_1Station_a7e1a832bc1ecff5811df303f907e9e04}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!uri\+Changed@{uri\+Changed}}
+\index{uri\+Changed@{uri\+Changed}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{uri\+Changed}{uriChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Station\+::uri\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Station_aa62d0b53ab56f702aa036fe36224e717}\label{classCSA_1_1Station_aa62d0b53ab56f702aa036fe36224e717}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+address@{m\+\_\+address}}
+\index{m\+\_\+address@{m\+\_\+address}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+address}{m\_address}}
+{\footnotesize\ttfamily Q\+Geo\+Address C\+S\+A\+::\+Station\+::m\+\_\+address\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a8ced92ad1d4e39e269435fcb7603c841}\label{classCSA_1_1Station_a8ced92ad1d4e39e269435fcb7603c841}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+average\+Stop\+Times@{m\+\_\+average\+Stop\+Times}}
+\index{m\+\_\+average\+Stop\+Times@{m\+\_\+average\+Stop\+Times}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+average\+Stop\+Times}{m\_averageStopTimes}}
+{\footnotesize\ttfamily qreal C\+S\+A\+::\+Station\+::m\+\_\+average\+Stop\+Times\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_afe87600b50102ea34f95a6af2cb123a3}\label{classCSA_1_1Station_afe87600b50102ea34f95a6af2cb123a3}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+country@{m\+\_\+country}}
+\index{m\+\_\+country@{m\+\_\+country}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+country}{m\_country}}
+{\footnotesize\ttfamily Q\+Locale\+::\+Country C\+S\+A\+::\+Station\+::m\+\_\+country\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a76023bf63f30f57b722c7816742caa26}\label{classCSA_1_1Station_a76023bf63f30f57b722c7816742caa26}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+disabled\+Parking\+Spots@{m\+\_\+disabled\+Parking\+Spots}}
+\index{m\+\_\+disabled\+Parking\+Spots@{m\+\_\+disabled\+Parking\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+disabled\+Parking\+Spots}{m\_disabledParkingSpots}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Station\+::m\+\_\+disabled\+Parking\+Spots\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a696c72ddd3115794f253cfda5c7fbd06}\label{classCSA_1_1Station_a696c72ddd3115794f253cfda5c7fbd06}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Bicycle\+Spots@{m\+\_\+has\+Bicycle\+Spots}}
+\index{m\+\_\+has\+Bicycle\+Spots@{m\+\_\+has\+Bicycle\+Spots}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Bicycle\+Spots}{m\_hasBicycleSpots}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Bicycle\+Spots\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_af89e446a2cadd47a70ff85d4a1605476}\label{classCSA_1_1Station_af89e446a2cadd47a70ff85d4a1605476}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Blue\+Bike@{m\+\_\+has\+Blue\+Bike}}
+\index{m\+\_\+has\+Blue\+Bike@{m\+\_\+has\+Blue\+Bike}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Blue\+Bike}{m\_hasBlueBike}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Blue\+Bike\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a657f9381af7d972fb0a256a2bd7f7c38}\label{classCSA_1_1Station_a657f9381af7d972fb0a256a2bd7f7c38}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Bus@{m\+\_\+has\+Bus}}
+\index{m\+\_\+has\+Bus@{m\+\_\+has\+Bus}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Bus}{m\_hasBus}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Bus\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a190b2f5b5df699b52e9319f1edfc65fb}\label{classCSA_1_1Station_a190b2f5b5df699b52e9319f1edfc65fb}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Elevated\+Platform@{m\+\_\+has\+Elevated\+Platform}}
+\index{m\+\_\+has\+Elevated\+Platform@{m\+\_\+has\+Elevated\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Elevated\+Platform}{m\_hasElevatedPlatform}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Elevated\+Platform\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_acc76b2fa0b1ca83cddd34c0914816ac2}\label{classCSA_1_1Station_acc76b2fa0b1ca83cddd34c0914816ac2}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Elevator\+Platform@{m\+\_\+has\+Elevator\+Platform}}
+\index{m\+\_\+has\+Elevator\+Platform@{m\+\_\+has\+Elevator\+Platform}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Elevator\+Platform}{m\_hasElevatorPlatform}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Elevator\+Platform\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a9da4053b1055e4eb7de68f0c584aa2ff}\label{classCSA_1_1Station_a9da4053b1055e4eb7de68f0c584aa2ff}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Escalator\+Down@{m\+\_\+has\+Escalator\+Down}}
+\index{m\+\_\+has\+Escalator\+Down@{m\+\_\+has\+Escalator\+Down}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Escalator\+Down}{m\_hasEscalatorDown}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Escalator\+Down\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a855114e1459342bb7d6e66eb2922ea69}\label{classCSA_1_1Station_a855114e1459342bb7d6e66eb2922ea69}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Escalator\+Up@{m\+\_\+has\+Escalator\+Up}}
+\index{m\+\_\+has\+Escalator\+Up@{m\+\_\+has\+Escalator\+Up}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Escalator\+Up}{m\_hasEscalatorUp}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Escalator\+Up\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_afc34176857b787cf3a1337d90fd21232}\label{classCSA_1_1Station_afc34176857b787cf3a1337d90fd21232}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Free\+Parking@{m\+\_\+has\+Free\+Parking}}
+\index{m\+\_\+has\+Free\+Parking@{m\+\_\+has\+Free\+Parking}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Free\+Parking}{m\_hasFreeParking}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Free\+Parking\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad52021cd3bdc9742fbec826af32d9821}\label{classCSA_1_1Station_ad52021cd3bdc9742fbec826af32d9821}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Hearing\+Aid\+Signal@{m\+\_\+has\+Hearing\+Aid\+Signal}}
+\index{m\+\_\+has\+Hearing\+Aid\+Signal@{m\+\_\+has\+Hearing\+Aid\+Signal}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Hearing\+Aid\+Signal}{m\_hasHearingAidSignal}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Hearing\+Aid\+Signal\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a21ecc0f7cdc71ab5c15bb8fc922b0a8a}\label{classCSA_1_1Station_a21ecc0f7cdc71ab5c15bb8fc922b0a8a}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Luggage\+Lockers@{m\+\_\+has\+Luggage\+Lockers}}
+\index{m\+\_\+has\+Luggage\+Lockers@{m\+\_\+has\+Luggage\+Lockers}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Luggage\+Lockers}{m\_hasLuggageLockers}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Luggage\+Lockers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a591ebe8b8f8ff846e364b96e98cabc9f}\label{classCSA_1_1Station_a591ebe8b8f8ff846e364b96e98cabc9f}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Metro@{m\+\_\+has\+Metro}}
+\index{m\+\_\+has\+Metro@{m\+\_\+has\+Metro}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Metro}{m\_hasMetro}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Metro\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aa192bc17d3e887e98a2f3499e4cdc7c7}\label{classCSA_1_1Station_aa192bc17d3e887e98a2f3499e4cdc7c7}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Ramp@{m\+\_\+has\+Ramp}}
+\index{m\+\_\+has\+Ramp@{m\+\_\+has\+Ramp}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Ramp}{m\_hasRamp}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Ramp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a165c04ccc0072c11a1dab515f8e82aa9}\label{classCSA_1_1Station_a165c04ccc0072c11a1dab515f8e82aa9}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Taxi@{m\+\_\+has\+Taxi}}
+\index{m\+\_\+has\+Taxi@{m\+\_\+has\+Taxi}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Taxi}{m\_hasTaxi}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Taxi\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a8da1484b9982379a0b8e07a4331aa1ec}\label{classCSA_1_1Station_a8da1484b9982379a0b8e07a4331aa1ec}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Ticket\+Vending\+Machine@{m\+\_\+has\+Ticket\+Vending\+Machine}}
+\index{m\+\_\+has\+Ticket\+Vending\+Machine@{m\+\_\+has\+Ticket\+Vending\+Machine}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Ticket\+Vending\+Machine}{m\_hasTicketVendingMachine}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Ticket\+Vending\+Machine\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_aec86731656727f5395da624ae51f47dc}\label{classCSA_1_1Station_aec86731656727f5395da624ae51f47dc}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Tram@{m\+\_\+has\+Tram}}
+\index{m\+\_\+has\+Tram@{m\+\_\+has\+Tram}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Tram}{m\_hasTram}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Tram\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a918ff279b54d1b4ff72a68949089a521}\label{classCSA_1_1Station_a918ff279b54d1b4ff72a68949089a521}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+has\+Wheelchair\+Available@{m\+\_\+has\+Wheelchair\+Available}}
+\index{m\+\_\+has\+Wheelchair\+Available@{m\+\_\+has\+Wheelchair\+Available}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+has\+Wheelchair\+Available}{m\_hasWheelchairAvailable}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Station\+::m\+\_\+has\+Wheelchair\+Available\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ac4f2d9d4a144e62b1a16cb3ecea57730}\label{classCSA_1_1Station_ac4f2d9d4a144e62b1a16cb3ecea57730}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+name@{m\+\_\+name}}
+\index{m\+\_\+name@{m\+\_\+name}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+name}{m\_name}}
+{\footnotesize\ttfamily Q\+Map$<$Q\+Locale\+::\+Language, Q\+String$>$ C\+S\+A\+::\+Station\+::m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ad822c4beb04f1b4739a4c17603e54bbb}\label{classCSA_1_1Station_ad822c4beb04f1b4739a4c17603e54bbb}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+opening\+Hours@{m\+\_\+opening\+Hours}}
+\index{m\+\_\+opening\+Hours@{m\+\_\+opening\+Hours}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+opening\+Hours}{m\_openingHours}}
+{\footnotesize\ttfamily Q\+Map$<$\mbox{\hyperlink{classCSA_1_1Station_aa160d0de40db0583099b5986dea1cd67}{C\+S\+A\+::\+Station\+::\+Day}}, Q\+Pair$<$Q\+Time, Q\+Time$>$ $>$ C\+S\+A\+::\+Station\+::m\+\_\+opening\+Hours\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_ae8f2de64fc98f099e23e0bf8cb117dc0}\label{classCSA_1_1Station_ae8f2de64fc98f099e23e0bf8cb117dc0}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+position@{m\+\_\+position}}
+\index{m\+\_\+position@{m\+\_\+position}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+position}{m\_position}}
+{\footnotesize\ttfamily Q\+Geo\+Coordinate C\+S\+A\+::\+Station\+::m\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Station_a01e636d3257400f9748ed7060333990c}\label{classCSA_1_1Station_a01e636d3257400f9748ed7060333990c}} 
+\index{C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}!m\+\_\+uri@{m\+\_\+uri}}
+\index{m\+\_\+uri@{m\+\_\+uri}!C\+S\+A\+::\+Station@{C\+S\+A\+::\+Station}}
+\subsubsection{\texorpdfstring{m\+\_\+uri}{m\_uri}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Station\+::m\+\_\+uri\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csastation_8h}{csastation.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csastation_8cpp}{csastation.\+cpp}}\end{DoxyCompactItemize}

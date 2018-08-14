@@ -1,0 +1,39 @@
+\hypertarget{namespaceNetwork}{}\section{Network Namespace Reference}
+\label{namespaceNetwork}\index{Network@{Network}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classNetwork_1_1Manager}{Manager}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade to access the network using the H\+T\+TP protocol. The \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade makes network access in Qt abstract from the underlying library (Q\+Network\+Access\+Manager, lib\+Curl, ...).
+
+Constructs a \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} if none exists and returns the instance.
+
+Retrieves a certain resource from the given Q\+Url \&url using a G\+ET request. The result as a Q\+Network\+Reply $\ast$reply will be available as soon as the request\+Completed signal is fired.
+
+Posts data to a certain resource from the given Q\+Url url using a P\+O\+ST request. The result as a Q\+Network\+Reply $\ast$reply will be available as soon as the request\+Completed signal is fired.
+
+Deletes a certain resource from the given Q\+Url url using a D\+E\+L\+E\+TE request. The result as a Q\+Network\+Reply $\ast$reply will be available as soon as the request\+Completed signal is fired.
+
+Retrieves the headers of the resource from the given Q\+Url url using a H\+E\+AD request. The result as a Q\+Network\+Reply $\ast$reply will be available as soon as the request\+Completed signal is fired.
+
+Everytime a H\+T\+TP request has been made by the user it needs several default headers to complete it\textquotesingle{}s mission. The prepare\+Request method just does that, it adds the Accept, User-\/\+Agent header to the request and allows redirects.
+
+Retrieves the current user agent used to make requests in this H\+T\+TP instance.
+
+Changes the current user agent to the given Q\+String.
+
+Retrieves the current accept header used to make requests in this H\+T\+TP instance.
+
+Changes the current accept header to the given Q\+String.
+
+Gets the Q\+Network\+Access\+Manager instance.
+
+Sets the Q\+Network\+Access\+Manager instance.
+
+Gets the Q\+Abstract\+Network\+Cache instance.
+
+Sets the Q\+Abstract\+Network\+Cache instance. 

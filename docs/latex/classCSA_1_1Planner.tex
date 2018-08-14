@@ -1,0 +1,400 @@
+\hypertarget{classCSA_1_1Planner}{}\section{C\+SA\+:\+:Planner Class Reference}
+\label{classCSA_1_1Planner}\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+
+
+{\ttfamily \#include $<$csaplanner.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Planner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1Planner}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_aef9242efc2f34759d0bc58da60b10baf}{routes\+Found}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Planner_a1ecc41dc060aafd6e2ce0f2c4a52648b}{routes}})
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a4057e2f24927818deb1857c47a5008cf}{error}} (const Q\+String \&message)
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a54e3e7049b018f3cd08697e39149add3}{page\+Requested}} (const Q\+Url \&page\+U\+RI)
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_af9fcdc9efcb27c4e45ddc36367a1364c}{page\+Received}} (const Q\+Url \&page\+U\+RI)
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a987cbbe8316beb1db2983ac62ccbed03}{page\+Progress}} (const Q\+Url \&page\+U\+RI, const qint16 \&progress)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_aebe12cc6eabe41e6e843ebab182d44ab}{get\+Connections}} (const Q\+Url \&departure\+Station, const Q\+Url \&arrival\+Station, const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}{departure\+Time}}, const qint16 \&\mbox{\hyperlink{classCSA_1_1Planner_a2b734fc3d3ae3af744876bdc72898596}{max\+Transfers}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Planner_a78671efec5a97e327b77bd2c9e03cf15}{calculate\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}{departure\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}{departure\+Time}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_ac97fdf7ce0d6b9a5f0d74e884927147c}{set\+Departure\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}{departure\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Planner_a1ae3eafa8ebde74343828fa98cb588b7}{arrival\+Time}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a140baeba635ac0e6d794747aa594e17f}{set\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classCSA_1_1Planner_a1ae3eafa8ebde74343828fa98cb588b7}{arrival\+Time}})
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Planner_a2b734fc3d3ae3af744876bdc72898596}{max\+Transfers}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a950c1dc8208d98aab977f490c2e7b244}{set\+Max\+Transfers}} (const qint16 \&\mbox{\hyperlink{classCSA_1_1Planner_a2b734fc3d3ae3af744876bdc72898596}{max\+Transfers}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Planner_a3b84dde21b6abaf92014af54b1cd7fe8}{departure\+Station\+U\+RI}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a562537d6903362f084d8aa08f812d441}{set\+Departure\+Station\+U\+RI}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Planner_a3b84dde21b6abaf92014af54b1cd7fe8}{departure\+Station\+U\+RI}})
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Planner_ac412f34346e0bdd24d62b06d8770b150}{arrival\+Station\+U\+RI}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_aab52e8e5b484f773a33923fd3f29be25}{set\+Arrival\+Station\+U\+RI}} (const Q\+Url \&\mbox{\hyperlink{classCSA_1_1Planner_ac412f34346e0bdd24d62b06d8770b150}{arrival\+Station\+U\+RI}})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classCSA_1_1Planner}{Planner}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a0a361e4991bc8f1f29b41507c13ea590}{get\+Instance}} (Q\+Object $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_ac1b6ffca527db0fe0ff6f904b6a0ee35}{page\+Received}} (\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$page)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Planner_aa0015d0596c5b78bf29f65276fcc8852}{Planner}} (Q\+Object $\ast$parent)
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a2539dd808dc988ef5cb0b4b7f4de0077}{plan\+Page}} (\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$page)
+\item 
+\mbox{\hyperlink{classCSA_1_1StationStopProfile}{Station\+Stop\+Profile}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a68af05f5dc3eaa5d204224c21c80f42d}{get\+First\+Reachable\+Connection}} (\mbox{\hyperlink{classCSA_1_1StationStopProfile}{Station\+Stop\+Profile}} $\ast$arrival\+Profile)
+\item 
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a7395c140e3cd577ed459350d4e5588ad}{Factory}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a6f6fe97b8620230960514f544109f076}{set\+Factory}} (\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$value)
+\item 
+\mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_aa6f6d8a3714aa2846f19a41da4f1959b}{station\+Factory}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a67b39227b11c5d49052c48141ad256ac}{set\+Station\+Factory}} (\mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$\mbox{\hyperlink{classCSA_1_1Planner_aa6f6d8a3714aa2846f19a41da4f1959b}{station\+Factory}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_a1ecc41dc060aafd6e2ce0f2c4a52648b}{routes}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a596d6e4038e76ff4944cab418594858f}{set\+Routes}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Planner_a1ecc41dc060aafd6e2ce0f2c4a52648b}{routes}})
+\item 
+Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$ $>$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_af8b23db7e72d8bf8d7a219d569c853c6}{S\+Array}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_af19efcec5cc9196698108f30fa55029c}{set\+S\+Array}} (const Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$$>$ $>$ \&\mbox{\hyperlink{classCSA_1_1Planner_af8b23db7e72d8bf8d7a219d569c853c6}{S\+Array}})
+\item 
+Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_a0e8ccca51c26f77086bddaf28ec521a2}{T\+Array}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Planner_a376be1acb09685a367131b290af81910}{set\+T\+Array}} (const Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Planner_a0e8ccca51c26f77086bddaf28ec521a2}{T\+Array}})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Mutex \mbox{\hyperlink{classCSA_1_1Planner_adfeb70ddbedfbb37567b852aa7b8cbe3}{sync\+Thread\+Mutex}}
+\item 
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a125612862843283f437f76dbc2ae56ba}{m\+\_\+linked\+Connection\+Factory}}
+\item 
+\mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a14aa8633412e69b1b26624ae4a63a478}{m\+\_\+station\+Factory}}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Planner_aa5eb52a86c4d14053de75f4b293409fa}{m\+\_\+departure\+Station\+U\+RI}}
+\item 
+Q\+Url \mbox{\hyperlink{classCSA_1_1Planner_a8f0231d1da5fc7451ef9127970ec3ff1}{m\+\_\+arrival\+Station\+U\+RI}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Planner_a79f5a12513524607b1fbbdcf9bd4162d}{m\+\_\+departure\+Time}}
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Planner_a96a9ae70c8919e65e81cd095355a7ea0}{m\+\_\+arrival\+Time}}
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Planner_a4b24326fa4784c61865526532935cd97}{m\+\_\+max\+Transfers}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_af978da0a218f6eecf870e8f4a3d6d294}{m\+\_\+routes}}
+\item 
+Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$ $>$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_adfc501aa7ae4f55c3fab20890e6bb980}{m\+\_\+\+S\+Array}}
+\item 
+Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Planner_a9787a967e79e8efb703bdf5e2e5718c7}{m\+\_\+\+T\+Array}}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classCSA_1_1Planner}{C\+S\+A\+::\+Planner}} $\ast$ \mbox{\hyperlink{classCSA_1_1Planner_a85076417b9aca86ba069c447e3ecdaa0}{m\+\_\+instance}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Planner_aa0015d0596c5b78bf29f65276fcc8852}\label{classCSA_1_1Planner_aa0015d0596c5b78bf29f65276fcc8852}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!Planner@{Planner}}
+\index{Planner@{Planner}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{Planner()}{Planner()}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Planner\+::\+Planner (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Planner_ac412f34346e0bdd24d62b06d8770b150}\label{classCSA_1_1Planner_ac412f34346e0bdd24d62b06d8770b150}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!arrival\+Station\+U\+RI@{arrival\+Station\+U\+RI}}
+\index{arrival\+Station\+U\+RI@{arrival\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{arrival\+Station\+U\+R\+I()}{arrivalStationURI()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Planner\+::arrival\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a1ae3eafa8ebde74343828fa98cb588b7}\label{classCSA_1_1Planner_a1ae3eafa8ebde74343828fa98cb588b7}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!arrival\+Time@{arrival\+Time}}
+\index{arrival\+Time@{arrival\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{arrival\+Time()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Planner\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a78671efec5a97e327b77bd2c9e03cf15}\label{classCSA_1_1Planner_a78671efec5a97e327b77bd2c9e03cf15}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!calculate\+Arrival\+Time@{calculate\+Arrival\+Time}}
+\index{calculate\+Arrival\+Time@{calculate\+Arrival\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{calculate\+Arrival\+Time()}{calculateArrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Planner\+::calculate\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a3b84dde21b6abaf92014af54b1cd7fe8}\label{classCSA_1_1Planner_a3b84dde21b6abaf92014af54b1cd7fe8}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!departure\+Station\+U\+RI@{departure\+Station\+U\+RI}}
+\index{departure\+Station\+U\+RI@{departure\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{departure\+Station\+U\+R\+I()}{departureStationURI()}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Planner\+::departure\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}\label{classCSA_1_1Planner_affe50069469ecc6b75c69efdb408b71a}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!departure\+Time@{departure\+Time}}
+\index{departure\+Time@{departure\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{departure\+Time()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Planner\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a4057e2f24927818deb1857c47a5008cf}\label{classCSA_1_1Planner_a4057e2f24927818deb1857c47a5008cf}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!error@{error}}
+\index{error@{error}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a7395c140e3cd577ed459350d4e5588ad}\label{classCSA_1_1Planner_a7395c140e3cd577ed459350d4e5588ad}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!Factory@{Factory}}
+\index{Factory@{Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{Factory()}{Factory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ C\+S\+A\+::\+Planner\+::\+Factory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_aebe12cc6eabe41e6e843ebab182d44ab}\label{classCSA_1_1Planner_aebe12cc6eabe41e6e843ebab182d44ab}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!get\+Connections@{get\+Connections}}
+\index{get\+Connections@{get\+Connections}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{get\+Connections()}{getConnections()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::get\+Connections (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{departure\+Station,  }\item[{const Q\+Url \&}]{arrival\+Station,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const qint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a68af05f5dc3eaa5d204224c21c80f42d}\label{classCSA_1_1Planner_a68af05f5dc3eaa5d204224c21c80f42d}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!get\+First\+Reachable\+Connection@{get\+First\+Reachable\+Connection}}
+\index{get\+First\+Reachable\+Connection@{get\+First\+Reachable\+Connection}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{get\+First\+Reachable\+Connection()}{getFirstReachableConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$ C\+S\+A\+::\+Planner\+::get\+First\+Reachable\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$}]{arrival\+Profile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a0a361e4991bc8f1f29b41507c13ea590}\label{classCSA_1_1Planner_a0a361e4991bc8f1f29b41507c13ea590}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Planner}{C\+S\+A\+::\+Planner}} $\ast$ C\+S\+A\+::\+Planner\+::get\+Instance (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a2b734fc3d3ae3af744876bdc72898596}\label{classCSA_1_1Planner_a2b734fc3d3ae3af744876bdc72898596}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!max\+Transfers@{max\+Transfers}}
+\index{max\+Transfers@{max\+Transfers}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{max\+Transfers()}{maxTransfers()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Planner\+::max\+Transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a987cbbe8316beb1db2983ac62ccbed03}\label{classCSA_1_1Planner_a987cbbe8316beb1db2983ac62ccbed03}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!page\+Progress@{page\+Progress}}
+\index{page\+Progress@{page\+Progress}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{page\+Progress}{pageProgress}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::page\+Progress (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI,  }\item[{const qint16 \&}]{progress }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_af9fcdc9efcb27c4e45ddc36367a1364c}\label{classCSA_1_1Planner_af9fcdc9efcb27c4e45ddc36367a1364c}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!page\+Received@{page\+Received}}
+\index{page\+Received@{page\+Received}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{page\+Received}{pageReceived}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::page\+Received (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_ac1b6ffca527db0fe0ff6f904b6a0ee35}\label{classCSA_1_1Planner_ac1b6ffca527db0fe0ff6f904b6a0ee35}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!page\+Received@{page\+Received}}
+\index{page\+Received@{page\+Received}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{page\+Received}{pageReceived}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::page\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$}]{page }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a54e3e7049b018f3cd08697e39149add3}\label{classCSA_1_1Planner_a54e3e7049b018f3cd08697e39149add3}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!page\+Requested@{page\+Requested}}
+\index{page\+Requested@{page\+Requested}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{page\+Requested}{pageRequested}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::page\+Requested (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a2539dd808dc988ef5cb0b4b7f4de0077}\label{classCSA_1_1Planner_a2539dd808dc988ef5cb0b4b7f4de0077}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!plan\+Page@{plan\+Page}}
+\index{plan\+Page@{plan\+Page}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{plan\+Page()}{planPage()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::plan\+Page (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$}]{page }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a1ecc41dc060aafd6e2ce0f2c4a52648b}\label{classCSA_1_1Planner_a1ecc41dc060aafd6e2ce0f2c4a52648b}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!routes@{routes}}
+\index{routes@{routes}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{routes()}{routes()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$ $>$ C\+S\+A\+::\+Planner\+::routes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_aef9242efc2f34759d0bc58da60b10baf}\label{classCSA_1_1Planner_aef9242efc2f34759d0bc58da60b10baf}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!routes\+Found@{routes\+Found}}
+\index{routes\+Found@{routes\+Found}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{routes\+Found}{routesFound}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::routes\+Found (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$$>$ \&}]{routes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_af8b23db7e72d8bf8d7a219d569c853c6}\label{classCSA_1_1Planner_af8b23db7e72d8bf8d7a219d569c853c6}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!S\+Array@{S\+Array}}
+\index{S\+Array@{S\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{S\+Array()}{SArray()}}
+{\footnotesize\ttfamily Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$ $>$ $>$ C\+S\+A\+::\+Planner\+::\+S\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_aab52e8e5b484f773a33923fd3f29be25}\label{classCSA_1_1Planner_aab52e8e5b484f773a33923fd3f29be25}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Arrival\+Station\+U\+RI@{set\+Arrival\+Station\+U\+RI}}
+\index{set\+Arrival\+Station\+U\+RI@{set\+Arrival\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Station\+U\+R\+I()}{setArrivalStationURI()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Arrival\+Station\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{arrival\+Station\+U\+RI }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a140baeba635ac0e6d794747aa594e17f}\label{classCSA_1_1Planner_a140baeba635ac0e6d794747aa594e17f}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Arrival\+Time@{set\+Arrival\+Time}}
+\index{set\+Arrival\+Time@{set\+Arrival\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Arrival\+Time()}{setArrivalTime()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a562537d6903362f084d8aa08f812d441}\label{classCSA_1_1Planner_a562537d6903362f084d8aa08f812d441}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Departure\+Station\+U\+RI@{set\+Departure\+Station\+U\+RI}}
+\index{set\+Departure\+Station\+U\+RI@{set\+Departure\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Departure\+Station\+U\+R\+I()}{setDepartureStationURI()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Departure\+Station\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{departure\+Station\+U\+RI }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_ac97fdf7ce0d6b9a5f0d74e884927147c}\label{classCSA_1_1Planner_ac97fdf7ce0d6b9a5f0d74e884927147c}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Departure\+Time@{set\+Departure\+Time}}
+\index{set\+Departure\+Time@{set\+Departure\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Departure\+Time()}{setDepartureTime()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Departure\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a6f6fe97b8620230960514f544109f076}\label{classCSA_1_1Planner_a6f6fe97b8620230960514f544109f076}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Factory@{set\+Factory}}
+\index{set\+Factory@{set\+Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Factory()}{setFactory()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Factory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a950c1dc8208d98aab977f490c2e7b244}\label{classCSA_1_1Planner_a950c1dc8208d98aab977f490c2e7b244}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Max\+Transfers@{set\+Max\+Transfers}}
+\index{set\+Max\+Transfers@{set\+Max\+Transfers}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Max\+Transfers()}{setMaxTransfers()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Max\+Transfers (\begin{DoxyParamCaption}\item[{const qint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a596d6e4038e76ff4944cab418594858f}\label{classCSA_1_1Planner_a596d6e4038e76ff4944cab418594858f}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Routes@{set\+Routes}}
+\index{set\+Routes@{set\+Routes}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Routes()}{setRoutes()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Routes (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$$>$ \&}]{routes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_af19efcec5cc9196698108f30fa55029c}\label{classCSA_1_1Planner_af19efcec5cc9196698108f30fa55029c}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+S\+Array@{set\+S\+Array}}
+\index{set\+S\+Array@{set\+S\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+S\+Array()}{setSArray()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+S\+Array (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$$>$ $>$ \&}]{S\+Array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a67b39227b11c5d49052c48141ad256ac}\label{classCSA_1_1Planner_a67b39227b11c5d49052c48141ad256ac}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+Station\+Factory@{set\+Station\+Factory}}
+\index{set\+Station\+Factory@{set\+Station\+Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+Station\+Factory()}{setStationFactory()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+Station\+Factory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$}]{station\+Factory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a376be1acb09685a367131b290af81910}\label{classCSA_1_1Planner_a376be1acb09685a367131b290af81910}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!set\+T\+Array@{set\+T\+Array}}
+\index{set\+T\+Array@{set\+T\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{set\+T\+Array()}{setTArray()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Planner\+::set\+T\+Array (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$$>$ \&}]{T\+Array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_aa6f6d8a3714aa2846f19a41da4f1959b}\label{classCSA_1_1Planner_aa6f6d8a3714aa2846f19a41da4f1959b}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!station\+Factory@{station\+Factory}}
+\index{station\+Factory@{station\+Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{station\+Factory()}{stationFactory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}} $\ast$ C\+S\+A\+::\+Planner\+::station\+Factory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a0e8ccca51c26f77086bddaf28ec521a2}\label{classCSA_1_1Planner_a0e8ccca51c26f77086bddaf28ec521a2}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!T\+Array@{T\+Array}}
+\index{T\+Array@{T\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{T\+Array()}{TArray()}}
+{\footnotesize\ttfamily Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$ $>$ C\+S\+A\+::\+Planner\+::\+T\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Planner_a8f0231d1da5fc7451ef9127970ec3ff1}\label{classCSA_1_1Planner_a8f0231d1da5fc7451ef9127970ec3ff1}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+arrival\+Station\+U\+RI@{m\+\_\+arrival\+Station\+U\+RI}}
+\index{m\+\_\+arrival\+Station\+U\+RI@{m\+\_\+arrival\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Station\+U\+RI}{m\_arrivalStationURI}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Planner\+::m\+\_\+arrival\+Station\+U\+RI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a96a9ae70c8919e65e81cd095355a7ea0}\label{classCSA_1_1Planner_a96a9ae70c8919e65e81cd095355a7ea0}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}}
+\index{m\+\_\+arrival\+Time@{m\+\_\+arrival\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+arrival\+Time}{m\_arrivalTime}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Planner\+::m\+\_\+arrival\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_aa5eb52a86c4d14053de75f4b293409fa}\label{classCSA_1_1Planner_aa5eb52a86c4d14053de75f4b293409fa}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+departure\+Station\+U\+RI@{m\+\_\+departure\+Station\+U\+RI}}
+\index{m\+\_\+departure\+Station\+U\+RI@{m\+\_\+departure\+Station\+U\+RI}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Station\+U\+RI}{m\_departureStationURI}}
+{\footnotesize\ttfamily Q\+Url C\+S\+A\+::\+Planner\+::m\+\_\+departure\+Station\+U\+RI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a79f5a12513524607b1fbbdcf9bd4162d}\label{classCSA_1_1Planner_a79f5a12513524607b1fbbdcf9bd4162d}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+departure\+Time@{m\+\_\+departure\+Time}}
+\index{m\+\_\+departure\+Time@{m\+\_\+departure\+Time}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+departure\+Time}{m\_departureTime}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Planner\+::m\+\_\+departure\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a85076417b9aca86ba069c447e3ecdaa0}\label{classCSA_1_1Planner_a85076417b9aca86ba069c447e3ecdaa0}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Planner}{C\+S\+A\+::\+Planner}} $\ast$ C\+S\+A\+::\+Planner\+::m\+\_\+instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a125612862843283f437f76dbc2ae56ba}\label{classCSA_1_1Planner_a125612862843283f437f76dbc2ae56ba}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+linked\+Connection\+Factory@{m\+\_\+linked\+Connection\+Factory}}
+\index{m\+\_\+linked\+Connection\+Factory@{m\+\_\+linked\+Connection\+Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+linked\+Connection\+Factory}{m\_linkedConnectionFactory}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}}$\ast$ C\+S\+A\+::\+Planner\+::m\+\_\+linked\+Connection\+Factory\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a4b24326fa4784c61865526532935cd97}\label{classCSA_1_1Planner_a4b24326fa4784c61865526532935cd97}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+max\+Transfers@{m\+\_\+max\+Transfers}}
+\index{m\+\_\+max\+Transfers@{m\+\_\+max\+Transfers}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+max\+Transfers}{m\_maxTransfers}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Planner\+::m\+\_\+max\+Transfers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_af978da0a218f6eecf870e8f4a3d6d294}\label{classCSA_1_1Planner_af978da0a218f6eecf870e8f4a3d6d294}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+routes@{m\+\_\+routes}}
+\index{m\+\_\+routes@{m\+\_\+routes}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+routes}{m\_routes}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1Route}{C\+S\+A\+::\+Route}} $\ast$$>$ C\+S\+A\+::\+Planner\+::m\+\_\+routes\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_adfc501aa7ae4f55c3fab20890e6bb980}\label{classCSA_1_1Planner_adfc501aa7ae4f55c3fab20890e6bb980}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+\+S\+Array@{m\+\_\+\+S\+Array}}
+\index{m\+\_\+\+S\+Array@{m\+\_\+\+S\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+\+S\+Array}{m\_SArray}}
+{\footnotesize\ttfamily Q\+Map$<$Q\+Url, Q\+List$<$\mbox{\hyperlink{classCSA_1_1StationStopProfile}{C\+S\+A\+::\+Station\+Stop\+Profile}} $\ast$$>$ $>$ C\+S\+A\+::\+Planner\+::m\+\_\+\+S\+Array\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a14aa8633412e69b1b26624ae4a63a478}\label{classCSA_1_1Planner_a14aa8633412e69b1b26624ae4a63a478}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+station\+Factory@{m\+\_\+station\+Factory}}
+\index{m\+\_\+station\+Factory@{m\+\_\+station\+Factory}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+station\+Factory}{m\_stationFactory}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1StationFactory}{C\+S\+A\+::\+Station\+Factory}}$\ast$ C\+S\+A\+::\+Planner\+::m\+\_\+station\+Factory\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_a9787a967e79e8efb703bdf5e2e5718c7}\label{classCSA_1_1Planner_a9787a967e79e8efb703bdf5e2e5718c7}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!m\+\_\+\+T\+Array@{m\+\_\+\+T\+Array}}
+\index{m\+\_\+\+T\+Array@{m\+\_\+\+T\+Array}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{m\+\_\+\+T\+Array}{m\_TArray}}
+{\footnotesize\ttfamily Q\+Map$<$Q\+Url, \mbox{\hyperlink{classCSA_1_1TrainProfile}{C\+S\+A\+::\+Train\+Profile}} $\ast$$>$ C\+S\+A\+::\+Planner\+::m\+\_\+\+T\+Array\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Planner_adfeb70ddbedfbb37567b852aa7b8cbe3}\label{classCSA_1_1Planner_adfeb70ddbedfbb37567b852aa7b8cbe3}} 
+\index{C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}!sync\+Thread\+Mutex@{sync\+Thread\+Mutex}}
+\index{sync\+Thread\+Mutex@{sync\+Thread\+Mutex}!C\+S\+A\+::\+Planner@{C\+S\+A\+::\+Planner}}
+\subsubsection{\texorpdfstring{sync\+Thread\+Mutex}{syncThreadMutex}}
+{\footnotesize\ttfamily Q\+Mutex C\+S\+A\+::\+Planner\+::sync\+Thread\+Mutex\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csaplanner_8h}{csaplanner.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csaplanner_8cpp}{csaplanner.\+cpp}}\end{DoxyCompactItemize}

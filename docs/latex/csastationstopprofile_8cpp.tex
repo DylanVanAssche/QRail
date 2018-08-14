@@ -1,0 +1,150 @@
+\hypertarget{csastationstopprofile_8cpp}{}\section{src/linkedconnections/csa/csastationstopprofile.cpp File Reference}
+\label{csastationstopprofile_8cpp}\index{src/linkedconnections/csa/csastationstopprofile.\+cpp@{src/linkedconnections/csa/csastationstopprofile.\+cpp}}
+
+
+Gets the departure time.  
+
+
+{\ttfamily \#include \char`\"{}csastationstopprofile.\+h\char`\"{}}\newline
+
+
+\subsection{Detailed Description}
+Gets the departure time. 
+
+Sets the number of transfers.
+
+Gets the number of transfers.
+
+Sets the arrival connection.
+
+Gets the arrival connection.
+
+Sets the departure connection.
+
+Gets the departure connection.
+
+Sets the arrivelt ime.
+
+Gets the arrival time.
+
+Sets the departure time.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Date\+Time departure\+Time
+\end{DoxyReturn}
+Gets the departure time in this stop.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Time\\
+\hline
+\end{DoxyParams}
+Sets the current departure time to the given Q\+Date\+Time \&departure\+Time. Emits the departure\+Time\+Changed signal when changed.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Date\+Time arrival\+Time
+\end{DoxyReturn}
+Gets the arrival time in this stop.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&arrival\+Time\\
+\hline
+\end{DoxyParams}
+Sets the current arrival time to the given Q\+Date\+Time \&arrival\+Time. Emits the arrival\+Time\+Changed signal when changed.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Fragment $\ast$departure\+Connection
+\end{DoxyReturn}
+Gets the departure connection in this stop.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Fragment $\ast$departure\+Connection\\
+\hline
+\end{DoxyParams}
+Sets the current departure connection to the given Fragment $\ast$departure\+Connection. Emits the departure\+Connection\+Changed signal when changed.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Fragment $\ast$arrival\+Connection
+\end{DoxyReturn}
+Gets the arrival connection in this stop.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Fragment $\ast$arrival\+Connection\\
+\hline
+\end{DoxyParams}
+Sets the current arrival connection to the given Fragment $\ast$arrival\+Connection. Emits the arrival\+Connection\+Changed signal when changed.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+qint16 transfers
+\end{DoxyReturn}
+Gets the number of transfers between this stop and the destination.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qint16 \&transfers\\
+\hline
+\end{DoxyParams}
+Sets the number of transfers between this stop and the destination to the given qint16 \&transfers. Emits the transfers\+Changed signal when changed. 

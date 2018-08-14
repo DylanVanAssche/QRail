@@ -1,0 +1,6 @@
+[submodule "qtcsv"]
+	path = qtcsv
+	url = git@github.com:iamantony/qtcsv.git
+[submodule "stations"]
+	path = stations
+	url = git@github.com:iRail/stations.git

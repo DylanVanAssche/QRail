@@ -1,0 +1,26 @@
+\hypertarget{namespaceDatabase}{}\section{Database Namespace Reference}
+\label{namespaceDatabase}\index{Database@{Database}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}} facade to access the database using the S\+QL language. The \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}} facade makes database access in Qt abstract from the underlying database (S\+Q\+Lite, My\+S\+QL, O\+R\+A\+C\+LE, ...). Any errors during initialisation of the database are catched and logged as C\+R\+I\+T\+I\+C\+AL.
+
+Constructs a \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} instance if none exists and returns it.
+
+Executes the given Q\+Sql\+Query query on the active database. Before the execution takes place, the connection is checked. During the execution, the errors are catched and logged as C\+R\+I\+T\+I\+C\+AL.
+
+Starts a transaction in the database. After you are done with your changes you should call \mbox{\hyperlink{classDatabase_1_1Manager_a08dc190a448c555f8334bdd60d32b26e}{Database\+::\+Manager\+::end\+Transaction()}} to commit your changes.
+
+\begin{DoxyWarning}{Warning}
+This method won\textquotesingle{}t do anything if no transaction was running.
+\end{DoxyWarning}
+Commits changes to the database and returns true if success.
+
+Sets the current Q\+Sql\+Database database to the given Q\+Sql\+Database \&database.
+
+Gets the Q\+Sql\+Database database and returns it. 

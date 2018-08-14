@@ -1,0 +1,348 @@
+\hypertarget{classCSA_1_1Route}{}\section{C\+SA\+:\+:Route Class Reference}
+\label{classCSA_1_1Route}\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+
+
+{\ttfamily \#include $<$csaroute.\+h$>$}
+
+Inheritance diagram for C\+SA\+:\+:Route\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCSA_1_1Route}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_a6ab64667f4573fd2c9cd8c0b6ab88b46}{legs\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_adce4cb4749b3f2668efe082f011a2e47}{transfers\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_afe760a3c1e840dfde35219466fa8c5c3}{trip\+Alerts\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_a44e976e85e907dfc3b0704c8ce4db5bf}{vehicle\+Alerts\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_ab31ce6bceb5dca29f7f74719e50e07df}{remarks\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCSA_1_1Route_a285d58821dfce5fe134c928cfb72e56e}{Route}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}{legs}}, const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a4a476195f30a740680bd3b61df7a5540}{transfers}}, const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a6e5c03d04237cea4167239b201f2d40b}{trip\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a173ce470308b9f20ae2273d987c6041f}{vehicle\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a6f5f7a812156030f15b7e94b2e43a72a}{remarks}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classCSA_1_1Route_a9c40376e7b67c123f88b9afba8aad6d6}{Route}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{Route\+Leg}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}{legs}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}{legs}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_acae4554ffa830193e2edbd8936842551}{set\+Legs}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{Route\+Leg}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}{legs}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a4a476195f30a740680bd3b61df7a5540}{transfers}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_a0977183a554295d3aaabdd3e3aa68ab4}{set\+Transfers}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a4a476195f30a740680bd3b61df7a5540}{transfers}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a6e5c03d04237cea4167239b201f2d40b}{trip\+Alerts}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_a0ef9be4b744e679ab9daeb8e39753f8f}{set\+Trip\+Alerts}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a6e5c03d04237cea4167239b201f2d40b}{trip\+Alerts}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a173ce470308b9f20ae2273d987c6041f}{vehicle\+Alerts}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_af9373662a655881774662dd580926e50}{set\+Vehicle\+Alerts}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a173ce470308b9f20ae2273d987c6041f}{vehicle\+Alerts}})
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a6f5f7a812156030f15b7e94b2e43a72a}{remarks}} () const
+\item 
+void \mbox{\hyperlink{classCSA_1_1Route_a285384451bf966a13649e38762205026}{set\+Remarks}} (const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&\mbox{\hyperlink{classCSA_1_1Route_a6f5f7a812156030f15b7e94b2e43a72a}{remarks}})
+\item 
+qint64 \mbox{\hyperlink{classCSA_1_1Route_aa23f1a78718f02e17eb409909c6b01b4}{duration}} () const
+\item 
+qint64 \mbox{\hyperlink{classCSA_1_1Route_a8c89a2514e3f0d0f57ccae96291f33f2}{duration\+With\+Delays}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Route_ac137b60b8eb1ca666d842d0c7a1e1f1e}{departure\+Time}} () const
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Route_a8773b1afb576a67ba7a76e010aeca537}{departure\+Delay}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Route_a24964759b1d391a4bb45c7e40daed095}{departure\+Delayed\+Time}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Route_a29727ecadd5b223b2c34dfe79ae4219a}{arrival\+Time}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classCSA_1_1Route_a524f4de8f4eb5dec77acb097ea537d03}{arrival\+Delayed\+Time}} () const
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Route_a02be7800fb68fe82982d71363786550f}{arrival\+Delay}} () const
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Route_ac8e18cd796c135d453e57c1ed0bf4bb9}{transfer\+Count}} () const
+\item 
+qint16 \mbox{\hyperlink{classCSA_1_1Route_a0f42086c6127684392c8942e4e7bfa66}{station\+Count}} () const
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Route_af5293d9548b9b9c5879a23e1882a2f33}{departure\+Platform}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Route_a0a7f2a3cc8b35d55067ceae8645e3f84}{is\+Departure\+Platform\+Normal}} () const
+\item 
+Q\+String \mbox{\hyperlink{classCSA_1_1Route_a90d2e37ca55dda6409cd53daaceae002}{arrival\+Platform}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Route_a8ce702c2ee2b244be18fd72ec9007410}{is\+Arrival\+Platform\+Normal}} () const
+\item 
+\mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ \mbox{\hyperlink{classCSA_1_1Route_a3c17150fb80436b17d1b8874bded6717}{departure\+Station}} () const
+\item 
+\mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ \mbox{\hyperlink{classCSA_1_1Route_aef3a9250c98c6283139f261a268e25a9}{arrival\+Station}} () const
+\item 
+bool \mbox{\hyperlink{classCSA_1_1Route_a5eeb84d448602394e223240ead9a363c}{is\+Partially\+Canceled}} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a9b5e0351e48fff9dd0d96dc2c06ec186}{m\+\_\+legs}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a6cda1eec2815597d04332dc00aa02cb5}{m\+\_\+transfers}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a2cc92adcc76332a90cc74816797bed61}{m\+\_\+trip\+Alerts}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a1212f056c45451fa3df603fa1f69e7f4}{m\+\_\+vehicle\+Alerts}}
+\item 
+Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ \mbox{\hyperlink{classCSA_1_1Route_a5826064e86e085944b25d4deb4087ffe}{m\+\_\+remarks}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCSA_1_1Route_a285d58821dfce5fe134c928cfb72e56e}\label{classCSA_1_1Route_a285d58821dfce5fe134c928cfb72e56e}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!Route@{Route}}
+\index{Route@{Route}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Route\+::\+Route (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$$>$ \&}]{legs,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$$>$ \&}]{transfers,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{trip\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{vehicle\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{remarks,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a9c40376e7b67c123f88b9afba8aad6d6}\label{classCSA_1_1Route_a9c40376e7b67c123f88b9afba8aad6d6}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!Route@{Route}}
+\index{Route@{Route}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+S\+A\+::\+Route\+::\+Route (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{Route\+Leg}} $\ast$$>$ \&}]{legs,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCSA_1_1Route_a02be7800fb68fe82982d71363786550f}\label{classCSA_1_1Route_a02be7800fb68fe82982d71363786550f}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!arrival\+Delay@{arrival\+Delay}}
+\index{arrival\+Delay@{arrival\+Delay}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{arrival\+Delay()}{arrivalDelay()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Route\+::arrival\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a524f4de8f4eb5dec77acb097ea537d03}\label{classCSA_1_1Route_a524f4de8f4eb5dec77acb097ea537d03}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!arrival\+Delayed\+Time@{arrival\+Delayed\+Time}}
+\index{arrival\+Delayed\+Time@{arrival\+Delayed\+Time}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{arrival\+Delayed\+Time()}{arrivalDelayedTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Route\+::arrival\+Delayed\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a90d2e37ca55dda6409cd53daaceae002}\label{classCSA_1_1Route_a90d2e37ca55dda6409cd53daaceae002}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!arrival\+Platform@{arrival\+Platform}}
+\index{arrival\+Platform@{arrival\+Platform}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{arrival\+Platform()}{arrivalPlatform()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Route\+::arrival\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_aef3a9250c98c6283139f261a268e25a9}\label{classCSA_1_1Route_aef3a9250c98c6283139f261a268e25a9}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!arrival\+Station@{arrival\+Station}}
+\index{arrival\+Station@{arrival\+Station}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{arrival\+Station()}{arrivalStation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ C\+S\+A\+::\+Route\+::arrival\+Station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a29727ecadd5b223b2c34dfe79ae4219a}\label{classCSA_1_1Route_a29727ecadd5b223b2c34dfe79ae4219a}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!arrival\+Time@{arrival\+Time}}
+\index{arrival\+Time@{arrival\+Time}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{arrival\+Time()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Route\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a8773b1afb576a67ba7a76e010aeca537}\label{classCSA_1_1Route_a8773b1afb576a67ba7a76e010aeca537}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!departure\+Delay@{departure\+Delay}}
+\index{departure\+Delay@{departure\+Delay}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{departure\+Delay()}{departureDelay()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Route\+::departure\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a24964759b1d391a4bb45c7e40daed095}\label{classCSA_1_1Route_a24964759b1d391a4bb45c7e40daed095}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!departure\+Delayed\+Time@{departure\+Delayed\+Time}}
+\index{departure\+Delayed\+Time@{departure\+Delayed\+Time}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{departure\+Delayed\+Time()}{departureDelayedTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Route\+::departure\+Delayed\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_af5293d9548b9b9c5879a23e1882a2f33}\label{classCSA_1_1Route_af5293d9548b9b9c5879a23e1882a2f33}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!departure\+Platform@{departure\+Platform}}
+\index{departure\+Platform@{departure\+Platform}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{departure\+Platform()}{departurePlatform()}}
+{\footnotesize\ttfamily Q\+String C\+S\+A\+::\+Route\+::departure\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a3c17150fb80436b17d1b8874bded6717}\label{classCSA_1_1Route_a3c17150fb80436b17d1b8874bded6717}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!departure\+Station@{departure\+Station}}
+\index{departure\+Station@{departure\+Station}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{departure\+Station()}{departureStation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ C\+S\+A\+::\+Route\+::departure\+Station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_ac137b60b8eb1ca666d842d0c7a1e1f1e}\label{classCSA_1_1Route_ac137b60b8eb1ca666d842d0c7a1e1f1e}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!departure\+Time@{departure\+Time}}
+\index{departure\+Time@{departure\+Time}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{departure\+Time()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time C\+S\+A\+::\+Route\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_aa23f1a78718f02e17eb409909c6b01b4}\label{classCSA_1_1Route_aa23f1a78718f02e17eb409909c6b01b4}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!duration@{duration}}
+\index{duration@{duration}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{duration()}{duration()}}
+{\footnotesize\ttfamily qint64 C\+S\+A\+::\+Route\+::duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a8c89a2514e3f0d0f57ccae96291f33f2}\label{classCSA_1_1Route_a8c89a2514e3f0d0f57ccae96291f33f2}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!duration\+With\+Delays@{duration\+With\+Delays}}
+\index{duration\+With\+Delays@{duration\+With\+Delays}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{duration\+With\+Delays()}{durationWithDelays()}}
+{\footnotesize\ttfamily qint64 C\+S\+A\+::\+Route\+::duration\+With\+Delays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a8ce702c2ee2b244be18fd72ec9007410}\label{classCSA_1_1Route_a8ce702c2ee2b244be18fd72ec9007410}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!is\+Arrival\+Platform\+Normal@{is\+Arrival\+Platform\+Normal}}
+\index{is\+Arrival\+Platform\+Normal@{is\+Arrival\+Platform\+Normal}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{is\+Arrival\+Platform\+Normal()}{isArrivalPlatformNormal()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Route\+::is\+Arrival\+Platform\+Normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a0a7f2a3cc8b35d55067ceae8645e3f84}\label{classCSA_1_1Route_a0a7f2a3cc8b35d55067ceae8645e3f84}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!is\+Departure\+Platform\+Normal@{is\+Departure\+Platform\+Normal}}
+\index{is\+Departure\+Platform\+Normal@{is\+Departure\+Platform\+Normal}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{is\+Departure\+Platform\+Normal()}{isDeparturePlatformNormal()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Route\+::is\+Departure\+Platform\+Normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a5eeb84d448602394e223240ead9a363c}\label{classCSA_1_1Route_a5eeb84d448602394e223240ead9a363c}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!is\+Partially\+Canceled@{is\+Partially\+Canceled}}
+\index{is\+Partially\+Canceled@{is\+Partially\+Canceled}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{is\+Partially\+Canceled()}{isPartiallyCanceled()}}
+{\footnotesize\ttfamily bool C\+S\+A\+::\+Route\+::is\+Partially\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}\label{classCSA_1_1Route_aad3e30f3e22b3a1b9d800441ce6ca1d4}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!legs@{legs}}
+\index{legs@{legs}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{legs()}{legs()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$ $>$ C\+S\+A\+::\+Route\+::legs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a6ab64667f4573fd2c9cd8c0b6ab88b46}\label{classCSA_1_1Route_a6ab64667f4573fd2c9cd8c0b6ab88b46}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!legs\+Changed@{legs\+Changed}}
+\index{legs\+Changed@{legs\+Changed}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{legs\+Changed}{legsChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::legs\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a6f5f7a812156030f15b7e94b2e43a72a}\label{classCSA_1_1Route_a6f5f7a812156030f15b7e94b2e43a72a}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!remarks@{remarks}}
+\index{remarks@{remarks}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{remarks()}{remarks()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ C\+S\+A\+::\+Route\+::remarks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_ab31ce6bceb5dca29f7f74719e50e07df}\label{classCSA_1_1Route_ab31ce6bceb5dca29f7f74719e50e07df}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!remarks\+Changed@{remarks\+Changed}}
+\index{remarks\+Changed@{remarks\+Changed}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{remarks\+Changed}{remarksChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::remarks\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_acae4554ffa830193e2edbd8936842551}\label{classCSA_1_1Route_acae4554ffa830193e2edbd8936842551}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!set\+Legs@{set\+Legs}}
+\index{set\+Legs@{set\+Legs}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{set\+Legs()}{setLegs()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::set\+Legs (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1RouteLeg}{Route\+Leg}} $\ast$$>$ \&}]{legs }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a285384451bf966a13649e38762205026}\label{classCSA_1_1Route_a285384451bf966a13649e38762205026}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!set\+Remarks@{set\+Remarks}}
+\index{set\+Remarks@{set\+Remarks}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{set\+Remarks()}{setRemarks()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::set\+Remarks (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{remarks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a0977183a554295d3aaabdd3e3aa68ab4}\label{classCSA_1_1Route_a0977183a554295d3aaabdd3e3aa68ab4}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!set\+Transfers@{set\+Transfers}}
+\index{set\+Transfers@{set\+Transfers}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{set\+Transfers()}{setTransfers()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::set\+Transfers (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$$>$ \&}]{transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a0ef9be4b744e679ab9daeb8e39753f8f}\label{classCSA_1_1Route_a0ef9be4b744e679ab9daeb8e39753f8f}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!set\+Trip\+Alerts@{set\+Trip\+Alerts}}
+\index{set\+Trip\+Alerts@{set\+Trip\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{set\+Trip\+Alerts()}{setTripAlerts()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::set\+Trip\+Alerts (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{trip\+Alerts }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Route_af9373662a655881774662dd580926e50}\label{classCSA_1_1Route_af9373662a655881774662dd580926e50}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!set\+Vehicle\+Alerts@{set\+Vehicle\+Alerts}}
+\index{set\+Vehicle\+Alerts@{set\+Vehicle\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{set\+Vehicle\+Alerts()}{setVehicleAlerts()}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::set\+Vehicle\+Alerts (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ \&}]{vehicle\+Alerts }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a0f42086c6127684392c8942e4e7bfa66}\label{classCSA_1_1Route_a0f42086c6127684392c8942e4e7bfa66}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!station\+Count@{station\+Count}}
+\index{station\+Count@{station\+Count}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{station\+Count()}{stationCount()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Route\+::station\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_ac8e18cd796c135d453e57c1ed0bf4bb9}\label{classCSA_1_1Route_ac8e18cd796c135d453e57c1ed0bf4bb9}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!transfer\+Count@{transfer\+Count}}
+\index{transfer\+Count@{transfer\+Count}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{transfer\+Count()}{transferCount()}}
+{\footnotesize\ttfamily qint16 C\+S\+A\+::\+Route\+::transfer\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a4a476195f30a740680bd3b61df7a5540}\label{classCSA_1_1Route_a4a476195f30a740680bd3b61df7a5540}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!transfers@{transfers}}
+\index{transfers@{transfers}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{transfers()}{transfers()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$ $>$ C\+S\+A\+::\+Route\+::transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_adce4cb4749b3f2668efe082f011a2e47}\label{classCSA_1_1Route_adce4cb4749b3f2668efe082f011a2e47}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!transfers\+Changed@{transfers\+Changed}}
+\index{transfers\+Changed@{transfers\+Changed}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{transfers\+Changed}{transfersChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::transfers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a6e5c03d04237cea4167239b201f2d40b}\label{classCSA_1_1Route_a6e5c03d04237cea4167239b201f2d40b}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!trip\+Alerts@{trip\+Alerts}}
+\index{trip\+Alerts@{trip\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{trip\+Alerts()}{tripAlerts()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ C\+S\+A\+::\+Route\+::trip\+Alerts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_afe760a3c1e840dfde35219466fa8c5c3}\label{classCSA_1_1Route_afe760a3c1e840dfde35219466fa8c5c3}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!trip\+Alerts\+Changed@{trip\+Alerts\+Changed}}
+\index{trip\+Alerts\+Changed@{trip\+Alerts\+Changed}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{trip\+Alerts\+Changed}{tripAlertsChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::trip\+Alerts\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a173ce470308b9f20ae2273d987c6041f}\label{classCSA_1_1Route_a173ce470308b9f20ae2273d987c6041f}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!vehicle\+Alerts@{vehicle\+Alerts}}
+\index{vehicle\+Alerts@{vehicle\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{vehicle\+Alerts()}{vehicleAlerts()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$ $>$ C\+S\+A\+::\+Route\+::vehicle\+Alerts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a44e976e85e907dfc3b0704c8ce4db5bf}\label{classCSA_1_1Route_a44e976e85e907dfc3b0704c8ce4db5bf}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!vehicle\+Alerts\+Changed@{vehicle\+Alerts\+Changed}}
+\index{vehicle\+Alerts\+Changed@{vehicle\+Alerts\+Changed}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{vehicle\+Alerts\+Changed}{vehicleAlertsChanged}}
+{\footnotesize\ttfamily void C\+S\+A\+::\+Route\+::vehicle\+Alerts\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classCSA_1_1Route_a9b5e0351e48fff9dd0d96dc2c06ec186}\label{classCSA_1_1Route_a9b5e0351e48fff9dd0d96dc2c06ec186}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!m\+\_\+legs@{m\+\_\+legs}}
+\index{m\+\_\+legs@{m\+\_\+legs}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{m\+\_\+legs}{m\_legs}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1RouteLeg}{C\+S\+A\+::\+Route\+Leg}} $\ast$$>$ C\+S\+A\+::\+Route\+::m\+\_\+legs\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a5826064e86e085944b25d4deb4087ffe}\label{classCSA_1_1Route_a5826064e86e085944b25d4deb4087ffe}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!m\+\_\+remarks@{m\+\_\+remarks}}
+\index{m\+\_\+remarks@{m\+\_\+remarks}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{m\+\_\+remarks}{m\_remarks}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ C\+S\+A\+::\+Route\+::m\+\_\+remarks\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a6cda1eec2815597d04332dc00aa02cb5}\label{classCSA_1_1Route_a6cda1eec2815597d04332dc00aa02cb5}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!m\+\_\+transfers@{m\+\_\+transfers}}
+\index{m\+\_\+transfers@{m\+\_\+transfers}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{m\+\_\+transfers}{m\_transfers}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1Transfer}{C\+S\+A\+::\+Transfer}} $\ast$$>$ C\+S\+A\+::\+Route\+::m\+\_\+transfers\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a2cc92adcc76332a90cc74816797bed61}\label{classCSA_1_1Route_a2cc92adcc76332a90cc74816797bed61}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!m\+\_\+trip\+Alerts@{m\+\_\+trip\+Alerts}}
+\index{m\+\_\+trip\+Alerts@{m\+\_\+trip\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{m\+\_\+trip\+Alerts}{m\_tripAlerts}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ C\+S\+A\+::\+Route\+::m\+\_\+trip\+Alerts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classCSA_1_1Route_a1212f056c45451fa3df603fa1f69e7f4}\label{classCSA_1_1Route_a1212f056c45451fa3df603fa1f69e7f4}} 
+\index{C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}!m\+\_\+vehicle\+Alerts@{m\+\_\+vehicle\+Alerts}}
+\index{m\+\_\+vehicle\+Alerts@{m\+\_\+vehicle\+Alerts}!C\+S\+A\+::\+Route@{C\+S\+A\+::\+Route}}
+\subsubsection{\texorpdfstring{m\+\_\+vehicle\+Alerts}{m\_vehicleAlerts}}
+{\footnotesize\ttfamily Q\+List$<$\mbox{\hyperlink{classCSA_1_1Message}{C\+S\+A\+::\+Message}} $\ast$$>$ C\+S\+A\+::\+Route\+::m\+\_\+vehicle\+Alerts\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csaroute_8h}{csaroute.\+h}}\item 
+src/linkedconnections/csa/\mbox{\hyperlink{csaroute_8cpp}{csaroute.\+cpp}}\end{DoxyCompactItemize}

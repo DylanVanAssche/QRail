@@ -65,7 +65,7 @@ unix {
     INSTALLS += target copy_lib_headers
 }
 
-# Print out information
+# Print out configuration information
 message(=== QRail configuration ===)
 message(Qt version: $$[QT_VERSION])
 message(QRail version: $$VERSION)

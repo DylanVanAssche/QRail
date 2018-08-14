@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csastationfactory.h"
+#include "../include/csa/csastationfactory.h"
 CSA::StationFactory* CSA::StationFactory::m_instance = nullptr;
 
 /**

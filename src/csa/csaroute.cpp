@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csaroute.h"
+#include "../include/csa/csaroute.h"
 
 /**
  * @file csaroute.cpp

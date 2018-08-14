@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csavehicle.h"
+#include "../include/csa/csavehicle.h"
 
 /**
  * @file csavehicle.cpp

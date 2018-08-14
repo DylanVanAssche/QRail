@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csatransfer.h"
+#include "../include/csa/csatransfer.h"
 
 /**
  * @file csatransfer.cpp

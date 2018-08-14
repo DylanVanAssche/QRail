@@ -17,70 +17,51 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#ifndef CSAROUTELEG_H
-#define CSAROUTELEG_H
+#ifndef CSASTATIONSTOPPROFILE_H
+#define CSASTATIONSTOPPROFILE_H
 
 #include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QMetaType>
-#include "csaroutelegend.h"
-#include "csavehicle.h"
-#include "csavehiclestop.h"
-#include "csanullstation.h"
+#include <QtCore/QDateTime>
+#include "../include/fragments/fragmentsfragment.h"
 
 namespace CSA {
-class RouteLeg : public QObject
+class StationStopProfile : public QObject
 {
     Q_OBJECT
 public:
-    enum class Type
-    {
-        WALKING,
-        BICYCLE,
-        BUS,
-        TRAM,
-        METRO,
-        BOAT,
-        TAXI,
-        TRAIN
-    };
-    explicit RouteLeg(
-            const CSA::RouteLeg::Type &type,
-            CSA::Vehicle *vehicleInformation,
-            CSA::RouteLegEnd *departure,
-            CSA::RouteLegEnd *arrival,
+    explicit StationStopProfile(
+            const QDateTime &departureTime,
+            const QDateTime &arrivalTime,
+            Fragments::Fragment *departureConnection,
+            Fragments::Fragment *arrivalConnection,
+            const qint16 transfers,
             QObject *parent = nullptr
             );
-    CSA::RouteLeg::Type type() const;
-    void setType(const CSA::RouteLeg::Type &type);
-    CSA::Vehicle *vehicleInformation() const;
-    void setVehicleInformation(CSA::Vehicle *vehicleInformation);
-    QList<CSA::VehicleStop *> intermediaryStops() const;
-    void setIntermediaryStops(const QList<CSA::VehicleStop *> &intermediaryStops);
-    CSA::RouteLegEnd *departure() const;
-    void setDeparture(CSA::RouteLegEnd *departure);
-    CSA::RouteLegEnd *arrival() const;
-    void setArrival(CSA::RouteLegEnd *arrival);
-    CSA::Station *station() const;
+    QDateTime departureTime() const;
+    void setDepartureTime(const QDateTime &departureTime);
+    QDateTime arrivalTime() const;
+    void setArrivalTime(const QDateTime &arrivalTime);
+    Fragments::Fragment *departureConnection() const;
+    void setDepartureConnection(Fragments::Fragment *departureConnection);
+    Fragments::Fragment *arrivalConnection() const;
+    void setArrivalConnection(Fragments::Fragment *arrivalConnection);
+    qint16 transfers() const;
+    void setTransfers(const qint16 &transfers);
 
 signals:
-    void typeChanged();
-    void vehicleInformationChanged();
-    void intermediaryStopsChanged();
-    void stopsChanged();
-    void departureChanged();
-    void arrivalChanged();
-    void stationChanged();
+    void departureTimeChanged();
+    void arrivalTimeChanged();
+    void departureConnectionChanged();
+    void arrivalConnectionChanged();
+    void transfersChanged();
 
 private:
-    CSA::RouteLeg::Type m_type;
-    CSA::Vehicle *m_vehicleInformation;
-    QList<CSA::VehicleStop *> m_intermediaryStops;
-    CSA::RouteLegEnd *m_departure;
-    CSA::RouteLegEnd *m_arrival;
-
-    Q_ENUM(Type)
+    QDateTime m_departureTime; // TODO: really needed? fetch them from fragments to reduce memory footprint?
+    QDateTime m_arrivalTime;
+    Fragments::Fragment *m_departureConnection;
+    Fragments::Fragment *m_arrivalConnection;
+    qint16 m_transfers;
 };
 }
 
-#endif // CSAROUTELEG_H
+#endif // CSASTATIONSTOPPROFILE_H

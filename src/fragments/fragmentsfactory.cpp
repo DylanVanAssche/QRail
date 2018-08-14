@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "fragmentsfactory.h"
+#include "../include/fragments/fragmentsfactory.h"
 Fragments::Factory* Fragments::Factory::m_instance = nullptr;
 
 /**

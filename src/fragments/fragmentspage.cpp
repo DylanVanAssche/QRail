@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "fragmentspage.h"
+#include "../include/fragments/fragmentspage.h"
 
 /**
  * @file fragmentspage.cpp

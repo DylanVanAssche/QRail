@@ -17,76 +17,69 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#ifndef CSAROUTELEGEND_H
-#define CSAROUTELEGEND_H
+#ifndef CSATRANSFER_H
+#define CSATRANSFER_H
 
-#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
-#include <QtCore/QUrl>
-#include <QtCore/QString>
-#include <QtCore/QDateTime>
-#include "csastation.h"
-#include "csavehicle.h"
+#include <QtCore/QMetaType>
+#include <QtCore/QDebug>
+#include "../csa/csarouteleg.h"
+#include "../csa/csaroutelegend.h"
 
 namespace CSA {
-class RouteLegEnd : public QObject
+class Transfer : public QObject
 {
     Q_OBJECT
 public:
-    explicit RouteLegEnd(
-            const QUrl &uri,
-            const QDateTime &time,
-            CSA::Station *station,
-            const QString &platform,
-            const bool &isNormalPlatform,
-            const qint16 &delay,
-            const bool &isCanceled,
-            const bool &isPassed,
-            const CSA::Vehicle::OccupancyLevel &occupancyLevel,
+    enum class Type
+    {
+        ARRIVAL,
+        DEPARTURE,
+        TRANSFER,
+        INVALID
+    };
+    explicit Transfer(
+            CSA::RouteLeg *departureLeg = nullptr,
+            CSA::RouteLeg *arrivalLeg = nullptr,
             QObject *parent = nullptr
             );
+    CSA::RouteLeg *departureLeg() const;
+    void setDepartureLeg(CSA::RouteLeg *departureLeg);
+    CSA::RouteLeg *arrivalLeg() const;
+    void setArrivalLeg(CSA::RouteLeg *arrivalLeg);
+    CSA::RouteLegEnd *departure() const;
+    void setDeparture(CSA::RouteLegEnd *departure);
+    CSA::RouteLegEnd *arrival() const;
+    void setArrival(CSA::RouteLegEnd *arrival);
+    CSA::Transfer::Type type() const;
+    void setType(const CSA::Transfer::Type &type);
     QUrl uri() const;
-    void setUri(const QUrl &uri);
-    QDateTime time() const;
-    void setTime(const QDateTime &time);
     CSA::Station *station() const;
-    void setStation(CSA::Station *station);
-    QString platform() const;
-    void setPlatform(const QString &platform);
-    bool isNormalPlatform() const;
-    void setIsNormalPlatform(bool isNormalPlatform);
+    QDateTime time() const;
     qint16 delay() const;
-    void setDelay(const qint16 &delay);
+    QDateTime delayedTime() const;
+    QString platform() const;
     bool isCanceled() const;
-    void setIsCanceled(bool isCanceled);
+    bool isNormalPlatform() const;
     bool isPassed() const;
-    void setIsPassed(bool isPassed);
     CSA::Vehicle::OccupancyLevel occupancyLevel() const;
-    void setOccupancyLevel(const CSA::Vehicle::OccupancyLevel &occupancyLevel);
 
 signals:
-    void uriChanged();
-    void timeChanged();
-    void stationChanged();
-    void platformChanged();
-    void isNormalPlatformChanged();
-    void delayChanged();
-    void isCanceledChanged();
-    void isPassedChanged();
-    void occupancyLevelChanged();
-    // connect to signals of the underlying things depending on the type!
+    void departureLegChanged();
+    void arrivalLegChanged();
+    void departureChanged();
+    void arrivalChanged();
+    void typeChanged();
 
 private:
-    QUrl m_uri;
-    QDateTime m_time;
-    CSA::Station *m_station;
-    QString m_platform;
-    bool m_isNormalPlatform;
-    qint16 m_delay;
-    bool m_isCanceled;
-    bool m_isPassed;
-    CSA::Vehicle::OccupancyLevel m_occupancyLevel;
+    CSA::RouteLeg *m_departureLeg;
+    CSA::RouteLeg *m_arrivalLeg;
+    CSA::RouteLegEnd *m_departure;
+    CSA::RouteLegEnd *m_arrival;
+    CSA::Transfer::Type m_type;
+
+    Q_ENUM(Type)
 };
 }
 
-#endif // CSAROUTELEGEND_H
+#endif // CSATRANSFER_H

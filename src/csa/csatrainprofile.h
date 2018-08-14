@@ -22,7 +22,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
-#include "../fragments/fragmentsfragment.h"
+#include "../include/fragments/fragmentsfragment.h"
 
 namespace CSA {
 class TrainProfile : public QObject

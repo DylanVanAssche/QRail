@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csastation.h"
+#include "../include/csa/csastation.h"
 
 /**
  * @file csastation.cpp

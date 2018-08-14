@@ -22,7 +22,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
-#include "csarouteleg.h"
+#include "../csa/csarouteleg.h"
 #include "csatransfer.h"
 #include "csamessage.h"
 

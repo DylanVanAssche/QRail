@@ -32,11 +32,11 @@
 #include <QtConcurrent/QtConcurrent>
 #include <algorithm> // C++ header needed for std:sort function
 #include "../fragments/fragmentsfactory.h"
-#include "csastationstopprofile.h"
-#include "csatrainprofile.h"
+#include "../csa/csastationstopprofile.h"
+#include "../csa/csatrainprofile.h"
 #include "csaroute.h"
-#include "csarouteleg.h"
-#include "csaroutelegend.h"
+#include "../csa/csarouteleg.h"
+#include "../csa/csaroutelegend.h"
 #include "csatransfer.h"
 #include "csamessage.h"
 #include "csastation.h"

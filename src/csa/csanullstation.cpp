@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csanullstation.h"
+#include "../include/csa/csanullstation.h"
 CSA::NullStation* CSA::NullStation::m_instance = nullptr;
 
 /**

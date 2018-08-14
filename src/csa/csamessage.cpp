@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csamessage.h"
+#include "../include/csa/csamessage.h"
 
 /**
  * @file csamessage.cpp

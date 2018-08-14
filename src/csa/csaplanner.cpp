@@ -17,7 +17,7 @@
  *   License along with BeRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csaplanner.h"
+#include "../include/csa/csaplanner.h"
 CSA::Planner* CSA::Planner::m_instance = nullptr;
 
 /**

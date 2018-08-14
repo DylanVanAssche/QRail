@@ -49,17 +49,17 @@ SOURCES += \
     $$PWD/qrail-tests.cpp \
     $$PWD/database/databasemanagertest.cpp \
     $$PWD/network/networkmanagertest.cpp \
-    $$PWD/fragments/fragmentsfragment.cpp \
-    $$PWD/fragments/fragmentspage.cpp \
-    $$PWD/fragments/fragmentsfactory.cpp \
+    $$PWD/fragments/fragmentsfragmenttest.cpp \
+    $$PWD/fragments/fragmentspagetest.cpp \
+    $$PWD/fragments/fragmentsfactorytest.cpp \
     $$PWD/csa/csaplannertest.cpp
 
 HEADERS += \
     $$PWD/database/databasemanagertest.h \
     $$PWD/network/networkmanagertest.h \
-    $$PWD/fragments/fragmentsfragment.h \
-    $$PWD/fragments/fragmentspage.h \
-    $$PWD/fragments/fragmentsfactory.h \
+    $$PWD/fragments/fragmentsfragmenttest.h \
+    $$PWD/fragments/fragmentspagetest.h \
+    $$PWD/fragments/fragmentsfactorytest.h \
     $$PWD/csa/csaplannertest.h
 
 # Print out configuration information

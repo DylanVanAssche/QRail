@@ -1,20 +1,27 @@
-# NOTICE:
 #
-# Application name defined in TARGET has a corresponding QML filename.
-# If name defined in TARGET is changed, the following needs to be done
-# to match new name:
-#   - corresponding QML filename must be changed
-#   - desktop icon filename must be changed
-#   - desktop filename must be changed
-#   - icon definition filename in desktop file must be changed
-#   - translation filenames have to be changed
+#   This file is part of QRail.
+#
+#   QRail is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   QRail is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+#
 
-# The name of your application
 TARGET = qrail-tests
 
+# QMake config
 CONFIG += sailfishapp \
         c++11
 
+# Qt modules
 QT += core \
     network \
     positioning \
@@ -22,6 +29,7 @@ QT += core \
     sql \
     testlib
 
+# QRail library build location
 CONFIG(debug, debug|release) {
     QRAIL_LOCATION = $$PWD/../build/debug
 }
@@ -30,7 +38,7 @@ else {
 }
 LIBS += $$QRAIL_LOCATION/libqrail.a
 
-## Header include path of the QRail library
+## Headers include path of the QRail library
 INCLUDEPATH += $$PWD/../src/include \
             $$PWD/../qtcsv/include
 
@@ -51,11 +59,9 @@ HEADERS += \
     src/csa/csaplannertest.h
 
 DISTFILES += \
-    rpm/qrail-tests.changes \
     rpm/qrail-tests.spec \
     qrail-tests.desktop
 
+# Due a bug in the spec file, these lines can't be removed
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
-
-# Due a bug in the spec file, this line can't be removed
 CONFIG += sailfishapp_i18n

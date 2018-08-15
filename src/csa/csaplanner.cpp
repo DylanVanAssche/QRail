@@ -595,7 +595,7 @@ void CSA::Planner::planPage(Fragments::Page *page)
                                 true,
                                 profile->departureConnection()->departureDelay(),
                                 false,
-                                profile->departureConnection()->departureDelayedTime() < QDateTime::currentDateTime(),
+                                profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
                                 CSA::Vehicle::OccupancyLevel::UNSUPPORTED
                                 );
                     CSA::RouteLegEnd *arrivalLeg = new CSA::RouteLegEnd(
@@ -606,7 +606,7 @@ void CSA::Planner::planPage(Fragments::Page *page)
                                 true,
                                 profile->arrivalConnection()->departureDelay(),
                                 false,
-                                profile->arrivalConnection()->arrivalDelayedTime() < QDateTime::currentDateTime(),
+                                profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
                                 CSA::Vehicle::OccupancyLevel::UNSUPPORTED
                                 );
                     // Create vehicle information
@@ -641,7 +641,7 @@ void CSA::Planner::planPage(Fragments::Page *page)
                             true,
                             profile->departureConnection()->departureDelay(),
                             false,
-                            profile->departureConnection()->departureDelayedTime() < QDateTime::currentDateTime(),
+                            profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
                             CSA::Vehicle::OccupancyLevel::UNSUPPORTED
                             );
 
@@ -653,7 +653,7 @@ void CSA::Planner::planPage(Fragments::Page *page)
                             true,
                             profile->arrivalConnection()->departureDelay(),
                             false,
-                            profile->arrivalConnection()->arrivalDelayedTime() < QDateTime::currentDateTime(),
+                            profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
                             Vehicle::OccupancyLevel::UNSUPPORTED
                             );
 

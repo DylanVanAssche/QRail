@@ -59,9 +59,7 @@ public:
     qint64 durationWithDelays() const;
     QDateTime departureTime() const;
     qint16 departureDelay() const;
-    QDateTime departureDelayedTime() const;
     QDateTime arrivalTime() const;
-    QDateTime arrivalDelayedTime()const;
     qint16 arrivalDelay() const;
     qint16 transferCount() const;
     qint16 stationCount() const;

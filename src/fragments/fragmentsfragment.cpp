@@ -314,36 +314,6 @@ void Fragments::Fragment::setArrivalDelay(const qint16 &arrivalDelay)
 /**
  * @file fragmentsfragment.cpp
  * @author Dylan Van Assche
- * @date 30 Jul 2018
- * @brief Gets the delayed departure time of the linked connection fragment
- * @return const QDateTime departureDelayedTime
- * @package Fragments
- * @public
- * Retrieves the delayed departure time of the linked connection fragment and returns it.
- */
-QDateTime Fragments::Fragment::departureDelayedTime() const
-{
-    return (this->departureTime().addSecs(this->departureDelay()));
-}
-
-/**
- * @file fragmentsfragment.cpp
- * @author Dylan Van Assche
- * @date 30 Jul 2018
- * @brief Gets the delayed arrival time of the linked connection fragment
- * @return const QDateTime arrivalDelayedTime
- * @package Fragments
- * @public
- * Retrieves the delayed arrival time of the linked connection fragment and returns it.
- */
-QDateTime Fragments::Fragment::arrivalDelayedTime() const
-{
-    return (this->arrivalTime().addSecs(this->arrivalDelay()));
-}
-
-/**
- * @file fragmentsfragment.cpp
- * @author Dylan Van Assche
  * @date 21 Jul 2018
  * @brief Gets the trip URI of the linked connection fragment
  * @return const QUrl tripURI

@@ -59,8 +59,6 @@ public:
     void setDepartureDelay(const qint16 &departureDelay);
     qint16 arrivalDelay() const;
     void setArrivalDelay(const qint16 &arrivalDelay);
-    QDateTime departureDelayedTime() const;
-    QDateTime arrivalDelayedTime() const;
     QUrl tripURI() const;
     void setTripURI(const QUrl &tripURI);
     QUrl routeURI() const;

@@ -275,25 +275,11 @@ qint64 CSA::Route::duration() const
  * @file csaroute.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the duration with delays
- * @return const qint64 durationWithDelays
- * @package CSA
- * @public
- * Gets the duration with the delays included of the route and returns it.
- */
-qint64 CSA::Route::durationWithDelays() const
-{
-    return this->departureDelayedTime().secsTo(this->arrivalDelayedTime());
-}
-
-/**
- * @file csaroute.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
  * @brief Gets the departure time
  * @return const QDateTime departureTime
  * @package CSA
  * @public
+ * @note Delays are already included in this timestamp.
  * Gets the departure time of the route and returns it.
  */
 QDateTime CSA::Route::departureTime() const
@@ -320,25 +306,11 @@ qint16 CSA::Route::departureDelay() const
  * @file csaroute.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the departure time with delays
- * @return const QDateTime departureDelayedTime
- * @package CSA
- * @public
- * Gets the departure time with the delays included of the route and returns it.
- */
-QDateTime CSA::Route::departureDelayedTime() const
-{
-    return this->departureTime().addSecs(this->departureDelay());
-}
-
-/**
- * @file csaroute.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
  * @brief Gets the arrival time
  * @return const QDateTime arrivalTime
  * @package CSA
  * @public
+ * @note Delays are already included in this timestamp.
  * Gets the arrival time of the route and returns it.
  */
 QDateTime CSA::Route::arrivalTime() const
@@ -359,21 +331,6 @@ QDateTime CSA::Route::arrivalTime() const
 qint16 CSA::Route::arrivalDelay() const
 {
     return this->arrivalStation()->arrival()->delay();
-}
-
-/**
- * @file csaroute.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the arrival time with delays
- * @return const QDateTime arrivalDelayedTime
- * @package CSA
- * @public
- * Gets the arrival time with the delays included of the route and returns it.
- */
-QDateTime CSA::Route::arrivalDelayedTime() const
-{
-    return this->arrivalTime().addSecs(this->arrivalDelay());
 }
 
 /**

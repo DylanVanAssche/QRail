@@ -57,5 +57,5 @@ DISTFILES += \
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
-# Don't remove this line, a bug in the Sailfish OS build engine corrupts the build if this line is removed!
+# Due a bug in the spec file, this line can't be removed
 CONFIG += sailfishapp_i18n

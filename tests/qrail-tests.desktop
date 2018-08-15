@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=deploy-test
-Exec=deploy-test
-Name=deploy-test
+Icon=qrail-tests
+Exec=qrail-tests
+Name=QRail tests

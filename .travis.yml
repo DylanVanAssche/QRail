@@ -1,0 +1,23 @@
+sudo: required
+
+language: cpp
+
+services:
+  - docker
+
+before_install:
+  - docker pull coderus/sailfishos-platform-sdk:2.2.0.29        
+  - docker run -it -d --name build-engine coderus/sailfishos-platform-sdk /bin/bash
+  - docker exec build-engine sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-install -R zypper --non-interactive install git qt5-qtpositioning-devel qt5-qtsql-devel qt5-qtconcurrent-devel qt5-qttest-devel
+  - docker exec build-engine ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts  
+  - docker exec build-engine git clone --recursive https://github.com/DylanVanAssche/QRail /home/nemo/QRail
+
+script:
+  - docker exec build-engine bash -c "cd /home/nemo
+    && cd QRail 
+    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build qmake 
+    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build make -j2 
+    && cd tests 
+    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build qmake 
+    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build make -j2"
+

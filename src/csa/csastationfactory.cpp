@@ -1,21 +1,19 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "../include/csa/csastationfactory.h"
 CSA::StationFactory* CSA::StationFactory::m_instance = nullptr;
@@ -324,7 +322,7 @@ CSA::Station *CSA::StationFactory::getStationByURI(const QUrl &uri)
  * Init the database for stations by reading the CSV files from iRail using QtCSV.
  */
 bool CSA::StationFactory::initDatabase()
-{
+{   
     // On instantation, create the tables in the database if they don't exist yet.
     QSqlQuery query(this->db()->database());
 
@@ -410,9 +408,9 @@ bool CSA::StationFactory::initDatabase()
     this->db()->startTransaction();
 
     // Read CSV files using the QtCSV library
-    QList<QStringList> stationsCSV = QtCSV::Reader::readToList("/home/nemo/.local/share/harbour-berail/csv/stations.csv");
-    QList<QStringList> facilitiesCSV = QtCSV::Reader::readToList("/home/nemo/.local/share/harbour-berail/csv/facilities.csv");
-    QList<QStringList> stopsCSV = QtCSV::Reader::readToList("/home/nemo/.local/share/harbour-berail/csv/stops.csv");
+    QList<QStringList> stationsCSV = QtCSV::Reader::readToList(":/database/stations/stations.csv");
+    QList<QStringList> facilitiesCSV = QtCSV::Reader::readToList(":/database/stations/facilities.csv");
+    QList<QStringList> stopsCSV = QtCSV::Reader::readToList(":/database/stations/stops.csv");
 
     // Synchronise all QFutures at the end of the transaction
     QFutureSynchronizer<bool> synchronizer;

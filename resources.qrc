@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/database">
+        <file>stations/facilities.csv</file>
+        <file>stations/stations.csv</file>
+        <file>stations/stops.csv</file>
+    </qresource>
+</RCC>

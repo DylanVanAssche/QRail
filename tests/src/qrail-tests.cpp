@@ -18,6 +18,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtTest/QtTest>
 
+#include "qrail.h"
 #include "network/networkmanagertest.h"
 #include "database/databasemanagertest.h"
 #include "fragments/fragmentsfragmenttest.h"
@@ -32,6 +33,9 @@ int main(int argc, char *argv[])
 {
     // Allow QEventLoops for QSignalSpy
     QCoreApplication app(argc, argv);
+
+    // Init the QRail library
+    initQRail();
 
     // Create test instances
     int networkManagerResult = -1;

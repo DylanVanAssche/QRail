@@ -34,44 +34,52 @@ int main(int argc, char *argv[])
     // Allow QEventLoops for QSignalSpy
     QCoreApplication app(argc, argv);
 
-    // Init the QRail library
-    initQRail();
-
-    // Create test instances
-    int networkManagerResult = -1;
-    int dbManagerResult = -1;
-    int lcFragmentResult = -1;
-    int lcPageResult = -1;
-    int lcFactoryResult = -1;
-    int csaPlannerResult = -1;
-    Network::ManagerTest testSuiteNetworkManager;
-    Database::ManagerTest testSuiteDBManager;
-    Fragments::FragmentTest testSuiteLCFragment;
-    Fragments::PageTest testSuiteLCPage;
-    Fragments::FactoryTest testSuiteLCFactory;
-    CSA::PlannerTest testSuiteCSAPlanner;
-
-    // Run unit tests
-    networkManagerResult = QTest::qExec(&testSuiteNetworkManager, argc, argv);
-    dbManagerResult = QTest::qExec(&testSuiteDBManager, argc, argv);
-    lcFragmentResult = QTest::qExec(&testSuiteLCFragment, argc, argv);
-    lcPageResult = QTest::qExec(&testSuiteLCPage, argc, argv);
-    lcFactoryResult = QTest::qExec(&testSuiteLCFactory, argc, argv);
-
     /*
-     * Wait until all the unit tests are completed to avoid network replies
-     * from httpbin.org in the CSA::Planner. If you remove this statement,
-     * wrong HTTP replies will land in the CSA::Planner due the fact that the
-     * Network::Manager is a singleton instance! The internal JSON validation
-     * for the Linked Connections fragment will fail!
-     *
-     * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
+     * This workaround will execute every test as soon as the event loop is started.
+     * NOTE: Requires C++11 support
+     * INFO: https://forum.qt.io/topic/36208/solved-console-application-does-not-exit/7
      */
-    QTest::qWait(WAIT_TIME);
+    QTimer::singleShot(0, [](){
+        // Init the QRail library
+        initQRail();
 
-    // Run integration tests
-    csaPlannerResult = QTest::qExec(&testSuiteCSAPlanner, argc, argv);
+        // Create test instances
+        int networkManagerResult = -1;
+        int dbManagerResult = -1;
+        int lcFragmentResult = -1;
+        int lcPageResult = -1;
+        int lcFactoryResult = -1;
+        int csaPlannerResult = -1;
+        Network::ManagerTest testSuiteNetworkManager;
+        Database::ManagerTest testSuiteDBManager;
+        Fragments::FragmentTest testSuiteLCFragment;
+        Fragments::PageTest testSuiteLCPage;
+        Fragments::FactoryTest testSuiteLCFactory;
+        CSA::PlannerTest testSuiteCSAPlanner;
 
-    // Return the status code of every test for CI/CD
-    return networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | lcFactoryResult | csaPlannerResult | app.exec();
+        // Run unit tests
+        networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
+        lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
+        lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
+        lcFactoryResult = QTest::qExec(&testSuiteLCFactory, 0, nullptr);
+
+        /*
+         * Wait until all the unit tests are completed to avoid network replies
+         * from httpbin.org in the CSA::Planner. If you remove this statement,
+         * wrong HTTP replies will land in the CSA::Planner due the fact that the
+         * Network::Manager is a singleton instance! The internal JSON validation
+         * for the Linked Connections fragment will fail!
+         *
+         * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
+         */
+        QTest::qWait(WAIT_TIME);
+
+        // Run integration tests
+        csaPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
+
+        // Return the status code of every test for CI/CD
+        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | lcFactoryResult | csaPlannerResult);
+    });
+    return app.exec();
 }

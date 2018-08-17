@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include "databasemanagertest.h"
-#define DB_PATH "/home/nemo/.local/share/harbour-berail/db/lc-tests.db"
+#define DB_PATH "/home/nemo/tests.db"
 
 void Database::ManagerTest::initDatabaseManager()
 {

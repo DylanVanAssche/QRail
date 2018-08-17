@@ -36,7 +36,8 @@
 #include "../../qtcsv/include/qtcsv/reader.h"
 #include "../../qtcsv/include/qtcsv/writer.h"
 
-#define DB_PATH "/home/nemo/.local/share/harbour-berail/db/stations.db"
+// TO DO: proper path for the DB
+#define DB_PATH "/home/nemo/stations.db"
 
 namespace CSA {
 class QRAIL_SHARED_EXPORT StationFactory : public QObject

@@ -42,7 +42,9 @@ SOURCES += \
     $$PWD/src/csa/csaroutelegend.cpp \
     $$PWD/src/csa/csastationstopprofile.cpp \
     $$PWD/src/csa/csatrainprofile.cpp \
-    $$PWD/src/qrail.cpp
+    $$PWD/src/qrail.cpp \
+    $$PWD/src/liveboard/liveboardfactory.cpp \
+    $$PWD/src/liveboard/liveboardboard.cpp
 
 HEADERS += \
     $$PWD/src/include/qrail.h \
@@ -57,14 +59,16 @@ HEADERS += \
     $$PWD/src/include/csa/csastationfactory.h \
     $$PWD/src/include/csa/csatransfer.h \
     $$PWD/src/include/csa/csamessage.h \
-    $$PWD/src/csa/csarouteleg.h \
-    $$PWD/src/csa/csaroutelegend.h \
-    $$PWD/src/csa/csastationstopprofile.h \
-    $$PWD/src/csa/csatrainprofile.h \
+    $$PWD/src/include/csa/csarouteleg.h \
+    $$PWD/src/include/csa/csaroutelegend.h \
+    $$PWD/src/include/csa/csastationstopprofile.h \
+    $$PWD/src/include/csa/csatrainprofile.h \
     $$PWD/src/include/fragments/fragmentsfragment.h \
     $$PWD/src/include/fragments/fragmentspage.h \
     $$PWD/src/include/fragments/fragmentsfactory.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
+    $$PWD/src/include/liveboard/liveboardfactory.h \
+    $$PWD/src/include/liveboard/liveboardboard.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

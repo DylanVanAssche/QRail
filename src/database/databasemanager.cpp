@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/database/databasemanager.h"
+#include "database/databasemanager.h"
 
 Database::Manager* Database::Manager::m_instance = nullptr;
 
@@ -34,11 +34,8 @@ Database::Manager* Database::Manager::m_instance = nullptr;
  * The Manager facade makes database access in Qt abstract from the underlying database (SQLite, MySQL, ORACLE, ...).
  * Any errors during initialisation of the database are catched and logged as CRITICAL.
  */
-Database::Manager::Manager(const QString &path, QObject *parent)
+Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
-
     if(QSqlDatabase::isDriverAvailable(DRIVER)) {
         this->setDatabase(QSqlDatabase::addDatabase(DRIVER));
         this->database().setDatabaseName(path);
@@ -65,12 +62,12 @@ Database::Manager::Manager(const QString &path, QObject *parent)
  * @public
  * Constructs a Database::Manager instance if none exists and returns it.
  */
-Database::Manager *Database::Manager::getInstance(const QString &path, QObject *parent)
+Database::Manager *Database::Manager::getInstance(const QString &path)
 {
     // NICE-TO-HAVE: Allow access to multiple databases by checking the path of the database
     if(m_instance == nullptr) {
         qDebug() << "Creating new Database::Manager";
-        m_instance = new Manager(path, parent);
+        m_instance = new Manager(path);
     }
     return m_instance;
 }

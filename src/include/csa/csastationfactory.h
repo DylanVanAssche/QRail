@@ -44,7 +44,7 @@ class QRAIL_SHARED_EXPORT StationFactory : public QObject
 {
     Q_OBJECT
 public:
-    static StationFactory *getInstance(QObject *parent = nullptr);
+    static StationFactory *getInstance();
     Station *getStationByURI(const QUrl &uri);
 
 private:
@@ -60,7 +60,7 @@ private:
     Database::Manager *db() const;
     void setDb(Database::Manager *db);
     static CSA::StationFactory *m_instance;
-    explicit StationFactory(QObject *parent);
+    explicit StationFactory(QObject *parent = nullptr);
 };
 }
 

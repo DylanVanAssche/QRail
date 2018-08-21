@@ -32,7 +32,7 @@ void CSA::PlannerTest::runCSAPlannerTest()
      * LC2IRail equivalent: https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
      */
 
-    QBENCHMARK_ONCE {
+    QBENCHMARK {
         planner->getConnections(
                     QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
                     QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge

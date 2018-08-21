@@ -25,7 +25,7 @@
 #include <QtTest/QSignalSpy>
 #include "network/networkmanager.h"
 
-#define SIGNAL_WAIT_TIME 3000
+#define NETWORK_WAIT_TIME 3000
 
 namespace Network {
 class ManagerTest : public QObject

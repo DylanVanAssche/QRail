@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csatransfer.h"
+#include "csa/csatransfer.h"
 
 /**
  * @file csatransfer.cpp
@@ -33,9 +33,6 @@
  */
 CSA::Transfer::Transfer(CSA::RouteLeg *departureLeg, CSA::RouteLeg *arrivalLeg, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_departureLeg = departureLeg;
     m_arrivalLeg = arrivalLeg;

@@ -38,7 +38,7 @@ class Factory: public QObject
 {
     Q_OBJECT
 public:
-    static Fragments::Factory *getInstance(QObject *parent = nullptr);
+    static Fragments::Factory *getInstance();
     void getPage(const QUrl &uri);
     void getPage(const QDateTime &departureTime);
 
@@ -56,7 +56,7 @@ private:
     void getPageByURIFromNetworkManager(const QUrl &uri);
     Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &connection);
     bool validateData(const QJsonObject &data, const QStringList &properties);
-    explicit Factory(QObject *parent);
+    explicit Factory(QObject *parent = nullptr);
     Network::Manager *http() const;
     void setHttp(Network::Manager *http);
 };

@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csamessage.h"
+#include "csa/csamessage.h"
 
 /**
  * @file csamessage.cpp
@@ -37,9 +37,6 @@
  */
 CSA::Message::Message(const QString &header, const QString &description, const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_header = header;
     m_description = description;
@@ -61,11 +58,8 @@ CSA::Message::Message(const QString &header, const QString &description, const Q
  * a disturbance, remark or anything else that might be
  * usefull for the user.
  */
-CSA::Message::Message(const QString &header, const QString &description, QObject *parent)
+CSA::Message::Message(const QString &header, const QString &description, QObject *parent): QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_header = header;
     m_description = description;

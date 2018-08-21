@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csavehiclestop.h"
+#include "csa/csavehiclestop.h"
 
 /**
  * @file csavehiclestop.cpp
@@ -31,8 +31,25 @@
  */
 CSA::VehicleStop::VehicleStop(QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
+
+}
+
+CSA::VehicleStop::VehicleStop(CSA::Vehicle *vehicleInformation, CSA::Station *station, const QString &platform, const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime, const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime, const qint16 &arrivalDelay, const bool &isArrivalCanceled, const CSA::Vehicle::OccupancyLevel &occupancyLevel, const CSA::VehicleStop::Type &type, QObject *parent): QObject(parent)
+{
+    // Use private members to avoid signal firing on construction
+    m_vehicleInformation = vehicleInformation;
+    m_station = station;
+    m_platform = platform;
+    m_isPlatformNormal = isPlatformNormal;
+    m_hasLeft = hasLeft;
+    m_departureTime = departureTime;
+    m_departureDelay = departureDelay;
+    m_isDepartureCanceled = isDepartureCanceled;
+    m_arrivalTime = arrivalTime;
+    m_arrivalDelay = arrivalDelay;
+    m_isArrivalCanceled = isArrivalCanceled;
+    m_occupancyLevel = occupancyLevel;
+    m_type = type;
 }
 
 // Getters & Setters
@@ -386,38 +403,6 @@ void CSA::VehicleStop::setIsArrivalCanceled(const bool &isArrivalCanceled)
 {
     m_isArrivalCanceled = isArrivalCanceled;
     emit this->isArrivalCanceledChanged();
-}
-
-/**
- * @file csavehiclestop.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the departure URI
- * @return const QUrl departureURI
- * @package CSA
- * @public
- * Gets the departureURI and returns it.
- */
-QUrl CSA::VehicleStop::departureURI() const
-{
-    return m_departureURI;
-}
-
-/**
- * @file csavehiclestop.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the departure URI
- * @param const QUrl &departureURI
- * @package CSA
- * @public
- * Sets the departure URI for this stop to the given QUrl &departureURI.
- * Emits the departureURIChanged signal.
- */
-void CSA::VehicleStop::setDepartureURI(const QUrl &departureURI)
-{
-    m_departureURI = departureURI;
-    emit this->departureURIChanged();
 }
 
 /**

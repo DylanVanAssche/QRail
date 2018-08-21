@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/fragments/fragmentsfragment.h"
+#include "fragments/fragmentsfragment.h"
 
 /**
  * @file fragmentsfragment.cpp
@@ -32,8 +32,7 @@
  */
 Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
+
 }
 
 /**
@@ -68,10 +67,8 @@ Fragments::Fragment::Fragment(
         const QUrl &routeURI,
         const QString &direction,
         QObject *parent
-        )
+        ): QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
 
     // Avoid using setters in constructor to reduce signal emitting on instantiation.
     m_uri = uri;

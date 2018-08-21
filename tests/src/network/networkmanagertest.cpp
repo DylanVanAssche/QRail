@@ -55,22 +55,22 @@ void Network::ManagerTest::runNetworkManager()
     // HTTP GET
     http->getResource(QUrl("https://httpbin.org/get"));
     // Wait for signal
-    QVERIFY(spy.wait(SIGNAL_WAIT_TIME));
+    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
     // HTTP POST
     http->postResource(QUrl("https://httpbin.org/post"), QByteArray("HTTP POST OK"));
     // Wait for signal
-    QVERIFY(spy.wait(SIGNAL_WAIT_TIME));
+    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
     // HTTP DELETE
     http->deleteResource(QUrl("https://httpbin.org/delete"));
     // Wait for signal
-    QVERIFY(spy.wait(SIGNAL_WAIT_TIME));
+    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
     // HTTP POST
     http->headResource(QUrl("https://httpbin.org/get"));
     // Wait for signal
-    QVERIFY(spy.wait(SIGNAL_WAIT_TIME));
+    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 }
 
 /**

@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/fragments/fragmentsfactory.h"
+#include "fragments/fragmentsfactory.h"
 Fragments::Factory* Fragments::Factory::m_instance = nullptr;
 
 /**
@@ -33,11 +33,8 @@ Fragments::Factory* Fragments::Factory::m_instance = nullptr;
  */
 Fragments::Factory::Factory(QObject *parent): QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
-
     // Setup the Network::Manager
-    this->setHttp(Network::Manager::getInstance(parent));
+    this->setHttp(Network::Manager::getInstance());
     connect(this->http(), SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processHTTPReply(QNetworkReply *)));
     /*
      * QNAM and callers are living in different threads!
@@ -57,12 +54,12 @@ Fragments::Factory::Factory(QObject *parent): QObject(parent)
  * @public
  * Constructs a Fragments::Factory if none exists and returns the instance.
  */
-Fragments::Factory *Fragments::Factory::getInstance(QObject *parent)
+Fragments::Factory *Fragments::Factory::getInstance()
 {
     // Singleton pattern
     if(m_instance == nullptr) {
         qDebug() << "Generating new Factory";
-        m_instance = new Fragments::Factory(parent);
+        m_instance = new Fragments::Factory();
     }
     return m_instance;
 }

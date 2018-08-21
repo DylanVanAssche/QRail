@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csaplanner.h"
+#include "csa/csaplanner.h"
 CSA::Planner* CSA::Planner::m_instance = nullptr;
 
 /**
@@ -33,12 +33,9 @@ CSA::Planner* CSA::Planner::m_instance = nullptr;
  */
 CSA::Planner::Planner(QObject *parent) : QObject(parent)
 {
-    // Automatically clean up when parent is destroyed
-    this->setParent(parent);
-
     // Init CSA::Planner
-    this->setFragmentsFactory(Fragments::Factory::getInstance(this));
-    this->setStationFactory(CSA::StationFactory::getInstance(this));
+    this->setFragmentsFactory(Fragments::Factory::getInstance());
+    this->setStationFactory(CSA::StationFactory::getInstance());
     this->setRoutes(QList<CSA::Route *> ()); // Init variable
     connect(this->fragmentsFactory(), SIGNAL(pageReady(Fragments::Page*)), this, SLOT(pageReceived(Fragments::Page*)));
 }
@@ -54,12 +51,12 @@ CSA::Planner::Planner(QObject *parent) : QObject(parent)
  * @public
  * Constructs a CSA::Planner if none exists and returns the instance.
  */
-CSA::Planner *CSA::Planner::getInstance(QObject *parent)
+CSA::Planner *CSA::Planner::getInstance()
 {
     // Singleton pattern
     if(m_instance == nullptr) {
         qDebug() << "Generating new CSA::Planner";
-        m_instance = new Planner(parent);
+        m_instance = new Planner();
     }
     return m_instance;
 }
@@ -131,7 +128,7 @@ void CSA::Planner::getConnections(const QUrl &departureStation, const QUrl &arri
  * to retrieve those pages while processing the current page. The order is very
  * important, that's why only 1 page at the time may be processed.
  */
-void CSA::Planner::planPage(Fragments::Page *page)
+void CSA::Planner::parsePage(Fragments::Page *page)
 {  
     QMutexLocker locker(&syncThreadMutex); // Lock processing to enforce the DESCENDING order of departure times
     bool hasPassedDepartureTimeLimit = false; // Flag to check if we're passed the departureTime
@@ -150,16 +147,6 @@ void CSA::Planner::planPage(Fragments::Page *page)
     qDebug() << "\tArrival time:" << this->arrivalTime();
     qDebug() << "\tmaxTransfers:" << this->maxTransfers();
 #endif
-
-    /*
-     * Before processing our received page we check if we the first fragment passed our departure time.
-     * We can do this because the departure times are sorted in DESCENDING order.
-     */
-    if(page->fragments().first()->departureTime() > this->departureTime()) {
-        qDebug() << "Requesting another page from Fragments::Factory";
-        this->fragmentsFactory()->getPage(page->hydraPrevious());
-        emit this->pageRequested(page->hydraPrevious());
-    }
 
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING departure times order
     for(qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; fragIndex--) {
@@ -765,8 +752,20 @@ CSA::StationStopProfile *CSA::Planner::getFirstReachableConnection(CSA::StationS
 void CSA::Planner::pageReceived(Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:" << page << "starting processing thread...";
-    QtConcurrent::run(this, &CSA::Planner::planPage, page);
     emit this->pageReceived(page->uri());
+
+    /*
+     * Before processing our received page we check if we the first fragment passed our departure time.
+     * We can do this because the departure times are sorted in DESCENDING order.
+     */
+    if(page->fragments().first()->departureTime() > this->departureTime()) {
+        qDebug() << "Requesting another page from Fragments::Factory";
+        this->fragmentsFactory()->getPage(page->hydraPrevious());
+        emit this->pageRequested(page->hydraPrevious());
+    }
+
+    // Launch processing thread
+    QtConcurrent::run(this, &CSA::Planner::parsePage, page);
 }
 
 // Helpers

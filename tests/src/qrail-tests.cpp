@@ -25,6 +25,7 @@
 #include "fragments/fragmentspagetest.h"
 #include "fragments/fragmentsfactorytest.h"
 #include "csa/csaplannertest.h"
+#include "liveboard/liveboardfactorytest.h"
 
 #define WAIT_TIME 5000
 
@@ -50,14 +51,16 @@ int main(int argc, char *argv[])
         int lcPageResult = -1;
         int lcFactoryResult = -1;
         int csaPlannerResult = -1;
+        int liveboardFactoryResult = -1;
         Network::ManagerTest testSuiteNetworkManager;
         Database::ManagerTest testSuiteDBManager;
         Fragments::FragmentTest testSuiteLCFragment;
         Fragments::PageTest testSuiteLCPage;
         Fragments::FactoryTest testSuiteLCFactory;
         CSA::PlannerTest testSuiteCSAPlanner;
+        Liveboard::FactoryTest testSuiteLiveboardFactory;
 
-        // Run unit tests
+        // Run unit tests without passing arguments
         networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
         dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
@@ -75,11 +78,25 @@ int main(int argc, char *argv[])
          */
         QTest::qWait(WAIT_TIME);
 
-        // Run integration tests
+        // Run CSA::Planner integration test
         csaPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
+        /*
+         * Wait until all the unit tests are completed to avoid network replies
+         * from httpbin.org in the Liveboard::Factory. If you remove this statement,
+         * wrong HTTP replies will land in the Liveboard::Factory due the fact that the
+         * Network::Manager is a singleton instance! The internal JSON validation
+         * for the Linked Connections fragment will fail!
+         *
+         * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
+         */
+        QTest::qWait(WAIT_TIME);
+
+        // Run Liveboard::Factory integration test
+        liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
+
         // Return the status code of every test for CI/CD
-        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | lcFactoryResult | csaPlannerResult);
+        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | lcFactoryResult | csaPlannerResult | liveboardFactoryResult);
     });
     return app.exec();
 }

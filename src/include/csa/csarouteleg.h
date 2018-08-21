@@ -25,7 +25,6 @@
 #include <QtCore/QMetaType>
 #include "csaroutelegend.h"
 #include "../include/csa/csavehicle.h"
-#include "../include/csa/csavehiclestop.h"
 #include "../include/csa/csanullstation.h"
 
 namespace CSA {
@@ -55,8 +54,6 @@ public:
     void setType(const CSA::RouteLeg::Type &type);
     CSA::Vehicle *vehicleInformation() const;
     void setVehicleInformation(CSA::Vehicle *vehicleInformation);
-    QList<CSA::VehicleStop *> intermediaryStops() const;
-    void setIntermediaryStops(const QList<CSA::VehicleStop *> &intermediaryStops);
     CSA::RouteLegEnd *departure() const;
     void setDeparture(CSA::RouteLegEnd *departure);
     CSA::RouteLegEnd *arrival() const;
@@ -66,7 +63,6 @@ public:
 signals:
     void typeChanged();
     void vehicleInformationChanged();
-    void intermediaryStopsChanged();
     void stopsChanged();
     void departureChanged();
     void arrivalChanged();
@@ -75,7 +71,6 @@ signals:
 private:
     CSA::RouteLeg::Type m_type;
     CSA::Vehicle *m_vehicleInformation;
-    QList<CSA::VehicleStop *> m_intermediaryStops;
     CSA::RouteLegEnd *m_departure;
     CSA::RouteLegEnd *m_arrival;
 

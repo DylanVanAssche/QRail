@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csatrainprofile.h"
+#include "csa/csatrainprofile.h"
 
 /**
  * @file csastationfactory.cpp
@@ -34,9 +34,6 @@
  */
 CSA::TrainProfile::TrainProfile(const QDateTime &arrivalTime, Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
 {
-    // Enable clean up when parent is destroyed
-    this->setParent(parent);
-
     // Use private members to avoid signal trigging on construction
     this->setArrivalTime(arrivalTime);
     this->setArrivalConnection(arrivalConnection);

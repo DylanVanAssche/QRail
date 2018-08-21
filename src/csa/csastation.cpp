@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csastation.h"
+#include "csa/csastation.h"
 
 /**
  * @file csastation.cpp
@@ -29,10 +29,9 @@
  * @public
  * Constructs a CSA::Station with the given parent.
  */
-CSA::Station::Station(QObject *parent)
+CSA::Station::Station(QObject *parent): QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
+
 }
 
 /**
@@ -52,9 +51,6 @@ CSA::Station::Station(QObject *parent)
  */
 CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     // Unknown fields are set to a default value to avoid undefined references
     m_uri = uri;
@@ -119,9 +115,6 @@ CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &n
  */
 CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp, const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp, const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal, const QMap<CSA::Station::Day, QPair<QTime, QTime> > &openingHours, const qreal &averageStopTimes, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_uri = uri;
     m_name = name;
@@ -167,9 +160,6 @@ CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &n
  */
 CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     // Unknown fields are set to a default value to avoid undefined references
     m_uri = uri;
@@ -235,9 +225,6 @@ CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &n
  */
 CSA::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp, const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp, const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal, const QMap<CSA::Station::Day, QPair<QTime, QTime> > &openingHours, const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_uri = uri;
     m_name = name;

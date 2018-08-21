@@ -23,7 +23,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
-#include <QtCore/QUrl>
 #include <QtCore/QMetaType>
 
 #include "../qrail.h"
@@ -39,9 +38,25 @@ public:
     {
         ARRIVAL,
         DEPARTURE,
-        STOP
+        STOP,
+        UNKNOWN
     };
     explicit VehicleStop(QObject *parent = nullptr);
+    explicit VehicleStop(
+            CSA::Vehicle *vehicleInformation,
+            CSA::Station *station,
+            const QString &platform,
+            const bool &isPlatformNormal,
+            const bool &hasLeft,
+            const QDateTime &departureTime,
+            const qint16 &departureDelay,
+            const bool &isDepartureCanceled,
+            const QDateTime &arrivalTime,
+            const qint16 &arrivalDelay,
+            const bool &isArrivalCanceled,
+            const CSA::Vehicle::OccupancyLevel &occupancyLevel,
+            const CSA::VehicleStop::Type &type,
+            QObject *parent = nullptr);
     CSA::Vehicle *vehicleInformation() const;
     void setVehicleInformation(CSA::Vehicle *vehicleInformation);
     CSA::Station *station() const;
@@ -64,8 +79,6 @@ public:
     void setArrivalDelay(const qint16 &arrivalDelay);
     bool isArrivalCanceled() const;
     void setIsArrivalCanceled(const bool &isArrivalCanceled);
-    QUrl departureURI() const;
-    void setDepartureURI(const QUrl &departureURI);
     CSA::Vehicle::OccupancyLevel occupancyLevel() const;
     void setOccupancyLevel(const CSA::Vehicle::OccupancyLevel &occupancyLevel);
     CSA::VehicleStop::Type type() const;
@@ -83,7 +96,6 @@ signals:
     void arrivalTimeChanged();
     void arrivalDelayChanged();
     void isArrivalCanceledChanged();
-    void departureURIChanged();
     void occupancyLevelChanged();
     void typeChanged();
 
@@ -99,7 +111,6 @@ private:
     QDateTime m_arrivalTime;
     qint16 m_arrivalDelay;
     bool m_isArrivalCanceled;
-    QUrl m_departureURI;
     CSA::Vehicle::OccupancyLevel m_occupancyLevel;
     CSA::VehicleStop::Type m_type;
 

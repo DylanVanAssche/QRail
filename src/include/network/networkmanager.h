@@ -39,7 +39,7 @@ namespace Network {
     {
         Q_OBJECT
     public:
-        static Manager *getInstance(QObject *parent = nullptr);
+        static Manager *getInstance();
         QString userAgent() const;
         void setUserAgent(const QString &userAgent);
         QString acceptHeader() const;
@@ -64,7 +64,7 @@ namespace Network {
         QString m_userAgent;
         QString m_acceptHeader;
         static Manager *m_instance; // error: ‘constexpr’ needed for in-class initialization of static data member ‘tolerance’ of non-integral type
-        explicit Manager(QObject *parent);
+        explicit Manager(QObject *parent = nullptr);
         QNetworkRequest prepareRequest(const QUrl &url);
         QNetworkAccessManager *QNAM() const;
         void setQNAM(QNetworkAccessManager *value);

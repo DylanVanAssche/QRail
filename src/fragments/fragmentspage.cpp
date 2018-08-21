@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/fragments/fragmentspage.h"
+#include "fragments/fragmentspage.h"
 
 /**
  * @file fragmentspage.cpp
@@ -32,8 +32,7 @@
  */
 Fragments::Page::Page(QObject *parent) : QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
+
 }
 
 /**
@@ -51,7 +50,7 @@ Fragments::Page::Page(QObject *parent) : QObject(parent)
  * Constructs a Page to store the information about
  * a Linked Connection page for the Connection Scan Algorithm (CSA).
  */
-Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext, const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent)
+Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext, const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
 {
     // Avoid signal triggering on contruction
     m_uri = uri;
@@ -59,9 +58,6 @@ Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &h
     m_hydraNext = hydraNext;
     m_hydraPrevious = hydraPrevious;
     m_fragments = fragments;
-
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
 }
 
 /**

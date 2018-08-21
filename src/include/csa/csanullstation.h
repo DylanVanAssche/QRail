@@ -36,7 +36,7 @@ namespace CSA {
 class QRAIL_SHARED_EXPORT NullStation: public Station
 {
 public:
-    static NullStation *getInstance(QObject *parent = nullptr);
+    static NullStation *getInstance();
 
 private:
     explicit NullStation(

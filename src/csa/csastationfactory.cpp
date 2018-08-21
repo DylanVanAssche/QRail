@@ -15,7 +15,7 @@
 *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../include/csa/csastationfactory.h"
+#include "csa/csastationfactory.h"
 CSA::StationFactory* CSA::StationFactory::m_instance = nullptr;
 
 /**
@@ -26,16 +26,13 @@ CSA::StationFactory* CSA::StationFactory::m_instance = nullptr;
  * @param QObject *parent = nullptr
  * @package CSA
  * @private
- * Constructs a CSA::StationFactory to generate station
- * objects on the fly.
+ * Constructs a CSA::StationFactory to
+ * generate CSA::Station objects on the fly.
  */
 CSA::StationFactory::StationFactory(QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Setup DB
-    this->setDb(Database::Manager::getInstance(DB_PATH, this));
+    this->setDb(Database::Manager::getInstance(DB_PATH));
     this->initDatabase();
 }
 
@@ -50,12 +47,12 @@ CSA::StationFactory::StationFactory(QObject *parent) : QObject(parent)
  * @public
  * Constructs a CSA::StationFactory if none exists and returns the instance.
  */
-CSA::StationFactory *CSA::StationFactory::getInstance(QObject *parent)
+CSA::StationFactory *CSA::StationFactory::getInstance()
 {
     // Singleton pattern
     if(m_instance == nullptr) {
-        qDebug() << "Generating new StationFactory";
-        m_instance = new CSA::StationFactory(parent);
+        qDebug() << "Generating new CSA::StationFactory";
+        m_instance = new CSA::StationFactory();
     }
     return m_instance;
 }

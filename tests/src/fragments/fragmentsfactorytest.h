@@ -1,25 +1,25 @@
-#ifndef LINKEDCONNECTIONFACTORYTEST_H
-#define LINKEDCONNECTIONFACTORYTEST_H
+#ifndef FRAGMENTSFACTORYTEST_H
+#define FRAGMENTSFACTORYTEST_H
 
-#include <QObject>
+#include <QtCore/QObject>
+#include <QtCore/QMetaType>
 #include <QtTest/QtTest>
-#include <QSignalSpy>
-#include <QMetaType>
-#include <QtSql/QSqlQuery>
+#include <QtTest/QSignalSpy>
+
 #include "fragments/fragmentsfactory.h"
 #include "database/databasemanager.h"
 #include "fragments/fragmentspage.h"
 
-#define SIGNAL_WAIT_TIME 3000
+#define FRAGMENT_WAIT_TIME 3000
 
 namespace Fragments {
 class FactoryTest : public QObject
 {
     Q_OBJECT
 private slots:
-    void initLinkedConnectionFactory();
-    void runLinkedConnectionFactory();
-    void cleanLinkedConnectionFactory();
+    void initFragmentsFactoryTest();
+    void runFragmentsFactoryTest();
+    void cleanFragmentsFactoryTest();
 
 private:
     Fragments::Factory *factory;
@@ -27,4 +27,4 @@ private:
 };
 }
 
-#endif // LINKEDCONNECTIONFACTORYTEST_H
+#endif // FRAGMENTSFACTORYTEST_H

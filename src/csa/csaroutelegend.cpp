@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csaroutelegend.h"
+#include "csa/csaroutelegend.h"
 
 /**
  * @file csaroutelegend.cpp
@@ -40,9 +40,6 @@
  */
 CSA::RouteLegEnd::RouteLegEnd(const QUrl &uri, const QDateTime &time, CSA::Station *station, const QString &platform, const bool &isNormalPlatform, const qint16 &delay, const bool &isCanceled, const bool &isPassed, const CSA::Vehicle::OccupancyLevel &occupancyLevel, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent is destroyed
-    this->setParent(parent);
-
     // Use private members to avoid signal fire on construction
     m_uri = uri;
     m_time = time;

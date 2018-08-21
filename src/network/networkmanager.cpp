@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/network/networkmanager.h"
+#include "network/networkmanager.h"
 Network::Manager* Network::Manager::m_instance = nullptr;
 
 /**
@@ -32,9 +32,6 @@ Network::Manager* Network::Manager::m_instance = nullptr;
  */
 Network::Manager::Manager(QObject* parent): QObject(parent)
 {
-    // Set parent of this QObject. When parent is destroyed, this one is automatically cleaned up too.
-    this->setParent(parent);
-
     // Initiate a new QNetworkAccessManager with cache
     this->setQNAM(new QNetworkAccessManager(this));
     QNetworkConfigurationManager QNAMConfig;
@@ -64,11 +61,11 @@ Network::Manager::Manager(QObject* parent): QObject(parent)
  * @public
  * Constructs a Network::Manager if none exists and returns the instance.
  */
-Network::Manager *Network::Manager::getInstance(QObject *parent)
+Network::Manager *Network::Manager::getInstance()
 {
     if(m_instance == nullptr) {
         qDebug() << "Creating new Network::Manager";
-        m_instance = new Manager(parent);
+        m_instance = new Manager();
     }
     return m_instance;
 }

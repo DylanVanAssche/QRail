@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csaroute.h"
+#include "csa/csaroute.h"
 
 /**
  * @file csaroute.cpp
@@ -36,9 +36,6 @@
  */
 CSA::Route::Route(const QList<CSA::RouteLeg *> &legs, const QList<CSA::Transfer *> &transfers, const QList<Message *> &tripAlerts, const QList<CSA::Message *> &vehicleAlerts, const QList<CSA::Message *> &remarks, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_legs = legs;
     m_transfers = transfers;
@@ -64,9 +61,6 @@ CSA::Route::Route(const QList<CSA::RouteLeg *> &legs, const QList<CSA::Transfer 
  */
 CSA::Route::Route(const QList<CSA::RouteLeg *> &legs, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_legs = legs;
 

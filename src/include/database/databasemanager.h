@@ -41,7 +41,7 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    static Manager *getInstance(const QString &path, QObject *parent = nullptr);
+    static Manager *getInstance(const QString &path);
     bool execute(QSqlQuery &query);
     QFuture<bool> executeAsync(QSqlQuery &query);
     bool startTransaction();
@@ -50,7 +50,7 @@ public:
 
 private:
     QSqlDatabase m_database;
-    explicit Manager(const QString &path, QObject *parent);
+    explicit Manager(const QString &path, QObject *parent = nullptr);
     static Manager *m_instance;
     void setDatabase(const QSqlDatabase &database);
 };

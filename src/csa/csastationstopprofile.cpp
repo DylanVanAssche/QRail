@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csastationstopprofile.h"
+#include "csa/csastationstopprofile.h"
 
 /**
  * @file csastationfactory.cpp
@@ -36,9 +36,6 @@
  */
 CSA::StationStopProfile::StationStopProfile(const QDateTime &departureTime, const QDateTime &arrivalTime, Fragments::Fragment *departureConnection, Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
 {
-    // Enable auto clean up when parent is destroyed
-    this->setParent(parent);
-
     // Use private members to avoid signal triggering on construction
     m_departureTime = departureTime;
     m_arrivalTime = arrivalTime;

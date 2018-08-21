@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "../include/csa/csavehicle.h"
+#include "csa/csavehicle.h"
 
 /**
  * @file csavehicle.cpp
@@ -34,9 +34,6 @@
  */
 CSA::Vehicle::Vehicle(const QUrl &uri, const QUrl &id, const QString &headsign, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent is destroyed
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_uri = uri;
     m_id = id;

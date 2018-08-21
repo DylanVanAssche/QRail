@@ -17,7 +17,7 @@
  *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************/
 
-#include "csarouteleg.h"
+#include "csa/csarouteleg.h"
 
 /**
  * @file csarouteleg.cpp
@@ -35,13 +35,9 @@
  */
 CSA::RouteLeg::RouteLeg(const CSA::RouteLeg::Type &type, CSA::Vehicle *vehicleInformation, CSA::RouteLegEnd *departure, CSA::RouteLegEnd *arrival, QObject *parent) : QObject(parent)
 {
-    // Clean up when parent dies
-    this->setParent(parent);
-
     // Use private members to avoid signal firing on construction
     m_type = type;
     m_vehicleInformation = vehicleInformation;
-    m_intermediaryStops = QList<CSA::VehicleStop *>();
     m_departure = departure;
     m_arrival = arrival;
 }
@@ -108,38 +104,6 @@ void CSA::RouteLeg::setVehicleInformation(CSA::Vehicle *vehicleInformation)
 {
     m_vehicleInformation = vehicleInformation;
     emit this->vehicleInformationChanged();
-}
-
-/**
- * @file csarouteleg.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the intermediary stops
- * @return const QList<CSA::VehicleStop *> intermediaryStops
- * @package CSA
- * @public
- * Gets the intermediary stops and returns it.
- */
-QList<CSA::VehicleStop *> CSA::RouteLeg::intermediaryStops() const
-{
-    return m_intermediaryStops;
-}
-
-/**
- * @file csarouteleg.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the type of the leg
- * @param const CSA::RouteLeg::Type &type
- * @package CSA
- * @public
- * Sets the type of route to the given CSA::RouteLeg::Type &type.
- * Emits the intermediaryStopsChanged signal.
- */
-void CSA::RouteLeg::setIntermediaryStops(const QList<CSA::VehicleStop *> &intermediaryStops)
-{
-    m_intermediaryStops = intermediaryStops;
-    emit this->intermediaryStopsChanged();
 }
 
 /**

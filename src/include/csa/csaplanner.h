@@ -66,7 +66,7 @@ class QRAIL_SHARED_EXPORT Planner: public QObject
 {
     Q_OBJECT
 public:
-    static Planner *getInstance(QObject *parent = nullptr);
+    static Planner *getInstance();
     void getConnections(
             const QUrl &departureStation,
             const QUrl &arrivalStation,
@@ -102,9 +102,9 @@ private:
     QList<CSA::Route *> m_routes;
     QMap<QUrl, QList<CSA::StationStopProfile *> > m_SArray;
     QMap<QUrl, CSA::TrainProfile *> m_TArray;
-    explicit Planner(QObject *parent);
+    explicit Planner(QObject *parent = nullptr);
     static CSA::Planner *m_instance;
-    void planPage(Fragments::Page *page);
+    void parsePage(Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
     Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(Fragments::Factory *value);

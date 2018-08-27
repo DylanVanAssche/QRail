@@ -1,0 +1,337 @@
+\hypertarget{routerplanner_8cpp}{}\section{src/engines/router/routerplanner.cpp File Reference}
+\label{routerplanner_8cpp}\index{src/engines/router/routerplanner.\+cpp@{src/engines/router/routerplanner.\+cpp}}
+
+
+Planner constructor.  
+
+
+{\ttfamily \#include \char`\"{}engines/router/routerplanner.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceRouterEngine}{Router\+Engine}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Planner constructor. 
+
+Sets S array.
+
+Gets S array.
+
+Sets T array.
+
+Gets the T array.
+
+Sets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance.
+
+Gets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance.
+
+Sets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+
+Gets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+
+Sets the routes.
+
+Gets the routes.
+
+Sets the departure station U\+RI.
+
+Gets the departure station U\+RI.
+
+Sets the arrival station U\+RI.
+
+Gets the arrival station U\+RI.
+
+Sets the departure time.
+
+Gets the departure time.
+
+Sets the arrival time.
+
+Gets the arrival time.
+
+Sets the maximum amount of transfers.
+
+Gets the maximum amount of transfers.
+
+Guesses the arrival time.
+
+Received page handler.
+
+Gets the first reachable connection.
+
+Plans a single page.
+
+Retrieves the connections between 2 stations.
+
+Gets a \mbox{\hyperlink{classRouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} instance.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classRouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} $\ast$planner
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&departure\+Station \\
+\hline
+{\em const} & Q\+Url \&arrival\+Station \\
+\hline
+{\em const} & Q\+Date\+Time \&departure\+Time \\
+\hline
+{\em const} & qint16 \&max\+Transfers\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}}} & $\ast$page\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}}} & $\ast$arrival\+Profile \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$profile
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 max\+Transfers
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qint16 \&max\+Transfers\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time arrival\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&arrival\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time departure\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url arrival\+Station\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&arrival\+Station\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url departure\+Station\+U\+RI
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&departure\+Station\+U\+RI\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+List$<$\+Router\+Engine\+::\+Route $\ast$$>$ routes
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+List$<$\+Router\+Engine\+::\+Route $\ast$$>$ \&routes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$factory
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$factory\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$factory
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Map$<$Q\+Url, Q\+List$<$\+Router\+Engine\+::\+Station\+Stop\+Profile $\ast$$>$ $>$ T\+Array
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Map$<$\+Q\+Url, Router\+Engine\+::\+Train\+Profile $\ast$$>$ \&T\+Array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Map$<$Q\+Url, Q\+List$<$\+Router\+Engine\+::\+Station\+Stop\+Profile $\ast$$>$ $>$ S\+Array
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Map$<$\+Q\+Url, Router\+Engine\+::\+Train\+Profile $\ast$$>$ \&S\+Array \\
+\hline
+\end{DoxyParams}

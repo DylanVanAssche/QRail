@@ -24,51 +24,53 @@ INCLUDEPATH += $$PWD/src/include \
             .
 
 SOURCES += \
+    $$PWD/src/engines/alerts/alertsmessage.cpp \
+    $$PWD/src/engines/router/routerplanner.cpp \
+    $$PWD/src/engines/router/routerroute.cpp \
+    $$PWD/src/engines/router/routertransfer.cpp \
+    $$PWD/src/engines/router/routerrouteleg.cpp \
+    $$PWD/src/engines/router/routerroutelegend.cpp \
+    $$PWD/src/engines/router/routerstationstopprofile.cpp \
+    $$PWD/src/engines/router/routertrainprofile.cpp \
+    $$PWD/src/engines/liveboard/liveboardfactory.cpp \
+    $$PWD/src/engines/liveboard/liveboardboard.cpp \
+    $$PWD/src/engines/station/stationstation.cpp \
+    $$PWD/src/engines/station/stationnullstation.cpp \
+    $$PWD/src/engines/station/stationfactory.cpp \
+    $$PWD/src/engines/vehicle/vehiclevehicle.cpp \
+    $$PWD/src/engines/vehicle/vehiclestop.cpp \
+    $$PWD/src/engines/vehicle/vehiclefactory.cpp \
     $$PWD/src/database/databasemanager.cpp \
     $$PWD/src/network/networkmanager.cpp \
-    $$PWD/src/csa/csaplanner.cpp \
-    $$PWD/src/csa/csaroute.cpp \
-    $$PWD/src/csa/csavehicle.cpp \
-    $$PWD/src/csa/csavehiclestop.cpp \
-    $$PWD/src/csa/csastation.cpp \
-    $$PWD/src/csa/csanullstation.cpp \
-    $$PWD/src/csa/csastationfactory.cpp \
-    $$PWD/src/csa/csatransfer.cpp \
-    $$PWD/src/csa/csamessage.cpp \
     $$PWD/src/fragments/fragmentsfragment.cpp \
     $$PWD/src/fragments/fragmentspage.cpp \
     $$PWD/src/fragments/fragmentsfactory.cpp \
-    $$PWD/src/csa/csarouteleg.cpp \
-    $$PWD/src/csa/csaroutelegend.cpp \
-    $$PWD/src/csa/csastationstopprofile.cpp \
-    $$PWD/src/csa/csatrainprofile.cpp \
-    $$PWD/src/qrail.cpp \
-    $$PWD/src/liveboard/liveboardfactory.cpp \
-    $$PWD/src/liveboard/liveboardboard.cpp
+    $$PWD/src/qrail.cpp
 
 HEADERS += \
-    $$PWD/src/include/qrail.h \
+    $$PWD/src/include/engines/alerts/alertsmessage.h \
+    $$PWD/src/include/engines/router/routerplanner.h \
+    $$PWD/src/include/engines/router/routerroute.h \
+    $$PWD/src/include/engines/router/routertransfer.h \
+    $$PWD/src/include/engines/router/routerrouteleg.h \
+    $$PWD/src/include/engines/router/routerroutelegend.h \
+    $$PWD/src/include/engines/router/routerstationstopprofile.h \
+    $$PWD/src/include/engines/router/routertrainprofile.h \
+    $$PWD/src/include/engines/liveboard/liveboardfactory.h \
+    $$PWD/src/include/engines/liveboard/liveboardboard.h \
+    $$PWD/src/include/engines/vehicle/vehiclevehicle.h \
+    $$PWD/src/include/engines/vehicle/vehiclestop.h \
+    $$PWD/src/include/engines/vehicle/vehiclefactory.h \
+    $$PWD/src/include/engines/station/stationstation.h \
+    $$PWD/src/include/engines/station/stationnullstation.h \
     $$PWD/src/include/database/databasemanager.h \
     $$PWD/src/include/network/networkmanager.h \
-    $$PWD/src/include/csa/csaplanner.h \
-    $$PWD/src/include/csa/csaroute.h \
-    $$PWD/src/include/csa/csavehicle.h \
-    $$PWD/src/include/csa/csavehiclestop.h \
-    $$PWD/src/include/csa/csastation.h \
-    $$PWD/src/include/csa/csanullstation.h \
-    $$PWD/src/include/csa/csastationfactory.h \
-    $$PWD/src/include/csa/csatransfer.h \
-    $$PWD/src/include/csa/csamessage.h \
-    $$PWD/src/include/csa/csarouteleg.h \
-    $$PWD/src/include/csa/csaroutelegend.h \
-    $$PWD/src/include/csa/csastationstopprofile.h \
-    $$PWD/src/include/csa/csatrainprofile.h \
     $$PWD/src/include/fragments/fragmentsfragment.h \
     $$PWD/src/include/fragments/fragmentspage.h \
     $$PWD/src/include/fragments/fragmentsfactory.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
-    $$PWD/src/include/liveboard/liveboardfactory.h \
-    $$PWD/src/include/liveboard/liveboardboard.h
+    $$PWD/src/include/qrail.h \
+    $$PWD/src/include/engines/station/stationfactory.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

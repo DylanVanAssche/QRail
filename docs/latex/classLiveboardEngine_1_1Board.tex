@@ -1,0 +1,100 @@
+\hypertarget{classLiveboardEngine_1_1Board}{}\section{Liveboard\+Engine\+:\+:Board Class Reference}
+\label{classLiveboardEngine_1_1Board}\index{Liveboard\+Engine\+::\+Board@{Liveboard\+Engine\+::\+Board}}
+Inheritance diagram for Liveboard\+Engine\+:\+:Board\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLiveboardEngine_1_1Board}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a40e707889f6ba898bc5628dbf251fcdf}\label{classLiveboardEngine_1_1Board_a40e707889f6ba898bc5628dbf251fcdf}} 
+enum {\bfseries Mode} \{ {\bfseries A\+R\+R\+I\+V\+A\+LS}, 
+{\bfseries D\+E\+P\+A\+R\+T\+U\+R\+ES}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a3730ecf6b49c607984cccac4a0ec8db0}\label{classLiveboardEngine_1_1Board_a3730ecf6b49c607984cccac4a0ec8db0}} 
+void {\bfseries entries\+Changed} ()
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_acfc6c7e16ad579dbc55e1a1a5189f016}\label{classLiveboardEngine_1_1Board_acfc6c7e16ad579dbc55e1a1a5189f016}} 
+void {\bfseries station\+Changed} ()
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a531c4cb3e17fda5a4f8144b9f75608cd}\label{classLiveboardEngine_1_1Board_a531c4cb3e17fda5a4f8144b9f75608cd}} 
+void {\bfseries from\+Changed} ()
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_af1e8c4bf8a6ccc7f6a19b7c4f34d7ac1}\label{classLiveboardEngine_1_1Board_af1e8c4bf8a6ccc7f6a19b7c4f34d7ac1}} 
+void {\bfseries until\+Changed} ()
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_addf2a9878bea4937fd1a5021437eef3d}\label{classLiveboardEngine_1_1Board_addf2a9878bea4937fd1a5021437eef3d}} 
+void {\bfseries mode\+Changed} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a70370a5f86db87e9edb9ca23de58b38b}\label{classLiveboardEngine_1_1Board_a70370a5f86db87e9edb9ca23de58b38b}} 
+{\bfseries Board} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_ae1f97006ef5590a3b4c6b27f48c83c1f}\label{classLiveboardEngine_1_1Board_ae1f97006ef5590a3b4c6b27f48c83c1f}} 
+{\bfseries Board} (const Q\+List$<$ \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$$>$ \&entries, \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station, const Q\+Date\+Time \&from, const Q\+Date\+Time \&until, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_abda2c74a02ab090986147ef538337645}\label{classLiveboardEngine_1_1Board_abda2c74a02ab090986147ef538337645}} 
+void {\bfseries add\+Entry} (\mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$entry)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a73fd7f8c8ff5f69da644ed20798059d1}\label{classLiveboardEngine_1_1Board_a73fd7f8c8ff5f69da644ed20798059d1}} 
+Q\+List$<$ \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ {\bfseries entries} () const
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a35d5d7a4b24e0f051d1e53ce7bb94761}\label{classLiveboardEngine_1_1Board_a35d5d7a4b24e0f051d1e53ce7bb94761}} 
+void {\bfseries set\+Entries} (const Q\+List$<$ \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$$>$ \&entries)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a1f477aa1637a52fdaff701cb4897c3f0}\label{classLiveboardEngine_1_1Board_a1f477aa1637a52fdaff701cb4897c3f0}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries station} () const
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_aa68cbd2bec552af0227238b592e7c048}\label{classLiveboardEngine_1_1Board_aa68cbd2bec552af0227238b592e7c048}} 
+void {\bfseries set\+Station} (\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a23f1e2c32589a58dfe13a939cd6b1eae}\label{classLiveboardEngine_1_1Board_a23f1e2c32589a58dfe13a939cd6b1eae}} 
+Q\+Date\+Time {\bfseries from} () const
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a54367a8ed3f970e4b5a11667e07196e2}\label{classLiveboardEngine_1_1Board_a54367a8ed3f970e4b5a11667e07196e2}} 
+void {\bfseries set\+From} (const Q\+Date\+Time \&from)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a37b083f54af4b4950342ef3fb526d4da}\label{classLiveboardEngine_1_1Board_a37b083f54af4b4950342ef3fb526d4da}} 
+Q\+Date\+Time {\bfseries until} () const
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a9618784ccc0e9a6df84f35f0bcc83785}\label{classLiveboardEngine_1_1Board_a9618784ccc0e9a6df84f35f0bcc83785}} 
+void {\bfseries set\+Until} (const Q\+Date\+Time \&until)
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_ac176d818e8f72ed241852b7487dfc49b}\label{classLiveboardEngine_1_1Board_ac176d818e8f72ed241852b7487dfc49b}} 
+Liveboard\+Engine\+::\+Board\+::\+Mode {\bfseries mode} () const
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_aff2aefd7d785e700e122f21563072e66}\label{classLiveboardEngine_1_1Board_aff2aefd7d785e700e122f21563072e66}} 
+void {\bfseries set\+Mode} (const Liveboard\+Engine\+::\+Board\+::\+Mode \&mode)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a0f83c2dd26626f955927bffa92c5f5f5}\label{classLiveboardEngine_1_1Board_a0f83c2dd26626f955927bffa92c5f5f5}} 
+Q\+List$<$ \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ {\bfseries m\+\_\+entries}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a1ff93cd110c4d8afd23745500b384e38}\label{classLiveboardEngine_1_1Board_a1ff93cd110c4d8afd23745500b384e38}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries m\+\_\+station}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_aab66196ab496ad45bd07e5652eb24eb2}\label{classLiveboardEngine_1_1Board_aab66196ab496ad45bd07e5652eb24eb2}} 
+Q\+Date\+Time {\bfseries m\+\_\+from}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_ad68f8d703d1a747b5cb0d8c12abc685d}\label{classLiveboardEngine_1_1Board_ad68f8d703d1a747b5cb0d8c12abc685d}} 
+Q\+Date\+Time {\bfseries m\+\_\+until}
+\item 
+\mbox{\Hypertarget{classLiveboardEngine_1_1Board_a1dde2228349f7f97ddd6191b1df07712}\label{classLiveboardEngine_1_1Board_a1dde2228349f7f97ddd6191b1df07712}} 
+Liveboard\+Engine\+::\+Board\+::\+Mode {\bfseries m\+\_\+mode}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/liveboard/liveboardboard.\+h\item 
+src/engines/liveboard/\mbox{\hyperlink{liveboardboard_8cpp}{liveboardboard.\+cpp}}\end{DoxyCompactItemize}

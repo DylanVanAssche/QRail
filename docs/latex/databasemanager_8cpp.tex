@@ -5,7 +5,7 @@
 Manager facade constructor.  
 
 
-{\ttfamily \#include \char`\"{}databasemanager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}database/databasemanager.\+h\char`\"{}}\newline
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,6 +23,8 @@ Sets the Q\+Sql\+Database database.
 Ends the transaction.
 
 Starts the transaction.
+
+Executes a given Q\+Sql\+Query asynchronous.
 
 Executes a given Q\+Sql\+Query.
 
@@ -55,6 +57,20 @@ Dylan Van Assche
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 20 Jul 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Sql\+Query} & query \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool success
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+13 Aug 2018 
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}

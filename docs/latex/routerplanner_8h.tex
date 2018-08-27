@@ -1,0 +1,96 @@
+\hypertarget{routerplanner_8h}{}\section{src/include/engines/router/routerplanner.h File Reference}
+\label{routerplanner_8h}\index{src/include/engines/router/routerplanner.\+h@{src/include/engines/router/routerplanner.\+h}}
+{\ttfamily \#include $<$Qt\+Core/\+Qt\+Global$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Date\+Time$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+List$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Locale$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Pair$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Map$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Mutex$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Mutex\+Locker$>$}\newline
+{\ttfamily \#include $<$Qt\+Concurrent/\+Qt\+Concurrent$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include \char`\"{}qrail.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fragments/fragmentsfactory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routerstationstopprofile.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routertrainprofile.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routerroute.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routerrouteleg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routerroutelegend.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/router/routertransfer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/alerts/alertsmessage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/station/stationstation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/station/stationfactory.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceRouterEngine}{Router\+Engine}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_a9decc45077806bdbc50c0488d45f7c1b}{V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}}
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_a787017c6118cb210d90bc7709b09b7d4}{T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME}}~240
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_af8b8d70d928fe8c0e479236171354ef6}{I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME}}~300
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_ad3a15fbb5af65973b57317990610b83c}{M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME}}~3600
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_aad7a084162342818e4399536163950f3}{M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}~1000
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}~3600
+\item 
+\#define \mbox{\hyperlink{routerplanner_8h_affb8c26e3d7615ef0bb160737c641b10}{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}}~1.\+0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{routerplanner_8h_af8b8d70d928fe8c0e479236171354ef6}\label{routerplanner_8h_af8b8d70d928fe8c0e479236171354ef6}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME@{I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME}}
+\index{I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME@{I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME}{INTRA\_STOP\_FOOTPATH\_TIME}}
+{\footnotesize\ttfamily \#define I\+N\+T\+R\+A\+\_\+\+S\+T\+O\+P\+\_\+\+F\+O\+O\+T\+P\+A\+T\+H\+\_\+\+T\+I\+ME~300}
+
+\mbox{\Hypertarget{routerplanner_8h_ad3a15fbb5af65973b57317990610b83c}\label{routerplanner_8h_ad3a15fbb5af65973b57317990610b83c}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME@{M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME}}
+\index{M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME@{M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME}{MAX\_TRANSFER\_TIME}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+T\+I\+ME~3600}
+
+\mbox{\Hypertarget{routerplanner_8h_aad7a084162342818e4399536163950f3}\label{routerplanner_8h_aad7a084162342818e4399536163950f3}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}
+\index{M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}{MILISECONDS\_TO\_SECONDS\_MULTIPLIER}}
+{\footnotesize\ttfamily \#define M\+I\+L\+I\+S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+S\+E\+C\+O\+N\+D\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER~1000}
+
+\mbox{\Hypertarget{routerplanner_8h_affb8c26e3d7615ef0bb160737c641b10}\label{routerplanner_8h_affb8c26e3d7615ef0bb160737c641b10}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT@{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}}
+\index{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT@{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}{MINIMUM\_PROGRESS\_INCREMENT}}
+{\footnotesize\ttfamily \#define M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT~1.\+0}
+
+\mbox{\Hypertarget{routerplanner_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}\label{routerplanner_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}
+\index{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}{SECONDS\_TO\_HOURS\_MULTIPLIER}}
+{\footnotesize\ttfamily \#define S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER~3600}
+
+\mbox{\Hypertarget{routerplanner_8h_a787017c6118cb210d90bc7709b09b7d4}\label{routerplanner_8h_a787017c6118cb210d90bc7709b09b7d4}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME@{T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME}}
+\index{T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME@{T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME}{TRANSFER\_EQUIVALENT\_TRAVEL\_TIME}}
+{\footnotesize\ttfamily \#define T\+R\+A\+N\+S\+F\+E\+R\+\_\+\+E\+Q\+U\+I\+V\+A\+L\+E\+N\+T\+\_\+\+T\+R\+A\+V\+E\+L\+\_\+\+T\+I\+ME~240}
+
+\mbox{\Hypertarget{routerplanner_8h_a9decc45077806bdbc50c0488d45f7c1b}\label{routerplanner_8h_a9decc45077806bdbc50c0488d45f7c1b}} 
+\index{routerplanner.\+h@{routerplanner.\+h}!V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS@{V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}}
+\index{V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS@{V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}!routerplanner.\+h@{routerplanner.\+h}}
+\subsubsection{\texorpdfstring{V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}{VERBOSE\_PARAMETERS}}
+{\footnotesize\ttfamily \#define V\+E\+R\+B\+O\+S\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}
+

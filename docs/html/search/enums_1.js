@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['occupancylevel',['OccupancyLevel',['../classCSA_1_1Vehicle.html#a331cc81107e5f0a8f37f894729dd9bda',1,'CSA::Vehicle']]]
+  ['mode',['Mode',['../classLiveboardEngine_1_1Board.html#a40e707889f6ba898bc5628dbf251fcdf',1,'LiveboardEngine::Board']]]
 ];

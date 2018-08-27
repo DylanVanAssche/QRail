@@ -1,0 +1,134 @@
+\hypertarget{classRouterEngine_1_1RouteLegEnd}{}\section{Router\+Engine\+:\+:Route\+Leg\+End Class Reference}
+\label{classRouterEngine_1_1RouteLegEnd}\index{Router\+Engine\+::\+Route\+Leg\+End@{Router\+Engine\+::\+Route\+Leg\+End}}
+Inheritance diagram for Router\+Engine\+:\+:Route\+Leg\+End\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRouterEngine_1_1RouteLegEnd}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a7c2f6e278e8c36277cd7375d404f9da7}\label{classRouterEngine_1_1RouteLegEnd_a7c2f6e278e8c36277cd7375d404f9da7}} 
+void {\bfseries uri\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_add70393bdb51cd803515054a865cb4cc}\label{classRouterEngine_1_1RouteLegEnd_add70393bdb51cd803515054a865cb4cc}} 
+void {\bfseries time\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_acd19ab71a7074629246ba2fa21e74b1b}\label{classRouterEngine_1_1RouteLegEnd_acd19ab71a7074629246ba2fa21e74b1b}} 
+void {\bfseries station\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a5ebc7a99f6c9feb9e7a4f8200b85af64}\label{classRouterEngine_1_1RouteLegEnd_a5ebc7a99f6c9feb9e7a4f8200b85af64}} 
+void {\bfseries platform\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a7ec769dededbb588e5d389df9d5492fa}\label{classRouterEngine_1_1RouteLegEnd_a7ec769dededbb588e5d389df9d5492fa}} 
+void {\bfseries is\+Normal\+Platform\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_aa8d92db59e92c6925c4d380a3bbd4d7a}\label{classRouterEngine_1_1RouteLegEnd_aa8d92db59e92c6925c4d380a3bbd4d7a}} 
+void {\bfseries delay\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a885f3487bcd25266619ee6f803190c68}\label{classRouterEngine_1_1RouteLegEnd_a885f3487bcd25266619ee6f803190c68}} 
+void {\bfseries is\+Canceled\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a8d4b0ade9234f22a423a0b4b3f3153f9}\label{classRouterEngine_1_1RouteLegEnd_a8d4b0ade9234f22a423a0b4b3f3153f9}} 
+void {\bfseries is\+Passed\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a9be6e797f6c63cb45e258df5b43f1ceb}\label{classRouterEngine_1_1RouteLegEnd_a9be6e797f6c63cb45e258df5b43f1ceb}} 
+void {\bfseries occupancy\+Level\+Changed} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ac8d5c3ffe9d65a83cae8c7de5962e818}\label{classRouterEngine_1_1RouteLegEnd_ac8d5c3ffe9d65a83cae8c7de5962e818}} 
+{\bfseries Route\+Leg\+End} (const Q\+Url \&uri, const Q\+Date\+Time \&time, \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station, const Q\+String \&platform, const bool \&is\+Normal\+Platform, const qint16 \&delay, const bool \&is\+Canceled, const bool \&is\+Passed, const Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a5a6b2f91b5503c7dfb410e1e426ed721}\label{classRouterEngine_1_1RouteLegEnd_a5a6b2f91b5503c7dfb410e1e426ed721}} 
+Q\+Url {\bfseries uri} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_aaa056987791da9ae776100926dd8141f}\label{classRouterEngine_1_1RouteLegEnd_aaa056987791da9ae776100926dd8141f}} 
+void {\bfseries set\+Uri} (const Q\+Url \&uri)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_aa3050fc8b747490c3c06f7e451e9dba1}\label{classRouterEngine_1_1RouteLegEnd_aa3050fc8b747490c3c06f7e451e9dba1}} 
+Q\+Date\+Time {\bfseries time} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ae56d26ce44fa8261ca43834cbdd79a7d}\label{classRouterEngine_1_1RouteLegEnd_ae56d26ce44fa8261ca43834cbdd79a7d}} 
+void {\bfseries set\+Time} (const Q\+Date\+Time \&time)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ac79a006d8c9d4cbcd97567beec83784a}\label{classRouterEngine_1_1RouteLegEnd_ac79a006d8c9d4cbcd97567beec83784a}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries station} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a49fb362e35a88711cc794c95d8c94c4e}\label{classRouterEngine_1_1RouteLegEnd_a49fb362e35a88711cc794c95d8c94c4e}} 
+void {\bfseries set\+Station} (\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a5cd38e1cde6c5632b60a183226825732}\label{classRouterEngine_1_1RouteLegEnd_a5cd38e1cde6c5632b60a183226825732}} 
+Q\+String {\bfseries platform} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ab44931f5c47e9497355d47ba44b896e5}\label{classRouterEngine_1_1RouteLegEnd_ab44931f5c47e9497355d47ba44b896e5}} 
+void {\bfseries set\+Platform} (const Q\+String \&platform)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a24879496826d9e513cf6ffb393237db8}\label{classRouterEngine_1_1RouteLegEnd_a24879496826d9e513cf6ffb393237db8}} 
+bool {\bfseries is\+Normal\+Platform} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_acfa2dac12a3e1e3f7a8bab5e9f55482b}\label{classRouterEngine_1_1RouteLegEnd_acfa2dac12a3e1e3f7a8bab5e9f55482b}} 
+void {\bfseries set\+Is\+Normal\+Platform} (bool is\+Normal\+Platform)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ae8c0b35f77c5a66d5d5afa96f7eb4625}\label{classRouterEngine_1_1RouteLegEnd_ae8c0b35f77c5a66d5d5afa96f7eb4625}} 
+qint16 {\bfseries delay} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a693365fb2083839ddd5ebf17d5032121}\label{classRouterEngine_1_1RouteLegEnd_a693365fb2083839ddd5ebf17d5032121}} 
+void {\bfseries set\+Delay} (const qint16 \&delay)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_afb87a99a388b7dd36c5357f57aeb361b}\label{classRouterEngine_1_1RouteLegEnd_afb87a99a388b7dd36c5357f57aeb361b}} 
+bool {\bfseries is\+Canceled} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ace382e058479c3ec424d8321df838667}\label{classRouterEngine_1_1RouteLegEnd_ace382e058479c3ec424d8321df838667}} 
+void {\bfseries set\+Is\+Canceled} (bool is\+Canceled)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_afb7a50823d8529b913832bd358bf4983}\label{classRouterEngine_1_1RouteLegEnd_afb7a50823d8529b913832bd358bf4983}} 
+bool {\bfseries is\+Passed} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_af96b512dc585624f8d9bbaed165dafb8}\label{classRouterEngine_1_1RouteLegEnd_af96b512dc585624f8d9bbaed165dafb8}} 
+void {\bfseries set\+Is\+Passed} (bool is\+Passed)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ad5ddf5854bee2bf268728707b405ae4c}\label{classRouterEngine_1_1RouteLegEnd_ad5ddf5854bee2bf268728707b405ae4c}} 
+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level {\bfseries occupancy\+Level} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ad71a1a0c0d96125eb1833bc63cd4abbf}\label{classRouterEngine_1_1RouteLegEnd_ad71a1a0c0d96125eb1833bc63cd4abbf}} 
+void {\bfseries set\+Occupancy\+Level} (const Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ad3d85af3fde972892bdd47239a402bd5}\label{classRouterEngine_1_1RouteLegEnd_ad3d85af3fde972892bdd47239a402bd5}} 
+Q\+Url {\bfseries m\+\_\+uri}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a63593b8c83639b2afad706a12bfeafa1}\label{classRouterEngine_1_1RouteLegEnd_a63593b8c83639b2afad706a12bfeafa1}} 
+Q\+Date\+Time {\bfseries m\+\_\+time}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ad8d8b12f9ea85211e3cf61939f9c3757}\label{classRouterEngine_1_1RouteLegEnd_ad8d8b12f9ea85211e3cf61939f9c3757}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries m\+\_\+station}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a2365b77544223ce133f77a9b5d64435c}\label{classRouterEngine_1_1RouteLegEnd_a2365b77544223ce133f77a9b5d64435c}} 
+Q\+String {\bfseries m\+\_\+platform}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a229d67e5fc1a6085f445d6413a7a6079}\label{classRouterEngine_1_1RouteLegEnd_a229d67e5fc1a6085f445d6413a7a6079}} 
+bool {\bfseries m\+\_\+is\+Normal\+Platform}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a91b8ffd54ecdc215cd4a1e7dfc2b4f96}\label{classRouterEngine_1_1RouteLegEnd_a91b8ffd54ecdc215cd4a1e7dfc2b4f96}} 
+qint16 {\bfseries m\+\_\+delay}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a33d2a432407bc94aa1dd3a6b5a062611}\label{classRouterEngine_1_1RouteLegEnd_a33d2a432407bc94aa1dd3a6b5a062611}} 
+bool {\bfseries m\+\_\+is\+Canceled}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_a8c9e800864e99015e3e7a8f7ba2c8601}\label{classRouterEngine_1_1RouteLegEnd_a8c9e800864e99015e3e7a8f7ba2c8601}} 
+bool {\bfseries m\+\_\+is\+Passed}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLegEnd_ad4ebf526d4f94ae30418613e7eeb2b9d}\label{classRouterEngine_1_1RouteLegEnd_ad4ebf526d4f94ae30418613e7eeb2b9d}} 
+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level {\bfseries m\+\_\+occupancy\+Level}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/routerroutelegend.\+h\item 
+src/engines/router/\mbox{\hyperlink{routerroutelegend_8cpp}{routerroutelegend.\+cpp}}\end{DoxyCompactItemize}

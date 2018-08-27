@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transfer_5fequivalent_5ftravel_5ftime',['TRANSFER_EQUIVALENT_TRAVEL_TIME',['../csaplanner_8h.html#a787017c6118cb210d90bc7709b09b7d4',1,'csaplanner.h']]]
+  ['seconds_5fto_5fhours_5fmultiplier',['SECONDS_TO_HOURS_MULTIPLIER',['../liveboardfactory_8h.html#a99e430ba4788dc5ce8b767a6a55f9ce6',1,'SECONDS_TO_HOURS_MULTIPLIER():&#160;liveboardfactory.h'],['../routerplanner_8h.html#a99e430ba4788dc5ce8b767a6a55f9ce6',1,'SECONDS_TO_HOURS_MULTIPLIER():&#160;routerplanner.h']]]
 ];

@@ -1,6 +1,6 @@
 \hypertarget{namespaceDatabase}{}\section{Database Namespace Reference}
 \label{namespaceDatabase}\index{Database@{Database}}
-\subsection*{Classes}
+\subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classDatabase_1_1Manager}{Manager}}
@@ -14,7 +14,9 @@ Constructs a \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} 
 
 Executes the given Q\+Sql\+Query query on the active database. Before the execution takes place, the connection is checked. During the execution, the errors are catched and logged as C\+R\+I\+T\+I\+C\+AL.
 
-Starts a transaction in the database. After you are done with your changes you should call \mbox{\hyperlink{classDatabase_1_1Manager_a08dc190a448c555f8334bdd60d32b26e}{Database\+::\+Manager\+::end\+Transaction()}} to commit your changes.
+Executes the given Q\+Sql\+Query query asynchronous on the active database. Before the execution takes place, the connection is checked. During the execution, the errors are catched and logged as C\+R\+I\+T\+I\+C\+AL.
+
+Starts a transaction in the database. After you are done with your changes you should call Database\+::\+Manager\+::end\+Transaction() to commit your changes.
 
 \begin{DoxyWarning}{Warning}
 This method won\textquotesingle{}t do anything if no transaction was running.

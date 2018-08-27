@@ -48,8 +48,9 @@ SOURCES += src/qrail-tests.cpp \
     src/fragments/fragmentsfragmenttest.cpp \
     src/fragments/fragmentspagetest.cpp \
     src/fragments/fragmentsfactorytest.cpp \
-    src/csa/csaplannertest.cpp \
-    src/liveboard/liveboardfactorytest.cpp
+    src/engines/router/routerplannertest.cpp \
+    src/engines/liveboard/liveboardfactorytest.cpp \
+    src/engines/vehicle/vehiclefactorytest.cpp
 
 HEADERS += \
     src/database/databasemanagertest.h \
@@ -57,8 +58,9 @@ HEADERS += \
     src/fragments/fragmentsfragmenttest.h \
     src/fragments/fragmentspagetest.h \
     src/fragments/fragmentsfactorytest.h \
-    src/csa/csaplannertest.h \
-    src/liveboard/liveboardfactorytest.h
+    src/engines/router/routerplannertest.h \
+    src/engines/liveboard/liveboardfactorytest.h \
+    src/engines/vehicle/vehiclefactorytest.h
 
 DISTFILES += \
     rpm/qrail-tests.spec \

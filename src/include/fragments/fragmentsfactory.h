@@ -27,8 +27,8 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QRegularExpression>
 #include <QtCore/QDebug>
-#include "fragmentsfragment.h"
-#include "fragmentspage.h"
+#include "fragments/fragmentsfragment.h"
+#include "fragments/fragmentspage.h"
 #include "network/networkmanager.h"
 #define BASE_URL "https://graph.irail.be/sncb/connections"
 
@@ -54,7 +54,7 @@ private:
     static Fragments::Factory *m_instance;
     Network::Manager *m_http;
     void getPageByURIFromNetworkManager(const QUrl &uri);
-    Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &connection);
+    Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
     bool validateData(const QJsonObject &data, const QStringList &properties);
     explicit Factory(QObject *parent = nullptr);
     Network::Manager *http() const;

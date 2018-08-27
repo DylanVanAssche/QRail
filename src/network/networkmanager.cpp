@@ -159,10 +159,12 @@ void Network::Manager::headResource(const QUrl &url)
 QNetworkRequest Network::Manager::prepareRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, this->acceptHeader());
+    //request.setHeader(QNetworkRequest::ContentTypeHeader, this->acceptHeader()); // TO DO only for POST or PUT
+    request.setRawHeader(QByteArray("Accept"), this->acceptHeader().toUtf8());
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork); // Load from network if cache has expired
+
     return request;
 }
 

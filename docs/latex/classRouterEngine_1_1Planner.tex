@@ -1,0 +1,167 @@
+\hypertarget{classRouterEngine_1_1Planner}{}\section{Router\+Engine\+:\+:Planner Class Reference}
+\label{classRouterEngine_1_1Planner}\index{Router\+Engine\+::\+Planner@{Router\+Engine\+::\+Planner}}
+Inheritance diagram for Router\+Engine\+:\+:Planner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRouterEngine_1_1Planner}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a5c655efeb575e8842cf20bdd16fc025e}\label{classRouterEngine_1_1Planner_a5c655efeb575e8842cf20bdd16fc025e}} 
+void {\bfseries routes\+Found} (const Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1Route}{Router\+Engine\+::\+Route}} $\ast$$>$ \&routes)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a26d92d9ae44cdffae0e3b37765b1708e}\label{classRouterEngine_1_1Planner_a26d92d9ae44cdffae0e3b37765b1708e}} 
+void {\bfseries error} (const Q\+String \&message)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ab4a2c861d1ed9561499a7036b809eb94}\label{classRouterEngine_1_1Planner_ab4a2c861d1ed9561499a7036b809eb94}} 
+void {\bfseries page\+Requested} (const Q\+Url \&page\+U\+RI)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a081f70dd778700e47328330acffdbd6b}\label{classRouterEngine_1_1Planner_a081f70dd778700e47328330acffdbd6b}} 
+void {\bfseries page\+Received} (const Q\+Url \&page\+U\+RI)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a64a706ca570771d9d9967a5288721219}\label{classRouterEngine_1_1Planner_a64a706ca570771d9d9967a5288721219}} 
+void {\bfseries page\+Progress} (const Q\+Url \&page\+U\+RI, const qint16 \&progress)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ad4d13efc9958b6641489808b0bc2895e}\label{classRouterEngine_1_1Planner_ad4d13efc9958b6641489808b0bc2895e}} 
+void {\bfseries get\+Connections} (const Q\+Url \&departure\+Station, const Q\+Url \&arrival\+Station, const Q\+Date\+Time \&departure\+Time, const qint16 \&max\+Transfers)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_aabc46d28d07f0972ff20a41a69d11922}\label{classRouterEngine_1_1Planner_aabc46d28d07f0972ff20a41a69d11922}} 
+Q\+Date\+Time {\bfseries calculate\+Arrival\+Time} (const Q\+Date\+Time \&departure\+Time)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_aacb44fb55e948fd01378e7a8b5fe38dc}\label{classRouterEngine_1_1Planner_aacb44fb55e948fd01378e7a8b5fe38dc}} 
+Q\+Date\+Time {\bfseries departure\+Time} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ac9dec0f6e45efb87a601c78e561e9eb5}\label{classRouterEngine_1_1Planner_ac9dec0f6e45efb87a601c78e561e9eb5}} 
+Q\+Date\+Time {\bfseries arrival\+Time} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_af9f2bb74f0b4a557b3eed7ae8488b143}\label{classRouterEngine_1_1Planner_af9f2bb74f0b4a557b3eed7ae8488b143}} 
+qint16 {\bfseries max\+Transfers} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a0aae4b211672051dadf9c8a832b0cb2b}\label{classRouterEngine_1_1Planner_a0aae4b211672051dadf9c8a832b0cb2b}} 
+Q\+Url {\bfseries departure\+Station\+U\+RI} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a246e95794a7af90b9fffc41a36de4b89}\label{classRouterEngine_1_1Planner_a246e95794a7af90b9fffc41a36de4b89}} 
+Q\+Url {\bfseries arrival\+Station\+U\+RI} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a28f31342a3167eb681b689898b784cc7}\label{classRouterEngine_1_1Planner_a28f31342a3167eb681b689898b784cc7}} 
+static \mbox{\hyperlink{classRouterEngine_1_1Planner}{Planner}} $\ast$ {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_afadfcb054f08ac1b338e143e7a84cc95}\label{classRouterEngine_1_1Planner_afadfcb054f08ac1b338e143e7a84cc95}} 
+void {\bfseries page\+Received} (\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$page)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a8bf6486e4b0d55b3aa7433b147bda6b6}\label{classRouterEngine_1_1Planner_a8bf6486e4b0d55b3aa7433b147bda6b6}} 
+{\bfseries Planner} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a582610961b633f5787084f8a666b6e37}\label{classRouterEngine_1_1Planner_a582610961b633f5787084f8a666b6e37}} 
+void {\bfseries parse\+Page} (\mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} $\ast$page)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a68a39695218135f3270680c4870fb4fa}\label{classRouterEngine_1_1Planner_a68a39695218135f3270680c4870fb4fa}} 
+\mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Station\+Stop\+Profile}} $\ast$ {\bfseries get\+First\+Reachable\+Connection} (\mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Station\+Stop\+Profile}} $\ast$arrival\+Profile)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a9e97d9af0619e8ee39d94ab5ce23971b}\label{classRouterEngine_1_1Planner_a9e97d9af0619e8ee39d94ab5ce23971b}} 
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ {\bfseries fragments\+Factory} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a5eda6f379ae74d0be89eb80507cab31e}\label{classRouterEngine_1_1Planner_a5eda6f379ae74d0be89eb80507cab31e}} 
+void {\bfseries set\+Fragments\+Factory} (\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$value)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_af2e50833a9f093a2a6e7cabea054cdd5}\label{classRouterEngine_1_1Planner_af2e50833a9f093a2a6e7cabea054cdd5}} 
+\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$ {\bfseries station\+Factory} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a0767e4341aa97bb7451de5ec0fd87563}\label{classRouterEngine_1_1Planner_a0767e4341aa97bb7451de5ec0fd87563}} 
+void {\bfseries set\+Station\+Factory} (\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$station\+Factory)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a5fc863694446aa45cb56bb3c3ab4c5b4}\label{classRouterEngine_1_1Planner_a5fc863694446aa45cb56bb3c3ab4c5b4}} 
+Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1Route}{Router\+Engine\+::\+Route}} $\ast$ $>$ {\bfseries routes} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a78127dc66f833ddc7263e2fca0b19b92}\label{classRouterEngine_1_1Planner_a78127dc66f833ddc7263e2fca0b19b92}} 
+void {\bfseries set\+Routes} (const Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1Route}{Router\+Engine\+::\+Route}} $\ast$$>$ \&routes)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a362360a5e60ee3f07e830e819d33110a}\label{classRouterEngine_1_1Planner_a362360a5e60ee3f07e830e819d33110a}} 
+Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$ $>$ $>$ {\bfseries S\+Array} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_aa199bf872a554e9088e0c76646fe4924}\label{classRouterEngine_1_1Planner_aa199bf872a554e9088e0c76646fe4924}} 
+void {\bfseries set\+S\+Array} (const Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$$>$ $>$ \&S\+Array)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ac09c55292b81273f4b338debb2e1e5ce}\label{classRouterEngine_1_1Planner_ac09c55292b81273f4b338debb2e1e5ce}} 
+Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classRouterEngine_1_1TrainProfile}{Router\+Engine\+::\+Train\+Profile}} $\ast$ $>$ {\bfseries T\+Array} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a5feff3fff4cba045a4964bea34309ee8}\label{classRouterEngine_1_1Planner_a5feff3fff4cba045a4964bea34309ee8}} 
+void {\bfseries set\+T\+Array} (const Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classRouterEngine_1_1TrainProfile}{Router\+Engine\+::\+Train\+Profile}} $\ast$$>$ \&T\+Array)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a4f6a6a4045e0fe51e2cb21b3e8108c83}\label{classRouterEngine_1_1Planner_a4f6a6a4045e0fe51e2cb21b3e8108c83}} 
+void {\bfseries set\+Departure\+Time} (const Q\+Date\+Time \&departure\+Time)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a9cf4483fd3fdf2b35965574c86eea2ac}\label{classRouterEngine_1_1Planner_a9cf4483fd3fdf2b35965574c86eea2ac}} 
+void {\bfseries set\+Arrival\+Time} (const Q\+Date\+Time \&arrival\+Time)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a66109426415a09e0558363aa498c5a17}\label{classRouterEngine_1_1Planner_a66109426415a09e0558363aa498c5a17}} 
+void {\bfseries set\+Max\+Transfers} (const qint16 \&max\+Transfers)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a3f8722660a6e751de7c2d2540aba6eb0}\label{classRouterEngine_1_1Planner_a3f8722660a6e751de7c2d2540aba6eb0}} 
+void {\bfseries set\+Departure\+Station\+U\+RI} (const Q\+Url \&departure\+Station\+U\+RI)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ac9deb497ddeffd9bc50fe395f1f98713}\label{classRouterEngine_1_1Planner_ac9deb497ddeffd9bc50fe395f1f98713}} 
+void {\bfseries set\+Arrival\+Station\+U\+RI} (const Q\+Url \&arrival\+Station\+U\+RI)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a300ad4d86bb8bee65a09d95ade239b04}\label{classRouterEngine_1_1Planner_a300ad4d86bb8bee65a09d95ade239b04}} 
+Q\+Mutex {\bfseries sync\+Thread\+Mutex}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_aa6ac71038550885954fb2ddc4016ec98}\label{classRouterEngine_1_1Planner_aa6ac71038550885954fb2ddc4016ec98}} 
+\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$ {\bfseries m\+\_\+fragments\+Factory}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a859a3820c95133884c85050991072802}\label{classRouterEngine_1_1Planner_a859a3820c95133884c85050991072802}} 
+\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$ {\bfseries m\+\_\+station\+Factory}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_ae76db90c07a6b5ea5034e534400f097f}\label{classRouterEngine_1_1Planner_ae76db90c07a6b5ea5034e534400f097f}} 
+Q\+Url {\bfseries m\+\_\+departure\+Station\+U\+RI}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_aafdf34c8a3faf1eda36a42b89fb54000}\label{classRouterEngine_1_1Planner_aafdf34c8a3faf1eda36a42b89fb54000}} 
+Q\+Url {\bfseries m\+\_\+arrival\+Station\+U\+RI}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_adcbafe913337cf8cc5b3bf685372d9d6}\label{classRouterEngine_1_1Planner_adcbafe913337cf8cc5b3bf685372d9d6}} 
+Q\+Date\+Time {\bfseries m\+\_\+departure\+Time}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_acd8cb28d41f982c3e636270e58a1e096}\label{classRouterEngine_1_1Planner_acd8cb28d41f982c3e636270e58a1e096}} 
+Q\+Date\+Time {\bfseries m\+\_\+arrival\+Time}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a263254f46248fcf0fc9939dcfa34ac08}\label{classRouterEngine_1_1Planner_a263254f46248fcf0fc9939dcfa34ac08}} 
+qint16 {\bfseries m\+\_\+max\+Transfers}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a07d50392392d758b092c2fc0f0b01230}\label{classRouterEngine_1_1Planner_a07d50392392d758b092c2fc0f0b01230}} 
+Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1Route}{Router\+Engine\+::\+Route}} $\ast$ $>$ {\bfseries m\+\_\+routes}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a0e87ce62e7806454f72dfe3dc5a79c00}\label{classRouterEngine_1_1Planner_a0e87ce62e7806454f72dfe3dc5a79c00}} 
+Q\+Map$<$ Q\+Url, Q\+List$<$ \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$ $>$ $>$ {\bfseries m\+\_\+\+S\+Array}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a14f0e0c95b7404fec05648ad34f5285e}\label{classRouterEngine_1_1Planner_a14f0e0c95b7404fec05648ad34f5285e}} 
+Q\+Map$<$ Q\+Url, \mbox{\hyperlink{classRouterEngine_1_1TrainProfile}{Router\+Engine\+::\+Train\+Profile}} $\ast$ $>$ {\bfseries m\+\_\+\+T\+Array}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Planner_a49a7ba0c183633e522d4d7ba674ecc18}\label{classRouterEngine_1_1Planner_a49a7ba0c183633e522d4d7ba674ecc18}} 
+static \mbox{\hyperlink{classRouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} $\ast$ {\bfseries m\+\_\+instance} = nullptr
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/routerplanner.\+h\item 
+src/engines/router/\mbox{\hyperlink{routerplanner_8cpp}{routerplanner.\+cpp}}\end{DoxyCompactItemize}

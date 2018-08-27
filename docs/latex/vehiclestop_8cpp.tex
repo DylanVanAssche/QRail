@@ -1,0 +1,367 @@
+\hypertarget{vehiclestop_8cpp}{}\section{src/engines/vehicle/vehiclestop.cpp File Reference}
+\label{vehiclestop_8cpp}\index{src/engines/vehicle/vehiclestop.\+cpp@{src/engines/vehicle/vehiclestop.\+cpp}}
+
+
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} constructor\+: empty.  
+
+
+{\ttfamily \#include \char`\"{}engines/vehicle/vehiclestop.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceVehicleEngine}{Vehicle\+Engine}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} constructor\+: empty. 
+
+Sets the is\+Extra\+Stop.
+
+Gets the is\+Extra\+Stop.
+
+Sets the type.
+
+Gets the type.
+
+Sets the occupancy level.
+
+Gets the occupancy level.
+
+Sets the is\+Arrival\+Canceled.
+
+Gets the is\+Arrival\+Canceled.
+
+Gets the arrival delay.
+
+Sets the arrival time.
+
+Gets the arrival time.
+
+Sets the is\+Departure\+Canceled.
+
+Gets the is\+Departure\+Canceled.
+
+Sets the departure delay.
+
+Gets the departure delay.
+
+Sets the departure time.
+
+Gets the departure time.
+
+Sets the has\+Left.
+
+Gets the has\+Left.
+
+Sets the is\+Platform\+Normal.
+
+Gets the is\+Platform\+Normal.
+
+Sets the platform for this stop.
+
+Gets the platform for this stop.
+
+Sets the station for this stop.
+
+Gets the station for this stop.
+
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} constructor\+: full.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}}} & $\ast$station \\
+\hline
+{\em const} & Q\+String \&platform \\
+\hline
+{\em const} & bool \&is\+Platform\+Normal \\
+\hline
+{\em const} & bool \&has\+Left \\
+\hline
+{\em const} & Q\+Date\+Time \&departure\+Time \\
+\hline
+{\em const} & qint16 \&departure\+Delay \\
+\hline
+{\em const} & bool \&is\+Departure\+Canceled \\
+\hline
+{\em const} & Q\+Date\+Time \&arrival\+Time \\
+\hline
+{\em const} & qint16 \&arrival\+Delay \\
+\hline
+{\em const} & bool \&is\+Arrival\+Canceled \\
+\hline
+{\em const} & bool \&is\+Extra\+Stop \\
+\hline
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level \\
+\hline
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Type \&type \\
+\hline
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}}} & $\ast$station\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+String platform
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&platform\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Platform\+Normal
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Platform\+Normal\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool has\+Left
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&has\+Left\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time departure\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&departure\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 departure\+Delay
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qint16 departure\+Delay\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Departure\+Canceled
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Departure\+Canceled\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time arrival\+Time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&arrival\+Time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 arrival\+Delay
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Arrival\+Canceled
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Arrival\+Canceled\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level occupancy\+Level
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Vehicle\+Engine\+::\+Stop\+::\+Type type
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Type \&type\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Extra\+Stop
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Extra\+Stop \\
+\hline
+\end{DoxyParams}

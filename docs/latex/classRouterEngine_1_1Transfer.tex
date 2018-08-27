@@ -1,0 +1,126 @@
+\hypertarget{classRouterEngine_1_1Transfer}{}\section{Router\+Engine\+:\+:Transfer Class Reference}
+\label{classRouterEngine_1_1Transfer}\index{Router\+Engine\+::\+Transfer@{Router\+Engine\+::\+Transfer}}
+Inheritance diagram for Router\+Engine\+:\+:Transfer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRouterEngine_1_1Transfer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a2b79055b3dc55c7d9631a0d3e68155c5}\label{classRouterEngine_1_1Transfer_a2b79055b3dc55c7d9631a0d3e68155c5}} 
+enum {\bfseries Type} \{ {\bfseries A\+R\+R\+I\+V\+AL}, 
+{\bfseries D\+E\+P\+A\+R\+T\+U\+RE}, 
+{\bfseries T\+R\+A\+N\+S\+F\+ER}, 
+{\bfseries I\+N\+V\+A\+L\+ID}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a727ff091ea2464cc1e6a5fa41dd38a9e}\label{classRouterEngine_1_1Transfer_a727ff091ea2464cc1e6a5fa41dd38a9e}} 
+void {\bfseries departure\+Leg\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a40b2a38cb0fcc48cc867409139242655}\label{classRouterEngine_1_1Transfer_a40b2a38cb0fcc48cc867409139242655}} 
+void {\bfseries arrival\+Leg\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_ad82484af56ccf65ef26862da23f96e78}\label{classRouterEngine_1_1Transfer_ad82484af56ccf65ef26862da23f96e78}} 
+void {\bfseries departure\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a7832205361f2f6273d2de37a33f8e5ac}\label{classRouterEngine_1_1Transfer_a7832205361f2f6273d2de37a33f8e5ac}} 
+void {\bfseries arrival\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a366c6e5188577967c89d4c52898cc652}\label{classRouterEngine_1_1Transfer_a366c6e5188577967c89d4c52898cc652}} 
+void {\bfseries type\+Changed} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a4dfa4a9e6d843c7a2a050e0767560917}\label{classRouterEngine_1_1Transfer_a4dfa4a9e6d843c7a2a050e0767560917}} 
+{\bfseries Transfer} (\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$departure\+Leg=nullptr, \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$arrival\+Leg=nullptr, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_ab4ba2b3ce728923052331bf326fe5ee4}\label{classRouterEngine_1_1Transfer_ab4ba2b3ce728923052331bf326fe5ee4}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$ {\bfseries departure\+Leg} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a0a21c2e3ea7d76323445a942820a36cc}\label{classRouterEngine_1_1Transfer_a0a21c2e3ea7d76323445a942820a36cc}} 
+void {\bfseries set\+Departure\+Leg} (\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$departure\+Leg)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a1eb0676f65b56cb2669c5273524ee87d}\label{classRouterEngine_1_1Transfer_a1eb0676f65b56cb2669c5273524ee87d}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$ {\bfseries arrival\+Leg} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_aaf6ae64e23f5b6a21b445c16810bdbd0}\label{classRouterEngine_1_1Transfer_aaf6ae64e23f5b6a21b445c16810bdbd0}} 
+void {\bfseries set\+Arrival\+Leg} (\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$arrival\+Leg)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a9de49b6229b08774c59a35e069241382}\label{classRouterEngine_1_1Transfer_a9de49b6229b08774c59a35e069241382}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries departure} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a07c651c052bcc4d12adf1d8fe8558473}\label{classRouterEngine_1_1Transfer_a07c651c052bcc4d12adf1d8fe8558473}} 
+void {\bfseries set\+Departure} (\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$departure)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_add9dd9f32aeb0a03643b4b3c7f9af752}\label{classRouterEngine_1_1Transfer_add9dd9f32aeb0a03643b4b3c7f9af752}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries arrival} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_acbb38fde6669e70006edd8cfadda4aa9}\label{classRouterEngine_1_1Transfer_acbb38fde6669e70006edd8cfadda4aa9}} 
+void {\bfseries set\+Arrival} (\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$arrival)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_aa68b42bfaacfe79b9d085c6a94aae2f8}\label{classRouterEngine_1_1Transfer_aa68b42bfaacfe79b9d085c6a94aae2f8}} 
+Router\+Engine\+::\+Transfer\+::\+Type {\bfseries type} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a2fd8d8f407490ad51b4604b3b379230e}\label{classRouterEngine_1_1Transfer_a2fd8d8f407490ad51b4604b3b379230e}} 
+void {\bfseries set\+Type} (const Router\+Engine\+::\+Transfer\+::\+Type \&type)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a9951403dc91e9e9be8a11cef284f7df8}\label{classRouterEngine_1_1Transfer_a9951403dc91e9e9be8a11cef284f7df8}} 
+Q\+Url {\bfseries uri} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a25dc4c790111fea727fdfe37413d0600}\label{classRouterEngine_1_1Transfer_a25dc4c790111fea727fdfe37413d0600}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries station} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_ae3a407001d9a4f1324dc4421d5d41bfb}\label{classRouterEngine_1_1Transfer_ae3a407001d9a4f1324dc4421d5d41bfb}} 
+Q\+Date\+Time {\bfseries time} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a0453774c1c6b2ba31cb2aafdaa60487d}\label{classRouterEngine_1_1Transfer_a0453774c1c6b2ba31cb2aafdaa60487d}} 
+qint16 {\bfseries delay} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a20b15b42fe19d1cf2d139b33242c7d02}\label{classRouterEngine_1_1Transfer_a20b15b42fe19d1cf2d139b33242c7d02}} 
+Q\+Date\+Time {\bfseries delayed\+Time} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a74ddb24be5e96f945a7ac946b1201e9e}\label{classRouterEngine_1_1Transfer_a74ddb24be5e96f945a7ac946b1201e9e}} 
+Q\+String {\bfseries platform} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_aff9e03cce26d0bee9e8871b796f5b0f3}\label{classRouterEngine_1_1Transfer_aff9e03cce26d0bee9e8871b796f5b0f3}} 
+bool {\bfseries is\+Canceled} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_aafcb639e843877555b6181ce8fe05e3c}\label{classRouterEngine_1_1Transfer_aafcb639e843877555b6181ce8fe05e3c}} 
+bool {\bfseries is\+Normal\+Platform} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_adb3a0639e91faff1efed72fd37732f47}\label{classRouterEngine_1_1Transfer_adb3a0639e91faff1efed72fd37732f47}} 
+bool {\bfseries is\+Passed} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_ac5a0ffecfe78455585ff85c221e3441c}\label{classRouterEngine_1_1Transfer_ac5a0ffecfe78455585ff85c221e3441c}} 
+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level {\bfseries occupancy\+Level} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a40772fc03d985aa0f8820c9ad414e50a}\label{classRouterEngine_1_1Transfer_a40772fc03d985aa0f8820c9ad414e50a}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$ {\bfseries m\+\_\+departure\+Leg}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a3104b73a0130558587111a7ec4a6cfff}\label{classRouterEngine_1_1Transfer_a3104b73a0130558587111a7ec4a6cfff}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$ {\bfseries m\+\_\+arrival\+Leg}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_ac33555843efa0815443c47324c55480c}\label{classRouterEngine_1_1Transfer_ac33555843efa0815443c47324c55480c}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries m\+\_\+departure}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a28ddd26907a602c03614ff89c78667ef}\label{classRouterEngine_1_1Transfer_a28ddd26907a602c03614ff89c78667ef}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries m\+\_\+arrival}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1Transfer_a029f1581f2c05784924898946fff9dc3}\label{classRouterEngine_1_1Transfer_a029f1581f2c05784924898946fff9dc3}} 
+Router\+Engine\+::\+Transfer\+::\+Type {\bfseries m\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/routertransfer.\+h\item 
+src/engines/router/\mbox{\hyperlink{routertransfer_8cpp}{routertransfer.\+cpp}}\end{DoxyCompactItemize}

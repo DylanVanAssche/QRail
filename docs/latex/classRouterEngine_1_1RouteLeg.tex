@@ -1,0 +1,99 @@
+\hypertarget{classRouterEngine_1_1RouteLeg}{}\section{Router\+Engine\+:\+:Route\+Leg Class Reference}
+\label{classRouterEngine_1_1RouteLeg}\index{Router\+Engine\+::\+Route\+Leg@{Router\+Engine\+::\+Route\+Leg}}
+Inheritance diagram for Router\+Engine\+:\+:Route\+Leg\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRouterEngine_1_1RouteLeg}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_acdcc25212c113c641ee3fbaebb52a7bd}\label{classRouterEngine_1_1RouteLeg_acdcc25212c113c641ee3fbaebb52a7bd}} 
+enum {\bfseries Type} \{ \newline
+{\bfseries W\+A\+L\+K\+I\+NG}, 
+{\bfseries B\+I\+C\+Y\+C\+LE}, 
+{\bfseries B\+US}, 
+{\bfseries T\+R\+AM}, 
+\newline
+{\bfseries M\+E\+T\+RO}, 
+{\bfseries B\+O\+AT}, 
+{\bfseries T\+A\+XI}, 
+{\bfseries T\+R\+A\+IN}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_afbed2dc6199e75b1ac36111465f6f3d4}\label{classRouterEngine_1_1RouteLeg_afbed2dc6199e75b1ac36111465f6f3d4}} 
+void {\bfseries type\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a11952e3a2fee4fa1d9f4fb56e69f0507}\label{classRouterEngine_1_1RouteLeg_a11952e3a2fee4fa1d9f4fb56e69f0507}} 
+void {\bfseries vehicle\+Information\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a1d28c018a24f8eed64064d685a1f6a09}\label{classRouterEngine_1_1RouteLeg_a1d28c018a24f8eed64064d685a1f6a09}} 
+void {\bfseries stops\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a8422dd38411600b6ffc2aa490633115b}\label{classRouterEngine_1_1RouteLeg_a8422dd38411600b6ffc2aa490633115b}} 
+void {\bfseries departure\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_abc2b662f878119adb9ded14f3d1fd5f9}\label{classRouterEngine_1_1RouteLeg_abc2b662f878119adb9ded14f3d1fd5f9}} 
+void {\bfseries arrival\+Changed} ()
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a670f844ac7c005ae2dd3a18b42bff29a}\label{classRouterEngine_1_1RouteLeg_a670f844ac7c005ae2dd3a18b42bff29a}} 
+void {\bfseries station\+Changed} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a1c2b7ecc87cab7b5a4ff69d07f4e646a}\label{classRouterEngine_1_1RouteLeg_a1c2b7ecc87cab7b5a4ff69d07f4e646a}} 
+{\bfseries Route\+Leg} (const Router\+Engine\+::\+Route\+Leg\+::\+Type \&type, \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$vehicle\+Information, \mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$departure, \mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$arrival, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a30acf2e2a57217cd2f588475ea3c6e80}\label{classRouterEngine_1_1RouteLeg_a30acf2e2a57217cd2f588475ea3c6e80}} 
+Router\+Engine\+::\+Route\+Leg\+::\+Type {\bfseries type} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_ada52c9281e1b545753e0beeded6f8e4a}\label{classRouterEngine_1_1RouteLeg_ada52c9281e1b545753e0beeded6f8e4a}} 
+void {\bfseries set\+Type} (const Router\+Engine\+::\+Route\+Leg\+::\+Type \&type)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a086d61b828cd572797ec327710eb4088}\label{classRouterEngine_1_1RouteLeg_a086d61b828cd572797ec327710eb4088}} 
+\mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$ {\bfseries vehicle\+Information} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a535891ef84cac1a875b3f1a58404c227}\label{classRouterEngine_1_1RouteLeg_a535891ef84cac1a875b3f1a58404c227}} 
+void {\bfseries set\+Vehicle\+Information} (\mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$vehicle\+Information)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a77dd1b04134b55cbc6dc031f5e6d6379}\label{classRouterEngine_1_1RouteLeg_a77dd1b04134b55cbc6dc031f5e6d6379}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries departure} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a80f8a85b74c662e1832313677a5bc7f3}\label{classRouterEngine_1_1RouteLeg_a80f8a85b74c662e1832313677a5bc7f3}} 
+void {\bfseries set\+Departure} (\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$departure)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a82998f111cb81b20e043e45e1e8c0ebc}\label{classRouterEngine_1_1RouteLeg_a82998f111cb81b20e043e45e1e8c0ebc}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries arrival} () const
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_aca6d3ade15e711e0bfe963b58de7a20f}\label{classRouterEngine_1_1RouteLeg_aca6d3ade15e711e0bfe963b58de7a20f}} 
+void {\bfseries set\+Arrival} (\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$arrival)
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a5643c5924f06246dd7e3ae9b07b70bca}\label{classRouterEngine_1_1RouteLeg_a5643c5924f06246dd7e3ae9b07b70bca}} 
+\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ {\bfseries station} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_abefba3e1870352470f547966736261d0}\label{classRouterEngine_1_1RouteLeg_abefba3e1870352470f547966736261d0}} 
+Router\+Engine\+::\+Route\+Leg\+::\+Type {\bfseries m\+\_\+type}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a602cdb13e3929a0378506661ed7336a7}\label{classRouterEngine_1_1RouteLeg_a602cdb13e3929a0378506661ed7336a7}} 
+\mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$ {\bfseries m\+\_\+vehicle\+Information}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a3a3354a3f654f5c923339a30beba7339}\label{classRouterEngine_1_1RouteLeg_a3a3354a3f654f5c923339a30beba7339}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries m\+\_\+departure}
+\item 
+\mbox{\Hypertarget{classRouterEngine_1_1RouteLeg_a85b14ef10073dec49d7fa2e20e35e54e}\label{classRouterEngine_1_1RouteLeg_a85b14ef10073dec49d7fa2e20e35e54e}} 
+\mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ {\bfseries m\+\_\+arrival}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/routerrouteleg.\+h\item 
+src/engines/router/\mbox{\hyperlink{routerrouteleg_8cpp}{routerrouteleg.\+cpp}}\end{DoxyCompactItemize}

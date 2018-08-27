@@ -1,0 +1,230 @@
+\hypertarget{namespaceRouterEngine}{}\section{Router\+Engine Namespace Reference}
+\label{namespaceRouterEngine}\index{Router\+Engine@{Router\+Engine}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1Planner}{Planner}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1Route}{Route}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Route\+Leg}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Route\+Leg\+End}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Station\+Stop\+Profile}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1TrainProfile}{Train\+Profile}}
+\item 
+class \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Transfer}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1Planner}{Planner}} to plan routes using the Connection Scan Algorithm (C\+SA).
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} if none exists and returns the instance.
+
+Retrieves the connections between 2 stations with a given departure time and a maximum of transfers. Emit the routes\+Found signal when completed, the error signal is emitted in case an error comes up.
+
+\begin{DoxyNote}{Note}
+This method runs in a separated thread using the Qt\+Concurrent framework. Runs the Connection Scan Algorithm (C\+SA) on a single \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} page. In case we need to fetch more pages, the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} is contacted to retrieve those pages while processing the current page. The order is very important, that\textquotesingle{}s why only 1 page at the time may be processed.
+\end{DoxyNote}
+Tries to find the first reachable connection for a given \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$arrival\+Profile and returns it.
+
+Handler for the generated pages from the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}}. When a page is received from the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} this handler will launch a separate thread to process the page.
+
+Guesses the arrival time for a given Q\+Date\+Time \&departure\+Time.
+
+Gets the maximum amount of transfers and returns it.
+
+Sets the maximum amount of transfers to the given qint16 \&max\+Transfers
+
+Gets the arrival time of the current routing and returns it.
+
+Sets the arrival time of the current routing to the given Q\+Date\+Time \&arrival\+Time.
+
+Gets the departure time of the current routing and returns it.
+
+Sets the departure time of the current routing to the given Q\+Date\+Time \&departure\+Time.
+
+Gets the arrival station U\+RI and returns it.
+
+Sets the arrival station U\+RI to the given Q\+Url \&arrival\+Station\+U\+RI
+
+Gets the departure station U\+RI and returns it.
+
+Sets the departure station U\+RI to the given Q\+Url \&departure\+Station\+U\+RI
+
+Gets the routes retrieved by the Connection Scan Algorithm (C\+SA) and returns it.
+
+Sets the routes retrieved by the Connection Scan Algorithm (C\+SA) to the given Q\+List$<$\+Router\+Engine\+::\+Route $\ast$$>$ \&routes.
+
+Gets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance and returns it.
+
+Sets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance to the given \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$factory.
+
+Gets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance and returns it.
+
+Sets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance to the given \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$station\+Factory.
+
+Gets the T array for the Connection Scan Algorithm (C\+SA) and returns it.
+
+Sets the T array for the Connection Scan Algorithm (C\+SA) to the given Q\+Map$<$\+Q\+Url, Router\+Engine\+::\+Train\+Profile $\ast$$>$ \&T\+Array.
+
+Gets the S array for the Connection Scan Algorithm (C\+SA) and returns it.
+
+Sets the S array for the Connection Scan Algorithm (C\+SA) to the given Q\+Map$<$\+Q\+Url, Router\+Engine\+::\+Train\+Profile $\ast$$>$ \&S\+Array.
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1Route}{Route}} with a list of legs and transfers
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1Route}{Route}} with a list of legs. The transfers are generated from the list of legs.
+
+Gets the list of legs and returns it.
+
+Sets the list of legs to the given Q\+List$<$\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs.
+
+Gets the list of transfers and returns it.
+
+Sets the list of transfers to the given Q\+List$<$\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers.
+
+Gets the list of trip alerts and returns it.
+
+Sets the list of trip alerts to the given Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&trip\+Alerts.
+
+Gets the list of vehicle alerts and returns it.
+
+Sets the list of vehicle alerts to the given Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts.
+
+Gets the list of remarks and returns it.
+
+Sets the list of remarks to the given Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks.
+
+Gets the duration of the route and returns it.
+
+\begin{DoxyNote}{Note}
+Delays are already included in this timestamp. Gets the departure time of the route and returns it.
+\end{DoxyNote}
+Gets the departure delay of the route and returns it.
+
+\begin{DoxyNote}{Note}
+Delays are already included in this timestamp. Gets the arrival time of the route and returns it.
+\end{DoxyNote}
+Gets the arrival delay of the route and returns it.
+
+Gets the number of transfers and returns it.
+
+Gets the number of stations and returns it.
+
+Gets the platform for the departure of the route and returns it.
+
+Gets the is\+Departure\+Platform\+Normal and returns it.
+
+Gets the platform for the arrival of the route and returns it.
+
+Gets the is\+Arrival\+Platform\+Normal and returns it.
+
+Gets the departure station \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} and returns it.
+
+Gets the arrival station \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} and returns it.
+
+Gets the is\+Partially\+Canceled of the route and returns it.
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Route\+Leg}} with a certain leg type, vehicle information and it\textquotesingle{}s departure and arrival legs.
+
+Gets the type of the leg and returns it.
+
+Sets the type of route to the given Router\+Engine\+::\+Route\+Leg\+::\+Type \&type. Emits the type\+Changed signal.
+
+Gets the vehicle information and returns it.
+
+Sets the type of route to the given \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$vehicle\+Information. Emits the vehicle\+Information\+Changed signal.
+
+Gets the departure leg end and returns it.
+
+Sets the departure leg end to the given \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$departure. Emits the departure\+Changed signal.
+
+Gets the arrival leg end and returns it.
+
+Sets the arrival to the given \mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$arrival. Emits the arrival\+Changed signal.
+
+Gets the stations for the route and returns it. Returns a \mbox{\hyperlink{classStationEngine_1_1NullStation}{Station\+Engine\+::\+Null\+Station}} instance if the station can\textquotesingle{}t be determined.
+
+Gets the U\+RI of the leg end and returns it.
+
+Sets the U\+RI of the leg end to the given Q\+Url \&uri. Emits the uri\+Changed signal.
+
+Gets the time of the leg end and returns it.
+
+Sets the time of the leg end to the given Q\+Date\+Time \&time. Emits the time\+Changed signal.
+
+Gets the station of the leg end and returns it.
+
+Sets the station of the leg end to the given \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} \&station. Emits the station\+Changed signal.
+
+Gets the platform and returns it.
+
+Sets the platform to the given Q\+String \&platform. Emits the platform\+Changed signal.
+
+Gets the is\+Normal\+Platform and returns it.
+
+Sets the is\+Normal\+Platform to the given bool \&is\+Normal\+Platform. Emits the is\+Normal\+Platform\+Changed signal.
+
+Gets the delay and returns it.
+
+Sets the delay to the given qint16 \&delay. Emits the delay\+Changed signal.
+
+Gets the is\+Canceled and returns it.
+
+Sets the is\+Canceled to the given bool \&is\+Canceled. Emits the is\+Canceled\+Changed signal.
+
+Gets the is\+Passed and returns it.
+
+Sets the is\+Passed to the given bool \&is\+Passed. Emits the is\+Passed\+Changed signal.
+
+Gets the occupancy level of the leg and returns it.
+
+Sets the occunpancy level to the given Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level. Emits the occupancy\+Level\+Changed signal.
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1StationStopProfile}{Router\+Engine\+::\+Station\+Stop\+Profile}} for the S array in the Connection Scan Algorithm.
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1TrainProfile}{Router\+Engine\+::\+Train\+Profile}} for the T array in the Connection Scan Algorithm.
+
+Constructs a \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} for the journey extraction.
+
+Gets the departure leg and returns it.
+
+Sets the departure leg to the given \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$departure\+Leg. Emits the departure\+Leg\+Changed signal.
+
+Gets the arrival leg and returns it.
+
+Sets the arrival leg to the given \mbox{\hyperlink{classRouterEngine_1_1RouteLeg}{Router\+Engine\+::\+Route\+Leg}} $\ast$arrival\+Leg. Emits the arrival\+Leg\+Changed signal.
+
+Gets the departure and returns it.
+
+Sets the departure to the given \mbox{\hyperlink{classRouterEngine_1_1RouteLegEnd}{Router\+Engine\+::\+Route\+Leg\+End}} $\ast$departure. Emits the departure\+Changed signal.
+
+Gets the arrival and returns it.
+
+Gets the type and returns it.
+
+Sets the type to the given Router\+Engine\+::\+Transfer\+::\+Type \&type. Emits the type\+Changed signal.
+
+Gets the uri of the underlying route and returns it.
+
+Gets the station of the underlying route and returns it.
+
+Gets the time of the underlying route and returns it.
+
+Gets the delay of the underlying route and returns it.
+
+Gets the time with the delays included of the underlying route and returns it.
+
+Gets the platform of the underlying route and returns it.
+
+Gets the is\+Canceled of the underlying route and returns it.
+
+Gets the is\+Normal\+Platform of the underlying route and returns it.
+
+Gets the is\+Passed of the underlying route and returns it.
+
+Gets the occupancy level of the underlying route and returns it. 

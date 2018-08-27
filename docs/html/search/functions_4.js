@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['factory',['Factory',['../classCSA_1_1Planner.html#a7395c140e3cd577ed459350d4e5588ad',1,'CSA::Planner::Factory()'],['../classFragments_1_1Factory.html#a04aefdf80a3318302fbb839b9322a12e',1,'Fragments::Factory::Factory()']]],
-  ['fragment',['Fragment',['../classFragments_1_1Fragment.html#a08e16b988d340a5e836c377a13e1c41d',1,'Fragments::Fragment::Fragment(QObject *parent=nullptr)'],['../classFragments_1_1Fragment.html#a26ec3793c4162b77e92498a77ae5b7dc',1,'Fragments::Fragment::Fragment(const QUrl &amp;uri, const QUrl &amp;departureStationURI, const QUrl &amp;arrivalStationURI, const QDateTime &amp;departureTime, const QDateTime &amp;arrivalTime, const qint16 &amp;departureDelay, const qint16 &amp;arrivalDelay, const QUrl &amp;tripURI, const QUrl &amp;routeURI, const QString &amp;direction, QObject *parent=nullptr)']]],
-  ['fragments',['fragments',['../classFragments_1_1Page.html#ab2460084209c3fe9211f70689ad78019',1,'Fragments::Page']]],
-  ['fragmentschanged',['fragmentsChanged',['../classFragments_1_1Page.html#a6d449124d048af31d3e1e24a66c34636',1,'Fragments::Page']]]
+  ['enablelogger',['enableLogger',['../logger_8cpp.html#a81a6f3731fb25029c4becb1efb01f03a',1,'enableLogger(bool enabled):&#160;logger.cpp'],['../logger_8h.html#a81a6f3731fb25029c4becb1efb01f03a',1,'enableLogger(bool enabled):&#160;logger.cpp']]],
+  ['endtransaction',['endTransaction',['../classDatabase_1_1Manager.html#a08dc190a448c555f8334bdd60d32b26e',1,'Database::Manager']]],
+  ['entries',['entries',['../classLiveboardEngine_1_1Board.html#a73fd7f8c8ff5f69da644ed20798059d1',1,'LiveboardEngine::Board']]],
+  ['entrieschanged',['entriesChanged',['../classLiveboardEngine_1_1Board.html#a3730ecf6b49c607984cccac4a0ec8db0',1,'LiveboardEngine::Board']]],
+  ['error',['error',['../classRouterEngine_1_1Planner.html#a26d92d9ae44cdffae0e3b37765b1708e',1,'RouterEngine::Planner::error()'],['../classVehicleEngine_1_1Factory.html#a6f3a429ae4109615d43d75fb9dc0767d',1,'VehicleEngine::Factory::error()'],['../classFragments_1_1Factory.html#ab8bdc67290ccbc5444d551fbebc68b17',1,'Fragments::Factory::error()']]],
+  ['execute',['execute',['../classDatabase_1_1Manager.html#a0afd7a0884097a8dcff61b0444f39fb4',1,'Database::Manager']]],
+  ['executeasync',['executeAsync',['../classDatabase_1_1Manager.html#af8b7852a0062a6a88c15fe25d50892cf',1,'Database::Manager']]],
+  ['extractfiledata',['extractFileData',['../classOS.html#a5703fdddfbee21d53e71906d509df442',1,'OS']]]
 ];

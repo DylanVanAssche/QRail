@@ -135,30 +135,30 @@ void Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
  * @private
  * Converts the JSON-LD into a Fragments::Fragments object and returns it.
  */
-Fragments::Fragment *Fragments::Factory::generateFragmentFromJSON(const QJsonObject &connection)
+Fragments::Fragment *Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {   
     // Check if the data have all the required keys for a fragment
     QStringList fragProps;
     fragProps << "@id" << "departureStop" << "arrivalStop" << "departureTime" << "arrivalTime" << "gtfs:trip" << "gtfs:route";
-    this->validateData(connection, fragProps);
+    this->validateData(data, fragProps);
 
     // Parse JSON
-    QUrl uri = QUrl(connection["@id"].toString());
-    QUrl departureStationURI = QUrl(connection["departureStop"].toString());
-    QUrl arrivalStationURI = QUrl(connection["arrivalStop"].toString());
-    QDateTime departureTime = QDateTime::fromString(connection["departureTime"].toString(), Qt::ISODate);
-    QDateTime arrivalTime = QDateTime::fromString(connection["arrivalTime"].toString(), Qt::ISODate);
-    QUrl tripURI = QUrl(connection["gtfs:trip"].toString());
-    QUrl routeURI = QUrl(connection["gtfs:route"].toString());
+    QUrl uri = QUrl(data["@id"].toString());
+    QUrl departureStationURI = QUrl(data["departureStop"].toString());
+    QUrl arrivalStationURI = QUrl(data["arrivalStop"].toString());
+    QDateTime departureTime = QDateTime::fromString(data["departureTime"].toString(), Qt::ISODate);
+    QDateTime arrivalTime = QDateTime::fromString(data["arrivalTime"].toString(), Qt::ISODate);
+    QUrl tripURI = QUrl(data["gtfs:trip"].toString());
+    QUrl routeURI = QUrl(data["gtfs:route"].toString());
     qint16 departureDelay;
     qint16 arrivalDelay;
-    if(connection.contains("departureDelay")) {
-        departureDelay = connection["departureDelay"].toInt();
+    if(data.contains("departureDelay")) {
+        departureDelay = data["departureDelay"].toInt();
     }
-    if(connection.contains("arrivalDelay")) {
-        arrivalDelay = connection["arrivalDelay"].toInt();
+    if(data.contains("arrivalDelay")) {
+        arrivalDelay = data["arrivalDelay"].toInt();
     }
-    QString direction = connection["direction"].toString();
+    QString direction = data["direction"].toString();
 
     // Create Linked Connection Fragment and return it
     Fragments::Fragment *frag = new Fragments::Fragment(

@@ -1,0 +1,261 @@
+\hypertarget{routerroutelegend_8cpp}{}\section{src/engines/router/routerroutelegend.cpp File Reference}
+\label{routerroutelegend_8cpp}\index{src/engines/router/routerroutelegend.\+cpp@{src/engines/router/routerroutelegend.\+cpp}}
+
+
+Route\+Leg\+End constructor.  
+
+
+{\ttfamily \#include \char`\"{}engines/router/routerroutelegend.\+h\char`\"{}}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceRouterEngine}{Router\+Engine}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Route\+Leg\+End constructor. 
+
+Sets the occupancy level.
+
+Gets the occupancy level.
+
+Sets the is\+Passed.
+
+Gets the is\+Passed.
+
+Sets the is\+Canceled.
+
+Gets the is\+Canceled.
+
+Sets the delay.
+
+Gets the delay.
+
+Sets the is\+Normal\+Platform.
+
+Gets the is\+Normal\+Platform.
+
+Sets the platform.
+
+Sets the station.
+
+Gets the station.
+
+Sets the time.
+
+Gets the time.
+
+Sets the U\+RI.
+
+Gets the U\+RI.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em const} & Q\+Date\+Time \&time \\
+\hline
+{\em \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}}} & $\ast$station \\
+\hline
+{\em const} & Q\+String \&platform \\
+\hline
+{\em const} & bool \&is\+Normal\+Platform \\
+\hline
+{\em const} & qint16 \&delay \\
+\hline
+{\em const} & bool \&is\+Canceled \\
+\hline
+{\em const} & bool \&is\+Passed \\
+\hline
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level \\
+\hline
+{\em Q\+Object} & $\ast$parent\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Url \&uri
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+Date\+Time \&time
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Date\+Time \&uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}}} & $\ast$station\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Q\+String platform
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&platform\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Normal\+Platform
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Normal\+Platform\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const qint16 delay
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & qint16 \&delay\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Canceled
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Canceled\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const bool is\+Passed
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & bool \&is\+Passed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+const Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level occupancy\+Level
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level \\
+\hline
+\end{DoxyParams}

@@ -24,7 +24,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
-#include "fragmentsfragment.h"
+#include "fragments/fragmentsfragment.h"
 
 namespace Fragments {
 class Page : public QObject

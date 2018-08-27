@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>harbour-berail: src/database/databasemanager.cpp File Reference</title>
+<title>QRail: src/database/databasemanager.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">harbour-berail
+   <div id="projectname">QRail
    </div>
   </td>
  </tr>
@@ -74,7 +74,7 @@ $(function() {
 
 <p>Manager facade constructor.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="databasemanager_8h_source.html">databasemanager.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;database/databasemanager.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -87,6 +87,7 @@ Namespaces</h2></td></tr>
 <p>Sets the QSqlDatabase database.</p>
 <p>Ends the transaction.</p>
 <p>Starts the transaction.</p>
+<p>Executes a given QSqlQuery asynchronous.</p>
 <p>Executes a given QSqlQuery.</p>
 <p>Gets a <a class="el" href="classDatabase_1_1Manager.html">Database::Manager</a> instance.</p>
 <dl class="section author"><dt>Author</dt><dd>Dylan Van Assche </dd></dl>
@@ -103,6 +104,15 @@ Namespaces</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classDatabase_1_1Manager.html">Database::Manager</a> *manager</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Dylan Van Assche </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>20 Jul 2018 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">QSqlQuery</td><td>query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool success</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Dylan Van Assche </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>13 Aug 2018 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">QSqlQuery</td><td>query </td></tr>

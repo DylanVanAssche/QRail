@@ -157,7 +157,7 @@ void RouterEngine::Planner::parsePage(Fragments::Page *page)
          *   - We only emit the pageProgress signal when we reach a certain treshold to avoid spamming the event loop.
          *   - Substract the progress from 100.0 (100 %) since we are looping in the opposite direction.
          *   - Increment the fragIndex before calculating the progress to reach 100 % when fragIndex == 0.
-         *   - Casting to qreal is needed to get a percentage back.
+         *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
          */
         currentProgress = 100.0 - 100.0*(fragIndex+1)/page->fragments().size();
         if(currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {

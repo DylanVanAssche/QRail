@@ -174,8 +174,25 @@ void LiveboardEngine::Factory::pageReceived(Fragments::Page *page)
  */
 void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &finished)
 {
+    qreal previousProgress = 0.0;
+    qreal currentProgress = 0.0; // Reports the page progress through the pageProgress signal
+
     // Parse each connection fragment
-    foreach(Fragments::Fragment *fragment, page->fragments()) {
+    for(qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
+        Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+
+        /*
+         * REMARKS:
+         *   - We only emit the pageProgress signal when we reach a certain treshold to avoid spamming the event loop.
+         *   - Increment the fragIndex before calculating the progress to reach 100 % when fragIndex == 0.
+         *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
+         */
+        currentProgress = 100.0*(fragIndex+1)/page->fragments().size();
+        if(currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
+            previousProgress = currentProgress;
+            emit this->pageProgress(page->uri(), qRound(currentProgress));
+        }
+
         // Lazy construction
         if((this->mode() == LiveboardEngine::Board::Mode::ARRIVALS && fragment->arrivalStationURI() == this->stationURI())
                 || (this->mode() == LiveboardEngine::Board::Mode::DEPARTURES && fragment->departureStationURI() == this->stationURI())) {

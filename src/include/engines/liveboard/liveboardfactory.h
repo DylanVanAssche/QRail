@@ -34,6 +34,7 @@
 #include "engines/vehicle/vehiclestop.h"
 
 #define SECONDS_TO_HOURS_MULTIPLIER 3600 // 3600 seconds = 1 hour
+#define MINIMUM_PROGRESS_INCREMENT 1.0 // 1.0 = 1%
 
 namespace LiveboardEngine {
 class Factory : public QObject
@@ -63,8 +64,10 @@ signals:
     void untilChanged();
     void stationURIChanged();
     void modeChanged();
+    void error(const QString &message);
     void pageReceived(const QUrl &uri);
     void pageRequested(const QUrl &uri);
+    void pageProgress(const QUrl &pageURI, const qint16 &progress);
 
 private slots:
     void pageReceived(Fragments::Page *page);

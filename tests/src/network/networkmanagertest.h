@@ -21,6 +21,7 @@
 #define NetworkManagerTEST_H
 
 #include <QtCore/QObject>
+#include <QtCore/QEvent>
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
 #include "network/networkmanager.h"
@@ -36,11 +37,12 @@ private slots:
     void runNetworkManager();
     void cleanNetworkManager();
 
-public slots:
-    void processReply(QNetworkReply *reply);
+protected:
+    virtual void customEvent(QEvent *event);
 
 private:
     Network::Manager *http;
+    void processHTTPReply(QNetworkReply *reply);
 };
 }
 

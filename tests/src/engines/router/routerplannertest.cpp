@@ -48,7 +48,10 @@ void RouterEngine::PlannerTest::runCSAPlannerTest()
 
 void RouterEngine::PlannerTest::cleanCSAPlannerTest()
 {
-    planner->deleteLater();
+    disconnect(planner, SIGNAL(routesFound(QList<RouterEngine::Route*>)), this, SLOT(processRouteFound(QList<RouterEngine::Route*>)));
+    disconnect(planner, SIGNAL(pageProgress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
+    disconnect(planner, SIGNAL(pageReceived(QUrl)), this, SLOT(pageReceived(QUrl)));
+    disconnect(planner, SIGNAL(pageRequested(QUrl)), this, SLOT(pageRequested(QUrl)));
 }
 
 void RouterEngine::PlannerTest::pageProcess(const QUrl &pageURI, const qint16 &progress)

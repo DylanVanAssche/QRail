@@ -33,7 +33,6 @@ LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get Fragments::Factory instance
     this->setFragmentsFactory(Fragments::Factory::getInstance());
-    connect(this->fragmentsFactory(), SIGNAL(pageReady(Fragments::Page*)), this, SLOT(pageReceived(Fragments::Page*)));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
@@ -80,8 +79,8 @@ void LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, const L
 {
     this->getLiveboardByStationURI(
                 uri,
-                QDateTime::currentDateTime(),
-                QDateTime::currentDateTime().addSecs(3 * SECONDS_TO_HOURS_MULTIPLIER),
+                QDateTime::currentDateTime().toUTC(),
+                QDateTime::currentDateTime().addSecs(3 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
                 mode
                 );
 }
@@ -110,7 +109,7 @@ void LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, const Q
     this->setMode(mode);
     this->setFrom(from);
     this->setUntil(until);
-    this->fragmentsFactory()->getPage(this->until());
+    this->fragmentsFactory()->getPage(this->until(), this);
     this->setLiveboard(new LiveboardEngine::Board(this));
     this->liveboard()->setEntries(QList<VehicleEngine::Vehicle *>());
     this->liveboard()->setFrom(this->from());
@@ -149,7 +148,7 @@ void LiveboardEngine::Factory::pageReceived(Fragments::Page *page)
     bool finished = false;
     if(page->fragments().first()->departureTime() > this->from()) {
         qDebug() << "Requesting another page from Fragments::Factory";
-        this->fragmentsFactory()->getPage(page->hydraPrevious());
+        this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
         emit this->pageRequested(page->hydraPrevious());
     }
     else {
@@ -283,6 +282,19 @@ LiveboardEngine::Board *LiveboardEngine::Factory::liveboard() const
     // Lock using QMutexLocker due concurrent access
     QMutexLocker locker(&liveboardAccessMutex);
     return m_liveboard;
+}
+
+void LiveboardEngine::Factory::customEvent(QEvent *event)
+{
+    if(event->type() == this->fragmentsFactory()->dispatcher()->eventType())
+    {
+        event->accept();
+        Fragments::DispatcherEvent *pageEvent = reinterpret_cast<Fragments::DispatcherEvent *>(event);
+        this->pageReceived(pageEvent->page());
+    }
+    else {
+        event->ignore();
+    }
 }
 
 /**

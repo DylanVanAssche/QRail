@@ -32,12 +32,11 @@ VehicleEngine::Factory* VehicleEngine::Factory::m_instance = nullptr;
 VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     this->setHttp(Network::Manager::getInstance());
-    connect(this->http(), SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processHTTPReply(QNetworkReply *)));
     /*
      * QNAM and callers are living in different threads!
      * INFO: https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl)), this->http(), SLOT(getResource(QUrl)));
+    connect(this, SIGNAL(getResource(QUrl, QObject*)), this->http(), SLOT(getResource(QUrl, QObject*)));
     this->setStationFactory(StationEngine::Factory::getInstance());
 }
 
@@ -77,7 +76,7 @@ VehicleEngine::Factory *VehicleEngine::Factory::getInstance()
 void VehicleEngine::Factory::getVehicleByURI(const QUrl &uri, const QLocale::Language &language)
 {
     this->setLanguage(language);
-    emit this->getResource(uri);
+    emit this->getResource(uri, this);
 }
 
 // Processors
@@ -96,11 +95,12 @@ void VehicleEngine::Factory::getVehicleByURI(const QUrl &uri, const QLocale::Lan
 void VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
 {
     if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
+#ifdef VERBOSE_HTTP_STATUS
         qDebug() << "Content-Header:" << reply->header(QNetworkRequest::ContentTypeHeader).toString();
         qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong() << "bytes";
         qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
         qDebug() << "Cache:" << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
-
+#endif
         // Read HTTP reply
         QString replyData = (QString)reply->readAll();
 
@@ -181,6 +181,19 @@ void VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
 }
 
 // Helpers
+void VehicleEngine::Factory::customEvent(QEvent *event)
+{
+    if(event->type() == this->http()->dispatcher()->eventType())
+    {
+        event->accept();
+        Network::DispatcherEvent *networkEvent = reinterpret_cast<Network::DispatcherEvent *>(event);
+        this->processHTTPReply(networkEvent->reply());
+    }
+    else {
+        event->ignore();
+    }
+}
+
 /**
  * @file vehiclefactory.cpp
  * @author Dylan Van Assche

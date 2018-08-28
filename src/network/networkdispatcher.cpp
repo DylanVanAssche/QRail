@@ -1,0 +1,80 @@
+/*
+ *   This file is part of QRail.
+ *
+ *   QRail is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   QRail is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include "network/networkdispatcher.h"
+
+Network::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
+{
+    // Register a custom event type to the Qt event system
+    this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
+}
+
+void Network::Dispatcher::dispatchReply(QNetworkReply *reply)
+{
+    /*
+     * WARNING:
+     *  QEvent must be allocated on the heap since the event queue will
+     *  take ownership of the QEvent object.
+     *  Accessing it after calling 'postEvents()' isn't safe!
+     * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
+     */
+
+    // Create custom event type
+    Network::DispatcherEvent *event = new Network::DispatcherEvent(this->eventType());
+    event->setReply(reply);
+
+    // Retrieve the caller of the reply
+    QObject *caller = this->findTarget(reply);
+
+    // Post the event to the event queue and remove the reply from the targets list
+    QCoreApplication::postEvent(caller, event);
+    this->removeTarget(reply);
+}
+
+void Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
+{
+    m_targets.insert(reply, caller);
+}
+
+void Network::Dispatcher::removeTarget(QNetworkReply *reply)
+{
+    m_targets.remove(reply);
+}
+
+QObject *Network::Dispatcher::findTarget(QNetworkReply *reply)
+{
+    return m_targets.value(reply);
+}
+
+QEvent::Type Network::Dispatcher::eventType() const
+{
+    return m_eventType;
+}
+
+void Network::Dispatcher::setEventType(const QEvent::Type &eventType)
+{
+    m_eventType = eventType;
+}
+
+QNetworkReply *Network::DispatcherEvent::reply() const
+{
+    return m_reply;
+}
+
+void Network::DispatcherEvent::setReply(QNetworkReply *reply)
+{
+    m_reply = reply;
+}

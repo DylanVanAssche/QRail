@@ -42,10 +42,12 @@ SOURCES += \
     $$PWD/src/engines/vehicle/vehiclefactory.cpp \
     $$PWD/src/database/databasemanager.cpp \
     $$PWD/src/network/networkmanager.cpp \
+    $$PWD/src/network/networkdispatcher.cpp \
     $$PWD/src/fragments/fragmentsfragment.cpp \
     $$PWD/src/fragments/fragmentspage.cpp \
     $$PWD/src/fragments/fragmentsfactory.cpp \
-    $$PWD/src/qrail.cpp
+    $$PWD/src/qrail.cpp \
+    $$PWD/src/fragments/fragmentsdispatcher.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -63,14 +65,16 @@ HEADERS += \
     $$PWD/src/include/engines/vehicle/vehiclefactory.h \
     $$PWD/src/include/engines/station/stationstation.h \
     $$PWD/src/include/engines/station/stationnullstation.h \
+    $$PWD/src/include/engines/station/stationfactory.h \
     $$PWD/src/include/database/databasemanager.h \
     $$PWD/src/include/network/networkmanager.h \
+    $$PWD/src/include/network/networkdispatcher.h \
     $$PWD/src/include/fragments/fragmentsfragment.h \
     $$PWD/src/include/fragments/fragmentspage.h \
     $$PWD/src/include/fragments/fragmentsfactory.h \
+    $$PWD/src/include/fragments/fragmentsdispatcher.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
-    $$PWD/src/include/qrail.h \
-    $$PWD/src/include/engines/station/stationfactory.h
+    $$PWD/src/include/qrail.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

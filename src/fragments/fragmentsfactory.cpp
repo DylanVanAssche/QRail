@@ -35,12 +35,14 @@ Fragments::Factory::Factory(QObject *parent): QObject(parent)
 {
     // Setup the Network::Manager
     this->setHttp(Network::Manager::getInstance());
-    connect(this->http(), SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processHTTPReply(QNetworkReply *)));
     /*
      * QNAM and callers are living in different threads!
      * INFO: https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl)), this->http(), SLOT(getResource(QUrl)));
+    connect(this, SIGNAL(getResource(QUrl, QObject*)), this->http(), SLOT(getResource(QUrl, QObject*)));
+
+    // Setup dispatcher
+    this->setDispatcher(new Fragments::Dispatcher());
 }
 
 /**
@@ -71,15 +73,21 @@ Fragments::Factory *Fragments::Factory::getInstance()
  * @date 09 Aug 2018
  * @brief Requests a page by URI
  * @param const QUrl &uri
+ * @param QObject *caller
  * @package Fragments
  * @public
  * Starts the generation process of a Fragments::Page object by requesting a page by URI.
  * When the page is ready, the pageReady signal will be emitted.
  */
-void Fragments::Factory::getPage(const QUrl &uri)
+void Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
     // Use processing methods to allow other extensions in the future if needed
     this->getPageByURIFromNetworkManager(uri);
+    QUrlQuery query = QUrlQuery(uri);
+    qDebug() << query.queryItemValue("departureTime");
+    QDateTime departureTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
+    qDebug() << departureTime;
+    this->dispatcher()->addTarget(departureTime, caller);
 }
 
 /**
@@ -88,12 +96,13 @@ void Fragments::Factory::getPage(const QUrl &uri)
  * @date 09 Aug 2018
  * @brief Requests a page by departure time
  * @param const QDateTime &departureTime
+ * @param QObject *caller
  * @package Fragments
  * @public
  * Starts the generation process of a Fragments::Page object by requesting a page by departure time.
  * When the page is ready, the pageReady signal will be emitted.
  */
-void Fragments::Factory::getPage(const QDateTime &departureTime)
+void Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
 {
     // Construct the URI of the page
     QUrl uri = QUrl(BASE_URL);
@@ -104,6 +113,20 @@ void Fragments::Factory::getPage(const QDateTime &departureTime)
 
     // Use processing methods to allow other extensions in the future if needed
     this->getPageByURIFromNetworkManager(uri);
+    this->dispatcher()->addTarget(departureTime, caller);
+}
+
+void Fragments::Factory::customEvent(QEvent *event)
+{
+    if(event->type() == this->http()->dispatcher()->eventType())
+    {
+        event->accept();
+        Network::DispatcherEvent *networkEvent = reinterpret_cast<Network::DispatcherEvent *>(event);
+        this->processHTTPReply(networkEvent->reply());
+    }
+    else {
+        event->ignore();
+    }
 }
 
 // Processors
@@ -120,7 +143,7 @@ void Fragments::Factory::getPage(const QDateTime &departureTime)
 void Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Call the getResource slot due different threads
-    emit this->getResource(uri);
+    emit this->getResource(uri, this);
 }
 
 // Helpers
@@ -217,10 +240,12 @@ bool Fragments::Factory::validateData(const QJsonObject &data, const QStringList
 void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
     if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
+#ifdef VERBOSE_HTTP_STATUS
         qDebug() << "Content-Header:" << reply->header(QNetworkRequest::ContentTypeHeader).toString();
         qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong() << "bytes";
         qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
         qDebug() << "Cache:" << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
+#endif
 
         // Read HTTP reply
         QString replyData = (QString)reply->readAll();
@@ -260,7 +285,7 @@ void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                         fragments
                         );
 
-            emit this->pageReady(page);
+            this->dispatcher()->dispatchPage(page);
         }
         else {
             qCritical() << "Parsing JSON-LD data failed:" << parseError.errorString();
@@ -308,3 +333,12 @@ void Fragments::Factory::setHttp(Network::Manager *http)
     m_http = http;
 }
 
+Fragments::Dispatcher *Fragments::Factory::dispatcher() const
+{
+    return m_dispatcher;
+}
+
+void Fragments::Factory::setDispatcher(Fragments::Dispatcher *dispatcher)
+{
+    m_dispatcher = dispatcher;
+}

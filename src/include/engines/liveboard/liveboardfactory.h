@@ -58,6 +58,9 @@ public:
     LiveboardEngine::Board::Mode mode() const;
     LiveboardEngine::Board *liveboard() const;
 
+protected:
+    virtual void customEvent(QEvent *event);
+
 signals:
     void liveboardReady(LiveboardEngine::Board *liveboard);
     void fromChanged();
@@ -68,9 +71,6 @@ signals:
     void pageReceived(const QUrl &uri);
     void pageRequested(const QUrl &uri);
     void pageProgress(const QUrl &pageURI, const qint16 &progress);
-
-private slots:
-    void pageReceived(Fragments::Page *page);
 
 private:
     mutable QMutex liveboardAccessMutex;
@@ -84,6 +84,7 @@ private:
     StationEngine::Factory *m_stationFactory;
     Fragments::Factory *fragmentsFactory() const;
     StationEngine::Factory *stationFactory() const;
+    void pageReceived(Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
     void parsePage(Fragments::Page *page, const bool &finished);
     void setFragmentsFactory(Fragments::Factory *fragmentsFactory);

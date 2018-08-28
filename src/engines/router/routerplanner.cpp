@@ -1,21 +1,19 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
+/*
+ *   This file is part of QRail.
+ *
+ *   QRail is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   QRail is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "engines/router/routerplanner.h"
 RouterEngine::Planner* RouterEngine::Planner::m_instance = nullptr;
@@ -37,7 +35,6 @@ RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setFragmentsFactory(Fragments::Factory::getInstance());
     this->setStationFactory(StationEngine::Factory::getInstance());
     this->setRoutes(QList<RouterEngine::Route *> ()); // Init variable
-    connect(this->fragmentsFactory(), SIGNAL(pageReady(Fragments::Page*)), this, SLOT(pageReceived(Fragments::Page*)));
 }
 
 /**
@@ -110,7 +107,7 @@ void RouterEngine::Planner::getConnections(const QUrl &departureStation, const Q
     this->setDepartureTime(departureTime);
     this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
     this->setMaxTransfers(maxTransfers);
-    this->fragmentsFactory()->getPage(this->arrivalTime());
+    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
 }
 
 // Processors
@@ -760,7 +757,7 @@ void RouterEngine::Planner::pageReceived(Fragments::Page *page)
      */
     if(page->fragments().first()->departureTime() > this->departureTime()) {
         qDebug() << "Requesting another page from Fragments::Factory";
-        this->fragmentsFactory()->getPage(page->hydraPrevious());
+        this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
         emit this->pageRequested(page->hydraPrevious());
     }
 
@@ -904,6 +901,19 @@ void RouterEngine::Planner::setDepartureTime(const QDateTime &departureTime)
 QUrl RouterEngine::Planner::arrivalStationURI() const
 {
     return m_arrivalStationURI;
+}
+
+void RouterEngine::Planner::customEvent(QEvent *event)
+{
+    if(event->type() == this->fragmentsFactory()->dispatcher()->eventType())
+    {
+        event->accept();
+        Fragments::DispatcherEvent *pageEvent = reinterpret_cast<Fragments::DispatcherEvent *>(event);
+        this->pageReceived(pageEvent->page());
+    }
+    else {
+        event->ignore();
+    }
 }
 
 /**

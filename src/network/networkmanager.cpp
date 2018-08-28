@@ -1,22 +1,19 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+ *   This file is part of QRail.
+ *
+ *   QRail is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   QRail is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "network/networkmanager.h"
 Network::Manager* Network::Manager::m_instance = nullptr;
 
@@ -40,13 +37,16 @@ Network::Manager::Manager(QObject* parent): QObject(parent)
     ((QNetworkDiskCache *)this->cache())->setCacheDirectory("~/.local/share/harbour-berail/network");
     this->QNAM()->setCache(this->cache());
 
+    // Init the dispatcher
+    this->setDispatcher(new Network::Dispatcher(this));
+
     // Connect QNetworkAccessManager signals
     connect(this->QNAM(), SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)), this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
     connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SIGNAL(sslErrorsReceived(QNetworkReply*,QList<QSslError>)));
-    connect(this->QNAM(), SIGNAL(finished(QNetworkReply*)), this, SIGNAL(requestCompleted(QNetworkReply*)));
+    connect(this->QNAM(), SIGNAL(finished(QNetworkReply*)), this, SLOT(requestCompleted(QNetworkReply*)));
 
     // Create HTTP client information
-    this->setUserAgent(QString("%1/%2 (%3)").arg("QRail-LC", "V0.0.1", "2.2.0.29"));
+    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC", "0.0.1", "Sailfish OS", "2.2.0.29"));
     this->setAcceptHeader(QString("application/ld+json"));
 }
 
@@ -77,16 +77,19 @@ Network::Manager *Network::Manager::getInstance()
  * @date 17 Jul 2018
  * @brief Get a resource
  * @param const QUrl &url
+ * @param QObject *caller
  * @package Network
  * @public
  * Retrieves a certain resource from the given QUrl &url using a GET request.
- * The result as a QNetworkReply *reply will be available as soon as the requestCompleted signal is fired.
+ * The result as a QNetworkReply *reply will be available through the Qt event system.
+ * Implement the customEvent() method in your QObject to receive the data.
  */
-void Network::Manager::getResource(const QUrl &url)
+void Network::Manager::getResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "GET resource:" << url;
     QNetworkRequest request = this->prepareRequest(url);
-    this->QNAM()->get(request);
+    QNetworkReply *reply = this->QNAM()->get(request);
+    this->dispatcher()->addTarget(reply, caller);
 }
 
 /**
@@ -95,16 +98,19 @@ void Network::Manager::getResource(const QUrl &url)
  * @date 17 Jul 2018
  * @brief Post to a resource
  * @param const QUrl &url
+ * @param QObject *caller
  * @package Network
  * @public
  * Posts data to a certain resource from the given QUrl url using a POST request.
- * The result as a QNetworkReply *reply will be available as soon as the requestCompleted signal is fired.
+ * The result as a QNetworkReply *reply will be available through the Qt event system.
+ * Implement the customEvent() method in your QObject to receive the data.
  */
-void Network::Manager::postResource(const QUrl &url, const QByteArray &data)
+void Network::Manager::postResource(const QUrl &url, const QByteArray &data, QObject *caller)
 {
     qDebug() << "POST resource:" << url;
     QNetworkRequest request = this->prepareRequest(url);
-    this->QNAM()->post(request, data);
+    QNetworkReply *reply = this->QNAM()->post(request, data);
+    this->dispatcher()->addTarget(reply, caller);
 }
 
 /**
@@ -113,16 +119,19 @@ void Network::Manager::postResource(const QUrl &url, const QByteArray &data)
  * @date 17 Jul 2018
  * @brief Delete a resource
  * @param const QUrl &url
+ * @param QObject *caller
  * @package Network
  * @public
  * Deletes a certain resource from the given QUrl url using a DELETE request.
- * The result as a QNetworkReply *reply will be available as soon as the requestCompleted signal is fired.
+ * The result as a QNetworkReply *reply will be available through the Qt event system.
+ * Implement the customEvent() method in your QObject to receive the data.
  */
-void Network::Manager::deleteResource(const QUrl &url)
+void Network::Manager::deleteResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "DELETE resource:" << url;
     QNetworkRequest request = this->prepareRequest(url);
-    this->QNAM()->deleteResource(request);
+    QNetworkReply *reply = this->QNAM()->deleteResource(request);
+    this->dispatcher()->addTarget(reply, caller);
 }
 
 /**
@@ -131,16 +140,24 @@ void Network::Manager::deleteResource(const QUrl &url)
  * @date 21 Jul 2018
  * @brief Head a resource
  * @param const QUrl &url
+ * @param QObject *caller
  * @package Network
  * @public
  * Retrieves the headers of the resource from the given QUrl url using a HEAD request.
- * The result as a QNetworkReply *reply will be available as soon as the requestCompleted signal is fired.
+ * The result as a QNetworkReply *reply will be available through the Qt event system.
+ * Implement the customEvent() method in your QObject to receive the data.
  */
-void Network::Manager::headResource(const QUrl &url)
+void Network::Manager::headResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "HEAD resource:" << url;
     QNetworkRequest request = this->prepareRequest(url);
-    this->QNAM()->head(request);
+    QNetworkReply *reply = this->QNAM()->head(request);
+    this->dispatcher()->addTarget(reply, caller);
+}
+
+void Network::Manager::requestCompleted(QNetworkReply *reply)
+{
+    this->dispatcher()->dispatchReply(reply);
 }
 
 // Helpers
@@ -159,7 +176,6 @@ void Network::Manager::headResource(const QUrl &url)
 QNetworkRequest Network::Manager::prepareRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
-    //request.setHeader(QNetworkRequest::ContentTypeHeader, this->acceptHeader()); // TO DO only for POST or PUT
     request.setRawHeader(QByteArray("Accept"), this->acceptHeader().toUtf8());
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
@@ -287,4 +303,34 @@ QAbstractNetworkCache *Network::Manager::cache() const
 void Network::Manager::setCache(QAbstractNetworkCache *cache)
 {
     m_cache = cache;
+}
+
+/**
+ * @file networkmanager.cpp
+ * @author Dylan Van Assche
+ * @date 28 Aug 2018
+ * @brief Gets the Network::Dispatcher instance
+ * @return Network::Dispatcher *
+ * @package Network
+ * @public
+ * Gets the Network::Dispatcher instance.
+ */
+Network::Dispatcher *Network::Manager::dispatcher() const
+{
+    return m_dispatcher;
+}
+
+/**
+ * @file networkmanager.cpp
+ * @author Dylan Van Assche
+ * @date 28 Aug 2018
+ * @brief Sets the Network::Dispatcher instance
+ * @param Network::Dispatcher *dispatcher
+ * @package Network
+ * @public
+ * Sets the Network::Dispatcher instance.
+ */
+void Network::Manager::setDispatcher(Network::Dispatcher *dispatcher)
+{
+    m_dispatcher = dispatcher;
 }

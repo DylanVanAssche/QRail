@@ -1,21 +1,19 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
+/*
+ *   This file is part of QRail.
+ *
+ *   QRail is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   QRail is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CSAPLANNER_H
 #define CSAPLANNER_H
@@ -45,7 +43,7 @@
 #include "engines/station/stationfactory.h"
 
 // Uncomment to enable logging of CSA parts
-#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
+//#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
 //#define VERBOSE_TMIN // Enable logging of the Tmin calculation
 //#define VERBOSE_T_ARRAY // Enable logging of the T array after each update
 //#define VERBOSE_S_ARRAY // Enable logging of the S array after each update
@@ -80,15 +78,15 @@ public:
     QUrl departureStationURI() const;
     QUrl arrivalStationURI() const;
 
+protected:
+    virtual void customEvent(QEvent *event);
+
 signals:
     void routesFound(const QList<RouterEngine::Route *> &routes);
     void error(const QString &message);
     void pageRequested(const QUrl &pageURI);
     void pageReceived(const QUrl &pageURI);
     void pageProgress(const QUrl &pageURI, const qint16 &progress);
-
-private slots:
-    void pageReceived(Fragments::Page *page);
 
 private:
     mutable QMutex syncThreadMutex;
@@ -105,6 +103,7 @@ private:
     explicit Planner(QObject *parent = nullptr);
     static RouterEngine::Planner *m_instance;
     void parsePage(Fragments::Page *page);
+    void pageReceived(Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
     Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(Fragments::Factory *value);

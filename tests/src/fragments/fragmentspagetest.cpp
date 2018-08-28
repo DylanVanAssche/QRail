@@ -58,6 +58,4 @@ void Fragments::PageTest::runLinkedConnectionPageTest()
 void Fragments::PageTest::cleanLinkedConnectionPageTest()
 {
     qDebug() << "Cleaning up Fragments::Page test";
-
-    page->deleteLater();
 }

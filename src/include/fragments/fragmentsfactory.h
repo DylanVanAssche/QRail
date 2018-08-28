@@ -27,9 +27,12 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QRegularExpression>
 #include <QtCore/QDebug>
+
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
+#include "fragments/fragmentsdispatcher.h"
 #include "network/networkmanager.h"
+
 #define BASE_URL "https://graph.irail.be/sncb/connections"
 
 // Factory pattern to generate Linked Connections fragments on the fly
@@ -39,26 +42,30 @@ class Factory: public QObject
     Q_OBJECT
 public:
     static Fragments::Factory *getInstance();
-    void getPage(const QUrl &uri);
-    void getPage(const QDateTime &departureTime);
+    void getPage(const QUrl &uri, QObject *caller);
+    void getPage(const QDateTime &departureTime, QObject *caller);
+    Fragments::Dispatcher *dispatcher() const;
+
+protected:
+    virtual void customEvent(QEvent *event);
 
 signals:
     void pageReady(Fragments::Page *page);
-    void getResource(const QUrl &uri);
+    void getResource(const QUrl &uri, QObject *caller);
     void error(const QString &message);
-
-private slots:
-    void processHTTPReply(QNetworkReply *reply);
 
 private:
     static Fragments::Factory *m_instance;
     Network::Manager *m_http;
+    Fragments::Dispatcher *m_dispatcher;
     void getPageByURIFromNetworkManager(const QUrl &uri);
     Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
     bool validateData(const QJsonObject &data, const QStringList &properties);
-    explicit Factory(QObject *parent = nullptr);
+    void processHTTPReply(QNetworkReply *reply);
     Network::Manager *http() const;
     void setHttp(Network::Manager *http);
+    void setDispatcher(Fragments::Dispatcher *dispatcher);
+    explicit Factory(QObject *parent = nullptr);
 };
 }
 

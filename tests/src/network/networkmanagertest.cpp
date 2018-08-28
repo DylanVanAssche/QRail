@@ -31,7 +31,7 @@ void Network::ManagerTest::initNetworkManager()
     qDebug() << "Init Network::Manager test";
 
     http = Network::Manager::getInstance();
-    connect(http, SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processReply(QNetworkReply *)));
+    //connect(http, SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processReply(QNetworkReply *)));
 }
 
 /**
@@ -50,27 +50,27 @@ void Network::ManagerTest::runNetworkManager()
     qDebug() << "Running Network::Manager test";
 
     // Activate QSignalSpy
-    QSignalSpy spy(http, SIGNAL(requestCompleted(QNetworkReply *)));
+    //QSignalSpy spy(http, SIGNAL(requestCompleted(QNetworkReply *)));
 
     // HTTP GET
-    http->getResource(QUrl("https://httpbin.org/get"));
+    http->getResource(QUrl("https://httpbin.org/get"), this);
     // Wait for signal
-    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
+    //QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
     // HTTP POST
-    http->postResource(QUrl("https://httpbin.org/post"), QByteArray("HTTP POST OK"));
+    http->postResource(QUrl("https://httpbin.org/post"), QByteArray("HTTP POST OK"), this);
     // Wait for signal
-    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
+    //QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
     // HTTP DELETE
-    http->deleteResource(QUrl("https://httpbin.org/delete"));
+    http->deleteResource(QUrl("https://httpbin.org/delete"), this);
     // Wait for signal
-    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
+    //QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 
-    // HTTP POST
-    http->headResource(QUrl("https://httpbin.org/get"));
+    // HTTP HEAD
+    http->headResource(QUrl("https://httpbin.org/get"), this);
     // Wait for signal
-    QVERIFY(spy.wait(NETWORK_WAIT_TIME));
+    //QVERIFY(spy.wait(NETWORK_WAIT_TIME));
 }
 
 /**
@@ -84,7 +84,22 @@ void Network::ManagerTest::cleanNetworkManager()
 {
     qDebug() << "Cleaning up Network::Manager test";
 
-    disconnect(http, SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processReply(QNetworkReply *)));
+    //disconnect(http, SIGNAL(requestCompleted(QNetworkReply *)), this, SLOT(processReply(QNetworkReply *)));
+}
+
+void Network::ManagerTest::customEvent(QEvent *event)
+{
+    if(event->type() == http->dispatcher()->eventType())
+    {
+        qDebug() << "Received Network::Dispatcher event in VehicleEngine::Factory, casting now!";
+        event->accept();
+        Network::DispatcherEvent *networkEvent = reinterpret_cast<Network::DispatcherEvent *>(event);
+        this->processHTTPReply(networkEvent->reply());
+    }
+    else {
+        qDebug() << "Unwanted event in VehicleEngine::Factory, ignoring...";
+        event->ignore();
+    }
 }
 
 /**
@@ -94,7 +109,7 @@ void Network::ManagerTest::cleanNetworkManager()
  * @brief Manager reply handler
  * Handles the HTTP replies from the NetworkManager by checking the HTTP status code and log it.
  */
-void Network::ManagerTest::processReply(QNetworkReply *reply)
+void Network::ManagerTest::processHTTPReply(QNetworkReply *reply)
 {
     QCOMPARE(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(), 200); // HTTP 200 OK check
     qDebug() << reply->readAll();

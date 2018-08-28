@@ -21,9 +21,8 @@
 #include "qrail.h"
 #include "network/networkmanagertest.h"
 #include "database/databasemanagertest.h"
-#include "fragments/fragmentsfragmenttest.h"
 #include "fragments/fragmentspagetest.h"
-#include "fragments/fragmentsfactorytest.h"
+#include "fragments/fragmentsfragmenttest.h"
 #include "engines/router/routerplannertest.h"
 #include "engines/liveboard/liveboardfactorytest.h"
 #include "engines/vehicle/vehiclefactorytest.h"
@@ -46,74 +45,38 @@ int main(int argc, char *argv[])
         initQRail();
 
         // Create test instances
-        int networkManagerResult = 0;
-        int dbManagerResult = 0;
-        int lcFragmentResult = 0;
-        int lcPageResult = 0;
-        int lcFactoryResult = 0;
-        int routerPlannerResult = 0;
-        int liveboardFactoryResult = 0;
+        int networkManagerResult = -1;
+        int dbManagerResult = -1;
+        int lcFragmentResult = -1;
+        int lcPageResult = -1;
+        int routerPlannerResult = -1;
+        int liveboardFactoryResult = -1;
         int vehicleFactoryResult = -1;
         Network::ManagerTest testSuiteNetworkManager;
         Database::ManagerTest testSuiteDBManager;
         Fragments::FragmentTest testSuiteLCFragment;
         Fragments::PageTest testSuiteLCPage;
-        Fragments::FactoryTest testSuiteLCFactory;
         RouterEngine::PlannerTest testSuiteCSAPlanner;
         LiveboardEngine::FactoryTest testSuiteLiveboardFactory;
         VehicleEngine::FactoryTest testSuiteVehicleFactory;
 
         // Run unit tests without passing arguments
-        /*networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
         dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
-        lcFactoryResult = QTest::qExec(&testSuiteLCFactory, 0, nullptr);*/
-
-        /*
-         * Wait until all the unit tests are completed to avoid network replies
-         * from httpbin.org in the RouterEngine::Planner. If you remove this statement,
-         * wrong HTTP replies will land in the RouterEngine::Planner due the fact that the
-         * Network::Manager is a singleton instance! The internal JSON validation
-         * for the Linked Connections fragment will fail!
-         *
-         * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
-         */
-        //QTest::qWait(WAIT_TIME);
 
         // Run RouterEngine::Planner integration test
-        //routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
-
-        /*
-         * Wait until all the unit tests are completed to avoid network replies
-         * from httpbin.org in the LiveboardEngine::Factory. If you remove this statement,
-         * wrong HTTP replies will land in the LiveboardEngine::Factory due the fact that the
-         * Network::Manager is a singleton instance! The internal JSON validation
-         * for the Linked Connections fragment will fail!
-         *
-         * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
-         */
-        //QTest::qWait(WAIT_TIME);
+        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
         // Run LiveboardEngine::Factory integration test
-        //liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
-
-        /*
-         * Wait until all the unit tests are completed to avoid network replies
-         * from httpbin.org in the VehicleEngine::Factory. If you remove this statement,
-         * wrong HTTP replies will land in the VehicleEngine::Factory due the fact that the
-         * Network::Manager is a singleton instance! The internal JSON validation
-         * for the Linked Connections fragment will fail!
-         *
-         * REMARK: QTest::qWait() still allows processing for events, QTest::qSleep() does not!
-         */
-        //QTest::qWait(WAIT_TIME);
+        liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
 
         // Run LiveboardEngine::Factory integration test
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
         // Return the status code of every test for CI/CD
-        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | lcFactoryResult | routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
+        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
     });
     return app.exec();
 }

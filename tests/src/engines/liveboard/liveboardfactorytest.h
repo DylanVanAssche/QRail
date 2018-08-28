@@ -8,7 +8,7 @@
 
 #include "engines/liveboard/liveboardfactory.h"
 
-#define LIVEBOARD_WAIT_TIME 15000
+#define LIVEBOARD_WAIT_TIME 45000
 
 namespace LiveboardEngine {
 class FactoryTest : public QObject

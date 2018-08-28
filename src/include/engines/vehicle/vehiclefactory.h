@@ -33,6 +33,9 @@
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 
+// Uncomment to enable verbose output
+//#define VERBOSE_HTTP_STATUS
+
 namespace VehicleEngine {
 class Factory : public QObject
 {
@@ -43,13 +46,13 @@ public:
     QLocale::Language language() const;
     void setLanguage(const QLocale::Language &language);
 
+protected:
+    virtual void customEvent(QEvent *event);
+
 signals:
     void vehicleReady(VehicleEngine::Vehicle *vehicle);
-    void getResource(const QUrl &uri);
+    void getResource(const QUrl &uri, QObject *caller);
     void error(const QString &message);
-
-private slots:
-    void processHTTPReply(QNetworkReply *reply);
 
 private:
     Network::Manager *m_http;
@@ -62,6 +65,7 @@ private:
     void setStationFactory(StationEngine::Factory *stationFactory);
     VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
     VehicleEngine::Stop::OccupancyLevel generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
+    void processHTTPReply(QNetworkReply *reply);
     static VehicleEngine::Factory *m_instance;
     explicit Factory(QObject *parent = nullptr);
 };

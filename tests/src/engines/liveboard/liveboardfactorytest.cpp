@@ -4,7 +4,7 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 {
     qDebug() << "Init LiveboardEngine::Factory test";
     factory = LiveboardEngine::Factory::getInstance();
-    connect(factory, SIGNAL(liveboardReady(LiveboardEngine::Board*)), this, SLOT(liveboardReceived(LiveboardEngine::Board*)));
+    connect(factory, SIGNAL(finished(LiveboardEngine::Board*)), this, SLOT(liveboardReceived(LiveboardEngine::Board*)));
 }
 
 void LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
@@ -13,7 +13,7 @@ void LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     // Activate QSignalSpy
     qRegisterMetaType< LiveboardEngine::Board* >("LiveboardEngine::Board"); // register custom class
-    QSignalSpy spyLiveboard(factory, SIGNAL(liveboardReady(LiveboardEngine::Board*)));
+    QSignalSpy spyLiveboard(factory, SIGNAL(finished(LiveboardEngine::Board*)));
 
     qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
     factory->getLiveboardByStationURI(

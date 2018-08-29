@@ -46,8 +46,8 @@ SOURCES += \
     $$PWD/src/fragments/fragmentsfragment.cpp \
     $$PWD/src/fragments/fragmentspage.cpp \
     $$PWD/src/fragments/fragmentsfactory.cpp \
-    $$PWD/src/qrail.cpp \
-    $$PWD/src/fragments/fragmentsdispatcher.cpp
+    $$PWD/src/fragments/fragmentsdispatcher.cpp \
+    $$PWD/src/qrail.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \

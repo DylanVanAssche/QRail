@@ -84,9 +84,9 @@ protected:
 signals:
     void routesFound(const QList<RouterEngine::Route *> &routes);
     void error(const QString &message);
-    void pageRequested(const QUrl &pageURI);
-    void pageReceived(const QUrl &pageURI);
-    void pageProgress(const QUrl &pageURI, const qint16 &progress);
+    void requested(const QUrl &pageURI);
+    void processing(const QUrl &pageURI);
+    void progress(const QUrl &pageURI, const qint16 &progress);
 
 private:
     mutable QMutex syncThreadMutex;
@@ -103,7 +103,7 @@ private:
     explicit Planner(QObject *parent = nullptr);
     static RouterEngine::Planner *m_instance;
     void parsePage(Fragments::Page *page);
-    void pageReceived(Fragments::Page *page);
+    void processing(Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
     Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(Fragments::Factory *value);

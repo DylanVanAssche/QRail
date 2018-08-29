@@ -10,9 +10,9 @@ void RouterEngine::PlannerTest::initCSAPlannerTest()
 
     // Connect the signals
     connect(planner, SIGNAL(routesFound(QList<RouterEngine::Route*>)), this, SLOT(processRouteFound(QList<RouterEngine::Route*>)));
-    connect(planner, SIGNAL(pageProgress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
-    connect(planner, SIGNAL(pageReceived(QUrl)), this, SLOT(pageReceived(QUrl)));
-    connect(planner, SIGNAL(pageRequested(QUrl)), this, SLOT(pageRequested(QUrl)));
+    connect(planner, SIGNAL(progress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
+    connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
+    connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
 
 void RouterEngine::PlannerTest::runCSAPlannerTest()
@@ -49,9 +49,9 @@ void RouterEngine::PlannerTest::runCSAPlannerTest()
 void RouterEngine::PlannerTest::cleanCSAPlannerTest()
 {
     disconnect(planner, SIGNAL(routesFound(QList<RouterEngine::Route*>)), this, SLOT(processRouteFound(QList<RouterEngine::Route*>)));
-    disconnect(planner, SIGNAL(pageProgress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
-    disconnect(planner, SIGNAL(pageReceived(QUrl)), this, SLOT(pageReceived(QUrl)));
-    disconnect(planner, SIGNAL(pageRequested(QUrl)), this, SLOT(pageRequested(QUrl)));
+    disconnect(planner, SIGNAL(progress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
+    disconnect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
+    disconnect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
 
 void RouterEngine::PlannerTest::pageProcess(const QUrl &pageURI, const qint16 &progress)
@@ -62,12 +62,12 @@ void RouterEngine::PlannerTest::pageProcess(const QUrl &pageURI, const qint16 &p
     }
 }
 
-void RouterEngine::PlannerTest::pageReceived(const QUrl &pageURI)
+void RouterEngine::PlannerTest::processing(const QUrl &pageURI)
 {
     qDebug() << "Page received:" << pageURI.toString();
 }
 
-void RouterEngine::PlannerTest::pageRequested(const QUrl &pageURI)
+void RouterEngine::PlannerTest::requested(const QUrl &pageURI)
 {
     qDebug() << "Page requested:" << pageURI.toString();
 }

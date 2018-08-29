@@ -62,15 +62,15 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void liveboardReady(LiveboardEngine::Board *liveboard);
     void fromChanged();
     void untilChanged();
     void stationURIChanged();
     void modeChanged();
     void error(const QString &message);
-    void pageReceived(const QUrl &uri);
-    void pageRequested(const QUrl &uri);
-    void pageProgress(const QUrl &pageURI, const qint16 &progress);
+    void requested(const QUrl &uri);
+    void processing(const QUrl &uri);
+    void progress(const QUrl &uri, const qint16 &progress);
+    void finished(LiveboardEngine::Board *liveboard);
 
 private:
     mutable QMutex liveboardAccessMutex;
@@ -84,7 +84,7 @@ private:
     StationEngine::Factory *m_stationFactory;
     Fragments::Factory *fragmentsFactory() const;
     StationEngine::Factory *stationFactory() const;
-    void pageReceived(Fragments::Page *page);
+    void processing(Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
     void parsePage(Fragments::Page *page, const bool &finished);
     void setFragmentsFactory(Fragments::Factory *fragmentsFactory);

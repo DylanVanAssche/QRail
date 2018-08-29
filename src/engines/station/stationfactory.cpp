@@ -285,7 +285,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                                            openingHours,
                                            averageStopTimes,
                                            platforms,
-                                           nullptr
+                                           this
                                            );
             }
             else {
@@ -295,7 +295,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                                            position,
                                            averageStopTimes,
                                            platforms,
-                                           nullptr
+                                           this
                                            );
             }
 

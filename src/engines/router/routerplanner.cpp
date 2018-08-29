@@ -132,7 +132,7 @@ void RouterEngine::Planner::parsePage(Fragments::Page *page)
     QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTime().addYears(1)); // Fake an infinite time by adding 1 year to the current date, this is required for the Profile Scan Algortihm to work
     qint16 INFINITE_TRANSFERS = 32767; // Fake an infinite number of transfers by setting it to 32767 (16 bits signed 01111111 11111111)
     qreal previousProgress = 0.0;
-    qreal currentProgress = 0.0; // Reports the page progress through the pageProgress signal
+    qreal currentProgress = 0.0; // Reports the page progress through the progress signal
 
 #ifdef VERBOSE_PARAMETERS
     qDebug() << "Planning Linked Connections page:";
@@ -151,7 +151,7 @@ void RouterEngine::Planner::parsePage(Fragments::Page *page)
 
         /*
          * REMARKS:
-         *   - We only emit the pageProgress signal when we reach a certain treshold to avoid spamming the event loop.
+         *   - We only emit the progress signal when we reach a certain treshold to avoid spamming the event loop.
          *   - Substract the progress from 100.0 (100 %) since we are looping in the opposite direction.
          *   - Increment the fragIndex before calculating the progress to reach 100 % when fragIndex == 0.
          *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
@@ -159,7 +159,7 @@ void RouterEngine::Planner::parsePage(Fragments::Page *page)
         currentProgress = 100.0 - 100.0*(fragIndex+1)/page->fragments().size();
         if(currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
             previousProgress = currentProgress;
-            emit this->pageProgress(page->uri(), qRound(currentProgress));
+            emit this->progress(page->uri(), qRound(currentProgress));
         }
 
         // We can only process fragments which are departing after our departure time
@@ -746,10 +746,10 @@ RouterEngine::StationStopProfile *RouterEngine::Planner::getFirstReachableConnec
  * When a page is received from the Fragments::Factory this handler
  * will launch a separate thread to process the page.
  */
-void RouterEngine::Planner::pageReceived(Fragments::Page *page)
+void RouterEngine::Planner::processing(Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:" << page << "starting processing thread...";
-    emit this->pageReceived(page->uri());
+    emit this->processing(page->uri());
 
     /*
      * Before processing our received page we check if we the first fragment passed our departure time.
@@ -758,7 +758,7 @@ void RouterEngine::Planner::pageReceived(Fragments::Page *page)
     if(page->fragments().first()->departureTime() > this->departureTime()) {
         qDebug() << "Requesting another page from Fragments::Factory";
         this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-        emit this->pageRequested(page->hydraPrevious());
+        emit this->requested(page->hydraPrevious());
     }
 
     // Launch processing thread
@@ -909,7 +909,7 @@ void RouterEngine::Planner::customEvent(QEvent *event)
     {
         event->accept();
         Fragments::DispatcherEvent *pageEvent = reinterpret_cast<Fragments::DispatcherEvent *>(event);
-        this->pageReceived(pageEvent->page());
+        this->processing(pageEvent->page());
     }
     else {
         event->ignore();

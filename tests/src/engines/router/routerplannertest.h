@@ -19,8 +19,8 @@ private slots:
 public slots:
     void processRouteFound(const QList<RouterEngine::Route *> &routes);
     void pageProcess(const QUrl &pageURI, const qint16 &progress);
-    void pageReceived(const QUrl &pageURI);
-    void pageRequested(const QUrl &pageURI);
+    void processing(const QUrl &pageURI);
+    void requested(const QUrl &pageURI);
 
 private:
     RouterEngine::Planner *planner;

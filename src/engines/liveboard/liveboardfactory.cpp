@@ -135,11 +135,11 @@ void LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, const Q
  * Handles the incoming Fragments::Page pages from the Fragments::Factory.
  * New pages are requested if the time range isn't fulfilled in DESCENDING order of the departure time.
  */
-void LiveboardEngine::Factory::pageReceived(Fragments::Page *page)
+void LiveboardEngine::Factory::processing(Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:" << page << "starting processing thread...";
     // Launch processing thread
-    emit this->pageReceived(page->uri());
+    emit this->processing(page->uri());
 
     /*
      * Before processing our received page we check if we the first fragment passed our departure time.
@@ -149,7 +149,7 @@ void LiveboardEngine::Factory::pageReceived(Fragments::Page *page)
     if(page->fragments().first()->departureTime() > this->from()) {
         qDebug() << "Requesting another page from Fragments::Factory";
         this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-        emit this->pageRequested(page->hydraPrevious());
+        emit this->requested(page->hydraPrevious());
     }
     else {
         finished = true;
@@ -169,12 +169,12 @@ void LiveboardEngine::Factory::pageReceived(Fragments::Page *page)
  * @public
  * Parses the incoming pages in a separate thread using the QtConcurrent framework.
  * If the finished parameter is set to true, the LiveboardEngine::Board is ready and
- * the liveboardReady signal is emitted.
+ * the finished signal is emitted.
  */
 void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &finished)
 {
     qreal previousProgress = 0.0;
-    qreal currentProgress = 0.0; // Reports the page progress through the pageProgress signal
+    qreal currentProgress = 0.0; // Reports the page progress through the progress signal
 
     // Parse each connection fragment
     for(qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
@@ -182,14 +182,14 @@ void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &fini
 
         /*
          * REMARKS:
-         *   - We only emit the pageProgress signal when we reach a certain treshold to avoid spamming the event loop.
+         *   - We only emit the progress signal when we reach a certain treshold to avoid spamming the event loop.
          *   - Increment the fragIndex before calculating the progress to reach 100 % when fragIndex == 0.
          *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
          */
         currentProgress = 100.0*(fragIndex+1)/page->fragments().size();
         if(currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
             previousProgress = currentProgress;
-            emit this->pageProgress(page->uri(), qRound(currentProgress));
+            emit this->progress(page->uri(), qRound(currentProgress));
         }
 
         // Lazy construction
@@ -214,8 +214,7 @@ void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &fini
                         false, // isArrivalCanceled
                         false, // isExtraStop
                         VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
-                        VehicleEngine::Stop::Type::STOP,
-                        nullptr // parent TO DO
+                        VehicleEngine::Stop::Type::STOP
                         );
 
             // Get vehicle information
@@ -225,8 +224,7 @@ void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &fini
                         fragment->routeURI(),
                         fragment->tripURI(),
                         fragment->direction(),
-                        intermediaryStops,
-                        nullptr // parent TO DO
+                        intermediaryStops
                         );
 
             // Liveboard arrivals mode
@@ -234,7 +232,7 @@ void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &fini
         }
     }
 
-    // Fetching fragment pages complete, emit the liveboardReady signal
+    // Fetching fragment pages complete, emit the finished signal
     if(finished) {
         qDebug() << "Finished fetching liveboard pages";
 
@@ -262,7 +260,7 @@ void LiveboardEngine::Factory::parsePage(Fragments::Page *page, const bool &fini
             });
         }
         this->liveboard()->setEntries(entries);
-        emit this->liveboardReady(this->liveboard());
+        emit this->finished(this->liveboard());
     }
 }
 
@@ -290,7 +288,7 @@ void LiveboardEngine::Factory::customEvent(QEvent *event)
     {
         event->accept();
         Fragments::DispatcherEvent *pageEvent = reinterpret_cast<Fragments::DispatcherEvent *>(event);
-        this->pageReceived(pageEvent->page());
+        this->processing(pageEvent->page());
     }
     else {
         event->ignore();

@@ -1,37 +1,35 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/router/routertransfer.h"
+using namespace QRail;
 
 /**
  * @file routertransfer.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief RouterEngine::Transfer constructor
- * @param RouterEngine::RouteLeg *departureLeg
- * @param RouterEngine::RouteLeg *arrivalLeg
+ * @brief QRail::RouterEngine::Transfer constructor
+ * @param QRail::RouterEngine::RouteLeg *departureLeg
+ * @param QRail::RouterEngine::RouteLeg *arrivalLeg
  * @param QObject *parent = nullptr
  * @package RouterEngine
  * @public
- * Constructs a RouterEngine::Transfer for the journey extraction.
+ * Constructs a QRail::RouterEngine::Transfer for the journey extraction.
  */
-RouterEngine::Transfer::Transfer(RouterEngine::RouteLeg *departureLeg, RouterEngine::RouteLeg *arrivalLeg, QObject *parent) : QObject(parent)
+QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departureLeg, QRail::RouterEngine::RouteLeg *arrivalLeg, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_departureLeg = departureLeg;
@@ -39,23 +37,23 @@ RouterEngine::Transfer::Transfer(RouterEngine::RouteLeg *departureLeg, RouterEng
 
     // When both legs are available, we have a TRANSFER
     if(departureLeg && arrivalLeg) {
-        m_type = RouterEngine::Transfer::Type::TRANSFER;
+        m_type = QRail::RouterEngine::Transfer::Type::TRANSFER;
         m_departure = departureLeg->departure();
         m_arrival = arrivalLeg->arrival();
     }
     // Only departure is available, we have a DEPARTURE
     else if(departureLeg) {
-        m_type = RouterEngine::Transfer::Type::DEPARTURE;
+        m_type = QRail::RouterEngine::Transfer::Type::DEPARTURE;
         m_departure = departureLeg->departure();
         m_arrival = nullptr;
     }
     else if(arrivalLeg) {
-        m_type = RouterEngine::Transfer::Type::ARRIVAL;
+        m_type = QRail::RouterEngine::Transfer::Type::ARRIVAL;
         m_departure = nullptr;
         m_arrival = arrivalLeg->arrival();
     }
     else {
-        m_type = RouterEngine::Transfer::Type::INVALID;
+        m_type = QRail::RouterEngine::Transfer::Type::INVALID;
         m_departure = nullptr;
         m_arrival = nullptr;
         qCritical() << "A transfer needs at least a departure or arrival!";
@@ -68,12 +66,12 @@ RouterEngine::Transfer::Transfer(RouterEngine::RouteLeg *departureLeg, RouterEng
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the departure leg
- * @return RouterEngine::RouteLeg *departureLeg
+ * @return QRail::RouterEngine::RouteLeg *departureLeg
  * @package RouterEngine
  * @public
  * Gets the departure leg and returns it.
  */
-RouterEngine::RouteLeg *RouterEngine::Transfer::departureLeg() const
+QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::departureLeg() const
 {
     return m_departureLeg;
 }
@@ -83,13 +81,13 @@ RouterEngine::RouteLeg *RouterEngine::Transfer::departureLeg() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the departure leg
- * @param RouterEngine::RouteLeg *departureLeg
+ * @param QRail::RouterEngine::RouteLeg *departureLeg
  * @package RouterEngine
  * @public
- * Sets the departure leg to the given RouterEngine::RouteLeg *departureLeg.
+ * Sets the departure leg to the given QRail::RouterEngine::RouteLeg *departureLeg.
  * Emits the departureLegChanged signal.
  */
-void RouterEngine::Transfer::setDepartureLeg(RouterEngine::RouteLeg *departureLeg)
+void QRail::RouterEngine::Transfer::setDepartureLeg(QRail::RouterEngine::RouteLeg *departureLeg)
 {
     m_departureLeg = departureLeg;
     emit this->departureLegChanged();
@@ -100,12 +98,12 @@ void RouterEngine::Transfer::setDepartureLeg(RouterEngine::RouteLeg *departureLe
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the arrival leg
- * @return RouterEngine::RouteLeg *arrivalLeg
+ * @return QRail::RouterEngine::RouteLeg *arrivalLeg
  * @package RouterEngine
  * @public
  * Gets the arrival leg and returns it.
  */
-RouterEngine::RouteLeg *RouterEngine::Transfer::arrivalLeg() const
+QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::arrivalLeg() const
 {
     return m_arrivalLeg;
 }
@@ -115,13 +113,13 @@ RouterEngine::RouteLeg *RouterEngine::Transfer::arrivalLeg() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the arrival leg
- * @param RouterEngine::RouteLeg *arrivalLeg
+ * @param QRail::RouterEngine::RouteLeg *arrivalLeg
  * @package RouterEngine
  * @public
- * Sets the arrival leg to the given RouterEngine::RouteLeg *arrivalLeg.
+ * Sets the arrival leg to the given QRail::RouterEngine::RouteLeg *arrivalLeg.
  * Emits the arrivalLegChanged signal.
  */
-void RouterEngine::Transfer::setArrivalLeg(RouterEngine::RouteLeg *arrivalLeg)
+void QRail::RouterEngine::Transfer::setArrivalLeg(QRail::RouterEngine::RouteLeg *arrivalLeg)
 {
     m_arrivalLeg = arrivalLeg;
     emit this->arrivalLegChanged();
@@ -132,12 +130,12 @@ void RouterEngine::Transfer::setArrivalLeg(RouterEngine::RouteLeg *arrivalLeg)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the departure
- * @return RouterEngine::RouteLegEnd *departure
+ * @return QRail::RouterEngine::RouteLegEnd *departure
  * @package RouterEngine
  * @public
  * Gets the departure and returns it.
  */
-RouterEngine::RouteLegEnd *RouterEngine::Transfer::departure() const
+QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::departure() const
 {
     return m_departure;
 }
@@ -147,13 +145,13 @@ RouterEngine::RouteLegEnd *RouterEngine::Transfer::departure() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the departure leg
- * @param RouterEngine::RouteLegEnd *departure
+ * @param QRail::RouterEngine::RouteLegEnd *departure
  * @package RouterEngine
  * @public
- * Sets the departure to the given RouterEngine::RouteLegEnd *departure.
+ * Sets the departure to the given QRail::RouterEngine::RouteLegEnd *departure.
  * Emits the departureChanged signal.
  */
-void RouterEngine::Transfer::setDeparture(RouterEngine::RouteLegEnd *departure)
+void QRail::RouterEngine::Transfer::setDeparture(QRail::RouterEngine::RouteLegEnd *departure)
 {
     m_departure = departure;
     emit this->departureChanged();
@@ -164,12 +162,12 @@ void RouterEngine::Transfer::setDeparture(RouterEngine::RouteLegEnd *departure)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the arrival
- * @return RouterEngine::RouteLegEnd *arrival
+ * @return QRail::RouterEngine::RouteLegEnd *arrival
  * @package RouterEngine
  * @public
  * Gets the arrival and returns it.
  */
-RouterEngine::RouteLegEnd *RouterEngine::Transfer::arrival() const
+QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::arrival() const
 {
     return m_arrival;
 }
@@ -179,13 +177,13 @@ RouterEngine::RouteLegEnd *RouterEngine::Transfer::arrival() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the arrival
- * @param RouterEngine::RouteLegEnd *arrival
+ * @param QRail::RouterEngine::RouteLegEnd *arrival
  * @package RouterEngine
  * @public
- * Sets the arrival to the given RouterEngine::RouteLegEnd *arrival.
+ * Sets the arrival to the given QRail::RouterEngine::RouteLegEnd *arrival.
  * Emits the arrivalChanged signal.
  */
-void RouterEngine::Transfer::setArrival(RouteLegEnd *arrival)
+void QRail::RouterEngine::Transfer::setArrival(RouteLegEnd *arrival)
 {
     m_arrival = arrival;
     emit this->arrivalChanged();
@@ -196,12 +194,12 @@ void RouterEngine::Transfer::setArrival(RouteLegEnd *arrival)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the type
- * @return const RouterEngine::Transfer::Type type
+ * @return const QRail::RouterEngine::Transfer::Type type
  * @package RouterEngine
  * @public
  * Gets the type and returns it.
  */
-RouterEngine::Transfer::Type RouterEngine::Transfer::type() const
+QRail::RouterEngine::Transfer::Type QRail::RouterEngine::Transfer::type() const
 {
     return m_type;
 }
@@ -211,13 +209,13 @@ RouterEngine::Transfer::Type RouterEngine::Transfer::type() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the type
- * @param const RouterEngine::Transfer::Type &type
+ * @param const QRail::RouterEngine::Transfer::Type &type
  * @package RouterEngine
  * @public
- * Sets the type to the given RouterEngine::Transfer::Type &type.
+ * Sets the type to the given QRail::RouterEngine::Transfer::Type &type.
  * Emits the typeChanged signal.
  */
-void RouterEngine::Transfer::setType(const RouterEngine::Transfer::Type &type)
+void QRail::RouterEngine::Transfer::setType(const QRail::RouterEngine::Transfer::Type &type)
 {
     m_type = type;
     emit this->typeChanged();
@@ -234,16 +232,16 @@ void RouterEngine::Transfer::setType(const RouterEngine::Transfer::Type &type)
  * @public
  * Gets the uri of the underlying route and returns it.
  */
-QUrl RouterEngine::Transfer::uri() const
+QUrl QRail::RouterEngine::Transfer::uri() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->uri();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->uri();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QUrl();
     }
 }
@@ -258,16 +256,16 @@ QUrl RouterEngine::Transfer::uri() const
  * @public
  * Gets the station of the underlying route and returns it.
  */
-StationEngine::Station *RouterEngine::Transfer::station() const
+StationEngine::Station *QRail::RouterEngine::Transfer::station() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->station();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->station();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return StationEngine::NullStation::getInstance();
     }
 }
@@ -282,16 +280,16 @@ StationEngine::Station *RouterEngine::Transfer::station() const
  * @public
  * Gets the time of the underlying route and returns it.
  */
-QDateTime RouterEngine::Transfer::time() const
+QDateTime QRail::RouterEngine::Transfer::time() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->time();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->time();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QDateTime();
     }
 }
@@ -306,16 +304,16 @@ QDateTime RouterEngine::Transfer::time() const
  * @public
  * Gets the delay of the underlying route and returns it.
  */
-qint16 RouterEngine::Transfer::delay() const
+qint16 QRail::RouterEngine::Transfer::delay() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->delay();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->delay();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return 0;
     }
 }
@@ -330,16 +328,16 @@ qint16 RouterEngine::Transfer::delay() const
  * @public
  * Gets the time with the delays included of the underlying route and returns it.
  */
-QDateTime RouterEngine::Transfer::delayedTime() const
+QDateTime QRail::RouterEngine::Transfer::delayedTime() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->time().addSecs(this->delay());
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->time().addSecs(this->delay());
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QDateTime();
     }
 }
@@ -354,16 +352,16 @@ QDateTime RouterEngine::Transfer::delayedTime() const
  * @public
  * Gets the platform of the underlying route and returns it.
  */
-QString RouterEngine::Transfer::platform() const
+QString QRail::RouterEngine::Transfer::platform() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->platform();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->platform();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QString();
     }
 }
@@ -378,16 +376,16 @@ QString RouterEngine::Transfer::platform() const
  * @public
  * Gets the isCanceled of the underlying route and returns it.
  */
-bool RouterEngine::Transfer::isCanceled() const
+bool QRail::RouterEngine::Transfer::isCanceled() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isCanceled();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isCanceled();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
 }
@@ -402,16 +400,16 @@ bool RouterEngine::Transfer::isCanceled() const
  * @public
  * Gets the isNormalPlatform of the underlying route and returns it.
  */
-bool RouterEngine::Transfer::isNormalPlatform() const
+bool QRail::RouterEngine::Transfer::isNormalPlatform() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isNormalPlatform();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isNormalPlatform();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
 }
@@ -426,16 +424,16 @@ bool RouterEngine::Transfer::isNormalPlatform() const
  * @public
  * Gets the isPassed of the underlying route and returns it.
  */
-bool RouterEngine::Transfer::isPassed() const
+bool QRail::RouterEngine::Transfer::isPassed() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isPassed();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isPassed();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
 }
@@ -445,21 +443,21 @@ bool RouterEngine::Transfer::isPassed() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the occupancy level of the underlying route
- * @return const VehicleEngine::Stop::OccupancyLevel occupancyLevel
+ * @return const QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel
  * @package RouterEngine
  * @public
  * Gets the occupancy level of the underlying route and returns it.
  */
-VehicleEngine::Stop::OccupancyLevel RouterEngine::Transfer::occupancyLevel() const
+QRail::VehicleEngine::Stop::OccupancyLevel QRail::RouterEngine::Transfer::occupancyLevel() const
 {
-    if(this->type() == RouterEngine::Transfer::Type::DEPARTURE || this->type() == RouterEngine::Transfer::Type::TRANSFER) {
+    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->occupancyLevel();
     }
-    else if(this->type() == RouterEngine::Transfer::Type::ARRIVAL) {
+    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->occupancyLevel();
     }
     else {
-        qCritical() << "RouterEngine::Transfer must have at least an arrival or departure leg!";
-        return VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED;
+        qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
+        return QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED;
     }
 }

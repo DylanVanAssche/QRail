@@ -14,7 +14,6 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef CSAVEHICLE_H
 #define CSAVEHICLE_H
 
@@ -27,6 +26,7 @@
 #include "engines/vehicle/vehiclestop.h"
 #include "engines/station/stationstation.h"
 
+namespace QRail {
 namespace VehicleEngine {
 class QRAIL_SHARED_EXPORT Vehicle : public QObject
 {
@@ -43,15 +43,15 @@ public:
             const QUrl &uri,
             const QUrl &tripURI,
             const QString &headsign,
-            const QList<VehicleEngine::Stop *> &intermediaryStops,
+            const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
             QObject *parent = nullptr
             );
     QUrl uri() const;
     void setUri(const QUrl &uri);
     QString headsign() const;
     void setHeadsign(const QString &headsign);
-    QList<VehicleEngine::Stop *> intermediaryStops() const;
-    void setIntermediaryStops(const QList<VehicleEngine::Stop *> &intermediaryStops);
+    QList<QRail::VehicleEngine::Stop *> intermediaryStops() const;
+    void setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *> &intermediaryStops);
     QUrl tripURI() const;
     void setTripURI(const QUrl &tripURI);
 
@@ -65,8 +65,9 @@ private:
     QUrl m_uri;
     QUrl m_tripURI;
     QString m_headsign;
-    QList<VehicleEngine::Stop *> m_intermediaryStops;
+    QList<QRail::VehicleEngine::Stop *> m_intermediaryStops;
 };
+}
 }
 
 #endif // CSAVEHICLE_H

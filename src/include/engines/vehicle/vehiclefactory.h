@@ -14,7 +14,6 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef VEHICLEFACTORY_H
 #define VEHICLEFACTORY_H
 
@@ -36,12 +35,13 @@
 // Uncomment to enable verbose output
 //#define VERBOSE_HTTP_STATUS
 
+namespace QRail {
 namespace VehicleEngine {
 class Factory : public QObject
 {
     Q_OBJECT
 public:
-    static VehicleEngine::Factory *getInstance();
+    static QRail::VehicleEngine::Factory *getInstance();
     void getVehicleByURI(const QUrl &uri, const QLocale::Language &language);
     QLocale::Language language() const;
     void setLanguage(const QLocale::Language &language);
@@ -50,25 +50,26 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void vehicleReady(VehicleEngine::Vehicle *vehicle);
+    void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
     void getResource(const QUrl &uri, QObject *caller);
     void error(const QString &message);
 
 private:
-    Network::Manager *m_http;
+    QRail::Network::Manager *m_http;
     StationEngine::Factory *m_stationFactory;
     QLocale::Language m_language;
     bool validateData(const QJsonObject &data, const QStringList &properties);
-    Network::Manager *http() const;
-    void setHttp(Network::Manager *http);
+    QRail::Network::Manager *http() const;
+    void setHttp(QRail::Network::Manager *http);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
-    VehicleEngine::Stop::OccupancyLevel generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
+    QRail::VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
+    QRail::VehicleEngine::Stop::OccupancyLevel generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
     void processHTTPReply(QNetworkReply *reply);
-    static VehicleEngine::Factory *m_instance;
+    static QRail::VehicleEngine::Factory *m_instance;
     explicit Factory(QObject *parent = nullptr);
 };
+}
 }
 
 #endif // VEHICLEFACTORY_H

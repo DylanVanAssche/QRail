@@ -42,6 +42,7 @@
 // Uncomment to enable verbose output
 //#define VERBOSE_CACHE
 
+namespace QRail {
 namespace StationEngine {
 class QRAIL_SHARED_EXPORT Factory : public QObject
 {
@@ -51,7 +52,7 @@ public:
     Station *getStationByURI(const QUrl &uri);
 
 private:
-    Database::Manager *m_db;
+    QRail::Database::Manager *m_db;
     QMap<QUrl, StationEngine::Station*> m_cache;
     bool initDatabase();
     QFuture<bool> insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities);
@@ -60,11 +61,12 @@ private:
     StationEngine::Station *fetchStationFromCache(const QUrl &uri) const;
     void addStationToCache(StationEngine::Station *station);
     QMap<QUrl, QString> getPlatformsByStationURI(const QUrl &uri);
-    Database::Manager *db() const;
-    void setDb(Database::Manager *db);
+    QRail::Database::Manager *db() const;
+    void setDb(QRail::Database::Manager *db);
     static StationEngine::Factory *m_instance;
     explicit Factory(QObject *parent = nullptr);
 };
+}
 }
 
 #endif // CSAFactory_H

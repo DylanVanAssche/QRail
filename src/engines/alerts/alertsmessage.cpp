@@ -1,29 +1,27 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/alerts/alertsmessage.h"
+using namespace QRail;
 
 /**
  * @file alertsmessage.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief AlertsEngine::Message constructor: full
+ * @brief QRail::AlertsEngine::Message constructor: full
  * @param const QString &header
  * @param const QString &description
  * @param const QString &lead
@@ -35,7 +33,7 @@
  * a disturbance, remark or anything else that might be
  * usefull for the user.
  */
-AlertsEngine::Message::Message(const QString &header, const QString &description, const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
+QRail::AlertsEngine::Message::Message(const QString &header, const QString &description, const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_header = header;
@@ -48,7 +46,7 @@ AlertsEngine::Message::Message(const QString &header, const QString &description
  * @file alertsmessage.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief AlertsEngine::Message constructor: minimum
+ * @brief QRail::AlertsEngine::Message constructor: minimum
  * @param const QString &header
  * @param const QString &description
  * @param QObject *parent
@@ -58,7 +56,7 @@ AlertsEngine::Message::Message(const QString &header, const QString &description
  * a disturbance, remark or anything else that might be
  * usefull for the user.
  */
-AlertsEngine::Message::Message(const QString &header, const QString &description, QObject *parent): QObject(parent)
+QRail::AlertsEngine::Message::Message(const QString &header, const QString &description, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_header = header;
@@ -77,7 +75,7 @@ AlertsEngine::Message::Message(const QString &header, const QString &description
  * @public
  * Gets the header of the message and returns it.
  */
-QString AlertsEngine::Message::header() const
+QString QRail::AlertsEngine::Message::header() const
 {
     return m_header;
 }
@@ -92,7 +90,7 @@ QString AlertsEngine::Message::header() const
  * @public
  * Sets the header of the message to the given QString &header
  */
-void AlertsEngine::Message::setHeader(const QString &header)
+void QRail::AlertsEngine::Message::setHeader(const QString &header)
 {
     m_header = header;
     emit this->headerChanged();
@@ -108,7 +106,7 @@ void AlertsEngine::Message::setHeader(const QString &header)
  * @public
  * Gets the description of the message and returns it.
  */
-QString AlertsEngine::Message::description() const
+QString QRail::AlertsEngine::Message::description() const
 {
     return m_description;
 }
@@ -123,7 +121,7 @@ QString AlertsEngine::Message::description() const
  * @public
  * Sets the description of the message to the given QString &description
  */
-void AlertsEngine::Message::setDescription(const QString &description)
+void QRail::AlertsEngine::Message::setDescription(const QString &description)
 {
     m_description = description;
     emit this->descriptionChanged();
@@ -139,7 +137,7 @@ void AlertsEngine::Message::setDescription(const QString &description)
  * @public
  * Gets the lead of the message and returns it.
  */
-QString AlertsEngine::Message::lead() const
+QString QRail::AlertsEngine::Message::lead() const
 {
     return m_lead;
 }
@@ -154,7 +152,7 @@ QString AlertsEngine::Message::lead() const
  * @public
  * Sets the lead of the message to the given QString &lead
  */
-void AlertsEngine::Message::setLead(const QString &lead)
+void QRail::AlertsEngine::Message::setLead(const QString &lead)
 {
     m_lead = lead;
     emit this->leadChanged();
@@ -170,7 +168,7 @@ void AlertsEngine::Message::setLead(const QString &lead)
  * @public
  * Gets the link of the message and returns it.
  */
-QUrl AlertsEngine::Message::link() const
+QUrl QRail::AlertsEngine::Message::link() const
 {
     return m_link;
 }
@@ -185,7 +183,7 @@ QUrl AlertsEngine::Message::link() const
  * @public
  * Sets the link of the message to the given QUrl &link
  */
-void AlertsEngine::Message::setLink(const QUrl &link)
+void QRail::AlertsEngine::Message::setLink(const QUrl &link)
 {
     m_link = link;
     emit this->linkChanged();

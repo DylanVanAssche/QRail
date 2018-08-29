@@ -1,23 +1,21 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "fragments/fragmentspage.h"
+using namespace QRail;
 
 /**
  * @file fragmentspage.cpp
@@ -30,7 +28,7 @@
  * Constructs a Page to store the information about
  * a Linked Connection page for the Connection Scan Algorithm (CSA).
  */
-Fragments::Page::Page(QObject *parent) : QObject(parent)
+QRail::Fragments::Page::Page(QObject *parent) : QObject(parent)
 {
 
 }
@@ -50,7 +48,7 @@ Fragments::Page::Page(QObject *parent) : QObject(parent)
  * Constructs a Page to store the information about
  * a Linked Connection page for the Connection Scan Algorithm (CSA).
  */
-Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext, const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
+QRail::Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext, const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
 {
     // Avoid signal triggering on contruction
     m_uri = uri;
@@ -70,7 +68,7 @@ Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &h
  * @public
  * Retrieves the URI of the linked connection page and returns it.
  */
-QUrl Fragments::Page::uri() const
+QUrl QRail::Fragments::Page::uri() const
 {
     return m_uri;
 }
@@ -86,7 +84,7 @@ QUrl Fragments::Page::uri() const
  * Sets the URI of the linked connection page to the given QUrl &uri.
  * Emits the uriChanged signal.
  */
-void Fragments::Page::setURI(const QUrl &uri)
+void QRail::Fragments::Page::setURI(const QUrl &uri)
 {
     m_uri = uri;
     emit this->uriChanged();
@@ -102,7 +100,7 @@ void Fragments::Page::setURI(const QUrl &uri)
  * @public
  * Retrieves the timestamp of the linked connection page and returns it.
  */
-QDateTime Fragments::Page::timestamp() const
+QDateTime QRail::Fragments::Page::timestamp() const
 {
     return m_timestamp;
 }
@@ -118,7 +116,7 @@ QDateTime Fragments::Page::timestamp() const
  * Sets the timestamp of the linked connection fragment to the given QDateTime &timestamp.
  * Emits the timestampChanged signal.
  */
-void Fragments::Page::setTimestamp(const QDateTime &timestamp)
+void QRail::Fragments::Page::setTimestamp(const QDateTime &timestamp)
 {
     m_timestamp = timestamp;
     emit this->timestampChanged();
@@ -134,7 +132,7 @@ void Fragments::Page::setTimestamp(const QDateTime &timestamp)
  * @public
  * Retrieves the URI of the next linked connection page and returns it.
  */
-QUrl Fragments::Page::hydraNext() const
+QUrl QRail::Fragments::Page::hydraNext() const
 {
     return m_hydraNext;
 }
@@ -150,7 +148,7 @@ QUrl Fragments::Page::hydraNext() const
  * Sets the URI of the linked connection next page to the given QUrl &hydraPrevious.
  * Emits the hydraPreviousChanged signal.
  */
-void Fragments::Page::setHydraNext(const QUrl &hydraNext)
+void QRail::Fragments::Page::setHydraNext(const QUrl &hydraNext)
 {
     m_hydraNext = hydraNext;
     emit this->hydraNextChanged();
@@ -166,7 +164,7 @@ void Fragments::Page::setHydraNext(const QUrl &hydraNext)
  * @public
  * Retrieves the URI of the previous linked connection page and returns it.
  */
-QUrl Fragments::Page::hydraPrevious() const
+QUrl QRail::Fragments::Page::hydraPrevious() const
 {
     return m_hydraPrevious;
 }
@@ -182,7 +180,7 @@ QUrl Fragments::Page::hydraPrevious() const
  * Sets the URI of the linked connection previous page to the given QUrl &hydraPrevious.
  * Emits the hydraPreviousChanged signal.
  */
-void Fragments::Page::setHydraPrevious(const QUrl &hydraPrevious)
+void QRail::Fragments::Page::setHydraPrevious(const QUrl &hydraPrevious)
 {
     m_hydraPrevious = hydraPrevious;
     emit this->hydraPreviousChanged();
@@ -198,7 +196,7 @@ void Fragments::Page::setHydraPrevious(const QUrl &hydraPrevious)
  * @public
  * Gets the list of fragments associated with this page and return it.
  */
-QList<Fragments::Fragment *> Fragments::Page::fragments() const
+QList<QRail::Fragments::Fragment *> QRail::Fragments::Page::fragments() const
 {
     return m_fragments;
 }
@@ -214,7 +212,7 @@ QList<Fragments::Fragment *> Fragments::Page::fragments() const
  * Sets the list of fragments associated with this page to the given QList<Fragment *> &fragments.
  * Emits the fragmentsChanged signal.
  */
-void Fragments::Page::setFragments(const QList<Fragments::Fragment *> &fragments)
+void QRail::Fragments::Page::setFragments(const QList<QRail::Fragments::Fragment *> &fragments)
 {
     m_fragments = fragments;
     emit this->fragmentsChanged();

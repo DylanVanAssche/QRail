@@ -28,6 +28,7 @@
 #include "engines/station/stationstation.h"
 #include "engines/vehicle/vehiclevehicle.h"
 
+namespace QRail {
 namespace RouterEngine {
 class RouteLegEnd : public QObject
 {
@@ -42,7 +43,7 @@ public:
             const qint16 &delay,
             const bool &isCanceled,
             const bool &isPassed,
-            const VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+            const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
             QObject *parent = nullptr
             );
     QUrl uri() const;
@@ -61,8 +62,8 @@ public:
     void setIsCanceled(bool isCanceled);
     bool isPassed() const;
     void setIsPassed(bool isPassed);
-    VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
-    void setOccupancyLevel(const VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
+    QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
+    void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
 
 signals:
     void uriChanged();
@@ -85,8 +86,9 @@ private:
     qint16 m_delay;
     bool m_isCanceled;
     bool m_isPassed;
-    VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
+    QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
 };
+}
 }
 
 #endif // CSAROUTELEGEND_H

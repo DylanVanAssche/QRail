@@ -1,39 +1,37 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/router/routerrouteleg.h"
+using namespace QRail;
 
 /**
  * @file routerrouteleg.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief RouteLeg constructor
- * @param const RouterEngine::RouteLeg::Type &type
- * @param VehicleEngine::Vehicle *vehicleInformation
- * @param RouterEngine::RouteLegEnd *departure
- * @param RouterEngine::RouteLegEnd *arrival
+ * @param const QRail::RouterEngine::RouteLeg::Type &type
+ * @param QRail::VehicleEngine::Vehicle *vehicleInformation
+ * @param QRail::RouterEngine::RouteLegEnd *departure
+ * @param QRail::RouterEngine::RouteLegEnd *arrival
  * @param QObject *parent
  * @package RouterEngine
  * @public
  * Constructs a RouteLeg with a certain leg type, vehicle information and it's departure and arrival legs.
  */
-RouterEngine::RouteLeg::RouteLeg(const RouterEngine::RouteLeg::Type &type, VehicleEngine::Vehicle *vehicleInformation, RouterEngine::RouteLegEnd *departure, RouterEngine::RouteLegEnd *arrival, QObject *parent) : QObject(parent)
+QRail::RouterEngine::RouteLeg::RouteLeg(const QRail::RouterEngine::RouteLeg::Type &type, QRail::VehicleEngine::Vehicle *vehicleInformation, QRail::RouterEngine::RouteLegEnd *departure, QRail::RouterEngine::RouteLegEnd *arrival, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_type = type;
@@ -47,12 +45,12 @@ RouterEngine::RouteLeg::RouteLeg(const RouterEngine::RouteLeg::Type &type, Vehic
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the type of the leg
- * @return const RouterEngine::RouteLeg::Type type
+ * @return const QRail::RouterEngine::RouteLeg::Type type
  * @package RouterEngine
  * @public
  * Gets the type of the leg and returns it.
  */
-RouterEngine::RouteLeg::Type RouterEngine::RouteLeg::type() const
+QRail::RouterEngine::RouteLeg::Type QRail::RouterEngine::RouteLeg::type() const
 {
     return m_type;
 }
@@ -62,13 +60,13 @@ RouterEngine::RouteLeg::Type RouterEngine::RouteLeg::type() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the type of the leg
- * @param const RouterEngine::RouteLeg::Type &type
+ * @param const QRail::RouterEngine::RouteLeg::Type &type
  * @package RouterEngine
  * @public
- * Sets the type of route to the given RouterEngine::RouteLeg::Type &type.
+ * Sets the type of route to the given QRail::RouterEngine::RouteLeg::Type &type.
  * Emits the typeChanged signal.
  */
-void RouterEngine::RouteLeg::setType(const RouterEngine::RouteLeg::Type &type)
+void QRail::RouterEngine::RouteLeg::setType(const QRail::RouterEngine::RouteLeg::Type &type)
 {
     m_type = type;
     emit this->typeChanged();
@@ -79,12 +77,12 @@ void RouterEngine::RouteLeg::setType(const RouterEngine::RouteLeg::Type &type)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the vehicle information
- * @return const VehicleEngine::Vehicle *vehicle
+ * @return const QRail::VehicleEngine::Vehicle *vehicle
  * @package RouterEngine
  * @public
  * Gets the vehicle information and returns it.
  */
-VehicleEngine::Vehicle *RouterEngine::RouteLeg::vehicleInformation() const
+QRail::VehicleEngine::Vehicle *QRail::RouterEngine::RouteLeg::vehicleInformation() const
 {
     return m_vehicleInformation;
 }
@@ -94,13 +92,13 @@ VehicleEngine::Vehicle *RouterEngine::RouteLeg::vehicleInformation() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the vehicleInformation
- * @param const VehicleEngine::Vehicle *vehicleInformation
+ * @param const QRail::VehicleEngine::Vehicle *vehicleInformation
  * @package RouterEngine
  * @public
- * Sets the type of route to the given VehicleEngine::Vehicle *vehicleInformation.
+ * Sets the type of route to the given QRail::VehicleEngine::Vehicle *vehicleInformation.
  * Emits the vehicleInformationChanged signal.
  */
-void RouterEngine::RouteLeg::setVehicleInformation(VehicleEngine::Vehicle *vehicleInformation)
+void QRail::RouterEngine::RouteLeg::setVehicleInformation(QRail::VehicleEngine::Vehicle *vehicleInformation)
 {
     m_vehicleInformation = vehicleInformation;
     emit this->vehicleInformationChanged();
@@ -111,12 +109,12 @@ void RouterEngine::RouteLeg::setVehicleInformation(VehicleEngine::Vehicle *vehic
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the deparature leg end.
- * @return const RouterEngine::RouteLegEnd *departure
+ * @return const QRail::RouterEngine::RouteLegEnd *departure
  * @package RouterEngine
  * @public
  * Gets the departure leg end and returns it.
  */
-RouterEngine::RouteLegEnd *RouterEngine::RouteLeg::departure() const
+QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::RouteLeg::departure() const
 {
     return m_departure;
 }
@@ -126,13 +124,13 @@ RouterEngine::RouteLegEnd *RouterEngine::RouteLeg::departure() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the type of the leg
- * @param const RouterEngine::RouteLeg *departure
+ * @param const QRail::RouterEngine::RouteLeg *departure
  * @package RouterEngine
  * @public
- * Sets the departure leg end to the given RouterEngine::RouteLeg *departure.
+ * Sets the departure leg end to the given QRail::RouterEngine::RouteLeg *departure.
  * Emits the departureChanged signal.
  */
-void RouterEngine::RouteLeg::setDeparture(RouterEngine::RouteLegEnd *departure)
+void QRail::RouterEngine::RouteLeg::setDeparture(QRail::RouterEngine::RouteLegEnd *departure)
 {
     m_departure = departure;
     emit this->departureChanged();
@@ -143,12 +141,12 @@ void RouterEngine::RouteLeg::setDeparture(RouterEngine::RouteLegEnd *departure)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the arrival leg end.
- * @return const RouterEngine::RouteLegEnd *arrival
+ * @return const QRail::RouterEngine::RouteLegEnd *arrival
  * @package RouterEngine
  * @public
  * Gets the arrival leg end and returns it.
  */
-RouterEngine::RouteLegEnd *RouterEngine::RouteLeg::arrival() const
+QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::RouteLeg::arrival() const
 {
     return m_arrival;
 }
@@ -158,13 +156,13 @@ RouterEngine::RouteLegEnd *RouterEngine::RouteLeg::arrival() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the type of the leg
- * @param const RouterEngine::RouteLegEnd *arrival
+ * @param const QRail::RouterEngine::RouteLegEnd *arrival
  * @package RouterEngine
  * @public
- * Sets the arrival to the given RouterEngine::RouteLegEnd *arrival.
+ * Sets the arrival to the given QRail::RouterEngine::RouteLegEnd *arrival.
  * Emits the arrivalChanged signal.
  */
-void RouterEngine::RouteLeg::setArrival(RouterEngine::RouteLegEnd *arrival)
+void QRail::RouterEngine::RouteLeg::setArrival(QRail::RouterEngine::RouteLegEnd *arrival)
 {
     m_arrival = arrival;
     emit this->arrivalChanged();
@@ -181,7 +179,7 @@ void RouterEngine::RouteLeg::setArrival(RouterEngine::RouteLegEnd *arrival)
  * Gets the stations for the route and returns it.
  * Returns a StationEngine::NullStation instance if the station can't be determined.
  */
-StationEngine::Station *RouterEngine::RouteLeg::station() const
+StationEngine::Station *QRail::RouterEngine::RouteLeg::station() const
 {
     if(this->departure()) {
         return this->departure()->station();

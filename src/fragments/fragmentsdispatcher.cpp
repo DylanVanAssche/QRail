@@ -15,13 +15,14 @@
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "fragments/fragmentsdispatcher.h"
+using namespace QRail;
 
-Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
+QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
 }
 
-void Fragments::Dispatcher::dispatchPage(Fragments::Page *page)
+void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 {
     /*
      * WARNING:
@@ -32,7 +33,7 @@ void Fragments::Dispatcher::dispatchPage(Fragments::Page *page)
      */
 
     // Create custom event type
-    Fragments::DispatcherEvent *event = new Fragments::DispatcherEvent(this->eventType());
+    QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
     event->setPage(page);
 
     /*
@@ -55,22 +56,22 @@ void Fragments::Dispatcher::dispatchPage(Fragments::Page *page)
     }
 }
 
-Fragments::Page *Fragments::DispatcherEvent::page() const
+QRail::Fragments::Page *QRail::Fragments::DispatcherEvent::page() const
 {
     return m_page;
 }
 
-void Fragments::DispatcherEvent::setPage(Fragments::Page *page)
+void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
 {
     m_page = page;
 }
 
-void Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
+void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
 {
     m_targets.insert(departureTime, caller);
 }
 
-QList<QObject *> Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from, const QDateTime &until)
+QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from, const QDateTime &until)
 {
     QList<QObject *> callers = QList<QObject *>();
     foreach(QDateTime timestamp, m_targets.keys())
@@ -84,12 +85,12 @@ QList<QObject *> Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &fr
     return callers;
 }
 
-QEvent::Type Fragments::Dispatcher::eventType() const
+QEvent::Type QRail::Fragments::Dispatcher::eventType() const
 {
     return m_eventType;
 }
 
-void Fragments::Dispatcher::setEventType(const QEvent::Type &eventType)
+void QRail::Fragments::Dispatcher::setEventType(const QEvent::Type &eventType)
 {
     m_eventType = eventType;
 }

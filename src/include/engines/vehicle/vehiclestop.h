@@ -1,20 +1,19 @@
 /*
- *   This file is part of QRail.
- *
- *   QRail is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   QRail is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #ifndef CSAVEHICLESTOP_H
 #define CSAVEHICLESTOP_H
 
@@ -26,6 +25,7 @@
 #include "qrail.h"
 #include "engines/station/stationstation.h"
 
+namespace QRail {
 namespace VehicleEngine {
 class QRAIL_SHARED_EXPORT Stop : public QObject
 {
@@ -59,8 +59,8 @@ public:
             const qint16 &arrivalDelay,
             const bool &isArrivalCanceled,
             const bool &isExtraStop,
-            const VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
-            const VehicleEngine::Stop::Type &type,
+            const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+            const QRail::VehicleEngine::Stop::Type &type,
             QObject *parent = nullptr
             );
     StationEngine::Station *station() const;
@@ -83,10 +83,10 @@ public:
     void setArrivalDelay(const qint16 &arrivalDelay);
     bool isArrivalCanceled() const;
     void setIsArrivalCanceled(const bool &isArrivalCanceled);
-    VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
-    void setOccupancyLevel(const VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
-    VehicleEngine::Stop::Type type() const;
-    void setType(const VehicleEngine::Stop::Type &type);
+    QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
+    void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
+    QRail::VehicleEngine::Stop::Type type() const;
+    void setType(const QRail::VehicleEngine::Stop::Type &type);
     bool isExtraStop() const;
     void setIsExtraStop(const bool &isExtraStop);
 
@@ -117,12 +117,13 @@ private:
     qint16 m_arrivalDelay;
     bool m_isArrivalCanceled;
     bool m_isExtraStop;
-    VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
-    VehicleEngine::Stop::Type m_type;
+    QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
+    QRail::VehicleEngine::Stop::Type m_type;
 
     Q_ENUM(Type)
     Q_ENUM(OccupancyLevel)
 };
+}
 }
 
 #endif // CSAVEHICLESTOP_H

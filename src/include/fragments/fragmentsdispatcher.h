@@ -26,6 +26,7 @@
 
 #include "fragments/fragmentspage.h"
 
+namespace QRail {
 namespace Fragments {
 class DispatcherEvent : public QEvent
 {
@@ -33,11 +34,11 @@ public:
     DispatcherEvent(const QEvent::Type &type) : QEvent(type)
     {
     }
-    Fragments::Page *page() const;
-    void setPage(Fragments::Page *value);
+    QRail::Fragments::Page *page() const;
+    void setPage(QRail::Fragments::Page *value);
 
 private:
-    Fragments::Page *m_page;
+    QRail::Fragments::Page *m_page;
 };
 
 class Dispatcher : public QObject
@@ -45,7 +46,7 @@ class Dispatcher : public QObject
     Q_OBJECT
 public:
     explicit Dispatcher(QObject *parent = nullptr);
-    void dispatchPage(Fragments::Page *page);
+    void dispatchPage(QRail::Fragments::Page *page);
     void addTarget(const QDateTime &departureTime, QObject *caller);
     QList<QObject *> findAndRemoveTargets(const QDateTime &from, const QDateTime &until);
     QEvent::Type eventType() const;
@@ -55,6 +56,7 @@ private:
     QEvent::Type m_eventType;
     void setEventType(const QEvent::Type &eventType);
 };
+}
 }
 
 #endif // FRAGMENTSDISPATCHER_H

@@ -1,23 +1,21 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "fragments/fragmentsfragment.h"
+using namespace QRail;
 
 /**
  * @file fragmentsfragment.cpp
@@ -30,7 +28,7 @@
  * Constructs a Fragment to store the information about
  * a Linked Connection fragment for the Connection Scan Algorithm (CSA).
  */
-Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
+QRail::Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
 {
 
 }
@@ -56,7 +54,7 @@ Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
  * Constructs a Fragment to store the information about
  * a Linked Connection fragment for the Connection Scan Algorithm (CSA).
  */
-Fragments::Fragment::Fragment(
+QRail::Fragments::Fragment::Fragment(
         const QUrl &uri, const QUrl &departureStationURI,
         const QUrl &arrivalStationURI,
         const QDateTime &departureTime,
@@ -94,7 +92,7 @@ Fragments::Fragment::Fragment(
  * @public
  * Retrieves the URI of the linked connection fragment  and returns it.
  */
-QUrl Fragments::Fragment::uri() const
+QUrl QRail::Fragments::Fragment::uri() const
 {
     return m_uri;
 }
@@ -110,7 +108,7 @@ QUrl Fragments::Fragment::uri() const
  * Sets the URI of the linked connection fragment to the given QUrl &uri.
  * Emits the uriChanged signal.
  */
-void Fragments::Fragment::setURI(const QUrl &uri)
+void QRail::Fragments::Fragment::setURI(const QUrl &uri)
 {
     m_uri = uri;
     emit this->uriChanged();
@@ -126,7 +124,7 @@ void Fragments::Fragment::setURI(const QUrl &uri)
  * @public
  * Retrieves the departure station URI of the linked connection fragment and returns it.
  */
-QUrl Fragments::Fragment::departureStationURI() const
+QUrl QRail::Fragments::Fragment::departureStationURI() const
 {
     return m_departureStationURI;
 }
@@ -142,7 +140,7 @@ QUrl Fragments::Fragment::departureStationURI() const
  * Sets the departure station URI of the linked connection fragment to the given QUrl &departureStationURI.
  * Emits the departureStationURIChanged signal.
  */
-void Fragments::Fragment::setDepartureStationURI(const QUrl &departureStationURI)
+void QRail::Fragments::Fragment::setDepartureStationURI(const QUrl &departureStationURI)
 {
     m_departureStationURI = departureStationURI;
     emit this->departureStationURIChanged();
@@ -158,7 +156,7 @@ void Fragments::Fragment::setDepartureStationURI(const QUrl &departureStationURI
  * @public
  * Retrieves the arrival station URI of the linked connection fragment and returns it.
  */
-QUrl Fragments::Fragment::arrivalStationURI() const
+QUrl QRail::Fragments::Fragment::arrivalStationURI() const
 {
     return m_arrivalStationURI;
 }
@@ -174,7 +172,7 @@ QUrl Fragments::Fragment::arrivalStationURI() const
  * Sets the arrival station URI of the linked connection fragment to the given QUrl &arrivalStationURI.
  * Emits the arrivalStationURIChanged signal.
  */
-void Fragments::Fragment::setArrivalStationURI(const QUrl &arrivalStationURI)
+void QRail::Fragments::Fragment::setArrivalStationURI(const QUrl &arrivalStationURI)
 {
     m_arrivalStationURI = arrivalStationURI;
     emit this->arrivalStationURIChanged();
@@ -190,7 +188,7 @@ void Fragments::Fragment::setArrivalStationURI(const QUrl &arrivalStationURI)
  * @public
  * Retrieves the departure time of the linked connection fragment and returns it.
  */
-QDateTime Fragments::Fragment::departureTime() const
+QDateTime QRail::Fragments::Fragment::departureTime() const
 {
     return m_departureTime;
 }
@@ -206,7 +204,7 @@ QDateTime Fragments::Fragment::departureTime() const
  * Sets the departure time of the linked connection fragment to the given QDateTime &departureTime.
  * Emits the departureTimeChanged signal.
  */
-void Fragments::Fragment::setDepartureTime(const QDateTime &departureTime)
+void QRail::Fragments::Fragment::setDepartureTime(const QDateTime &departureTime)
 {
     m_departureTime = departureTime;
     emit this->departureTimeChanged();
@@ -222,7 +220,7 @@ void Fragments::Fragment::setDepartureTime(const QDateTime &departureTime)
  * @public
  * Retrieves the arrival time of the linked connection fragment and returns it.
  */
-QDateTime Fragments::Fragment::arrivalTime() const
+QDateTime QRail::Fragments::Fragment::arrivalTime() const
 {
     return m_arrivalTime;
 }
@@ -238,7 +236,7 @@ QDateTime Fragments::Fragment::arrivalTime() const
  * Sets the arrival time of the linked connection fragment to the given QDateTime &arrivalTime.
  * Emits the arrivalTimeChanged signal.
  */
-void Fragments::Fragment::setArrivalTime(const QDateTime &arrivalTime)
+void QRail::Fragments::Fragment::setArrivalTime(const QDateTime &arrivalTime)
 {
     m_arrivalTime = arrivalTime;
     emit this->arrivalTimeChanged();
@@ -254,7 +252,7 @@ void Fragments::Fragment::setArrivalTime(const QDateTime &arrivalTime)
  * @public
  * Retrieves the departure delay (in seconds) of the linked connection fragment and returns it.
  */
-qint16 Fragments::Fragment::departureDelay() const
+qint16 QRail::Fragments::Fragment::departureDelay() const
 {
     return m_departureDelay;
 }
@@ -270,7 +268,7 @@ qint16 Fragments::Fragment::departureDelay() const
  * Sets the departure delay (in seconds) of the linked connection fragment to the given qint16 &departureDelay.
  * Emits the departureDelayChanged signal.
  */
-void Fragments::Fragment::setDepartureDelay(const qint16 &departureDelay)
+void QRail::Fragments::Fragment::setDepartureDelay(const qint16 &departureDelay)
 {
     m_departureDelay = departureDelay;
     emit this->departureDelayChanged();
@@ -286,7 +284,7 @@ void Fragments::Fragment::setDepartureDelay(const qint16 &departureDelay)
  * @public
  * Retrieves the arrival delay (in seconds) of the linked connection fragment and returns it.
  */
-qint16 Fragments::Fragment::arrivalDelay() const
+qint16 QRail::Fragments::Fragment::arrivalDelay() const
 {
     return m_arrivalDelay;
 }
@@ -302,7 +300,7 @@ qint16 Fragments::Fragment::arrivalDelay() const
  * Sets the arrival delay (in seconds) of the linked connection fragment to the given qint16 &arrivalDelay.
  * Emits the arrivalDelayChanged signal.
  */
-void Fragments::Fragment::setArrivalDelay(const qint16 &arrivalDelay)
+void QRail::Fragments::Fragment::setArrivalDelay(const qint16 &arrivalDelay)
 {
     m_arrivalDelay = arrivalDelay;
     emit this->arrivalDelayChanged();
@@ -318,7 +316,7 @@ void Fragments::Fragment::setArrivalDelay(const qint16 &arrivalDelay)
  * @public
  * Retrieves the trip URI of the linked connection fragment and returns it.
  */
-QUrl Fragments::Fragment::tripURI() const
+QUrl QRail::Fragments::Fragment::tripURI() const
 {
     return m_tripURI;
 }
@@ -334,7 +332,7 @@ QUrl Fragments::Fragment::tripURI() const
  * Sets the trip URI of the linked connection fragment to the given QUrl &tripURI.
  * Emits the tripURIChanged signal.
  */
-void Fragments::Fragment::setTripURI(const QUrl &tripURI)
+void QRail::Fragments::Fragment::setTripURI(const QUrl &tripURI)
 {
     m_tripURI = tripURI;
     emit this->tripURIChanged();
@@ -350,7 +348,7 @@ void Fragments::Fragment::setTripURI(const QUrl &tripURI)
  * @public
  * Retrieves the route URI of the linked connection fragment and returns it.
  */
-QUrl Fragments::Fragment::routeURI() const
+QUrl QRail::Fragments::Fragment::routeURI() const
 {
     return m_routeURI;
 }
@@ -366,7 +364,7 @@ QUrl Fragments::Fragment::routeURI() const
  * Sets the route URI of the linked connection fragment to the given QUrl &routeURI.
  * Emits the routeURIChanged signal.
  */
-void Fragments::Fragment::setRouteURI(const QUrl &routeURI)
+void QRail::Fragments::Fragment::setRouteURI(const QUrl &routeURI)
 {
     m_routeURI = routeURI;
     emit this->routeURIChanged();
@@ -382,7 +380,7 @@ void Fragments::Fragment::setRouteURI(const QUrl &routeURI)
  * @public
  * Retrieves the direction of the vehicle in this linked connection fragment and returns it.
  */
-QString Fragments::Fragment::direction() const
+QString QRail::Fragments::Fragment::direction() const
 {
     return m_direction;
 }
@@ -398,7 +396,7 @@ QString Fragments::Fragment::direction() const
  * Sets the direction of the vehicle in this linked connection fragment to the given QString &direction.
  * Emits the directionChanged signal.
  */
-void Fragments::Fragment::setDirection(const QString &direction)
+void QRail::Fragments::Fragment::setDirection(const QString &direction)
 {
     m_direction = direction;
     emit this->directionChanged();

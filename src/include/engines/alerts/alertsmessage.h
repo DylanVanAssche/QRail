@@ -26,6 +26,7 @@
 
 #include "qrail.h"
 
+namespace QRail {
 namespace AlertsEngine {
 class QRAIL_SHARED_EXPORT Message : public QObject
 {
@@ -64,6 +65,7 @@ private:
     QString m_lead;
     QUrl m_link;
 };
+}
 }
 
 #endif // CSAMESSAGE_H

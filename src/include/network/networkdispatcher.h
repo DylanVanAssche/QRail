@@ -14,7 +14,6 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef NETWORKDISPATCHER_H
 #define NETWORKDISPATCHER_H
 
@@ -24,6 +23,7 @@
 #include <QtCore/QMap>
 #include <QtNetwork/QNetworkReply>
 
+namespace QRail {
 namespace Network {
 /*
  * Using Qt events, we can easily dispatch events to a certain QObject.
@@ -64,6 +64,7 @@ private:
     QEvent::Type m_eventType;
     void setEventType(const QEvent::Type &eventType);
 };
+}
 }
 
 #endif // NETWORKDISPATCHER_H

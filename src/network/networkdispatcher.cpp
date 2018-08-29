@@ -15,14 +15,15 @@
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "network/networkdispatcher.h"
+using namespace QRail;
 
-Network::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
+QRail::Network::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
     // Register a custom event type to the Qt event system
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
 }
 
-void Network::Dispatcher::dispatchReply(QNetworkReply *reply)
+void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
 {
     /*
      * WARNING:
@@ -33,7 +34,7 @@ void Network::Dispatcher::dispatchReply(QNetworkReply *reply)
      */
 
     // Create custom event type
-    Network::DispatcherEvent *event = new Network::DispatcherEvent(this->eventType());
+    QRail::Network::DispatcherEvent *event = new QRail::Network::DispatcherEvent(this->eventType());
     event->setReply(reply);
 
     // Retrieve the caller of the reply
@@ -44,37 +45,37 @@ void Network::Dispatcher::dispatchReply(QNetworkReply *reply)
     this->removeTarget(reply);
 }
 
-void Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
+void QRail::Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
 {
     m_targets.insert(reply, caller);
 }
 
-void Network::Dispatcher::removeTarget(QNetworkReply *reply)
+void QRail::Network::Dispatcher::removeTarget(QNetworkReply *reply)
 {
     m_targets.remove(reply);
 }
 
-QObject *Network::Dispatcher::findTarget(QNetworkReply *reply)
+QObject *QRail::Network::Dispatcher::findTarget(QNetworkReply *reply)
 {
     return m_targets.value(reply);
 }
 
-QEvent::Type Network::Dispatcher::eventType() const
+QEvent::Type QRail::Network::Dispatcher::eventType() const
 {
     return m_eventType;
 }
 
-void Network::Dispatcher::setEventType(const QEvent::Type &eventType)
+void QRail::Network::Dispatcher::setEventType(const QEvent::Type &eventType)
 {
     m_eventType = eventType;
 }
 
-QNetworkReply *Network::DispatcherEvent::reply() const
+QNetworkReply *QRail::Network::DispatcherEvent::reply() const
 {
     return m_reply;
 }
 
-void Network::DispatcherEvent::setReply(QNetworkReply *reply)
+void QRail::Network::DispatcherEvent::setReply(QNetworkReply *reply)
 {
     m_reply = reply;
 }

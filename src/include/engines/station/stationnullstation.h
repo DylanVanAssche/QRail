@@ -30,6 +30,7 @@
 #include "engines/station/stationstation.h"
 #include "qrail.h"
 
+namespace QRail {
 namespace StationEngine {
 class QRAIL_SHARED_EXPORT NullStation: public Station
 {
@@ -65,6 +66,7 @@ private:
             QObject *parent = nullptr);
     static StationEngine::NullStation *m_instance;
 };
+}
 }
 
 #endif // CSANULLSTATION_H

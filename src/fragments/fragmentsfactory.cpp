@@ -1,40 +1,38 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "fragments/fragmentsfactory.h"
-Fragments::Factory* Fragments::Factory::m_instance = nullptr;
+using namespace QRail;
+QRail::Fragments::Factory* QRail::Fragments::Factory::m_instance = nullptr;
 
 /**
  * @file fragmentsfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Fragments::Factory constructor: empty
+ * @brief QRail::Fragments::Factory constructor: empty
  * @param QObject *parent = nullptr
  * @package Fragments
  * @private
- * Constructs a Fragments::Factory to generate Linked Connections
+ * Constructs a QRail::Fragments::Factory to generate Linked Connections
  * fragments on the fly.
  */
-Fragments::Factory::Factory(QObject *parent): QObject(parent)
+QRail::Fragments::Factory::Factory(QObject *parent): QObject(parent)
 {
-    // Setup the Network::Manager
-    this->setHttp(Network::Manager::getInstance());
+    // Setup the QRail::Network::Manager
+    this->setHttp(QRail::Network::Manager::getInstance());
     /*
      * QNAM and callers are living in different threads!
      * INFO: https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
@@ -42,26 +40,26 @@ Fragments::Factory::Factory(QObject *parent): QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject*)), this->http(), SLOT(getResource(QUrl, QObject*)));
 
     // Setup dispatcher
-    this->setDispatcher(new Fragments::Dispatcher());
+    this->setDispatcher(new QRail::Fragments::Dispatcher());
 }
 
 /**
  * @file fragmentsfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets a Fragments::Factory instance
+ * @brief Gets a QRail::Fragments::Factory instance
  * @param QObject *parent = nullptr
  * @return Fragment::Factory *factory
  * @package Fragments
  * @public
- * Constructs a Fragments::Factory if none exists and returns the instance.
+ * Constructs a QRail::Fragments::Factory if none exists and returns the instance.
  */
-Fragments::Factory *Fragments::Factory::getInstance()
+QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 {
     // Singleton pattern
     if(m_instance == nullptr) {
         qDebug() << "Generating new Factory";
-        m_instance = new Fragments::Factory();
+        m_instance = new QRail::Fragments::Factory();
     }
     return m_instance;
 }
@@ -76,10 +74,10 @@ Fragments::Factory *Fragments::Factory::getInstance()
  * @param QObject *caller
  * @package Fragments
  * @public
- * Starts the generation process of a Fragments::Page object by requesting a page by URI.
+ * Starts the generation process of a QRail::Fragments::Page object by requesting a page by URI.
  * When the page is ready, the pageReady signal will be emitted.
  */
-void Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
+void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
     // Use processing methods to allow other extensions in the future if needed
     this->getPageByURIFromNetworkManager(uri);
@@ -99,10 +97,10 @@ void Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
  * @param QObject *caller
  * @package Fragments
  * @public
- * Starts the generation process of a Fragments::Page object by requesting a page by departure time.
+ * Starts the generation process of a QRail::Fragments::Page object by requesting a page by departure time.
  * When the page is ready, the pageReady signal will be emitted.
  */
-void Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
+void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
 {
     // Construct the URI of the page
     QUrl uri = QUrl(BASE_URL);
@@ -116,12 +114,12 @@ void Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller
     this->dispatcher()->addTarget(departureTime, caller);
 }
 
-void Fragments::Factory::customEvent(QEvent *event)
+void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
     if(event->type() == this->http()->dispatcher()->eventType())
     {
         event->accept();
-        Network::DispatcherEvent *networkEvent = reinterpret_cast<Network::DispatcherEvent *>(event);
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
         this->processHTTPReply(networkEvent->reply());
     }
     else {
@@ -138,9 +136,9 @@ void Fragments::Factory::customEvent(QEvent *event)
  * @param const QUrl &uri
  * @package Fragments
  * @private
- * Sends a request to the Network::Manager to retrieve a Linked Connections page by URI.
+ * Sends a request to the QRail::Network::Manager to retrieve a Linked Connections page by URI.
  */
-void Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
+void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Call the getResource slot due different threads
     emit this->getResource(uri, this);
@@ -153,12 +151,12 @@ void Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
  * @date 09 Aug 2018
  * @brief Parses the JSON-LD fragment
  * @param const QJsonObject &connection
- * @return Fragments::Fragment *frag;
+ * @return QRail::Fragments::Fragment *frag;
  * @package Fragments
  * @private
- * Converts the JSON-LD into a Fragments::Fragments object and returns it.
+ * Converts the JSON-LD into a QRail::Fragments::Fragments object and returns it.
  */
-Fragments::Fragment *Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
+QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {   
     // Check if the data have all the required keys for a fragment
     QStringList fragProps;
@@ -184,7 +182,7 @@ Fragments::Fragment *Fragments::Factory::generateFragmentFromJSON(const QJsonObj
     QString direction = data["direction"].toString();
 
     // Create Linked Connection Fragment and return it
-    Fragments::Fragment *frag = new Fragments::Fragment(
+    QRail::Fragments::Fragment *frag = new QRail::Fragments::Fragment(
                 uri,
                 departureStationURI,
                 arrivalStationURI,
@@ -213,7 +211,7 @@ Fragments::Fragment *Fragments::Factory::generateFragmentFromJSON(const QJsonObj
  * Checks the JSON-LD data by comparing the expected
  * properties with the received ones.
  */
-bool Fragments::Factory::validateData(const QJsonObject &data, const QStringList &properties)
+bool QRail::Fragments::Factory::validateData(const QJsonObject &data, const QStringList &properties)
 {
     foreach(QString prop, properties) {
         if(data[prop].isUndefined()) {
@@ -237,7 +235,7 @@ bool Fragments::Factory::validateData(const QJsonObject &data, const QStringList
  * the pageReady signal is emitted.
  * In case we faced an error, the error signal is emitted with an error message.
  */
-void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
+void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
     if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
 #ifdef VERBOSE_HTTP_STATUS
@@ -251,7 +249,7 @@ void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
         QString replyData = (QString)reply->readAll();
 
         // HTTP 200 OK, create LCPage and LCFragment list
-        QList<Fragments::Fragment *> fragments = QList<Fragments::Fragment *>();
+        QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
 
         // Try to parse the data as JSON-LD
         QJsonParseError parseError;
@@ -268,7 +266,7 @@ void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
             QJsonArray graph = jsonObject["@graph"].toArray();
             foreach(QJsonValue item, graph) {
                 QJsonObject connection = item.toObject();
-                Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+                QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
                 fragments.append(frag);
             }
 
@@ -277,7 +275,7 @@ void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
             QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
             QString hydraNext = jsonObject["hydra:next"].toString();
             QString hydraPrevious = jsonObject["hydra:previous"].toString();
-            Fragments::Page *page = new Fragments::Page(
+            QRail::Fragments::Page *page = new QRail::Fragments::Page(
                         pageURI,
                         pageTimestamp,
                         hydraNext,
@@ -307,13 +305,13 @@ void Fragments::Factory::processHTTPReply(QNetworkReply *reply)
  * @file fragmentsfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the Network::Manager instance
- * @return const Network::Manager *manager
+ * @brief Gets the QRail::Network::Manager instance
+ * @return const QRail::Network::Manager *manager
  * @package Fragments
  * @private
- * Gets the Network::Manager instance and returns it.
+ * Gets the QRail::Network::Manager instance and returns it.
  */
-Network::Manager *Fragments::Factory::http() const
+QRail::Network::Manager *QRail::Fragments::Factory::http() const
 {
     return m_http;
 }
@@ -322,23 +320,23 @@ Network::Manager *Fragments::Factory::http() const
  * @file fragmentsfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Sets the Network::Manager instance
- * @param Network::Manager *http
+ * @brief Sets the QRail::Network::Manager instance
+ * @param QRail::Network::Manager *http
  * @package Fragments
  * @private
- * Sets the Network::Manager instance to the given Network::Manager *http.
+ * Sets the QRail::Network::Manager instance to the given QRail::Network::Manager *http.
  */
-void Fragments::Factory::setHttp(Network::Manager *http)
+void QRail::Fragments::Factory::setHttp(QRail::Network::Manager *http)
 {
     m_http = http;
 }
 
-Fragments::Dispatcher *Fragments::Factory::dispatcher() const
+QRail::Fragments::Dispatcher *QRail::Fragments::Factory::dispatcher() const
 {
     return m_dispatcher;
 }
 
-void Fragments::Factory::setDispatcher(Fragments::Dispatcher *dispatcher)
+void QRail::Fragments::Factory::setDispatcher(QRail::Fragments::Dispatcher *dispatcher)
 {
     m_dispatcher = dispatcher;
 }

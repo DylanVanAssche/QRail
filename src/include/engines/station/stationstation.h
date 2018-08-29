@@ -14,7 +14,6 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #ifndef CSASTATION_H
 #define CSASTATION_H
 
@@ -32,6 +31,7 @@
 
 #include "qrail.h"
 
+namespace QRail {
 namespace StationEngine {
 class QRAIL_SHARED_EXPORT Station : public QObject
 {
@@ -226,6 +226,7 @@ private:
 
     Q_ENUM(Day)
 };
+}
 }
 
 #endif // CSASTATION_H

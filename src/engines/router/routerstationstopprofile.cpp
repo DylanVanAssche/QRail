@@ -1,40 +1,38 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/router/routerstationstopprofile.h"
+using namespace QRail;
 
 /**
  * @file routerstationfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief RouterEngine::StationStopProfile constructor
+ * @brief QRail::RouterEngine::StationStopProfile constructor
  * @param const QDateTime &departureTime
  * @param const QDateTime &arrivalTime
- * @param Fragments::Fragment *departureConnection
- * @param Fragments::Fragment *arrivalConnection
+ * @param QRail::Fragments::Fragment *departureConnection
+ * @param QRail::Fragments::Fragment *arrivalConnection
  * @param const qint16 transfers
  * @param QObject *parent = nullptr
  * @package RouterEngine
  * @public
- * Constructs a RouterEngine::StationStopProfile for the S array in the Connection Scan Algorithm.
+ * Constructs a QRail::RouterEngine::StationStopProfile for the S array in the Connection Scan Algorithm.
  */
-RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &departureTime, const QDateTime &arrivalTime, Fragments::Fragment *departureConnection, Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
+QRail::RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &departureTime, const QDateTime &arrivalTime, QRail::Fragments::Fragment *departureConnection, QRail::Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal triggering on construction
     m_departureTime = departureTime;
@@ -54,7 +52,7 @@ RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &departureT
  * @public
  * Gets the departure time in this stop.
  */
-QDateTime RouterEngine::StationStopProfile::departureTime() const
+QDateTime QRail::RouterEngine::StationStopProfile::departureTime() const
 {
     return m_departureTime;
 }
@@ -69,7 +67,7 @@ QDateTime RouterEngine::StationStopProfile::departureTime() const
  * Sets the current departure time to the given QDateTime &departureTime.
  * Emits the departureTimeChanged signal when changed.
  */
-void RouterEngine::StationStopProfile::setDepartureTime(const QDateTime &departureTime)
+void QRail::RouterEngine::StationStopProfile::setDepartureTime(const QDateTime &departureTime)
 {
     m_departureTime = departureTime;
     emit this->departureTimeChanged();
@@ -84,7 +82,7 @@ void RouterEngine::StationStopProfile::setDepartureTime(const QDateTime &departu
  * @public
  * Gets the arrival time in this stop.
  */
-QDateTime RouterEngine::StationStopProfile::arrivalTime() const
+QDateTime QRail::RouterEngine::StationStopProfile::arrivalTime() const
 {
     return m_arrivalTime;
 }
@@ -99,7 +97,7 @@ QDateTime RouterEngine::StationStopProfile::arrivalTime() const
  * Sets the current arrival time to the given QDateTime &arrivalTime.
  * Emits the arrivalTimeChanged signal when changed.
  */
-void RouterEngine::StationStopProfile::setArrivalTime(const QDateTime &arrivalTime)
+void QRail::RouterEngine::StationStopProfile::setArrivalTime(const QDateTime &arrivalTime)
 {
     m_arrivalTime = arrivalTime;
     emit this->arrivalTimeChanged();
@@ -114,7 +112,7 @@ void RouterEngine::StationStopProfile::setArrivalTime(const QDateTime &arrivalTi
  * @public
  * Gets the departure connection in this stop.
  */
-Fragments::Fragment *RouterEngine::StationStopProfile::departureConnection() const
+QRail::Fragments::Fragment *QRail::RouterEngine::StationStopProfile::departureConnection() const
 {
     return m_departureConnection;
 }
@@ -129,7 +127,7 @@ Fragments::Fragment *RouterEngine::StationStopProfile::departureConnection() con
  * Sets the current departure connection to the given Fragment *departureConnection.
  * Emits the departureConnectionChanged signal when changed.
  */
-void RouterEngine::StationStopProfile::setDepartureConnection(Fragments::Fragment *departureConnection)
+void QRail::RouterEngine::StationStopProfile::setDepartureConnection(QRail::Fragments::Fragment *departureConnection)
 {
     m_departureConnection = departureConnection;
     emit this->departureConnectionChanged();
@@ -144,7 +142,7 @@ void RouterEngine::StationStopProfile::setDepartureConnection(Fragments::Fragmen
  * @public
  * Gets the arrival connection in this stop.
  */
-Fragments::Fragment *RouterEngine::StationStopProfile::arrivalConnection() const
+QRail::Fragments::Fragment *QRail::RouterEngine::StationStopProfile::arrivalConnection() const
 {
     return m_arrivalConnection;
 }
@@ -159,7 +157,7 @@ Fragments::Fragment *RouterEngine::StationStopProfile::arrivalConnection() const
  * Sets the current arrival connection to the given Fragment *arrivalConnection.
  * Emits the arrivalConnectionChanged signal when changed.
  */
-void RouterEngine::StationStopProfile::setArrivalConnection(Fragments::Fragment *arrivalConnection)
+void QRail::RouterEngine::StationStopProfile::setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection)
 {
     m_arrivalConnection = arrivalConnection;
     emit this->arrivalConnectionChanged();
@@ -174,7 +172,7 @@ void RouterEngine::StationStopProfile::setArrivalConnection(Fragments::Fragment 
  * @public
  * Gets the number of transfers between this stop and the destination.
  */
-qint16 RouterEngine::StationStopProfile::transfers() const
+qint16 QRail::RouterEngine::StationStopProfile::transfers() const
 {
     return m_transfers;
 }
@@ -189,7 +187,7 @@ qint16 RouterEngine::StationStopProfile::transfers() const
  * Sets the number of transfers between this stop and the destination to the given qint16 &transfers.
  * Emits the transfersChanged signal when changed.
  */
-void RouterEngine::StationStopProfile::setTransfers(const qint16 &transfers)
+void QRail::RouterEngine::StationStopProfile::setTransfers(const qint16 &transfers)
 {
     m_transfers = transfers;
     emit this->transfersChanged();

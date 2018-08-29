@@ -14,8 +14,8 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #include "engines/station/stationnullstation.h"
+using namespace QRail;
 StationEngine::NullStation* StationEngine::NullStation::m_instance = nullptr;
 
 /**

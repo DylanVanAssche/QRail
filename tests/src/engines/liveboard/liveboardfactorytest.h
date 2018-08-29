@@ -1,30 +1,47 @@
+/*
+ *   This file is part of QRail.
+ *
+ *   QRail is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   QRail is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #ifndef LIVEBOARDFACTORYTEST_H
 #define LIVEBOARDFACTORYTEST_H
 
-#include <QtCore/QObject>
 #include <QtCore/QMetaType>
-#include <QtTest/QtTest>
+#include <QtCore/QObject>
 #include <QtTest/QSignalSpy>
+#include <QtTest/QtTest>
 
 #include "engines/liveboard/liveboardfactory.h"
 
 #define LIVEBOARD_WAIT_TIME 45000
 
+namespace QRail {
 namespace LiveboardEngine {
-class FactoryTest : public QObject
-{
-    Q_OBJECT
+class FactoryTest : public QObject {
+  Q_OBJECT
 public slots:
-    void liveboardReceived(LiveboardEngine::Board *board);
+  void liveboardReceived(QRail::LiveboardEngine::Board *board);
 
 private slots:
-    void initLiveboardFactoryTest();
-    void runLiveboardFactoryTest();
-    void cleanLiveboardFactoryTest();
+  void initLiveboardFactoryTest();
+  void runLiveboardFactoryTest();
+  void cleanLiveboardFactoryTest();
 
 private:
-    LiveboardEngine::Factory *factory;
+  QRail::LiveboardEngine::Factory *factory;
 };
-}
+} // namespace LiveboardEngine
+} // namespace QRail
 
 #endif // LIVEBOARDFACTORYTEST_H

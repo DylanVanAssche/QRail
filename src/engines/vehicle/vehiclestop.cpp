@@ -1,23 +1,21 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/vehicle/vehiclestop.h"
+using namespace QRail;
 
 /**
  * @file vehiclestop.cpp
@@ -27,9 +25,9 @@
  * @param QObject *parent
  * @package VehicleEngine
  * @public
- * Constructs a VehicleEngine::Stop with the given parent.
+ * Constructs a QRail::VehicleEngine::Stop with the given parent.
  */
-VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
+QRail::VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
 {
 
 }
@@ -50,14 +48,14 @@ VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
  * @param const qint16 &arrivalDelay
  * @param const bool &isArrivalCanceled
  * @param const bool &isExtraStop
- * @param const VehicleEngine::Stop::OccupancyLevel &occupancyLevel
- * @param const VehicleEngine::Stop::Type &type
+ * @param const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel
+ * @param const QRail::VehicleEngine::Stop::Type &type
  * @param QObject *parent
  * @package VehicleEngine
  * @public
- * Constructs a VehicleEngine::Stop with the given parent.
+ * Constructs a QRail::VehicleEngine::Stop with the given parent.
  */
-VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platform, const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime, const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime, const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop, const VehicleEngine::Stop::OccupancyLevel &occupancyLevel, const VehicleEngine::Stop::Type &type, QObject *parent): QObject(parent)
+QRail::VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platform, const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime, const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime, const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop, const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel, const QRail::VehicleEngine::Stop::Type &type, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_station = station;
@@ -86,7 +84,7 @@ VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platfo
  * @public
  * Gets the station for this stop and returns it.
  */
-StationEngine::Station *VehicleEngine::Stop::station() const
+StationEngine::Station *QRail::VehicleEngine::Stop::station() const
 {
     return m_station;
 }
@@ -102,7 +100,7 @@ StationEngine::Station *VehicleEngine::Stop::station() const
  * Sets the station for this stop to the given StationEngine::Station *station.
  * Emits the stationChanged signal.
  */
-void VehicleEngine::Stop::setStation(StationEngine::Station *station)
+void QRail::VehicleEngine::Stop::setStation(StationEngine::Station *station)
 {
     m_station = station;
     emit this->stationChanged();
@@ -118,7 +116,7 @@ void VehicleEngine::Stop::setStation(StationEngine::Station *station)
  * @public
  * Gets the platform for this stop and returns it.
  */
-QString VehicleEngine::Stop::platform() const
+QString QRail::VehicleEngine::Stop::platform() const
 {
     return m_platform;
 }
@@ -134,7 +132,7 @@ QString VehicleEngine::Stop::platform() const
  * Sets the platform for this stop to the given QString &platform.
  * Emits the platformChanged signal.
  */
-void VehicleEngine::Stop::setPlatform(const QString &platform)
+void QRail::VehicleEngine::Stop::setPlatform(const QString &platform)
 {
     m_platform = platform;
     emit this->platformChanged();
@@ -150,7 +148,7 @@ void VehicleEngine::Stop::setPlatform(const QString &platform)
  * @public
  * Gets the isPlatformNormal and returns it.
  */
-bool VehicleEngine::Stop::isPlatformNormal() const
+bool QRail::VehicleEngine::Stop::isPlatformNormal() const
 {
     return m_isPlatformNormal;
 }
@@ -166,7 +164,7 @@ bool VehicleEngine::Stop::isPlatformNormal() const
  * Sets the isPlatformNormal to the given bool &isPlatformNormal.
  * Emits the isPlatformNormalChanged signal.
  */
-void VehicleEngine::Stop::setIsPlatformNormal(const bool &isPlatformNormal)
+void QRail::VehicleEngine::Stop::setIsPlatformNormal(const bool &isPlatformNormal)
 {
     m_isPlatformNormal = isPlatformNormal;
     emit this->isPlatformNormalChanged();
@@ -182,7 +180,7 @@ void VehicleEngine::Stop::setIsPlatformNormal(const bool &isPlatformNormal)
  * @public
  * Gets the hasLeft and returns it.
  */
-bool VehicleEngine::Stop::hasLeft() const
+bool QRail::VehicleEngine::Stop::hasLeft() const
 {
     return m_hasLeft;
 }
@@ -198,7 +196,7 @@ bool VehicleEngine::Stop::hasLeft() const
  * Sets the hasLeft to the given bool &hasLeft.
  * Emits the hasLeftChanged signal.
  */
-void VehicleEngine::Stop::setHasLeft(const bool &hasLeft)
+void QRail::VehicleEngine::Stop::setHasLeft(const bool &hasLeft)
 {
     m_hasLeft = hasLeft;
     emit this->hasLeftChanged();
@@ -214,7 +212,7 @@ void VehicleEngine::Stop::setHasLeft(const bool &hasLeft)
  * @public
  * Gets the departure time for this stop and returns it.
  */
-QDateTime VehicleEngine::Stop::departureTime() const
+QDateTime QRail::VehicleEngine::Stop::departureTime() const
 {
     return m_departureTime;
 }
@@ -230,7 +228,7 @@ QDateTime VehicleEngine::Stop::departureTime() const
  * Sets the departure time for this stop to the given QDateTime &departureTime.
  * Emits the departureTimeChanged signal.
  */
-void VehicleEngine::Stop::setDepartureTime(const QDateTime &departureTime)
+void QRail::VehicleEngine::Stop::setDepartureTime(const QDateTime &departureTime)
 {
     m_departureTime = departureTime;
     emit this->departureTimeChanged();
@@ -246,7 +244,7 @@ void VehicleEngine::Stop::setDepartureTime(const QDateTime &departureTime)
  * @public
  * Gets the departure delay for this stop and returns it.
  */
-qint16 VehicleEngine::Stop::departureDelay() const
+qint16 QRail::VehicleEngine::Stop::departureDelay() const
 {
     return m_departureDelay;
 }
@@ -262,7 +260,7 @@ qint16 VehicleEngine::Stop::departureDelay() const
  * Sets the departure delay for this stop to the given qint16 departureDelay.
  * Emits the departureDelayChanged signal.
  */
-void VehicleEngine::Stop::setDepartureDelay(const qint16 &departureDelay)
+void QRail::VehicleEngine::Stop::setDepartureDelay(const qint16 &departureDelay)
 {
     m_departureDelay = departureDelay;
     emit this->departureDelayChanged();
@@ -278,7 +276,7 @@ void VehicleEngine::Stop::setDepartureDelay(const qint16 &departureDelay)
  * @public
  * Gets the isDepartureCanceled and returns it.
  */
-bool VehicleEngine::Stop::isDepartureCanceled() const
+bool QRail::VehicleEngine::Stop::isDepartureCanceled() const
 {
     return m_isDepartureCanceled;
 }
@@ -294,7 +292,7 @@ bool VehicleEngine::Stop::isDepartureCanceled() const
  * Sets the isDepartureCanceled for this stop to the given bool &isDepartureCanceled.
  * Emits the isDepartureCanceledChanged signal.
  */
-void VehicleEngine::Stop::setIsDepartureCanceled(const bool &isDepartureCanceled)
+void QRail::VehicleEngine::Stop::setIsDepartureCanceled(const bool &isDepartureCanceled)
 {
     m_isDepartureCanceled = isDepartureCanceled;
     emit this->isDepartureCanceledChanged();
@@ -310,7 +308,7 @@ void VehicleEngine::Stop::setIsDepartureCanceled(const bool &isDepartureCanceled
  * @public
  * Gets the arrival time for this stop and returns it.
  */
-QDateTime VehicleEngine::Stop::arrivalTime() const
+QDateTime QRail::VehicleEngine::Stop::arrivalTime() const
 {
     return m_arrivalTime;
 }
@@ -326,7 +324,7 @@ QDateTime VehicleEngine::Stop::arrivalTime() const
  * Sets the arrival time for this stop to the given QDateTime &arrivalTime.
  * Emits the arrivalTimeChanged signal.
  */
-void VehicleEngine::Stop::setArrivalTime(const QDateTime &arrivalTime)
+void QRail::VehicleEngine::Stop::setArrivalTime(const QDateTime &arrivalTime)
 {
     m_arrivalTime = arrivalTime;
     emit this->arrivalTimeChanged();
@@ -342,7 +340,7 @@ void VehicleEngine::Stop::setArrivalTime(const QDateTime &arrivalTime)
  * @public
  * Gets the arrival delay for this stop and returns it.
  */
-qint16 VehicleEngine::Stop::arrivalDelay() const
+qint16 QRail::VehicleEngine::Stop::arrivalDelay() const
 {
     return m_arrivalDelay;
 }
@@ -358,7 +356,7 @@ qint16 VehicleEngine::Stop::arrivalDelay() const
  * Gets the arrival delay for this stop and returns it.
  * Emits the arrivalDelayChanged signal.
  */
-void VehicleEngine::Stop::setArrivalDelay(const qint16 &arrivalDelay)
+void QRail::VehicleEngine::Stop::setArrivalDelay(const qint16 &arrivalDelay)
 {
     m_arrivalDelay = arrivalDelay;
     emit this->arrivalDelayChanged();
@@ -374,7 +372,7 @@ void VehicleEngine::Stop::setArrivalDelay(const qint16 &arrivalDelay)
  * @public
  * Gets the isArrivalCanceled and returns it.
  */
-bool VehicleEngine::Stop::isArrivalCanceled() const
+bool QRail::VehicleEngine::Stop::isArrivalCanceled() const
 {
     return m_isArrivalCanceled;
 }
@@ -390,7 +388,7 @@ bool VehicleEngine::Stop::isArrivalCanceled() const
  * Sets the isArrivalCanceled for this stop to the given bool &isArrivalCanceled.
  * Emits the isArrivalCanceledChanged signal.
  */
-void VehicleEngine::Stop::setIsArrivalCanceled(const bool &isArrivalCanceled)
+void QRail::VehicleEngine::Stop::setIsArrivalCanceled(const bool &isArrivalCanceled)
 {
     m_isArrivalCanceled = isArrivalCanceled;
     emit this->isArrivalCanceledChanged();
@@ -401,12 +399,12 @@ void VehicleEngine::Stop::setIsArrivalCanceled(const bool &isArrivalCanceled)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the occupancy level
- * @return const VehicleEngine::Stop::OccupancyLevel occupancyLevel
+ * @return const QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel
  * @package VehicleEngine
  * @public
  * Gets the occupancy level and returns it.
  */
-VehicleEngine::Stop::OccupancyLevel VehicleEngine::Stop::occupancyLevel() const
+QRail::VehicleEngine::Stop::OccupancyLevel QRail::VehicleEngine::Stop::occupancyLevel() const
 {
     return m_occupancyLevel;
 }
@@ -416,13 +414,13 @@ VehicleEngine::Stop::OccupancyLevel VehicleEngine::Stop::occupancyLevel() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the occupancy level
- * @param const VehicleEngine::Stop::OccupancyLevel &occupancyLevel
+ * @param const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel
  * @package VehicleEngine
  * @public
- * Sets the occupancy level for this stop to the given VehicleEngine::Stop::OccupancyLevel &occupancyLevel.
+ * Sets the occupancy level for this stop to the given QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel.
  * Emits the occupancyLevelChanged signal.
  */
-void VehicleEngine::Stop::setOccupancyLevel(const VehicleEngine::Stop::OccupancyLevel &occupancyLevel)
+void QRail::VehicleEngine::Stop::setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel)
 {
     m_occupancyLevel = occupancyLevel;
     emit this->occupancyLevelChanged();
@@ -433,12 +431,12 @@ void VehicleEngine::Stop::setOccupancyLevel(const VehicleEngine::Stop::Occupancy
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the type
- * @return const VehicleEngine::Stop::Type type
+ * @return const QRail::VehicleEngine::Stop::Type type
  * @package VehicleEngine
  * @public
  * Gets the type and returns it.
  */
-VehicleEngine::Stop::Type VehicleEngine::Stop::type() const
+QRail::VehicleEngine::Stop::Type QRail::VehicleEngine::Stop::type() const
 {
     return m_type;
 }
@@ -448,13 +446,13 @@ VehicleEngine::Stop::Type VehicleEngine::Stop::type() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the type
- * @param const VehicleEngine::Stop::Type &type
+ * @param const QRail::VehicleEngine::Stop::Type &type
  * @package VehicleEngine
  * @public
- * Sets the type to the given VehicleEngine::Stop::Type &type
+ * Sets the type to the given QRail::VehicleEngine::Stop::Type &type
  * Emits the typeChanged signal.
  */
-void VehicleEngine::Stop::setType(const VehicleEngine::Stop::Type &type)
+void QRail::VehicleEngine::Stop::setType(const QRail::VehicleEngine::Stop::Type &type)
 {
     m_type = type;
     emit this->typeChanged();
@@ -470,7 +468,7 @@ void VehicleEngine::Stop::setType(const VehicleEngine::Stop::Type &type)
  * @public
  * Gets the isExtraStop and returns it.
  */
-bool VehicleEngine::Stop::isExtraStop() const
+bool QRail::VehicleEngine::Stop::isExtraStop() const
 {
     return m_isExtraStop;
 }
@@ -486,7 +484,7 @@ bool VehicleEngine::Stop::isExtraStop() const
  * Sets the isExtraStop to the given bool &isExtraStop.
  * Emits the isExtraStopChanged signal.
  */
-void VehicleEngine::Stop::setIsExtraStop(const bool &isExtraStop)
+void QRail::VehicleEngine::Stop::setIsExtraStop(const bool &isExtraStop)
 {
     m_isExtraStop = isExtraStop;
     emit this->isExtraStopChanged();

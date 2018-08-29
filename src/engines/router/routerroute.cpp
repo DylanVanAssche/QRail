@@ -1,40 +1,38 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "engines/router/routerroute.h"
+using namespace QRail;
 
 /**
  * @file routerroute.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Route constructor: full
- * @param const QList<RouterEngine::RouteLeg *> &legs
- * @param const QList<RouterEngine::Transfer *> &transfers
- * @param const QList<AlertsEngine::Message *> &tripAlerts
- * @param const QList<AlertsEngine::Message *> &vehicleAlerts
- * @param const QList<AlertsEngine::Message *> &remarks
+ * @param const QList<QRail::RouterEngine::RouteLeg *> &legs
+ * @param const QList<QRail::RouterEngine::Transfer *> &transfers
+ * @param const QList<QRail::AlertsEngine::Message *> &tripAlerts
+ * @param const QList<QRail::AlertsEngine::Message *> &vehicleAlerts
+ * @param const QList<QRail::AlertsEngine::Message *> &remarks
  * @param QObject *parent
  * @package RouterEngine
  * @public
  * Constructs a Route with a list of legs and transfers
  */
-RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, const QList<RouterEngine::Transfer *> &transfers, const QList<AlertsEngine::Message *> &tripAlerts, const QList<AlertsEngine::Message *> &vehicleAlerts, const QList<AlertsEngine::Message *> &remarks, QObject *parent) : QObject(parent)
+QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &legs, const QList<QRail::RouterEngine::Transfer *> &transfers, const QList<QRail::AlertsEngine::Message *> &tripAlerts, const QList<QRail::AlertsEngine::Message *> &vehicleAlerts, const QList<QRail::AlertsEngine::Message *> &remarks, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_legs = legs;
@@ -49,26 +47,26 @@ RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, const QL
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Route constructor: full
- * @param const QList<RouterEngine::RouteLeg *> &legs
- * @param const QList<RouterEngine::Transfer *> &transfers
+ * @param const QList<QRail::RouterEngine::RouteLeg *> &legs
+ * @param const QList<QRail::RouterEngine::Transfer *> &transfers
  * @param const QList<Message *> &tripAlerts
- * @param const QList<AlertsEngine::Message *> &vehicleAlerts
- * @param const QList<AlertsEngine::Message *> &remarks
+ * @param const QList<QRail::AlertsEngine::Message *> &vehicleAlerts
+ * @param const QList<QRail::AlertsEngine::Message *> &remarks
  * @param QObject *parent
  * @package RouterEngine
  * @public
  * Constructs a Route with a list of legs. The transfers are generated from the list of legs.
  */
-RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, QObject *parent) : QObject(parent)
+QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &legs, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_legs = legs;
 
     // Calculate Transfer for easy data access
-    m_transfers = QList<RouterEngine::Transfer *>();
+    m_transfers = QList<QRail::RouterEngine::Transfer *>();
 
     // Departure RouteLegEnd
-    m_transfers.append(new RouterEngine::Transfer(
+    m_transfers.append(new QRail::RouterEngine::Transfer(
                            this->legs().first(),
                            nullptr,
                            this)
@@ -76,7 +74,7 @@ RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, QObject 
 
     // Intermediate legs (transfers)
     for(qint16 i = 1; i < this->legs().size(); i++) {
-        m_transfers.append(new RouterEngine::Transfer(
+        m_transfers.append(new QRail::RouterEngine::Transfer(
                                this->legs().at(i),
                                this->legs().at(i-1),
                                this)
@@ -84,15 +82,15 @@ RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, QObject 
     }
 
     // Arrival RouteLegEnd
-    m_transfers.append(new RouterEngine::Transfer(
+    m_transfers.append(new QRail::RouterEngine::Transfer(
                            nullptr,
                            this->legs().last(),
                            this)
                        );
 
-    m_tripAlerts = QList<AlertsEngine::Message *>();
-    m_vehicleAlerts = QList<AlertsEngine::Message *>(); // TODO: Bert Marcelis implements this one as a 2D array
-    m_remarks = QList<AlertsEngine::Message *>();
+    m_tripAlerts = QList<QRail::AlertsEngine::Message *>();
+    m_vehicleAlerts = QList<QRail::AlertsEngine::Message *>(); // TODO: Bert Marcelis implements this one as a 2D array
+    m_remarks = QList<QRail::AlertsEngine::Message *>();
 }
 
 /**
@@ -100,12 +98,12 @@ RouterEngine::Route::Route(const QList<RouterEngine::RouteLeg *> &legs, QObject 
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the list of legs
- * @return const QList<RouterEngine::RouteLeg *> legs
+ * @return const QList<QRail::RouterEngine::RouteLeg *> legs
  * @package RouterEngine
  * @public
  * Gets the list of legs and returns it.
  */
-QList<RouterEngine::RouteLeg *> RouterEngine::Route::legs() const
+QList<QRail::RouterEngine::RouteLeg *> QRail::RouterEngine::Route::legs() const
 {
     return m_legs;
 }
@@ -115,12 +113,12 @@ QList<RouterEngine::RouteLeg *> RouterEngine::Route::legs() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the list of legs
- * @param const QList<RouterEngine::RouteLeg *> &legs
+ * @param const QList<QRail::RouterEngine::RouteLeg *> &legs
  * @package RouterEngine
  * @public
- * Sets the list of legs to the given QList<RouterEngine::RouteLeg *> &legs.
+ * Sets the list of legs to the given QList<QRail::RouterEngine::RouteLeg *> &legs.
  */
-void RouterEngine::Route::setLegs(const QList<RouterEngine::RouteLeg *> &legs)
+void QRail::RouterEngine::Route::setLegs(const QList<QRail::RouterEngine::RouteLeg *> &legs)
 {
     m_legs = legs;
     emit this->legsChanged();
@@ -131,12 +129,12 @@ void RouterEngine::Route::setLegs(const QList<RouterEngine::RouteLeg *> &legs)
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the list of transfers
- * @return const QList<RouterEngine::Transfer *> transfers
+ * @return const QList<QRail::RouterEngine::Transfer *> transfers
  * @package RouterEngine
  * @public
  * Gets the list of transfers and returns it.
  */
-QList<RouterEngine::Transfer *> RouterEngine::Route::transfers() const
+QList<QRail::RouterEngine::Transfer *> QRail::RouterEngine::Route::transfers() const
 {
     return m_transfers;
 }
@@ -146,12 +144,12 @@ QList<RouterEngine::Transfer *> RouterEngine::Route::transfers() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the list of transfers
- * @param const QList<RouterEngine::Transfer *> &transfers
+ * @param const QList<QRail::RouterEngine::Transfer *> &transfers
  * @package RouterEngine
  * @public
- * Sets the list of transfers to the given QList<RouterEngine::Transfer *> &transfers.
+ * Sets the list of transfers to the given QList<QRail::RouterEngine::Transfer *> &transfers.
  */
-void RouterEngine::Route::setTransfers(const QList<RouterEngine::Transfer *> &transfers)
+void QRail::RouterEngine::Route::setTransfers(const QList<QRail::RouterEngine::Transfer *> &transfers)
 {
     m_transfers = transfers;
     emit this->transfersChanged();
@@ -162,12 +160,12 @@ void RouterEngine::Route::setTransfers(const QList<RouterEngine::Transfer *> &tr
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the list of trip alerts
- * @return const QList<AlertsEngine::Message *> tripAlerts
+ * @return const QList<QRail::AlertsEngine::Message *> tripAlerts
  * @package RouterEngine
  * @public
  * Gets the list of trip alerts and returns it.
  */
-QList<AlertsEngine::Message *> RouterEngine::Route::tripAlerts() const
+QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::tripAlerts() const
 {
     return m_tripAlerts;
 }
@@ -177,12 +175,12 @@ QList<AlertsEngine::Message *> RouterEngine::Route::tripAlerts() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the list of trip alerts
- * @param const QList<AlertsEngine::Message *> &tripAlerts
+ * @param const QList<QRail::AlertsEngine::Message *> &tripAlerts
  * @package RouterEngine
  * @public
- * Sets the list of trip alerts to the given QList<AlertsEngine::Message *> &tripAlerts.
+ * Sets the list of trip alerts to the given QList<QRail::AlertsEngine::Message *> &tripAlerts.
  */
-void RouterEngine::Route::setTripAlerts(const QList<AlertsEngine::Message *> &tripAlerts)
+void QRail::RouterEngine::Route::setTripAlerts(const QList<QRail::AlertsEngine::Message *> &tripAlerts)
 {
     m_tripAlerts = tripAlerts;
     emit this->tripAlertsChanged();
@@ -193,12 +191,12 @@ void RouterEngine::Route::setTripAlerts(const QList<AlertsEngine::Message *> &tr
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the list of vehicle alerts
- * @return const QList<AlertsEngine::Message *> vehicleAlerts
+ * @return const QList<QRail::AlertsEngine::Message *> vehicleAlerts
  * @package RouterEngine
  * @public
  * Gets the list of vehicle alerts and returns it.
  */
-QList<AlertsEngine::Message *> RouterEngine::Route::vehicleAlerts() const
+QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::vehicleAlerts() const
 {
     return m_vehicleAlerts;
 }
@@ -208,12 +206,12 @@ QList<AlertsEngine::Message *> RouterEngine::Route::vehicleAlerts() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the list of vehicle alerts
- * @param const QList<AlertsEngine::Message *> &vehicleAlerts
+ * @param const QList<QRail::AlertsEngine::Message *> &vehicleAlerts
  * @package RouterEngine
  * @public
- * Sets the list of vehicle alerts to the given QList<AlertsEngine::Message *> &vehicleAlerts.
+ * Sets the list of vehicle alerts to the given QList<QRail::AlertsEngine::Message *> &vehicleAlerts.
  */
-void RouterEngine::Route::setVehicleAlerts(const QList<AlertsEngine::Message *> &vehicleAlerts)
+void QRail::RouterEngine::Route::setVehicleAlerts(const QList<QRail::AlertsEngine::Message *> &vehicleAlerts)
 {
     m_vehicleAlerts = vehicleAlerts;
     emit this->vehicleAlertsChanged();
@@ -224,12 +222,12 @@ void RouterEngine::Route::setVehicleAlerts(const QList<AlertsEngine::Message *> 
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the list of remarks
- * @return const QList<AlertsEngine::Message *> remarks
+ * @return const QList<QRail::AlertsEngine::Message *> remarks
  * @package RouterEngine
  * @public
  * Gets the list of remarks and returns it.
  */
-QList<AlertsEngine::Message *> RouterEngine::Route::remarks() const
+QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::remarks() const
 {
     return m_remarks;
 }
@@ -239,12 +237,12 @@ QList<AlertsEngine::Message *> RouterEngine::Route::remarks() const
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the list of remarks
- * @param const QList<AlertsEngine::Message *> &remarks
+ * @param const QList<QRail::AlertsEngine::Message *> &remarks
  * @package RouterEngine
  * @public
- * Sets the list of remarks to the given QList<AlertsEngine::Message *> &remarks.
+ * Sets the list of remarks to the given QList<QRail::AlertsEngine::Message *> &remarks.
  */
-void RouterEngine::Route::setRemarks(const QList<AlertsEngine::Message *> &remarks)
+void QRail::RouterEngine::Route::setRemarks(const QList<QRail::AlertsEngine::Message *> &remarks)
 {
     m_remarks = remarks;
     emit this->remarksChanged();
@@ -260,7 +258,7 @@ void RouterEngine::Route::setRemarks(const QList<AlertsEngine::Message *> &remar
  * @public
  * Gets the duration of the route and returns it.
  */
-qint64 RouterEngine::Route::duration() const
+qint64 QRail::RouterEngine::Route::duration() const
 {
     return this->departureTime().secsTo(this->arrivalTime());
 }
@@ -276,7 +274,7 @@ qint64 RouterEngine::Route::duration() const
  * @note Delays are already included in this timestamp.
  * Gets the departure time of the route and returns it.
  */
-QDateTime RouterEngine::Route::departureTime() const
+QDateTime QRail::RouterEngine::Route::departureTime() const
 {
     return this->departureStation()->departure()->time();
 }
@@ -291,7 +289,7 @@ QDateTime RouterEngine::Route::departureTime() const
  * @public
  * Gets the departure delay of the route and returns it.
  */
-qint16 RouterEngine::Route::departureDelay() const
+qint16 QRail::RouterEngine::Route::departureDelay() const
 {
     return this->departureStation()->departure()->delay();
 }
@@ -307,7 +305,7 @@ qint16 RouterEngine::Route::departureDelay() const
  * @note Delays are already included in this timestamp.
  * Gets the arrival time of the route and returns it.
  */
-QDateTime RouterEngine::Route::arrivalTime() const
+QDateTime QRail::RouterEngine::Route::arrivalTime() const
 {
     return this->arrivalStation()->arrival()->time();
 }
@@ -322,7 +320,7 @@ QDateTime RouterEngine::Route::arrivalTime() const
  * @public
  * Gets the arrival delay of the route and returns it.
  */
-qint16 RouterEngine::Route::arrivalDelay() const
+qint16 QRail::RouterEngine::Route::arrivalDelay() const
 {
     return this->arrivalStation()->arrival()->delay();
 }
@@ -337,7 +335,7 @@ qint16 RouterEngine::Route::arrivalDelay() const
  * @public
  * Gets the number of transfers and returns it.
  */
-qint16 RouterEngine::Route::transferCount() const
+qint16 QRail::RouterEngine::Route::transferCount() const
 {
     // Departure and arrival stations aren't transfer stops
     return this->legs().size() - 1;
@@ -353,7 +351,7 @@ qint16 RouterEngine::Route::transferCount() const
  * @public
  * Gets the number of stations and returns it.
  */
-qint16 RouterEngine::Route::stationCount() const
+qint16 QRail::RouterEngine::Route::stationCount() const
 {
     // Number of transfers + arrival & departure station
     return this->transferCount() + 2;
@@ -369,7 +367,7 @@ qint16 RouterEngine::Route::stationCount() const
  * @public
  * Gets the platform for the departure of the route and returns it.
  */
-QString RouterEngine::Route::departurePlatform() const
+QString QRail::RouterEngine::Route::departurePlatform() const
 {
     return this->departureStation()->departure()->platform();
 }
@@ -384,7 +382,7 @@ QString RouterEngine::Route::departurePlatform() const
  * @public
  * Gets the isDeparturePlatformNormal and returns it.
  */
-bool RouterEngine::Route::isDeparturePlatformNormal() const
+bool QRail::RouterEngine::Route::isDeparturePlatformNormal() const
 {
     return this->departureStation()->departure()->isNormalPlatform();
 }
@@ -399,7 +397,7 @@ bool RouterEngine::Route::isDeparturePlatformNormal() const
  * @public
  * Gets the platform for the arrival of the route and returns it.
  */
-QString RouterEngine::Route::arrivalPlatform() const
+QString QRail::RouterEngine::Route::arrivalPlatform() const
 {
     return this->arrivalStation()->arrival()->platform();
 }
@@ -414,7 +412,7 @@ QString RouterEngine::Route::arrivalPlatform() const
  * @public
  * Gets the isArrivalPlatformNormal and returns it.
  */
-bool RouterEngine::Route::isArrivalPlatformNormal() const
+bool QRail::RouterEngine::Route::isArrivalPlatformNormal() const
 {
     return this->arrivalStation()->arrival()->isNormalPlatform();
 }
@@ -423,13 +421,13 @@ bool RouterEngine::Route::isArrivalPlatformNormal() const
  * @file routerroute.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the RouterEngine::Transfer departureStation
- * @return RouterEngine::Transfer *departureStation
+ * @brief Gets the QRail::RouterEngine::Transfer departureStation
+ * @return QRail::RouterEngine::Transfer *departureStation
  * @package RouterEngine
  * @public
- * Gets the departure station RouterEngine::Transfer and returns it.
+ * Gets the departure station QRail::RouterEngine::Transfer and returns it.
  */
-RouterEngine::Transfer *RouterEngine::Route::departureStation() const
+QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::departureStation() const
 {
     return this->transfers().first();
 }
@@ -438,13 +436,13 @@ RouterEngine::Transfer *RouterEngine::Route::departureStation() const
  * @file routerroute.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the RouterEngine::Transfer arrivalStation
- * @return RouterEngine::Transfer *arrivalStation
+ * @brief Gets the QRail::RouterEngine::Transfer arrivalStation
+ * @return QRail::RouterEngine::Transfer *arrivalStation
  * @package RouterEngine
  * @public
- * Gets the arrival station RouterEngine::Transfer and returns it.
+ * Gets the arrival station QRail::RouterEngine::Transfer and returns it.
  */
-RouterEngine::Transfer *RouterEngine::Route::arrivalStation() const
+QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::arrivalStation() const
 {
     return this->transfers().last();
 }
@@ -459,7 +457,7 @@ RouterEngine::Transfer *RouterEngine::Route::arrivalStation() const
  * @public
  * Gets the isPartiallyCanceled of the route and returns it.
  */
-bool RouterEngine::Route::isPartiallyCanceled() const
+bool QRail::RouterEngine::Route::isPartiallyCanceled() const
 {
     foreach(RouteLeg *leg, this->legs()) {
         if(leg->departure()->isCanceled()) {

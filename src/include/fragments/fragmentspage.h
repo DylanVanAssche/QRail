@@ -1,22 +1,19 @@
-/******************************************************************************
- * Copyright (C) 2018 by Dylan Van Assche                                     *
- *                                                                            *
- * This file is part of QRail.                                               *
- *                                                                            *
- *   QRail is free software: you can redistribute it and/or modify it        *
- *   under the terms of the GNU Lesser General Public License as published    *
- *   by the Free Software Foundation, either version 3 of the License, or     *
- *   (at your option) any later version.                                      *
- *                                                                            *
- *   QRail is distributed in the hope that it will be useful,                *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of           *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            *
- *   GNU Lesser General Public License for more details.                      *
- *                                                                            *
- *   You should have received a copy of the GNU Lesser General Public         *
- *   License along with QRail.  If not, see <http://www.gnu.org/licenses/>.  *
- ******************************************************************************/
-
+/*
+*   This file is part of QRail.
+*
+*   QRail is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   QRail is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #ifndef LINKEDCONNECTIONPAGE_H
 #define LINKEDCONNECTIONPAGE_H
 
@@ -26,6 +23,7 @@
 #include <QtCore/QList>
 #include "fragments/fragmentsfragment.h"
 
+namespace QRail {
 namespace Fragments {
 class Page : public QObject
 {
@@ -37,7 +35,7 @@ public:
             const QDateTime &timestamp,
             const QUrl &hydraNext,
             const QUrl &hydraPrevious,
-            const QList<Fragments::Fragment *> &fragments,
+            const QList<QRail::Fragments::Fragment *> &fragments,
             QObject *parent = nullptr
             );
     QUrl uri() const;
@@ -48,8 +46,8 @@ public:
     void setHydraNext(const QUrl &hydraNext);
     QUrl hydraPrevious() const;
     void setHydraPrevious(const QUrl &hydraPrevious);
-    QList<Fragments::Fragment *> fragments() const;
-    void setFragments(const QList<Fragments::Fragment *> &fragments);
+    QList<QRail::Fragments::Fragment *> fragments() const;
+    void setFragments(const QList<QRail::Fragments::Fragment *> &fragments);
 
 signals:
     void uriChanged();
@@ -63,8 +61,9 @@ private:
     QDateTime m_timestamp;
     QUrl m_hydraNext;
     QUrl m_hydraPrevious;
-    QList<Fragments::Fragment *> m_fragments;
+    QList<QRail::Fragments::Fragment *> m_fragments;
 };
+}
 }
 
 #endif // LINKEDCONNECTIONPAGE_H

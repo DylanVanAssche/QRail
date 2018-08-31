@@ -68,7 +68,7 @@ signals:
   void requested(const QUrl &uri);
   void processing(const QUrl &uri);
   void progress(const QUrl &uri, const qint16 &progress);
-  void finished(LiveboardEngine::Board *liveboard);
+  void finished(QRail::LiveboardEngine::Board *liveboard);
 
 private:
   mutable QMutex liveboardAccessMutex;

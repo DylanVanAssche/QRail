@@ -69,8 +69,9 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest() {
 }
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest() {
-  disconnect(planner, SIGNAL(routesFound(QList<RouterEngine::Route *>)), this,
-             SLOT(processRouteFound(QList<RouterEngine::Route *>)));
+  disconnect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)),
+             this,
+             SLOT(processRouteFound(QList<QRail::RouterEngine::Route *>)));
   disconnect(planner, SIGNAL(progress(QUrl, qint16)), this,
              SLOT(pageProcess(QUrl, qint16)));
   disconnect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
@@ -90,7 +91,7 @@ void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI) {
   qDebug() << "Page received:" << pageURI.toString();
 }
 
-void RouterEngine::PlannerTest::requested(const QUrl &pageURI) {
+void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI) {
   qDebug() << "Page requested:" << pageURI.toString();
 }
 

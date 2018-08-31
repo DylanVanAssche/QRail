@@ -17,59 +17,60 @@
 #ifndef VEHICLEFACTORY_H
 #define VEHICLEFACTORY_H
 
-#include <QtCore/QObject>
-#include <QtCore/QUrl>
-#include <QtCore/QLocale>
+#include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonParseError>
-#include <QtCore/QJsonArray>
 #include <QtCore/QJsonValue>
+#include <QtCore/QLocale>
+#include <QtCore/QObject>
+#include <QtCore/QUrl>
 
-#include "network/networkmanager.h"
-#include "engines/vehicle/vehiclevehicle.h"
-#include "engines/vehicle/vehiclestop.h"
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
+#include "engines/vehicle/vehiclestop.h"
+#include "engines/vehicle/vehiclevehicle.h"
+#include "network/networkmanager.h"
+#include "qrail.h"
 
 // Uncomment to enable verbose output
 //#define VERBOSE_HTTP_STATUS
 
 namespace QRail {
 namespace VehicleEngine {
-class Factory : public QObject
-{
-    Q_OBJECT
+class Factory : public QObject {
+  Q_OBJECT
 public:
-    static QRail::VehicleEngine::Factory *getInstance();
-    void getVehicleByURI(const QUrl &uri, const QLocale::Language &language);
-    QLocale::Language language() const;
-    void setLanguage(const QLocale::Language &language);
+  static QRail::VehicleEngine::Factory *getInstance();
+  void getVehicleByURI(const QUrl &uri, const QLocale::Language &language);
+  QLocale::Language language() const;
+  void setLanguage(const QLocale::Language &language);
 
 protected:
-    virtual void customEvent(QEvent *event);
+  virtual void customEvent(QEvent *event);
 
 signals:
-    void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
-    void getResource(const QUrl &uri, QObject *caller);
-    void error(const QString &message);
+  void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
+  void getResource(const QUrl &uri, QObject *caller);
+  void error(const QString &message);
 
 private:
-    QRail::Network::Manager *m_http;
-    StationEngine::Factory *m_stationFactory;
-    QLocale::Language m_language;
-    bool validateData(const QJsonObject &data, const QStringList &properties);
-    QRail::Network::Manager *http() const;
-    void setHttp(QRail::Network::Manager *http);
-    StationEngine::Factory *stationFactory() const;
-    void setStationFactory(StationEngine::Factory *stationFactory);
-    QRail::VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
-    QRail::VehicleEngine::Stop::OccupancyLevel generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
-    void processHTTPReply(QNetworkReply *reply);
-    static QRail::VehicleEngine::Factory *m_instance;
-    explicit Factory(QObject *parent = nullptr);
+  QRail::Network::Manager *m_http;
+  StationEngine::Factory *m_stationFactory;
+  QLocale::Language m_language;
+  bool validateData(const QJsonObject &data, const QStringList &properties);
+  QRail::Network::Manager *http() const;
+  void setHttp(QRail::Network::Manager *http);
+  StationEngine::Factory *stationFactory() const;
+  void setStationFactory(StationEngine::Factory *stationFactory);
+  QRail::VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
+  QRail::VehicleEngine::Stop::OccupancyLevel
+  generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
+  void processHTTPReply(QNetworkReply *reply);
+  static QRail::VehicleEngine::Factory *m_instance;
+  explicit Factory(QObject *parent = nullptr);
 };
-}
-}
+} // namespace VehicleEngine
+} // namespace QRail
 
 #endif // VEHICLEFACTORY_H

@@ -4,4 +4,8 @@
         <file>stations/stations.csv</file>
         <file>stations/stops.csv</file>
     </qresource>
+    <qresource prefix="/">
+        <file>context/vehicle/context.json</file>
+        <file>context/page/context.json</file>
+    </qresource>
 </RCC>

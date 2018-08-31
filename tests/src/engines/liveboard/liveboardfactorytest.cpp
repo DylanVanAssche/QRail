@@ -20,17 +20,18 @@ using namespace QRail;
 void LiveboardEngine::FactoryTest::initLiveboardFactoryTest() {
   qDebug() << "Init LiveboardEngine::Factory test";
   factory = LiveboardEngine::Factory::getInstance();
-  connect(factory, SIGNAL(finished(LiveboardEngine::Board *)), this,
-          SLOT(liveboardReceived(LiveboardEngine::Board *)));
+  connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
+          SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
 }
 
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest() {
   qDebug() << "Running LiveboardEngine::Factory test";
 
   // Activate QSignalSpy
-  qRegisterMetaType<LiveboardEngine::Board *>(
-      "LiveboardEngine::Board"); // register custom class
-  QSignalSpy spyLiveboard(factory, SIGNAL(finished(LiveboardEngine::Board *)));
+  qRegisterMetaType<QRail::LiveboardEngine::Board *>(
+      "QRail::LiveboardEngine::Board"); // register custom class
+  QSignalSpy spyLiveboard(factory,
+                          SIGNAL(finished(QRail::LiveboardEngine::Board *)));
 
   qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
   factory->getLiveboardByStationURI(

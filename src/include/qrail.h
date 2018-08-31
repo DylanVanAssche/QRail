@@ -17,10 +17,19 @@
 #ifndef QRAIL_H
 #define QRAIL_H
 
-#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QIODevice>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
+#include <QtCore/QString>
 #include <QtCore/QtGlobal>
 
+#define PAGE_CONTEXT_PATH "://context/page/context.json"
+#define VEHICLE_CONTEXT_PATH "://context/vehicle/context.json"
+
 void initQRail();
+QJsonObject pageContext();
+QJsonObject vehicleContext();
 
 #ifdef QRAIL_STATIC_LIB
 #define QRAIL_SHARED_EXPORT
@@ -32,4 +41,4 @@ void initQRail();
 #endif
 #endif
 
-#endif  // QRAIL_H
+#endif // QRAIL_H

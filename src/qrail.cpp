@@ -16,6 +16,31 @@
  */
 #include "qrail.h"
 
+// Helpers
+/**
+ * @file qrail.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Reads a JSON file
+ * @param const QString &path
+ * @return QJsonObject json
+ * @public
+ * Reads a JSON file, parses it and returns it as a QJsonObject.
+ */
+QJsonObject context(const QString &contextPath) {
+  // Read JSON data
+  QFile file;
+  QString data;
+  file.setFileName(contextPath);
+  file.open(QIODevice::ReadOnly | QIODevice::Text);
+  data = file.readAll();
+  file.close();
+
+  // Convert to object and return it
+  QJsonDocument document = QJsonDocument::fromJson(data.toUtf8());
+  return document.object();
+}
+
 /**
  * @file qrail.cpp
  * @author Dylan Van Assche
@@ -32,3 +57,26 @@ void initQRail() {
    */
   Q_INIT_RESOURCE(resources);
 }
+
+// Getters & Setters
+/**
+ * @file qrail.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Reads the LC page context in JSON
+ * @return QJsonObject pageContext
+ * @public
+ * Reads the LC page context JSON file and returns it.
+ */
+QJsonObject pageContext() { return context(PAGE_CONTEXT_PATH); }
+
+/**
+ * @file qrail.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Reads the vehicle context in JSON
+ * @return QJsonObject vehicleContext
+ * @public
+ * Reads the iRail vehicle context JSON file and returns it.
+ */
+QJsonObject vehicleContext() { return context(VEHICLE_CONTEXT_PATH); }

@@ -27,7 +27,7 @@
 #include "engines/vehicle/vehiclestop.h"
 #include "engines/vehicle/vehiclevehicle.h"
 
-#define VEHICLE_WAIT_TIME 5000
+#define VEHICLE_WAIT_TIME 7500
 
 namespace QRail {
 namespace VehicleEngine {

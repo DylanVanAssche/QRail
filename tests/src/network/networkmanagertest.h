@@ -20,28 +20,27 @@
 #include "network/networkmanager.h"
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
-#include <QtTest/QSignalSpy>
 #include <QtTest/QtTest>
 
 #define NETWORK_WAIT_TIME 3000
 
 namespace QRail {
-namespace Network {
-class ManagerTest : public QObject {
-  Q_OBJECT
-private slots:
-  void initNetworkManager();
-  void runNetworkManager();
-  void cleanNetworkManager();
+    namespace Network {
+        class ManagerTest : public QObject {
+          Q_OBJECT
+        private slots:
+          void initNetworkManager();
+          void runNetworkManager();
+          void cleanNetworkManager();
 
-protected:
-  virtual void customEvent(QEvent *event);
+        protected:
+          virtual void customEvent(QEvent *event);
 
-private:
-  QRail::Network::Manager *http;
-  void processHTTPReply(QNetworkReply *reply);
-};
-} // namespace Network
+        private:
+          QRail::Network::Manager *http;
+          void processHTTPReply(QNetworkReply *reply);
+        };
+    } // namespace Network
 } // namespace QRail
 
 #endif // NetworkManagerTEST_H

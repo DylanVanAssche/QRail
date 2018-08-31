@@ -26,104 +26,104 @@
 #include "engines/station/stationstation.h"
 
 namespace QRail {
-namespace VehicleEngine {
-class QRAIL_SHARED_EXPORT Stop : public QObject
-{
-    Q_OBJECT
-public:
-    enum class Type
-    {
-        ARRIVAL,
-        DEPARTURE,
-        STOP,
-        UNKNOWN
-    };
-    enum class OccupancyLevel
-    {
-        UNSUPPORTED,
-        UNKNOWN,
-        LOW,
-        MEDIUM,
-        HIGH
-    };
-    explicit Stop(QObject *parent = nullptr);
-    explicit Stop(
-            StationEngine::Station *station,
-            const QString &platform,
-            const bool &isPlatformNormal,
-            const bool &hasLeft,
-            const QDateTime &departureTime,
-            const qint16 &departureDelay,
-            const bool &isDepartureCanceled,
-            const QDateTime &arrivalTime,
-            const qint16 &arrivalDelay,
-            const bool &isArrivalCanceled,
-            const bool &isExtraStop,
-            const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
-            const QRail::VehicleEngine::Stop::Type &type,
-            QObject *parent = nullptr
-            );
-    StationEngine::Station *station() const;
-    void setStation(StationEngine::Station *station);
-    QString platform() const;
-    void setPlatform(const QString &platform);
-    bool isPlatformNormal() const;
-    void setIsPlatformNormal(const bool &isPlatformNormal);
-    bool hasLeft() const;
-    void setHasLeft(const bool &hasLeft);
-    QDateTime departureTime() const;
-    void setDepartureTime(const QDateTime &departureTime);
-    qint16 departureDelay() const;
-    void setDepartureDelay(const qint16 &departureDelay);
-    bool isDepartureCanceled() const;
-    void setIsDepartureCanceled(const bool &isDepartureCanceled);
-    QDateTime arrivalTime() const;
-    void setArrivalTime(const QDateTime &arrivalTime);
-    qint16 arrivalDelay() const;
-    void setArrivalDelay(const qint16 &arrivalDelay);
-    bool isArrivalCanceled() const;
-    void setIsArrivalCanceled(const bool &isArrivalCanceled);
-    QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
-    void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
-    QRail::VehicleEngine::Stop::Type type() const;
-    void setType(const QRail::VehicleEngine::Stop::Type &type);
-    bool isExtraStop() const;
-    void setIsExtraStop(const bool &isExtraStop);
+    namespace VehicleEngine {
+        class QRAIL_SHARED_EXPORT Stop : public QObject
+        {
+            Q_OBJECT
+        public:
+            enum class Type
+            {
+                ARRIVAL,
+                DEPARTURE,
+                STOP,
+                UNKNOWN
+            };
+            enum class OccupancyLevel
+            {
+                UNSUPPORTED,
+                UNKNOWN,
+                LOW,
+                MEDIUM,
+                HIGH
+            };
+            explicit Stop(QObject *parent = nullptr);
+            explicit Stop(
+                    StationEngine::Station *station,
+                    const QString &platform,
+                    const bool &isPlatformNormal,
+                    const bool &hasLeft,
+                    const QDateTime &departureTime,
+                    const qint16 &departureDelay,
+                    const bool &isDepartureCanceled,
+                    const QDateTime &arrivalTime,
+                    const qint16 &arrivalDelay,
+                    const bool &isArrivalCanceled,
+                    const bool &isExtraStop,
+                    const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+                    const QRail::VehicleEngine::Stop::Type &type,
+                    QObject *parent = nullptr
+                    );
+            StationEngine::Station *station() const;
+            void setStation(StationEngine::Station *station);
+            QString platform() const;
+            void setPlatform(const QString &platform);
+            bool isPlatformNormal() const;
+            void setIsPlatformNormal(const bool &isPlatformNormal);
+            bool hasLeft() const;
+            void setHasLeft(const bool &hasLeft);
+            QDateTime departureTime() const;
+            void setDepartureTime(const QDateTime &departureTime);
+            qint16 departureDelay() const;
+            void setDepartureDelay(const qint16 &departureDelay);
+            bool isDepartureCanceled() const;
+            void setIsDepartureCanceled(const bool &isDepartureCanceled);
+            QDateTime arrivalTime() const;
+            void setArrivalTime(const QDateTime &arrivalTime);
+            qint16 arrivalDelay() const;
+            void setArrivalDelay(const qint16 &arrivalDelay);
+            bool isArrivalCanceled() const;
+            void setIsArrivalCanceled(const bool &isArrivalCanceled);
+            QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
+            void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
+            QRail::VehicleEngine::Stop::Type type() const;
+            void setType(const QRail::VehicleEngine::Stop::Type &type);
+            bool isExtraStop() const;
+            void setIsExtraStop(const bool &isExtraStop);
 
-signals:
-    void stationChanged();
-    void platformChanged();
-    void isPlatformNormalChanged();
-    void hasLeftChanged();
-    void departureTimeChanged();
-    void departureDelayChanged();
-    void isDepartureCanceledChanged();
-    void arrivalTimeChanged();
-    void arrivalDelayChanged();
-    void isArrivalCanceledChanged();
-    void isExtraStopChanged();
-    void occupancyLevelChanged();
-    void typeChanged();
+        signals:
+            void stationChanged();
+            void platformChanged();
+            void isPlatformNormalChanged();
+            void hasLeftChanged();
+            void departureTimeChanged();
+            void departureDelayChanged();
+            void isDepartureCanceledChanged();
+            void arrivalTimeChanged();
+            void arrivalDelayChanged();
+            void isArrivalCanceledChanged();
+            void isExtraStopChanged();
+            void occupancyLevelChanged();
+            void typeChanged();
 
-private:
-    StationEngine::Station *m_station;
-    QString m_platform;
-    bool m_isPlatformNormal;
-    bool m_hasLeft;
-    QDateTime m_departureTime;
-    qint16 m_departureDelay;
-    bool m_isDepartureCanceled;
-    QDateTime m_arrivalTime;
-    qint16 m_arrivalDelay;
-    bool m_isArrivalCanceled;
-    bool m_isExtraStop;
-    QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
-    QRail::VehicleEngine::Stop::Type m_type;
+        private:
+            StationEngine::Station *m_station;
+            QString m_platform;
+            bool m_isPlatformNormal;
+            bool m_hasLeft;
+            QDateTime m_departureTime;
+            qint16 m_departureDelay;
+            bool m_isDepartureCanceled;
+            QDateTime m_arrivalTime;
+            qint16 m_arrivalDelay;
+            bool m_isArrivalCanceled;
+            bool m_isExtraStop;
+            QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
+            QRail::VehicleEngine::Stop::Type m_type;
 
-    Q_ENUM(Type)
-    Q_ENUM(OccupancyLevel)
-};
-}
+            Q_ENUM(Type)
+            Q_ENUM(OccupancyLevel)
+        };
+    }
 }
 
 #endif // CSAVEHICLESTOP_H

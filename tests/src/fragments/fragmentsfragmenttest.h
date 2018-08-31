@@ -23,19 +23,19 @@
 #include <QtTest/QtTest>
 
 namespace QRail {
-namespace Fragments {
-class FragmentTest : public QObject {
-  Q_OBJECT
-private slots:
-  void initLinkedConnectionFragment();
-  void runLinkedConnectionFragment();
-  void cleanLinkedConnectionFragment();
+    namespace Fragments {
+        class FragmentTest : public QObject {
+          Q_OBJECT
+        private slots:
+          void initLinkedConnectionFragment();
+          void runLinkedConnectionFragment();
+          void cleanLinkedConnectionFragment();
 
-private:
-  QRail::Fragments::Fragment *lcWithoutDelay;
-  QRail::Fragments::Fragment *lcWithDelay;
-};
-} // namespace Fragments
+        private:
+          QRail::Fragments::Fragment *lcWithoutDelay;
+          QRail::Fragments::Fragment *lcWithDelay;
+        };
+    } // namespace Fragments
 } // namespace QRail
 
 #endif // LINKEDCONNECTIONFRAGMENTTEST_H

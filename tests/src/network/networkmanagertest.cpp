@@ -25,8 +25,8 @@ using namespace QRail;
  * Init Manager
  */
 void QRail::Network::ManagerTest::initNetworkManager() {
-  qDebug() << "Init QRail::Network::Manager test";
-  http = QRail::Network::Manager::getInstance();
+    qDebug() << "Init QRail::Network::Manager test";
+    http = QRail::Network::Manager::getInstance();
 }
 
 /**
@@ -41,23 +41,19 @@ void QRail::Network::ManagerTest::initNetworkManager() {
  *  - HEAD request
  */
 void QRail::Network::ManagerTest::runNetworkManager() {
-  qDebug() << "Running QRail::Network::Manager test";
+    qDebug() << "Running QRail::Network::Manager test";
 
-  // Activate QSignalSpy
-  // QSignalSpy spy(http, SIGNAL(requestCompleted(QNetworkReply *)));
+    // HTTP GET
+    http->getResource(QUrl("https://httpbin.org/get"), this);
 
-  // HTTP GET
-  http->getResource(QUrl("https://httpbin.org/get"), this);
+    // HTTP POST
+    http->postResource(QUrl("https://httpbin.org/post"), QByteArray("HTTP POST OK"), this);
 
-  // HTTP POST
-  http->postResource(QUrl("https://httpbin.org/post"),
-                     QByteArray("HTTP POST OK"), this);
+    // HTTP DELETE
+    http->deleteResource(QUrl("https://httpbin.org/delete"), this);
 
-  // HTTP DELETE
-  http->deleteResource(QUrl("https://httpbin.org/delete"), this);
-
-  // HTTP HEAD
-  http->headResource(QUrl("https://httpbin.org/get"), this);
+    // HTTP HEAD
+    http->headResource(QUrl("https://httpbin.org/get"), this);
 }
 
 /**
@@ -68,22 +64,20 @@ void QRail::Network::ManagerTest::runNetworkManager() {
  * Init Manager
  */
 void QRail::Network::ManagerTest::cleanNetworkManager() {
-  qDebug() << "Cleaning up QRail::Network::Manager test";
+    qDebug() << "Cleaning up QRail::Network::Manager test";
 }
 
 void QRail::Network::ManagerTest::customEvent(QEvent *event) {
-  if (event->type() == http->dispatcher()->eventType()) {
-    qDebug() << "Received QRail::Network::Dispatcher event in "
-                "QRail::VehicleEngine::Factory, "
-                "casting now!";
-    event->accept();
-    QRail::Network::DispatcherEvent *networkEvent =
-        reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
-    this->processHTTPReply(networkEvent->reply());
-  } else {
-    qDebug() << "Unwanted event in QRail::VehicleEngine::Factory, ignoring...";
-    event->ignore();
-  }
+    if (event->type() == http->dispatcher()->eventType()) {
+        qDebug() << "Received QRail::Network::Dispatcher event in QRail::VehicleEngine::Factory, casting now!";
+        event->accept();
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
+        this->processHTTPReply(networkEvent->reply());
+    }
+    else {
+        qDebug() << "Unwanted event in QRail::VehicleEngine::Factory, ignoring...";
+        event->ignore();
+    }
 }
 
 /**
@@ -95,7 +89,6 @@ void QRail::Network::ManagerTest::customEvent(QEvent *event) {
  * code and log it.
  */
 void QRail::Network::ManagerTest::processHTTPReply(QNetworkReply *reply) {
-  QCOMPARE(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
-           200); // HTTP 200 OK check
-  qDebug() << reply->readAll();
+    QCOMPARE(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(), 200); // HTTP 200 OK check
+    qDebug() << reply->readAll();
 }

@@ -35,37 +35,36 @@
 
 // Factory pattern to generate Linked Connections fragments on the fly
 namespace QRail {
-namespace Fragments {
-class Factory : public QObject {
-  Q_OBJECT
-public:
-  static QRail::Fragments::Factory *getInstance();
-  void getPage(const QUrl &uri, QObject *caller);
-  void getPage(const QDateTime &departureTime, QObject *caller);
-  QRail::Fragments::Dispatcher *dispatcher() const;
+    namespace Fragments {
+        class Factory : public QObject {
+          Q_OBJECT
+        public:
+          static QRail::Fragments::Factory *getInstance();
+          void getPage(const QUrl &uri, QObject *caller);
+          void getPage(const QDateTime &departureTime, QObject *caller);
+          QRail::Fragments::Dispatcher *dispatcher() const;
 
-protected:
-  virtual void customEvent(QEvent *event);
+        protected:
+          virtual void customEvent(QEvent *event);
 
-signals:
-  void pageReady(QRail::Fragments::Page *page);
-  void getResource(const QUrl &uri, QObject *caller);
-  void error(const QString &message);
+        signals:
+          void pageReady(QRail::Fragments::Page *page);
+          void getResource(const QUrl &uri, QObject *caller);
+          void error(const QString &message);
 
-private:
-  static QRail::Fragments::Factory *m_instance;
-  QRail::Network::Manager *m_http;
-  QRail::Fragments::Dispatcher *m_dispatcher;
-  void getPageByURIFromNetworkManager(const QUrl &uri);
-  QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
-  bool validateData(const QJsonObject &data, const QStringList &properties);
-  void processHTTPReply(QNetworkReply *reply);
-  QRail::Network::Manager *http() const;
-  void setHttp(QRail::Network::Manager *http);
-  void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);
-  explicit Factory(QObject *parent = nullptr);
-};
-} // namespace Fragments
+        private:
+          static QRail::Fragments::Factory *m_instance;
+          QRail::Network::Manager *m_http;
+          QRail::Fragments::Dispatcher *m_dispatcher;
+          void getPageByURIFromNetworkManager(const QUrl &uri);
+          QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
+          void processHTTPReply(QNetworkReply *reply);
+          QRail::Network::Manager *http() const;
+          void setHttp(QRail::Network::Manager *http);
+          void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);
+          explicit Factory(QObject *parent = nullptr);
+        };
+    } // namespace Fragments
 } // namespace QRail
 
 #endif // LINKEDCONNECTIONFACTORY_H

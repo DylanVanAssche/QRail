@@ -26,47 +26,47 @@
 #include "fragments/fragmentspage.h"
 
 namespace QRail {
-namespace LiveboardEngine {
-class Board : public QObject {
-  Q_OBJECT
-public:
-  enum class Mode {
-    ARRIVALS,
-    DEPARTURES,
-  };
-  explicit Board(QObject *parent = nullptr);
-  explicit Board(const QList<QRail::VehicleEngine::Vehicle *> &entries,
-                 StationEngine::Station *station, const QDateTime &from,
-                 const QDateTime &until, QObject *parent = nullptr);
-  void addEntry(QRail::VehicleEngine::Vehicle *entry);
-  QList<QRail::VehicleEngine::Vehicle *> entries() const;
-  void setEntries(const QList<QRail::VehicleEngine::Vehicle *> &entries);
-  StationEngine::Station *station() const;
-  void setStation(StationEngine::Station *station);
-  QDateTime from() const;
-  void setFrom(const QDateTime &from);
-  QDateTime until() const;
-  void setUntil(const QDateTime &until);
-  QRail::LiveboardEngine::Board::Mode mode() const;
-  void setMode(const QRail::LiveboardEngine::Board::Mode &mode);
+    namespace LiveboardEngine {
+        class Board : public QObject {
+          Q_OBJECT
+        public:
+          enum class Mode {
+            ARRIVALS,
+            DEPARTURES,
+          };
+          explicit Board(QObject *parent = nullptr);
+          explicit Board(const QList<QRail::VehicleEngine::Vehicle *> &entries,
+                         StationEngine::Station *station, const QDateTime &from,
+                         const QDateTime &until, QObject *parent = nullptr);
+          void addEntry(QRail::VehicleEngine::Vehicle *entry);
+          QList<QRail::VehicleEngine::Vehicle *> entries() const;
+          void setEntries(const QList<QRail::VehicleEngine::Vehicle *> &entries);
+          StationEngine::Station *station() const;
+          void setStation(StationEngine::Station *station);
+          QDateTime from() const;
+          void setFrom(const QDateTime &from);
+          QDateTime until() const;
+          void setUntil(const QDateTime &until);
+          QRail::LiveboardEngine::Board::Mode mode() const;
+          void setMode(const QRail::LiveboardEngine::Board::Mode &mode);
 
-signals:
-  void entriesChanged();
-  void stationChanged();
-  void fromChanged();
-  void untilChanged();
-  void modeChanged();
+        signals:
+          void entriesChanged();
+          void stationChanged();
+          void fromChanged();
+          void untilChanged();
+          void modeChanged();
 
-private:
-  QList<QRail::VehicleEngine::Vehicle *> m_entries;
-  QRail::StationEngine::Station *m_station;
-  QDateTime m_from;
-  QDateTime m_until;
-  QRail::LiveboardEngine::Board::Mode m_mode;
+        private:
+          QList<QRail::VehicleEngine::Vehicle *> m_entries;
+          QRail::StationEngine::Station *m_station;
+          QDateTime m_from;
+          QDateTime m_until;
+          QRail::LiveboardEngine::Board::Mode m_mode;
 
-  Q_ENUM(Mode)
-};
-} // namespace LiveboardEngine
+          Q_ENUM(Mode)
+        };
+    } // namespace LiveboardEngine
 } // namespace QRail
 
 #endif // LIVEBOARDBOARD_H

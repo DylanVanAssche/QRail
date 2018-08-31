@@ -18,61 +18,52 @@
 using namespace QRail;
 
 void LiveboardEngine::FactoryTest::initLiveboardFactoryTest() {
-  qDebug() << "Init LiveboardEngine::Factory test";
-  factory = LiveboardEngine::Factory::getInstance();
-  connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
-          SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
+    qDebug() << "Init LiveboardEngine::Factory test";
+    factory = LiveboardEngine::Factory::getInstance();
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this, SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
 }
 
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest() {
-  qDebug() << "Running LiveboardEngine::Factory test";
+    qDebug() << "Running LiveboardEngine::Factory test";
 
-  // Activate QSignalSpy
-  qRegisterMetaType<QRail::LiveboardEngine::Board *>(
-      "QRail::LiveboardEngine::Board"); // register custom class
-  QSignalSpy spyLiveboard(factory,
-                          SIGNAL(finished(QRail::LiveboardEngine::Board *)));
+    // Activate QSignalSpy
+    qRegisterMetaType<QRail::LiveboardEngine::Board *>("QRail::LiveboardEngine::Board"); // register custom class
+    QSignalSpy spyLiveboard(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)));
 
-  qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
-  factory->getLiveboardByStationURI(
-      QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-      LiveboardEngine::Board::Mode::ARRIVALS);
-  QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
+    qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::ARRIVALS);
+    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
 
-  qDebug() << "Liveboard departures (now) for station Vilvoorde";
-  factory->getLiveboardByStationURI(
-      QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-      LiveboardEngine::Board::Mode::DEPARTURES);
-  QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
+    qDebug() << "Liveboard departures (now) for station Vilvoorde";
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);
+    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
 }
 
 void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest() {
-  qDebug() << "Cleaning up QRail::LiveboardEngine::Factory test";
+    qDebug() << "Cleaning up QRail::LiveboardEngine::Factory test";
 }
 
-void QRail::LiveboardEngine::FactoryTest::liveboardReceived(
-    QRail::LiveboardEngine::Board *board) {
-  qDebug()
-      << "Received liveboard from QRail::LiveboardEngine::Factory for station"
-      << board->station()->name().value(QLocale::Language::Dutch);
-  qDebug() << "\tFrom:" << board->from();
-  qDebug() << "\tUntil:" << board->until();
-  qDebug() << "\tMode:" << board->mode();
-  qDebug() << "\tNumber of entries:" << board->entries().size();
-  qDebug() << "\tEntries:";
+void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board) {
+    qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" << board->station()->name().value(QLocale::Language::Dutch);
+    qDebug() << "\tFrom:" << board->from();
+    qDebug() << "\tUntil:" << board->until();
+    qDebug() << "\tMode:" << board->mode();
+    qDebug() << "\tNumber of entries:" << board->entries().size();
+    qDebug() << "\tEntries:";
 
-  foreach (QRail::VehicleEngine::Vehicle *entry, board->entries()) {
-    if (board->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-      qDebug() << "\t\t" << entry->headsign()
-               << entry->intermediaryStops().first()->arrivalTime().toString(
-                      "hh:mm");
-    } else if (board->mode() ==
-               QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-      qDebug() << "\t\t" << entry->headsign()
-               << entry->intermediaryStops().first()->departureTime().toString(
-                      "hh:mm");
-    } else {
-      qCritical() << "Unknown QRail::LiveboardEngine::Board mode!";
+    foreach (QRail::VehicleEngine::Vehicle *entry, board->entries()) {
+        if (board->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
+          qDebug() << "\t\t" << entry->headsign() << entry->intermediaryStops().first()->arrivalTime().toString("hh:mm");
+        }
+        else if (board->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+          qDebug() << "\t\t" << entry->headsign() << entry->intermediaryStops().first()->departureTime().toString("hh:mm");
+        }
+        else {
+          qCritical() << "Unknown QRail::LiveboardEngine::Board mode!";
+        }
     }
-  }
 }

@@ -27,45 +27,45 @@
 #include "qrail.h"
 
 namespace QRail {
-namespace AlertsEngine {
-class QRAIL_SHARED_EXPORT Message : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Message(
-            const QString &header,
-            const QString &description,
-            const QString &lead,
-            const QUrl &link,
-            QObject *parent = nullptr
-            );
-    explicit Message(
-            const QString &header,
-            const QString &description,
-            QObject *parent = nullptr
-            );
-    QString header() const;
-    void setHeader(const QString &header);
-    QString description() const;
-    void setDescription(const QString &description);
-    QString lead() const;
-    void setLead(const QString &lead);
-    QUrl link() const;
-    void setLink(const QUrl &link);
+    namespace AlertsEngine {
+        class QRAIL_SHARED_EXPORT Message : public QObject
+        {
+            Q_OBJECT
+        public:
+            explicit Message(
+                    const QString &header,
+                    const QString &description,
+                    const QString &lead,
+                    const QUrl &link,
+                    QObject *parent = nullptr
+                    );
+            explicit Message(
+                    const QString &header,
+                    const QString &description,
+                    QObject *parent = nullptr
+                    );
+            QString header() const;
+            void setHeader(const QString &header);
+            QString description() const;
+            void setDescription(const QString &description);
+            QString lead() const;
+            void setLead(const QString &lead);
+            QUrl link() const;
+            void setLink(const QUrl &link);
 
-signals:
-    void headerChanged();
-    void descriptionChanged();
-    void leadChanged();
-    void linkChanged();
+        signals:
+            void headerChanged();
+            void descriptionChanged();
+            void leadChanged();
+            void linkChanged();
 
-private:
-    QString m_header;
-    QString m_description;
-    QString m_lead;
-    QUrl m_link;
-};
-}
+        private:
+            QString m_header;
+            QString m_description;
+            QString m_lead;
+            QUrl m_link;
+        };
+    }
 }
 
 #endif // CSAMESSAGE_H

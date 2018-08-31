@@ -58,78 +58,68 @@ using namespace QRail;
  */
 
 void QRail::Fragments::FragmentTest::initLinkedConnectionFragment() {
-  qDebug() << "Init QRail::Fragments::Fragment test";
+    qDebug() << "Init QRail::Fragments::Fragment test";
 
-  lcWithoutDelay = new QRail::Fragments::Fragment(this);
-  lcWithDelay = new QRail::Fragments::Fragment(
-      QUrl("http://irail.be/connections/8814001/20180721/IC3309"),
-      QUrl("http://irail.be/stations/NMBS/008814001"),
-      QUrl("http://irail.be/stations/NMBS/008813037"),
-      QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate),
-      QDateTime::fromString("2018-07-21T07:31:00.000Z", Qt::ISODate), 0, 60,
-      QUrl("http://irail.be/vehicle/IC3309/20180721"),
-      QUrl("http://irail.be/vehicle/IC3309"), QString("Anvers-Central"), this);
+    lcWithoutDelay = new QRail::Fragments::Fragment(this);
+    lcWithDelay = new QRail::Fragments::Fragment(
+        QUrl("http://irail.be/connections/8814001/20180721/IC3309"),
+        QUrl("http://irail.be/stations/NMBS/008814001"),
+        QUrl("http://irail.be/stations/NMBS/008813037"),
+        QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate),
+        QDateTime::fromString("2018-07-21T07:31:00.000Z", Qt::ISODate), 0, 60,
+        QUrl("http://irail.be/vehicle/IC3309/20180721"),
+        QUrl("http://irail.be/vehicle/IC3309"), QString("Anvers-Central"), this);
 }
 
 void QRail::Fragments::FragmentTest::runLinkedConnectionFragment() {
-  qDebug() << "Running QRail::Fragments::Fragment test";
+    qDebug() << "Running QRail::Fragments::Fragment test";
 
-  // Set each property and check if the signal of the property fires
-  QSignalSpy spyUriChanged(lcWithoutDelay, SIGNAL(uriChanged()));
-  lcWithoutDelay->setURI(
-      QUrl("http://irail.be/connections/8822004/20180721/IC3108"));
-  QCOMPARE(spyUriChanged.count(), 1);
+    // Set each property and check if the signal of the property fires
+    QSignalSpy spyUriChanged(lcWithoutDelay, SIGNAL(uriChanged()));
+    lcWithoutDelay->setURI(QUrl("http://irail.be/connections/8822004/20180721/IC3108"));
+    QCOMPARE(spyUriChanged.count(), 1);
 
-  QSignalSpy spyDepartureStationURIChanged(
-      lcWithoutDelay, SIGNAL(departureStationURIChanged()));
-  lcWithoutDelay->setDepartureStationURI(
-      QUrl("http://irail.be/stations/NMBS/008822004"));
-  QCOMPARE(spyDepartureStationURIChanged.count(), 1);
+    QSignalSpy spyDepartureStationURIChanged(lcWithoutDelay, SIGNAL(departureStationURIChanged()));
+    lcWithoutDelay->setDepartureStationURI(QUrl("http://irail.be/stations/NMBS/008822004"));
+    QCOMPARE(spyDepartureStationURIChanged.count(), 1);
 
-  QSignalSpy spyArrivalStationURIChanged(lcWithoutDelay,
-                                         SIGNAL(arrivalStationURIChanged()));
-  lcWithoutDelay->setArrivalStationURI(
-      QUrl("http://irail.be/stations/NMBS/008822343"));
-  QCOMPARE(spyArrivalStationURIChanged.count(), 1);
+    QSignalSpy spyArrivalStationURIChanged(lcWithoutDelay, SIGNAL(arrivalStationURIChanged()));
+    lcWithoutDelay->setArrivalStationURI(QUrl("http://irail.be/stations/NMBS/008822343"));
+    QCOMPARE(spyArrivalStationURIChanged.count(), 1);
 
-  QSignalSpy spyDepartureTimeChanged(lcWithoutDelay,
-                                     SIGNAL(departureTimeChanged()));
-  lcWithoutDelay->setDepartureTime(
+    QSignalSpy spyDepartureTimeChanged(lcWithoutDelay, SIGNAL(departureTimeChanged()));
+    lcWithoutDelay->setDepartureTime(
       QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate));
-  QCOMPARE(spyDepartureTimeChanged.count(), 1);
+    QCOMPARE(spyDepartureTimeChanged.count(), 1);
 
-  QSignalSpy spyArrivalTimeChanged(lcWithoutDelay,
-                                   SIGNAL(arrivalTimeChanged()));
-  lcWithoutDelay->setArrivalTime(
-      QDateTime::fromString("2018-07-21T07:32:00.000Z", Qt::ISODate));
-  QCOMPARE(spyArrivalTimeChanged.count(), 1);
+    QSignalSpy spyArrivalTimeChanged(lcWithoutDelay, SIGNAL(arrivalTimeChanged()));
+    lcWithoutDelay->setArrivalTime(QDateTime::fromString("2018-07-21T07:32:00.000Z", Qt::ISODate));
+    QCOMPARE(spyArrivalTimeChanged.count(), 1);
 
-  QSignalSpy spyDepartureDelayChanged(lcWithoutDelay,
-                                      SIGNAL(departureDelayChanged()));
-  lcWithoutDelay->setDepartureDelay(0);
-  QCOMPARE(spyDepartureDelayChanged.count(), 1);
+    QSignalSpy spyDepartureDelayChanged(lcWithoutDelay, SIGNAL(departureDelayChanged()));
+    lcWithoutDelay->setDepartureDelay(0);
+    QCOMPARE(spyDepartureDelayChanged.count(), 1);
 
-  QSignalSpy spyArrivalDelayChanged(lcWithoutDelay,
-                                    SIGNAL(arrivalDelayChanged()));
-  lcWithoutDelay->setArrivalDelay(0);
-  QCOMPARE(spyArrivalDelayChanged.count(), 1);
+    QSignalSpy spyArrivalDelayChanged(lcWithoutDelay, SIGNAL(arrivalDelayChanged()));
+    lcWithoutDelay->setArrivalDelay(0);
+    QCOMPARE(spyArrivalDelayChanged.count(), 1);
 
-  QSignalSpy spyTripURIChanged(lcWithoutDelay, SIGNAL(tripURIChanged()));
-  lcWithoutDelay->setTripURI(QUrl("http://irail.be/vehicle/IC3108/20180721"));
-  QCOMPARE(spyTripURIChanged.count(), 1);
+    QSignalSpy spyTripURIChanged(lcWithoutDelay, SIGNAL(tripURIChanged()));
+    lcWithoutDelay->setTripURI(QUrl("http://irail.be/vehicle/IC3108/20180721"));
+    QCOMPARE(spyTripURIChanged.count(), 1);
 
-  QSignalSpy spyRouteURIChanged(lcWithoutDelay, SIGNAL(routeURIChanged()));
-  lcWithoutDelay->setRouteURI(QUrl("http://irail.be/vehicle/IC3108"));
-  QCOMPARE(spyRouteURIChanged.count(), 1);
+    QSignalSpy spyRouteURIChanged(lcWithoutDelay, SIGNAL(routeURIChanged()));
+    lcWithoutDelay->setRouteURI(QUrl("http://irail.be/vehicle/IC3108"));
+    QCOMPARE(spyRouteURIChanged.count(), 1);
 
-  QSignalSpy spyDirectionChanged(lcWithoutDelay, SIGNAL(directionChanged()));
-  lcWithoutDelay->setDirection(QString("Anvers-Central"));
-  QCOMPARE(spyDirectionChanged.count(), 1);
+    QSignalSpy spyDirectionChanged(lcWithoutDelay, SIGNAL(directionChanged()));
+    lcWithoutDelay->setDirection(QString("Anvers-Central"));
+    QCOMPARE(spyDirectionChanged.count(), 1);
 }
 
 void QRail::Fragments::FragmentTest::cleanLinkedConnectionFragment() {
-  qDebug() << "Cleaning up QRail::Fragments::Fragment test";
+    qDebug() << "Cleaning up QRail::Fragments::Fragment test";
 
-  lcWithoutDelay->deleteLater();
-  lcWithDelay->deleteLater();
+    lcWithoutDelay->deleteLater();
+    lcWithDelay->deleteLater();
 }

@@ -18,46 +18,37 @@
 using namespace QRail;
 
 void QRail::Fragments::PageTest::initLinkedConnectionPageTest() {
-  qDebug() << "Init QRail::Fragments::Page test";
+    qDebug() << "Init QRail::Fragments::Page test";
 
-  page = new QRail::Fragments::Page(
-      QUrl("https://graph.irail.be/sncb/"
-           "connections?departureTime=2018-07-24T17:59:00.000Z"),
-      QDateTime::fromString("2018-07-24T17:59:00.000Z", Qt::ISODate),
-      QUrl("https://graph.irail.be/sncb/"
-           "connections?departureTime=2018-07-24T16:29:00.000Z"),
-      QUrl("https://graph.irail.be/sncb/"
-           "connections?departureTime=2018-07-24T19:34:00.000Z"),
-      QList<QRail::Fragments::Fragment *>(), this);
+    page = new QRail::Fragments::Page(
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T17:59:00.000Z"),
+        QDateTime::fromString("2018-07-24T17:59:00.000Z", Qt::ISODate),
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T16:29:00.000Z"),
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T19:34:00.000Z"),
+        QList<QRail::Fragments::Fragment *>(), this);
 }
 
 void QRail::Fragments::PageTest::runLinkedConnectionPageTest() {
-  qDebug() << "Running QRail::Fragments::Page test";
+    qDebug() << "Running QRail::Fragments::Page test";
 
-  // Set each property and check if the signal of the property fires
-  QSignalSpy spyUriChanged(page, SIGNAL(uriChanged()));
-  page->setURI(QUrl("https://graph.irail.be/sncb/"
-                    "connections?departureTime=2018-07-24T16:29:00.000Z"));
-  QCOMPARE(spyUriChanged.count(), 1);
+    // Set each property and check if the signal of the property fires
+    QSignalSpy spyUriChanged(page, SIGNAL(uriChanged()));
+    page->setURI(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T16:29:00.000Z"));
+    QCOMPARE(spyUriChanged.count(), 1);
 
-  QSignalSpy spyTimestampChanged(page, SIGNAL(timestampChanged()));
-  page->setTimestamp(
-      QDateTime::fromString("2018-07-24T16:29:00.000Z", Qt::ISODate));
-  QCOMPARE(spyTimestampChanged.count(), 1);
+    QSignalSpy spyTimestampChanged(page, SIGNAL(timestampChanged()));
+    page->setTimestamp(QDateTime::fromString("2018-07-24T16:29:00.000Z", Qt::ISODate));
+    QCOMPARE(spyTimestampChanged.count(), 1);
 
-  QSignalSpy spyHydraNextChanged(page, SIGNAL(hydraNextChanged()));
-  page->setHydraNext(
-      QUrl("https://graph.irail.be/sncb/"
-           "connections?departureTime=2018-07-24T15:29:00.000Z"));
-  QCOMPARE(spyHydraNextChanged.count(), 1);
+    QSignalSpy spyHydraNextChanged(page, SIGNAL(hydraNextChanged()));
+    page->setHydraNext(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T15:29:00.000Z"));
+    QCOMPARE(spyHydraNextChanged.count(), 1);
 
-  QSignalSpy spyHydraPreviousChanged(page, SIGNAL(hydraPreviousChanged()));
-  page->setHydraPrevious(
-      QUrl("https://graph.irail.be/sncb/"
-           "connections?departureTime=2018-07-24T17:29:00.000Z"));
-  QCOMPARE(spyHydraPreviousChanged.count(), 1);
+    QSignalSpy spyHydraPreviousChanged(page, SIGNAL(hydraPreviousChanged()));
+    page->setHydraPrevious(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T17:29:00.000Z"));
+    QCOMPARE(spyHydraPreviousChanged.count(), 1);
 }
 
 void QRail::Fragments::PageTest::cleanLinkedConnectionPageTest() {
-  qDebug() << "Cleaning up QRail::Fragments::Page test";
+    qDebug() << "Cleaning up QRail::Fragments::Page test";
 }

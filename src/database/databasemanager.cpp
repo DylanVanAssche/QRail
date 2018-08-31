@@ -32,21 +32,20 @@ QRail::Database::Manager *QRail::Database::Manager::m_instance = nullptr;
  * database (SQLite, MySQL, ORACLE, ...). Any errors during initialisation of
  * the database are catched and logged as CRITICAL.
  */
-QRail::Database::Manager::Manager(const QString &path, QObject *parent)
-    : QObject(parent) {
-  if (QSqlDatabase::isDriverAvailable(DRIVER)) {
-    this->setDatabase(QSqlDatabase::addDatabase(DRIVER));
-    this->database().setDatabaseName(path);
-    qDebug() << "Database name:" << this->database().databaseName();
+QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent) {
+    if (QSqlDatabase::isDriverAvailable(DRIVER)) {
+        this->setDatabase(QSqlDatabase::addDatabase(DRIVER));
+        this->database().setDatabaseName(path);
+        qDebug() << "Database name:" << this->database().databaseName();
 
-    if (!this->database().open()) {
-      qCritical() << "Connection to database failed";
+        if (!this->database().open()) {
+            qCritical() << "Connection to database failed";
+        } else {
+            qInfo() << "Database connection OK";
+        }
     } else {
-      qInfo() << "Database connection OK";
+        qCritical() << "Missing support for SQL driver:" << DRIVER;
     }
-  } else {
-    qCritical() << "Missing support for SQL driver:" << DRIVER;
-  }
 }
 
 /**
@@ -59,15 +58,14 @@ QRail::Database::Manager::Manager(const QString &path, QObject *parent)
  * @public
  * Constructs a QRail::Database::Manager instance if none exists and returns it.
  */
-QRail::Database::Manager *
-QRail::Database::Manager::getInstance(const QString &path) {
-  // NICE-TO-HAVE: Allow access to multiple databases by checking the path of
-  // the database
-  if (m_instance == nullptr) {
-    qDebug() << "Creating new QRail::Database::Manager";
-    m_instance = new Manager(path);
-  }
-  return m_instance;
+QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &path) {
+    // NICE-TO-HAVE: Allow access to multiple databases by checking the path of
+    // the database
+    if (m_instance == nullptr) {
+        qDebug() << "Creating new QRail::Database::Manager";
+        m_instance = new Manager(path);
+    }
+    return m_instance;
 }
 
 /**
@@ -84,13 +82,12 @@ QRail::Database::Manager::getInstance(const QString &path) {
  * During the execution, the errors are catched and logged as CRITICAL.
  */
 bool QRail::Database::Manager::execute(QSqlQuery &query) {
-  if (this->database().isOpen() && query.exec()) {
-    return true;
-  } else {
-    qCritical() << "Executing querry:" << query.executedQuery()
-                << "FAILED:" << query.lastError().text();
-    return false;
-  }
+    if (this->database().isOpen() && query.exec()) {
+        return true;
+    } else {
+        qCritical() << "Executing querry:" << query.executedQuery() << "FAILED:" << query.lastError().text();
+        return false;
+    }
 }
 
 /**
@@ -107,9 +104,8 @@ bool QRail::Database::Manager::execute(QSqlQuery &query) {
  * During the execution, the errors are catched and logged as CRITICAL.
  */
 QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query) {
-  QFuture<bool> future =
-      QtConcurrent::run(this, &QRail::Database::Manager::execute, query);
-  return future;
+    QFuture<bool> future = QtConcurrent::run(this, &QRail::Database::Manager::execute, query);
+    return future;
 }
 
 /**
@@ -126,7 +122,7 @@ QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query) {
  * commit your changes.
  */
 bool QRail::Database::Manager::startTransaction() {
-  return this->database().transaction();
+    return this->database().transaction();
 }
 
 /**
@@ -141,7 +137,7 @@ bool QRail::Database::Manager::startTransaction() {
  * Commits changes to the database and returns true if success.
  */
 bool QRail::Database::Manager::endTransaction() {
-  return this->database().commit();
+    return this->database().commit();
 }
 
 /**
@@ -155,7 +151,7 @@ bool QRail::Database::Manager::endTransaction() {
  * Sets the current QSqlDatabase database to the given QSqlDatabase &database.
  */
 void QRail::Database::Manager::setDatabase(const QSqlDatabase &database) {
-  m_database = database;
+    m_database = database;
 }
 
 /**
@@ -168,4 +164,6 @@ void QRail::Database::Manager::setDatabase(const QSqlDatabase &database) {
  * @public
  * Gets the QSqlDatabase database and returns it.
  */
-QSqlDatabase QRail::Database::Manager::database() const { return m_database; }
+QSqlDatabase QRail::Database::Manager::database() const {
+    return m_database;
+}

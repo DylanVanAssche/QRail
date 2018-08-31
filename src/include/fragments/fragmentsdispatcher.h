@@ -27,36 +27,36 @@
 #include "fragments/fragmentspage.h"
 
 namespace QRail {
-namespace Fragments {
-class DispatcherEvent : public QEvent
-{
-public:
-    DispatcherEvent(const QEvent::Type &type) : QEvent(type)
-    {
+    namespace Fragments {
+        class DispatcherEvent : public QEvent
+        {
+        public:
+            DispatcherEvent(const QEvent::Type &type) : QEvent(type)
+            {
+            }
+            QRail::Fragments::Page *page() const;
+            void setPage(QRail::Fragments::Page *value);
+
+        private:
+            QRail::Fragments::Page *m_page;
+        };
+
+        class Dispatcher : public QObject
+        {
+            Q_OBJECT
+        public:
+            explicit Dispatcher(QObject *parent = nullptr);
+            void dispatchPage(QRail::Fragments::Page *page);
+            void addTarget(const QDateTime &departureTime, QObject *caller);
+            QList<QObject *> findAndRemoveTargets(const QDateTime &from, const QDateTime &until);
+            QEvent::Type eventType() const;
+
+        private:
+            QMap<QDateTime, QObject *> m_targets;
+            QEvent::Type m_eventType;
+            void setEventType(const QEvent::Type &eventType);
+        };
     }
-    QRail::Fragments::Page *page() const;
-    void setPage(QRail::Fragments::Page *value);
-
-private:
-    QRail::Fragments::Page *m_page;
-};
-
-class Dispatcher : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Dispatcher(QObject *parent = nullptr);
-    void dispatchPage(QRail::Fragments::Page *page);
-    void addTarget(const QDateTime &departureTime, QObject *caller);
-    QList<QObject *> findAndRemoveTargets(const QDateTime &from, const QDateTime &until);
-    QEvent::Type eventType() const;
-
-private:
-    QMap<QDateTime, QObject *> m_targets;
-    QEvent::Type m_eventType;
-    void setEventType(const QEvent::Type &eventType);
-};
-}
 }
 
 #endif // FRAGMENTSDISPATCHER_H

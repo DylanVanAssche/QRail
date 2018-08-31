@@ -18,50 +18,41 @@
 using namespace QRail;
 
 void QRail::VehicleEngine::FactoryTest::initVehicleFactoryTest() {
-  qDebug() << "Init QRail::VehicleEngine::Factory test";
-  factory = QRail::VehicleEngine::Factory::getInstance();
-  connect(factory, SIGNAL(finished(QRail::VehicleEngine::Vehicle *)), this,
-          SLOT(vehicleReady(QRail::VehicleEngine::Vehicle*)));
+    qDebug() << "Init QRail::VehicleEngine::Factory test";
+    factory = QRail::VehicleEngine::Factory::getInstance();
+    connect(factory, SIGNAL(finished(QRail::VehicleEngine::Vehicle *)), this, SLOT(vehicleReady(QRail::VehicleEngine::Vehicle*)));
 }
 
 void QRail::VehicleEngine::FactoryTest::runVehicleFactoryTest() {
-  qDebug() << "Running QRail::VehicleEngine::Factory test";
+    qDebug() << "Running QRail::VehicleEngine::Factory test";
 
-  // Activate QSignalSpy
-  qRegisterMetaType<QRail::VehicleEngine::Vehicle *>(
-      "QRail::VehicleEngine::Vehicle"); // register custom class
-  QSignalSpy spyVehicle(factory,
-                        SIGNAL(finished(QRail::VehicleEngine::Vehicle *)));
+    // Activate QSignalSpy
+    qRegisterMetaType<QRail::VehicleEngine::Vehicle *>("QRail::VehicleEngine::Vehicle"); // register custom class
+    QSignalSpy spyVehicle(factory, SIGNAL(finished(QRail::VehicleEngine::Vehicle *)));
 
-  qDebug() << "Vehicle L562 route";
-  factory->getVehicleByURI(QUrl("http://irail.be/vehicle/L562"),
-                           QLocale::Language::Dutch);
+    qDebug() << "Vehicle L562 route";
+    factory->getVehicleByURI(QUrl("http://irail.be/vehicle/L562"), QLocale::Language::Dutch);
 
-  qDebug() << "Vehicle L562 route should NOT be retrieved "
-              "from the network cache (cache-control: no-cache header)";
-  factory->getVehicleByURI(QUrl("http://irail.be/vehicle/L562"),
-                           QLocale::Language::Dutch);
+    qDebug() << "Vehicle L562 route should NOT be retrieved from the network cache (cache-control: no-cache header)";
+    factory->getVehicleByURI(QUrl("http://irail.be/vehicle/L562"), QLocale::Language::Dutch);
 
-  qDebug() << "Vehicle IC540 route";
-  factory->getVehicleByURI(QUrl("http://irail.be/vehicle/IC540"),
-                           QLocale::Language::Dutch);
+    qDebug() << "Vehicle IC540 route";
+    factory->getVehicleByURI(QUrl("http://irail.be/vehicle/IC540"), QLocale::Language::Dutch);
 
-  // Wait until we received some signals firing from the factory
-  QVERIFY(spyVehicle.wait(VEHICLE_WAIT_TIME));
+    // Wait until we received some signals firing from the factory
+    QVERIFY(spyVehicle.wait(VEHICLE_WAIT_TIME));
 }
 
 void QRail::VehicleEngine::FactoryTest::cleanVehicleFactoryTest() {
-  qDebug() << "Clean up QRail::VehicleEngine::Factory test";
+    qDebug() << "Clean up QRail::VehicleEngine::Factory test";
 }
 
-void QRail::VehicleEngine::FactoryTest::vehicleReady(
-    QRail::VehicleEngine::Vehicle *vehicle) {
-  qDebug() << "Received vehicle:" << vehicle->uri();
-  qDebug() << "\tTrip URI:" << vehicle->tripURI();
-  qDebug() << "\tHeadsign:" << vehicle->headsign();
-  qDebug() << "\tStops:";
-  foreach (QRail::VehicleEngine::Stop *stop, vehicle->intermediaryStops()) {
-    qDebug() << "\t\t" << stop->arrivalTime().toString("hh:mm")
-             << stop->station()->name().value(QLocale::Language::Dutch);
-  }
+void QRail::VehicleEngine::FactoryTest::vehicleReady(QRail::VehicleEngine::Vehicle *vehicle) {
+    qDebug() << "Received vehicle:" << vehicle->uri();
+    qDebug() << "\tTrip URI:" << vehicle->tripURI();
+    qDebug() << "\tHeadsign:" << vehicle->headsign();
+    qDebug() << "\tStops:";
+    foreach (QRail::VehicleEngine::Stop *stop, vehicle->intermediaryStops()) {
+        qDebug() << "\t\t" << stop->arrivalTime().toString("hh:mm") << stop->station()->name().value(QLocale::Language::Dutch);
+    }
 }

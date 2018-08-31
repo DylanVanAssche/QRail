@@ -30,55 +30,51 @@
 
 // Unittest main method
 int main(int argc, char *argv[]) {
-  // Allow QEventLoops for QSignalSpy
-  QCoreApplication app(argc, argv);
+    // Allow QEventLoops for QSignalSpy
+    QCoreApplication app(argc, argv);
 
-  /*
-   * This workaround will execute every test as soon as the event loop is
-   * started. NOTE: Requires C++11 support INFO:
-   * https://forum.qt.io/topic/36208/solved-console-application-does-not-exit/7
-   */
-  QTimer::singleShot(0, []() {
-    // Init the QRail library
-    initQRail();
+    /*
+    * This workaround will execute every test as soon as the event loop is
+    * started. NOTE: Requires C++11 support INFO:
+    * https://forum.qt.io/topic/36208/solved-console-application-does-not-exit/7
+    */
+    QTimer::singleShot(0, []() {
+        // Init the QRail library
+        initQRail();
 
-    // Create test instances
-    int networkManagerResult = -1;
-    int dbManagerResult = -1;
-    int lcFragmentResult = -1;
-    int lcPageResult = -1;
-    int routerPlannerResult = -1;
-    int liveboardFactoryResult = -1;
-    int vehicleFactoryResult = -1;
-    QRail::Network::ManagerTest testSuiteNetworkManager;
-    QRail::Database::ManagerTest testSuiteDBManager;
-    QRail::Fragments::FragmentTest testSuiteLCFragment;
-    QRail::Fragments::PageTest testSuiteLCPage;
-    QRail::RouterEngine::PlannerTest testSuiteCSAPlanner;
-    QRail::LiveboardEngine::FactoryTest testSuiteLiveboardFactory;
-    QRail::VehicleEngine::FactoryTest testSuiteVehicleFactory;
+        // Create test instances
+        int networkManagerResult = -1;
+        int dbManagerResult = -1;
+        int lcFragmentResult = -1;
+        int lcPageResult = -1;
+        int routerPlannerResult = -1;
+        int liveboardFactoryResult = -1;
+        int vehicleFactoryResult = -1;
+        QRail::Network::ManagerTest testSuiteNetworkManager;
+        QRail::Database::ManagerTest testSuiteDBManager;
+        QRail::Fragments::FragmentTest testSuiteLCFragment;
+        QRail::Fragments::PageTest testSuiteLCPage;
+        QRail::RouterEngine::PlannerTest testSuiteCSAPlanner;
+        QRail::LiveboardEngine::FactoryTest testSuiteLiveboardFactory;
+        QRail::VehicleEngine::FactoryTest testSuiteVehicleFactory;
 
-    // Run unit tests without passing arguments
-    networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
-    dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
-    lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
-    lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
+        // Run unit tests without passing arguments
+        networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
+        lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
+        lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
 
-    // Run QRail::RouterEngine::Planner integration test
-    routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
+        // Run QRail::RouterEngine::Planner integration test
+        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
-    // Run QRail::LiveboardEngine::Factory integration test
-    liveboardFactoryResult =
-        QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
+        // Run QRail::LiveboardEngine::Factory integration test
+        liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
 
-    // Run QRail::LiveboardEngine::Factory integration test
-    vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
+        // Run QRail::LiveboardEngine::Factory integration test
+        vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
-    // Return the status code of every test for CI/CD
-    QCoreApplication::exit(networkManagerResult | dbManagerResult |
-                           lcFragmentResult | lcPageResult |
-                           routerPlannerResult | liveboardFactoryResult |
-                           vehicleFactoryResult);
-  });
-  return app.exec();
+        // Return the status code of every test for CI/CD
+        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
+    });
+    return app.exec();
 }

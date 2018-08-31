@@ -28,17 +28,17 @@
  * Reads a JSON file, parses it and returns it as a QJsonObject.
  */
 QJsonObject context(const QString &contextPath) {
-  // Read JSON data
-  QFile file;
-  QString data;
-  file.setFileName(contextPath);
-  file.open(QIODevice::ReadOnly | QIODevice::Text);
-  data = file.readAll();
-  file.close();
+    // Read JSON data
+    QFile file;
+    QString data;
+    file.setFileName(contextPath);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    data = file.readAll();
+    file.close();
 
-  // Convert to object and return it
-  QJsonDocument document = QJsonDocument::fromJson(data.toUtf8());
-  return document.object();
+    // Convert to object and return it
+    QJsonDocument document = QJsonDocument::fromJson(data.toUtf8());
+    return document.object();
 }
 
 /**
@@ -51,11 +51,11 @@ QJsonObject context(const QString &contextPath) {
  * work without it. Init the QRail library assets.
  */
 void initQRail() {
-  /*
-   * Init resources since we're running in library mode.
-   * Without this, the resources aren't visible to QRail.
-   */
-  Q_INIT_RESOURCE(resources);
+    /*
+    * Init resources since we're running in library mode.
+    * Without this, the resources aren't visible to QRail.
+    */
+    Q_INIT_RESOURCE(resources);
 }
 
 // Getters & Setters
@@ -68,7 +68,9 @@ void initQRail() {
  * @public
  * Reads the LC page context JSON file and returns it.
  */
-QJsonObject pageContext() { return context(PAGE_CONTEXT_PATH); }
+QJsonObject pageContext() {
+    return context(PAGE_CONTEXT_PATH);
+}
 
 /**
  * @file qrail.cpp
@@ -79,4 +81,6 @@ QJsonObject pageContext() { return context(PAGE_CONTEXT_PATH); }
  * @public
  * Reads the iRail vehicle context JSON file and returns it.
  */
-QJsonObject vehicleContext() { return context(VEHICLE_CONTEXT_PATH); }
+QJsonObject vehicleContext() {
+    return context(VEHICLE_CONTEXT_PATH);
+}

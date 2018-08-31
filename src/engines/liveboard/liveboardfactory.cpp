@@ -16,8 +16,7 @@
  */
 #include "engines/liveboard/liveboardfactory.h"
 using namespace QRail;
-QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance =
-    nullptr;
+QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance = nullptr;
 
 /**
  * @file liveboardfactory.cpp
@@ -31,11 +30,11 @@ QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance =
  * QRail::LiveboardEngine::Board objects on the fly.
  */
 QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent) {
-  // Get QRail::Fragments::Factory instance
-  this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
+    // Get QRail::Fragments::Factory instance
+    this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
 
-  // Get StationEngine::Factory instance
-  this->setStationFactory(StationEngine::Factory::getInstance());
+    // Get StationEngine::Factory instance
+    this->setStationFactory(StationEngine::Factory::getInstance());
 }
 
 /**
@@ -50,14 +49,13 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent) {
  * Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
  * instance.
  */
-QRail::LiveboardEngine::Factory *
-QRail::LiveboardEngine::Factory::getInstance() {
-  // Singleton pattern
-  if (m_instance == nullptr) {
-    qDebug() << "Generating new QRail::LiveboardEngine::Factory";
-    m_instance = new QRail::LiveboardEngine::Factory();
-  }
-  return m_instance;
+QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance() {
+    // Singleton pattern
+    if (m_instance == nullptr) {
+        qDebug() << "Generating new QRail::LiveboardEngine::Factory";
+        m_instance = new QRail::LiveboardEngine::Factory();
+    }
+    return m_instance;
 }
 
 // Invokers
@@ -77,13 +75,12 @@ QRail::LiveboardEngine::Factory::getInstance() {
  * Calling this method will retrieve a QRail::LiveboardEngine::Board for the
  * current time until the current time + 3 hours.
  */
-void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(
-    const QUrl &uri, const QRail::LiveboardEngine::Board::Mode &mode) {
-  this->getLiveboardByStationURI(uri, QDateTime::currentDateTime().toUTC(),
-                                 QDateTime::currentDateTime()
-                                     .addSecs(3 * SECONDS_TO_HOURS_MULTIPLIER)
-                                     .toUTC(),
-                                 mode);
+void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, const QRail::LiveboardEngine::Board::Mode &mode) {
+    this->getLiveboardByStationURI(uri,
+                                   QDateTime::currentDateTime().toUTC(),
+                                   QDateTime::currentDateTime().addSecs(3 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
+                                   mode
+                                   );
 }
 
 /**
@@ -102,28 +99,25 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(
  * The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
  * liveboard should contain all the arrivals, departures of the station.
  */
-void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(
-    const QUrl &uri, const QDateTime &from, const QDateTime &until,
-    const QRail::LiveboardEngine::Board::Mode &mode) {
-  this->setStationURI(uri);
-  qDebug() << "URI" << uri;
-  qDebug() << "station URI variable" << this->stationURI();
-  this->setMode(mode);
-  this->setFrom(from);
-  this->setUntil(until);
-  this->fragmentsFactory()->getPage(this->until(), this);
-  this->setLiveboard(new QRail::LiveboardEngine::Board(this));
-  this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
-  this->liveboard()->setFrom(this->from());
-  this->liveboard()->setUntil(this->until());
-  this->liveboard()->setMode(this->mode());
-  qDebug() << "Station factory is the bad girl";
-  qDebug() << this->stationURI().toString();
-  qDebug() << this->stationFactory();
-  qDebug() << this->stationFactory()->getStationByURI(this->stationURI());
-  this->liveboard()->setStation(
-      this->stationFactory()->getStationByURI(this->stationURI()));
-  qDebug() << "Invoked liveboard request";
+void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, const QDateTime &from, const QDateTime &until, const QRail::LiveboardEngine::Board::Mode &mode) {
+    this->setStationURI(uri);
+    qDebug() << "URI" << uri;
+    qDebug() << "station URI variable" << this->stationURI();
+    this->setMode(mode);
+    this->setFrom(from);
+    this->setUntil(until);
+    this->fragmentsFactory()->getPage(this->until(), this);
+    this->setLiveboard(new QRail::LiveboardEngine::Board(this));
+    this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
+    this->liveboard()->setFrom(this->from());
+    this->liveboard()->setUntil(this->until());
+    this->liveboard()->setMode(this->mode());
+    qDebug() << "Station factory is the bad girl";
+    qDebug() << this->stationURI().toString();
+    qDebug() << this->stationFactory();
+    qDebug() << this->stationFactory()->getStationByURI(this->stationURI());
+    this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
+    qDebug() << "Invoked liveboard request";
 }
 
 // Helpers
@@ -139,28 +133,25 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(
  * QRail::Fragments::Factory. New pages are requested if the time range isn't
  * fulfilled in DESCENDING order of the departure time.
  */
-void QRail::LiveboardEngine::Factory::processPage(
-    QRail::Fragments::Page *page) {
-  qDebug() << "Factory generated requested Linked Connection page:" << page
-           << "starting processing thread...";
-  // Launch processing thread
-  emit this->processing(page->uri());
+void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page) {
+    qDebug() << "Factory generated requested Linked Connection page:" << page << "starting processing thread...";
+    // Launch processing thread
+    emit this->processing(page->uri());
 
-  /*
+    /*
    * Before processing our received page we check if we the first fragment
    * passed our departure time. We can do this because the departure times are
    * sorted in DESCENDING order.
    */
-  bool finished = false;
-  if (page->fragments().first()->departureTime() > this->from()) {
-    qDebug() << "Requesting another page from QRail::Fragments::Factory";
-    this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-    emit this->requested(page->hydraPrevious());
-  } else {
-    finished = true;
-  }
-  QtConcurrent::run(this, &QRail::LiveboardEngine::Factory::parsePage, page,
-                    finished);
+    bool finished = false;
+    if (page->fragments().first()->departureTime() > this->from()) {
+        qDebug() << "Requesting another page from QRail::Fragments::Factory";
+        this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
+        emit this->requested(page->hydraPrevious());
+    } else {
+        finished = true;
+    }
+    QtConcurrent::run(this, &QRail::LiveboardEngine::Factory::parsePage, page, finished);
 }
 
 /**
@@ -171,118 +162,106 @@ void QRail::LiveboardEngine::Factory::processPage(
  * @param QRail::Fragments::Page *page
  * @param const bool &finished
  * @package Liveboard
- * @note If you want to retrieve the full intermediary stops of each vehicle in
-the QRail::LiveboardEngine::Board you can use the QRail::VehicleEngine::Factory.
+ * @note If you want to retrieve the full intermediary stops of each vehicle in the QRail::LiveboardEngine::Board you can use the QRail::VehicleEngine::Factory.
  * @public
- * Parses the incoming pages in a separate thread using the QtConcurrent
-framework.
- * If the finished parameter is set to true, the LiveboardEngine::Board is ready
-and
+ * Parses the incoming pages in a separate thread using the QtConcurrent framework.
+ * If the finished parameter is set to true, the LiveboardEngine::Board is ready and
  * the finished signal is emitted.
  */
-void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page,
-                                                const bool &finished) {
-  qreal previousProgress = 0.0;
-  qreal currentProgress =
-      0.0; // Reports the page progress through the progress signal
+void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished) {
+    qreal previousProgress = 0.0;
+    qreal currentProgress = 0.0; // Reports the page progress through the progress signal
 
-  // Parse each connection fragment
-  for (qint16 fragIndex = 0; fragIndex < page->fragments().size();
-       fragIndex++) {
-    QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+    // Parse each connection fragment
+    for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
+        QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
-    /*
-     * REMARKS:
-     *   - We only emit the progress signal when we reach a certain treshold to
-     * avoid spamming the event loop.
-     *   - Increment the fragIndex before calculating the progress to reach 100
-     * % when fragIndex == 0.
-     *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
-     */
-    currentProgress = 100.0 * (fragIndex + 1) / page->fragments().size();
-    if (currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
-      previousProgress = currentProgress;
-      emit this->progress(page->uri(), qRound(currentProgress));
+        /*
+         * REMARKS:
+         *   - We only emit the progress signal when we reach a certain treshold to
+         * avoid spamming the event loop.
+         *   - Increment the fragIndex before calculating the progress to reach 100
+         * % when fragIndex == 0.
+         *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
+         */
+        currentProgress = 100.0 * (fragIndex + 1) / page->fragments().size();
+        if (currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
+            previousProgress = currentProgress;
+            emit this->progress(page->uri(), qRound(currentProgress));
+        }
+
+        // Lazy construction
+        if ((this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS &&
+             fragment->arrivalStationURI() == this->stationURI()) ||
+                (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES &&
+                 fragment->departureStationURI() == this->stationURI()))
+        {
+
+            /*
+            * Create stop information
+            * TO DO: Add platform and canceled information.
+            *        This is still unsupported by the Linked Connections graph!
+            */
+            QRail::VehicleEngine::Stop *entry = new QRail::VehicleEngine::Stop(
+                        this->liveboard()->station(),
+                        QString("?"), // platform
+                        true,         // isPlatformNormal
+                        fragment->departureTime() >= QDateTime::currentDateTime(),
+                        fragment->departureTime(), fragment->departureDelay(),
+                        false, // isDepartureCanceled
+                        fragment->arrivalTime(), fragment->arrivalDelay(),
+                        false, // isArrivalCanceled
+                        false, // isExtraStop
+                        QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                        QRail::VehicleEngine::Stop::Type::STOP
+                        );
+
+            // Get vehicle information
+            QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();
+            intermediaryStops.append(entry);
+            QRail::VehicleEngine::Vehicle *vehicle =
+                    new QRail::VehicleEngine::Vehicle(
+                        fragment->routeURI(),
+                        fragment->tripURI(),
+                        fragment->direction(),
+                        intermediaryStops
+                        );
+
+            // Liveboard arrivals mode
+            this->liveboard()->addEntry(vehicle);
+        }
     }
 
-    // Lazy construction
-    if ((this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS &&
-         fragment->arrivalStationURI() == this->stationURI()) ||
-        (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES &&
-         fragment->departureStationURI() == this->stationURI())) {
+    // Fetching fragment pages complete, emit the finished signal
+    if (finished) {
+        qDebug() << "Finished fetching liveboard pages";
 
-      /*
-       * Create stop information
-       * TO DO: Add platform and canceled information.
-       *        This is still unsupported by the Linked Connections graph!
-       */
-      QRail::VehicleEngine::Stop *entry = new QRail::VehicleEngine::Stop(
-          this->liveboard()->station(),
-          QString("?"), // platform
-          true,         // isPlatformNormal
-          fragment->departureTime() >= QDateTime::currentDateTime(),
-          fragment->departureTime(), fragment->departureDelay(),
-          false, // isDepartureCanceled
-          fragment->arrivalTime(), fragment->arrivalDelay(),
-          false, // isArrivalCanceled
-          false, // isExtraStop
-          QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
-          QRail::VehicleEngine::Stop::Type::STOP);
-
-      // Get vehicle information
-      QList<QRail::VehicleEngine::Stop *> intermediaryStops =
-          QList<QRail::VehicleEngine::Stop *>();
-      intermediaryStops.append(entry);
-      QRail::VehicleEngine::Vehicle *vehicle =
-          new QRail::VehicleEngine::Vehicle(
-              fragment->routeURI(), fragment->tripURI(), fragment->direction(),
-              intermediaryStops);
-
-      // Liveboard arrivals mode
-      this->liveboard()->addEntry(vehicle);
+        /*
+         * Sort the entries on arrival or departure time (due concurrent access).
+         *
+         * We can use the .first() method to retrieve the stop since the liveboard
+         * only adds one stop to the intermediaryStops list.
+         * If the user wants to retrieve the full vehicle he/she can use the
+         * VehicleEngine API to retrieve the full intermediaryStops list.
+         */
+        QList<QRail::VehicleEngine::Vehicle *> entries = this->liveboard()->entries();
+        if (this->liveboard()->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
+            std::sort(entries.begin(), entries.end(), [](const QRail::VehicleEngine::Vehicle *a, const QRail::VehicleEngine::Vehicle *b) -> bool {
+                QDateTime timeA = a->intermediaryStops().first()->arrivalTime();
+                QDateTime timeB = b->intermediaryStops().first()->arrivalTime();
+                return timeA < timeB;
+            });
+        }
+        else if (this->liveboard()->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+            std::sort(entries.begin(), entries.end(), [](const QRail::VehicleEngine::Vehicle *a, const QRail::VehicleEngine::Vehicle *b) -> bool {
+                QDateTime timeA = a->intermediaryStops().first()->departureTime();
+                QDateTime timeB = b->intermediaryStops().first()->departureTime();
+                return timeA < timeB;
+            });
+        }
+        this->liveboard()->setEntries(entries);
+        emit this->finished(this->liveboard());
     }
-  }
-
-  // Fetching fragment pages complete, emit the finished signal
-  if (finished) {
-    qDebug() << "Finished fetching liveboard pages";
-
-    /*
-     * Sort the entries on arrival or departure time (due concurrent access).
-     *
-     * We can use the .first() method to retrieve the stop since the liveboard
-     * only adds one stop to the intermediaryStops list.
-     * If the user wants to retrieve the full vehicle he/she can use the
-     * VehicleEngine API to retrieve the full intermediaryStops list.
-     */
-    QList<QRail::VehicleEngine::Vehicle *> entries =
-        this->liveboard()->entries();
-    if (this->liveboard()->mode() ==
-        QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-      std::sort(entries.begin(), entries.end(),
-                [](const QRail::VehicleEngine::Vehicle *a,
-                   const QRail::VehicleEngine::Vehicle *b) -> bool {
-                  QDateTime timeA =
-                      a->intermediaryStops().first()->arrivalTime();
-                  QDateTime timeB =
-                      b->intermediaryStops().first()->arrivalTime();
-                  return timeA < timeB;
-                });
-    } else if (this->liveboard()->mode() ==
-               QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-      std::sort(entries.begin(), entries.end(),
-                [](const QRail::VehicleEngine::Vehicle *a,
-                   const QRail::VehicleEngine::Vehicle *b) -> bool {
-                  QDateTime timeA =
-                      a->intermediaryStops().first()->departureTime();
-                  QDateTime timeB =
-                      b->intermediaryStops().first()->departureTime();
-                  return timeA < timeB;
-                });
-    }
-    this->liveboard()->setEntries(entries);
-    emit this->finished(this->liveboard());
-  }
 }
 
 // Getters & Setters
@@ -297,22 +276,20 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page,
  * Gets the QRail::LiveboardEngine::Board instance we're currently using and
  * returns it.
  */
-QRail::LiveboardEngine::Board *
-QRail::LiveboardEngine::Factory::liveboard() const {
-  // Lock using QMutexLocker due concurrent access
-  QMutexLocker locker(&liveboardAccessMutex);
-  return m_liveboard;
+QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() const {
+    // Lock using QMutexLocker due concurrent access
+    QMutexLocker locker(&liveboardAccessMutex);
+    return m_liveboard;
 }
 
 void QRail::LiveboardEngine::Factory::customEvent(QEvent *event) {
-  if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
-    event->accept();
-    QRail::Fragments::DispatcherEvent *pageEvent =
-        reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
-    this->processPage(pageEvent->page());
-  } else {
-    event->ignore();
-  }
+    if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
+        event->accept();
+        QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        this->processPage(pageEvent->page());
+    } else {
+        event->ignore();
+    }
 }
 
 /**
@@ -326,11 +303,10 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event) {
  * Sets the QRail::LiveboardEngine::Board instance we're currently using to the
  * given QRail::LiveboardEngine::Board *liveboard.
  */
-void QRail::LiveboardEngine::Factory::setLiveboard(
-    QRail::LiveboardEngine::Board *liveboard) {
-  // Lock using QMutexLocker due concurrent access
-  QMutexLocker locker(&liveboardAccessMutex);
-  m_liveboard = liveboard;
+void QRail::LiveboardEngine::Factory::setLiveboard(QRail::LiveboardEngine::Board *liveboard) {
+    // Lock using QMutexLocker due concurrent access
+    QMutexLocker locker(&liveboardAccessMutex);
+    m_liveboard = liveboard;
 }
 
 /**
@@ -343,9 +319,8 @@ void QRail::LiveboardEngine::Factory::setLiveboard(
  * @private
  * Gets the StationEngine::Factory instance and returns it.
  */
-StationEngine::Factory *
-QRail::LiveboardEngine::Factory::stationFactory() const {
-  return m_stationFactory;
+StationEngine::Factory *QRail::LiveboardEngine::Factory::stationFactory() const {
+    return m_stationFactory;
 }
 
 /**
@@ -359,9 +334,8 @@ QRail::LiveboardEngine::Factory::stationFactory() const {
  * Sets the StationEngine::Factory instance to the given StationEngine::Factory
  * *stationfactory.
  */
-void QRail::LiveboardEngine::Factory::setStationFactory(
-    StationEngine::Factory *stationFactory) {
-  m_stationFactory = stationFactory;
+void QRail::LiveboardEngine::Factory::setStationFactory(StationEngine::Factory *stationFactory) {
+    m_stationFactory = stationFactory;
 }
 
 /**
@@ -374,9 +348,8 @@ void QRail::LiveboardEngine::Factory::setStationFactory(
  * @public
  * Gets the QRail::LiveboardEngine::Board::Mode mode and returns it.
  */
-QRail::LiveboardEngine::Board::Mode
-QRail::LiveboardEngine::Factory::mode() const {
-  return m_mode;
+QRail::LiveboardEngine::Board::Mode QRail::LiveboardEngine::Factory::mode() const {
+    return m_mode;
 }
 
 /**
@@ -390,10 +363,9 @@ QRail::LiveboardEngine::Factory::mode() const {
  * Sets the mode of the liveboard to the given
  * QRail::LiveboardEngine::Board::Mode &mode. Emits the modeChanged signal.
  */
-void QRail::LiveboardEngine::Factory::setMode(
-    const QRail::LiveboardEngine::Board::Mode &mode) {
-  m_mode = mode;
-  emit this->modeChanged();
+void QRail::LiveboardEngine::Factory::setMode(const QRail::LiveboardEngine::Board::Mode &mode) {
+    m_mode = mode;
+    emit this->modeChanged();
 }
 
 /**
@@ -407,7 +379,7 @@ void QRail::LiveboardEngine::Factory::setMode(
  * Gets the station URI and returns it.
  */
 QUrl QRail::LiveboardEngine::Factory::stationURI() const {
-  return m_stationURI;
+    return m_stationURI;
 }
 
 /**
@@ -422,8 +394,8 @@ QUrl QRail::LiveboardEngine::Factory::stationURI() const {
  * Emits the stationURIChanged signal.
  */
 void QRail::LiveboardEngine::Factory::setStationURI(const QUrl &stationURI) {
-  m_stationURI = stationURI;
-  emit this->stationURIChanged();
+    m_stationURI = stationURI;
+    emit this->stationURIChanged();
 }
 
 /**
@@ -436,7 +408,9 @@ void QRail::LiveboardEngine::Factory::setStationURI(const QUrl &stationURI) {
  * @public
  * Gets the until time and returns it.
  */
-QDateTime QRail::LiveboardEngine::Factory::until() const { return m_until; }
+QDateTime QRail::LiveboardEngine::Factory::until() const {
+    return m_until;
+}
 
 /**
  * @file liveboardfactory.cpp
@@ -450,8 +424,8 @@ QDateTime QRail::LiveboardEngine::Factory::until() const { return m_until; }
  * Emits the untilChanged signal.
  */
 void QRail::LiveboardEngine::Factory::setUntil(const QDateTime &until) {
-  m_until = until;
-  emit this->untilChanged();
+    m_until = until;
+    emit this->untilChanged();
 }
 
 /**
@@ -464,7 +438,9 @@ void QRail::LiveboardEngine::Factory::setUntil(const QDateTime &until) {
  * @public
  * Gets the from time and returns it.
  */
-QDateTime QRail::LiveboardEngine::Factory::from() const { return m_from; }
+QDateTime QRail::LiveboardEngine::Factory::from() const {
+    return m_from;
+}
 
 /**
  * @file liveboardfactory.cpp
@@ -478,8 +454,8 @@ QDateTime QRail::LiveboardEngine::Factory::from() const { return m_from; }
  * Emits the fromChanged signal.
  */
 void QRail::LiveboardEngine::Factory::setFrom(const QDateTime &from) {
-  m_from = from;
-  emit this->fromChanged();
+    m_from = from;
+    emit this->fromChanged();
 }
 
 /**
@@ -492,9 +468,8 @@ void QRail::LiveboardEngine::Factory::setFrom(const QDateTime &from) {
  * @private
  * Gets the QRail::Fragments::Factory instance and returns it.
  */
-QRail::Fragments::Factory *
-QRail::LiveboardEngine::Factory::fragmentsFactory() const {
-  return m_fragmentsFactory;
+QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() const {
+    return m_fragmentsFactory;
 }
 
 /**
@@ -508,7 +483,6 @@ QRail::LiveboardEngine::Factory::fragmentsFactory() const {
  * Sets the QRail::Fragments::Factory instance to the given
  * QRail::Fragments::Factory *factory.
  */
-void QRail::LiveboardEngine::Factory::setFragmentsFactory(
-    QRail::Fragments::Factory *fragmentsFactory) {
-  m_fragmentsFactory = fragmentsFactory;
+void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory *fragmentsFactory) {
+    m_fragmentsFactory = fragmentsFactory;
 }

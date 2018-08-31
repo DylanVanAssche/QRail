@@ -24,46 +24,46 @@
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
-namespace Fragments {
-class Page : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Page(QObject *parent = nullptr);
-    explicit Page(
-            const QUrl &uri,
-            const QDateTime &timestamp,
-            const QUrl &hydraNext,
-            const QUrl &hydraPrevious,
-            const QList<QRail::Fragments::Fragment *> &fragments,
-            QObject *parent = nullptr
-            );
-    QUrl uri() const;
-    void setURI(const QUrl &uri);
-    QDateTime timestamp() const;
-    void setTimestamp(const QDateTime &timestamp);
-    QUrl hydraNext() const;
-    void setHydraNext(const QUrl &hydraNext);
-    QUrl hydraPrevious() const;
-    void setHydraPrevious(const QUrl &hydraPrevious);
-    QList<QRail::Fragments::Fragment *> fragments() const;
-    void setFragments(const QList<QRail::Fragments::Fragment *> &fragments);
+    namespace Fragments {
+        class Page : public QObject
+        {
+            Q_OBJECT
+        public:
+            explicit Page(QObject *parent = nullptr);
+            explicit Page(
+                    const QUrl &uri,
+                    const QDateTime &timestamp,
+                    const QUrl &hydraNext,
+                    const QUrl &hydraPrevious,
+                    const QList<QRail::Fragments::Fragment *> &fragments,
+                    QObject *parent = nullptr
+                    );
+            QUrl uri() const;
+            void setURI(const QUrl &uri);
+            QDateTime timestamp() const;
+            void setTimestamp(const QDateTime &timestamp);
+            QUrl hydraNext() const;
+            void setHydraNext(const QUrl &hydraNext);
+            QUrl hydraPrevious() const;
+            void setHydraPrevious(const QUrl &hydraPrevious);
+            QList<QRail::Fragments::Fragment *> fragments() const;
+            void setFragments(const QList<QRail::Fragments::Fragment *> &fragments);
 
-signals:
-    void uriChanged();
-    void timestampChanged();
-    void hydraNextChanged();
-    void hydraPreviousChanged();
-    void fragmentsChanged();
+        signals:
+            void uriChanged();
+            void timestampChanged();
+            void hydraNextChanged();
+            void hydraPreviousChanged();
+            void fragmentsChanged();
 
-private:
-    QUrl m_uri;
-    QDateTime m_timestamp;
-    QUrl m_hydraNext;
-    QUrl m_hydraPrevious;
-    QList<QRail::Fragments::Fragment *> m_fragments;
-};
-}
+        private:
+            QUrl m_uri;
+            QDateTime m_timestamp;
+            QUrl m_hydraNext;
+            QUrl m_hydraPrevious;
+            QList<QRail::Fragments::Fragment *> m_fragments;
+        };
+    }
 }
 
 #endif // LINKEDCONNECTIONPAGE_H

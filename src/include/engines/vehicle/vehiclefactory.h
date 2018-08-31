@@ -25,6 +25,10 @@
 #include <QtCore/QLocale>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
+#include <QtCore/QString>
+#include <QtCore/QMap>
+#include <QtCore/QRegularExpression>
+#include <QtCore/QRegularExpressionMatch>
 
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
@@ -35,6 +39,7 @@
 
 // Uncomment to enable verbose output
 //#define VERBOSE_HTTP_STATUS
+#define VERBOSE_CACHE
 
 namespace QRail {
 namespace VehicleEngine {
@@ -50,11 +55,12 @@ protected:
   virtual void customEvent(QEvent *event);
 
 signals:
-  void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
+  void finished(QRail::VehicleEngine::Vehicle *vehicle);
   void getResource(const QUrl &uri, QObject *caller);
   void error(const QString &message);
 
 private:
+  QMap<QString, QRail::VehicleEngine::Vehicle*> m_cache;
   QRail::Network::Manager *m_http;
   StationEngine::Factory *m_stationFactory;
   QLocale::Language m_language;
@@ -66,6 +72,9 @@ private:
   QRail::VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
   QRail::VehicleEngine::Stop::OccupancyLevel
   generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
+  QRail::VehicleEngine::Vehicle *fetchVehicleFromCache(const QUrl &uri);
+  void addVehicleToCache(const QUrl &uri, QRail::VehicleEngine::Vehicle *vehicle);
+  QString stripIDFromVehicleURI(const QUrl &uri);
   void processHTTPReply(QNetworkReply *reply);
   static QRail::VehicleEngine::Factory *m_instance;
   explicit Factory(QObject *parent = nullptr);

@@ -31,7 +31,8 @@ QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::m_instance =
  * generate QRail::VehicleEngine::Vehicle objects on the fly.
  */
 QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent) {
-  this->setHttp(QRail::Network::Manager::getInstance());
+  // Setup Network::Manager
+    this->setHttp(QRail::Network::Manager::getInstance());
   /*
    * QNAM and callers are living in different threads!
    * INFO:
@@ -39,7 +40,12 @@ QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent) {
    */
   connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(),
           SLOT(getResource(QUrl, QObject *)));
+
+  // Setup StationEngine::Factory
   this->setStationFactory(StationEngine::Factory::getInstance());
+
+  // Init caching
+  m_cache = QMap<QString, QRail::VehicleEngine::Vehicle*>();
 }
 
 /**
@@ -73,12 +79,21 @@ QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::getInstance() {
  * @package StationEngine
  * @public
  * Retrieves a vehicle by URI from the network iRail API.
- * When the vehicle is ready, the vehicleReady signal is emitted.
+ * When the vehicle is ready, the finished signal is emitted.
  */
 void QRail::VehicleEngine::Factory::getVehicleByURI(
     const QUrl &uri, const QLocale::Language &language) {
   this->setLanguage(language);
-  emit this->getResource(uri, this);
+  QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
+  // Vehicle isn't in our cache yet, fetching...
+  if (!vehicle) {
+      emit this->getResource(uri, this);
+  }
+  // Vehicle found in cache, emitting directly the finished signal
+  else {
+      emit this->finished(vehicle);
+  }
+
 }
 
 // Processors
@@ -177,7 +192,15 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
                 intermediaryStops.last()->station()->name().value(
                     this->language()),
                 intermediaryStops);
-        emit this->vehicleReady(vehicle);
+
+        /*
+         * Add the vehicle to cache for faster responses in the future and less
+         * memory usage due duplicate objects.
+         */
+        this->addVehicleToCache(vehicle->uri(), vehicle);
+
+        // Emit finished signal for the caller
+        emit this->finished(vehicle);
       } else {
         qCritical() << "Validation vehicle context failed!";
         emit this->error(QString("Validation vehicle context failed!"));
@@ -294,6 +317,91 @@ QRail::VehicleEngine::Factory::generateOccupancyLevelFromJSON(
   } else {
     return QRail::VehicleEngine::Stop::OccupancyLevel::UNKNOWN;
   }
+}
+
+/**
+ * @file vehiclefactory.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Tries to fetch a vehicle from the cache
+ * @return QRail::VehicleEngine::Vehicle *vehicle
+ * @package VehicleEngine
+ * @private
+ * Tries to fetch a vehicle from the cache.
+ * In case the vehicle can't be retrieved from the cache, a nullptr is returned.
+ */
+VehicleEngine::Vehicle *
+VehicleEngine::Factory::fetchVehicleFromCache(const QUrl &uri) {
+    QString id = this->stripIDFromVehicleURI(uri);
+#ifdef VERBOSE_CACHE
+    qDebug() << "Vehicle cache:";
+    foreach(QString key, m_cache.keys()) {
+        qDebug() << "\t" << key << m_cache.value(key);
+    }
+#endif
+
+  if (m_cache.contains(id)) {
+    return this->m_cache.value(id);
+#ifdef VERBOSE_CACHE
+    qDebug() << "Found vehicle in cache:" << id;
+#endif
+  }
+    return nullptr;
+}
+
+/**
+ * @file vehiclefactory.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Adds a vehicle to the cache
+ * @param const QUrl &uri
+ * @param QRail::VehicleEngine::Vehicle *vehicle
+ * @package VehicleEngine
+ * @private
+ * Adds a vehicle to the cache.
+ * In case the URI of the vehicle already exists in the cache, the entry is
+ * updated with the new vehicle.
+ */
+void VehicleEngine::Factory::addVehicleToCache(const QUrl &uri, VehicleEngine::Vehicle *vehicle)
+{
+    QString id = this->stripIDFromVehicleURI(uri);
+    m_cache.insert(id, vehicle);
+#ifdef VERBOSE_CACHE
+    qDebug() << "Added vehicle to cache:" << id;
+#endif
+}
+
+/**
+ * @file vehiclefactory.cpp
+ * @author Dylan Van Assche
+ * @date 31 Aug 2018
+ * @brief Strips the vehicle ID from it's URI.
+ * @param const QUrl &uri
+ * @package VehicleEngine
+ * @private
+ * Strips the vehicle ID from the URI and returns it.
+ */
+QString VehicleEngine::Factory::stripIDFromVehicleURI(const QUrl &uri)
+{
+    /*
+     * Avoiding cache misses due HTTPS upgrades.
+     * We can't guarantee that our data resource already use HTTPS for it's links.
+     * If not, the links might upgrade to HTTPS for security reasons.
+     * To avoid cache misses we only use internally the ID of the vehicle instead of the complete URI.
+     * Escaping C strings and Regex by using '\\'
+     */
+    QString id;
+    QRegularExpression re("(^https:\\/\\/|^http:\\/\\/)(\\w+\\.\\w+\\/\\w+\\/)(\\w+)");
+    QRegularExpressionMatch match = re.match(uri.toString());
+    if (match.hasMatch()) {
+      id = match.captured(3); // Get the 3nd group (\\w+)
+#ifdef VERBOSE_CACHE
+      qDebug() << "Stripped ID:" << id;
+#endif
+    } else {
+      qCritical() << "Unable to retrieve ID for the vehicle";
+    }
+    return id;
 }
 
 // Getters & Setters

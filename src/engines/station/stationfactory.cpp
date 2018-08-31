@@ -33,6 +33,9 @@ StationEngine::Factory::Factory(QObject *parent) : QObject(parent) {
   // Setup DB
   this->setDb(QRail::Database::Manager::getInstance(DB_PATH));
   this->initDatabase();
+
+    // Init caching
+    m_cache = QMap<QUrl, StationEngine::Station*>();
 }
 
 /**
@@ -682,9 +685,8 @@ StationEngine::Station *
 StationEngine::Factory::fetchStationFromCache(const QUrl &uri) const {
   if (m_cache.contains(uri)) {
     return this->m_cache.value(uri);
-  } else {
-    return nullptr;
   }
+    return nullptr;
 }
 
 /**

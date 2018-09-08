@@ -20,6 +20,8 @@
 #include "database/databasemanager.h"
 #include <QtCore/QFuture>
 #include <QtCore/QObject>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QDir>
 #include <QtSql/QSqlQuery>
 #include <QtTest/QSignalSpy>
 #include <QtTest/QtTest>

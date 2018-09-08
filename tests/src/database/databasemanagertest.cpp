@@ -15,12 +15,14 @@
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "databasemanagertest.h"
-#define DB_PATH "/home/nemo/tests.db"
 using namespace QRail;
 
 void QRail::Database::ManagerTest::initDatabaseManager() {
     qDebug() << "Init QRail::Database::Manager test";
-    db = QRail::Database::Manager::getInstance(DB_PATH);
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dbDirectory;
+    dbDirectory.mkpath(path);
+    db = QRail::Database::Manager::getInstance(path + "/tests.db");
 }
 
 void QRail::Database::ManagerTest::runDatabaseManager() {

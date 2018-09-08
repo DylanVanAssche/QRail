@@ -30,8 +30,13 @@ StationEngine::Factory *StationEngine::Factory::m_instance = nullptr;
  * generate StationEngine::Station objects on the fly.
  */
 StationEngine::Factory::Factory(QObject *parent) : QObject(parent) {
+    // Make sure that the DB path is writable and created
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dbDirectory;
+    dbDirectory.mkpath(path);
+
     // Setup DB
-    this->setDb(QRail::Database::Manager::getInstance(DB_PATH));
+    this->setDb(QRail::Database::Manager::getInstance(path + "/stations.db"));
     this->initDatabase();
 
     // Init caching

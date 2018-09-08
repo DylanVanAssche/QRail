@@ -546,14 +546,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
                 // Replace existing StationStopProfile at the back when departure times are equal
                 if (updatedStationStopProfile->departureTime() == existingStationStopProfile->departureTime()) {
                     /*
-                   * COMPILER ERROR: Modifying the return value of S.value(URI) isn't
-                   * allowed. The return value is declared by Qt as a constant,
+                   * COMPILER ERROR:
+                   * Modifying the return value of S.value(URI) isn't allowed.
+                   * The return value is declared by Qt as a constant,
                    * modifying it directly violates this restriction. Copying this QList
                    * into a variable, modifying it and then replace it in the S array
                    * circumvents this issue.
                    *
                    * OUTPUT:
-                   * /home/dylan/Projects/harbour-berail/src/linkedconnections/routerplanner.cpp:395:
                    * error: passing 'const QList<StationStopProfile*>' as 'this'
                    * argument of 'void QList<T>::replace(int, const T&) [with T
                    * = StationStopProfile*]' discards qualifiers [-fpermissive]

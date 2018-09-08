@@ -179,9 +179,9 @@ QNetworkRequest QRail::Network::Manager::prepareRequest(const QUrl &url)
     QNetworkRequest request(url);
     request.setRawHeader(QByteArray("Accept"), this->acceptHeader().toUtf8());
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, CONTENT_TYPE);
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork); // Load from network if cache has expired
-
     return request;
 }
 

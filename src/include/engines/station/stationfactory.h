@@ -24,7 +24,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QUrl>
 #include <QtCore/QMap>
-#include <QtCore/QFile>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <QtSql/QSqlQuery>
 
 #include "qrail.h"
@@ -35,9 +36,6 @@
 #include "../../qtcsv/include/qtcsv/stringdata.h"
 #include "../../qtcsv/include/qtcsv/reader.h"
 #include "../../qtcsv/include/qtcsv/writer.h"
-
-// TO DO: proper path for the DB
-#define DB_PATH "/home/nemo/stations.db"
 
 // Uncomment to enable verbose output
 //#define VERBOSE_CACHE

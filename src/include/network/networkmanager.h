@@ -33,6 +33,8 @@
 
 #include "network/networkdispatcher.h"
 
+#define CONTENT_TYPE "application/ld+json"
+
 // Singleton pattern
 namespace QRail {
     namespace Network {

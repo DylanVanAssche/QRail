@@ -112,7 +112,6 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri, 
     this->liveboard()->setFrom(this->from());
     this->liveboard()->setUntil(this->until());
     this->liveboard()->setMode(this->mode());
-    qDebug() << "Station factory is the bad girl";
     qDebug() << this->stationURI().toString();
     qDebug() << this->stationFactory();
     qDebug() << this->stationFactory()->getStationByURI(this->stationURI());

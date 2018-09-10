@@ -23,6 +23,8 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtCore/QUrlQuery>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QDir>
 #include <QtNetwork/QAbstractNetworkCache>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkConfigurationManager>

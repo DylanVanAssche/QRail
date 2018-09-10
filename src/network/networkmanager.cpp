@@ -35,7 +35,16 @@ QRail::Network::Manager::Manager(QObject* parent): QObject(parent)
     QNetworkConfigurationManager QNAMConfig;
     this->QNAM()->setConfiguration(QNAMConfig.defaultConfiguration());
     this->setCache(new QNetworkDiskCache(this));
-    ((QNetworkDiskCache *)this->cache())->setCacheDirectory("~/.local/share/harbour-berail/network");
+
+    // Get the caching directory of the application
+    QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/network";
+
+    // Create the 'network' folder to save our caching data
+    QDir cacheDirectory;
+    cacheDirectory.mkpath(path);
+
+    // Setup the QNetworkDiskCache
+    ((QNetworkDiskCache *)this->cache())->setCacheDirectory(path);
     this->QNAM()->setCache(this->cache());
 
     // Init the dispatcher

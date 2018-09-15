@@ -55,7 +55,7 @@ namespace QRail {
 
         private:
             QRail::Database::Manager *m_db;
-            QMap<QUrl, StationEngine::Station*> m_cache;
+            QMap<QUrl, QRail::StationEngine::Station*> m_cache;
             bool initDatabase();
             QFuture<bool> insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities);
             QFuture<bool> insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);

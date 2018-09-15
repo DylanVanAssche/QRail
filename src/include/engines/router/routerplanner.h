@@ -57,6 +57,9 @@
 #define MILISECONDS_TO_SECONDS_MULTIPLIER 1000 // 1000 miliseconds = 1 second
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
 #define MINIMUM_PROGRESS_INCREMENT 5.0         // 5.0 = 5%
+#define WALKING_SPEED 5.0                      // 5.0 m/s
+#define SEARCH_RADIUS 20.0                     // 20 km
+#define MAX_RESULTS 10                         // 10 results
 
 // Singleton pattern
 namespace QRail {
@@ -65,10 +68,12 @@ namespace QRail {
           Q_OBJECT
         public:
           static Planner *getInstance();
-          void getConnections(const QUrl &departureStation, const QUrl &arrivalStation,
+          void getConnections(const QUrl &departureStation,
+                              const QUrl &arrivalStation,
                               const QDateTime &departureTime,
                               const qint16 &maxTransfers);
-          void getConnections(const QGeoCoordinate &departurePosition, const QUrl &arrivalPosition,
+          void getConnections(const QGeoCoordinate &departurePosition,
+                              const QGeoCoordinate &arrivalPosition,
                               const QDateTime &departureTime,
                               const qint16 &maxTransfers);
           QDateTime calculateArrivalTime(const QDateTime &departureTime);

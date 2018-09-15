@@ -340,7 +340,7 @@ QRail::StationEngine::Station *StationEngine::Factory::getStationByURI(const QUr
  * In case something goes wrong, a StationEngine::NullStation instance is
  * pushed to the QList<StationEngine::Station *station> &nearbyStations.
  */
-QList<StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosition(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults)
+QList<QRail::StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosition(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults)
 {
     /*
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
@@ -349,7 +349,7 @@ QList<StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosit
     qDebug() << "Looking for nearby stations of" << position;
     qDebug() << "\tRadius:" << radius << "kilometres";
     qDebug() << "\tMax results:" << maxResults;
-    QList<QRail::StationEngine *> nearbyStations;
+    QList<QRail::StationEngine::Station *> nearbyStations = QList<QRail::StationEngine::Station *>();
     QSqlQuery query(this->db()->database());
     query.prepare("SELECT "
                   "uri, "
@@ -358,7 +358,7 @@ QList<StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosit
                   "  cos(radians(latitude)) * "
                   "  cos(radians(longitude) - radians(:lon)) + "
                   "  sin(radians(:lat)) * sin(radians(latitude)))"
-                  ") AS distance"
+                  ") AS distance "
                   "FROM stations "
                   "HAVING distance < :radius "
                   "ORDER BY distance LIMIT 0, :max_results");
@@ -379,6 +379,8 @@ QList<StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosit
         nearbyStations.append(nearbyStation);
         qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
     }
+
+    return nearbyStations;
 }
 
 StationEngine::Station *StationEngine::Factory::getNearestStationByPosition(const QGeoCoordinate &position)

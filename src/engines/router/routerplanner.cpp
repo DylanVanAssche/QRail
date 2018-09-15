@@ -107,8 +107,8 @@ void QRail::RouterEngine::Planner::getConnections(
 
     qDebug() << "Init CSA algorithm";
     this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
-    this->setSArray(
-                QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+    this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+    this->setDArray(QMap<QUrl, qint64>());
     this->setDepartureStationURI(departureStation);
     this->setArrivalStationURI(arrivalStation);
     this->setDepartureTime(departureTime);
@@ -137,11 +137,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
     QMutexLocker locker(&syncThreadMutex); // Lock processing to enforce the
     // DESCENDING order of departure times
     bool hasPassedDepartureTimeLimit = false; // Flag to check if we're passed the departureTime
-    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTime().addYears(1)); // Fake an infinite time by adding 1 year to the current date, this
-    // is required for the Profile Scan Algortihm to work
-    qint16 INFINITE_TRANSFERS = 32767; // Fake an infinite number of transfers by
-    // setting it to 32767 (16 bits signed
-    // 01111111 11111111)
+    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTime().addYears(1)); // Fake an infinite time by adding 1 year to the current date, this is required for the Profile Scan Algortihm to work
+    qint16 INFINITE_TRANSFERS = 32767; // Fake an infinite number of transfers by setting it to 32767 (16 bits signed 01111111 11111111)
     qreal previousProgress = 0.0;
     qreal currentProgress = 0.0; // Reports the page progress through the progress signal
 
@@ -156,21 +153,20 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
     qDebug() << "\tmaxTransfers:" << this->maxTransfers();
 #endif
 
-    // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
-    // departure times order
+    // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING departure times order
     for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; fragIndex--) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
         /*
-     * REMARKS:
-     *   - We only emit the progress signal when we reach a certain treshold to
-     * avoid spamming the event loop.
-     *   - Substract the progress from 100.0 (100 %) since we are looping in the
-     * opposite direction.
-     *   - Increment the fragIndex before calculating the progress to reach 100
-     * % when fragIndex == 0.
-     *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
-     */
+         * REMARKS:
+         *   - We only emit the progress signal when we reach a certain treshold to
+         * avoid spamming the event loop.
+         *   - Substract the progress from 100.0 (100 %) since we are looping in the
+         * opposite direction.
+         *   - Increment the fragIndex before calculating the progress to reach 100
+         * % when fragIndex == 0.
+         *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
+         */
         currentProgress =100.0 - 100.0 * (fragIndex + 1) / page->fragments().size();
         if (currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
             previousProgress = currentProgress;
@@ -184,10 +180,10 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
         }
 
         /*
-     * ====================================================
-     *         GET EARLIEST ARRIVAL TIME T1, T2, T3
-     * ====================================================
-     */
+         * ====================================================
+         *         GET EARLIEST ARRIVAL TIME T1, T2, T3
+         * ====================================================
+         */
 
         // Init variables for the algorithm, see the paper for the explanation
         // behind T1, T2, T3 and Tmin (Tmin = Tc in the paper).
@@ -198,13 +194,24 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
         // Calculate T1, the time when walking from the current stop to the destination
         if (fragment->arrivalStationURI() == this->arrivalStationURI()) {
             /*
-             * This connection ends at our destination.
-             * We can walk now out of the station, our implementation doesn't cover
-             * the footpath at the end (yet)
+             * This connection ends at the nearest station to our destination.
+             * We can walk now out of the station to our destination which
+             * requires an additional footpath time, stored in the DArray
+             * for each stop (see p16 - p17 of the CSA paper).
              */
-            T1_walkingArrivalTime =fragment->arrivalTime(); // Due the footpath limitation, we arrive at
-            // our destination when we arrive with the vehicle.
-            T1_transfers = 0; // Walking, no transfers between arrival and destination.
+            if(this->DArray().contains(fragment->arrivalStationURI())) {
+                T1_walkingArrivalTime = fragment->arrivalTime().addSecs(this->DArray().value(fragment->arrivalStationURI()));
+                T1_transfers = this->TArray().value(fragment->tripURI())->transfers() + 1; // Walking to another station, needs transfer
+            }
+            else {
+               /*
+                * Walking to the destination from this station isn't possible.
+                * Default value to avoid undefined variables.
+                * The loop will skip results like this anyway.
+                */
+                T1_walkingArrivalTime = INFINITE_TIME;
+                T1_transfers = INFINITE_TIME;
+            }
         }
         else {
             /*
@@ -309,8 +316,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
 
         /*
          * ==========================================================================================
-         *         FIND THE EARLIEST ARRIVAL TIME Tmin BETWEEN THE 3 POSSIBILITIES
-         * T1, T2, T3
+         *         FIND THE EARLIEST ARRIVAL TIME Tmin BETWEEN THE 3 POSSIBILITIES T1, T2, T3
          * ==========================================================================================
          *
          * In the CSA paper (march 2017) they describe the JourneyLeg Extraction
@@ -382,6 +388,24 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
             }
         }
 #endif
+
+        /*
+        * ====================================
+        *         UPDATING THE D ARRAY
+        * ====================================
+        *
+        * When we can walk to a nearest station to transfer there,
+        * we need to add some time to walk to that station. This
+        * data is saved in the D array.
+        *
+        * WARNING: We cannot longer guarantee the earliest departure time
+        * in each profile of the S array!
+        *
+        * TO DO: Implement a smarter insertion algorithm that can deal with this (see p17).
+        * TO DO: Add limited walking optimization (see p17)
+        */
+
+
 
         /*
         * ====================================
@@ -567,8 +591,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->setSArray(S);
                 }
-                // We're iterating over DESCENDING departure times, inserting the
-                // StationStopProfile at the back
+                // We're iterating over DESCENDING departure times, inserting the StationStopProfile at the back
                 else {
                     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(fragment->departureStationURI());
@@ -586,6 +609,19 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->setSArray(S);
         }
+
+        /*
+         * Insert our footpaths as a possible connection into the S array.
+         *
+         */
+        QRail::RouterEngine::StationStopProfile *footpathStationStopProfile =
+                new QRail::RouterEngine::StationStopProfile(
+                    fragment->departureTime().addSecs(-this->DArray().value()),
+                    Tmin_earliestArrivalTime,
+                    fragment,
+                    this->TArray().value(fragment->tripURI())->arrivalConnection(),
+                    Tmin_transfers
+                    );
 
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";
@@ -877,7 +913,8 @@ QDateTime QRail::RouterEngine::Planner::calculateArrivalTime(const QDateTime &de
  * @public
  * Gets the maximum amount of transfers and returns it.
  */
-qint16 QRail::RouterEngine::Planner::maxTransfers() const {
+qint16 QRail::RouterEngine::Planner::maxTransfers() const
+{
     return m_maxTransfers;
 }
 
@@ -891,7 +928,8 @@ qint16 QRail::RouterEngine::Planner::maxTransfers() const {
  * @private
  * Sets the maximum amount of transfers to the given qint16 &maxTransfers
  */
-void QRail::RouterEngine::Planner::setMaxTransfers(const qint16 &maxTransfers) {
+void QRail::RouterEngine::Planner::setMaxTransfers(const qint16 &maxTransfers)
+{
     m_maxTransfers = maxTransfers;
 }
 
@@ -905,7 +943,8 @@ void QRail::RouterEngine::Planner::setMaxTransfers(const qint16 &maxTransfers) {
  * @public
  * Gets the arrival time of the current routing and returns it.
  */
-QDateTime QRail::RouterEngine::Planner::arrivalTime() const {
+QDateTime QRail::RouterEngine::Planner::arrivalTime() const
+{
     return m_arrivalTime;
 }
 
@@ -920,8 +959,8 @@ QDateTime QRail::RouterEngine::Planner::arrivalTime() const {
  * Sets the arrival time of the current routing to the given QDateTime
  * &arrivalTime.
  */
-void QRail::RouterEngine::Planner::setArrivalTime(
-        const QDateTime &arrivalTime) {
+void QRail::RouterEngine::Planner::setArrivalTime(const QDateTime &arrivalTime)
+{
     m_arrivalTime = arrivalTime;
 }
 
@@ -935,7 +974,8 @@ void QRail::RouterEngine::Planner::setArrivalTime(
  * @public
  * Gets the departure time of the current routing and returns it.
  */
-QDateTime QRail::RouterEngine::Planner::departureTime() const {
+QDateTime QRail::RouterEngine::Planner::departureTime() const
+{
     return m_departureTime;
 }
 
@@ -950,8 +990,8 @@ QDateTime QRail::RouterEngine::Planner::departureTime() const {
  * Sets the departure time of the current routing to the given QDateTime
  * &departureTime.
  */
-void QRail::RouterEngine::Planner::setDepartureTime(
-        const QDateTime &departureTime) {
+void QRail::RouterEngine::Planner::setDepartureTime(const QDateTime &departureTime)
+{
     m_departureTime = departureTime;
 }
 
@@ -965,17 +1005,20 @@ void QRail::RouterEngine::Planner::setDepartureTime(
  * @public
  * Gets the arrival station URI and returns it.
  */
-QUrl QRail::RouterEngine::Planner::arrivalStationURI() const {
+QUrl QRail::RouterEngine::Planner::arrivalStationURI() const
+{
     return m_arrivalStationURI;
 }
 
 void QRail::RouterEngine::Planner::customEvent(QEvent *event) {
-    if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
+    if (event->type() == this->fragmentsFactory()->dispatcher()->eventType())
+    {
         event->accept();
-        QRail::Fragments::DispatcherEvent *pageEvent =
-                reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-    } else {
+    }
+    else
+    {
         event->ignore();
     }
 }
@@ -990,7 +1033,8 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event) {
  * @private
  * Sets the arrival station URI to the given QUrl &arrivalStationURI
  */
-void QRail::RouterEngine::Planner::setArrivalStationURI(const QUrl &arrivalStationURI) {
+void QRail::RouterEngine::Planner::setArrivalStationURI(const QUrl &arrivalStationURI)
+{
     m_arrivalStationURI = arrivalStationURI;
 }
 
@@ -1004,7 +1048,8 @@ void QRail::RouterEngine::Planner::setArrivalStationURI(const QUrl &arrivalStati
  * @public
  * Gets the departure station URI and returns it.
  */
-QUrl QRail::RouterEngine::Planner::departureStationURI() const {
+QUrl QRail::RouterEngine::Planner::departureStationURI() const
+{
     return m_departureStationURI;
 }
 
@@ -1018,7 +1063,8 @@ QUrl QRail::RouterEngine::Planner::departureStationURI() const {
  * @private
  * Sets the departure station URI to the given QUrl &departureStationURI
  */
-void QRail::RouterEngine::Planner::setDepartureStationURI(const QUrl &departureStationURI) {
+void QRail::RouterEngine::Planner::setDepartureStationURI(const QUrl &departureStationURI)
+{
     m_departureStationURI = departureStationURI;
 }
 
@@ -1033,7 +1079,8 @@ void QRail::RouterEngine::Planner::setDepartureStationURI(const QUrl &departureS
  * Gets the routes retrieved by the Connection Scan Algorithm (CSA) and returns
  * it.
  */
-QList<QRail::RouterEngine::Route *> QRail::RouterEngine::Planner::routes() const {
+QList<QRail::RouterEngine::Route *> QRail::RouterEngine::Planner::routes() const
+{
     return m_routes;
 }
 
@@ -1048,7 +1095,8 @@ QList<QRail::RouterEngine::Route *> QRail::RouterEngine::Planner::routes() const
  * Sets the routes retrieved by the Connection Scan Algorithm (CSA) to the given
  * QList<QRail::RouterEngine::Route *> &routes.
  */
-void QRail::RouterEngine::Planner::setRoutes(const QList<QRail::RouterEngine::Route *> &routes) {
+void QRail::RouterEngine::Planner::setRoutes(const QList<QRail::RouterEngine::Route *> &routes)
+{
     m_routes = routes;
 }
 
@@ -1062,7 +1110,8 @@ void QRail::RouterEngine::Planner::setRoutes(const QList<QRail::RouterEngine::Ro
  * @public
  * Gets the QRail::Fragments::Factory instance and returns it.
  */
-QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() const {
+QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() const
+{
     return m_fragmentsFactory;
 }
 
@@ -1077,7 +1126,8 @@ QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() cons
  * Sets the QRail::Fragments::Factory instance to the given
  * QRail::Fragments::Factory *factory.
  */
-void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory *factory) {
+void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory *factory)
+{
     m_fragmentsFactory = factory;
 }
 
@@ -1091,7 +1141,8 @@ void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory
  * @public
  * Gets the StationEngine::Factory instance and returns it.
  */
-StationEngine::Factory *QRail::RouterEngine::Planner::stationFactory() const {
+StationEngine::Factory *QRail::RouterEngine::Planner::stationFactory() const
+{
     return m_stationFactory;
 }
 
@@ -1106,7 +1157,8 @@ StationEngine::Factory *QRail::RouterEngine::Planner::stationFactory() const {
  * Sets the StationEngine::Factory instance to the given StationEngine::Factory
  * *stationFactory.
  */
-void QRail::RouterEngine::Planner::setStationFactory(StationEngine::Factory *stationFactory) {
+void QRail::RouterEngine::Planner::setStationFactory(StationEngine::Factory *stationFactory)
+{
     m_stationFactory = stationFactory;
 }
 
@@ -1115,13 +1167,13 @@ void QRail::RouterEngine::Planner::setStationFactory(StationEngine::Factory *sta
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the T array
- * @return const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >
- * TArray
+ * @return const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > TArray
  * @package RouterEngine
  * @public
  * Gets the T array for the Connection Scan Algorithm (CSA) and returns it.
  */
-QMap<QUrl, QRail::RouterEngine::TrainProfile *> QRail::RouterEngine::Planner::TArray() const {
+QMap<QUrl, QRail::RouterEngine::TrainProfile *> QRail::RouterEngine::Planner::TArray() const
+{
     return m_TArray;
 }
 
@@ -1136,7 +1188,8 @@ QMap<QUrl, QRail::RouterEngine::TrainProfile *> QRail::RouterEngine::Planner::TA
  * Sets the T array for the Connection Scan Algorithm (CSA) to the given
  * QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray.
  */
-void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray) {
+void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray)
+{
     m_TArray = TArray;
 }
 
@@ -1145,13 +1198,13 @@ void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngin
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets S array
- * @return const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >
- * SArray
+ * @return const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray
  * @package RouterEngine
  * @public
  * Gets the S array for the Connection Scan Algorithm (CSA) and returns it.
  */
-QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> QRail::RouterEngine::Planner::SArray() const {
+QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> QRail::RouterEngine::Planner::SArray() const
+{
     return m_SArray;
 }
 
@@ -1166,6 +1219,38 @@ QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> QRail::RouterEngine
  * Sets the S array for the Connection Scan Algorithm (CSA) to the given
  * QMap<QUrl, QRail::RouterEngine::TrainProfile *> &SArray.
  */
-void QRail::RouterEngine::Planner::setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray) {
+void QRail::RouterEngine::Planner::setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray)
+{
     m_SArray = SArray;
+}
+
+/**
+ * @file routerplanner.cpp
+ * @author Dylan Van Assche
+ * @date 13 Sep 2018
+ * @brief Gets D array
+ * @return const QMap<QUrl, qint64> DArray
+ * @package RouterEngine
+ * @public
+ * Gets the D array for the Connection Scan Algorithm (CSA) footpath and returns it.
+ */
+QMap<QUrl, qint64> QRail::RouterEngine::Planner::DArray() const
+{
+    return m_DArray;
+}
+
+/**
+ * @file routerplanner.cpp
+ * @author Dylan Van Assche
+ * @date 09 Aug 2018
+ * @brief Sets D array
+ * @param const QMap<QUrl, qint64> &DArray
+ * @package RouterEngine
+ * @private
+ * Sets the D array for the Connection Scan Algorithm (CSA) footpath to the given
+ * QMap<QUrl, qint64> &DArray.
+ */
+void QRail::RouterEngine::Planner::setDArray(const QMap<QUrl, qint64> &DArray)
+{
+    m_DArray = DArray;
 }

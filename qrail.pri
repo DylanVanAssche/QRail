@@ -32,6 +32,7 @@ SOURCES += \
     $$PWD/src/engines/router/routerroutelegend.cpp \
     $$PWD/src/engines/router/routerstationstopprofile.cpp \
     $$PWD/src/engines/router/routertrainprofile.cpp \
+    $$PWD/src/engines/router/routerfootpathprofile.cpp \
     $$PWD/src/engines/liveboard/liveboardfactory.cpp \
     $$PWD/src/engines/liveboard/liveboardboard.cpp \
     $$PWD/src/engines/station/stationstation.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     $$PWD/src/include/engines/router/routerroutelegend.h \
     $$PWD/src/include/engines/router/routerstationstopprofile.h \
     $$PWD/src/include/engines/router/routertrainprofile.h \
+    $$PWD/src/include/engines/router/routerfootpathprofile.h \
     $$PWD/src/include/engines/liveboard/liveboardfactory.h \
     $$PWD/src/include/engines/liveboard/liveboardboard.h \
     $$PWD/src/include/engines/vehicle/vehiclevehicle.h \

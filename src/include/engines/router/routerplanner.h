@@ -56,7 +56,7 @@
 #define MAX_TRANSFER_TIME 3600                 // 3600 seconds = 1 hour
 #define MILISECONDS_TO_SECONDS_MULTIPLIER 1000 // 1000 miliseconds = 1 second
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
-#define MINIMUM_PROGRESS_INCREMENT 1.0         // 1.0 = 1%
+#define MINIMUM_PROGRESS_INCREMENT 5.0         // 5.0 = 5%
 
 // Singleton pattern
 namespace QRail {
@@ -97,6 +97,7 @@ namespace QRail {
           QList<QRail::RouterEngine::Route *> m_routes;
           QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> m_SArray;
           QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+          QMap<QUrl, qint64> m_DArray;
           explicit Planner(QObject *parent = nullptr);
           static QRail::RouterEngine::Planner *m_instance;
           void parsePage(QRail::Fragments::Page *page);
@@ -110,11 +111,11 @@ namespace QRail {
           QList<QRail::RouterEngine::Route *> routes() const;
           void setRoutes(const QList<QRail::RouterEngine::Route *> &routes);
           QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> SArray() const;
-          void
-          setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>
-                        &SArray);
+          void setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray);
           QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
           void setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray);
+          QMap<QUrl, qint64> DArray() const;
+          void setDArray(const QMap<QUrl, qint64> &DArray);
           void setDepartureTime(const QDateTime &departureTime);
           void setArrivalTime(const QDateTime &arrivalTime);
           void setMaxTransfers(const qint16 &maxTransfers);

@@ -76,8 +76,7 @@ StationEngine::Factory *StationEngine::Factory::getInstance() {
  * In case something goes wrong, a StationEngine::NullStation instance is
  * returned.
  */
-StationEngine::Station *
-StationEngine::Factory::getStationByURI(const QUrl &uri) {
+QRail::StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri) {
     // Init StationEngine::Station variable
     StationEngine::Station *station;
 
@@ -329,6 +328,63 @@ StationEngine::Factory::getStationByURI(const QUrl &uri) {
  * @file stationfactory.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
+ * @brief Retrieves a station by URI
+ * @param const StationEngine::Station *station
+ * @param const qreal &radius
+ * @param const qint32 &maxResults
+ * @return QList<StationEngine::Station *station> &nearbyStations
+ * @package StationEngine
+ * @public
+ * @note The radius is defined in kilometres, with the given station as the centre of the circle.
+ * Fetches nearby stations from database using the Haversine formula (Google's solution).
+ * In case something goes wrong, a StationEngine::NullStation instance is
+ * pushed to the QList<StationEngine::Station *station> &nearbyStations.
+ */
+QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(StationEngine::Station *station, const qreal &radius, const qint32 &maxResults)
+{
+    /*
+     * Fetch nearby stations from database using the Haversine formula (Google's solution)
+     * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
+     */
+    qDebug() << "Looking for nearby stations of" << station->name().value(QLocale::Dutch);
+    qDebug() << "\tRadius:" << radius << "kilometres";
+    qDebug() << "\tMax results:" << maxResults;
+    QList<QRail::StationEngine *> nearbyStations;
+    QSqlQuery query(this->db()->database());
+    query.prepare("SELECT "
+                  "uri, "
+                  "("
+                  "  6371 * acos(cos(radians(:lat)) * "
+                  "  cos(radians(latitude)) * "
+                  "  cos(radians(longitude) - radians(:lon)) + "
+                  "  sin(radians(:lat)) * sin(radians(latitude)))"
+                  ") AS distance"
+                  "FROM stations "
+                  "HAVING distance < :radius "
+                  "ORDER BY distance LIMIT 0, :max_results");
+    query.bindValue(":lat", station->position().latitude()); // Latitude of our current stop
+    query.bindValue(":lon", station->position().longitude()); // Longitude of our current stop
+    query.bindValue(":radius", radius);
+    query.bindValue(":max_results", maxResults);
+    this->db()->execute(query);
+    qDebug() << "Found" << query.size() << "nearby stations";
+
+    //Read the results from the query
+    while (query.next()) {
+        // Using the field name in overload query.value(x) is less efficient then
+        // using indexes according to the Qt 5.6.3 docs
+        QUrl uri = query.value(0).toUrl();
+        qreal distance = query.value(1).toReal();
+        QRail::StationEngine::Station *nearbyStation = this->getStationByURI(uri);
+        nearbyStations.append(nearbyStation);
+        qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
+    }
+}
+
+/**
+ * @file stationfactory.cpp
+ * @author Dylan Van Assche
+ * @date 09 Aug 2018
  * @brief Init the database for stations
  * @package StationEngine
  * @public
@@ -418,12 +474,9 @@ bool StationEngine::Factory::initDatabase() {
     this->db()->startTransaction();
 
     // Read CSV files using the QtCSV library
-    QList<QStringList> stationsCSV =
-            QtCSV::Reader::readToList(":/database/stations/stations.csv");
-    QList<QStringList> facilitiesCSV =
-            QtCSV::Reader::readToList(":/database/stations/facilities.csv");
-    QList<QStringList> stopsCSV =
-            QtCSV::Reader::readToList(":/database/stations/stops.csv");
+    QList<QStringList> stationsCSV = QtCSV::Reader::readToList(":/database/stations/stations.csv");
+    QList<QStringList> facilitiesCSV = QtCSV::Reader::readToList(":/database/stations/facilities.csv");
+    QList<QStringList> stopsCSV = QtCSV::Reader::readToList(":/database/stations/stops.csv");
 
     // Synchronise all QFutures at the end of the transaction
     QFutureSynchronizer<bool> synchronizer;

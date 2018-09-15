@@ -68,6 +68,9 @@ namespace QRail {
           void getConnections(const QUrl &departureStation, const QUrl &arrivalStation,
                               const QDateTime &departureTime,
                               const qint16 &maxTransfers);
+          void getConnections(const QGeoCoordinate &departurePosition, const QUrl &arrivalPosition,
+                              const QDateTime &departureTime,
+                              const qint16 &maxTransfers);
           QDateTime calculateArrivalTime(const QDateTime &departureTime);
           QDateTime departureTime() const;
           QDateTime arrivalTime() const;

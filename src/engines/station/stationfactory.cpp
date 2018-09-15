@@ -340,7 +340,7 @@ QRail::StationEngine::Station *StationEngine::Factory::getStationByURI(const QUr
  * In case something goes wrong, a StationEngine::NullStation instance is
  * pushed to the QList<StationEngine::Station *station> &nearbyStations.
  */
-QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults)
+QList<StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosition(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults)
 {
     /*
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
@@ -379,6 +379,12 @@ QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(const 
         nearbyStations.append(nearbyStation);
         qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
     }
+}
+
+StationEngine::Station *StationEngine::Factory::getNearestStationByPosition(const QGeoCoordinate &position)
+{
+    // We only need the nearest station, the list is automatically sorted by distance anyway.
+    return this->getNearbyStationsByPosition(position, SEARCH_RADIUS_NEAREST_STATION, 1).first();
 }
 
 /**

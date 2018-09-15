@@ -40,6 +40,8 @@
 // Uncomment to enable verbose output
 //#define VERBOSE_CACHE
 
+#define SEARCH_RADIUS_NEAREST_STATION 10.0 // 10.0 km
+
 namespace QRail {
     namespace StationEngine {
         class QRAIL_SHARED_EXPORT Factory : public QObject
@@ -48,7 +50,8 @@ namespace QRail {
         public:
             static Factory *getInstance();
             QRail::StationEngine::Station *getStationByURI(const QUrl &uri);
-            QList<QRail::StationEngine::Station *> getNearbyStations(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults);
+            QList<QRail::StationEngine::Station *> getNearbyStationsByPosition(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults);
+            QRail::StationEngine::Station *getNearestStationByPosition(const QGeoCoordinate &position);
 
         private:
             QRail::Database::Manager *m_db;

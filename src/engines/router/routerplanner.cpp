@@ -69,7 +69,7 @@ QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance() {
  * @param const QDateTime &departureTime
  * @param const qint16 &maxTransfers
  * @package RouterEngine
- * @private
+ * @public
  * Retrieves the connections between 2 stations with a given departure time and
  * a maximum of transfers. Emit the routesFound signal when completed, the error
  * signal is emitted in case an error comes up.
@@ -86,26 +86,31 @@ void QRail::RouterEngine::Planner::getConnections(
    *  - while no results have been found yet
    *  - until we're at the front (hasPassedDepartureTimeLimit = true)
    *
+   *
    * We use the Qt Concurrent framework to enable automatically scaling of the
    * threadpool as mentioned by the docs: The QtConcurrent namespace provides
    * high-level APIs that make it possible to write multi-threaded programs
    * without using low-level threading primitives such as mutexes,
    * read-write locks, wait conditions, or semaphores.
    *
-   *      Programs written with QtConcurrent automatically adjust the number of
+   * Programs written with QtConcurrent automatically adjust the number of
    * threads used according to the number of processor cores available. This
    * means that applications written today will continue to scale when
    * deployed on multi-core systems in the future.
    *
-   * Tutorial:
-   * http://www.bogotobogo.com/Qt/Qt5_QtConcurrent_RunFunction_QThread.php Help:
-   * https://stackoverflow.com/questions/23702930/how-to-call-a-function-with-arguments-by-qtconcurrent#23711170
-   * Help:
-   * https://stackoverflow.com/questions/7114421/qtconcurrentrun-emit-signal#41110098
-   * Docs: https://doc.qt.io/qt-5.6/qtconcurrent.html
+   * TUTORIAL:
+   * - http://www.bogotobogo.com/Qt/Qt5_QtConcurrent_RunFunction_QThread.php Help:
+   * - https://stackoverflow.com/questions/23702930/how-to-call-a-function-with-arguments-by-qtconcurrent#23711170
+   * HELP: https://stackoverflow.com/questions/7114421/qtconcurrentrun-emit-signal#41110098
+   * DOCS: https://doc.qt.io/qt-5.6/qtconcurrent.html
+   *
+   * WARNING:
+   * The CSA paper uses an INFINITE state for the initialisation. We use an
+   * empty QMap instead based on hashing, when X isn't available in the map,
+   * it's INFINITY in the paper!
    */
 
-    qDebug() << "Init CSA algorithm";
+    qDebug() << "Init CSA profile algorithm";
     this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
     this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
     this->setDArray(QMap<QUrl, qint64>());
@@ -115,6 +120,29 @@ void QRail::RouterEngine::Planner::getConnections(
     this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
     this->setMaxTransfers(maxTransfers);
     this->fragmentsFactory()->getPage(this->arrivalTime(), this);
+}
+
+/**
+ * @file routerplanner.cpp
+ * @author Dylan Van Assche
+ * @date 09 Aug 2018
+ * @brief Retrieves the connections between 2 GPS positions
+ * @param const QGeoCoordinate &departurePosition
+ * @param const QGeoCoordinate &arrivalPosition
+ * @param const QDateTime &departureTime
+ * @param const qint16 &maxTransfers
+ * @package RouterEngine
+ * @public
+ * @note Calls internally getConnections with 2 stations.
+ * Retrieves the connections between 2 GPS positions with a given departure time and
+ * a maximum of transfers. Emit the routesFound signal when completed, the error
+ * signal is emitted in case an error comes up.
+ */
+void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition, const QUrl &arrivalPosition, const QDateTime &departureTime, const qint16 &maxTransfers)
+{
+    QRail::StationEngine::Station *departureStation = this->stationFactory()->getNearestStationByPosition(departurePosition);
+    QRail::StationEngine::Station *arrivalStation = this->stationFactory()->getNearestStationByPosition(arrivalPosition);
+    this->getConnections(departureStation, arrivalStation, departureTime, maxTransfers);
 }
 
 // Processors
@@ -159,12 +187,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
 
         /*
          * REMARKS:
-         *   - We only emit the progress signal when we reach a certain treshold to
-         * avoid spamming the event loop.
-         *   - Substract the progress from 100.0 (100 %) since we are looping in the
-         * opposite direction.
-         *   - Increment the fragIndex before calculating the progress to reach 100
-         * % when fragIndex == 0.
+         *   - We only emit the progress signal when we reach a certain treshold to avoid spamming the event loop.
+         *   - Substract the progress from 100.0 (100 %) since we are looping in the opposite direction.
+         *   - Increment the fragIndex before calculating the progress to reach 100% when fragIndex == 0.
          *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
          */
         currentProgress =100.0 - 100.0 * (fragIndex + 1) / page->fragments().size();

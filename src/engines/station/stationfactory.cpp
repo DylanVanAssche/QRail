@@ -329,7 +329,7 @@ QRail::StationEngine::Station *StationEngine::Factory::getStationByURI(const QUr
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Retrieves a station by URI
- * @param const StationEngine::Station *station
+ * @param const QGeoCoordinate &position
  * @param const qreal &radius
  * @param const qint32 &maxResults
  * @return QList<StationEngine::Station *station> &nearbyStations
@@ -340,13 +340,13 @@ QRail::StationEngine::Station *StationEngine::Factory::getStationByURI(const QUr
  * In case something goes wrong, a StationEngine::NullStation instance is
  * pushed to the QList<StationEngine::Station *station> &nearbyStations.
  */
-QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(StationEngine::Station *station, const qreal &radius, const qint32 &maxResults)
+QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults)
 {
     /*
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
      * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
      */
-    qDebug() << "Looking for nearby stations of" << station->name().value(QLocale::Dutch);
+    qDebug() << "Looking for nearby stations of" << position;
     qDebug() << "\tRadius:" << radius << "kilometres";
     qDebug() << "\tMax results:" << maxResults;
     QList<QRail::StationEngine *> nearbyStations;
@@ -362,8 +362,8 @@ QList<StationEngine::Station *> StationEngine::Factory::getNearbyStations(Statio
                   "FROM stations "
                   "HAVING distance < :radius "
                   "ORDER BY distance LIMIT 0, :max_results");
-    query.bindValue(":lat", station->position().latitude()); // Latitude of our current stop
-    query.bindValue(":lon", station->position().longitude()); // Longitude of our current stop
+    query.bindValue(":lat", position.latitude()); // Latitude of our position
+    query.bindValue(":lon", position.longitude()); // Longitude of our position
     query.bindValue(":radius", radius);
     query.bindValue(":max_results", maxResults);
     this->db()->execute(query);

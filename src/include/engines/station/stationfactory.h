@@ -48,7 +48,7 @@ namespace QRail {
         public:
             static Factory *getInstance();
             QRail::StationEngine::Station *getStationByURI(const QUrl &uri);
-            QList<QRail::StationEngine::Station *> getNearbyStations(QRail::StationEngine::Station *station, const qreal &radius, const qint32 &maxResults);
+            QList<QRail::StationEngine::Station *> getNearbyStations(const QGeoCoordinate &position, const qreal &radius, const qint32 &maxResults);
 
         private:
             QRail::Database::Manager *m_db;

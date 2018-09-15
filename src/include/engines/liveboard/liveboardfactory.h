@@ -33,7 +33,7 @@
 #include "fragments/fragmentspage.h"
 
 #define SECONDS_TO_HOURS_MULTIPLIER 3600 // 3600 seconds = 1 hour
-#define MINIMUM_PROGRESS_INCREMENT 1.0   // 1.0 = 1%
+#define MINIMUM_PROGRESS_INCREMENT 5.0   // 5.0 = 5%
 
 namespace QRail {
     namespace LiveboardEngine {

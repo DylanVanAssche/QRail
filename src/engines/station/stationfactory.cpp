@@ -346,38 +346,45 @@ QList<QRail::StationEngine::Station *> StationEngine::Factory::getNearbyStations
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
      * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
      */
-    qDebug() << "Looking for nearby stations of" << position;
+    Q_UNUSED(maxResults); // bypass compiler
+    /*qDebug() << "Looking for nearby stations of" << position;
     qDebug() << "\tRadius:" << radius << "kilometres";
-    qDebug() << "\tMax results:" << maxResults;
+    qDebug() << "\tMax results:" << maxResults;*/
     QList<QRail::StationEngine::Station *> nearbyStations = QList<QRail::StationEngine::Station *>();
     QSqlQuery query(this->db()->database());
+    // SQLite doesn't support trigonometric functions, we have calculate the Haversine formula outside the SQL query.
     query.prepare("SELECT "
                   "uri, "
-                  "("
-                  "  6371 * acos(cos(radians(:lat)) * "
-                  "  cos(radians(latitude)) * "
-                  "  cos(radians(longitude) - radians(:lon)) + "
-                  "  sin(radians(:lat)) * sin(radians(latitude)))"
-                  ") AS distance "
-                  "FROM stations "
-                  "HAVING distance < :radius "
-                  "ORDER BY distance LIMIT 0, :max_results");
-    query.bindValue(":lat", position.latitude()); // Latitude of our position
-    query.bindValue(":lon", position.longitude()); // Longitude of our position
-    query.bindValue(":radius", radius);
-    query.bindValue(":max_results", maxResults);
+                  "latitude, "
+                  "longitude "
+                  "FROM stations ");
     this->db()->execute(query);
-    qDebug() << "Found" << query.size() << "nearby stations";
 
     //Read the results from the query
+    qreal latitudeRadianCenter = qDegreesToRadians(position.latitude());
+    qreal longitudeRadianCenter = qDegreesToRadians(position.longitude());
     while (query.next()) {
         // Using the field name in overload query.value(x) is less efficient then
         // using indexes according to the Qt 5.6.3 docs
         QUrl uri = query.value(0).toUrl();
-        qreal distance = query.value(1).toReal();
-        QRail::StationEngine::Station *nearbyStation = this->getStationByURI(uri);
-        nearbyStations.append(nearbyStation);
-        qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
+        qreal latitudeStation = query.value(1).toReal();
+        qreal longitudeStation = query.value(2).toReal();
+
+        qreal latitudeRadianStation = qDegreesToRadians(latitudeStation);
+        qreal longitudeRadianStation = qDegreesToRadians(longitudeStation);
+
+        qreal differenceLatitude = latitudeRadianStation - latitudeRadianCenter;
+        qreal differenceLongitude = longitudeRadianStation - longitudeRadianCenter;
+
+        // Haversine
+        qreal computation = qAsin(qSqrt(qSin(differenceLatitude / 2) * qSin(differenceLatitude / 2) + qCos(latitudeRadianCenter) * qCos(latitudeRadianStation) * qSin(differenceLongitude / 2) * qSin(differenceLongitude / 2)));
+        qreal distance = 2 * 6372.8 * computation; // Earth radius in km
+        if(distance < radius) {
+            QRail::StationEngine::Station *station = this->getStationByURI(uri);
+            nearbyStations.append(station);
+            //nearbyStations.append(QPair<QRail::StationEngine::Station *, qreal>(nearbyStation, distance));
+            //qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
+        }
     }
 
     return nearbyStations;

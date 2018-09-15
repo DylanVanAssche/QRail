@@ -58,8 +58,8 @@
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
 #define MINIMUM_PROGRESS_INCREMENT 5.0         // 5.0 = 5%
 #define WALKING_SPEED 5.0                      // 5.0 m/s
-#define SEARCH_RADIUS 20.0                     // 20 km
-#define MAX_RESULTS 10                         // 10 results
+#define SEARCH_RADIUS 2.0                      // 2 km
+#define MAX_RESULTS 2                          // 2 results maximum
 
 // Singleton pattern
 namespace QRail {

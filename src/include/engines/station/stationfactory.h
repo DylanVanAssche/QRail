@@ -26,7 +26,9 @@
 #include <QtCore/QMap>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QPair>
 #include <QtSql/QSqlQuery>
+#include <QtMath>
 
 #include "qrail.h"
 #include "engines/station/stationstation.h"

@@ -638,8 +638,12 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
          */
         QRail::StationEngine::Station *arrivalStation = this->stationFactory()->getStationByURI(fragment->arrivalStationURI());
         QList<QRail::StationEngine::Station *> nearbyStations = this->stationFactory()->getNearbyStationsByPosition(arrivalStation->position(), SEARCH_RADIUS, MAX_RESULTS); // TO DO set properly the SEARCH_RADIUS and MAX_RESULTS
-        qDebug() << "Inserting footpath profiles into S array";
-        foreach (QRail::StationEngine::Station *footpathStation, nearbyStations) {
+        QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
+        QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(fragment->departureStationURI());
+
+        //foreach (QRail::StationEngine::Station *footpathStation, nearbyStations) {
+        if(!nearbyStations.isEmpty()) {
+            QRail::StationEngine::Station *footpathStation = nearbyStations.first(); // Limit the number of results
             qreal distanceInMetres = footpathStation->position().distanceTo(arrivalStation->position()); // Get distance between stations
             qint64 interFootpathTime = qRound64((distanceInMetres / WALKING_SPEED) / 60.0); // Convert walking distance to walking time
 
@@ -651,19 +655,19 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page) {
                         this->TArray().value(fragment->tripURI())->arrivalConnection(),
                         Tmin_transfers
                         );
-            QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
-            QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(fragment->departureStationURI());
-            SProfiles.append(footpathStationStopProfile);
-            qDebug() << "Inserting footpathProfile:" << footpathStationStopProfile;
 
-            std::sort(SProfiles.begin(), SProfiles.end(), [](const QRail::RouterEngine::StationStopProfile *a, const QRail::RouterEngine::StationStopProfile *b) -> bool {
-                QDateTime timeA = a->departureTime();
-                QDateTime timeB = b->departureTime();
-                return timeA < timeB;
-            });
-            S.insert(fragment->departureStationURI(), SProfiles);
-            this->setSArray(S);
+            SProfiles.append(footpathStationStopProfile);
         }
+        //}
+
+        // Ensure the departure time DESCENDING order
+        std::sort(SProfiles.begin(), SProfiles.end(), [](const QRail::RouterEngine::StationStopProfile *a, const QRail::RouterEngine::StationStopProfile *b) -> bool {
+            QDateTime timeA = a->departureTime();
+            QDateTime timeB = b->departureTime();
+            return timeA < timeB;
+        });
+        S.insert(fragment->departureStationURI(), SProfiles);
+        this->setSArray(S);
         
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";

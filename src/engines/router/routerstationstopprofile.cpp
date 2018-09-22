@@ -32,7 +32,12 @@ using namespace QRail;
  * @public
  * Constructs a QRail::RouterEngine::StationStopProfile for the S array in the Connection Scan Algorithm.
  */
-QRail::RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &departureTime, const QDateTime &arrivalTime, QRail::Fragments::Fragment *departureConnection, QRail::Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
+QRail::RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &departureTime,
+                                                            const QDateTime &arrivalTime,
+                                                            QRail::Fragments::Fragment *departureConnection,
+                                                            QRail::Fragments::Fragment *arrivalConnection,
+                                                            const qint16 transfers,
+                                                            QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal triggering on construction
     m_departureTime = departureTime;
@@ -127,7 +132,8 @@ QRail::Fragments::Fragment *QRail::RouterEngine::StationStopProfile::departureCo
  * Sets the current departure connection to the given Fragment *departureConnection.
  * Emits the departureConnectionChanged signal when changed.
  */
-void QRail::RouterEngine::StationStopProfile::setDepartureConnection(QRail::Fragments::Fragment *departureConnection)
+void QRail::RouterEngine::StationStopProfile::setDepartureConnection(QRail::Fragments::Fragment
+                                                                     *departureConnection)
 {
     m_departureConnection = departureConnection;
     emit this->departureConnectionChanged();
@@ -157,7 +163,8 @@ QRail::Fragments::Fragment *QRail::RouterEngine::StationStopProfile::arrivalConn
  * Sets the current arrival connection to the given Fragment *arrivalConnection.
  * Emits the arrivalConnectionChanged signal when changed.
  */
-void QRail::RouterEngine::StationStopProfile::setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection)
+void QRail::RouterEngine::StationStopProfile::setArrivalConnection(QRail::Fragments::Fragment
+                                                                   *arrivalConnection)
 {
     m_arrivalConnection = arrivalConnection;
     emit this->arrivalConnectionChanged();

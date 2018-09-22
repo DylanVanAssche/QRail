@@ -24,24 +24,25 @@
 #include <QtTest/QtTest>
 
 namespace QRail {
-    namespace RouterEngine {
-        class PlannerTest : public QObject {
-          Q_OBJECT
-        private slots:
-          void initCSAPlannerTest();
-          void runCSAPlannerTest();
-          void cleanCSAPlannerTest();
+namespace RouterEngine {
+class PlannerTest : public QObject
+{
+    Q_OBJECT
+private slots:
+    void initCSAPlannerTest();
+    void runCSAPlannerTest();
+    void cleanCSAPlannerTest();
 
-        public slots:
-          void processRouteFound(const QList<QRail::RouterEngine::Route *> &routes);
-          void pageProcess(const QUrl &pageURI, const qint16 &progress);
-          void processing(const QUrl &pageURI);
-          void requested(const QUrl &pageURI);
+public slots:
+    void processRouteFound(const QList<QRail::RouterEngine::Route *> &routes);
+    void pageProcess(const QUrl &pageURI, const qint16 &progress);
+    void processing(const QUrl &pageURI);
+    void requested(const QUrl &pageURI);
 
-        private:
-          QRail::RouterEngine::Planner *planner;
-        };
-    } // namespace RouterEngine
+private:
+    QRail::RouterEngine::Planner *planner;
+};
+} // namespace RouterEngine
 } // namespace QRail
 
 #endif // CSAPLANNERTEST_H

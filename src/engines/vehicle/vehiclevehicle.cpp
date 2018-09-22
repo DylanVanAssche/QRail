@@ -47,7 +47,8 @@ QRail::VehicleEngine::Vehicle::Vehicle(QObject *parent): QObject(parent)
  * @public
  * Constructs a QRail::VehicleEngine::Vehicle to store information about the vehicle itself without intermediary stops.
  */
-QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI, const QString &headsign, QObject *parent): QObject(parent)
+QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI,
+                                       const QString &headsign, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_uri = uri;
@@ -70,8 +71,15 @@ QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI, con
  * @public
  * Constructs a QRail::VehicleEngine::Vehicle to store information about the vehicle itself with intermediary stops.
  */
-QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI, const QString &headsign, const QList<QRail::VehicleEngine::Stop *> &intermediaryStops, QObject *parent) : QObject(parent)
+QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI,
+                                       const QString &headsign, const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+                                       QObject *parent) : QObject(parent)
 {
+    // Enforce the Vehicle as the parent of all it's children
+    foreach (QRail::VehicleEngine::Stop *stop, intermediaryStops) {
+        stop->setParent(this);
+    }
+
     // Use private members to avoid signal firing on construction
     m_uri = uri;
     m_tripURI = tripURI;
@@ -202,7 +210,8 @@ QList<QRail::VehicleEngine::Stop *> QRail::VehicleEngine::Vehicle::intermediaryS
  * Sets the intermediary stops of the vehicle to the given QList<QRail::VehicleEngine::Stop *> &intermediaryStops.
  * Emit the intermediaryStopsChanged signal.
  */
-void QRail::VehicleEngine::Vehicle::setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *> &intermediaryStops)
+void QRail::VehicleEngine::Vehicle::setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *>
+                                                         &intermediaryStops)
 {
     m_intermediaryStops = intermediaryStops;
     emit this->intermediaryStopsChanged();

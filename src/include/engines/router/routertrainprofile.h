@@ -22,35 +22,35 @@
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
-    namespace RouterEngine {
-        class TrainProfile : public QObject
-        {
-            Q_OBJECT
-        public:
-            explicit TrainProfile(
-                    const QDateTime &arrivalTime,
-                    QRail::Fragments::Fragment *arrivalConnection,
-                    const qint16 transfers,
-                    QObject *parent = nullptr
-                    );
-            QDateTime arrivalTime() const;
-            void setArrivalTime(const QDateTime &arrivalTime);
-            QRail::Fragments::Fragment *arrivalConnection() const;
-            void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
-            qint16 transfers() const;
-            void setTransfers(const qint16 &transfers);
+namespace RouterEngine {
+class TrainProfile : public QObject
+{
+    Q_OBJECT
+public:
+    explicit TrainProfile(
+        const QDateTime &arrivalTime,
+        QRail::Fragments::Fragment *arrivalConnection,
+        const qint16 transfers,
+        QObject *parent = nullptr
+    );
+    QDateTime arrivalTime() const;
+    void setArrivalTime(const QDateTime &arrivalTime);
+    QRail::Fragments::Fragment *arrivalConnection() const;
+    void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
+    qint16 transfers() const;
+    void setTransfers(const qint16 &transfers);
 
-        signals:
-            void arrivalTimeChanged();
-            void arrivalConnectionChanged();
-            void transfersChanged();
+signals:
+    void arrivalTimeChanged();
+    void arrivalConnectionChanged();
+    void transfersChanged();
 
-        private:
-            QDateTime m_arrivalTime;
-            QRail::Fragments::Fragment *m_arrivalConnection;
-            qint16 m_transfers;
-        };
-    }
+private:
+    QDateTime m_arrivalTime;
+    QRail::Fragments::Fragment *m_arrivalConnection;
+    qint16 m_transfers;
+};
+}
 }
 
 #endif // CSATRAINPROFILE_H

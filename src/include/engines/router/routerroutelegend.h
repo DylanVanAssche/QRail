@@ -29,66 +29,66 @@
 #include "engines/vehicle/vehiclevehicle.h"
 
 namespace QRail {
-    namespace RouterEngine {
-        class RouteLegEnd : public QObject
-        {
-            Q_OBJECT
-        public:
-            explicit RouteLegEnd(
-                    const QUrl &uri,
-                    const QDateTime &time,
-                    StationEngine::Station *station,
-                    const QString &platform,
-                    const bool &isNormalPlatform,
-                    const qint16 &delay,
-                    const bool &isCanceled,
-                    const bool &isPassed,
-                    const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
-                    QObject *parent = nullptr
-                    );
-            QUrl uri() const;
-            void setUri(const QUrl &uri);
-            QDateTime time() const;
-            void setTime(const QDateTime &time);
-            StationEngine::Station *station() const;
-            void setStation(StationEngine::Station *station);
-            QString platform() const;
-            void setPlatform(const QString &platform);
-            bool isNormalPlatform() const;
-            void setIsNormalPlatform(bool isNormalPlatform);
-            qint16 delay() const;
-            void setDelay(const qint16 &delay);
-            bool isCanceled() const;
-            void setIsCanceled(bool isCanceled);
-            bool isPassed() const;
-            void setIsPassed(bool isPassed);
-            QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
-            void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
+namespace RouterEngine {
+class RouteLegEnd : public QObject
+{
+    Q_OBJECT
+public:
+    explicit RouteLegEnd(
+        const QUrl &uri,
+        const QDateTime &time,
+        StationEngine::Station *station,
+        const QString &platform,
+        const bool &isNormalPlatform,
+        const qint16 &delay,
+        const bool &isCanceled,
+        const bool &isPassed,
+        const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+        QObject *parent = nullptr
+    );
+    QUrl uri() const;
+    void setUri(const QUrl &uri);
+    QDateTime time() const;
+    void setTime(const QDateTime &time);
+    StationEngine::Station *station() const;
+    void setStation(StationEngine::Station *station);
+    QString platform() const;
+    void setPlatform(const QString &platform);
+    bool isNormalPlatform() const;
+    void setIsNormalPlatform(bool isNormalPlatform);
+    qint16 delay() const;
+    void setDelay(const qint16 &delay);
+    bool isCanceled() const;
+    void setIsCanceled(bool isCanceled);
+    bool isPassed() const;
+    void setIsPassed(bool isPassed);
+    QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
+    void setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel);
 
-        signals:
-            void uriChanged();
-            void timeChanged();
-            void stationChanged();
-            void platformChanged();
-            void isNormalPlatformChanged();
-            void delayChanged();
-            void isCanceledChanged();
-            void isPassedChanged();
-            void occupancyLevelChanged();
-            // connect to signals of the underlying things depending on the type!
+signals:
+    void uriChanged();
+    void timeChanged();
+    void stationChanged();
+    void platformChanged();
+    void isNormalPlatformChanged();
+    void delayChanged();
+    void isCanceledChanged();
+    void isPassedChanged();
+    void occupancyLevelChanged();
+    // connect to signals of the underlying things depending on the type!
 
-        private:
-            QUrl m_uri;
-            QDateTime m_time;
-            StationEngine::Station *m_station;
-            QString m_platform;
-            bool m_isNormalPlatform;
-            qint16 m_delay;
-            bool m_isCanceled;
-            bool m_isPassed;
-            QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
-        };
-    }
+private:
+    QUrl m_uri;
+    QDateTime m_time;
+    StationEngine::Station *m_station;
+    QString m_platform;
+    bool m_isNormalPlatform;
+    qint16 m_delay;
+    bool m_isCanceled;
+    bool m_isPassed;
+    QRail::VehicleEngine::Stop::OccupancyLevel m_occupancyLevel;
+};
+}
 }
 
 #endif // CSAROUTELEGEND_H

@@ -17,7 +17,8 @@
 #include "fragmentspagetest.h"
 using namespace QRail;
 
-void QRail::Fragments::PageTest::initLinkedConnectionPageTest() {
+void QRail::Fragments::PageTest::initLinkedConnectionPageTest()
+{
     qDebug() << "Init QRail::Fragments::Page test";
 
     page = new QRail::Fragments::Page(
@@ -28,12 +29,14 @@ void QRail::Fragments::PageTest::initLinkedConnectionPageTest() {
         QList<QRail::Fragments::Fragment *>(), this);
 }
 
-void QRail::Fragments::PageTest::runLinkedConnectionPageTest() {
+void QRail::Fragments::PageTest::runLinkedConnectionPageTest()
+{
     qDebug() << "Running QRail::Fragments::Page test";
 
     // Set each property and check if the signal of the property fires
     QSignalSpy spyUriChanged(page, SIGNAL(uriChanged()));
-    page->setURI(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T16:29:00.000Z"));
+    page->setURI(
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T16:29:00.000Z"));
     QCOMPARE(spyUriChanged.count(), 1);
 
     QSignalSpy spyTimestampChanged(page, SIGNAL(timestampChanged()));
@@ -41,14 +44,17 @@ void QRail::Fragments::PageTest::runLinkedConnectionPageTest() {
     QCOMPARE(spyTimestampChanged.count(), 1);
 
     QSignalSpy spyHydraNextChanged(page, SIGNAL(hydraNextChanged()));
-    page->setHydraNext(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T15:29:00.000Z"));
+    page->setHydraNext(
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T15:29:00.000Z"));
     QCOMPARE(spyHydraNextChanged.count(), 1);
 
     QSignalSpy spyHydraPreviousChanged(page, SIGNAL(hydraPreviousChanged()));
-    page->setHydraPrevious(QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T17:29:00.000Z"));
+    page->setHydraPrevious(
+        QUrl("https://graph.irail.be/sncb/connections?departureTime=2018-07-24T17:29:00.000Z"));
     QCOMPARE(spyHydraPreviousChanged.count(), 1);
 }
 
-void QRail::Fragments::PageTest::cleanLinkedConnectionPageTest() {
+void QRail::Fragments::PageTest::cleanLinkedConnectionPageTest()
+{
     qDebug() << "Cleaning up QRail::Fragments::Page test";
 }

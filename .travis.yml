@@ -7,19 +7,30 @@ services:
 
 before_install:
   - ls
-  - docker pull coderus/sailfishos-platform-sdk:2.2.0.29        
-  - docker run -it --mount type=bind,source="$(pwd)",target=/home/nemo/QRail-git -d --name build-engine coderus/sailfishos-platform-sdk:2.2.0.29 /bin/bash  
-  - docker exec build-engine sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-install -R zypper --non-interactive install git qt5-qtpositioning-devel qt5-qtsql-devel qt5-qtconcurrent-devel qt5-qttest-devel
+  - docker pull coderus/sailfishos-platform-sdk:2.2.1.18        
+  - docker run -it --mount type=bind,source="$(pwd)",target=/home/nemo/QRail-git -d --name build-engine coderus/sailfishos-platform-sdk:2.2.1.18 /bin/bash  
+  - docker exec build-engine sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-install -R zypper --non-interactive install git qt5-qtpositioning-devel qt5-qtsql-devel qt5-qtconcurrent-devel qt5-qttest-devel
+  - docker exec build-engine sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-install -R zypper --non-interactive install git qt5-qtpositioning-devel qt5-qtsql-devel qt5-qtconcurrent-devel qt5-qttest-devel
   - docker exec build-engine ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts  
 
 script:
   - docker exec build-engine bash -c "cd /home/nemo
-    && cp -r QRail-git QRail
-    && cd QRail 
-    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug
-    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build make -j2 
+    && cp -r QRail-git QRail-armv7hl 
+    && cd QRail-armv7hl 
+    && sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug
+    && sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-build make -j2 
     && cd tests 
-    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug 
-    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build make -j2 
-    && sb2 -t SailfishOS-2.2.0.29-armv7hl -m sdk-build ./qrail-tests"
+    && sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug 
+    && sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-build make -j2 
+    && sb2 -t SailfishOS-2.2.1.18-armv7hl -m sdk-build ./qrail-tests"
+
+  - docker exec build-engine bash -c "cd /home/nemo
+    && cp -r QRail-git QRail-i486 
+    && cd QRail-i486
+    && sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug
+    && sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-build make -j2 
+    && cd tests 
+    && sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-build qmake CONFIG+=debug CONFIG+=qml_debug 
+    && sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-build make -j2 
+    && sb2 -t SailfishOS-2.2.1.18-i486 -m sdk-build ./qrail-tests"
 

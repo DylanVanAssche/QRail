@@ -29,7 +29,8 @@ QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::m_instance = nullp
  * Constructs a QRail::VehicleEngine::Factory to
  * generate QRail::VehicleEngine::Vehicle objects on the fly.
  */
-QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent) {
+QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent)
+{
     // Setup Network::Manager
     this->setHttp(QRail::Network::Manager::getInstance());
     /*
@@ -37,13 +38,14 @@ QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent) {
      * INFO:
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
+    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl,
+                                                                                       QObject *)));
 
     // Setup StationEngine::Factory
     this->setStationFactory(StationEngine::Factory::getInstance());
 
     // Init caching
-    m_cache = QMap<QString, QRail::VehicleEngine::Vehicle*>();
+    m_cache = QMap<QString, QRail::VehicleEngine::Vehicle *>();
 }
 
 /**
@@ -58,7 +60,8 @@ QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent) {
  * Constructs a QRail::VehicleEngine::Factory if none exists and returns the
  * instance.
  */
-QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::getInstance() {
+QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::getInstance()
+{
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new QRail::VehicleEngine::Factory";
@@ -79,7 +82,9 @@ QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::getInstance() {
  * Retrieves a vehicle by URI from the network iRail API.
  * When the vehicle is ready, the finished signal is emitted.
  */
-void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri, const QLocale::Language &language) {
+void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
+                                                    const QLocale::Language &language)
+{
     this->setLanguage(language);
     QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
     // Vehicle isn't in our cache yet, fetching...
@@ -106,12 +111,15 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri, const QLoca
  * QRail::VehicleEngine::Vehicle is generated with it's
  * QRail::VehicleEngine::Stop list.
  */
-void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
+void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
+{
     if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
 #ifdef VERBOSE_HTTP_STATUS
         qDebug() << "Content-Header:" << reply->header(QNetworkRequest::ContentTypeHeader).toString();
-        qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong() << "bytes";
-        qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
+        qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong()
+                 << "bytes";
+        qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
+                 reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
         qDebug() << "Cache:" << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
 #endif
         // Read HTTP reply
@@ -120,7 +128,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
         // Try to parse the data as JSON-LD
         QJsonParseError parseError;
         QJsonDocument jsonData =
-                QJsonDocument::fromJson(replyData.toUtf8(), &parseError);
+            QJsonDocument::fromJson(replyData.toUtf8(), &parseError);
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject jsonObject = jsonData.object();
 
@@ -128,7 +136,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
                     vehicleContext() == jsonObject["@context"].toObject()) {
                 // Vehicle intermediary stops
                 QList<QRail::VehicleEngine::Stop *> intermediaryStops =
-                        QList<QRail::VehicleEngine::Stop *>();
+                    QList<QRail::VehicleEngine::Stop *>();
                 QJsonArray graph = jsonObject["@graph"].toArray();
                 QString tripDate;
                 for (qint16 i = 0; i < graph.size(); i++) {
@@ -141,8 +149,8 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
                     if (i == 0) {
                         stop->setType(QRail::VehicleEngine::Stop::Type::DEPARTURE);
                         tripDate =
-                                item["departureConnection"]
-                                .toString(); // Remove http://irail.be/connections/8891173/
+                            item["departureConnection"]
+                            .toString(); // Remove http://irail.be/connections/8891173/
                         // We need to escape the C compiler and the RegEx: '\\'
                         QRegularExpression re("^(http:\\/\\/\\w+\\.\\w+\\/\\w+\\/\\d{7})\\/"
                                               "(\\d{8})\\/(.\\d{3})");
@@ -162,26 +170,26 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
                 }
 
                 /*
-         * Construct a vehicle object with the parsed JSON-LD data.
-         *
-         * The headsign of a vehicle is the destination station of the
-         * vehicle (http://vocab.org/transit/terms/headsign).
-         * Since our stops are already sorted by the resource we can pick
-         * the last stop and retrieve the name of it without querying other
-         * resources.
-         */
+                * Construct a vehicle object with the parsed JSON-LD data.
+                *
+                * The headsign of a vehicle is the destination station of the
+                * vehicle (http://vocab.org/transit/terms/headsign).
+                * Since our stops are already sorted by the resource we can pick
+                * the last stop and retrieve the name of it without querying other
+                * resources.
+                */
                 QRail::VehicleEngine::Vehicle *vehicle =
-                        new QRail::VehicleEngine::Vehicle(
-                            reply->url(), // Vehicle URI
-                            QUrl(reply->url().toString().append("/" + tripDate)),
-                            intermediaryStops.last()->station()->name().value(
-                                this->language()),
-                            intermediaryStops);
+                    new QRail::VehicleEngine::Vehicle(
+                    reply->url(), // Vehicle URI
+                    QUrl(reply->url().toString().append("/" + tripDate)),
+                    intermediaryStops.last()->station()->name().value(
+                        this->language()),
+                    intermediaryStops);
 
                 /*
-         * Add the vehicle to cache for faster responses in the future and less
-         * memory usage due duplicate objects.
-         */
+                * Add the vehicle to cache for faster responses in the future and less
+                * memory usage due duplicate objects.
+                */
                 this->addVehicleToCache(vehicle->uri(), vehicle);
 
                 // Emit finished signal for the caller
@@ -199,14 +207,14 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
     } else {
         qCritical() << "Network request failed! HTTP status:"
                     << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                       .toString();
+                    .toString();
         qCritical() << "\tReply:" << (QString)reply->readAll();
         emit this->error(
-                    QString("Network request failed! HTTP status:")
-                    .append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                            .toString())
-                    .append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                            .toString()));
+            QString("Network request failed! HTTP status:")
+            .append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                    .toString())
+            .append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString()));
     }
 
     // Clean up the reply to avoid memory leaks
@@ -214,10 +222,12 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply) {
 }
 
 // Helpers
-void QRail::VehicleEngine::Factory::customEvent(QEvent *event) {
+void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
+{
     if (event->type() == this->http()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Network::DispatcherEvent *networkEvent =reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
+                                                        (event);
         this->processHTTPReply(networkEvent->reply());
     } else {
         event->ignore();
@@ -235,19 +245,23 @@ void QRail::VehicleEngine::Factory::customEvent(QEvent *event) {
  * @private
  * Generates QRail::VehicleEngine::Stop from JSON-LD and returns it.
  */
-QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(const QJsonObject &stop) {
+QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
+    const QJsonObject &stop)
+{
     // Parse JSON-LD data
     QString platform = stop["platforminfo"].toObject()["name"].toString();
     bool isPlatformNormal = stop["platforminfo"].toObject()["normal"].toBool();
     bool hasLeft = stop["left"].toBool();
     qint16 departureDelay = stop["departureDelay"].toInt();
     QDateTime departureTime;
-    departureTime.setTime_t(stop["scheduledDepartureTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    departureTime.setTime_t(
+        stop["scheduledDepartureTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
     departureTime.addSecs(departureDelay);
     bool isDepartureCanceled = stop["departureCanceled"].toBool();
     qint16 arrivalDelay = stop["arrivalDelay"].toInt();
     QDateTime arrivalTime;
-    arrivalTime.setTime_t(stop["scheduledArrivalTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    arrivalTime.setTime_t(
+        stop["scheduledArrivalTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
     arrivalTime.addSecs(arrivalDelay);
     bool isArrivalCanceled = stop["arrivalCanceled"].toBool();
     bool isExtraStop = stop["isExtraStop"].toBool();
@@ -257,10 +271,10 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
 
     // Generate QRail::VehicleEngine::Stop object
     return new QRail::VehicleEngine::Stop(
-                this->stationFactory()->getStationByURI(stationURI), platform,
-                isPlatformNormal, hasLeft, departureTime, departureDelay,
-                isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,
-                isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type);
+               this->stationFactory()->getStationByURI(stationURI), platform,
+               isPlatformNormal, hasLeft, departureTime, departureDelay,
+               isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,
+               isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type);
 }
 
 /**
@@ -275,22 +289,20 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
  * Generates QRail::VehicleEngine::Stop::OccupancyLevel from JSON-LD and
  * returns it.
  */
-QRail::VehicleEngine::Stop::OccupancyLevel QRail::VehicleEngine::Factory::generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const {
+QRail::VehicleEngine::Stop::OccupancyLevel
+QRail::VehicleEngine::Factory::generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const
+{
     QUrl occupancyURI = QUrl(occupancy["@id"].toString());
 
     if (occupancyURI == QUrl("http://api.irail.be/terms/unknown")) {
         return QRail::VehicleEngine::Stop::OccupancyLevel::UNKNOWN;
-    }
-    else if (occupancyURI == QUrl("http://api.irail.be/terms/low")) {
+    } else if (occupancyURI == QUrl("http://api.irail.be/terms/low")) {
         return QRail::VehicleEngine::Stop::OccupancyLevel::LOW;
-    }
-    else if (occupancyURI == QUrl("http://api.irail.be/terms/medium")) {
+    } else if (occupancyURI == QUrl("http://api.irail.be/terms/medium")) {
         return QRail::VehicleEngine::Stop::OccupancyLevel::MEDIUM;
-    }
-    else if (occupancyURI == QUrl("http://api.irail.be/terms/high")) {
+    } else if (occupancyURI == QUrl("http://api.irail.be/terms/high")) {
         return QRail::VehicleEngine::Stop::OccupancyLevel::HIGH;
-    }
-    else {
+    } else {
         return QRail::VehicleEngine::Stop::OccupancyLevel::UNKNOWN;
     }
 }
@@ -306,11 +318,12 @@ QRail::VehicleEngine::Stop::OccupancyLevel QRail::VehicleEngine::Factory::genera
  * Tries to fetch a vehicle from the cache.
  * In case the vehicle can't be retrieved from the cache, a nullptr is returned.
  */
-VehicleEngine::Vehicle * VehicleEngine::Factory::fetchVehicleFromCache(const QUrl &uri) {
+VehicleEngine::Vehicle *VehicleEngine::Factory::fetchVehicleFromCache(const QUrl &uri)
+{
     QString id = this->stripIDFromVehicleURI(uri);
 #ifdef VERBOSE_CACHE
     qDebug() << "Vehicle cache:";
-    foreach(QString key, m_cache.keys()) {
+    foreach (QString key, m_cache.keys()) {
         qDebug() << "\t" << key << m_cache.value(key);
     }
 #endif
@@ -390,7 +403,8 @@ QString VehicleEngine::Factory::stripIDFromVehicleURI(const QUrl &uri)
  * @private
  * Gets the QRail::Network::Manager instance and returns it.
  */
-QRail::Network::Manager *QRail::VehicleEngine::Factory::http() const {
+QRail::Network::Manager *QRail::VehicleEngine::Factory::http() const
+{
     return m_http;
 }
 
@@ -405,7 +419,8 @@ QRail::Network::Manager *QRail::VehicleEngine::Factory::http() const {
  * Sets the QRail::Network::Manager instance to the given
  * QRail::Network::Manager *http.
  */
-void QRail::VehicleEngine::Factory::setHttp(QRail::Network::Manager *http) {
+void QRail::VehicleEngine::Factory::setHttp(QRail::Network::Manager *http)
+{
     m_http = http;
 }
 
@@ -419,7 +434,8 @@ void QRail::VehicleEngine::Factory::setHttp(QRail::Network::Manager *http) {
  * @private
  * Gets the StationEngine::Factory instance and returns it.
  */
-StationEngine::Factory *QRail::VehicleEngine::Factory::stationFactory() const {
+StationEngine::Factory *QRail::VehicleEngine::Factory::stationFactory() const
+{
     return m_stationFactory;
 }
 
@@ -434,7 +450,8 @@ StationEngine::Factory *QRail::VehicleEngine::Factory::stationFactory() const {
  * Sets the StationEngine::Factory instance to the given
  * StationEngine::Factory *stationFactory.
  */
-void QRail::VehicleEngine::Factory::setStationFactory(StationEngine::Factory *stationFactory) {
+void QRail::VehicleEngine::Factory::setStationFactory(StationEngine::Factory *stationFactory)
+{
     m_stationFactory = stationFactory;
 }
 
@@ -448,7 +465,8 @@ void QRail::VehicleEngine::Factory::setStationFactory(StationEngine::Factory *st
  * @private
  * Gets the language and returns it.
  */
-QLocale::Language QRail::VehicleEngine::Factory::language() const {
+QLocale::Language QRail::VehicleEngine::Factory::language() const
+{
     return m_language;
 }
 
@@ -462,6 +480,7 @@ QLocale::Language QRail::VehicleEngine::Factory::language() const {
  * @private
  * Sets the language to the given const QLocale::Language &language.
  */
-void QRail::VehicleEngine::Factory::setLanguage(const QLocale::Language &language) {
+void QRail::VehicleEngine::Factory::setLanguage(const QLocale::Language &language)
+{
     m_language = language;
 }

@@ -23,18 +23,19 @@
 #include <QtTest/QtTest>
 
 namespace QRail {
-    namespace Fragments {
-        class PageTest : public QObject {
-          Q_OBJECT
-        private slots:
-          void initLinkedConnectionPageTest();
-          void runLinkedConnectionPageTest();
-          void cleanLinkedConnectionPageTest();
+namespace Fragments {
+class PageTest : public QObject
+{
+    Q_OBJECT
+private slots:
+    void initLinkedConnectionPageTest();
+    void runLinkedConnectionPageTest();
+    void cleanLinkedConnectionPageTest();
 
-        private:
-          QRail::Fragments::Page *page;
-        };
-    } // namespace Fragments
+private:
+    QRail::Fragments::Page *page;
+};
+} // namespace Fragments
 } // namespace QRail
 
 #endif // LINKEDCONNECTIONPAGETEST_H

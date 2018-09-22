@@ -31,42 +31,42 @@
 #include "qrail.h"
 
 namespace QRail {
-    namespace StationEngine {
-        class QRAIL_SHARED_EXPORT NullStation: public Station
-        {
-        public:
-            static NullStation *getInstance();
+namespace StationEngine {
+class QRAIL_SHARED_EXPORT NullStation: public Station
+{
+public:
+    static NullStation *getInstance();
 
-        private:
-            explicit NullStation(
-                    const QUrl &uri,
-                    const QMap<QLocale::Language, QString> &name,
-                    const QLocale::Country &country,
-                    const QGeoCoordinate &position,
-                    const QGeoAddress &address,
-                    const bool &hasTicketVendingMachine,
-                    const bool &hasLuggageLockers,
-                    const bool &hasFreeParking,
-                    const bool &hasTaxi,
-                    const bool &hasBicycleSpots,
-                    const bool &hasBlueBike,
-                    const bool &hasBus,
-                    const bool &hasTram,
-                    const bool &hasMetro,
-                    const bool &hasWheelchairAvailable,
-                    const bool &hasRamp,
-                    const qint16 &disabledParkingSpots,
-                    const bool &hasElevatedPlatform,
-                    const bool &hasEscalatorUp,
-                    const bool &hasEscalatorDown,
-                    const bool &hasElevatorPlatform,
-                    const bool &hasHearingAidSignal,
-                    const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours,
-                    const qreal &averageStopTimes,
-                    QObject *parent = nullptr);
-            static StationEngine::NullStation *m_instance;
-        };
-    }
+private:
+    explicit NullStation(
+        const QUrl &uri,
+        const QMap<QLocale::Language, QString> &name,
+        const QLocale::Country &country,
+        const QGeoCoordinate &position,
+        const QGeoAddress &address,
+        const bool &hasTicketVendingMachine,
+        const bool &hasLuggageLockers,
+        const bool &hasFreeParking,
+        const bool &hasTaxi,
+        const bool &hasBicycleSpots,
+        const bool &hasBlueBike,
+        const bool &hasBus,
+        const bool &hasTram,
+        const bool &hasMetro,
+        const bool &hasWheelchairAvailable,
+        const bool &hasRamp,
+        const qint16 &disabledParkingSpots,
+        const bool &hasElevatedPlatform,
+        const bool &hasEscalatorUp,
+        const bool &hasEscalatorDown,
+        const bool &hasElevatorPlatform,
+        const bool &hasHearingAidSignal,
+        const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours,
+        const qreal &averageStopTimes,
+        QObject *parent = nullptr);
+    static StationEngine::NullStation *m_instance;
+};
+}
 }
 
 #endif // CSANULLSTATION_H

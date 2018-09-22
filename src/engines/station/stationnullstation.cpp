@@ -16,7 +16,7 @@
  */
 #include "engines/station/stationnullstation.h"
 using namespace QRail;
-StationEngine::NullStation* StationEngine::NullStation::m_instance = nullptr;
+StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
 
 /**
  * @file routernullstation.cpp
@@ -51,8 +51,20 @@ StationEngine::NullStation* StationEngine::NullStation::m_instance = nullptr;
  * @private
  * Constructs a StationEngine::NullStation according to the Null design pattern.
  */
-StationEngine::NullStation::NullStation(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp, const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp, const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal, const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours, const qreal &averageStopTimes, QObject *parent) :
-    Station(uri, name, country, position, address, hasTicketVendingMachine, hasLuggageLockers, hasFreeParking, hasTaxi, hasBicycleSpots, hasBlueBike, hasBus, hasTram, hasMetro, hasWheelchairAvailable, hasRamp, disabledParkingSpots, hasElevatedPlatform, hasEscalatorDown, hasEscalatorUp, hasElevatorPlatform, hasHearingAidSignal, openingHours, averageStopTimes, parent)
+StationEngine::NullStation::NullStation(const QUrl &uri,
+                                        const QMap<QLocale::Language, QString> &name, const QLocale::Country &country,
+                                        const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine,
+                                        const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi,
+                                        const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram,
+                                        const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
+                                        const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
+                                        const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
+                                        const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
+                                        const qreal &averageStopTimes, QObject *parent) :
+    Station(uri, name, country, position, address, hasTicketVendingMachine, hasLuggageLockers,
+            hasFreeParking, hasTaxi, hasBicycleSpots, hasBlueBike, hasBus, hasTram, hasMetro,
+            hasWheelchairAvailable, hasRamp, disabledParkingSpots, hasElevatedPlatform, hasEscalatorDown,
+            hasEscalatorUp, hasElevatorPlatform, hasHearingAidSignal, openingHours, averageStopTimes, parent)
 {
 
 }
@@ -71,34 +83,34 @@ StationEngine::NullStation::NullStation(const QUrl &uri, const QMap<QLocale::Lan
 StationEngine::NullStation *StationEngine::NullStation::getInstance()
 {
     // Singleton pattern
-    if(m_instance == nullptr) {
+    if (m_instance == nullptr) {
         qDebug() << "Generating new NullStation";
         m_instance = new StationEngine::NullStation(
-                    QUrl(),
-                    QMap<QLocale::Language, QString>(),
-                    QLocale::Country::Belgium,
-                    QGeoCoordinate(),
-                    QGeoAddress(),
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    0,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    QMap<StationEngine::Station::Day, QPair<QTime, QTime> >(),
-                    0.0
-                    );
+            QUrl(),
+            QMap<QLocale::Language, QString>(),
+            QLocale::Country::Belgium,
+            QGeoCoordinate(),
+            QGeoAddress(),
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            0,
+            false,
+            false,
+            false,
+            false,
+            false,
+            QMap<StationEngine::Station::Day, QPair<QTime, QTime> >(),
+            0.0
+        );
     }
     return m_instance;
 }

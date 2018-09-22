@@ -41,30 +41,31 @@
 //#define VERBOSE_CACHE
 
 namespace QRail {
-    namespace StationEngine {
-        class QRAIL_SHARED_EXPORT Factory : public QObject
-        {
-            Q_OBJECT
-        public:
-            static Factory *getInstance();
-            Station *getStationByURI(const QUrl &uri);
+namespace StationEngine {
+class QRAIL_SHARED_EXPORT Factory : public QObject
+{
+    Q_OBJECT
+public:
+    static Factory *getInstance();
+    Station *getStationByURI(const QUrl &uri);
 
-        private:
-            QRail::Database::Manager *m_db;
-            QMap<QUrl, StationEngine::Station*> m_cache;
-            bool initDatabase();
-            QFuture<bool> insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities);
-            QFuture<bool> insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);
-            QFuture<bool> insertPlatformIntoDatabase(const QStringList &stop);
-            StationEngine::Station *fetchStationFromCache(const QUrl &uri) const;
-            void addStationToCache(StationEngine::Station *station);
-            QMap<QUrl, QString> getPlatformsByStationURI(const QUrl &uri);
-            QRail::Database::Manager *db() const;
-            void setDb(QRail::Database::Manager *db);
-            static StationEngine::Factory *m_instance;
-            explicit Factory(QObject *parent = nullptr);
-        };
-    }
+private:
+    QRail::Database::Manager *m_db;
+    QMap<QUrl, StationEngine::Station *> m_cache;
+    bool initDatabase();
+    QFuture<bool> insertStationWithFacilitiesIntoDatabase(const QStringList &station,
+                                                          const QStringList &facilities);
+    QFuture<bool> insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);
+    QFuture<bool> insertPlatformIntoDatabase(const QStringList &stop);
+    StationEngine::Station *fetchStationFromCache(const QUrl &uri) const;
+    void addStationToCache(StationEngine::Station *station);
+    QMap<QUrl, QString> getPlatformsByStationURI(const QUrl &uri);
+    QRail::Database::Manager *db() const;
+    void setDb(QRail::Database::Manager *db);
+    static StationEngine::Factory *m_instance;
+    explicit Factory(QObject *parent = nullptr);
+};
+}
 }
 
 #endif // CSAFactory_H

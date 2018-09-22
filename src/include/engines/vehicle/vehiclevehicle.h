@@ -27,47 +27,47 @@
 #include "engines/station/stationstation.h"
 
 namespace QRail {
-    namespace VehicleEngine {
-        class QRAIL_SHARED_EXPORT Vehicle : public QObject
-        {
-            Q_OBJECT
-        public:
-            explicit Vehicle(QObject *parent = nullptr);
-            explicit Vehicle(
-                    const QUrl &uri,
-                    const QUrl &tripURI,
-                    const QString &headsign,
-                    QObject *parent = nullptr
-                    );
-            explicit Vehicle(
-                    const QUrl &uri,
-                    const QUrl &tripURI,
-                    const QString &headsign,
-                    const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
-                    QObject *parent = nullptr
-                    );
-            QUrl uri() const;
-            void setUri(const QUrl &uri);
-            QString headsign() const;
-            void setHeadsign(const QString &headsign);
-            QList<QRail::VehicleEngine::Stop *> intermediaryStops() const;
-            void setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *> &intermediaryStops);
-            QUrl tripURI() const;
-            void setTripURI(const QUrl &tripURI);
+namespace VehicleEngine {
+class QRAIL_SHARED_EXPORT Vehicle : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Vehicle(QObject *parent = nullptr);
+    explicit Vehicle(
+        const QUrl &uri,
+        const QUrl &tripURI,
+        const QString &headsign,
+        QObject *parent = nullptr
+    );
+    explicit Vehicle(
+        const QUrl &uri,
+        const QUrl &tripURI,
+        const QString &headsign,
+        const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+        QObject *parent = nullptr
+    );
+    QUrl uri() const;
+    void setUri(const QUrl &uri);
+    QString headsign() const;
+    void setHeadsign(const QString &headsign);
+    QList<QRail::VehicleEngine::Stop *> intermediaryStops() const;
+    void setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *> &intermediaryStops);
+    QUrl tripURI() const;
+    void setTripURI(const QUrl &tripURI);
 
-        signals:
-            void uriChanged();
-            void tripURIChanged();
-            void headsignChanged();
-            void intermediaryStopsChanged();
+signals:
+    void uriChanged();
+    void tripURIChanged();
+    void headsignChanged();
+    void intermediaryStopsChanged();
 
-        private:
-            QUrl m_uri;
-            QUrl m_tripURI;
-            QString m_headsign;
-            QList<QRail::VehicleEngine::Stop *> m_intermediaryStops;
-        };
-    }
+private:
+    QUrl m_uri;
+    QUrl m_tripURI;
+    QString m_headsign;
+    QList<QRail::VehicleEngine::Stop *> m_intermediaryStops;
+};
+}
 }
 
 #endif // CSAVEHICLE_H

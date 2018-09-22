@@ -39,52 +39,53 @@
 
 // Singleton pattern
 namespace QRail {
-    namespace Network {
-        class Manager : public QObject {
-          Q_OBJECT
-        public:
-          static Manager *getInstance();
-          QString userAgent() const;
-          void setUserAgent(const QString &userAgent);
-          QString acceptHeader() const;
-          void setAcceptHeader(const QString &acceptHeader);
-          QRail::Network::Dispatcher *dispatcher() const;
+namespace Network {
+class Manager : public QObject
+{
+    Q_OBJECT
+public:
+    static Manager *getInstance();
+    QString userAgent() const;
+    void setUserAgent(const QString &userAgent);
+    QString acceptHeader() const;
+    void setAcceptHeader(const QString &acceptHeader);
+    QRail::Network::Dispatcher *dispatcher() const;
 
-        signals:
-          QList<QSslError> sslErrorsReceived(QNetworkReply *reply,
-                                             QList<QSslError> sslError);
-          QNetworkAccessManager::NetworkAccessibility
-          networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
-          void userAgentChanged();
-          void acceptHeaderChanged();
+signals:
+    QList<QSslError> sslErrorsReceived(QNetworkReply *reply,
+                                       QList<QSslError> sslError);
+    QNetworkAccessManager::NetworkAccessibility
+    networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
+    void userAgentChanged();
+    void acceptHeaderChanged();
 
-        public slots:
-          void getResource(const QUrl &url, QObject *caller);
-          void postResource(const QUrl &url, const QByteArray &data, QObject *caller);
-          void deleteResource(const QUrl &url, QObject *caller);
-          void headResource(const QUrl &url, QObject *caller);
+public slots:
+    void getResource(const QUrl &url, QObject *caller);
+    void postResource(const QUrl &url, const QByteArray &data, QObject *caller);
+    void deleteResource(const QUrl &url, QObject *caller);
+    void headResource(const QUrl &url, QObject *caller);
 
-        private slots:
-          void requestCompleted(QNetworkReply *reply);
+private slots:
+    void requestCompleted(QNetworkReply *reply);
 
-        private:
-          QNetworkAccessManager *m_QNAM;
-          QAbstractNetworkCache *m_cache;
-          QRail::Network::Dispatcher *m_dispatcher;
-          QString m_userAgent;
-          QString m_acceptHeader;
-          static Manager *m_instance;
-          explicit Manager(QObject *parent = nullptr);
-          QNetworkRequest prepareRequest(const QUrl &url);
-          QNetworkAccessManager *QNAM() const;
-          void setQNAM(QNetworkAccessManager *value);
-          QAbstractNetworkCache *cache() const;
-          void setCache(QAbstractNetworkCache *cache);
-          void setDispatcher(QRail::Network::Dispatcher *dispatcher);
-          static Manager *manager();
-          static void setManager(const Manager *manager);
-        };
-    } // namespace Network
+private:
+    QNetworkAccessManager *m_QNAM;
+    QAbstractNetworkCache *m_cache;
+    QRail::Network::Dispatcher *m_dispatcher;
+    QString m_userAgent;
+    QString m_acceptHeader;
+    static Manager *m_instance;
+    explicit Manager(QObject *parent = nullptr);
+    QNetworkRequest prepareRequest(const QUrl &url);
+    QNetworkAccessManager *QNAM() const;
+    void setQNAM(QNetworkAccessManager *value);
+    QAbstractNetworkCache *cache() const;
+    void setCache(QAbstractNetworkCache *cache);
+    void setDispatcher(QRail::Network::Dispatcher *dispatcher);
+    static Manager *manager();
+    static void setManager(const Manager *manager);
+};
+} // namespace Network
 } // namespace QRail
 
 #endif // NETWORKMANAGER_H

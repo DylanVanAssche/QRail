@@ -55,17 +55,17 @@ QRail::Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
  * a Linked Connection fragment for the Connection Scan Algorithm (CSA).
  */
 QRail::Fragments::Fragment::Fragment(
-        const QUrl &uri, const QUrl &departureStationURI,
-        const QUrl &arrivalStationURI,
-        const QDateTime &departureTime,
-        const QDateTime &arrivalTime,
-        const qint16 &departureDelay,
-        const qint16 &arrivalDelay,
-        const QUrl &tripURI,
-        const QUrl &routeURI,
-        const QString &direction,
-        QObject *parent
-        ): QObject(parent)
+    const QUrl &uri, const QUrl &departureStationURI,
+    const QUrl &arrivalStationURI,
+    const QDateTime &departureTime,
+    const QDateTime &arrivalTime,
+    const qint16 &departureDelay,
+    const qint16 &arrivalDelay,
+    const QUrl &tripURI,
+    const QUrl &routeURI,
+    const QString &direction,
+    QObject *parent
+): QObject(parent)
 {
 
     // Avoid using setters in constructor to reduce signal emitting on instantiation.

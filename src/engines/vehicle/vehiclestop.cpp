@@ -55,7 +55,12 @@ QRail::VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
  * @public
  * Constructs a QRail::VehicleEngine::Stop with the given parent.
  */
-QRail::VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platform, const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime, const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime, const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop, const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel, const QRail::VehicleEngine::Stop::Type &type, QObject *parent): QObject(parent)
+QRail::VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platform,
+                                 const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime,
+                                 const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime,
+                                 const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop,
+                                 const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+                                 const QRail::VehicleEngine::Stop::Type &type, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_station = station;
@@ -420,7 +425,8 @@ QRail::VehicleEngine::Stop::OccupancyLevel QRail::VehicleEngine::Stop::occupancy
  * Sets the occupancy level for this stop to the given QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel.
  * Emits the occupancyLevelChanged signal.
  */
-void QRail::VehicleEngine::Stop::setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel)
+void QRail::VehicleEngine::Stop::setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel
+                                                   &occupancyLevel)
 {
     m_occupancyLevel = occupancyLevel;
     emit this->occupancyLevelChanged();

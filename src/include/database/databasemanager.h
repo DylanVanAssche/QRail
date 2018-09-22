@@ -34,25 +34,25 @@
 
 // Singleton pattern
 namespace QRail {
-    namespace Database {
-        class Manager : public QObject
-        {
-            Q_OBJECT
-        public:
-            static Manager *getInstance(const QString &path);
-            bool execute(QSqlQuery &query);
-            QFuture<bool> executeAsync(QSqlQuery &query);
-            bool startTransaction();
-            bool endTransaction();
-            QSqlDatabase database() const;
+namespace Database {
+class Manager : public QObject
+{
+    Q_OBJECT
+public:
+    static Manager *getInstance(const QString &path);
+    bool execute(QSqlQuery &query);
+    QFuture<bool> executeAsync(QSqlQuery &query);
+    bool startTransaction();
+    bool endTransaction();
+    QSqlDatabase database() const;
 
-        private:
-            QSqlDatabase m_database;
-            explicit Manager(const QString &path, QObject *parent = nullptr);
-            static Manager *m_instance;
-            void setDatabase(const QSqlDatabase &database);
-        };
-    }
+private:
+    QSqlDatabase m_database;
+    explicit Manager(const QString &path, QObject *parent = nullptr);
+    static Manager *m_instance;
+    void setDatabase(const QSqlDatabase &database);
+};
+}
 }
 
 #endif // DATABASEMANAGER_H

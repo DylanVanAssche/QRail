@@ -31,7 +31,11 @@ using namespace QRail;
  * @public
  * Constructs a RouteLeg with a certain leg type, vehicle information and it's departure and arrival legs.
  */
-QRail::RouterEngine::RouteLeg::RouteLeg(const QRail::RouterEngine::RouteLeg::Type &type, QRail::VehicleEngine::Vehicle *vehicleInformation, QRail::RouterEngine::RouteLegEnd *departure, QRail::RouterEngine::RouteLegEnd *arrival, QObject *parent) : QObject(parent)
+QRail::RouterEngine::RouteLeg::RouteLeg(const QRail::RouterEngine::RouteLeg::Type &type,
+                                        QRail::VehicleEngine::Vehicle *vehicleInformation,
+                                        QRail::RouterEngine::RouteLegEnd *departure,
+                                        QRail::RouterEngine::RouteLegEnd *arrival,
+                                        QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_type = type;
@@ -98,7 +102,8 @@ QRail::VehicleEngine::Vehicle *QRail::RouterEngine::RouteLeg::vehicleInformation
  * Sets the type of route to the given QRail::VehicleEngine::Vehicle *vehicleInformation.
  * Emits the vehicleInformationChanged signal.
  */
-void QRail::RouterEngine::RouteLeg::setVehicleInformation(QRail::VehicleEngine::Vehicle *vehicleInformation)
+void QRail::RouterEngine::RouteLeg::setVehicleInformation(QRail::VehicleEngine::Vehicle
+                                                          *vehicleInformation)
 {
     m_vehicleInformation = vehicleInformation;
     emit this->vehicleInformationChanged();
@@ -181,13 +186,11 @@ void QRail::RouterEngine::RouteLeg::setArrival(QRail::RouterEngine::RouteLegEnd 
  */
 StationEngine::Station *QRail::RouterEngine::RouteLeg::station() const
 {
-    if(this->departure()) {
+    if (this->departure()) {
         return this->departure()->station();
-    }
-    else if(this->arrival()) {
+    } else if (this->arrival()) {
         return this->arrival()->station();
-    }
-    else {
+    } else {
         return StationEngine::NullStation::getInstance();
     }
 }

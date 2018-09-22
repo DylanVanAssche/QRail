@@ -29,30 +29,30 @@ using namespace QRail;
  * @public
  * Constructs a QRail::RouterEngine::Transfer for the journey extraction.
  */
-QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departureLeg, QRail::RouterEngine::RouteLeg *arrivalLeg, QObject *parent) : QObject(parent)
+QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departureLeg,
+                                        QRail::RouterEngine::RouteLeg *arrivalLeg,
+                                        QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_departureLeg = departureLeg;
     m_arrivalLeg = arrivalLeg;
 
     // When both legs are available, we have a TRANSFER
-    if(departureLeg && arrivalLeg) {
+    if (departureLeg && arrivalLeg) {
         m_type = QRail::RouterEngine::Transfer::Type::TRANSFER;
         m_departure = departureLeg->departure();
         m_arrival = arrivalLeg->arrival();
     }
     // Only departure is available, we have a DEPARTURE
-    else if(departureLeg) {
+    else if (departureLeg) {
         m_type = QRail::RouterEngine::Transfer::Type::DEPARTURE;
         m_departure = departureLeg->departure();
         m_arrival = nullptr;
-    }
-    else if(arrivalLeg) {
+    } else if (arrivalLeg) {
         m_type = QRail::RouterEngine::Transfer::Type::ARRIVAL;
         m_departure = nullptr;
         m_arrival = arrivalLeg->arrival();
-    }
-    else {
+    } else {
         m_type = QRail::RouterEngine::Transfer::Type::INVALID;
         m_departure = nullptr;
         m_arrival = nullptr;
@@ -234,13 +234,12 @@ void QRail::RouterEngine::Transfer::setType(const QRail::RouterEngine::Transfer:
  */
 QUrl QRail::RouterEngine::Transfer::uri() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->uri();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->uri();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QUrl();
     }
@@ -258,13 +257,12 @@ QUrl QRail::RouterEngine::Transfer::uri() const
  */
 StationEngine::Station *QRail::RouterEngine::Transfer::station() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->station();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->station();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return StationEngine::NullStation::getInstance();
     }
@@ -282,13 +280,12 @@ StationEngine::Station *QRail::RouterEngine::Transfer::station() const
  */
 QDateTime QRail::RouterEngine::Transfer::time() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->time();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->time();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QDateTime();
     }
@@ -306,13 +303,12 @@ QDateTime QRail::RouterEngine::Transfer::time() const
  */
 qint16 QRail::RouterEngine::Transfer::delay() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->delay();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->delay();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return 0;
     }
@@ -330,13 +326,12 @@ qint16 QRail::RouterEngine::Transfer::delay() const
  */
 QDateTime QRail::RouterEngine::Transfer::delayedTime() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->time().addSecs(this->delay());
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->time().addSecs(this->delay());
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QDateTime();
     }
@@ -354,13 +349,12 @@ QDateTime QRail::RouterEngine::Transfer::delayedTime() const
  */
 QString QRail::RouterEngine::Transfer::platform() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->platform();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->platform();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QString();
     }
@@ -378,13 +372,12 @@ QString QRail::RouterEngine::Transfer::platform() const
  */
 bool QRail::RouterEngine::Transfer::isCanceled() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isCanceled();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isCanceled();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
@@ -402,13 +395,12 @@ bool QRail::RouterEngine::Transfer::isCanceled() const
  */
 bool QRail::RouterEngine::Transfer::isNormalPlatform() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isNormalPlatform();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isNormalPlatform();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
@@ -426,13 +418,12 @@ bool QRail::RouterEngine::Transfer::isNormalPlatform() const
  */
 bool QRail::RouterEngine::Transfer::isPassed() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->isPassed();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->isPassed();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return false;
     }
@@ -450,13 +441,12 @@ bool QRail::RouterEngine::Transfer::isPassed() const
  */
 QRail::VehicleEngine::Stop::OccupancyLevel QRail::RouterEngine::Transfer::occupancyLevel() const
 {
-    if(this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
+    if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
+            || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
         return this->departure()->occupancyLevel();
-    }
-    else if(this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
+    } else if (this->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
         return this->arrival()->occupancyLevel();
-    }
-    else {
+    } else {
         qCritical() << "QRail::RouterEngine::Transfer must have at least an arrival or departure leg!";
         return QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED;
     }

@@ -22,45 +22,45 @@
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
-    namespace RouterEngine {
-        class StationStopProfile : public QObject
-        {
-            Q_OBJECT
-        public:
-            explicit StationStopProfile(
-                    const QDateTime &departureTime,
-                    const QDateTime &arrivalTime,
-                    QRail::Fragments::Fragment *departureConnection,
-                    QRail::Fragments::Fragment *arrivalConnection,
-                    const qint16 transfers,
-                    QObject *parent = nullptr
-                    );
-            QDateTime departureTime() const;
-            void setDepartureTime(const QDateTime &departureTime);
-            QDateTime arrivalTime() const;
-            void setArrivalTime(const QDateTime &arrivalTime);
-            QRail::Fragments::Fragment *departureConnection() const;
-            void setDepartureConnection(QRail::Fragments::Fragment *departureConnection);
-            QRail::Fragments::Fragment *arrivalConnection() const;
-            void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
-            qint16 transfers() const;
-            void setTransfers(const qint16 &transfers);
+namespace RouterEngine {
+class StationStopProfile : public QObject
+{
+    Q_OBJECT
+public:
+    explicit StationStopProfile(
+        const QDateTime &departureTime,
+        const QDateTime &arrivalTime,
+        QRail::Fragments::Fragment *departureConnection,
+        QRail::Fragments::Fragment *arrivalConnection,
+        const qint16 transfers,
+        QObject *parent = nullptr
+    );
+    QDateTime departureTime() const;
+    void setDepartureTime(const QDateTime &departureTime);
+    QDateTime arrivalTime() const;
+    void setArrivalTime(const QDateTime &arrivalTime);
+    QRail::Fragments::Fragment *departureConnection() const;
+    void setDepartureConnection(QRail::Fragments::Fragment *departureConnection);
+    QRail::Fragments::Fragment *arrivalConnection() const;
+    void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
+    qint16 transfers() const;
+    void setTransfers(const qint16 &transfers);
 
-        signals:
-            void departureTimeChanged();
-            void arrivalTimeChanged();
-            void departureConnectionChanged();
-            void arrivalConnectionChanged();
-            void transfersChanged();
+signals:
+    void departureTimeChanged();
+    void arrivalTimeChanged();
+    void departureConnectionChanged();
+    void arrivalConnectionChanged();
+    void transfersChanged();
 
-        private:
-            QDateTime m_departureTime; // TODO: really needed? fetch them from fragments to reduce memory footprint?
-            QDateTime m_arrivalTime;
-            QRail::Fragments::Fragment *m_departureConnection;
-            QRail::Fragments::Fragment *m_arrivalConnection;
-            qint16 m_transfers;
-        };
-    }
+private:
+    QDateTime m_departureTime; // TODO: really needed? fetch them from fragments to reduce memory footprint?
+    QDateTime m_arrivalTime;
+    QRail::Fragments::Fragment *m_departureConnection;
+    QRail::Fragments::Fragment *m_arrivalConnection;
+    qint16 m_transfers;
+};
+}
 }
 
 #endif // CSASTATIONSTOPPROFILE_H

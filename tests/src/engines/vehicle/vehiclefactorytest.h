@@ -30,21 +30,22 @@
 #define VEHICLE_WAIT_TIME 7500
 
 namespace QRail {
-    namespace VehicleEngine {
-        class FactoryTest : public QObject {
-          Q_OBJECT
-        public slots:
-          void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
+namespace VehicleEngine {
+class FactoryTest : public QObject
+{
+    Q_OBJECT
+public slots:
+    void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
 
-        private slots:
-          void initVehicleFactoryTest();
-          void runVehicleFactoryTest();
-          void cleanVehicleFactoryTest();
+private slots:
+    void initVehicleFactoryTest();
+    void runVehicleFactoryTest();
+    void cleanVehicleFactoryTest();
 
-        private:
-          QRail::VehicleEngine::Factory *factory;
-        };
-    } // namespace VehicleEngine
+private:
+    QRail::VehicleEngine::Factory *factory;
+};
+} // namespace VehicleEngine
 } // namespace QRail
 
 #endif // VEHICLEFACTORYTEST_H

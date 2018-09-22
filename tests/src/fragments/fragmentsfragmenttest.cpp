@@ -57,7 +57,8 @@ using namespace QRail;
  * }
  */
 
-void QRail::Fragments::FragmentTest::initLinkedConnectionFragment() {
+void QRail::Fragments::FragmentTest::initLinkedConnectionFragment()
+{
     qDebug() << "Init QRail::Fragments::Fragment test";
 
     lcWithoutDelay = new QRail::Fragments::Fragment(this);
@@ -71,7 +72,8 @@ void QRail::Fragments::FragmentTest::initLinkedConnectionFragment() {
         QUrl("http://irail.be/vehicle/IC3309"), QString("Anvers-Central"), this);
 }
 
-void QRail::Fragments::FragmentTest::runLinkedConnectionFragment() {
+void QRail::Fragments::FragmentTest::runLinkedConnectionFragment()
+{
     qDebug() << "Running QRail::Fragments::Fragment test";
 
     // Set each property and check if the signal of the property fires
@@ -89,7 +91,7 @@ void QRail::Fragments::FragmentTest::runLinkedConnectionFragment() {
 
     QSignalSpy spyDepartureTimeChanged(lcWithoutDelay, SIGNAL(departureTimeChanged()));
     lcWithoutDelay->setDepartureTime(
-      QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate));
+        QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate));
     QCOMPARE(spyDepartureTimeChanged.count(), 1);
 
     QSignalSpy spyArrivalTimeChanged(lcWithoutDelay, SIGNAL(arrivalTimeChanged()));
@@ -117,7 +119,8 @@ void QRail::Fragments::FragmentTest::runLinkedConnectionFragment() {
     QCOMPARE(spyDirectionChanged.count(), 1);
 }
 
-void QRail::Fragments::FragmentTest::cleanLinkedConnectionFragment() {
+void QRail::Fragments::FragmentTest::cleanLinkedConnectionFragment()
+{
     qDebug() << "Cleaning up QRail::Fragments::Fragment test";
 
     lcWithoutDelay->deleteLater();

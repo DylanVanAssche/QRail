@@ -47,7 +47,9 @@ StationEngine::Station::Station(QObject *parent): QObject(parent)
  * @public
  * Constructs a StationEngine::Station without facilities.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes, QObject *parent) : QObject(parent)
+StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes,
+                                QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     // Unknown fields are set to a default value to avoid undefined references
@@ -111,7 +113,15 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
  * @public
  * Constructs a StationEngine::Station with facilities.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp, const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp, const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal, const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours, const qreal &averageStopTimes, QObject *parent) : QObject(parent)
+StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address,
+                                const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking,
+                                const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus,
+                                const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
+                                const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
+                                const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
+                                const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
+                                const qreal &averageStopTimes, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_uri = uri;
@@ -156,7 +166,9 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
  * @public
  * Constructs a StationEngine::Station without facilities.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
+StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes,
+                                const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     // Unknown fields are set to a default value to avoid undefined references
@@ -221,7 +233,16 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
  * @public
  * Constructs a StationEngine::Station with facilities and platforms.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name, const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp, const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp, const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal, const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours, const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
+StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address,
+                                const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking,
+                                const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus,
+                                const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
+                                const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
+                                const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
+                                const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
+                                const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms,
+                                QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_uri = uri;
@@ -962,7 +983,8 @@ QMap<StationEngine::Station::Day, QPair<QTime, QTime> > StationEngine::Station::
  * Sets the openinghours to the given QMap<Station::Day, QPair<QTime, QTime> > &openingHours.
  * Emits the openingHoursChanged signal.
  */
-void StationEngine::Station::setOpeningHours(const QMap<Station::Day, QPair<QTime, QTime> > &openingHours)
+void StationEngine::Station::setOpeningHours(const QMap<Station::Day, QPair<QTime, QTime> >
+                                             &openingHours)
 {
     m_openingHours = openingHours;
     emit this->openingHoursChanged();

@@ -24,7 +24,8 @@ using namespace QRail;
  * @brief Manager init
  * Init Manager
  */
-void QRail::Network::ManagerTest::initNetworkManager() {
+void QRail::Network::ManagerTest::initNetworkManager()
+{
     qDebug() << "Init QRail::Network::Manager test";
     http = QRail::Network::Manager::getInstance();
 }
@@ -40,7 +41,8 @@ void QRail::Network::ManagerTest::initNetworkManager() {
  *  - DELETE request
  *  - HEAD request
  */
-void QRail::Network::ManagerTest::runNetworkManager() {
+void QRail::Network::ManagerTest::runNetworkManager()
+{
     qDebug() << "Running QRail::Network::Manager test";
 
     // HTTP GET
@@ -63,18 +65,21 @@ void QRail::Network::ManagerTest::runNetworkManager() {
  * @brief Manager clean up
  * Init Manager
  */
-void QRail::Network::ManagerTest::cleanNetworkManager() {
+void QRail::Network::ManagerTest::cleanNetworkManager()
+{
     qDebug() << "Cleaning up QRail::Network::Manager test";
 }
 
-void QRail::Network::ManagerTest::customEvent(QEvent *event) {
+void QRail::Network::ManagerTest::customEvent(QEvent *event)
+{
     if (event->type() == http->dispatcher()->eventType()) {
-        qDebug() << "Received QRail::Network::Dispatcher event in QRail::VehicleEngine::Factory, casting now!";
+        qDebug() <<
+                 "Received QRail::Network::Dispatcher event in QRail::VehicleEngine::Factory, casting now!";
         event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
+                                                        (event);
         this->processHTTPReply(networkEvent->reply());
-    }
-    else {
+    } else {
         qDebug() << "Unwanted event in QRail::VehicleEngine::Factory, ignoring...";
         event->ignore();
     }
@@ -88,7 +93,9 @@ void QRail::Network::ManagerTest::customEvent(QEvent *event) {
  * Handles the HTTP replies from the NetworkManager by checking the HTTP status
  * code and log it.
  */
-void QRail::Network::ManagerTest::processHTTPReply(QNetworkReply *reply) {
-    QCOMPARE(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(), 200); // HTTP 200 OK check
+void QRail::Network::ManagerTest::processHTTPReply(QNetworkReply *reply)
+{
+    QCOMPARE(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
+             200); // HTTP 200 OK check
     qDebug() << reply->readAll();
 }

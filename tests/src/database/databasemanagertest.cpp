@@ -17,7 +17,8 @@
 #include "databasemanagertest.h"
 using namespace QRail;
 
-void QRail::Database::ManagerTest::initDatabaseManager() {
+void QRail::Database::ManagerTest::initDatabaseManager()
+{
     qDebug() << "Init QRail::Database::Manager test";
     QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir dbDirectory;
@@ -25,7 +26,8 @@ void QRail::Database::ManagerTest::initDatabaseManager() {
     db = QRail::Database::Manager::getInstance(path + "/tests.db");
 }
 
-void QRail::Database::ManagerTest::runDatabaseManager() {
+void QRail::Database::ManagerTest::runDatabaseManager()
+{
     qDebug() << "Running QRail::Database::Manager test";
 
     // Create a QSqlQuery object and connect it to our database
@@ -75,6 +77,7 @@ void QRail::Database::ManagerTest::runDatabaseManager() {
     query.clear();
 }
 
-void QRail::Database::ManagerTest::cleanDatabaseManager() {
-  qDebug() << "Cleaning up QRail::Database::Manager test";
+void QRail::Database::ManagerTest::cleanDatabaseManager()
+{
+    qDebug() << "Cleaning up QRail::Database::Manager test";
 }

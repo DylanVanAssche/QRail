@@ -16,7 +16,7 @@
  */
 #include "network/networkmanager.h"
 using namespace QRail;
-QRail::Network::Manager* QRail::Network::Manager::m_instance = nullptr;
+QRail::Network::Manager *QRail::Network::Manager::m_instance = nullptr;
 
 /**
  * @file networkmanager.cpp
@@ -28,7 +28,7 @@ QRail::Network::Manager* QRail::Network::Manager::m_instance = nullptr;
  * Constructs a QRail::Network::Manager facade to access the network using the HTTP protocol.
  * The QRail::Network::Manager facade makes network access in Qt abstract from the underlying library (QNetworkAccessManager, libCurl, ...).
  */
-QRail::Network::Manager::Manager(QObject* parent): QObject(parent)
+QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
 {
     // Initiate a new QNetworkAccessManager with cache
     this->setQNAM(new QNetworkAccessManager(this));
@@ -51,9 +51,12 @@ QRail::Network::Manager::Manager(QObject* parent): QObject(parent)
     this->setDispatcher(new QRail::Network::Dispatcher(this));
 
     // Connect QNetworkAccessManager signals
-    connect(this->QNAM(), SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)), this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
-    connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SIGNAL(sslErrorsReceived(QNetworkReply*,QList<QSslError>)));
-    connect(this->QNAM(), SIGNAL(finished(QNetworkReply*)), this, SLOT(requestCompleted(QNetworkReply*)));
+    connect(this->QNAM(), SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)),
+            this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
+    connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)), this,
+            SIGNAL(sslErrorsReceived(QNetworkReply *, QList<QSslError>)));
+    connect(this->QNAM(), SIGNAL(finished(QNetworkReply *)), this,
+            SLOT(requestCompleted(QNetworkReply *)));
 
     // Create HTTP client information
     this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC", "0.0.1", "Sailfish OS", "2.2.0.29"));
@@ -73,7 +76,7 @@ QRail::Network::Manager::Manager(QObject* parent): QObject(parent)
  */
 QRail::Network::Manager *QRail::Network::Manager::getInstance()
 {
-    if(m_instance == nullptr) {
+    if (m_instance == nullptr) {
         qDebug() << "Creating new QRail::Network::Manager";
         m_instance = new Manager();
     }
@@ -190,7 +193,8 @@ QNetworkRequest QRail::Network::Manager::prepareRequest(const QUrl &url)
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setHeader(QNetworkRequest::ContentTypeHeader, CONTENT_TYPE);
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork); // Load from network if cache has expired
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                         QNetworkRequest::PreferNetwork); // Load from network if cache has expired
     return request;
 }
 

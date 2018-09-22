@@ -17,13 +17,16 @@
 #include "liveboardfactorytest.h"
 using namespace QRail;
 
-void LiveboardEngine::FactoryTest::initLiveboardFactoryTest() {
+void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
+{
     qDebug() << "Init LiveboardEngine::Factory test";
     factory = LiveboardEngine::Factory::getInstance();
-    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this, SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
+            SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
 }
 
-void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest() {
+void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
+{
     qDebug() << "Running LiveboardEngine::Factory test";
 
     // Activate QSignalSpy
@@ -43,12 +46,15 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest() {
     QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
 }
 
-void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest() {
+void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()
+{
     qDebug() << "Cleaning up QRail::LiveboardEngine::Factory test";
 }
 
-void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board) {
-    qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" << board->station()->name().value(QLocale::Language::Dutch);
+void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board)
+{
+    qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" <<
+             board->station()->name().value(QLocale::Language::Dutch);
     qDebug() << "\tFrom:" << board->from();
     qDebug() << "\tUntil:" << board->until();
     qDebug() << "\tMode:" << board->mode();
@@ -57,13 +63,13 @@ void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngi
 
     foreach (QRail::VehicleEngine::Vehicle *entry, board->entries()) {
         if (board->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-          qDebug() << "\t\t" << entry->headsign() << entry->intermediaryStops().first()->arrivalTime().toString("hh:mm");
-        }
-        else if (board->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-          qDebug() << "\t\t" << entry->headsign() << entry->intermediaryStops().first()->departureTime().toString("hh:mm");
-        }
-        else {
-          qCritical() << "Unknown QRail::LiveboardEngine::Board mode!";
+            qDebug() << "\t\t" << entry->headsign() <<
+                     entry->intermediaryStops().first()->arrivalTime().toString("hh:mm");
+        } else if (board->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+            qDebug() << "\t\t" << entry->headsign() <<
+                     entry->intermediaryStops().first()->departureTime().toString("hh:mm");
+        } else {
+            qCritical() << "Unknown QRail::LiveboardEngine::Board mode!";
         }
     }
 }

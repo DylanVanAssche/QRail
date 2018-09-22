@@ -26,61 +26,60 @@
 #include "engines/router/routerroutelegend.h"
 
 namespace QRail {
-    namespace RouterEngine {
-        class QRAIL_SHARED_EXPORT Transfer : public QObject
-        {
-            Q_OBJECT
-        public:
-            enum class Type
-            {
-                ARRIVAL,
-                DEPARTURE,
-                TRANSFER,
-                INVALID
-            };
-            explicit Transfer(
-                    QRail::RouterEngine::RouteLeg *departureLeg = nullptr,
-                    QRail::RouterEngine::RouteLeg *arrivalLeg = nullptr,
-                    QObject *parent = nullptr
-                    );
-            QRail::RouterEngine::RouteLeg *departureLeg() const;
-            void setDepartureLeg(QRail::RouterEngine::RouteLeg *departureLeg);
-            QRail::RouterEngine::RouteLeg *arrivalLeg() const;
-            void setArrivalLeg(QRail::RouterEngine::RouteLeg *arrivalLeg);
-            QRail::RouterEngine::RouteLegEnd *departure() const;
-            void setDeparture(QRail::RouterEngine::RouteLegEnd *departure);
-            QRail::RouterEngine::RouteLegEnd *arrival() const;
-            void setArrival(QRail::RouterEngine::RouteLegEnd *arrival);
-            QRail::RouterEngine::Transfer::Type type() const;
-            void setType(const QRail::RouterEngine::Transfer::Type &type);
-            QUrl uri() const;
-            StationEngine::Station *station() const;
-            QDateTime time() const;
-            qint16 delay() const;
-            QDateTime delayedTime() const;
-            QString platform() const;
-            bool isCanceled() const;
-            bool isNormalPlatform() const;
-            bool isPassed() const;
-            QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
+namespace RouterEngine {
+class QRAIL_SHARED_EXPORT Transfer : public QObject
+{
+    Q_OBJECT
+public:
+    enum class Type {
+        ARRIVAL,
+        DEPARTURE,
+        TRANSFER,
+        INVALID
+    };
+    explicit Transfer(
+        QRail::RouterEngine::RouteLeg *departureLeg = nullptr,
+        QRail::RouterEngine::RouteLeg *arrivalLeg = nullptr,
+        QObject *parent = nullptr
+    );
+    QRail::RouterEngine::RouteLeg *departureLeg() const;
+    void setDepartureLeg(QRail::RouterEngine::RouteLeg *departureLeg);
+    QRail::RouterEngine::RouteLeg *arrivalLeg() const;
+    void setArrivalLeg(QRail::RouterEngine::RouteLeg *arrivalLeg);
+    QRail::RouterEngine::RouteLegEnd *departure() const;
+    void setDeparture(QRail::RouterEngine::RouteLegEnd *departure);
+    QRail::RouterEngine::RouteLegEnd *arrival() const;
+    void setArrival(QRail::RouterEngine::RouteLegEnd *arrival);
+    QRail::RouterEngine::Transfer::Type type() const;
+    void setType(const QRail::RouterEngine::Transfer::Type &type);
+    QUrl uri() const;
+    StationEngine::Station *station() const;
+    QDateTime time() const;
+    qint16 delay() const;
+    QDateTime delayedTime() const;
+    QString platform() const;
+    bool isCanceled() const;
+    bool isNormalPlatform() const;
+    bool isPassed() const;
+    QRail::VehicleEngine::Stop::OccupancyLevel occupancyLevel() const;
 
-        signals:
-            void departureLegChanged();
-            void arrivalLegChanged();
-            void departureChanged();
-            void arrivalChanged();
-            void typeChanged();
+signals:
+    void departureLegChanged();
+    void arrivalLegChanged();
+    void departureChanged();
+    void arrivalChanged();
+    void typeChanged();
 
-        private:
-            QRail::RouterEngine::RouteLeg *m_departureLeg;
-            QRail::RouterEngine::RouteLeg *m_arrivalLeg;
-            QRail::RouterEngine::RouteLegEnd *m_departure;
-            QRail::RouterEngine::RouteLegEnd *m_arrival;
-            QRail::RouterEngine::Transfer::Type m_type;
+private:
+    QRail::RouterEngine::RouteLeg *m_departureLeg;
+    QRail::RouterEngine::RouteLeg *m_arrivalLeg;
+    QRail::RouterEngine::RouteLegEnd *m_departure;
+    QRail::RouterEngine::RouteLegEnd *m_arrival;
+    QRail::RouterEngine::Transfer::Type m_type;
 
-            Q_ENUM(Type)
-        };
-    }
+    Q_ENUM(Type)
+};
+}
 }
 
 #endif // CSATRANSFER_H

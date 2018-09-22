@@ -48,8 +48,14 @@ QRail::Fragments::Page::Page(QObject *parent) : QObject(parent)
  * Constructs a Page to store the information about
  * a Linked Connection page for the Connection Scan Algorithm (CSA).
  */
-QRail::Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext, const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
+QRail::Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext,
+                             const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
 {
+    // Enforce Page as the parent of all it's children, Qt will delete them when the Page is destroyed
+    foreach (QRail::Fragments::Fragment *frag, fragments) {
+        frag->setParent(this);
+    }
+
     // Avoid signal triggering on contruction
     m_uri = uri;
     m_timestamp = timestamp;

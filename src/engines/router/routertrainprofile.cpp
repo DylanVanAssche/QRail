@@ -30,7 +30,10 @@ using namespace QRail;
  * @public
  * Constructs a QRail::RouterEngine::TrainProfile for the T array in the Connection Scan Algorithm.
  */
-QRail::RouterEngine::TrainProfile::TrainProfile(const QDateTime &arrivalTime, QRail::Fragments::Fragment *arrivalConnection, const qint16 transfers, QObject *parent) : QObject(parent)
+QRail::RouterEngine::TrainProfile::TrainProfile(const QDateTime &arrivalTime,
+                                                QRail::Fragments::Fragment *arrivalConnection,
+                                                const qint16 transfers,
+                                                QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal trigging on construction
     this->setArrivalTime(arrivalTime);
@@ -91,7 +94,8 @@ QRail::Fragments::Fragment *QRail::RouterEngine::TrainProfile::arrivalConnection
  * @public
  * Sets the arrival connection for the next transfer or arrival to the given Fragment *arrivalConnection.
  */
-void QRail::RouterEngine::TrainProfile::setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection)
+void QRail::RouterEngine::TrainProfile::setArrivalConnection(QRail::Fragments::Fragment
+                                                             *arrivalConnection)
 {
     m_arrivalConnection = arrivalConnection;
     emit this->arrivalConnectionChanged();

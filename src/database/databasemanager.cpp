@@ -32,7 +32,8 @@ QRail::Database::Manager *QRail::Database::Manager::m_instance = nullptr;
  * database (SQLite, MySQL, ORACLE, ...). Any errors during initialisation of
  * the database are catched and logged as CRITICAL.
  */
-QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent) {
+QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent)
+{
     if (QSqlDatabase::isDriverAvailable(DRIVER)) {
         this->setDatabase(QSqlDatabase::addDatabase(DRIVER));
         this->database().setDatabaseName(path);
@@ -58,7 +59,8 @@ QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject
  * @public
  * Constructs a QRail::Database::Manager instance if none exists and returns it.
  */
-QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &path) {
+QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &path)
+{
     // NICE-TO-HAVE: Allow access to multiple databases by checking the path of
     // the database
     if (m_instance == nullptr) {
@@ -81,11 +83,13 @@ QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &p
  * Before the execution takes place, the connection is checked.
  * During the execution, the errors are catched and logged as CRITICAL.
  */
-bool QRail::Database::Manager::execute(QSqlQuery &query) {
+bool QRail::Database::Manager::execute(QSqlQuery &query)
+{
     if (this->database().isOpen() && query.exec()) {
         return true;
     } else {
-        qCritical() << "Executing querry:" << query.executedQuery() << "FAILED:" << query.lastError().text();
+        qCritical() << "Executing querry:" << query.executedQuery() << "FAILED:" <<
+                    query.lastError().text();
         return false;
     }
 }
@@ -103,7 +107,8 @@ bool QRail::Database::Manager::execute(QSqlQuery &query) {
  * Before the execution takes place, the connection is checked.
  * During the execution, the errors are catched and logged as CRITICAL.
  */
-QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query) {
+QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query)
+{
     QFuture<bool> future = QtConcurrent::run(this, &QRail::Database::Manager::execute, query);
     return future;
 }
@@ -121,7 +126,8 @@ QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query) {
  * call QRail::Database::Manager::endTransaction() to
  * commit your changes.
  */
-bool QRail::Database::Manager::startTransaction() {
+bool QRail::Database::Manager::startTransaction()
+{
     return this->database().transaction();
 }
 
@@ -136,7 +142,8 @@ bool QRail::Database::Manager::startTransaction() {
  * @public
  * Commits changes to the database and returns true if success.
  */
-bool QRail::Database::Manager::endTransaction() {
+bool QRail::Database::Manager::endTransaction()
+{
     return this->database().commit();
 }
 
@@ -150,7 +157,8 @@ bool QRail::Database::Manager::endTransaction() {
  * @private
  * Sets the current QSqlDatabase database to the given QSqlDatabase &database.
  */
-void QRail::Database::Manager::setDatabase(const QSqlDatabase &database) {
+void QRail::Database::Manager::setDatabase(const QSqlDatabase &database)
+{
     m_database = database;
 }
 
@@ -164,6 +172,7 @@ void QRail::Database::Manager::setDatabase(const QSqlDatabase &database) {
  * @public
  * Gets the QSqlDatabase database and returns it.
  */
-QSqlDatabase QRail::Database::Manager::database() const {
+QSqlDatabase QRail::Database::Manager::database() const
+{
     return m_database;
 }

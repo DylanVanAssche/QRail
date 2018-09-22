@@ -33,7 +33,8 @@ using namespace QRail;
  * a disturbance, remark or anything else that might be
  * usefull for the user.
  */
-QRail::AlertsEngine::Message::Message(const QString &header, const QString &description, const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
+QRail::AlertsEngine::Message::Message(const QString &header, const QString &description,
+                                      const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_header = header;
@@ -56,7 +57,8 @@ QRail::AlertsEngine::Message::Message(const QString &header, const QString &desc
  * a disturbance, remark or anything else that might be
  * usefull for the user.
  */
-QRail::AlertsEngine::Message::Message(const QString &header, const QString &description, QObject *parent): QObject(parent)
+QRail::AlertsEngine::Message::Message(const QString &header, const QString &description,
+                                      QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_header = header;

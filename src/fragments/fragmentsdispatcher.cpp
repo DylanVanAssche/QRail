@@ -51,9 +51,12 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
     QList<QObject *> callerList = this->findAndRemoveTargets(from, until);
 
     // Post the event to the event queue
-    foreach(QObject *caller, callerList) {
+    foreach (QObject *caller, callerList) {
         QCoreApplication::postEvent(caller, event);
     }
+
+    // Trigger event processing, without this we might have race conditions where event processing is taking too long
+    qApp->processEvents();
 }
 
 QRail::Fragments::Page *QRail::Fragments::DispatcherEvent::page() const
@@ -71,13 +74,13 @@ void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QOb
     m_targets.insert(departureTime, caller);
 }
 
-QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from, const QDateTime &until)
+QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from,
+                                                                    const QDateTime &until)
 {
     QList<QObject *> callers = QList<QObject *>();
-    foreach(QDateTime timestamp, m_targets.keys())
-    {
-        if((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch()) && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch()))
-        {
+    foreach (QDateTime timestamp, m_targets.keys()) {
+        if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
+                && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
             callers.append(m_targets.value(timestamp));
             m_targets.remove(timestamp);
         }

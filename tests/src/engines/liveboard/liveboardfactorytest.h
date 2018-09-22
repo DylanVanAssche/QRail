@@ -24,24 +24,25 @@
 
 #include "engines/liveboard/liveboardfactory.h"
 
-#define LIVEBOARD_WAIT_TIME 45000
+#define LIVEBOARD_WAIT_TIME 15000
 
 namespace QRail {
-    namespace LiveboardEngine {
-        class FactoryTest : public QObject {
-          Q_OBJECT
-        public slots:
-          void liveboardReceived(QRail::LiveboardEngine::Board *board);
+namespace LiveboardEngine {
+class FactoryTest : public QObject
+{
+    Q_OBJECT
+public slots:
+    void liveboardReceived(QRail::LiveboardEngine::Board *board);
 
-        private slots:
-          void initLiveboardFactoryTest();
-          void runLiveboardFactoryTest();
-          void cleanLiveboardFactoryTest();
+private slots:
+    void initLiveboardFactoryTest();
+    void runLiveboardFactoryTest();
+    void cleanLiveboardFactoryTest();
 
-        private:
-          QRail::LiveboardEngine::Factory *factory;
-        };
-    } // namespace LiveboardEngine
+private:
+    QRail::LiveboardEngine::Factory *factory;
+};
+} // namespace LiveboardEngine
 } // namespace QRail
 
 #endif // LIVEBOARDFACTORYTEST_H

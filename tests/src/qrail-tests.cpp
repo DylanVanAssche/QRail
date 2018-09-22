@@ -29,7 +29,8 @@
 #define WAIT_TIME 5000
 
 // Unittest main method
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     // Allow QEventLoops for QSignalSpy
     QCoreApplication app(argc, argv);
 
@@ -74,7 +75,8 @@ int main(int argc, char *argv[]) {
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
         // Return the status code of every test for CI/CD
-        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult | routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
+        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult |
+                               routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
     });
     return app.exec();
 }

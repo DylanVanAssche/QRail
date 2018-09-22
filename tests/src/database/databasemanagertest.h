@@ -27,18 +27,19 @@
 #include <QtTest/QtTest>
 
 namespace QRail {
-    namespace Database {
-        class ManagerTest : public QObject {
-          Q_OBJECT
-        private slots:
-          void initDatabaseManager();
-          void runDatabaseManager();
-          void cleanDatabaseManager();
+namespace Database {
+class ManagerTest : public QObject
+{
+    Q_OBJECT
+private slots:
+    void initDatabaseManager();
+    void runDatabaseManager();
+    void cleanDatabaseManager();
 
-        private:
-          QRail::Database::Manager *db;
-        };
-    } // namespace Database
+private:
+    QRail::Database::Manager *db;
+};
+} // namespace Database
 } // namespace QRail
 
 #endif // DATABASEMANAGERTEST_H

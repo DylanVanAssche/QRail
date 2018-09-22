@@ -29,7 +29,8 @@ StationEngine::Factory *StationEngine::Factory::m_instance = nullptr;
  * Constructs a StationEngine::Factory to
  * generate StationEngine::Station objects on the fly.
  */
-StationEngine::Factory::Factory(QObject *parent) : QObject(parent) {
+StationEngine::Factory::Factory(QObject *parent) : QObject(parent)
+{
     // Make sure that the DB path is writable and created
     QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir dbDirectory;
@@ -40,7 +41,7 @@ StationEngine::Factory::Factory(QObject *parent) : QObject(parent) {
     this->initDatabase();
 
     // Init caching
-    m_cache = QMap<QUrl, StationEngine::Station*>();
+    m_cache = QMap<QUrl, StationEngine::Station *>();
 }
 
 /**
@@ -54,7 +55,8 @@ StationEngine::Factory::Factory(QObject *parent) : QObject(parent) {
  * @public
  * Constructs a StationEngine::Factory if none exists and returns the instance.
  */
-StationEngine::Factory *StationEngine::Factory::getInstance() {
+StationEngine::Factory *StationEngine::Factory::getInstance()
+{
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new StationEngine::Factory";
@@ -77,7 +79,8 @@ StationEngine::Factory *StationEngine::Factory::getInstance() {
  * returned.
  */
 StationEngine::Station *
-StationEngine::Factory::getStationByURI(const QUrl &uri) {
+StationEngine::Factory::getStationByURI(const QUrl &uri)
+{
     // Init StationEngine::Station variable
     StationEngine::Station *station;
 
@@ -183,7 +186,7 @@ StationEngine::Factory::getStationByURI(const QUrl &uri) {
                 country = QLocale::Country::Germany;
             } else {
                 country =
-                        QLocale::Country::Belgium; // Qt 5.6 lacks an unknown country enum
+                    QLocale::Country::Belgium; // Qt 5.6 lacks an unknown country enum
             }
 
             // Convert latitude and longitude to QGeoCoordinate
@@ -201,8 +204,8 @@ StationEngine::Factory::getStationByURI(const QUrl &uri) {
             // We check this by looking at the full address of the station, if that's
             // missing then probably all the rest of the data will be missing too.
             bool hasFacilities = query.value(6).toString().length() > 0 &&
-                    query.value(7).toString().length() > 0 &&
-                    query.value(8).toString().length() > 0;
+                                 query.value(7).toString().length() > 0 &&
+                                 query.value(8).toString().length() > 0;
             if (hasFacilities) {
                 // Convert street, zip and city to QGeoAddress
                 QGeoAddress address;
@@ -230,86 +233,86 @@ StationEngine::Factory::getStationByURI(const QUrl &uri) {
 
                 // Convert openinghours to QMap
                 QMap<StationEngine::Station::Day, QPair<QTime, QTime>>
-                        openingHours; // Example: 06:45
+                                                                    openingHours; // Example: 06:45
                 openingHours.insert(
-                            StationEngine::Station::Day::MONDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(29).toString(), "hh:mm"),
-                                QTime::fromString(query.value(30).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::MONDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(29).toString(), "hh:mm"),
+                        QTime::fromString(query.value(30).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::TUESDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(31).toString(), "hh:mm"),
-                                QTime::fromString(query.value(32).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::TUESDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(31).toString(), "hh:mm"),
+                        QTime::fromString(query.value(32).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::WEDNESDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(33).toString(), "hh:mm"),
-                                QTime::fromString(query.value(34).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::WEDNESDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(33).toString(), "hh:mm"),
+                        QTime::fromString(query.value(34).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::THURSDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(35).toString(), "hh:mm"),
-                                QTime::fromString(query.value(36).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::THURSDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(35).toString(), "hh:mm"),
+                        QTime::fromString(query.value(36).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::FRIDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(37).toString(), "hh:mm"),
-                                QTime::fromString(query.value(38).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::FRIDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(37).toString(), "hh:mm"),
+                        QTime::fromString(query.value(38).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::SATURDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(39).toString(), "hh:mm"),
-                                QTime::fromString(query.value(40).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::SATURDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(39).toString(), "hh:mm"),
+                        QTime::fromString(query.value(40).toString(), "hh:mm"))
+                );
                 openingHours.insert(
-                            StationEngine::Station::Day::SUNDAY,
-                            QPair<QTime, QTime>(
-                                QTime::fromString(query.value(41).toString(), "hh:mm"),
-                                QTime::fromString(query.value(42).toString(), "hh:mm"))
-                            );
+                    StationEngine::Station::Day::SUNDAY,
+                    QPair<QTime, QTime>(
+                        QTime::fromString(query.value(41).toString(), "hh:mm"),
+                        QTime::fromString(query.value(42).toString(), "hh:mm"))
+                );
 
                 station = new StationEngine::Station(
-                            uri,
-                            name,
-                            country,
-                            position,
-                            address,
-                            hasTicketVendingMachine,
-                            hasLuggageLockers,
-                            hasFreeParking,
-                            hasTaxi,
-                            hasBicycleSpots,
-                            hasBlueBike,
-                            hasBus,
-                            hasTram,
-                            hasMetro,
-                            hasWheelchairAvailable,
-                            hasRamp,
-                            disabledParkingSpots,
-                            hasElevatedPlatform,
-                            hasEscalatorUp,
-                            hasEscalatorDown,
-                            hasElevatorPlatform,
-                            hasHearingAidSignal,
-                            openingHours,
-                            averageStopTimes,
-                            platforms
-                            );
+                    uri,
+                    name,
+                    country,
+                    position,
+                    address,
+                    hasTicketVendingMachine,
+                    hasLuggageLockers,
+                    hasFreeParking,
+                    hasTaxi,
+                    hasBicycleSpots,
+                    hasBlueBike,
+                    hasBus,
+                    hasTram,
+                    hasMetro,
+                    hasWheelchairAvailable,
+                    hasRamp,
+                    disabledParkingSpots,
+                    hasElevatedPlatform,
+                    hasEscalatorUp,
+                    hasEscalatorDown,
+                    hasElevatorPlatform,
+                    hasHearingAidSignal,
+                    openingHours,
+                    averageStopTimes,
+                    platforms
+                );
             } else {
                 station = new StationEngine::Station(
-                            uri,
-                            name,
-                            country,
-                            position,
-                            averageStopTimes,
-                            platforms
-                            );
+                    uri,
+                    name,
+                    country,
+                    position,
+                    averageStopTimes,
+                    platforms
+                );
             }
 
             // Add station to cache
@@ -335,7 +338,8 @@ StationEngine::Factory::getStationByURI(const QUrl &uri) {
  * Init the database for stations by reading the CSV files from iRail using
  * QtCSV.
  */
-bool StationEngine::Factory::initDatabase() {
+bool StationEngine::Factory::initDatabase()
+{
     // On instantation, create the tables in the database if they don't exist yet.
     QSqlQuery query(this->db()->database());
 
@@ -419,11 +423,11 @@ bool StationEngine::Factory::initDatabase() {
 
     // Read CSV files using the QtCSV library
     QList<QStringList> stationsCSV =
-            QtCSV::Reader::readToList(":/database/stations/stations.csv");
+        QtCSV::Reader::readToList(":/database/stations/stations.csv");
     QList<QStringList> facilitiesCSV =
-            QtCSV::Reader::readToList(":/database/stations/facilities.csv");
+        QtCSV::Reader::readToList(":/database/stations/facilities.csv");
     QList<QStringList> stopsCSV =
-            QtCSV::Reader::readToList(":/database/stations/stops.csv");
+        QtCSV::Reader::readToList(":/database/stations/stops.csv");
 
     // Synchronise all QFutures at the end of the transaction
     QFutureSynchronizer<bool> synchronizer;
@@ -452,7 +456,7 @@ bool StationEngine::Factory::initDatabase() {
         } else {
             // qWarning() << "No facilties found for station:" << station.at(0);
             synchronizer.addFuture(
-                        this->insertStationWithoutFacilitiesIntoDatabase(station));
+                this->insertStationWithoutFacilitiesIntoDatabase(station));
         }
     }
 
@@ -491,7 +495,9 @@ bool StationEngine::Factory::initDatabase() {
  * @public
  * Inserts a station with facilities into the database from the CSV file.
  */
-QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities) {
+QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
+    const QStringList &station, const QStringList &facilities)
+{
     QSqlQuery query(this->db()->database());
     query.prepare("INSERT INTO stations ("
                   "uri, "
@@ -641,7 +647,8 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(co
  * Inserts a station without facilities into the database from the CSV file.
  */
 QFuture<bool>
-StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QStringList &station) {
+StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QStringList &station)
+{
     QSqlQuery query(this->db()->database());
     query.prepare("INSERT INTO stations ("
                   "uri, "
@@ -679,7 +686,8 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
  * @public
  * Inserts a platform into the database from the CSV file.
  */
-QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringList &platform) {
+QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringList &platform)
+{
     QSqlQuery query(this->db()->database());
     query.prepare("INSERT INTO platforms ("
                   "uri, "
@@ -716,7 +724,8 @@ QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringLi
  * @note If no station is found in the memory cache, a NULL pointer is returned.
  * Tries to fetch a station from the memory cache and returns it.
  */
-StationEngine::Station *StationEngine::Factory::fetchStationFromCache(const QUrl &uri) const {
+StationEngine::Station *StationEngine::Factory::fetchStationFromCache(const QUrl &uri) const
+{
     if (m_cache.contains(uri)) {
         return this->m_cache.value(uri);
     }
@@ -738,7 +747,8 @@ StationEngine::Station *StationEngine::Factory::fetchStationFromCache(const QUrl
  * BENCHMARK: Jolla 1 saves 400-500 ms by using this caching method for a single
  * routing calculation.
  */
-void StationEngine::Factory::addStationToCache(StationEngine::Station *station) {
+void StationEngine::Factory::addStationToCache(StationEngine::Station *station)
+{
     this->m_cache.insert(station->uri(), station);
 }
 
@@ -754,7 +764,8 @@ void StationEngine::Factory::addStationToCache(StationEngine::Station *station) 
  * Fetches the platforms of a station by URI from the database.
  * The platforms are added in a QMap and returned.
  */
-QMap<QUrl, QString> StationEngine::Factory::getPlatformsByStationURI(const QUrl &uri) {
+QMap<QUrl, QString> StationEngine::Factory::getPlatformsByStationURI(const QUrl &uri)
+{
     // Fetch platforms from database for a specific station URI.
     QSqlQuery query(this->db()->database());
     query.prepare("SELECT "
@@ -771,9 +782,9 @@ QMap<QUrl, QString> StationEngine::Factory::getPlatformsByStationURI(const QUrl 
 
     while (query.next()) {
         platformsMap.insert(
-                    query.value(0).toUrl(),   // Platform URI
-                    query.value(2).toString() // Platform name
-                    );
+            query.value(0).toUrl(),   // Platform URI
+            query.value(2).toString() // Platform name
+        );
     }
 
     return platformsMap;
@@ -790,7 +801,10 @@ QMap<QUrl, QString> StationEngine::Factory::getPlatformsByStationURI(const QUrl 
  * @public
  * Gets the QRail::Database::Manager instance and returns it.
  */
-QRail::Database::Manager *StationEngine::Factory::db() const { return m_db; }
+QRail::Database::Manager *StationEngine::Factory::db() const
+{
+    return m_db;
+}
 
 /**
  * @file stationfactory.cpp
@@ -803,4 +817,7 @@ QRail::Database::Manager *StationEngine::Factory::db() const { return m_db; }
  * Sets the QRail::Database::Manager instance to the given
  * QRail::Database::Manager *db.
  */
-void StationEngine::Factory::setDb(QRail::Database::Manager *db) { m_db = db; }
+void StationEngine::Factory::setDb(QRail::Database::Manager *db)
+{
+    m_db = db;
+}

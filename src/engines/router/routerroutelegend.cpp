@@ -36,7 +36,16 @@ using namespace QRail;
  * @public
  * Constructs a RouteLeg with a certain leg type, vehicle information and it's departure and arrival legs.
  */
-QRail::RouterEngine::RouteLegEnd::RouteLegEnd(const QUrl &uri, const QDateTime &time, StationEngine::Station *station, const QString &platform, const bool &isNormalPlatform, const qint16 &delay, const bool &isCanceled, const bool &isPassed, const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel, QObject *parent) : QObject(parent)
+QRail::RouterEngine::RouteLegEnd::RouteLegEnd(const QUrl &uri,
+                                              const QDateTime &time,
+                                              StationEngine::Station *station,
+                                              const QString &platform,
+                                              const bool &isNormalPlatform,
+                                              const qint16 &delay,
+                                              const bool &isCanceled,
+                                              const bool &isPassed,
+                                              const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel,
+                                              QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal fire on construction
     m_uri = uri;
@@ -332,7 +341,8 @@ QRail::VehicleEngine::Stop::OccupancyLevel QRail::RouterEngine::RouteLegEnd::occ
  * Sets the occunpancy level to the given QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel.
  * Emits the occupancyLevelChanged signal.
  */
-void QRail::RouterEngine::RouteLegEnd::setOccupancyLevel(const QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel)
+void QRail::RouterEngine::RouteLegEnd::setOccupancyLevel(const
+                                                         QRail::VehicleEngine::Stop::OccupancyLevel &occupancyLevel)
 {
     m_occupancyLevel = occupancyLevel;
     emit this->occupancyLevelChanged();

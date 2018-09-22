@@ -25,56 +25,55 @@
 #include "engines/station/stationnullstation.h"
 
 namespace QRail {
-    namespace RouterEngine {
-        class RouteLeg : public QObject
-        {
-            Q_OBJECT
-        public:
-            enum class Type
-            {
-                WALKING,
-                BICYCLE,
-                BUS,
-                TRAM,
-                METRO,
-                BOAT,
-                TAXI,
-                TRAIN
-            };
-            explicit RouteLeg(
-                    const QRail::RouterEngine::RouteLeg::Type &type,
-                    QRail::VehicleEngine::Vehicle *vehicleInformation,
-                    QRail::RouterEngine::RouteLegEnd *departure,
-                    QRail::RouterEngine::RouteLegEnd *arrival,
-                    QObject *parent = nullptr
-                    );
-            QRail::RouterEngine::RouteLeg::Type type() const;
-            void setType(const QRail::RouterEngine::RouteLeg::Type &type);
-            QRail::VehicleEngine::Vehicle *vehicleInformation() const;
-            void setVehicleInformation(QRail::VehicleEngine::Vehicle *vehicleInformation);
-            QRail::RouterEngine::RouteLegEnd *departure() const;
-            void setDeparture(QRail::RouterEngine::RouteLegEnd *departure);
-            QRail::RouterEngine::RouteLegEnd *arrival() const;
-            void setArrival(QRail::RouterEngine::RouteLegEnd *arrival);
-            StationEngine::Station *station() const;
+namespace RouterEngine {
+class RouteLeg : public QObject
+{
+    Q_OBJECT
+public:
+    enum class Type {
+        WALKING,
+        BICYCLE,
+        BUS,
+        TRAM,
+        METRO,
+        BOAT,
+        TAXI,
+        TRAIN
+    };
+    explicit RouteLeg(
+        const QRail::RouterEngine::RouteLeg::Type &type,
+        QRail::VehicleEngine::Vehicle *vehicleInformation,
+        QRail::RouterEngine::RouteLegEnd *departure,
+        QRail::RouterEngine::RouteLegEnd *arrival,
+        QObject *parent = nullptr
+    );
+    QRail::RouterEngine::RouteLeg::Type type() const;
+    void setType(const QRail::RouterEngine::RouteLeg::Type &type);
+    QRail::VehicleEngine::Vehicle *vehicleInformation() const;
+    void setVehicleInformation(QRail::VehicleEngine::Vehicle *vehicleInformation);
+    QRail::RouterEngine::RouteLegEnd *departure() const;
+    void setDeparture(QRail::RouterEngine::RouteLegEnd *departure);
+    QRail::RouterEngine::RouteLegEnd *arrival() const;
+    void setArrival(QRail::RouterEngine::RouteLegEnd *arrival);
+    StationEngine::Station *station() const;
 
-        signals:
-            void typeChanged();
-            void vehicleInformationChanged();
-            void stopsChanged();
-            void departureChanged();
-            void arrivalChanged();
-            void stationChanged();
+signals:
+    void typeChanged();
+    void vehicleInformationChanged();
+    void stopsChanged();
+    void departureChanged();
+    void arrivalChanged();
+    void stationChanged();
 
-        private:
-            QRail::RouterEngine::RouteLeg::Type m_type;
-            QRail::VehicleEngine::Vehicle *m_vehicleInformation;
-            QRail::RouterEngine::RouteLegEnd *m_departure;
-            QRail::RouterEngine::RouteLegEnd *m_arrival;
+private:
+    QRail::RouterEngine::RouteLeg::Type m_type;
+    QRail::VehicleEngine::Vehicle *m_vehicleInformation;
+    QRail::RouterEngine::RouteLegEnd *m_departure;
+    QRail::RouterEngine::RouteLegEnd *m_arrival;
 
-            Q_ENUM(Type)
-        };
-    }
+    Q_ENUM(Type)
+};
+}
 }
 
 #endif // CSAROUTELEG_H

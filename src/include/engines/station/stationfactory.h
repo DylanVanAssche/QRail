@@ -26,7 +26,9 @@
 #include <QtCore/QMap>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QFuture>
 #include <QtSql/QSqlQuery>
+#include <QtConcurrent/QtConcurrent>
 
 #include "qrail.h"
 #include "engines/station/stationstation.h"
@@ -40,6 +42,8 @@
 // Uncomment to enable verbose output
 //#define VERBOSE_CACHE
 
+#define SEARCH_RADIUS_NEAREST_STATION 3.0 // 3.0 km
+
 namespace QRail {
 namespace StationEngine {
 class QRAIL_SHARED_EXPORT Factory : public QObject
@@ -48,6 +52,10 @@ class QRAIL_SHARED_EXPORT Factory : public QObject
 public:
     static Factory *getInstance();
     Station *getStationByURI(const QUrl &uri);
+    QList<QRail::StationEngine::Station *> getNearbyStationsByPosition(const QGeoCoordinate &position,
+                                                                       const qreal &radius,
+                                                                       const qint32 &maxResults);
+    QRail::StationEngine::Station *getNearestStationByPosition(const QGeoCoordinate &position);
 
 private:
     QRail::Database::Manager *m_db;

@@ -47,7 +47,8 @@ SOURCES += \
     $$PWD/src/fragments/fragmentspage.cpp \
     $$PWD/src/fragments/fragmentsfactory.cpp \
     $$PWD/src/fragments/fragmentsdispatcher.cpp \
-    $$PWD/src/qrail.cpp
+    $$PWD/src/qrail.cpp \
+    $$PWD/src/include/engines/router/routerfootpathprofile.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -74,7 +75,8 @@ HEADERS += \
     $$PWD/src/include/fragments/fragmentsfactory.h \
     $$PWD/src/include/fragments/fragmentsdispatcher.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
-    $$PWD/src/include/qrail.h
+    $$PWD/src/include/qrail.h \
+    $$PWD/src/include/engines/router/routerfootpathprofile.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

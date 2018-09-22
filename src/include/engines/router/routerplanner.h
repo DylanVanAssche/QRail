@@ -98,6 +98,7 @@ private:
     QList<QRail::RouterEngine::Route *> m_routes;
     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> m_SArray;
     QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+    QMap<QUrl, QRail::RouterEngine::FootpathProfile *> m_DArray;
     QList<QRail::Fragments::Page *> m_usedPages;
     explicit Planner(QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;

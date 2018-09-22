@@ -52,9 +52,10 @@ class QRAIL_SHARED_EXPORT Factory : public QObject
 public:
     static Factory *getInstance();
     Station *getStationByURI(const QUrl &uri);
-    QList<QRail::StationEngine::Station *> getNearbyStationsByPosition(const QGeoCoordinate &position,
-                                                                       const qreal &radius,
-                                                                       const qint32 &maxResults);
+    QList<QRail::StationEngine::Station *> getStationsInTheAreaByPosition(
+        const QGeoCoordinate &position,
+        const qreal &radius,
+        const qint32 &maxResults);
     QRail::StationEngine::Station *getNearestStationByPosition(const QGeoCoordinate &position);
 
 private:

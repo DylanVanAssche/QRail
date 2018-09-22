@@ -343,7 +343,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
  * In case something goes wrong, a StationEngine::NullStation instance is
  * pushed to the QList<StationEngine::Station *station> &nearbyStations.
  */
-QList<QRail::StationEngine::Station *> StationEngine::Factory::getNearbyStationsByPosition(
+QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsInTheAreaByPosition(
     const QGeoCoordinate &position,
     const qreal &radius,
     const qint32 &maxResults)

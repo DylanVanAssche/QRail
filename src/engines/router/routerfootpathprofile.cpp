@@ -14,7 +14,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "routerfootpathprofile.h"
+#include "engines/router/routerfootpathprofile.h"
 using namespace QRail;
 
 RouterEngine::FootpathProfile::FootpathProfile(QObject *parent) : QObject(parent)

@@ -32,6 +32,7 @@ SOURCES += \
     $$PWD/src/engines/router/routerroutelegend.cpp \
     $$PWD/src/engines/router/routerstationstopprofile.cpp \
     $$PWD/src/engines/router/routertrainprofile.cpp \
+    $$PWD/src/engines/router/routerfootpathprofile.cpp \
     $$PWD/src/engines/liveboard/liveboardfactory.cpp \
     $$PWD/src/engines/liveboard/liveboardboard.cpp \
     $$PWD/src/engines/station/stationstation.cpp \
@@ -47,8 +48,7 @@ SOURCES += \
     $$PWD/src/fragments/fragmentspage.cpp \
     $$PWD/src/fragments/fragmentsfactory.cpp \
     $$PWD/src/fragments/fragmentsdispatcher.cpp \
-    $$PWD/src/qrail.cpp \
-    $$PWD/src/include/engines/router/routerfootpathprofile.cpp
+    $$PWD/src/qrail.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \

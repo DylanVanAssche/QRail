@@ -400,7 +400,7 @@ StationEngine::Station *StationEngine::Factory::getNearestStationByPosition(
     const QGeoCoordinate &position)
 {
     // We only need the nearest station, the list is automatically sorted by distance anyway.
-    return this->getNearbyStationsByPosition(position, SEARCH_RADIUS_NEAREST_STATION, 1).first();
+    return this->getStationsInTheAreaByPosition(position, SEARCH_RADIUS_NEAREST_STATION, 1).first();
 }
 
 /**

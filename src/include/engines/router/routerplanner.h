@@ -36,6 +36,7 @@
 #include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routertrainprofile.h"
 #include "engines/router/routertransfer.h"
+#include "engines/router/routerfootpathprofile.h"
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"

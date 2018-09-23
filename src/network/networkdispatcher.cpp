@@ -21,9 +21,6 @@ QRail::Network::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
     // Register a custom event type to the Qt event system
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
-
-    // Init target list
-    m_targets = QList<QObject *>();
 }
 
 void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
@@ -54,19 +51,19 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
 
 void QRail::Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     m_targets.insert(reply, caller);
 }
 
 void QRail::Network::Dispatcher::removeTarget(QNetworkReply *reply)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     m_targets.remove(reply);
 }
 
 QObject *QRail::Network::Dispatcher::findTarget(QNetworkReply *reply)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     return m_targets.value(reply);
 }
 

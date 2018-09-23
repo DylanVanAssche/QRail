@@ -21,9 +21,6 @@ QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
     // Register a custom event type to the Qt event system
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
-
-    // Init target list
-    m_targets = QList<QObject *>();
 }
 
 void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
@@ -52,7 +49,7 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
     QDateTime from = page->fragments().first()->departureTime();
     QDateTime until = page->fragments().last()->departureTime();
-    qDebug() << m_targets;
+    qDebug() << m_targets; // DEBUG
     QList<QObject *> callerList = this->findTargets(from, until);
 
     // Post the event to the event queue
@@ -79,14 +76,14 @@ void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
 
 void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     m_targets.insert(departureTime, caller);
 }
 
 QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from,
                                                            const QDateTime &until)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
@@ -97,10 +94,10 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
     return callers;
 }
 
-void QRail::Fragments::Dispatcher::removeTarget(const QDateTime &from,
-                                                const QDateTime &until)
+void QRail::Fragments::Dispatcher::removeTargets(const QDateTime &from,
+                                                 const QDateTime &until)
 {
-    QMutexLocker locker(targetListLocker);
+    QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())

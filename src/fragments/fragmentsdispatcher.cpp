@@ -19,7 +19,11 @@ using namespace QRail;
 
 QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
+    // Register a custom event type to the Qt event system
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
+
+    // Init target list
+    m_targets = QList<QObject *>();
 }
 
 void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
@@ -48,13 +52,16 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
     QDateTime from = page->fragments().first()->departureTime();
     QDateTime until = page->fragments().last()->departureTime();
-    QList<QObject *> callerList = this->findAndRemoveTargets(from, until);
+    qDebug() << m_targets;
+    QList<QObject *> callerList = this->findTargets(from, until);
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
         QCoreApplication::postEvent(caller, event);
     }
     qDebug() << "Dispatched page to" << callerList;
+    this->removeTargets(from, until);
+    qDebug() << "Removed targets";
 
     // Trigger event processing, without this we might have race conditions where event processing is taking too long
     qApp->processEvents();
@@ -72,12 +79,28 @@ void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
 
 void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
 {
+    QMutexLocker locker(targetListLocker);
     m_targets.insert(departureTime, caller);
 }
 
-QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from,
-                                                                    const QDateTime &until)
+QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from,
+                                                           const QDateTime &until)
 {
+    QMutexLocker locker(targetListLocker);
+    QList<QObject *> callers = QList<QObject *>();
+    foreach (QDateTime timestamp, m_targets.keys()) {
+        if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
+                && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
+            callers.append(m_targets.value(timestamp));
+        }
+    }
+    return callers;
+}
+
+void QRail::Fragments::Dispatcher::removeTarget(const QDateTime &from,
+                                                const QDateTime &until)
+{
+    QMutexLocker locker(targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
@@ -85,7 +108,6 @@ QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateT
             callers.append(m_targets.take(timestamp));
         }
     }
-    return callers;
 }
 
 QEvent::Type QRail::Fragments::Dispatcher::eventType() const

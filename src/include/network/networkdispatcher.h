@@ -21,6 +21,8 @@
 #include <QtCore/QEvent>
 #include <QtCore/QCoreApplication>
 #include <QtCore/QMap>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 #include <QtNetwork/QNetworkReply>
 
 namespace QRail {
@@ -60,6 +62,7 @@ public:
     QEvent::Type eventType() const;
 
 private:
+    QMutex targetListLocker;
     QMap<QNetworkReply *, QObject *> m_targets;
     QEvent::Type m_eventType;
     void setEventType(const QEvent::Type &eventType);

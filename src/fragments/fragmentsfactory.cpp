@@ -33,6 +33,9 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Setup the QRail::Network::Manager
     this->setHttp(QRail::Network::Manager::getInstance());
+
+    // Setup dispatcher
+    this->setDispatcher(new QRail::Fragments::Dispatcher());
     /*
      * QNAM and callers are living in different threads!
      * INFO:
@@ -40,9 +43,6 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
      */
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl,
                                                                                        QObject *)));
-
-    // Setup dispatcher
-    this->setDispatcher(new QRail::Fragments::Dispatcher());
 }
 
 /**
@@ -121,7 +121,9 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
 
 void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
+    qDebug() << "Received event in factory:" << event;
     if (event->type() == this->http()->dispatcher()->eventType()) {
+        qDebug() << "Network event!";
         event->accept();
         QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
                                                         (event);

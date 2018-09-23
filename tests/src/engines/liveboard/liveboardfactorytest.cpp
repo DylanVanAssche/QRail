@@ -28,22 +28,27 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 {
     qDebug() << "Running LiveboardEngine::Factory test";
+    QBENCHMARK {
+        factory->getLiveboardByStationURI(
+            QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+            LiveboardEngine::Board::Mode::DEPARTURES);
 
-    // Activate QSignalSpy
-    qRegisterMetaType<QRail::LiveboardEngine::Board *>("QRail::LiveboardEngine::Board"); // register custom class
-    QSignalSpy spyLiveboard(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)));
+        // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+        QEventLoop loop1;
+        connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop1, SLOT(quit()));
+        loop1.exec();
+    }
 
-    qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
-    factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-        LiveboardEngine::Board::Mode::ARRIVALS);
-    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
+    /*QBENCHMARK {
+        factory->getLiveboardByStationURI(
+            QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+            LiveboardEngine::Board::Mode::ARRIVALS);
 
-    qDebug() << "Liveboard departures (now) for station Vilvoorde";
-    factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-        LiveboardEngine::Board::Mode::DEPARTURES);
-    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
+        // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+        QEventLoop loop2;
+        connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop2, SLOT(quit()));
+        loop2.exec();
+    }*/
 }
 
 void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()

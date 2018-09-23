@@ -32,6 +32,11 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
 {
     // Initiate a new QNetworkAccessManager with cache
     this->setQNAM(new QNetworkAccessManager(this));
+
+    // Init the dispatcher
+    this->setDispatcher(new QRail::Network::Dispatcher(this));
+
+    // Init cache
     QNetworkConfigurationManager QNAMConfig;
     this->QNAM()->setConfiguration(QNAMConfig.defaultConfiguration());
     this->setCache(new QNetworkDiskCache(this));
@@ -46,9 +51,6 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
     // Setup the QNetworkDiskCache
     ((QNetworkDiskCache *)this->cache())->setCacheDirectory(path);
     this->QNAM()->setCache(this->cache());
-
-    // Init the dispatcher
-    this->setDispatcher(new QRail::Network::Dispatcher(this));
 
     // Connect QNetworkAccessManager signals
     connect(this->QNAM(), SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)),

@@ -65,11 +65,11 @@ int main(int argc, char *argv[])
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
 
-        // Run QRail::RouterEngine::Planner integration test
-        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
-
         // Run QRail::LiveboardEngine::Factory integration test
         liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
+
+        // Run QRail::RouterEngine::Planner integration test
+        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
         // Run QRail::LiveboardEngine::Factory integration test
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);

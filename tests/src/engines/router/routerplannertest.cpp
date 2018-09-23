@@ -51,6 +51,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
+
     QDateTime start = QDateTime::currentDateTime();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
@@ -64,7 +65,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     connect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), &loop, SLOT(quit()));
     loop.exec();
     qInfo() << "Routing Vilvoorde -> Brugge took"
-            << (QDateTime::currentDateTime()).secsTo(start)
+            << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 }
 

@@ -39,7 +39,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     loop.exec();
 
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
-            << (QDateTime::currentDateTime()).secsTo(start)
+            << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 }
 

@@ -91,8 +91,18 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
     QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
+        /*
+         * If the timestamp is the same or higher or equal than the first fragment departure time
+         * and it's lower than the last fragment departure time + 1 minute.
+         *
+         * WARNING: We need to add 1 minute to this check to avoid a reace condition:
+         *          If the page ends at 19:28:00.000 (departure time of the last fragment)
+         *          and we request the page at 19:28:35.841 then our check needs to valid.
+         *          The reason for this lies in the way the Linked Connection server fragments
+         *          the data and how it's redirecting clients.
+         */
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
-                && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
+                && (timestamp.toMSecsSinceEpoch() < until.toMSecsSinceEpoch() + MINUTES_TO_MSECONDS_MULTIPLIER)) {
             callers.append(m_targets.value(timestamp));
         }
     }

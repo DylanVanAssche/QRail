@@ -28,6 +28,8 @@
 
 #include "fragments/fragmentspage.h"
 
+#define MINUTES_TO_MSECONDS_MULTIPLIER 60*1000 // 60 seconds = 60 * 1000 msec
+
 namespace QRail {
 namespace Fragments {
 class DispatcherEvent : public QEvent

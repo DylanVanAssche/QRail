@@ -118,8 +118,9 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
     this->setMaxTransfers(maxTransfers);
     this->setRoutes(QList<QRail::RouterEngine::Route *>());
-    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
     this->initUsedPages();
+    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
+    qApp->processEvents();
     qDebug() << "CSA init OK";
 }
 

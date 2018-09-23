@@ -52,6 +52,11 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
     qDebug() << m_targets; // DEBUG
     QList<QObject *> callerList = this->findTargets(from, until);
 
+    // We should have retrieved some callers to dispatch the page to
+    if (callerList.isEmpty()) {
+        qCritical() << "No callers found for dispatching page:" << page->uri();
+    }
+
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
         QCoreApplication::postEvent(caller, event);
@@ -98,11 +103,10 @@ void QRail::Fragments::Dispatcher::removeTargets(const QDateTime &from,
                                                  const QDateTime &until)
 {
     QMutexLocker locker(&targetListLocker);
-    QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
                 && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
-            callers.append(m_targets.take(timestamp));
+            m_targets.remove(timestamp);
         }
     }
 }

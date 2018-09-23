@@ -27,8 +27,10 @@
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QFuture>
+#include <QtCore/QPair>
 #include <QtSql/QSqlQuery>
 #include <QtConcurrent/QtConcurrent>
+#include <algorithm>
 
 #include "qrail.h"
 #include "engines/station/stationstation.h"
@@ -52,11 +54,13 @@ class QRAIL_SHARED_EXPORT Factory : public QObject
 public:
     static Factory *getInstance();
     Station *getStationByURI(const QUrl &uri);
-    QList<QRail::StationEngine::Station *> getStationsInTheAreaByPosition(
+    QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(
+                                                          const QGeoCoordinate &position,
+                                                          const qreal &radius,
+                                                          const qint32 &maxResults);
+    QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(
         const QGeoCoordinate &position,
-        const qreal &radius,
-        const qint32 &maxResults);
-    QRail::StationEngine::Station *getNearestStationByPosition(const QGeoCoordinate &position);
+        const qreal radius);
 
 private:
     QRail::Database::Manager *m_db;

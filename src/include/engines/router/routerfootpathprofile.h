@@ -19,17 +19,29 @@
 
 #include <QtCore/QObject>
 
+#include "engines/station/stationstation.h"
+
 namespace QRail {
 namespace RouterEngine {
 class FootpathProfile : public QObject
 {
     Q_OBJECT
 public:
-    explicit FootpathProfile(QObject *parent = nullptr);
+    explicit FootpathProfile(QRail::StationEngine::Station *arrivalStation,
+                             QRail::StationEngine::Station *departureStation,
+                             qreal distance,
+                             QObject *parent = nullptr);
+    QRail::StationEngine::Station *arrivalStation() const;
+    void setArrivalStation(QRail::StationEngine::Station *arrivalStation);
+    QRail::StationEngine::Station *departureStation() const;
+    void setDepartureStation(QRail::StationEngine::Station *departureStation);
+    qreal distance() const;
+    void setDistance(const qreal &distance);
 
-signals:
-
-public slots:
+private:
+    QRail::StationEngine::Station *m_arrivalStation;
+    QRail::StationEngine::Station *m_departureStation;
+    qreal m_distance;
 };
 }
 }

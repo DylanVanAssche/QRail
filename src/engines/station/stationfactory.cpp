@@ -341,19 +341,21 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
  * @note The radius is defined in kilometres, with the given station as the centre of the circle.
  * Fetches nearby stations from database using the Haversine formula (Google's solution).
  * In case something goes wrong, a StationEngine::NullStation instance is
- * pushed to the QList<StationEngine::Station *station> &nearbyStations.
+ * pushed to the QList<QPair<StationEngine::Station *, qreal>> &nearbyStations.
  */
-QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsInTheAreaByPosition(
-    const QGeoCoordinate &position,
-    const qreal &radius,
-    const qint32 &maxResults)
+QList<QPair<QRail::StationEngine::Station *, qreal>>
+                                                  StationEngine::Factory::getStationsInTheAreaByPosition(
+                                                      const QGeoCoordinate &position,
+                                                      const qreal &radius,
+                                                      const qint32 &maxResults)
 {
     /*
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
      * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
      */
     Q_UNUSED(maxResults); // bypass compiler
-    QList<QRail::StationEngine::Station *> nearbyStations = QList<QRail::StationEngine::Station *>();
+    QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                                                          QList<QPair<QRail::StationEngine::Station *, qreal>>();
     QSqlQuery query(this->db()->database());
 
     // SQLite doesn't support trigonometric functions, we have calculate the Haversine formula outside the SQL query.
@@ -373,34 +375,54 @@ QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsInTheA
         QUrl uri = query.value(0).toUrl();
         qreal latitudeStation = query.value(1).toReal();
         qreal longitudeStation = query.value(2).toReal();
-
         qreal latitudeRadianStation = qDegreesToRadians(latitudeStation);
         qreal longitudeRadianStation = qDegreesToRadians(longitudeStation);
+
+        // Don't return stations that are the same as the center of our search radius
+        if (latitudeRadianStation != latitudeRadianCenter
+                && longitudeRadianStation != longitudeRadianCenter) {
+            continue;
+        }
 
         qreal differenceLatitude = latitudeRadianStation - latitudeRadianCenter;
         qreal differenceLongitude = longitudeRadianStation - longitudeRadianCenter;
 
         // Haversine
-        qreal computation = qAsin(qSqrt(qSin(differenceLatitude / 2) * qSin(differenceLatitude / 2) + qCos(
-                                            latitudeRadianCenter) * qCos(latitudeRadianStation) * qSin(differenceLongitude / 2) * qSin(
-                                            differenceLongitude / 2)));
+        qreal computation = qAsin(qSqrt(qSin(differenceLatitude / 2)
+                                        * qSin(differenceLatitude / 2)
+                                        + qCos(latitudeRadianCenter)
+                                        * qCos(latitudeRadianStation)
+                                        * qSin(differenceLongitude / 2)
+                                        * qSin(differenceLongitude / 2)));
         qreal distance = 2 * 6372.8 * computation; // Earth radius in km
         if (distance < radius) {
-            QRail::StationEngine::Station *station = this->getStationByURI(uri);
-            nearbyStations.append(station);
-            //nearbyStations.append(QPair<QRail::StationEngine::Station *, qreal>(nearbyStation, distance));
-            //qDebug() << "Found nearby station:" << nearbyStation->name().value(QLocale::Dutch) << "distance:" << distance << "kilometres";
+            QPair<QRail::StationEngine::Station *, qreal> stationDistancePair;
+            stationDistancePair.first = this->getStationByURI(uri);
+            stationDistancePair.second = distance;
+
+            nearbyStations.append(stationDistancePair);
+            qDebug() << "Found station" << stationDistancePair.first->name().value(
+                         QLocale::Language::Dutch) << "distance" << distance << "km";
         }
     }
+
+    std::sort(nearbyStations.begin(), nearbyStations.end(), [](
+                  QPair<QRail::StationEngine::Station *, qreal > a,
+    QPair<QRail::StationEngine::Station *, qreal > b) -> bool {
+        qreal distanceA = a.second;
+        qreal distanceB = b.second;
+        return distanceA < distanceB;
+    });
 
     return nearbyStations;
 }
 
-StationEngine::Station *StationEngine::Factory::getNearestStationByPosition(
-    const QGeoCoordinate &position)
+QPair<StationEngine::Station *, qreal> StationEngine::Factory::getNearestStationByPosition(
+    const QGeoCoordinate &position,
+    const qreal radius)
 {
     // We only need the nearest station, the list is automatically sorted by distance anyway.
-    return this->getStationsInTheAreaByPosition(position, SEARCH_RADIUS_NEAREST_STATION, 1).first();
+    return this->getStationsInTheAreaByPosition(position, radius, 1).first();
 }
 
 /**

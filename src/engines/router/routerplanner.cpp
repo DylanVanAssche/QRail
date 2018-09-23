@@ -112,6 +112,9 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     plannerProcessingMutex.lock(); // Queue requests
     this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
     this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+    QMap<QUrl, qreal> DArray = this->DArray();
+    DArray.clear();
+    this->setDArray(DArray);
     this->setDepartureStationURI(departureStation);
     this->setArrivalStationURI(arrivalStation);
     this->setDepartureTime(departureTime);
@@ -119,6 +122,29 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     this->setMaxTransfers(maxTransfers);
     this->setRoutes(QList<QRail::RouterEngine::Route *>());
     this->initUsedPages();
+
+    /*
+     * Setup footpaths for the arrival station since CSA profile
+     * goes from the end to the beginning.
+     *
+     * Footpaths give the user the possibility to exit at another station
+     * and walk to it's destination in case that's faster than the original
+     * arrival station.
+     */
+    QRail::StationEngine::Station *station =
+        this->stationFactory()->getStationByURI(this->arrivalStationURI());
+
+    QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                                                          this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
+                                                                                                                 SEARCH_RADIUS,
+                                                                                                                 MAX_RESULTS);
+    for (qint32 i = 0; i < nearbyStations.length(); i++) {
+        QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
+        this->DArray().insert(stationDistancePair.first->uri(), stationDistancePair.second);
+    }
+    qDebug() << this->DArray();
+
+    // Jumpstart the page fetching
     this->fragmentsFactory()->getPage(this->arrivalTime(), this);
     qApp->processEvents();
     qDebug() << "CSA init OK";
@@ -214,14 +240,21 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         *newExitTrainFragment; // Save the connection when we exit the train for a transfer
 
         // Calculate T1, the time when walking from the current stop to the destination
-        if (fragment->arrivalStationURI() == this->arrivalStationURI()) {
+        if (fragment->arrivalStationURI() == this->arrivalStationURI()
+                && this->DArray().contains(fragment->arrivalStationURI())) {
             /*
              * This connection ends at our destination.
-             * We can walk now out of the station, our implementation doesn't cover
-             * the footpath at the end (yet)
+             * We can walk now out of the station towards our destination.
+             * The time to arrive is the arrival time in the station
+             * + the walking time of the footpath to our destination.
+             *
+             * WARNING: The D array stores distances, we need to divide
+             * them by a given WALKING_SPEED before adding them to the
+             * T1_walkingArrivalTime!
              */
-            T1_walkingArrivalTime = fragment->arrivalTime(); // Due the footpath limitation, we arrive at
-            // our destination when we arrive with the vehicle.
+            T1_walkingArrivalTime = fragment->arrivalTime().addSecs(
+                                        (this->DArray().value(fragment->arrivalStationURI()) / WALKING_SPEED)
+                                        * SECONDS_TO_HOURS_MULTIPLIER);
             T1_transfers = 0; // Walking, no transfers between arrival and destination.
         } else {
             /*
@@ -544,7 +577,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         *         UPDATING THE S ARRAY
         * ====================================
         * Create a new StationStopProfile to update the S array.
-        * The existing CSAStationStopProfiles shouldn't dominate our
+        * The existing StationStopProfiles shouldn't dominate our
         * StationStopProfile. This is automatically the case since the new
         * departure time is always less or equal than the ones already stored in
         * the S array (departures are sorted by DESCENDING departure times).
@@ -613,6 +646,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->setSArray(S);
         }
+
+        /*
+         * Inserting possible footpaths into the S array.
+         * if (c_deptime, Tc) is non-dominated in profile of S[c_depstop] then:
+         *      for all footpaths f with f_arrstop = c_depstop do:
+         *          incorporate (c_deptime - f_dur, Tc) into profile of S[f_depstop];
+         */
+
 
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";
@@ -1203,6 +1244,16 @@ void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngin
                                              &TArray)
 {
     m_TArray = TArray;
+}
+
+QMap<QUrl, qreal> RouterEngine::Planner::DArray() const
+{
+    return m_DArray;
+}
+
+void RouterEngine::Planner::setDArray(const QMap<QUrl, qreal> &DArray)
+{
+    m_DArray = DArray;
 }
 
 void RouterEngine::Planner::addToUsedPages(Fragments::Page *page)

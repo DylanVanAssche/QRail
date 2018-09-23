@@ -17,7 +17,45 @@
 #include "engines/router/routerfootpathprofile.h"
 using namespace QRail;
 
-RouterEngine::FootpathProfile::FootpathProfile(QObject *parent) : QObject(parent)
+RouterEngine::FootpathProfile::FootpathProfile(StationEngine::Station *arrivalStation,
+                                               StationEngine::Station *departureStation,
+                                               qreal distance,
+                                               QObject *parent) : QObject(parent)
 {
+    // Use private members to avoid signal fire on construction
+    m_arrivalStation = arrivalStation;
+    m_departureStation = departureStation;
+    m_distance = distance;
+}
 
+// Getters & Setters
+qreal RouterEngine::FootpathProfile::distance() const
+{
+    return m_distance;
+}
+
+void RouterEngine::FootpathProfile::setDistance(const qreal &distance)
+{
+    m_distance = distance;
+}
+
+QRail::StationEngine::Station *RouterEngine::FootpathProfile::departureStation() const
+{
+    return m_departureStation;
+}
+
+void RouterEngine::FootpathProfile::setDepartureStation(QRail::StationEngine::Station
+                                                        *departureStation)
+{
+    m_departureStation = departureStation;
+}
+
+QRail::StationEngine::Station *RouterEngine::FootpathProfile::arrivalStation() const
+{
+    return m_arrivalStation;
+}
+
+void RouterEngine::FootpathProfile::setArrivalStation(QRail::StationEngine::Station *arrivalStation)
+{
+    m_arrivalStation = arrivalStation;
 }

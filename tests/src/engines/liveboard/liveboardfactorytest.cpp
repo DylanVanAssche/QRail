@@ -28,27 +28,19 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 {
     qDebug() << "Running LiveboardEngine::Factory test";
-    QBENCHMARK {
-        factory->getLiveboardByStationURI(
-            QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-            LiveboardEngine::Board::Mode::DEPARTURES);
+    QDateTime start = QDateTime::currentDateTime();
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);
 
-        // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
-        QEventLoop loop1;
-        connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop1, SLOT(quit()));
-        loop1.exec();
-    }
+    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    QEventLoop loop;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
+    loop.exec();
 
-    /*QBENCHMARK {
-        factory->getLiveboardByStationURI(
-            QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-            LiveboardEngine::Board::Mode::ARRIVALS);
-
-        // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
-        QEventLoop loop2;
-        connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop2, SLOT(quit()));
-        loop2.exec();
-    }*/
+    qInfo() << "Liveboard Vilvoorde DEPARTURES took"
+            << (QDateTime::currentDateTime()).secsTo(start)
+            << "msecs";
 }
 
 void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()

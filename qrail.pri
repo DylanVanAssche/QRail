@@ -32,7 +32,6 @@ SOURCES += \
     $$PWD/src/engines/router/routerroutelegend.cpp \
     $$PWD/src/engines/router/routerstationstopprofile.cpp \
     $$PWD/src/engines/router/routertrainprofile.cpp \
-    $$PWD/src/engines/router/routerfootpathprofile.cpp \
     $$PWD/src/engines/liveboard/liveboardfactory.cpp \
     $$PWD/src/engines/liveboard/liveboardboard.cpp \
     $$PWD/src/engines/station/stationstation.cpp \
@@ -75,8 +74,7 @@ HEADERS += \
     $$PWD/src/include/fragments/fragmentsfactory.h \
     $$PWD/src/include/fragments/fragmentsdispatcher.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
-    $$PWD/src/include/qrail.h \
-    $$PWD/src/include/engines/router/routerfootpathprofile.h
+    $$PWD/src/include/qrail.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

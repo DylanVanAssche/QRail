@@ -49,7 +49,6 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
     QDateTime from = page->fragments().first()->departureTime();
     QDateTime until = page->fragments().last()->departureTime();
-    qDebug() << m_targets; // DEBUG
     QList<QObject *> callerList = this->findTargets(from, until);
 
     // We should have retrieved some callers to dispatch the page to
@@ -61,9 +60,7 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
     foreach (QObject *caller, callerList) {
         QCoreApplication::postEvent(caller, event);
     }
-    qDebug() << "Dispatched page to" << callerList;
     this->removeTargets(from, until);
-    qDebug() << "Removed targets";
 
     // Trigger event processing, without this we might have race conditions where event processing is taking too long
     qApp->processEvents();

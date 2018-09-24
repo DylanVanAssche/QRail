@@ -393,10 +393,7 @@ QList<QPair<QRail::StationEngine::Station *, qreal>>
             QPair<QRail::StationEngine::Station *, qreal> stationDistancePair;
             stationDistancePair.first = this->getStationByURI(uri);
             stationDistancePair.second = distance;
-
             nearbyStations.append(stationDistancePair);
-            qDebug() << "Found station" << stationDistancePair.first->name().value(
-                         QLocale::Language::Dutch) << "distance" << distance << "km";
         }
     }
 

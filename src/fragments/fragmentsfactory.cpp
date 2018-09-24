@@ -121,9 +121,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
 
 void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
-    qDebug() << "Received event in factory:" << event;
     if (event->type() == this->http()->dispatcher()->eventType()) {
-        qDebug() << "Network event!";
         event->accept();
         QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
                                                         (event);

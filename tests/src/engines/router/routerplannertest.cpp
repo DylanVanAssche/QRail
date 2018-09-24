@@ -28,7 +28,6 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     // Connect the signals
     connect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), this,
             SLOT(processRouteFound(QList<QRail::RouterEngine::Route *>)));
-    connect(planner, SIGNAL(progress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
@@ -73,17 +72,8 @@ void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
 {
     disconnect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), this,
                SLOT(processRouteFound(QList<QRail::RouterEngine::Route *>)));
-    disconnect(planner, SIGNAL(progress(QUrl, qint16)), this, SLOT(pageProcess(QUrl, qint16)));
     disconnect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     disconnect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
-}
-
-void QRail::RouterEngine::PlannerTest::pageProcess(const QUrl &pageURI, const qint16 &progress)
-{
-    // Limit the logging of the page progress
-    if (progress == 33 || progress == 67 || progress == 100) {
-        qDebug() << "Page (" << pageURI.toString() << ") progress:" << progress << "%";
-    }
 }
 
 void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI)

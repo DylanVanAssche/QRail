@@ -189,10 +189,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // Fake an infinite number of transfers by setting it to 32767 (16 bits signed 01111111 11111111)
     qint16 INFINITE_TRANSFERS = 32767;
 
-    // Reports the page progress through the progress signal
-    qreal previousProgress = 0.0;
-    qreal currentProgress = 0.0;
-
 #ifdef VERBOSE_PARAMETERS
     qDebug() << "Planning Linked Connections page:";
     qDebug() << "\tPage URI:" << page->uri();
@@ -211,22 +207,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // departure times order
     for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; fragIndex--) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
-
-        /*
-        * REMARKS:
-        *   - We only emit the progress signal when we reach a certain treshold to
-        * avoid spamming the event loop.
-        *   - Substract the progress from 100.0 (100 %) since we are looping in the
-        * opposite direction.
-        *   - Increment the fragIndex before calculating the progress to reach 100
-        * % when fragIndex == 0.
-        *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
-        */
-        currentProgress = 100.0 - 100.0 * (fragIndex + 1) / page->fragments().size();
-        if (currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
-            previousProgress = currentProgress;
-            //emit this->progress(page->uri(), qRound(currentProgress));
-        }
 
         // We can only process fragments which are departing after our departure time
         if (fragment->departureTime() < this->departureTime()) {

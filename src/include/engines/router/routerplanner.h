@@ -93,7 +93,6 @@ signals:
     void error(const QString &message);
     void requested(const QUrl &pageURI);
     void processing(const QUrl &pageURI);
-    void progress(const QUrl &pageURI, const qint16 &progress);
 
 private:
     mutable QMutex plannerProcessingMutex;

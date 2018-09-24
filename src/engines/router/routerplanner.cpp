@@ -112,9 +112,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     plannerProcessingMutex.lock(); // Queue requests
     this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
     this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
-    QMap<QUrl, qreal> DArray = this->DArray();
-    DArray.clear();
-    this->setDArray(DArray);
     this->setDepartureStationURI(departureStation);
     this->setArrivalStationURI(arrivalStation);
     this->setDepartureTime(departureTime);
@@ -138,16 +135,28 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                                                           this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
                                                                                                                  SEARCH_RADIUS,
                                                                                                                  MAX_RESULTS);
+    QMap<QUrl, qreal> D = QMap<QUrl, qreal>();
     for (qint32 i = 0; i < nearbyStations.length(); i++) {
         QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
-        this->DArray().insert(stationDistancePair.first->uri(), stationDistancePair.second);
+        D.insert(stationDistancePair.first->uri(), stationDistancePair.second);
     }
-    qDebug() << this->DArray();
+    this->setDArray(D);
+    qDebug() << "D ARRAY=" << this->DArray();
 
     // Jumpstart the page fetching
     this->fragmentsFactory()->getPage(this->arrivalTime(), this);
     qApp->processEvents();
     qDebug() << "CSA init OK";
+}
+
+void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition,
+                                           const QGeoCoordinate &arrivalPosition, const QDateTime &departureTime, const qint16 &maxTransfers)
+{
+    QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition,
+                                                                                   SEARCH_RADIUS).first->uri();
+    QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition,
+                                                                                 SEARCH_RADIUS).first->uri();
+    this->getConnections(departureStationURI, arrivalStationURI, departureTime, maxTransfers);
 }
 
 // Processors
@@ -358,7 +367,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         /*
          * ==========================================================================================
          *         FIND THE EARLIEST ARRIVAL TIME Tmin BETWEEN THE 3 POSSIBILITIES
-         * T1, T2, T3
+         *         T1, T2, T3
          * ==========================================================================================
          *
          * In the CSA paper (march 2017) they describe the JourneyLeg Extraction
@@ -532,8 +541,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         Tmin_transfers
                     );
                     QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-                    T.insert(fragment->tripURI(),
-                             newTrainProfile); // Key is automatically updated when key already exists
+                    T.insert(fragment->tripURI(), newTrainProfile);
                     this->setTArray(T);
                 }
             }
@@ -547,8 +555,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     Tmin_transfers
                 );
                 QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-                T.insert(fragment->tripURI(),
-                         fasterTrainProfile); // Key is automatically updated when key already exists
+                T.insert(fragment->tripURI(), fasterTrainProfile);
                 this->setTArray(T);
             }
         } else {
@@ -559,8 +566,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 Tmin_transfers
             );
             QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-            T.insert(fragment->tripURI(),
-                     nonExistingTrainProfile); // Key is automatically updated when key already exists
+            T.insert(fragment->tripURI(), nonExistingTrainProfile);
             this->setTArray(T);
         }
 
@@ -620,8 +626,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
                                                                                      fragment->departureStationURI());
-                    SProfiles.replace(numberOfPairs - 1,
-                                      updatedStationStopProfile); // Replace profile when departure times are equal
+                    // Replace profile when departure times are equal
+                    SProfiles.replace(numberOfPairs - 1, updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->setSArray(S);
                 }
@@ -631,7 +637,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
                                                                                      fragment->departureStationURI());
-                    SProfiles.append(updatedStationStopProfile); // Add profile when we have different departure times
+                    // Add profile when we have different departure times
+                    SProfiles.append(updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->setSArray(S);
                 }
@@ -642,6 +649,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
             QList<QRail::RouterEngine::StationStopProfile *> stationStopProfileList =
                 QList<QRail::RouterEngine::StationStopProfile *>();
+
+            // Add new entry if it doesn't exist yet
             stationStopProfileList.append(updatedStationStopProfile);
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->setSArray(S);
@@ -654,6 +663,55 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          *          incorporate (c_deptime - f_dur, Tc) into profile of S[f_depstop];
          */
 
+        /*QRail::StationEngine::Station *targetStation = this->stationFactory()->getStationByURI(
+                                                           fragment->departureStationURI());
+        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                                                              this->stationFactory()->getStationsInTheAreaByPosition(targetStation->position(),
+                                                                                                                     SEARCH_RADIUS, MAX_RESULTS);
+        QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
+
+        for (qint32 i = 0; i < nearbyStations.length(); i++) {
+            QRail::StationEngine::Station *station = nearbyStations.at(i).first;
+            qreal distance = nearbyStations.at(i).second;
+            qreal walkingTime = (distance / WALKING_SPEED) // Convert km / km/h to hours
+                                * SECONDS_TO_HOURS_MULTIPLIER; // Convert hours to seconds
+
+            QRail::RouterEngine::StationStopProfile *footpathStationStopProfile =
+                new QRail::RouterEngine::StationStopProfile(
+                fragment->departureTime(),
+                Tmin_earliestArrivalTime,
+                fragment,
+                this->TArray().value(fragment->tripURI())->arrivalConnection(),
+                Tmin_transfers
+            );
+
+            if (this->SArray().contains(station->uri())) {
+                qint16 numberOfPairs = this->SArray().value(fragment->departureStationURI()).size();
+                QRail::RouterEngine::StationStopProfile *existingStationStopProfile = this->SArray().value(
+                                                                                          fragment->departureStationURI()).at(numberOfPairs - 1);
+                QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
+                                                                                 fragment->departureStationURI());
+                if (fragment->arrivalTime().addSecs(walkingTime) == existingStationStopProfile->arrivalTime()) {
+                    // Walking is faster than the existing route, replacing
+                    SProfiles.replace(numberOfPairs - 1, footpathStationStopProfile);
+                    S.insert(station->uri(), SProfiles);
+                    this->setSArray(S);
+                } else {
+                    SProfiles.append(footpathStationStopProfile);
+                    S.insert(station->uri(), SProfiles);
+                    this->setSArray(S);
+                }
+            } else {
+                // New entry
+                QList<QRail::RouterEngine::StationStopProfile *> stationStopProfileList =
+                    QList<QRail::RouterEngine::StationStopProfile *>();
+
+                // Add new entry if it doesn't exist yet
+                stationStopProfileList.append(footpathStationStopProfile);
+                S.insert(station->uri(), QList<QRail::RouterEngine::StationStopProfile *>());
+                this->setSArray(S);
+            }
+        }*/
 
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";

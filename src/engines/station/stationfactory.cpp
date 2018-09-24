@@ -378,12 +378,6 @@ QList<QPair<QRail::StationEngine::Station *, qreal>>
         qreal latitudeRadianStation = qDegreesToRadians(latitudeStation);
         qreal longitudeRadianStation = qDegreesToRadians(longitudeStation);
 
-        // Don't return stations that are the same as the center of our search radius
-        if (latitudeRadianStation != latitudeRadianCenter
-                && longitudeRadianStation != longitudeRadianCenter) {
-            continue;
-        }
-
         qreal differenceLatitude = latitudeRadianStation - latitudeRadianCenter;
         qreal differenceLongitude = longitudeRadianStation - longitudeRadianCenter;
 

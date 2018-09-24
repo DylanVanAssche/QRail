@@ -51,19 +51,22 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
-    QBENCHMARK {
-        planner->getConnections(
-            QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
-            QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-            QDateTime::fromString("2018-09-20T13:00:00.000Z", Qt::ISODate), // Departure time (UTC)
-            4 // Max transfers
-        );
 
-        // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
-        QEventLoop loop;
-        connect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), &loop, SLOT(quit()));
-        loop.exec();
-    }
+    QDateTime start = QDateTime::currentDateTime();
+    planner->getConnections(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
+        QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
+        QDateTime::fromString("2018-09-21T13:00:00.000Z", Qt::ISODate), // Departure time (UTC)
+        4 // Max transfers
+    );
+
+    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    QEventLoop loop;
+    connect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), &loop, SLOT(quit()));
+    loop.exec();
+    qInfo() << "Routing Vilvoorde -> Brugge took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
 }
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()

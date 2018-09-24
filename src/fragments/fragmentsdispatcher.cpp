@@ -19,6 +19,7 @@ using namespace QRail;
 
 QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 {
+    // Register a custom event type to the Qt event system
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
 }
 
@@ -48,12 +49,18 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
     QDateTime from = page->fragments().first()->departureTime();
     QDateTime until = page->fragments().last()->departureTime();
-    QList<QObject *> callerList = this->findAndRemoveTargets(from, until);
+    QList<QObject *> callerList = this->findTargets(from, until);
+
+    // We should have retrieved some callers to dispatch the page to
+    if (callerList.isEmpty()) {
+        qCritical() << "No callers found for dispatching page:" << page->uri();
+    }
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
         QCoreApplication::postEvent(caller, event);
     }
+    this->removeTargets(from, until);
 
     // Trigger event processing, without this we might have race conditions where event processing is taking too long
     qApp->processEvents();
@@ -71,21 +78,44 @@ void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
 
 void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
 {
+    QMutexLocker locker(&targetListLocker);
     m_targets.insert(departureTime, caller);
 }
 
-QList<QObject *> QRail::Fragments::Dispatcher::findAndRemoveTargets(const QDateTime &from,
-                                                                    const QDateTime &until)
+QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from,
+                                                           const QDateTime &until)
 {
+    QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     foreach (QDateTime timestamp, m_targets.keys()) {
+        /*
+         * If the timestamp is the same or higher or equal than the first fragment departure time
+         * and it's lower than the last fragment departure time + 1 minute.
+         *
+         * WARNING: We need to add 1 minute to this check to avoid a reace condition:
+         *          If the page ends at 19:28:00.000 (departure time of the last fragment)
+         *          and we request the page at 19:28:35.841 then our check needs to valid.
+         *          The reason for this lies in the way the Linked Connection server fragments
+         *          the data and how it's redirecting clients.
+         */
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
-                && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
+                && (timestamp.toMSecsSinceEpoch() < until.toMSecsSinceEpoch() + MINUTES_TO_MSECONDS_MULTIPLIER)) {
             callers.append(m_targets.value(timestamp));
-            m_targets.remove(timestamp);
         }
     }
     return callers;
+}
+
+void QRail::Fragments::Dispatcher::removeTargets(const QDateTime &from,
+                                                 const QDateTime &until)
+{
+    QMutexLocker locker(&targetListLocker);
+    foreach (QDateTime timestamp, m_targets.keys()) {
+        if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
+                && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
+            m_targets.remove(timestamp);
+        }
+    }
 }
 
 QEvent::Type QRail::Fragments::Dispatcher::eventType() const

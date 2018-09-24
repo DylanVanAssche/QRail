@@ -20,6 +20,7 @@
 #include "engines/router/routerplanner.h"
 #include <QtCore/QDateTime>
 #include <QtCore/QObject>
+#include <QtCore/QDateTime>
 #include <QtTest/QSignalSpy>
 #include <QtTest/QtTest>
 

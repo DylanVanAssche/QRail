@@ -24,8 +24,6 @@
 
 #include "engines/liveboard/liveboardfactory.h"
 
-#define LIVEBOARD_WAIT_TIME 15000
-
 namespace QRail {
 namespace LiveboardEngine {
 class FactoryTest : public QObject

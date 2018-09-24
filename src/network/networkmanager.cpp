@@ -32,6 +32,11 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
 {
     // Initiate a new QNetworkAccessManager with cache
     this->setQNAM(new QNetworkAccessManager(this));
+
+    // Init the dispatcher
+    this->setDispatcher(new QRail::Network::Dispatcher(this));
+
+    // Init cache
     QNetworkConfigurationManager QNAMConfig;
     this->QNAM()->setConfiguration(QNAMConfig.defaultConfiguration());
     this->setCache(new QNetworkDiskCache(this));
@@ -47,19 +52,19 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
     ((QNetworkDiskCache *)this->cache())->setCacheDirectory(path);
     this->QNAM()->setCache(this->cache());
 
-    // Init the dispatcher
-    this->setDispatcher(new QRail::Network::Dispatcher(this));
-
     // Connect QNetworkAccessManager signals
     connect(this->QNAM(), SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)),
             this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
-    connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)), this,
-            SIGNAL(sslErrorsReceived(QNetworkReply *, QList<QSslError>)));
-    connect(this->QNAM(), SIGNAL(finished(QNetworkReply *)), this,
-            SLOT(requestCompleted(QNetworkReply *)));
+    connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)),
+            this, SIGNAL(sslErrorsReceived(QNetworkReply *, QList<QSslError>)));
+    connect(this->QNAM(), SIGNAL(finished(QNetworkReply *)),
+            this, SLOT(requestCompleted(QNetworkReply *)));
 
     // Create HTTP client information
-    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC", "0.0.1", "Sailfish OS", "2.2.0.29"));
+    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC",
+                                                    "0.0.2",
+                                                    "Sailfish OS",
+                                                    "2.2.1.18"));
     this->setAcceptHeader(QString("application/ld+json"));
 }
 

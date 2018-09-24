@@ -33,16 +33,16 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Setup the QRail::Network::Manager
     this->setHttp(QRail::Network::Manager::getInstance());
+
+    // Setup dispatcher
+    this->setDispatcher(new QRail::Fragments::Dispatcher());
     /*
      * QNAM and callers are living in different threads!
      * INFO:
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl,
-                                                                                       QObject *)));
-
-    // Setup dispatcher
-    this->setDispatcher(new QRail::Fragments::Dispatcher());
+    connect(this, SIGNAL(getResource(QUrl, QObject *)),
+            this->http(), SLOT(getResource(QUrl, QObject *)));
 }
 
 /**
@@ -217,12 +217,16 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
     if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
 #ifdef VERBOSE_HTTP_STATUS
-        qDebug() << "Content-Header:" << reply->header(QNetworkRequest::ContentTypeHeader).toString();
-        qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong()
+        qDebug() << "Content-Header:"
+                 << reply->header(QNetworkRequest::ContentTypeHeader).toString();
+        qDebug() << "Content-Length:"
+                 << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong()
                  << "bytes";
-        qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
-                 reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
-        qDebug() << "Cache:" << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
+        qDebug() << "HTTP status:"
+                 << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()
+                 << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
+        qDebug() << "Cache:"
+                 << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
 #endif
 
         // Read HTTP reply

@@ -22,9 +22,13 @@
 #include <QtCore/QMap>
 #include <QtCore/QEvent>
 #include <QtCore/QList>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 #include <QtCore/QCoreApplication>
 
 #include "fragments/fragmentspage.h"
+
+#define MINUTES_TO_MSECONDS_MULTIPLIER 60*1000 // 60 seconds = 60 * 1000 msec
 
 namespace QRail {
 namespace Fragments {
@@ -48,10 +52,12 @@ public:
     explicit Dispatcher(QObject *parent = nullptr);
     void dispatchPage(QRail::Fragments::Page *page);
     void addTarget(const QDateTime &departureTime, QObject *caller);
-    QList<QObject *> findAndRemoveTargets(const QDateTime &from, const QDateTime &until);
+    void removeTargets(const QDateTime &from, const QDateTime &until);
+    QList<QObject *> findTargets(const QDateTime &from, const QDateTime &until);
     QEvent::Type eventType() const;
 
 private:
+    mutable QMutex targetListLocker;
     QMap<QDateTime, QObject *> m_targets;
     QEvent::Type m_eventType;
     void setEventType(const QEvent::Type &eventType);

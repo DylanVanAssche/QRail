@@ -27,6 +27,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QPair>
 #include <QtCore/QtGlobal>
+#include <QtPositioning/QGeoCoordinate>
 #include <algorithm> // C++ header needed for std:sort function
 
 #include "engines/alerts/alertsmessage.h"
@@ -57,6 +58,10 @@
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
 #define MINIMUM_PROGRESS_INCREMENT 1.0         // 1.0 = 1%
 
+#define SEARCH_RADIUS 3.0 // 3.0 km
+#define MAX_RESULTS 5 // 5 results maximum
+#define WALKING_SPEED 5.0 // 5.0 km/h
+
 // Singleton pattern
 namespace QRail {
 namespace RouterEngine {
@@ -65,7 +70,12 @@ class QRAIL_SHARED_EXPORT Planner : public QObject
     Q_OBJECT
 public:
     static Planner *getInstance();
-    void getConnections(const QUrl &departureStation, const QUrl &arrivalStation,
+    void getConnections(const QUrl &departureStation,
+                        const QUrl &arrivalStation,
+                        const QDateTime &departureTime,
+                        const qint16 &maxTransfers);
+    void getConnections(const QGeoCoordinate &departurePosition,
+                        const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
                         const qint16 &maxTransfers);
     QDateTime calculateArrivalTime(const QDateTime &departureTime);
@@ -98,6 +108,7 @@ private:
     QList<QRail::RouterEngine::Route *> m_routes;
     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> m_SArray;
     QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+    QMap<QUrl, qreal> m_DArray;
     QList<QRail::Fragments::Page *> m_usedPages;
     explicit Planner(QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
@@ -114,6 +125,8 @@ private:
     void setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray);
     QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
     void setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray);
+    QMap<QUrl, qreal> DArray() const;
+    void setDArray(const QMap<QUrl, qreal> &DArray);
     void addToUsedPages(QRail::Fragments::Page *page);
     void deleteUsedPages();
     void initUsedPages();

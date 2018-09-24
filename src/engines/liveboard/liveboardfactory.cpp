@@ -112,7 +112,6 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
     this->setMode(mode);
     this->setFrom(from);
     this->setUntil(until);
-    this->fragmentsFactory()->getPage(this->until(), this);
     this->setLiveboard(new QRail::LiveboardEngine::Board(this));
     this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
     this->liveboard()->setFrom(this->from());
@@ -120,6 +119,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
     this->liveboard()->setMode(this->mode());
     this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
     this->initUsedPages();
+    this->fragmentsFactory()->getPage(this->until(), this);
+    qApp->processEvents();
 }
 
 // Helpers

@@ -33,6 +33,8 @@
 
 #define BASE_URL "https://graph.irail.be/sncb/connections"
 
+//#define VERBOSE_HTTP_STATUS // Show HTTP results
+
 // Factory pattern to generate Linked Connections fragments on the fly
 namespace QRail {
 namespace Fragments {

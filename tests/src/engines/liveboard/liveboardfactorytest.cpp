@@ -28,22 +28,19 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 {
     qDebug() << "Running LiveboardEngine::Factory test";
-
-    // Activate QSignalSpy
-    qRegisterMetaType<QRail::LiveboardEngine::Board *>("QRail::LiveboardEngine::Board"); // register custom class
-    QSignalSpy spyLiveboard(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)));
-
-    qDebug() << "Liveboard arrivals (now) for station Vilvoorde";
-    factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-        LiveboardEngine::Board::Mode::ARRIVALS);
-    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
-
-    qDebug() << "Liveboard departures (now) for station Vilvoorde";
+    QDateTime start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
         LiveboardEngine::Board::Mode::DEPARTURES);
-    QVERIFY(spyLiveboard.wait(LIVEBOARD_WAIT_TIME));
+
+    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    QEventLoop loop;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
+    loop.exec();
+
+    qInfo() << "Liveboard Vilvoorde DEPARTURES took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
 }
 
 void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()

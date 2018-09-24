@@ -27,9 +27,9 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
 {
     /*
      * WARNING:
-     *  QEvent must be allocated on the heap since the event queue will
-     *  take ownership of the QEvent object.
-     *  Accessing it after calling 'postEvents()' isn't safe!
+     *      QEvent must be allocated on the heap since the event queue will
+     *      take ownership of the QEvent object.
+     *      Accessing it after calling 'postEvents()' isn't safe!
      * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
      */
 
@@ -39,7 +39,6 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
 
     // Retrieve the caller of the reply
     QObject *caller = this->findTarget(reply);
-    qDebug() << "Reply dispatched to target:" << caller;
 
     // Post the event to the event queue and remove the reply from the targets list
     QCoreApplication::postEvent(caller, event);
@@ -51,16 +50,19 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
 
 void QRail::Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
 {
+    QMutexLocker locker(&targetListLocker);
     m_targets.insert(reply, caller);
 }
 
 void QRail::Network::Dispatcher::removeTarget(QNetworkReply *reply)
 {
+    QMutexLocker locker(&targetListLocker);
     m_targets.remove(reply);
 }
 
 QObject *QRail::Network::Dispatcher::findTarget(QNetworkReply *reply)
 {
+    QMutexLocker locker(&targetListLocker);
     return m_targets.value(reply);
 }
 

@@ -118,9 +118,45 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
     this->setMaxTransfers(maxTransfers);
     this->setRoutes(QList<QRail::RouterEngine::Route *>());
-    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
     this->initUsedPages();
+
+    /*
+     * Setup footpaths for the arrival station since CSA profile
+     * goes from the end to the beginning.
+     *
+     * Footpaths give the user the possibility to exit at another station
+     * and walk to it's destination in case that's faster than the original
+     * arrival station.
+     */
+    QRail::StationEngine::Station *station =
+        this->stationFactory()->getStationByURI(this->arrivalStationURI());
+
+    QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                                                          this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
+                                                                                                                 SEARCH_RADIUS,
+                                                                                                                 MAX_RESULTS);
+    QMap<QUrl, qreal> D = QMap<QUrl, qreal>();
+    for (qint32 i = 0; i < nearbyStations.length(); i++) {
+        QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
+        D.insert(stationDistancePair.first->uri(), stationDistancePair.second);
+    }
+    this->setDArray(D);
+    qDebug() << "D ARRAY=" << this->DArray();
+
+    // Jumpstart the page fetching
+    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
+    qApp->processEvents();
     qDebug() << "CSA init OK";
+}
+
+void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition,
+                                           const QGeoCoordinate &arrivalPosition, const QDateTime &departureTime, const qint16 &maxTransfers)
+{
+    QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition,
+                                                                                   SEARCH_RADIUS).first->uri();
+    QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition,
+                                                                                 SEARCH_RADIUS).first->uri();
+    this->getConnections(departureStationURI, arrivalStationURI, departureTime, maxTransfers);
 }
 
 // Processors
@@ -213,14 +249,21 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         *newExitTrainFragment; // Save the connection when we exit the train for a transfer
 
         // Calculate T1, the time when walking from the current stop to the destination
-        if (fragment->arrivalStationURI() == this->arrivalStationURI()) {
+        if (fragment->arrivalStationURI() == this->arrivalStationURI()
+                && this->DArray().contains(fragment->arrivalStationURI())) {
             /*
              * This connection ends at our destination.
-             * We can walk now out of the station, our implementation doesn't cover
-             * the footpath at the end (yet)
+             * We can walk now out of the station towards our destination.
+             * The time to arrive is the arrival time in the station
+             * + the walking time of the footpath to our destination.
+             *
+             * WARNING: The D array stores distances, we need to divide
+             * them by a given WALKING_SPEED before adding them to the
+             * T1_walkingArrivalTime!
              */
-            T1_walkingArrivalTime = fragment->arrivalTime(); // Due the footpath limitation, we arrive at
-            // our destination when we arrive with the vehicle.
+            T1_walkingArrivalTime = fragment->arrivalTime().addSecs(
+                                        (this->DArray().value(fragment->arrivalStationURI()) / WALKING_SPEED)
+                                        * SECONDS_TO_HOURS_MULTIPLIER);
             T1_transfers = 0; // Walking, no transfers between arrival and destination.
         } else {
             /*
@@ -273,9 +316,11 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             * between vehicles
             */
             qint16 position = this->SArray().value(fragment->arrivalStationURI()).size() - 1;
+
             QRail::RouterEngine::StationStopProfile *stopProfile = this->SArray().value(
                                                                        fragment->arrivalStationURI()).at(position);
 
+            // Needs extension for footpath support
             while ((((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
                       MILISECONDS_TO_SECONDS_MULTIPLIER) < fragment->arrivalTime().toMSecsSinceEpoch()) ||
                     stopProfile->transfers() >= this->maxTransfers()) && position > 0) {
@@ -324,7 +369,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         /*
          * ==========================================================================================
          *         FIND THE EARLIEST ARRIVAL TIME Tmin BETWEEN THE 3 POSSIBILITIES
-         * T1, T2, T3
+         *         T1, T2, T3
          * ==========================================================================================
          *
          * In the CSA paper (march 2017) they describe the JourneyLeg Extraction
@@ -498,8 +543,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         Tmin_transfers
                     );
                     QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-                    T.insert(fragment->tripURI(),
-                             newTrainProfile); // Key is automatically updated when key already exists
+                    T.insert(fragment->tripURI(), newTrainProfile);
                     this->setTArray(T);
                 }
             }
@@ -513,8 +557,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     Tmin_transfers
                 );
                 QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-                T.insert(fragment->tripURI(),
-                         fasterTrainProfile); // Key is automatically updated when key already exists
+                T.insert(fragment->tripURI(), fasterTrainProfile);
                 this->setTArray(T);
             }
         } else {
@@ -525,8 +568,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 Tmin_transfers
             );
             QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->TArray();
-            T.insert(fragment->tripURI(),
-                     nonExistingTrainProfile); // Key is automatically updated when key already exists
+            T.insert(fragment->tripURI(), nonExistingTrainProfile);
             this->setTArray(T);
         }
 
@@ -543,7 +585,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         *         UPDATING THE S ARRAY
         * ====================================
         * Create a new StationStopProfile to update the S array.
-        * The existing CSAStationStopProfiles shouldn't dominate our
+        * The existing StationStopProfiles shouldn't dominate our
         * StationStopProfile. This is automatically the case since the new
         * departure time is always less or equal than the ones already stored in
         * the S array (departures are sorted by DESCENDING departure times).
@@ -563,7 +605,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             qint16 numberOfPairs = this->SArray().value(fragment->departureStationURI()).size();
             QRail::RouterEngine::StationStopProfile *existingStationStopProfile = this->SArray().value(
                                                                                       fragment->departureStationURI()).at(numberOfPairs - 1);
-
             if (updatedStationStopProfile->arrivalTime() < existingStationStopProfile->arrivalTime()) {
                 // Replace existing StationStopProfile at the back when departure times are equal
                 if (updatedStationStopProfile->departureTime() == existingStationStopProfile->departureTime()) {
@@ -586,8 +627,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
                                                                                      fragment->departureStationURI());
-                    SProfiles.replace(numberOfPairs - 1,
-                                      updatedStationStopProfile); // Replace profile when departure times are equal
+                    // Replace profile when departure times are equal
+                    SProfiles.replace(numberOfPairs - 1, updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->setSArray(S);
                 }
@@ -597,7 +638,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
                                                                                      fragment->departureStationURI());
-                    SProfiles.append(updatedStationStopProfile); // Add profile when we have different departure times
+                    // Add profile when we have different departure times
+                    SProfiles.append(updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->setSArray(S);
                 }
@@ -608,10 +650,22 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->SArray();
             QList<QRail::RouterEngine::StationStopProfile *> stationStopProfileList =
                 QList<QRail::RouterEngine::StationStopProfile *>();
+
+            // Add new entry if it doesn't exist yet
             stationStopProfileList.append(updatedStationStopProfile);
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->setSArray(S);
         }
+
+        /*
+         * Inserting possible footpaths into the S array.
+         * if (c_deptime, Tc) is non-dominated in profile of S[c_depstop] then:
+         *      for all footpaths f with f_arrstop = c_depstop do:
+         *          incorporate (c_deptime - f_dur, Tc) into profile of S[f_depstop];
+         *
+         * WARNING: We can't guarantee any longer that the non-domination as mentioned earlier is guaranteed!
+         *          We need to run a check before actually executing the profile insertion.
+         */
 
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";
@@ -1202,6 +1256,16 @@ void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngin
                                              &TArray)
 {
     m_TArray = TArray;
+}
+
+QMap<QUrl, qreal> RouterEngine::Planner::DArray() const
+{
+    return m_DArray;
+}
+
+void RouterEngine::Planner::setDArray(const QMap<QUrl, qreal> &DArray)
+{
+    m_DArray = DArray;
 }
 
 void RouterEngine::Planner::addToUsedPages(Fragments::Page *page)

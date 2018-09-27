@@ -252,17 +252,17 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
     QString platform = stop["platforminfo"].toObject()["name"].toString();
     bool isPlatformNormal = stop["platforminfo"].toObject()["normal"].toBool();
     bool hasLeft = stop["left"].toBool();
-    qint16 departureDelay = stop["departureDelay"].toInt();
+    qint16 departureDelay = (qint16)stop["departureDelay"].toInt();
     QDateTime departureTime;
     departureTime.setTime_t(
-        stop["scheduledDepartureTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
-    departureTime.addSecs(departureDelay);
+        stop["scheduledDepartureTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    departureTime = departureTime.addSecs(departureDelay);
     bool isDepartureCanceled = stop["departureCanceled"].toBool();
-    qint16 arrivalDelay = stop["arrivalDelay"].toInt();
+    qint16 arrivalDelay = (qint16)stop["arrivalDelay"].toInt();
     QDateTime arrivalTime;
     arrivalTime.setTime_t(
-        stop["scheduledArrivalTime"].toString().toInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
-    arrivalTime.addSecs(arrivalDelay);
+        stop["scheduledArrivalTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    arrivalTime = arrivalTime.addSecs(arrivalDelay);
     bool isArrivalCanceled = stop["arrivalCanceled"].toBool();
     bool isExtraStop = stop["isExtraStop"].toBool();
     QJsonObject occupancyLevel = stop["occupancy"].toObject();
@@ -329,10 +329,10 @@ VehicleEngine::Vehicle *VehicleEngine::Factory::fetchVehicleFromCache(const QUrl
 #endif
 
     if (m_cache.contains(id)) {
-        return this->m_cache.value(id);
 #ifdef VERBOSE_CACHE
         qDebug() << "Found vehicle in cache:" << id;
 #endif
+        return this->m_cache.value(id);
     }
     return nullptr;
 }

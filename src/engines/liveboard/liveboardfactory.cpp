@@ -175,26 +175,9 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
  */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
 {
-    qreal previousProgress = 0.0;
-    qreal currentProgress = 0.0; // Reports the page progress through the progress signal
-
     // Parse each connection fragment
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
-
-        /*
-         * REMARKS:
-         *   - We only emit the progress signal when we reach a certain treshold to
-         * avoid spamming the event loop.
-         *   - Increment the fragIndex before calculating the progress to reach 100
-         * % when fragIndex == 0.
-         *   - 100.0 * is needed to get a qreal back between [0.0, 100.0].
-         */
-        currentProgress = 100.0 * (fragIndex + 1) / page->fragments().size();
-        if (currentProgress - previousProgress >= MINIMUM_PROGRESS_INCREMENT) {
-            previousProgress = currentProgress;
-            emit this->progress(page->uri(), qRound(currentProgress));
-        }
 
         // Lazy construction
         if ((this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS &&

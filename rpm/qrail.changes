@@ -21,5 +21,16 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Sep 30 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.3-1
+- [MAJOR BUGFIX] Fixed delays and timestamps of the LiveboardEngine::Board instances
+- [IMPROVEMENT] Removed obselete progress signals to reduce the load on the event loop
+- [NEW] Added fuzzy name search for stations
+- [CI] Enabled x64 desktop as target in CI tests
+
+* Mon Sep 24 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.2-1
+- [MAJOR BUGFIX] Fixed memory leaks
+- [IMPROVEMENT] Stability improvement of the library
+- [CI] CI builds are working again
+
 * Thu Aug 14 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.1-1
 - [RELEASE] First public release

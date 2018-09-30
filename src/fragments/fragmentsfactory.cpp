@@ -173,8 +173,8 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
     QDateTime arrivalTime = QDateTime::fromString(data["arrivalTime"].toString(), Qt::ISODate);
     QUrl tripURI = QUrl(data["gtfs:trip"].toString());
     QUrl routeURI = QUrl(data["gtfs:route"].toString());
-    qint16 departureDelay;
-    qint16 arrivalDelay;
+    qint16 departureDelay = 0;
+    qint16 arrivalDelay = 0;
     if (data.contains("departureDelay")) {
         departureDelay = data["departureDelay"].toInt();
     }

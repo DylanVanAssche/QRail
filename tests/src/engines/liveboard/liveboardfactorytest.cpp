@@ -59,14 +59,14 @@ void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngi
     qDebug() << "\tEntries:";
 
     foreach (QRail::VehicleEngine::Vehicle *entry, board->entries()) {
-        if (board->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-            qDebug() << "\t\t" << entry->headsign() <<
-                     entry->intermediaryStops().first()->arrivalTime().toString("hh:mm");
-        } else if (board->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-            qDebug() << "\t\t" << entry->headsign() <<
-                     entry->intermediaryStops().first()->departureTime().toString("hh:mm");
-        } else {
-            qCritical() << "Unknown QRail::LiveboardEngine::Board mode!";
-        }
+        qDebug() << "\t\t"
+                 << entry->headsign()
+                 << entry->intermediaryStops().first()->arrivalTime().toString("hh:mm")
+                 << "+"
+                 << entry->intermediaryStops().first()->arrivalDelay() / 60
+                 << "|"
+                 << entry->intermediaryStops().first()->departureTime().toString("hh:mm")
+                 << "+"
+                 << entry->intermediaryStops().first()->departureDelay() / 60;
     }
 }

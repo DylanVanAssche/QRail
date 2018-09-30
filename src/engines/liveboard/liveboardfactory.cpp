@@ -187,22 +187,58 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
 
             /*
             * Create stop information
-            * TO DO: Add platform and canceled information.
-            *        This is still unsupported by the Linked Connections graph!
+            * TO DO:
+            *       - Add platform and canceled information.
+            *         This is still unsupported by the Linked Connections graph!
+            *       - Add arrival time or departure time when Liveboard::Mode is inverted,
+            *         this requires vehicle route data.
+            *         This is still unsupported by the Linked Connections graph!
+            *
+            *          Departure                    Arrival
+            *           +-----------------------------+
+            *
+            *          /!\ Using arrival time for the departure stop as arrival time is wrong!
+            *              Circumventing by setting the arrival and departure time of a stop to
+            *              the same depending on the Liveboard::Mode.
             */
-            QRail::VehicleEngine::Stop *entry = new QRail::VehicleEngine::Stop(
-                this->liveboard()->station(),
-                QString("?"), // platform
-                true,         // isPlatformNormal
-                fragment->departureTime() >= QDateTime::currentDateTime(),
-                fragment->departureTime(), fragment->departureDelay(),
-                false, // isDepartureCanceled
-                fragment->arrivalTime(), fragment->arrivalDelay(),
-                false, // isArrivalCanceled
-                false, // isExtraStop
-                QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
-                QRail::VehicleEngine::Stop::Type::STOP
-            );
+
+            QRail::VehicleEngine::Stop *entry = nullptr;
+            if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+                entry = new QRail::VehicleEngine::Stop(
+                    this->liveboard()->station(),
+                    QString("?"), // platform
+                    true,         // isPlatformNormal
+                    fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                    fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
+                    fragment->departureDelay(),
+                    false, // isDepartureCanceled
+                    fragment->departureTime().addSecs(-fragment->departureDelay()),
+                    fragment->departureDelay(),
+                    false, // isArrivalCanceled
+                    false, // isExtraStop
+                    QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                    QRail::VehicleEngine::Stop::Type::STOP
+                );
+            } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
+                entry = new QRail::VehicleEngine::Stop(
+                    this->liveboard()->station(),
+                    QString("?"), // platform
+                    true,         // isPlatformNormal
+                    fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                    fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
+                    fragment->arrivalDelay(),
+                    false, // isDepartureCanceled
+                    fragment->arrivalTime().addSecs(-fragment->arrivalDelay()),
+                    fragment->arrivalDelay(),
+                    false, // isArrivalCanceled
+                    false, // isExtraStop
+                    QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                    QRail::VehicleEngine::Stop::Type::STOP
+                );
+            } else {
+                qCritical() << "Unknown LiveboardEngine::Board::Mode, can't fill Liveboard::Board entries!";
+            }
+
 
             // Get vehicle information
             QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();

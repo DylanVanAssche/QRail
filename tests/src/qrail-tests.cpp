@@ -21,6 +21,7 @@
 #include "engines/liveboard/liveboardfactorytest.h"
 #include "engines/router/routerplannertest.h"
 #include "engines/vehicle/vehiclefactorytest.h"
+#include "engines/station/stationfactorytest.h"
 #include "fragments/fragmentsfragmenttest.h"
 #include "fragments/fragmentspagetest.h"
 #include "network/networkmanagertest.h"
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
         int routerPlannerResult = -1;
         int liveboardFactoryResult = -1;
         int vehicleFactoryResult = -1;
+        int stationFactoryResult = -1;
         QRail::Network::ManagerTest testSuiteNetworkManager;
         QRail::Database::ManagerTest testSuiteDBManager;
         QRail::Fragments::FragmentTest testSuiteLCFragment;
@@ -58,6 +60,7 @@ int main(int argc, char *argv[])
         QRail::RouterEngine::PlannerTest testSuiteCSAPlanner;
         QRail::LiveboardEngine::FactoryTest testSuiteLiveboardFactory;
         QRail::VehicleEngine::FactoryTest testSuiteVehicleFactory;
+        QRail::StationEngine::FactoryTest testSuiteStationFactory;
 
         // Run unit tests without passing arguments
         networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
@@ -74,9 +77,12 @@ int main(int argc, char *argv[])
         // Run QRail::LiveboardEngine::Factory integration test
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
+        // Run QRail::StationEngine::Factory integration test
+        stationFactoryResult = QTest::qExec(&testSuiteStationFactory, 0, nullptr);
+
         // Return the status code of every test for CI/CD
         QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult |
-                               routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult);
+                               routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult | stationFactoryResult);
     });
     return app.exec();
 }

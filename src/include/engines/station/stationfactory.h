@@ -53,7 +53,7 @@ class QRAIL_SHARED_EXPORT Factory : public QObject
     Q_OBJECT
 public:
     static Factory *getInstance();
-    Station *getStationByURI(const QUrl &uri);
+    QRail::StationEngine::Station *getStationByURI(const QUrl &uri);
     QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(
                                                           const QGeoCoordinate &position,
                                                           const qreal &radius,
@@ -61,6 +61,8 @@ public:
     QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(
         const QGeoCoordinate &position,
         const qreal radius);
+
+    QList<QRail::StationEngine::Station *> getStationsByName(const QString &query);
 
 private:
     QRail::Database::Manager *m_db;

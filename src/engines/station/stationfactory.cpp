@@ -366,7 +366,7 @@ QList<QPair<QRail::StationEngine::Station *, qreal>>
                   "FROM stations ");
     this->db()->execute(query);
 
-    //Read the results from the query
+    // Read the results from the query
     qreal latitudeRadianCenter = qDegreesToRadians(position.latitude());
     qreal longitudeRadianCenter = qDegreesToRadians(position.longitude());
     while (query.next()) {
@@ -414,6 +414,42 @@ QPair<StationEngine::Station *, qreal> StationEngine::Factory::getNearestStation
 {
     // We only need the nearest station, the list is automatically sorted by distance anyway.
     return this->getStationsInTheAreaByPosition(position, radius, 1).first();
+}
+
+QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsByName(
+    const QString &name)
+{
+    QSqlQuery query(this->db()->database());
+
+    // Retrieve stations by fuzzy matching their names
+    query.prepare("SELECT "
+                  "uri, "
+                  "name, "
+                  "alternativeFR, "
+                  "alternativeNL, "
+                  "alternativeDE, "
+                  "alternativeEN "
+                  "FROM stations "
+                  "WHERE name LIKE '%" + name + "%' "
+                  "OR alternativeFR LIKE '%" + name + "%' "
+                  "OR alternativeNL LIKE '%" + name + "%' "
+                  "OR alternativeDE LIKE '%" + name + "%' "
+                  "OR alternativeEN LIKE '%" + name + "%'");
+    // Binding parameters fails due %fuzzymatching% characters TO DO
+    /*query.bindValue(":name", name);
+    query.bindValue(":alternativeFR", name);
+    query.bindValue(":alternativeNL", name);
+    query.bindValue(":alternativeDE", name);
+    query.bindValue(":alternativeEN", name);*/
+    this->db()->execute(query);
+
+    QList<QRail::StationEngine::Station *> stations = QList<QRail::StationEngine::Station *>();
+    while (query.next()) {
+        QUrl uri = query.value(0).toUrl();
+        stations.append(this->getStationByURI(uri));
+    }
+
+    return stations;
 }
 
 /**

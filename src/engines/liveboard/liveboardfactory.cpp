@@ -176,6 +176,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
 {
     // Parse each connection fragment
+    bool foundEntryInPage = false;
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -251,46 +252,26 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
                 intermediaryStops
             );
             this->liveboard()->addEntry(vehicle);
+            foundEntryInPage = true;
         }
+    }
+
+    // Only fire signal when we actually found a new entry.
+    if(foundEntryInPage) {
+        this->streamUpdate(this->liveboard());
     }
 
     // Fetching fragment pages complete, emit the finished signal
     if (finished) {
         qDebug() << "Finished fetching liveboard pages";
 
-        /*
-         * Sort the entries on arrival or departure time (due concurrent access).
-         *
-         * We can use the .first() method to retrieve the stop since the liveboard
-         * only adds one stop to the intermediaryStops list.
-         * If the user wants to retrieve the full vehicle he/she can use the
-         * VehicleEngine API to retrieve the full intermediaryStops list.
-         */
-        QList<QRail::VehicleEngine::Vehicle *> entries = this->liveboard()->entries();
-        if (this->liveboard()->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-            // Use arrival time to sort
-            std::sort(entries.begin(), entries.end(), [](const QRail::VehicleEngine::Vehicle * a,
-            const QRail::VehicleEngine::Vehicle * b) -> bool {
-                QDateTime timeA = a->intermediaryStops().first()->arrivalTime();
-                QDateTime timeB = b->intermediaryStops().first()->arrivalTime();
-                return timeA < timeB;
-            });
-        } else if (this->liveboard()->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-            // Use departure time to sort
-            std::sort(entries.begin(), entries.end(), [](const QRail::VehicleEngine::Vehicle * a,
-            const QRail::VehicleEngine::Vehicle * b) -> bool {
-                QDateTime timeA = a->intermediaryStops().first()->departureTime();
-                QDateTime timeB = b->intermediaryStops().first()->departureTime();
-                return timeA < timeB;
-            });
-        }
-        this->liveboard()->setEntries(entries);
-
         // Emit finished signal
         emit this->finished(this->liveboard());
         this->deleteUsedPages();
         liveboardProcessingMutex.unlock(); // Processing finished
     }
+
+    // Stream pages to client
 
     // Queue page for deletion when Liveboard is ready
     this->addUsedPage(page);

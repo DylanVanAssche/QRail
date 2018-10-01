@@ -20,6 +20,8 @@
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
+#include <QtCore/QDebug>
+#include <algorithm> // std::sort C++
 
 #include "engines/station/stationstation.h"
 #include "engines/vehicle/vehiclevehicle.h"

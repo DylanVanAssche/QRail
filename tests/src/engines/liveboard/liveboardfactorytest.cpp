@@ -23,6 +23,8 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
     factory = LiveboardEngine::Factory::getInstance();
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
             SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
+    connect(factory, SIGNAL(streamUpdate(QRail::LiveboardEngine::Board *)), this,
+            SLOT(liveboardStreamReceived(QRail::LiveboardEngine::Board *)));
 }
 
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
@@ -56,8 +58,11 @@ void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngi
     qDebug() << "\tUntil:" << board->until();
     qDebug() << "\tMode:" << board->mode();
     qDebug() << "\tNumber of entries:" << board->entries().size();
-    qDebug() << "\tEntries:";
+}
 
+void LiveboardEngine::FactoryTest::liveboardStreamReceived(LiveboardEngine::Board *board)
+{
+    qDebug() << "Stream liveboard for station:" << board->station()->name().value(QLocale::Language::Dutch);
     foreach (QRail::VehicleEngine::Vehicle *entry, board->entries()) {
         qDebug() << "\t\t"
                  << entry->headsign()

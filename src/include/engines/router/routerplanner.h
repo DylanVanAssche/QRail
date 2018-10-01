@@ -90,6 +90,7 @@ protected:
 
 signals:
     void routesFound(const QList<QRail::RouterEngine::Route *> &routes);
+    void routesStream(const QList<QRail::RouterEngine::Route *> &routes);
     void error(const QString &message);
     void requested(const QUrl &pageURI);
     void processing(const QUrl &pageURI);

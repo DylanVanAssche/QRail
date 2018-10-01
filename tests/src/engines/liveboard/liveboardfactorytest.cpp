@@ -32,8 +32,8 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qDebug() << "Running LiveboardEngine::Factory test";
     QDateTime start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
-        LiveboardEngine::Board::Mode::DEPARTURES);
+                QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+                LiveboardEngine::Board::Mode::DEPARTURES);
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
     QEventLoop loop;
@@ -53,7 +53,7 @@ void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()
 void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board)
 {
     qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" <<
-             board->station()->name().value(QLocale::Language::Dutch);
+                board->station()->name().value(QLocale::Language::Dutch);
     qDebug() << "\tFrom:" << board->from();
     qDebug() << "\tUntil:" << board->until();
     qDebug() << "\tMode:" << board->mode();

@@ -145,7 +145,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 
     // Jumpstart the page fetching
     this->fragmentsFactory()->getPage(this->arrivalTime(), this);
-    qApp->processEvents();
+    //qApp->processEvents();
     qDebug() << "CSA init OK";
 }
 

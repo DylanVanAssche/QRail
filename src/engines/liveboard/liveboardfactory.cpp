@@ -120,7 +120,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
     this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
     this->initUsedPages();
     this->fragmentsFactory()->getPage(this->until(), this);
-    qApp->processEvents();
+    //qApp->processEvents();
 }
 
 // Helpers

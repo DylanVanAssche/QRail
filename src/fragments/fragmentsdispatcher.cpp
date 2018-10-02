@@ -34,8 +34,8 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
 
     // Create custom event type
-    QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
-    event->setPage(page);
+    QRail::Fragments::DispatcherEvent event = QRail::Fragments::DispatcherEvent(this->eventType());
+    event.setPage(page);
 
     /*
      * Retrieve the callers of the page.
@@ -58,12 +58,9 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
-        QCoreApplication::postEvent(caller, event);
+        QCoreApplication::sendEvent(caller, &event);
     }
     this->removeTargets(from, until);
-
-    // Trigger event processing, without this we might have race conditions where event processing is taking too long
-    qApp->processEvents();
 }
 
 QRail::Fragments::Page *QRail::Fragments::DispatcherEvent::page() const

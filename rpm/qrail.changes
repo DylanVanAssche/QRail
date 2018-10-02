@@ -21,6 +21,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed Oct 03 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.4-1
+- [MAJOR BUGFIX] Misuse of QCoreApplication::postEvent()
+- [NEW] Streaming support for Liveboard and Router
+
 * Sun Sep 30 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.3-1
 - [MAJOR BUGFIX] Fixed delays and timestamps of the LiveboardEngine::Board instances
 - [IMPROVEMENT] Removed obselete progress signals to reduce the load on the event loop

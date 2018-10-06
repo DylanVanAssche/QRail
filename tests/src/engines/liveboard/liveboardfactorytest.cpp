@@ -30,7 +30,10 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 {
     qDebug() << "Running LiveboardEngine::Factory test";
-    QDateTime start = QDateTime::currentDateTime();
+    QDateTime start;
+
+    // Creating liveboard
+    start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
         LiveboardEngine::Board::Mode::DEPARTURES);
@@ -39,8 +42,31 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     QEventLoop loop;
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
     loop.exec();
-
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    // Extending liveboard with next results
+    start = QDateTime::currentDateTime();
+    factory->getNextResultsForLiveboard(liveboard);
+
+    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    QEventLoop loopNext;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopNext, SLOT(quit()));
+    loopNext.exec();
+    qInfo() << "Liveboard Vilvoorde DEPARTURES extending NEXT took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    // Extending liveboard with previous results
+    start = QDateTime::currentDateTime();
+    factory->getPreviousResultsForLiveboard(liveboard);
+
+    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    QEventLoop loopPrevious;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopPrevious, SLOT(quit()));
+    loopPrevious.exec();
+    qInfo() << "Liveboard Vilvoorde DEPARTURES extending PREVIOUS took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 }
@@ -58,6 +84,7 @@ void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngi
     qDebug() << "\tUntil:" << board->until();
     qDebug() << "\tMode:" << board->mode();
     qDebug() << "\tNumber of entries:" << board->entries().size();
+    liveboard = board;
 }
 
 void LiveboardEngine::FactoryTest::liveboardStreamReceived(QRail::VehicleEngine::Vehicle *entry)

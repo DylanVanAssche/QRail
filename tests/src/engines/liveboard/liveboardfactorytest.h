@@ -40,6 +40,7 @@ private slots:
 
 private:
     QRail::LiveboardEngine::Factory *factory;
+    QRail::LiveboardEngine::Board *liveboard;
 };
 } // namespace LiveboardEngine
 } // namespace QRail

@@ -82,7 +82,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
 {
     this->getLiveboardByStationURI(uri,
                                    QDateTime::currentDateTime().toUTC(),
-                                   QDateTime::currentDateTime().addSecs(1 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
+                                   QDateTime::currentDateTime().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
                                    mode);
 }
 
@@ -119,8 +119,46 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
     this->liveboard()->setMode(this->mode());
     this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
     this->initUsedPages();
+    this->setIsExtending(false);
     this->fragmentsFactory()->getPage(this->from(), this);
-    //qApp->processEvents();
+}
+
+void LiveboardEngine::Factory::getNextResultsForLiveboard(LiveboardEngine::Board *board)
+{
+    if (board->hydraNext().isValid() && board->hydraNext().hasQuery()) {
+        liveboardProcessingMutex.lock(); // Processing started
+        this->setStationURI(board->station()->uri());
+        this->setMode(board->mode());
+        this->setFrom(board->until());
+        this->setLiveboard(board);
+        this->initUsedPages();
+        QUrlQuery query = QUrlQuery(board->hydraNext().query());
+        QDateTime timestamp = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
+        this->setUntil(timestamp);
+        this->setIsExtending(true);
+        this->fragmentsFactory()->getPage(board->hydraNext(), this);
+    } else {
+        qCritical() << "hydraNext URI invalid, can't extend liveboard";
+    }
+}
+
+void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::Board *board)
+{
+    if (board->hydraPrevious().isValid() && board->hydraPrevious().hasQuery()) {
+        liveboardProcessingMutex.lock(); // Processing started
+        this->setStationURI(board->station()->uri());
+        this->setMode(board->mode());
+        this->setFrom(board->until());
+        this->setLiveboard(board);
+        this->initUsedPages();
+        QUrlQuery query = QUrlQuery(board->hydraPrevious().query());
+        QDateTime timestamp = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
+        this->setUntil(timestamp);
+        this->setIsExtending(true);
+        this->fragmentsFactory()->getPage(board->hydraPrevious(), this);
+    } else {
+        qCritical() << "hydraPrevious URI invalid, can't extend liveboard";
+    }
 }
 
 // Helpers
@@ -147,9 +185,12 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     * Before processing our received page we check if we the first fragment
     * passed our departure time. We can do this because the departure times are
     * sorted in DESCENDING order.
+    *
+    * Or if we're extending the liveboard we keep searching until a result has
+    * been retrieved.
     */
     bool finished = false;
-    if (page->fragments().last()->departureTime() < this->until()) {
+    if (page->fragments().last()->departureTime() < this->until() || this->isExtending()) {
         qDebug() << "Requesting another page from QRail::Fragments::Factory";
         this->fragmentsFactory()->getPage(page->hydraNext(), this);
         emit this->requested(page->hydraNext());
@@ -175,6 +216,10 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
  */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
 {
+    // Update hydra pagination
+    this->liveboard()->setHydraNext(page->hydraNext());
+    this->liveboard()->setHydraPrevious(page->hydraPrevious());
+
     // Parse each connection fragment
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
@@ -252,13 +297,23 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
             );
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
+
+            // If we were extending the liveboard, the fetching will stop after this is set to false
+            this->setIsExtending(false);
         }
     }
     // Fetching fragment pages complete, emit the finished signal
     if (finished) {
         qDebug() << "Finished fetching liveboard pages";
 
-        // Emit finished signal
+        // Update the time boundaries of the liveboard
+        // TO DO: Handle ARRIVALS and DEPARTURES mode, both timestamps are the same at the moment so this valid.
+        this->liveboard()->setFrom(
+            this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
+        this->liveboard()->setUntil(
+            this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
+
+        // Emit finished signal and clean up
         emit this->finished(this->liveboard());
         this->deleteUsedPages();
         liveboardProcessingMutex.unlock(); // Processing finished
@@ -352,6 +407,18 @@ void LiveboardEngine::Factory::deleteUsedPages()
 StationEngine::Factory *QRail::LiveboardEngine::Factory::stationFactory() const
 {
     return m_stationFactory;
+}
+
+bool QRail::LiveboardEngine::Factory::isExtending() const
+{
+    QMutexLocker locker(&liveboardExtendingMutex);
+    return m_isExtending;
+}
+
+void QRail::LiveboardEngine::Factory::setIsExtending(bool isExtending)
+{
+    QMutexLocker locker(&liveboardExtendingMutex);
+    m_isExtending = isExtending;
 }
 
 /**

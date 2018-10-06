@@ -98,11 +98,74 @@ void QRail::LiveboardEngine::Board::addEntry(QRail::VehicleEngine::Vehicle *entr
             QDateTime timeB = b->intermediaryStops().first()->departureTime();
             return timeA < timeB;
         });
-    }
-    else {
+    } else {
         qCritical() << "Sorting Liveboard::Board failed! Unknown Liveboard::Board::Mode";
     }
     this->setEntries(entries);
+}
+
+QUrl QRail::LiveboardEngine::Board::hydraNext() const
+{
+    return m_hydraNext;
+}
+
+void QRail::LiveboardEngine::Board::setHydraNext(const QUrl &hydraNext)
+{
+    // New hydraNext URI is further in time?
+    if (hydraNext.hasQuery() && this->hydraNext().isValid()) {
+        QUrlQuery queryNewHydraNext = QUrlQuery(hydraNext.query());
+        QUrlQuery queryOldHydraNext = QUrlQuery(this->hydraNext().query());
+        QDateTime timeNewHydraNext = QDateTime::fromString(
+                                         queryNewHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+        QDateTime timeOldHydraNext = QDateTime::fromString(
+                                         queryOldHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+
+        qDebug() << "HYDRA NEXT=" << hydraNext << timeNewHydraNext << "|" << this->hydraNext() <<
+                 timeOldHydraNext;
+        // Only accept URI that's later in time
+        if (timeNewHydraNext > timeOldHydraNext) {
+            m_hydraNext = hydraNext;
+            emit this->hydraNextChanged();
+        }
+    }
+    // Current hydraNext is still empty, setting it to the received hydraNext
+    else {
+        qDebug() << "Empty hydraNext";
+        m_hydraNext = hydraNext;
+        emit this->hydraNextChanged();
+    }
+}
+
+QUrl QRail::LiveboardEngine::Board::hydraPrevious() const
+{
+    return m_hydraPrevious;
+}
+
+void QRail::LiveboardEngine::Board::setHydraPrevious(const QUrl &hydraPrevious)
+{
+    // New hydraPrevious URI is earlier in time?
+    if (hydraPrevious.hasQuery() && this->hydraPrevious().hasQuery()) {
+        QUrlQuery queryNewHydraPrevious = QUrlQuery(hydraPrevious.query());
+        QUrlQuery queryOldHydraPrevious = QUrlQuery(this->hydraPrevious().query());
+        QDateTime timeNewHydraPrevious = QDateTime::fromString(
+                                             queryNewHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+        QDateTime timeOldHydraPrevious = QDateTime::fromString(
+                                             queryOldHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+        qDebug() << "HYDRA PREVIOUS=" << hydraPrevious << timeNewHydraPrevious << "|" <<
+                 this->hydraPrevious() <<
+                 timeOldHydraPrevious;
+        // Only accept URI that's earlier in time
+        if (timeNewHydraPrevious < timeOldHydraPrevious) {
+            m_hydraPrevious = hydraPrevious;
+            emit this->hydraPreviousChanged();
+        }
+    }
+    // Current hydraPrevious is still empty, setting it to the received hydraPrevious
+    else {
+        qDebug() << "Empty hydraPrevious";
+        m_hydraPrevious = hydraPrevious;
+        emit this->hydraPreviousChanged();
+    }
 }
 
 // Getters & Setters

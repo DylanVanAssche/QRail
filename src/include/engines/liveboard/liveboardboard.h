@@ -21,6 +21,9 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
+#include <QtCore/QUrl>
+#include <QtCore/QUrlQuery>
+#include <QtCore/QDateTime>
 #include <algorithm> // std::sort C++
 
 #include "engines/station/stationstation.h"
@@ -52,6 +55,10 @@ public:
     QRail::LiveboardEngine::Board::Mode mode() const;
     void setMode(const QRail::LiveboardEngine::Board::Mode &mode);
     void addEntry(QRail::VehicleEngine::Vehicle *entry);
+    QUrl hydraPrevious() const;
+    void setHydraPrevious(const QUrl &hydraPrevious);
+    QUrl hydraNext() const;
+    void setHydraNext(const QUrl &hydraNext);
 
 signals:
     void entriesChanged();
@@ -59,6 +66,8 @@ signals:
     void fromChanged();
     void untilChanged();
     void modeChanged();
+    void hydraPreviousChanged();
+    void hydraNextChanged();
 
 private:
     QList<QRail::VehicleEngine::Vehicle *> m_entries;
@@ -66,6 +75,8 @@ private:
     QDateTime m_from;
     QDateTime m_until;
     QRail::LiveboardEngine::Board::Mode m_mode;
+    QUrl m_hydraPrevious;
+    QUrl m_hydraNext;
 
     Q_ENUM(Mode)
 };

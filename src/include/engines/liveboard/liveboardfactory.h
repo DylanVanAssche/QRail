@@ -51,6 +51,8 @@ public:
                              const QDateTime &until,
                              const QRail::LiveboardEngine::Board::Mode &mode =
                                  QRail::LiveboardEngine::Board::Mode::DEPARTURES);
+    void getNextResultsForLiveboard(QRail::LiveboardEngine::Board *board);
+    void getPreviousResultsForLiveboard(QRail::LiveboardEngine::Board *board);
     QDateTime from() const;
     QDateTime until() const;
     QUrl stationURI() const;
@@ -74,6 +76,7 @@ signals:
 private:
     mutable QMutex liveboardProcessingMutex;
     mutable QMutex liveboardAccessMutex;
+    mutable QMutex liveboardExtendingMutex;
     QList<QRail::Fragments::Page *> m_usedPages;
     QRail::LiveboardEngine::Board *m_liveboard;
     QDateTime m_from;
@@ -85,6 +88,7 @@ private:
     StationEngine::Factory *m_stationFactory;
     QRail::Fragments::Factory *fragmentsFactory() const;
     StationEngine::Factory *stationFactory() const;
+    bool m_isExtending;
     void processPage(QRail::Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
     void parsePage(QRail::Fragments::Page *page, const bool &finished);
@@ -97,6 +101,8 @@ private:
     void initUsedPages();
     void addUsedPage(QRail::Fragments::Page *page);
     void deleteUsedPages();
+    bool isExtending() const;
+    void setIsExtending(bool isExtending);
     explicit Factory(QObject *parent = nullptr);
 };
 } // namespace LiveboardEngine

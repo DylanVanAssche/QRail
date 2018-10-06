@@ -176,7 +176,6 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
 {
     // Parse each connection fragment
-    bool foundEntryInPage = false;
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -252,15 +251,9 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
                 intermediaryStops
             );
             this->liveboard()->addEntry(vehicle);
-            foundEntryInPage = true;
+            this->stream(vehicle);
         }
     }
-
-    // Only fire signal when we actually found a new entry.
-    if (foundEntryInPage) {
-        this->streamUpdate(this->liveboard());
-    }
-
     // Fetching fragment pages complete, emit the finished signal
     if (finished) {
         qDebug() << "Finished fetching liveboard pages";

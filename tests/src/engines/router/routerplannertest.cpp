@@ -28,8 +28,8 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     // Connect the signals
     connect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), this,
             SLOT(processRoutesFound(QList<QRail::RouterEngine::Route *>)));
-    connect(planner, SIGNAL(routesStream(QList<QRail::RouterEngine::Route *>)), this,
-            SLOT(processRoutesStream(QList<QRail::RouterEngine::Route *>)));
+    connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this,
+            SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
@@ -55,11 +55,11 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
     QDateTime start = QDateTime::currentDateTime();
     planner->getConnections(
-                QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
-                QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-                QDateTime::fromString("2018-09-21T13:00:00.000Z", Qt::ISODate), // Departure time (UTC)
-                4 // Max transfers
-                );
+        QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
+        QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
+        QDateTime::fromString("2018-10-05T13:00:00.000Z", Qt::ISODate), // Departure time (UTC)
+        4 // Max transfers
+    );
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
     QEventLoop loop;
@@ -73,7 +73,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
 {
     disconnect(planner, SIGNAL(routesFound(QList<QRail::RouterEngine::Route *>)), this,
-               SLOT(processRouteFound(QList<QRail::RouterEngine::Route *>)));
+               SLOT(processRoutesFound(QList<QRail::RouterEngine::Route *>)));
     disconnect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     disconnect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
@@ -95,8 +95,8 @@ void QRail::RouterEngine::PlannerTest::processRoutesFound(const QList<QRail::Rou
     foreach (QRail::RouterEngine::Route *route, routes) {
         // Verify the complete trip
         qDebug() << "Trip:" << route->departureStation()->station()->name().value(
-                        QLocale::Language::Dutch) << "->" << route->arrivalStation()->station()->name().value(
-                        QLocale::Language::Dutch) << " Route:";
+                     QLocale::Language::Dutch) << "->" << route->arrivalStation()->station()->name().value(
+                     QLocale::Language::Dutch) << " Route:";
         QVERIFY2(route->departureStation()->station()->name().value(QLocale::Language::Dutch) ==
                  QString("Vilvoorde"), "Expected departure station: Vilvoorde");
         QVERIFY2(route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) ==
@@ -115,16 +115,16 @@ void QRail::RouterEngine::PlannerTest::processRoutesFound(const QList<QRail::Rou
         foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
             if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
                 qDebug() << "TRANSFER:" << "Changing vehicle at" << transfer->time().time().toString("hh:mm") <<
-                            transfer->station()->name().value(QLocale::Language::Dutch);
+                         transfer->station()->name().value(QLocale::Language::Dutch);
                 retrievedTransferStations << transfer->station()->name().value(QLocale::Language::Dutch);
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE) {
                 qDebug() << "DEPARTURE:" << transfer->time().time().toString("hh:mm") <<
-                            transfer->station()->name().value(QLocale::Language::Dutch);
+                         transfer->station()->name().value(QLocale::Language::Dutch);
                 QVERIFY2(transfer->station()->name().value(QLocale::Language::Dutch) == QString("Vilvoorde"),
                          "Expected departure station: Vilvoorde");
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
                 qDebug() << "ARRIVAL:" << transfer->time().time().toString("hh:mm") <<
-                            transfer->station()->name().value(QLocale::Language::Dutch);
+                         transfer->station()->name().value(QLocale::Language::Dutch);
                 QVERIFY2(transfer->station()->name().value(QLocale::Language::Dutch) == QString("Brugge"),
                          "Expected arrival station: Brugge");
             } else {
@@ -135,23 +135,19 @@ void QRail::RouterEngine::PlannerTest::processRoutesFound(const QList<QRail::Rou
     qDebug() << "All routes processed";
 }
 
-void RouterEngine::PlannerTest::processRoutesStream(const QList<RouterEngine::Route *> &routes)
+void RouterEngine::PlannerTest::processRoutesStream(QRail::RouterEngine::Route *route)
 {
-    qDebug() << "CSA streaming:" << routes.size() << "possible routes, new result:";
-
-    // New routes are always before the older ones due sorting on departureTime
-    QRail::RouterEngine::Route *route = routes.first();
     // Log the complete trip to the console and verify it
     foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
         if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
             qDebug() << "TRANSFER:" << "Changing vehicle at" << transfer->time().time().toString("hh:mm") <<
-                        transfer->station()->name().value(QLocale::Language::Dutch);
+                     transfer->station()->name().value(QLocale::Language::Dutch);
         } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE) {
             qDebug() << "DEPARTURE:" << transfer->time().time().toString("hh:mm") <<
-                        transfer->station()->name().value(QLocale::Language::Dutch);
+                     transfer->station()->name().value(QLocale::Language::Dutch);
         } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
             qDebug() << "ARRIVAL:" << transfer->time().time().toString("hh:mm") <<
-                        transfer->station()->name().value(QLocale::Language::Dutch);
+                     transfer->station()->name().value(QLocale::Language::Dutch);
         }
     }
 }

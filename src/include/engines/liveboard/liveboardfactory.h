@@ -69,7 +69,7 @@ signals:
     void requested(const QUrl &uri);
     void processing(const QUrl &uri);
     void finished(QRail::LiveboardEngine::Board *liveboard);
-    void streamUpdate(QRail::LiveboardEngine::Board *liveboard);
+    void stream(QRail::VehicleEngine::Vehicle *entry);
 
 private:
     mutable QMutex liveboardProcessingMutex;

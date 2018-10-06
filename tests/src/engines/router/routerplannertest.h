@@ -36,7 +36,7 @@ private slots:
 
 public slots:
     void processRoutesFound(const QList<QRail::RouterEngine::Route *> &routes);
-    void processRoutesStream(const QList<QRail::RouterEngine::Route *> &routes);
+    void processRoutesStream(QRail::RouterEngine::Route *route);
     void processing(const QUrl &pageURI);
     void requested(const QUrl &pageURI);
 

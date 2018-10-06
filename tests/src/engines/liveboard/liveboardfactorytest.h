@@ -31,7 +31,7 @@ class FactoryTest : public QObject
     Q_OBJECT
 public slots:
     void liveboardReceived(QRail::LiveboardEngine::Board *board);
-    void liveboardStreamReceived(QRail::LiveboardEngine::Board *board);
+    void liveboardStreamReceived(QRail::VehicleEngine::Vehicle *vehicle);
 
 private slots:
     void initLiveboardFactoryTest();

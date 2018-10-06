@@ -167,6 +167,7 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {
     // Parse JSON
     QUrl uri = QUrl(data["@id"].toString());
+    QString type = data["@type"].toString();
     QUrl departureStationURI = QUrl(data["departureStop"].toString());
     QUrl arrivalStationURI = QUrl(data["arrivalStop"].toString());
     QDateTime departureTime = QDateTime::fromString(data["departureTime"].toString(), Qt::ISODate);
@@ -183,21 +184,32 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
     }
     QString direction = data["direction"].toString();
 
-    // Create Linked Connection Fragment and return it
-    QRail::Fragments::Fragment *frag = new QRail::Fragments::Fragment(
-        uri,
-        departureStationURI,
-        arrivalStationURI,
-        departureTime,
-        arrivalTime,
-        departureDelay,
-        arrivalDelay,
-        tripURI,
-        routeURI,
-        direction,
-        m_instance
-    );
-    return frag;
+    Q_UNUSED(type); // Only connections at the moment
+
+    // Verify the extracted data before creating a Fragment
+    if (departureStationURI.isValid() && arrivalStationURI.isValid()
+            && departureTime.isValid() && arrivalTime.isValid() && tripURI.isValid()
+            && routeURI.isValid() && !direction.isEmpty()) {
+
+        // Create Linked Connection Fragment and return it
+        QRail::Fragments::Fragment *frag = new QRail::Fragments::Fragment(
+            uri,
+            departureStationURI,
+            arrivalStationURI,
+            departureTime,
+            arrivalTime,
+            departureDelay,
+            arrivalDelay,
+            tripURI,
+            routeURI,
+            direction,
+            m_instance
+        );
+        return frag;
+    }
+
+    qCritical() << "Parsing failed, throw fragment away: " << uri;
+    return nullptr;
 }
 
 /**
@@ -249,7 +261,11 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                     if (item.isObject()) {
                         QJsonObject connection = item.toObject();
                         QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
-                        fragments.append(frag);
+                        if (frag) {
+                            fragments.append(frag);
+                        } else {
+                            qCritical() << "Corrupt Fragment detected!";
+                        }
                     } else {
                         qCritical() << "Fragment isn't a JSON object!";
                     }

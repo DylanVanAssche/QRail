@@ -119,7 +119,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
     this->liveboard()->setMode(this->mode());
     this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
     this->initUsedPages();
-    this->fragmentsFactory()->getPage(this->until(), this);
+    this->fragmentsFactory()->getPage(this->from(), this);
     //qApp->processEvents();
 }
 
@@ -149,10 +149,10 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     * sorted in DESCENDING order.
     */
     bool finished = false;
-    if (page->fragments().first()->departureTime() > this->from()) {
+    if (page->fragments().last()->departureTime() < this->until()) {
         qDebug() << "Requesting another page from QRail::Fragments::Factory";
-        this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-        emit this->requested(page->hydraPrevious());
+        this->fragmentsFactory()->getPage(page->hydraNext(), this);
+        emit this->requested(page->hydraNext());
     } else {
         finished = true;
     }
@@ -257,7 +257,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
     }
 
     // Only fire signal when we actually found a new entry.
-    if(foundEntryInPage) {
+    if (foundEntryInPage) {
         this->streamUpdate(this->liveboard());
     }
 

@@ -210,6 +210,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
         // We can only process fragments which are departing after our departure time
         if (fragment->departureTime() < this->departureTime()) {
+            qDebug() << fragment->departureTime() << fragment->uri() << "in page:" << page->uri();
+            qDebug() << fragment->departureTime().isValid();
             hasPassedDepartureTimeLimit = true;
             continue;
         }
@@ -924,6 +926,8 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     * Before processing our received page we check if we the first fragment
     * passed our departure time. We can do this because the departure times are
     * sorted in DESCENDING order.
+    *
+    * If not, fetch new pages
     */
     if (page->fragments().first()->departureTime() > this->departureTime()) {
         qDebug() << "Requesting another page from QRail::Fragments::Factory";

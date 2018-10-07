@@ -173,7 +173,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
  * a maximum of transfers. Emit the finished signal when completed, the error
  * signal is emitted in case an error comes up.
  *
- * Invalid input will directly emit the finished signal with an empty list.
+ * Invalid input will directly emit the finished signal with a NullJourney instance.
  */
 void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition,
                                            const QGeoCoordinate &arrivalPosition,
@@ -191,7 +191,7 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
         qCritical() << "Departure position:" << departurePosition;
         qCritical() << "Arrival position:" << arrivalPosition;
         qCritical() << "Departure time:" << departureTime;
-        emit this->finished(QList<QRail::RouterEngine::Route *>());
+        emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
     }
 }
 
@@ -881,7 +881,15 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         }
 
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
-        emit this->finished(this->routes());
+        //emit this->finished(this->routes());
+        QRail::RouterEngine::Journey *journey = new QRail::RouterEngine::Journey(this->routes(),
+                                                                                 this->TArray(),
+                                                                                 this->SArray(),
+                                                                                 this->departureStationURI(),
+                                                                                 this->arrivalStationURI(),
+                                                                                 this->maxTransfers(),
+                                                                                 this->hydraPrevious(),
+                                                                                 this->hydraNext());
 
         // Clean up pages when we're finished
         this->deleteUsedPages();

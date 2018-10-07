@@ -37,6 +37,8 @@
 #include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routertrainprofile.h"
 #include "engines/router/routertransfer.h"
+#include "engines/router/routerjourney.h"
+#include "engines/router/routernulljourney.h"
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"
@@ -89,7 +91,7 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void finished(const QList<QRail::RouterEngine::Route *> &routes);
+    void finished(QRail::RouterEngine::Journey *journey);
     void stream(QRail::RouterEngine::Route *route);
     void error(const QString &message);
     void requested(const QUrl &pageURI);

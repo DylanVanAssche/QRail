@@ -49,7 +49,9 @@ SOURCES += \
     $$PWD/src/fragments/fragmentsdispatcher.cpp \
     $$PWD/src/qrail.cpp \
     $$PWD/src/engines/vehicle/vehiclenullvehicle.cpp \
-    $$PWD/src/engines/liveboard/liveboardnullboard.cpp
+    $$PWD/src/engines/liveboard/liveboardnullboard.cpp \
+    $$PWD/src/include/engines/router/routerjourney.cpp \
+    $$PWD/src/engines/router/routernulljourney.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -60,6 +62,8 @@ HEADERS += \
     $$PWD/src/include/engines/router/routerroutelegend.h \
     $$PWD/src/include/engines/router/routerstationstopprofile.h \
     $$PWD/src/include/engines/router/routertrainprofile.h \
+    $$PWD/src/include/engines/router/routerjourney.h \
+    $$PWD/src/include/engines/router/routernulljourney.h \
     $$PWD/src/include/engines/liveboard/liveboardfactory.h \
     $$PWD/src/include/engines/liveboard/liveboardboard.h \
     $$PWD/src/include/engines/liveboard/liveboardnullboard.h \

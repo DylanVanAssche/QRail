@@ -35,11 +35,11 @@ public:
     static NullBoard *getInstance();
 
 private:
-    NullBoard(const QList<QRail::VehicleEngine::Vehicle *> &entries,
-              StationEngine::Station *station,
-              const QDateTime &from,
-              const QDateTime &until,
-              QObject *parent = nullptr);
+    explicit NullBoard(const QList<QRail::VehicleEngine::Vehicle *> &entries,
+                       StationEngine::Station *station,
+                       const QDateTime &from,
+                       const QDateTime &until,
+                       QObject *parent = nullptr);
     static LiveboardEngine::NullBoard *m_instance;
 };
 }

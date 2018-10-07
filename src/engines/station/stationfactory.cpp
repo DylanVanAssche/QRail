@@ -864,7 +864,6 @@ QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringLi
     query.bindValue(":alternativeDE", platform.at(7));
     query.bindValue(":alternativeEN", platform.at(8));
     query.bindValue(":platform", platform.at(9));
-    qDebug() << platform;
     return this->db()->executeAsync(query);
 }
 

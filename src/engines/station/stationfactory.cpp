@@ -119,7 +119,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                       "escalatorUp, "
                       "escalatorDown, "
                       "elevatorPlatform, "
-                      "hearingAidSignal, "
+                      "audioInductionLoop, "
                       "salesOpenMonday, "
                       "salesCloseMonday, "
                       "salesOpenTuesday, "
@@ -135,6 +135,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                       "salesOpenSunday, "
                       "salesCloseSunday, "
                       "avgStopTimes "
+                      "officialTransferTimes "
                       "FROM stations "
                       "WHERE uri = :uri");
         query.bindValue(":uri", uri); // Match page URI's
@@ -196,6 +197,9 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
             // Fetch the average stop times for this station
             qreal averageStopTimes = query.value(43).toDouble();
 
+            // The official transfer time according to the NMBS for the station
+            quint32 officialTransferTimes = query.value(44).toInt();
+
             // Get the platform data for this station
             QMap<QUrl, QString> platforms = this->getPlatformsByStationURI(uri);
 
@@ -228,7 +232,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                 bool hasEscalatorUp = query.value(25).toBool();
                 bool hasEscalatorDown = query.value(26).toBool();
                 bool hasElevatorPlatform = query.value(27).toBool();
-                bool hasHearingAidSignal = query.value(28).toBool();
+                bool hasAudioInductionLoop = query.value(28).toBool();
 
                 // Convert openinghours to QMap
                 QMap<StationEngine::Station::Day, QPair<QTime, QTime>>
@@ -298,9 +302,10 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                     hasEscalatorUp,
                     hasEscalatorDown,
                     hasElevatorPlatform,
-                    hasHearingAidSignal,
+                    hasAudioInductionLoop,
                     openingHours,
                     averageStopTimes,
+                    officialTransferTimes,
                     platforms
                 );
             } else {
@@ -310,6 +315,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                     country,
                     position,
                     averageStopTimes,
+                    officialTransferTimes,
                     platforms
                 );
             }
@@ -476,9 +482,10 @@ bool StationEngine::Factory::initDatabase()
     success = this->db()->execute(query);
     query.clear();
 
-    // STATIONS table
+    // STATIONS table, IGNORE insertion for PRIMARY KEY violations
+    // https://www.guru99.com/sqlite-query-insert-update.html#4
     success = query.prepare("CREATE TABLE IF NOT EXISTS stations ("
-                            "uri TEXT PRIMARY KEY, "
+                            "uri TEXT PRIMARY KEY ON CONFLICT IGNORE, "
                             "name TEXT NOT NULL, "
                             "alternativeFR TEXT, "
                             "alternativeNL TEXT, "
@@ -506,7 +513,7 @@ bool StationEngine::Factory::initDatabase()
                             "escalatorUp INT, "
                             "escalatorDown INT, "
                             "elevatorPlatform INT, "
-                            "hearingAidSignal INT, "
+                            "audioInductionLoop INT, "
                             "salesOpenMonday TEXT, "
                             "salesCloseMonday TEXT, "
                             "salesOpenTuesday TEXT, "
@@ -521,17 +528,23 @@ bool StationEngine::Factory::initDatabase()
                             "salesCloseSaturday TEXT, "
                             "salesOpenSunday TEXT, "
                             "salesCloseSunday TEXT, "
-                            "avgStopTimes REAL)");
+                            "avgStopTimes REAL, "
+                            "officialTransferTimes INT)");
     success = this->db()->execute(query);
     query.clear(); // Release resources for reuse
 
-    // PLATFORMS table
+    // PLATFORMS table, IGNORE insertion for PRIMARY KEY violations
+    // https://www.guru99.com/sqlite-query-insert-update.html#4
     success = query.prepare("CREATE TABLE IF NOT EXISTS platforms ("
-                            "uri TEXT PRIMARY KEY, "
+                            "uri TEXT PRIMARY KEY ON CONFLICT IGNORE, "
                             "parentStop TEXT, "
                             "longitude REAL, "
                             "latitude REAL, "
                             "name TEXT, "
+                            "alternativeFR TEXT, "
+                            "alternativeNL TEXT, "
+                            "alternativeDE TEXT, "
+                            "alternativeEN TEXT, "
                             "platform TEXT, "
                             "FOREIGN KEY(parentStop) REFERENCES stations(uri))");
     success = this->db()->execute(query);
@@ -652,7 +665,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
                   "escalatorUp, "
                   "escalatorDown, "
                   "elevatorPlatform, "
-                  "hearingAidSignal, "
+                  "audioInductionLoop, "
                   "salesOpenMonday, "
                   "salesCloseMonday, "
                   "salesOpenTuesday, "
@@ -667,7 +680,8 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
                   "salesCloseSaturday, "
                   "salesOpenSunday, "
                   "salesCloseSunday, "
-                  "avgStopTimes)"
+                  "avgStopTimes, "
+                  "officialTransferTimes)"
                   " VALUES( "
                   ":uri, "
                   ":name, "
@@ -697,7 +711,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
                   ":escalatorUp, "
                   ":escaltorDown, "
                   ":elevatorPlatform, "
-                  ":hearingAidSignal, "
+                  ":audioInductionLoop, "
                   ":salesOpenMonday, "
                   ":salesCloseMonday, "
                   ":salesOpenTuesday, "
@@ -712,7 +726,8 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
                   ":salesCloseSaturday, "
                   ":salesOpenSunday, "
                   ":salesCloseSunday, "
-                  ":avgStopTimes)");
+                  ":avgStopTimes, "
+                  ":officialTransferTimes)");
     query.bindValue(":uri", station.at(0));  // Same as facilities.at(0)
     query.bindValue(":name", station.at(1)); // Same as facilties.at(1)
     query.bindValue(":alternativeFR", station.at(2));
@@ -741,7 +756,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
     query.bindValue(":escalatorUp", facilities.at(18).toInt());
     query.bindValue(":escalatorDown", facilities.at(19).toInt());
     query.bindValue(":elevatorPlatform", facilities.at(20).toInt());
-    query.bindValue(":hearingAidSignal", facilities.at(21));
+    query.bindValue(":audioInductionLoop", facilities.at(21));
     query.bindValue(":salesOpenMonday", facilities.at(22));
     query.bindValue(":salesCloseMonday", facilities.at(23));
     query.bindValue(":salesOpenTuesday", facilities.at(24));
@@ -757,6 +772,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
     query.bindValue(":salesOpenSunday", facilities.at(34));
     query.bindValue(":salesCloseSunday", facilities.at(35));
     query.bindValue(":avgStopTimes", station.at(9));
+    query.bindValue(":officialTransferTimes", station.at(10));
     return this->db()->executeAsync(query);
 }
 
@@ -781,7 +797,8 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
                   "alternativeNL, "
                   "alternativeDE, "
                   "alternativeEN, "
-                  "avgStopTimes)"
+                  "avgStopTimes, "
+                  "officialTransferTimes)"
                   " VALUES( "
                   ":uri, "
                   ":name, "
@@ -789,7 +806,8 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
                   ":alternativeNL, "
                   ":alternativeDE, "
                   ":alternativeEN, "
-                  ":avgStopTimes)");
+                  ":avgStopTimes, "
+                  ":officialTransferTimes)");
     query.bindValue(":uri", station.at(0));
     query.bindValue(":name", station.at(1));
     query.bindValue(":alternativeFR", station.at(2));
@@ -797,6 +815,7 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
     query.bindValue(":alternativeDE", station.at(4));
     query.bindValue(":alternativeEN", station.at(5));
     query.bindValue(":avgStopTimes", station.at(9));
+    query.bindValue(":officialTransferTimes", station.at(10));
     return this->db()->executeAsync(query);
 }
 
@@ -819,6 +838,10 @@ QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringLi
                   "longitude, "
                   "latitude, "
                   "name, "
+                  "alternativeFR, "
+                  "alternativeNL, "
+                  "alternativeDE, "
+                  "alternativeEN, "
                   "platform)"
                   " VALUES("
                   ":uri, "
@@ -826,13 +849,22 @@ QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringLi
                   ":longitude, "
                   ":latitude, "
                   ":name, "
+                  ":alternativeFR, "
+                  ":alternativeNL, "
+                  ":alternativeDE, "
+                  ":alternativeEN, "
                   ":platform)");
     query.bindValue(":uri", platform.at(0));
     query.bindValue(":parentStop", platform.at(1));
     query.bindValue(":longitude", platform.at(2));
     query.bindValue(":latitude", platform.at(3));
     query.bindValue(":name", platform.at(4));
-    query.bindValue(":platform", platform.at(5));
+    query.bindValue(":alternativeFR", platform.at(6));
+    query.bindValue(":alternativeNL", platform.at(5));
+    query.bindValue(":alternativeDE", platform.at(7));
+    query.bindValue(":alternativeEN", platform.at(8));
+    query.bindValue(":platform", platform.at(9));
+    qDebug() << platform;
     return this->db()->executeAsync(query);
 }
 
@@ -907,7 +939,7 @@ QMap<QUrl, QString> StationEngine::Factory::getPlatformsByStationURI(const QUrl 
     while (query.next()) {
         platformsMap.insert(
             query.value(0).toUrl(),   // Platform URI
-            query.value(2).toString() // Platform name
+            query.value(2).toString() // Platform code
         );
     }
 

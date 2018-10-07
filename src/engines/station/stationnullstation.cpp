@@ -43,7 +43,7 @@ StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
  * @param const bool &hasEscalatorUp
  * @param const bool &hasEscalatorDown
  * @param const bool &hasElevatorPlatform
- * @param const bool &hasHearingAidSignal
+ * @param const bool &hasAudioInductionLoop
  * @param const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours
  * @param const qreal &averageStopTimes
  * @param QObject *parent
@@ -52,19 +52,36 @@ StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
  * Constructs a StationEngine::NullStation according to the Null design pattern.
  */
 StationEngine::NullStation::NullStation(const QUrl &uri,
-                                        const QMap<QLocale::Language, QString> &name, const QLocale::Country &country,
-                                        const QGeoCoordinate &position, const QGeoAddress &address, const bool &hasTicketVendingMachine,
-                                        const bool &hasLuggageLockers, const bool &hasFreeParking, const bool &hasTaxi,
-                                        const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus, const bool &hasTram,
-                                        const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
-                                        const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
-                                        const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
+                                        const QMap<QLocale::Language, QString> &name,
+                                        const QLocale::Country &country,
+                                        const QGeoCoordinate &position,
+                                        const QGeoAddress &address,
+                                        const bool &hasTicketVendingMachine,
+                                        const bool &hasLuggageLockers,
+                                        const bool &hasFreeParking,
+                                        const bool &hasTaxi,
+                                        const bool &hasBicycleSpots,
+                                        const bool &hasBlueBike,
+                                        const bool &hasBus,
+                                        const bool &hasTram,
+                                        const bool &hasMetro,
+                                        const bool &hasWheelchairAvailable,
+                                        const bool &hasRamp,
+                                        const qint16 &disabledParkingSpots,
+                                        const bool &hasElevatedPlatform,
+                                        const bool &hasEscalatorUp,
+                                        const bool &hasEscalatorDown,
+                                        const bool &hasElevatorPlatform,
+                                        const bool &hasAudioInductionLoop,
                                         const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
-                                        const qreal &averageStopTimes, QObject *parent) :
+                                        const qreal &averageStopTimes,
+                                        const quint32 &officialTransferTimes,
+                                        QObject *parent) :
     Station(uri, name, country, position, address, hasTicketVendingMachine, hasLuggageLockers,
             hasFreeParking, hasTaxi, hasBicycleSpots, hasBlueBike, hasBus, hasTram, hasMetro,
             hasWheelchairAvailable, hasRamp, disabledParkingSpots, hasElevatedPlatform, hasEscalatorDown,
-            hasEscalatorUp, hasElevatorPlatform, hasHearingAidSignal, openingHours, averageStopTimes, parent)
+            hasEscalatorUp, hasElevatorPlatform, hasAudioInductionLoop, openingHours, averageStopTimes,
+            officialTransferTimes, parent)
 {
 
 }
@@ -109,7 +126,8 @@ StationEngine::NullStation *StationEngine::NullStation::getInstance()
             false,
             false,
             QMap<StationEngine::Station::Day, QPair<QTime, QTime> >(),
-            0.0
+            0.0,
+            0
         );
     }
     return m_instance;

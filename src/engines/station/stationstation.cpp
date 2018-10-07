@@ -18,7 +18,7 @@
 using namespace QRail;
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief StationEngine::Station constructor: empty
@@ -33,7 +33,7 @@ StationEngine::Station::Station(QObject *parent): QObject(parent)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief StationEngine::Station constructor: minimal
@@ -42,13 +42,19 @@ StationEngine::Station::Station(QObject *parent): QObject(parent)
  * @param const QLocale::Country &country
  * @param const QGeoCoordinate &position
  * @param const qreal &averageStopTimes
+ * @param const quint32 &officialTransferTimes
  * @param QObject *parent
  * @package StationEngine
  * @public
  * Constructs a StationEngine::Station without facilities.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
-                                const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes,
+StationEngine::Station::Station(const QUrl &uri,
+                                const QMap<QLocale::Language,
+                                QString> &name,
+                                const QLocale::Country &country,
+                                const QGeoCoordinate &position,
+                                const qreal &averageStopTimes,
+                                const quint32 &officialTransferTimes,
                                 QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
@@ -74,14 +80,15 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
     m_hasEscalatorUp = false;
     m_hasEscalatorDown = false;
     m_hasElevatorPlatform = false;
-    m_hasHearingAidSignal = false;
+    m_hasAudioInductionLoop = false;
     m_openingHours = QMap<StationEngine::Station::Day, QPair<QTime, QTime> >();
     m_averageStopTimes = averageStopTimes;
+    m_officialTransferTimes = officialTransferTimes;
     m_platforms = QMap<QUrl, QString>();
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief StationEngine::Station constructor: full
@@ -105,143 +112,40 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
  * @param const bool &hasEscalatorUp
  * @param const bool &hasEscalatorDown
  * @param const bool &hasElevatorPlatform
- * @param const bool &hasHearingAidSignal
+ * @param const bool &hasAudioInductionLoop
  * @param const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours
  * @param const qreal &averageStopTimes
+ * @param const quint32 &officialTransferTimes
  * @param QObject *parent
  * @package StationEngine
  * @public
  * Constructs a StationEngine::Station with facilities.
  */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
-                                const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address,
-                                const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking,
-                                const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus,
-                                const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
-                                const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
-                                const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
+StationEngine::Station::Station(const QUrl &uri,
+                                const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country,
+                                const QGeoCoordinate &position,
+                                const QGeoAddress &address,
+                                const bool &hasTicketVendingMachine,
+                                const bool &hasLuggageLockers,
+                                const bool &hasFreeParking,
+                                const bool &hasTaxi,
+                                const bool &hasBicycleSpots,
+                                const bool &hasBlueBike,
+                                const bool &hasBus,
+                                const bool &hasTram,
+                                const bool &hasMetro,
+                                const bool &hasWheelchairAvailable,
+                                const bool &hasRamp,
+                                const qint16 &disabledParkingSpots,
+                                const bool &hasElevatedPlatform,
+                                const bool &hasEscalatorUp,
+                                const bool &hasEscalatorDown,
+                                const bool &hasElevatorPlatform,
+                                const bool &hasAudioInductionLoop,
                                 const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
-                                const qreal &averageStopTimes, QObject *parent) : QObject(parent)
-{
-    // Use private members to avoid signal firing on construction
-    m_uri = uri;
-    m_name = name;
-    m_country = country;
-    m_position = position;
-    m_address = address;
-    m_hasTicketVendingMachine = hasTicketVendingMachine;
-    m_hasLuggageLockers = hasLuggageLockers;
-    m_hasFreeParking = hasFreeParking;
-    m_hasTaxi = hasTaxi;
-    m_hasBicycleSpots = hasBicycleSpots;
-    m_hasBlueBike = hasBlueBike;
-    m_hasBus = hasBus;
-    m_hasTram = hasTram;
-    m_hasMetro = hasMetro;
-    m_hasWheelchairAvailable = hasWheelchairAvailable;
-    m_hasRamp = hasRamp;
-    m_disabledParkingSpots = disabledParkingSpots;
-    m_hasElevatedPlatform = hasElevatedPlatform;
-    m_hasEscalatorUp = hasEscalatorUp;
-    m_hasEscalatorDown = hasEscalatorDown;
-    m_hasElevatorPlatform = hasElevatorPlatform;
-    m_hasHearingAidSignal = hasHearingAidSignal;
-    m_openingHours = openingHours;
-    m_averageStopTimes = averageStopTimes;
-    m_platforms = QMap<QUrl, QString>();
-}
-
-/**
- * @file csastation.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief StationEngine::Station constructor: minimal
- * @param const QUrl &uri
- * @param const QMap<QLocale::Language, QString> &name
- * @param const QLocale::Country &country
- * @param const QGeoCoordinate &position
- * @param const qreal &averageStopTimes
- * @param QObject *parent
- * @package StationEngine
- * @public
- * Constructs a StationEngine::Station without facilities.
- */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
-                                const QLocale::Country &country, const QGeoCoordinate &position, const qreal &averageStopTimes,
-                                const QMap<QUrl, QString> &platforms, QObject *parent) : QObject(parent)
-{
-    // Use private members to avoid signal firing on construction
-    // Unknown fields are set to a default value to avoid undefined references
-    m_uri = uri;
-    m_name = name;
-    m_country = country;
-    m_position = position;
-    m_address = QGeoAddress();
-    m_hasTicketVendingMachine = false;
-    m_hasLuggageLockers = false;
-    m_hasFreeParking = false;
-    m_hasTaxi = false;
-    m_hasBicycleSpots = false;
-    m_hasBlueBike = false;
-    m_hasBus = false;
-    m_hasTram = false;
-    m_hasMetro = false;
-    m_hasWheelchairAvailable = false;
-    m_hasRamp = false;
-    m_disabledParkingSpots = 0;
-    m_hasElevatedPlatform = false;
-    m_hasEscalatorUp = false;
-    m_hasEscalatorDown = false;
-    m_hasElevatorPlatform = false;
-    m_hasHearingAidSignal = false;
-    m_openingHours = QMap<StationEngine::Station::Day, QPair<QTime, QTime> >();
-    m_averageStopTimes = averageStopTimes;
-    m_platforms = platforms;
-}
-
-/**
- * @file csastation.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief StationEngine::Station constructor: full
- * @param const QUrl &uri
- * @param const QMap<QLocale::Language, QString> &name
- * @param const QLocale::Country &country
- * @param const QGeoCoordinate &position
- * @param const QGeoAddress &address
- * @param const bool &hasTicketVendingMachine
- * @param const bool &hasLuggageLockers
- * @param const bool &hasFreeParking
- * @param const bool &hasTaxi
- * @param const bool &hasBicyclSpots
- * @param const bool &hasBus
- * @param const bool &hasTram
- * @param const bool &hasMetro
- * @param const bool &hasWheelchairAvailable
- * @param const bool &hasRamp
- * @param const qint16 &disabledParkingSpots
- * @param const bool &hasElevatedPlatform
- * @param const bool &hasEscalatorUp
- * @param const bool &hasEscalatorDown
- * @param const bool &hasElevatorPlatform
- * @param const bool &hasHearingAidSignal
- * @param const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours
- * @param const QList<QPair<QUrl, QString> > &platforms
- * @param const qreal &averageStopTimes
- * @param QObject *parent
- * @package StationEngine
- * @public
- * Constructs a StationEngine::Station with facilities and platforms.
- */
-StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, QString> &name,
-                                const QLocale::Country &country, const QGeoCoordinate &position, const QGeoAddress &address,
-                                const bool &hasTicketVendingMachine, const bool &hasLuggageLockers, const bool &hasFreeParking,
-                                const bool &hasTaxi, const bool &hasBicycleSpots, const bool &hasBlueBike, const bool &hasBus,
-                                const bool &hasTram, const bool &hasMetro, const bool &hasWheelchairAvailable, const bool &hasRamp,
-                                const qint16 &disabledParkingSpots, const bool &hasElevatedPlatform, const bool &hasEscalatorUp,
-                                const bool &hasEscalatorDown, const bool &hasElevatorPlatform, const bool &hasHearingAidSignal,
-                                const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
-                                const qreal &averageStopTimes, const QMap<QUrl, QString> &platforms,
+                                const qreal &averageStopTimes,
+                                const quint32 &officialTransferTimes,
                                 QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
@@ -266,14 +170,162 @@ StationEngine::Station::Station(const QUrl &uri, const QMap<QLocale::Language, Q
     m_hasEscalatorUp = hasEscalatorUp;
     m_hasEscalatorDown = hasEscalatorDown;
     m_hasElevatorPlatform = hasElevatorPlatform;
-    m_hasHearingAidSignal = hasHearingAidSignal;
+    m_hasAudioInductionLoop = hasAudioInductionLoop;
     m_openingHours = openingHours;
     m_averageStopTimes = averageStopTimes;
+    m_officialTransferTimes = officialTransferTimes;
+    m_platforms = QMap<QUrl, QString>();
+}
+
+/**
+ * @file stationstation.cpp
+ * @author Dylan Van Assche
+ * @date 09 Aug 2018
+ * @brief StationEngine::Station constructor: minimal
+ * @param const QUrl &uri
+ * @param const QMap<QLocale::Language, QString> &name
+ * @param const QLocale::Country &country
+ * @param const QGeoCoordinate &position
+ * @param const qreal &averageStopTimes
+ * @param const quint32 &officialTransferTimes
+ * @param QObject *parent
+ * @package StationEngine
+ * @public
+ * Constructs a StationEngine::Station without facilities.
+ */
+StationEngine::Station::Station(const QUrl &uri,
+                                const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country,
+                                const QGeoCoordinate &position,
+                                const qreal &averageStopTimes,
+                                const quint32 &officialTransferTimes,
+                                const QMap<QUrl, QString> &platforms,
+                                QObject *parent) : QObject(parent)
+{
+    // Use private members to avoid signal firing on construction
+    // Unknown fields are set to a default value to avoid undefined references
+    m_uri = uri;
+    m_name = name;
+    m_country = country;
+    m_position = position;
+    m_address = QGeoAddress();
+    m_hasTicketVendingMachine = false;
+    m_hasLuggageLockers = false;
+    m_hasFreeParking = false;
+    m_hasTaxi = false;
+    m_hasBicycleSpots = false;
+    m_hasBlueBike = false;
+    m_hasBus = false;
+    m_hasTram = false;
+    m_hasMetro = false;
+    m_hasWheelchairAvailable = false;
+    m_hasRamp = false;
+    m_disabledParkingSpots = 0;
+    m_hasElevatedPlatform = false;
+    m_hasEscalatorUp = false;
+    m_hasEscalatorDown = false;
+    m_hasElevatorPlatform = false;
+    m_hasAudioInductionLoop = false;
+    m_openingHours = QMap<StationEngine::Station::Day, QPair<QTime, QTime> >();
+    m_averageStopTimes = averageStopTimes;
+    m_officialTransferTimes = officialTransferTimes;
     m_platforms = platforms;
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
+ * @author Dylan Van Assche
+ * @date 09 Aug 2018
+ * @brief StationEngine::Station constructor: full
+ * @param const QUrl &uri
+ * @param const QMap<QLocale::Language, QString> &name
+ * @param const QLocale::Country &country
+ * @param const QGeoCoordinate &position
+ * @param const QGeoAddress &address
+ * @param const bool &hasTicketVendingMachine
+ * @param const bool &hasLuggageLockers
+ * @param const bool &hasFreeParking
+ * @param const bool &hasTaxi
+ * @param const bool &hasBicyclSpots
+ * @param const bool &hasBus
+ * @param const bool &hasTram
+ * @param const bool &hasMetro
+ * @param const bool &hasWheelchairAvailable
+ * @param const bool &hasRamp
+ * @param const qint16 &disabledParkingSpots
+ * @param const bool &hasElevatedPlatform
+ * @param const bool &hasEscalatorUp
+ * @param const bool &hasEscalatorDown
+ * @param const bool &hasElevatorPlatform
+ * @param const bool &hasAudioInductionLoop
+ * @param const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours
+ * @param const QList<QPair<QUrl, QString> > &platforms
+ * @param const qreal &averageStopTimes
+ * @param const quint32 &officialTransferTimes
+ * @param QObject *parent
+ * @package StationEngine
+ * @public
+ * Constructs a StationEngine::Station with facilities and platforms.
+ */
+StationEngine::Station::Station(const QUrl &uri,
+                                const QMap<QLocale::Language, QString> &name,
+                                const QLocale::Country &country,
+                                const QGeoCoordinate &position,
+                                const QGeoAddress &address,
+                                const bool &hasTicketVendingMachine,
+                                const bool &hasLuggageLockers,
+                                const bool &hasFreeParking,
+                                const bool &hasTaxi,
+                                const bool &hasBicycleSpots,
+                                const bool &hasBlueBike,
+                                const bool &hasBus,
+                                const bool &hasTram,
+                                const bool &hasMetro,
+                                const bool &hasWheelchairAvailable,
+                                const bool &hasRamp,
+                                const qint16 &disabledParkingSpots,
+                                const bool &hasElevatedPlatform,
+                                const bool &hasEscalatorUp,
+                                const bool &hasEscalatorDown,
+                                const bool &hasElevatorPlatform,
+                                const bool &hasAudioInductionLoop,
+                                const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours,
+                                const qreal &averageStopTimes,
+                                const quint32 &officialTransferTimes,
+                                const QMap<QUrl, QString> &platforms,
+                                QObject *parent) : QObject(parent)
+{
+    // Use private members to avoid signal firing on construction
+    m_uri = uri;
+    m_name = name;
+    m_country = country;
+    m_position = position;
+    m_address = address;
+    m_hasTicketVendingMachine = hasTicketVendingMachine;
+    m_hasLuggageLockers = hasLuggageLockers;
+    m_hasFreeParking = hasFreeParking;
+    m_hasTaxi = hasTaxi;
+    m_hasBicycleSpots = hasBicycleSpots;
+    m_hasBlueBike = hasBlueBike;
+    m_hasBus = hasBus;
+    m_hasTram = hasTram;
+    m_hasMetro = hasMetro;
+    m_hasWheelchairAvailable = hasWheelchairAvailable;
+    m_hasRamp = hasRamp;
+    m_disabledParkingSpots = disabledParkingSpots;
+    m_hasElevatedPlatform = hasElevatedPlatform;
+    m_hasEscalatorUp = hasEscalatorUp;
+    m_hasEscalatorDown = hasEscalatorDown;
+    m_hasElevatorPlatform = hasElevatorPlatform;
+    m_hasAudioInductionLoop = hasAudioInductionLoop;
+    m_openingHours = openingHours;
+    m_averageStopTimes = averageStopTimes;
+    m_officialTransferTimes = officialTransferTimes;
+    m_platforms = platforms;
+}
+
+/**
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the URI
@@ -288,7 +340,7 @@ QUrl StationEngine::Station::uri() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the URI
@@ -304,7 +356,7 @@ void StationEngine::Station::setUri(const QUrl &uri)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the name
@@ -319,7 +371,7 @@ QMap<QLocale::Language, QString> StationEngine::Station::name() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the name
@@ -335,7 +387,7 @@ void StationEngine::Station::setName(const QMap<QLocale::Language, QString> &nam
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the country
@@ -350,7 +402,7 @@ QLocale::Country StationEngine::Station::country() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the country
@@ -366,7 +418,7 @@ void StationEngine::Station::setCountry(const QLocale::Country &country)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the position
@@ -381,7 +433,7 @@ QGeoCoordinate StationEngine::Station::position() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the position
@@ -397,7 +449,7 @@ void StationEngine::Station::setPosition(const QGeoCoordinate &position)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the address
@@ -412,7 +464,7 @@ QGeoAddress StationEngine::Station::address() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the address
@@ -428,7 +480,7 @@ void StationEngine::Station::setAddress(const QGeoAddress &address)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasTicketVendingMachine
@@ -443,7 +495,7 @@ bool StationEngine::Station::hasTicketVendingMachine() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasTicketVendingMachine
@@ -459,7 +511,7 @@ void StationEngine::Station::setHasTicketVendingMachine(const bool &hasTicketVen
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasLuggageLockers
@@ -474,7 +526,7 @@ bool StationEngine::Station::hasLuggageLockers() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasLuggageLockers
@@ -490,7 +542,7 @@ void StationEngine::Station::setHasLuggageLockers(const bool &hasLuggageLockers)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasFreeParking
@@ -505,7 +557,7 @@ bool StationEngine::Station::hasFreeParking() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasFreeParking
@@ -521,7 +573,7 @@ void StationEngine::Station::setHasFreeParking(const bool &hasFreeParking)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasTaxi
@@ -536,7 +588,7 @@ bool StationEngine::Station::hasTaxi() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasTaxi
@@ -552,7 +604,7 @@ void StationEngine::Station::setHasTaxi(const bool &hasTaxi)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasBicycleSpots
@@ -567,7 +619,7 @@ bool StationEngine::Station::hasBicycleSpots() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasBicycleSpots
@@ -583,7 +635,7 @@ void StationEngine::Station::setHasBicycleSpots(const bool &hasBicycleSpots)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasBlueBike
@@ -598,7 +650,7 @@ bool StationEngine::Station::hasBlueBike() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasBlueBike
@@ -614,7 +666,7 @@ void StationEngine::Station::setHasBlueBike(const bool &hasBlueBike)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasBus
@@ -629,7 +681,7 @@ bool StationEngine::Station::hasBus() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasBus
@@ -645,7 +697,7 @@ void StationEngine::Station::setHasBus(const bool &hasBus)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasTram
@@ -660,7 +712,7 @@ bool StationEngine::Station::hasTram() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasTram
@@ -676,7 +728,7 @@ void StationEngine::Station::setHasTram(const bool &hasTram)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasMetro
@@ -691,7 +743,7 @@ bool StationEngine::Station::hasMetro() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasMetro
@@ -707,7 +759,7 @@ void StationEngine::Station::setHasMetro(const bool &hasMetro)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the URI
@@ -722,7 +774,7 @@ bool StationEngine::Station::hasWheelchairAvailable() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasWheelchairAvailable
@@ -738,7 +790,7 @@ void StationEngine::Station::setHasWheelchairAvailable(const bool &hasWheelchair
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasRamp
@@ -753,7 +805,7 @@ bool StationEngine::Station::hasRamp() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasRamp
@@ -769,7 +821,7 @@ void StationEngine::Station::setHasRamp(const bool &hasRamp)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the number of disabled parking spots
@@ -784,7 +836,7 @@ qint16 StationEngine::Station::disabledParkingSpots() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the number of disabled parking spots
@@ -800,7 +852,7 @@ void StationEngine::Station::setDisabledParkingSpots(const qint16 &disabledParki
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasElevatedPlatform
@@ -815,7 +867,7 @@ bool StationEngine::Station::hasElevatedPlatform() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasElevatedPlatform
@@ -831,7 +883,7 @@ void StationEngine::Station::setHasElevatedPlatform(const bool &hasElevatedPlatf
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasEscalatorUp
@@ -846,7 +898,7 @@ bool StationEngine::Station::hasEscalatorUp() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasEscalatorUp
@@ -863,7 +915,7 @@ void StationEngine::Station::setHasEscalatorUp(const bool &hasEscalatorUp)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasEscalatorDown
@@ -878,7 +930,7 @@ bool StationEngine::Station::hasEscalatorDown() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasEscalatorDown
@@ -895,7 +947,7 @@ void StationEngine::Station::setHasEscalatorDown(const bool &hasEscalatorDown)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the hasElevatorPlatform
@@ -910,7 +962,7 @@ bool StationEngine::Station::hasElevatorPlatform() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the hasElevatorPlatform
@@ -926,39 +978,39 @@ void StationEngine::Station::setHasElevatorPlatform(const bool &hasElevatorPlatf
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Gets the hasHearingAidSignal
+ * @brief Gets the hasAudioInductionLoop
  * @package StationEngine
- * @return bool hasHearingAidSignal
+ * @return bool hasAudioInductionLoop
  * @public
- * Gets the hasHearingAidSignal and returns it.
+ * Gets the hasAudioInductionLoop and returns it.
  */
-bool StationEngine::Station::hasHearingAidSignal() const
+bool StationEngine::Station::hasAudioInductionLoop() const
 {
-    return m_hasHearingAidSignal;
+    return m_hasAudioInductionLoop;
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
- * @brief Sets the hasHearingAidSignal
+ * @brief Sets the hasAudioInductionLoop
  * @package StationEngine
- * @param const bool &hasHearingAidSignal
+ * @param const bool &hasAudioInductionLoop
  * @public
- * Sets the hasHearingAidSignal to the given bool &hasHearingAidSignal.
- * Emit the hasHearingAidSignalChanged signal.
+ * Sets the hasAudioInductionLoop to the given bool &hasAudioInductionLoop.
+ * Emit the hasAudioInductionLoopChanged signal.
  */
-void StationEngine::Station::setHasHearingAidSignal(const bool &hasHearingAidSignal)
+void StationEngine::Station::setHasAudioInductionLoop(const bool &hasAudioInductionLoop)
 {
-    m_hasHearingAidSignal = hasHearingAidSignal;
-    emit this->hasHearingAidSignalChanged();
+    m_hasAudioInductionLoop = hasAudioInductionLoop;
+    emit this->hasAudioInductionLoopChanged();
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the URI
@@ -973,7 +1025,7 @@ QMap<StationEngine::Station::Day, QPair<QTime, QTime> > StationEngine::Station::
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the openingHours
@@ -991,7 +1043,7 @@ void StationEngine::Station::setOpeningHours(const QMap<Station::Day, QPair<QTim
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the average stop times
@@ -1006,7 +1058,7 @@ qreal StationEngine::Station::averageStopTimes() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets the average stop times
@@ -1023,7 +1075,39 @@ void StationEngine::Station::setAverageStopTimes(const qreal &averageStopTimes)
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
+ * @author Dylan Van Assche
+ * @date 07 Oct 2018
+ * @brief Gets the official transfer times
+ * @package StationEngine
+ * @return quint32 officialTransferTimes
+ * @public
+ * Gets the official transfer times and returns it.
+ */
+quint32 QRail::StationEngine::Station::officialTransferTimes() const
+{
+    return m_officialTransferTimes;
+}
+
+/**
+ * @file stationstation.cpp
+ * @author Dylan Van Assche
+ * @date 07 Oct 2018
+ * @brief Sets the official transfer times
+ * @package StationEngine
+ * @param const quint32 &officialTransferTimes
+ * @public
+ * Sets the official transfer times to the given quint32 &officialTransferTimes.
+ * Emits the officialTransferTimesChanged signal.
+ */
+void QRail::StationEngine::Station::setOfficialTransferTimes(const quint32 &officialTransferTimes)
+{
+    m_officialTransferTimes = officialTransferTimes;
+    emit this->officialTransferTimesChanged();
+}
+
+/**
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets the platforms for the station
@@ -1038,7 +1122,7 @@ QMap<QUrl, QString> StationEngine::Station::platforms() const
 }
 
 /**
- * @file csastation.cpp
+ * @file stationstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Sets platforms for the station

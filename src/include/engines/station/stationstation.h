@@ -55,6 +55,7 @@ public:
         const QLocale::Country &country,
         const QGeoCoordinate &position,
         const qreal &averageStopTimes,
+        const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
     // With facilities
     explicit Station(
@@ -79,9 +80,10 @@ public:
         const bool &hasEscalatorUp,
         const bool &hasEscalatorDown,
         const bool &hasElevatorPlatform,
-        const bool &hasHearingAidSignal,
+        const bool &hasAudioInductionLoop,
         const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours,
         const qreal &averageStopTimes,
+        const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
     // Without facilities and platforms
     explicit Station(
@@ -90,6 +92,7 @@ public:
         const QLocale::Country &country,
         const QGeoCoordinate &position,
         const qreal &averageStopTimes,
+        const quint32 &officialTransferTimes,
         const QMap<QUrl, QString> &platforms,
         QObject *parent = nullptr);
     // With facilities and platforms
@@ -115,9 +118,10 @@ public:
         const bool &hasEscalatorUp,
         const bool &hasEscalatorDown,
         const bool &hasElevatorPlatform,
-        const bool &hasHearingAidSignal,
+        const bool &hasAudioInductionLoop,
         const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours,
         const qreal &averageStopTimes,
+        const quint32 &officialTransferTimes,
         const QMap<QUrl, QString> &platforms,
         QObject *parent = nullptr);
     QUrl uri() const;
@@ -162,12 +166,14 @@ public:
     void setHasEscalatorDown(const bool &hasEscalatorDown);
     bool hasElevatorPlatform() const;
     void setHasElevatorPlatform(const bool &hasElevatorPlatform);
-    bool hasHearingAidSignal() const;
-    void setHasHearingAidSignal(const bool &hasHearingAidSignal);
+    bool hasAudioInductionLoop() const;
+    void setHasAudioInductionLoop(const bool &hasAudioInductionLoop);
     QMap<StationEngine::Station::Day, QPair<QTime, QTime> > openingHours() const;
     void setOpeningHours(const QMap<StationEngine::Station::Day, QPair<QTime, QTime> > &openingHours);
     qreal averageStopTimes() const;
     void setAverageStopTimes(const qreal &averageStopTimes);
+    quint32 officialTransferTimes() const;
+    void setOfficialTransferTimes(const quint32 &officialTransferTimes);
     QMap<QUrl, QString> platforms() const;
     void setPlatforms(const QMap<QUrl, QString> &platforms);
 
@@ -192,9 +198,10 @@ signals:
     void hasElevatedPlatformChanged();
     void hasEscalatorUpChanged();
     void hasEscalatorDownChanged();
-    void hasHearingAidSignalChanged();
+    void hasAudioInductionLoopChanged();
     void openingHoursChanged();
     void averageStopTimesChanged();
+    void officialTransferTimesChanged();
     void platformsChanged();
 
 private:
@@ -219,9 +226,10 @@ private:
     bool m_hasEscalatorUp;
     bool m_hasEscalatorDown;
     bool m_hasElevatorPlatform;
-    bool m_hasHearingAidSignal;
+    bool m_hasAudioInductionLoop;
     QMap<StationEngine::Station::Day, QPair<QTime, QTime>> m_openingHours;
     qreal m_averageStopTimes;
+    quint32 m_officialTransferTimes;
     QMap<QUrl, QString> m_platforms;
 
     Q_ENUM(Day)

@@ -60,9 +60,10 @@ private:
         const bool &hasEscalatorUp,
         const bool &hasEscalatorDown,
         const bool &hasElevatorPlatform,
-        const bool &hasHearingAidSignal,
+        const bool &hasAudioInductionLoop,
         const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours,
         const qreal &averageStopTimes,
+        const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
     static StationEngine::NullStation *m_instance;
 };

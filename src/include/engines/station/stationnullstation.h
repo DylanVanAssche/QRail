@@ -14,9 +14,8 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef CSANULLSTATION_H
-#define CSANULLSTATION_H
+#ifndef STATIONNULLSTATION_H
+#define STATIONNULLSTATION_H
 
 #include <QtCore/QObject>
 #include <QtCore/QDebug>
@@ -70,4 +69,4 @@ private:
 }
 }
 
-#endif // CSANULLSTATION_H
+#endif // STATIONNULLSTATION_H

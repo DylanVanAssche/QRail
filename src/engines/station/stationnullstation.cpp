@@ -19,7 +19,7 @@ using namespace QRail;
 StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
 
 /**
- * @file routernullstation.cpp
+ * @file stationnullstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief StationEngine::NullStation constructor
@@ -87,11 +87,10 @@ StationEngine::NullStation::NullStation(const QUrl &uri,
 }
 
 /**
- * @file routernullstation.cpp
+ * @file stationnullstation.cpp
  * @author Dylan Van Assche
  * @date 09 Aug 2018
  * @brief Gets a StationEngine::NullStation instance
- * @param QObject *parent = nullptr
  * @return StationEngine::NullStation *station
  * @package StationEngine
  * @public

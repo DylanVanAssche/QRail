@@ -107,20 +107,28 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QDateTime &until,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
-    liveboardProcessingMutex.lock(); // Processing started
-    this->setStationURI(uri);
-    this->setMode(mode);
-    this->setFrom(from);
-    this->setUntil(until);
-    this->setLiveboard(new QRail::LiveboardEngine::Board(this));
-    this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
-    this->liveboard()->setFrom(this->from());
-    this->liveboard()->setUntil(this->until());
-    this->liveboard()->setMode(this->mode());
-    this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
-    this->initUsedPages();
-    this->setIsExtending(false);
-    this->fragmentsFactory()->getPage(this->from(), this);
+    if (uri.isValid() && from.isValid() && until.isValid()) {
+        liveboardProcessingMutex.lock(); // Processing started
+        this->setStationURI(uri);
+        this->setMode(mode);
+        this->setFrom(from);
+        this->setUntil(until);
+        this->setLiveboard(new QRail::LiveboardEngine::Board(this));
+        this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
+        this->liveboard()->setFrom(this->from());
+        this->liveboard()->setUntil(this->until());
+        this->liveboard()->setMode(this->mode());
+        this->liveboard()->setStation(this->stationFactory()->getStationByURI(this->stationURI()));
+        this->initUsedPages();
+        this->setIsExtending(false);
+        this->fragmentsFactory()->getPage(this->from(), this);
+    } else {
+        qCritical() << "Station URI or timestamps are invalid";
+        qCritical() << "URI:" << uri;
+        qCritical() << "From:" << from;
+        qCritical() << "Until:" << until;
+        emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
+    }
 }
 
 void LiveboardEngine::Factory::getNextResultsForLiveboard(LiveboardEngine::Board *board)

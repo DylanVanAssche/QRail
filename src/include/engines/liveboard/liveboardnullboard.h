@@ -14,36 +14,35 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CSAPLANNERTEST_H
-#define CSAPLANNERTEST_H
+#ifndef LIVEBOARDNULLBOARD_H
+#define LIVEBOARDNULLBOARD_H
 
-#include "engines/router/routerplanner.h"
-#include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
-#include <QtTest/QSignalSpy>
-#include <QtTest/QtTest>
+#include <QtCore/QList>
+
+#include <engines/vehicle/vehiclevehicle.h>
+#include "engines/station/stationstation.h"
+#include "engines/station/stationnullstation.h"
+#include "engines/liveboard/liveboardboard.h"
+#include "qrail.h"
 
 namespace QRail {
-namespace RouterEngine {
-class PlannerTest : public QObject
+namespace LiveboardEngine {
+class QRAIL_SHARED_EXPORT NullBoard : public LiveboardEngine::Board
 {
-    Q_OBJECT
-private slots:
-    void initCSAPlannerTest();
-    void runCSAPlannerTest();
-    void cleanCSAPlannerTest();
-
-public slots:
-    void processRoutesFinished(const QList<QRail::RouterEngine::Route *> &routes);
-    void processRoutesStream(QRail::RouterEngine::Route *route);
-    void processing(const QUrl &pageURI);
-    void requested(const QUrl &pageURI);
+public:
+    static NullBoard *getInstance();
 
 private:
-    QRail::RouterEngine::Planner *planner;
+    NullBoard(const QList<QRail::VehicleEngine::Vehicle *> &entries,
+              StationEngine::Station *station,
+              const QDateTime &from,
+              const QDateTime &until,
+              QObject *parent = nullptr);
+    static LiveboardEngine::NullBoard *m_instance;
 };
-} // namespace RouterEngine
-} // namespace QRail
+}
+}
 
-#endif // CSAPLANNERTEST_H
+#endif // LIVEBOARDNULLBOARD_H

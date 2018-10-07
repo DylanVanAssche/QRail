@@ -57,7 +57,7 @@ public:
     QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(
                                                           const QGeoCoordinate &position,
                                                           const qreal &radius,
-                                                          const qint32 &maxResults);
+                                                          const quint32 &maxResults);
     QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(
         const QGeoCoordinate &position,
         const qreal radius);

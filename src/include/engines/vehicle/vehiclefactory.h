@@ -34,6 +34,7 @@
 #include "engines/station/stationstation.h"
 #include "engines/vehicle/vehiclestop.h"
 #include "engines/vehicle/vehiclevehicle.h"
+#include "engines/vehicle/vehiclenullvehicle.h"
 #include "network/networkmanager.h"
 #include "qrail.h"
 

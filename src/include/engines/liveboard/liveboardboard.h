@@ -42,8 +42,10 @@ public:
     };
     explicit Board(QObject *parent = nullptr);
     explicit Board(const QList<QRail::VehicleEngine::Vehicle *> &entries,
-                   StationEngine::Station *station, const QDateTime &from,
-                   const QDateTime &until, QObject *parent = nullptr);
+                   StationEngine::Station *station,
+                   const QDateTime &from,
+                   const QDateTime &until,
+                   QObject *parent = nullptr);
     QList<QRail::VehicleEngine::Vehicle *> entries() const;
     void setEntries(const QList<QRail::VehicleEngine::Vehicle *> &entries);
     StationEngine::Station *station() const;

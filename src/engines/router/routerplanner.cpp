@@ -72,13 +72,15 @@ QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance()
  * @package RouterEngine
  * @private
  * Retrieves the connections between 2 stations with a given departure time and
- * a maximum of transfers. Emit the routesFound signal when completed, the error
+ * a maximum of transfers. Emit the finished signal when completed, the error
  * signal is emitted in case an error comes up.
+ *
+ * Invalid input will directly emit the finished signal with an empty list.
  */
 void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                                                   const QUrl &arrivalStation,
                                                   const QDateTime &departureTime,
-                                                  const qint16 &maxTransfers)
+                                                  const quint16 &maxTransfers)
 {
     /*
     * The CSA algorithm is based on the Connection Scan Algorithm paper, March
@@ -108,55 +110,89 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     * Docs: https://doc.qt.io/qt-5.6/qtconcurrent.html
     */
 
-    qDebug() << "Init CSA algorithm";
-    plannerProcessingMutex.lock(); // Queue requests
-    this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
-    this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
-    this->setDepartureStationURI(departureStation);
-    this->setArrivalStationURI(arrivalStation);
-    this->setDepartureTime(departureTime);
-    this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
-    this->setMaxTransfers(maxTransfers);
-    this->setRoutes(QList<QRail::RouterEngine::Route *>());
-    this->initUsedPages();
+    if (departureStation.isValid() && arrivalStation.isValid() && departureStation.isValid()) {
+        qDebug() << "Init CSA algorithm";
+        plannerProcessingMutex.lock(); // Queue requests
+        this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
+        this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+        this->setDepartureStationURI(departureStation);
+        this->setArrivalStationURI(arrivalStation);
+        this->setDepartureTime(departureTime);
+        this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
+        this->setMaxTransfers(maxTransfers);
+        this->setRoutes(QList<QRail::RouterEngine::Route *>());
+        this->initUsedPages();
 
-    /*
-     * Setup footpaths for the arrival station since CSA profile
-     * goes from the end to the beginning.
-     *
-     * Footpaths give the user the possibility to exit at another station
-     * and walk to it's destination in case that's faster than the original
-     * arrival station.
-     */
-    QRail::StationEngine::Station *station =
-        this->stationFactory()->getStationByURI(this->arrivalStationURI());
+        /*
+         * Setup footpaths for the arrival station since CSA profile
+         * goes from the end to the beginning.
+         *
+         * Footpaths give the user the possibility to exit at another station
+         * and walk to it's destination in case that's faster than the original
+         * arrival station.
+         */
+        QRail::StationEngine::Station *station =
+            this->stationFactory()->getStationByURI(this->arrivalStationURI());
 
-    QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
-                                                          this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
-                                                                                                                 SEARCH_RADIUS,
-                                                                                                                 MAX_RESULTS);
-    QMap<QUrl, qreal> D = QMap<QUrl, qreal>();
-    for (qint32 i = 0; i < nearbyStations.length(); i++) {
-        QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
-        D.insert(stationDistancePair.first->uri(), stationDistancePair.second);
+        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                                                              this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
+                                                                                                                     SEARCH_RADIUS,
+                                                                                                                     MAX_RESULTS);
+        QMap<QUrl, qreal> D = QMap<QUrl, qreal>();
+        for (qint32 i = 0; i < nearbyStations.length(); i++) {
+            QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
+            D.insert(stationDistancePair.first->uri(), stationDistancePair.second);
+        }
+        this->setDArray(D);
+        qDebug() << "D ARRAY=" << this->DArray();
+
+        // Jumpstart the page fetching
+        this->fragmentsFactory()->getPage(this->arrivalTime(), this);
+        //qApp->processEvents();
+        qDebug() << "CSA init OK";
+    } else {
+        qCritical() << "Invalid stations or timestamps";
+        qCritical() << "Departure station:" << departureStation;
+        qCritical() << "Arrival station:" << arrivalStation;
+        qCritical() << "Departure time:" << departureTime;
     }
-    this->setDArray(D);
-    qDebug() << "D ARRAY=" << this->DArray();
-
-    // Jumpstart the page fetching
-    this->fragmentsFactory()->getPage(this->arrivalTime(), this);
-    //qApp->processEvents();
-    qDebug() << "CSA init OK";
 }
 
+/**
+ * @file routerplanner.cpp
+ * @author Dylan Van Assche
+ * @date 07 Oct 2018
+ * @brief Retrieves the connections between 2 GPS positions
+ * @param const QGeoCoordinate &departurePosition
+ * @param const QGeoCoordinate &arrivalPosition
+ * @param const QDateTime &departureTime
+ * @param const qint16 &maxTransfers
+ * @package RouterEngine
+ * @private
+ * Retrieves the connections between 2 GPS positions with a given departure time and
+ * a maximum of transfers. Emit the finished signal when completed, the error
+ * signal is emitted in case an error comes up.
+ *
+ * Invalid input will directly emit the finished signal with an empty list.
+ */
 void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition,
-                                           const QGeoCoordinate &arrivalPosition, const QDateTime &departureTime, const qint16 &maxTransfers)
+                                           const QGeoCoordinate &arrivalPosition,
+                                           const QDateTime &departureTime,
+                                           const quint16 &maxTransfers)
 {
-    QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition,
-                                                                                   SEARCH_RADIUS).first->uri();
-    QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition,
-                                                                                 SEARCH_RADIUS).first->uri();
-    this->getConnections(departureStationURI, arrivalStationURI, departureTime, maxTransfers);
+    if (departurePosition.isValid() && arrivalPosition.isValid() && departureTime.isValid()) {
+        QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition,
+                                                                                       SEARCH_RADIUS).first->uri();
+        QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition,
+                                                                                     SEARCH_RADIUS).first->uri();
+        this->getConnections(departureStationURI, arrivalStationURI, departureTime, maxTransfers);
+    } else {
+        qCritical() << "Invalid positions or timestamps";
+        qCritical() << "Departure position:" << departurePosition;
+        qCritical() << "Arrival position:" << arrivalPosition;
+        qCritical() << "Departure time:" << departureTime;
+        emit this->finished(QList<QRail::RouterEngine::Route *>());
+    }
 }
 
 // Processors
@@ -668,7 +704,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     *         RETRIEVING THE RESULTS
     * ======================================
     * If we have found results in our Page,
-    * we return it to the client by calling the routesFound signal.
+    * we return it to the client by calling the finished signal.
     *
     * In case we haven't found any results, we load more data or
     * stop if we passed the departure time limit (see hasPassedDepartureTimeLimit
@@ -844,8 +880,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             emit this->error("No routes found!");
         }
 
-        // Emit routesFound signal as soon as we parsed a full LC page without results
-        emit this->routesFound(this->routes());
+        // Emit finished signal when we completely parsed and processed all Linked Connections pages
+        emit this->finished(this->routes());
 
         // Clean up pages when we're finished
         this->deleteUsedPages();

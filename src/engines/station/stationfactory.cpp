@@ -80,6 +80,12 @@ StationEngine::Factory *StationEngine::Factory::getInstance()
  */
 StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
 {
+    if (!uri.isValid()) {
+        qCritical() << "Station URI is invalid";
+        qCritical() << "URI:" << uri;
+        return QRail::StationEngine::NullStation::getInstance();
+    }
+
     // Init StationEngine::Station variable
     StationEngine::Station *station;
 
@@ -348,20 +354,29 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
  * Fetches nearby stations from database using the Haversine formula (Google's solution).
  * In case something goes wrong, a StationEngine::NullStation instance is
  * pushed to the QList<QPair<StationEngine::Station *, qreal>> &nearbyStations.
+ * When the input data is wrong, an empty QList is returned.
  */
 QList<QPair<QRail::StationEngine::Station *, qreal>>
                                                   StationEngine::Factory::getStationsInTheAreaByPosition(
                                                       const QGeoCoordinate &position,
                                                       const qreal &radius,
-                                                      const qint32 &maxResults)
+                                                      const quint32 &maxResults)
 {
     /*
      * Fetch nearby stations from database using the Haversine formula (Google's solution)
      * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
      */
-    Q_UNUSED(maxResults); // bypass compiler
+    Q_UNUSED(maxResults); // bypass compiler for now
     QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
                                                           QList<QPair<QRail::StationEngine::Station *, qreal>>();
+    // Avoid SQL query when data is invalid
+    if (!position.isValid() || radius < 0.0) {
+        qCritical() << "Position or radius is wrong";
+        qCritical() << "Position:" << position;
+        qCritical() << "Radius:" << radius;
+        return nearbyStations;
+    }
+
     QSqlQuery query(this->db()->database());
 
     // SQLite doesn't support trigonometric functions, we have calculate the Haversine formula outside the SQL query.
@@ -425,28 +440,35 @@ QPair<StationEngine::Station *, qreal> StationEngine::Factory::getNearestStation
 QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsByName(
     const QString &name)
 {
-    QSqlQuery query(this->db()->database());
 
-    // Retrieve stations by fuzzy matching their names
-    query.prepare("SELECT "
-                  "uri, "
-                  "name, "
-                  "alternativeFR, "
-                  "alternativeNL, "
-                  "alternativeDE, "
-                  "alternativeEN "
-                  "FROM stations "
-                  "WHERE name LIKE '%" + name + "%' "
-                  "OR alternativeFR LIKE '%" + name + "%' "
-                  "OR alternativeNL LIKE '%" + name + "%' "
-                  "OR alternativeDE LIKE '%" + name + "%' "
-                  "OR alternativeEN LIKE '%" + name + "%'");
-    // Binding parameters fails due %fuzzymatching% characters TO DO
-    /*query.bindValue(":name", name);
-    query.bindValue(":alternativeFR", name);
-    query.bindValue(":alternativeNL", name);
-    query.bindValue(":alternativeDE", name);
-    query.bindValue(":alternativeEN", name);*/
+    QSqlQuery query(this->db()->database());
+    // Empty search name, show all stations
+    if (name.length() == 0) {
+        query.prepare("SELECT "
+                      "uri, "
+                      "name, "
+                      "alternativeFR, "
+                      "alternativeNL, "
+                      "alternativeDE, "
+                      "alternativeEN "
+                      "FROM stations ");
+    }
+    // Search name using fuzzy matching
+    else {
+        query.prepare("SELECT "
+                      "uri, "
+                      "name, "
+                      "alternativeFR, "
+                      "alternativeNL, "
+                      "alternativeDE, "
+                      "alternativeEN "
+                      "FROM stations "
+                      "WHERE name LIKE '%" + name + "%' "
+                      "OR alternativeFR LIKE '%" + name + "%' "
+                      "OR alternativeNL LIKE '%" + name + "%' "
+                      "OR alternativeDE LIKE '%" + name + "%' "
+                      "OR alternativeEN LIKE '%" + name + "%'");
+    }
     this->db()->execute(query);
 
     QList<QRail::StationEngine::Station *> stations = QList<QRail::StationEngine::Station *>();

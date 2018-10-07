@@ -14,36 +14,37 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CSAPLANNERTEST_H
-#define CSAPLANNERTEST_H
+#ifndef VEHICLENULLVEHICLE_H
+#define VEHICLENULLVEHICLE_H
 
-#include "engines/router/routerplanner.h"
-#include <QtCore/QDateTime>
 #include <QtCore/QObject>
-#include <QtCore/QDateTime>
-#include <QtTest/QSignalSpy>
-#include <QtTest/QtTest>
+#include <QtCore/QDebug>
+#include <QtCore/QString>
+#include <QtCore/QUrl>
+#include <QtCore/QUrl>
+
+#include "engines/vehicle/vehiclevehicle.h"
+#include "engines/vehicle/vehiclestop.h"
+#include "qrail.h"
 
 namespace QRail {
-namespace RouterEngine {
-class PlannerTest : public QObject
+namespace VehicleEngine {
+class QRAIL_SHARED_EXPORT NullVehicle : public QRail::VehicleEngine::Vehicle
 {
-    Q_OBJECT
-private slots:
-    void initCSAPlannerTest();
-    void runCSAPlannerTest();
-    void cleanCSAPlannerTest();
-
-public slots:
-    void processRoutesFinished(const QList<QRail::RouterEngine::Route *> &routes);
-    void processRoutesStream(QRail::RouterEngine::Route *route);
-    void processing(const QUrl &pageURI);
-    void requested(const QUrl &pageURI);
+public:
+    static NullVehicle *getInstance();
 
 private:
-    QRail::RouterEngine::Planner *planner;
+    explicit NullVehicle(
+        const QUrl &uri,
+        const QUrl &tripURI,
+        const QString &headsign,
+        const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+        QObject *parent = nullptr
+    );
+    static VehicleEngine::NullVehicle *m_instance;
 };
-} // namespace RouterEngine
-} // namespace QRail
+}
+}
 
-#endif // CSAPLANNERTEST_H
+#endif // VEHICLENULLVEHICLE_H

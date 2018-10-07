@@ -73,11 +73,11 @@ public:
     void getConnections(const QUrl &departureStation,
                         const QUrl &arrivalStation,
                         const QDateTime &departureTime,
-                        const qint16 &maxTransfers);
+                        const quint16 &maxTransfers);
     void getConnections(const QGeoCoordinate &departurePosition,
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
-                        const qint16 &maxTransfers);
+                        const quint16 &maxTransfers);
     QDateTime calculateArrivalTime(const QDateTime &departureTime);
     QDateTime departureTime() const;
     QDateTime arrivalTime() const;
@@ -89,7 +89,7 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void routesFound(const QList<QRail::RouterEngine::Route *> &routes);
+    void finished(const QList<QRail::RouterEngine::Route *> &routes);
     void stream(QRail::RouterEngine::Route *route);
     void error(const QString &message);
     void requested(const QUrl &pageURI);

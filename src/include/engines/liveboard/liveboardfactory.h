@@ -25,6 +25,7 @@
 #include <QtCore/QUrl>
 
 #include "engines/liveboard/liveboardboard.h"
+#include "engines/liveboard/liveboardnullboard.h"
 #include "engines/station/stationfactory.h"
 #include "engines/vehicle/vehiclestop.h"
 #include "engines/vehicle/vehiclevehicle.h"

@@ -81,19 +81,26 @@ QRail::VehicleEngine::Factory *QRail::VehicleEngine::Factory::getInstance()
  * @public
  * Retrieves a vehicle by URI from the network iRail API.
  * When the vehicle is ready, the finished signal is emitted.
+ * In case something goes wrong, a QRail::VehicleEngine::NullVehicle is returned.
  */
 void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
                                                     const QLocale::Language &language)
 {
-    this->setLanguage(language);
-    QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
-    // Vehicle isn't in our cache yet, fetching...
-    if (!vehicle) {
-        emit this->getResource(uri, this);
-    }
-    // Vehicle found in cache, emitting directly the finished signal
-    else {
-        emit this->finished(vehicle);
+    if (uri.isValid()) {
+        this->setLanguage(language);
+        QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
+        // Vehicle isn't in our cache yet, fetching...
+        if (!vehicle) {
+            emit this->getResource(uri, this);
+        }
+        // Vehicle found in cache, emitting directly the finished signal
+        else {
+            emit this->finished(vehicle);
+        }
+    } else {
+        qCritical() << "Vehicle URI invalid";
+        qCritical() << "URI:" << uri;
+        emit this->finished(QRail::VehicleEngine::NullVehicle::getInstance());
     }
 }
 

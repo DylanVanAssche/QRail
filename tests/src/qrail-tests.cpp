@@ -69,16 +69,16 @@ int main(int argc, char *argv[])
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
 
         // Run QRail::LiveboardEngine::Factory integration test
-        liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
-
-        // Run QRail::RouterEngine::Planner integration test
-        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
-
-        // Run QRail::LiveboardEngine::Factory integration test
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
         // Run QRail::StationEngine::Factory integration test
         stationFactoryResult = QTest::qExec(&testSuiteStationFactory, 0, nullptr);
+
+        // Run QRail::LiveboardEngine::Factory integration test
+        liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);
+
+        // Run QRail::RouterEngine::Planner integration test
+        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
         // Return the status code of every test for CI/CD
         QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult |

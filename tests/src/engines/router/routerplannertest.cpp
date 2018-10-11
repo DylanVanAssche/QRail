@@ -19,6 +19,8 @@ using namespace QRail;
 
 void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
 {
+    qInfo() << "Init PlannerTest";
+
     // Get a Planner instance
     planner = QRail::RouterEngine::Planner::getInstance();
 
@@ -26,8 +28,8 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     qRegisterMetaType<QList<QRail::RouterEngine::Route *>>("QList<QRail::RouterEngine::Route*>");
 
     // Connect the signals
-    connect(planner, SIGNAL(finished(QList<QRail::RouterEngine::Route *>)), this,
-            SLOT(processRoutesFinished(QList<QRail::RouterEngine::Route *>)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this,
+            SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
     connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this,
             SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
@@ -36,6 +38,7 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
 
 void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 {
+    qInfo() << "Running PlannerTest";
     /*
     * Guess the arrival time given a departure time.
     * The arrival time must come after the departure time to be valid.
@@ -62,7 +65,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
     QEventLoop loop;
-    connect(planner, SIGNAL(finished(QList<QRail::RouterEngine::Route *>)), &loop, SLOT(quit()));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), &loop, SLOT(quit()));
     loop.exec();
     qInfo() << "Routing Vilvoorde -> Brugge took"
             << start.msecsTo(QDateTime::currentDateTime())
@@ -71,14 +74,20 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
 {
-    disconnect(planner, SIGNAL(finished(QList<QRail::RouterEngine::Route *>)),
-               this, SLOT(processRoutesFinished(QList<QRail::RouterEngine::Route *>)));
+    qInfo() << "Cleaning up PlannerTest";
+    disconnect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)),
+               this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
     disconnect(planner, SIGNAL(processing(QUrl)),
                this, SLOT(processing(QUrl)));
     disconnect(planner, SIGNAL(requested(QUrl)),
                this, SLOT(requested(QUrl)));
     disconnect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)),
                this, SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
+}
+
+void RouterEngine::PlannerTest::processRoutesFinished(RouterEngine::Journey *journey)
+{
+    qDebug() << "JOURNEY OK";
 }
 
 void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI)
@@ -91,7 +100,7 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
     qDebug() << "Page requested:" << pageURI.toString();
 }
 
-void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
+/*void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
                                                              QList<QRail::RouterEngine::Route *>
                                                              &routes)
 {
@@ -137,7 +146,7 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
         }
     }
     qDebug() << "All routes processed";
-}
+}*/
 
 void RouterEngine::PlannerTest::processRoutesStream(QRail::RouterEngine::Route *route)
 {

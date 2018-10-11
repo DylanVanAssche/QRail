@@ -14,7 +14,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "routerjourney.h"
+#include "engines/router/routerjourney.h"
 using namespace QRail;
 
 RouterEngine::Journey::Journey(QObject *parent) : QObject(parent)
@@ -125,9 +125,6 @@ void RouterEngine::Journey::setHydraPrevious(const QUrl &hydraPrevious)
                                              queryNewHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
         QDateTime timeOldHydraPrevious = QDateTime::fromString(
                                              queryOldHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
-        qDebug() << "HYDRA PREVIOUS=" << hydraPrevious << timeNewHydraPrevious << "|" <<
-                 this->hydraPrevious() <<
-                 timeOldHydraPrevious;
         // Only accept URI that's earlier in time
         if (timeNewHydraPrevious < timeOldHydraPrevious) {
             m_hydraPrevious = hydraPrevious;
@@ -136,7 +133,6 @@ void RouterEngine::Journey::setHydraPrevious(const QUrl &hydraPrevious)
     }
     // Current hydraPrevious is still empty, setting it to the received hydraPrevious
     else {
-        qDebug() << "Empty hydraPrevious";
         m_hydraPrevious = hydraPrevious;
         emit this->hydraPreviousChanged();
     }
@@ -158,8 +154,6 @@ void RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
         QDateTime timeOldHydraNext = QDateTime::fromString(
                                          queryOldHydraNext.queryItemValue("departureTime"), Qt::ISODate);
 
-        qDebug() << "HYDRA NEXT=" << hydraNext << timeNewHydraNext << "|" << this->hydraNext() <<
-                 timeOldHydraNext;
         // Only accept URI that's later in time
         if (timeNewHydraNext > timeOldHydraNext) {
             m_hydraNext = hydraNext;
@@ -168,7 +162,6 @@ void RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
     }
     // Current hydraNext is still empty, setting it to the received hydraNext
     else {
-        qDebug() << "Empty hydraNext";
         m_hydraNext = hydraNext;
         emit this->hydraNextChanged();
     }

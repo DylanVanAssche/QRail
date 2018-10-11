@@ -78,6 +78,11 @@ public:
                         const QUrl &arrivalStation,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    void getConnections(const QUrl &departureStation,
+                        const QUrl &arrivalStation,
+                        const QDateTime &departureTime,
+                        const QDateTime &arrivalTime,
+                        const quint16 &maxTransfers);
     void getConnections(const QGeoCoordinate &departurePosition,
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,

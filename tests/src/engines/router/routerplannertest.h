@@ -42,6 +42,7 @@ public slots:
 
 private:
     QRail::RouterEngine::Planner *planner;
+    QRail::RouterEngine::Journey *journey;
 };
 } // namespace RouterEngine
 } // namespace QRail

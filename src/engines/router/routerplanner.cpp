@@ -82,6 +82,19 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                                                   const QDateTime &departureTime,
                                                   const quint16 &maxTransfers)
 {
+    this->getConnections(departureStation,
+                         arrivalStation,
+                         departureTime,
+                         this->calculateArrivalTime(departureTime),
+                         maxTransfers);
+}
+
+void RouterEngine::Planner::getConnections(const QUrl &departureStation,
+                                           const QUrl &arrivalStation,
+                                           const QDateTime &departureTime,
+                                           const QDateTime &arrivalTime,
+                                           const quint16 &maxTransfers)
+{
     /*
     * The CSA algorithm is based on the Connection Scan Algorithm paper, March
     * 2017 by Julian Dibbelt, Thomas Pajor, Ben Strasser, Dorothea Wagner (KIT)
@@ -110,7 +123,10 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     * Docs: https://doc.qt.io/qt-5.6/qtconcurrent.html
     */
 
-    if (departureStation.isValid() && arrivalStation.isValid() && departureStation.isValid()) {
+    if (departureStation.isValid()
+            && arrivalStation.isValid()
+            && departureTime.isValid()
+            && arrivalTime.isValid()) {
         qDebug() << "Init CSA algorithm";
         plannerProcessingMutex.lock(); // Queue requests
         this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
@@ -118,7 +134,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         this->setDepartureStationURI(departureStation);
         this->setArrivalStationURI(arrivalStation);
         this->setDepartureTime(departureTime);
-        this->setArrivalTime(this->calculateArrivalTime(this->departureTime()));
+        this->setArrivalTime(arrivalTime);
         this->setMaxTransfers(maxTransfers);
         this->setRoutes(QList<QRail::RouterEngine::Route *>());
         this->initUsedPages();
@@ -127,6 +143,8 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         this->journey()->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
         this->journey()->setDepartureStation(departureStation);
         this->journey()->setArrivalStation(arrivalStation);
+        this->journey()->setDepartureTime(departureTime);
+        this->journey()->setArrivalTime(arrivalTime);
         this->journey()->setMaxTransfers(maxTransfers);
         this->journey()->setRoutes(QList<QRail::RouterEngine::Route *>());
 
@@ -205,7 +223,7 @@ void RouterEngine::Planner::getNextConnectionForJourney(RouterEngine::Journey *j
 {
     // Later arrival time is a problem! The S and T array are different since CSA runs backwards
     // A better solution here would be great! TO DO
-    this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
+    /*this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
     this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
     QUrlQuery queryHydraNext = QUrlQuery(journey->hydraNext().query());
     QDateTime timeHydraNext = QDateTime::fromString(
@@ -216,12 +234,28 @@ void RouterEngine::Planner::getNextConnectionForJourney(RouterEngine::Journey *j
     this->setArrivalStationURI(journey->arrivalStation());
 
     // Jumpstart the page fetching, use hydraPrevious to get the previous page of the last page
-    this->fragmentsFactory()->getPage(journey->hydraNext(), this);
+    this->fragmentsFactory()->getPage(journey->hydraNext(), this);*/
+    QUrlQuery queryHydraNext = QUrlQuery(journey->hydraNext().query());
+    QDateTime timeHydraNext = QDateTime::fromString(
+                                  queryHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+    qDebug() << "NEXT connections";
+    qDebug() << journey->departureStation();
+    qDebug() << journey->arrivalStation();
+    qDebug() << journey->departureTime();
+    qDebug() << timeHydraNext;
+    qDebug() << journey->maxTransfers();
+    this->getConnections(journey->departureStation(),
+                         journey->arrivalStation(),
+                         journey->departureTime(),
+                         timeHydraNext,
+                         journey->maxTransfers());
 }
 
 void RouterEngine::Planner::getPreviousConnectionForJourney(RouterEngine::Journey *journey)
 {
-    this->setSArray(journey->SArray());
+    // Later arrival time is a problem! The S and T array are different since CSA runs backwards
+    // A better solution here would be great! TO DO
+    /*this->setSArray(journey->SArray());
     this->setTArray(journey->TArray());
     QUrlQuery queryHydraPrevious = QUrlQuery(journey->hydraPrevious().query());
     QDateTime timeHydraPrevious = QDateTime::fromString(
@@ -232,7 +266,21 @@ void RouterEngine::Planner::getPreviousConnectionForJourney(RouterEngine::Journe
     this->setArrivalStationURI(journey->arrivalStation());
 
     // Jumpstart the page fetching, use hydraPrevious to get the previous page of the last page
-    this->fragmentsFactory()->getPage(journey->hydraPrevious(), this);
+    this->fragmentsFactory()->getPage(journey->hydraPrevious(), this);*/
+    QUrlQuery queryHydraPrevious = QUrlQuery(journey->hydraPrevious().query());
+    QDateTime timeHydraPrevious = QDateTime::fromString(
+                                      queryHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+    qDebug() << "PREVIOUS connections";
+    qDebug() << journey->departureStation();
+    qDebug() << journey->arrivalStation();
+    qDebug() << timeHydraPrevious;
+    qDebug() << journey->arrivalTime();
+    qDebug() << journey->maxTransfers();
+    this->getConnections(journey->departureStation(),
+                         journey->arrivalStation(),
+                         timeHydraPrevious,
+                         journey->arrivalTime(),
+                         journey->maxTransfers());
 }
 
 // Processors
@@ -290,8 +338,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
         // We can only process fragments which are departing after our departure time
         if (fragment->departureTime() < this->departureTime()) {
-            qDebug() << fragment->departureTime() << fragment->uri() << "in page:" << page->uri();
-            qDebug() << fragment->departureTime().isValid();
             hasPassedDepartureTimeLimit = true;
             continue;
         }
@@ -757,7 +803,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
     // Results found, process them
     if (this->SArray().contains(this->departureStationURI())) {
-        qDebug() << "Processing results: " << this->SArray().value(this->departureStationURI());
+        //qDebug() << "Processing results: " << this->SArray().value(this->departureStationURI());
         foreach (QRail::RouterEngine::StationStopProfile *profile,
                  this->SArray().value(this->departureStationURI())) {
             QList<QRail::RouterEngine::RouteLeg *> legs = QList<QRail::RouterEngine::RouteLeg *>();
@@ -874,7 +920,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 // Routes with the same arrival and departure times are duplicates
                 if (route->departureTime() == r->departureTime()
                         && route->arrivalTime() == r->arrivalTime()) {
-                    qDebug() << "Duplicate found, skipping";
                     newRoute = false;
                     break;
                 }
@@ -1001,8 +1046,7 @@ QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstR
  */
 void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:" << page <<
-             "starting processing thread...";
+    //qDebug() << "Factory generated requested Linked Connection page:" << page << "starting processing thread...";
     emit this->processing(page->uri());
 
     /*
@@ -1013,7 +1057,7 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     * If not, fetch new pages
     */
     if (page->fragments().first()->departureTime() > this->departureTime()) {
-        qDebug() << "Requesting another page from QRail::Fragments::Factory";
+        //qDebug() << "Requesting another page from QRail::Fragments::Factory";
         this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
         emit this->requested(page->hydraPrevious());
     }

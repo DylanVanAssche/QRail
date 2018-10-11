@@ -55,6 +55,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
+    // Create journey
     QDateTime start = QDateTime::currentDateTime();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
@@ -68,6 +69,30 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), &loop, SLOT(quit()));
     loop.exec();
     qInfo() << "Routing Vilvoorde -> Brugge took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    // Extend with next page (later arrival time)
+    start = QDateTime::currentDateTime();
+    planner->getNextConnectionForJourney(this->journey);
+
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    QEventLoop loopNext;
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), &loopNext, SLOT(quit()));
+    loopNext.exec();
+    qInfo() << "Extending NEXT: later arrival time took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    // Extend with previous page (earlier departure time)
+    start = QDateTime::currentDateTime();
+    planner->getPreviousConnectionForJourney(this->journey);
+
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    QEventLoop loopPrevious;
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), &loopPrevious, SLOT(quit()));
+    loopPrevious.exec();
+    qInfo() << "Extending PREVIOUS: later arrival time took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 }
@@ -87,6 +112,8 @@ void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
 
 void RouterEngine::PlannerTest::processRoutesFinished(RouterEngine::Journey *journey)
 {
+    this->journey = journey;
+
     qDebug() << "Journey calculation finished, found" << journey->routes().length() << "routes";
     QList<QRail::RouterEngine::Route *> routes = journey->routes();
     foreach (QRail::RouterEngine::Route *route, routes) {

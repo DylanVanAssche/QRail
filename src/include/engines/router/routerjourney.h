@@ -21,6 +21,8 @@
 #include <QtCore/QList>
 #include <QtCore/QUrl>
 #include <QtCore/QMap>
+#include <QtCore/QDateTime>
+#include <QtCore/QUrlQuery>
 
 #include "engines/router/routerroute.h"
 #include "engines/router/routerstationstopprofile.h"
@@ -39,8 +41,6 @@ public:
                      const QUrl &departureStation,
                      const QUrl &arrivalStation,
                      const quint16 &maxTransfers,
-                     const QUrl &hydraPrevious,
-                     const QUrl &hydraNext,
                      QObject *parent = nullptr);
     QList<QRail::RouterEngine::Route *> routes() const;
     void setRoutes(const QList<QRail::RouterEngine::Route *> &routes);

@@ -112,6 +112,7 @@ private:
     QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
     QMap<QUrl, qreal> m_DArray;
     QList<QRail::Fragments::Page *> m_usedPages;
+    QRail::RouterEngine::Journey *m_journey;
     explicit Planner(QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
@@ -137,6 +138,8 @@ private:
     void setMaxTransfers(const qint16 &maxTransfers);
     void setDepartureStationURI(const QUrl &departureStationURI);
     void setArrivalStationURI(const QUrl &arrivalStationURI);
+    QRail::RouterEngine::Journey *journey() const;
+    void setJourney(QRail::RouterEngine::Journey *journey);
 };
 } // namespace RouterEngine
 } // namespace QRail

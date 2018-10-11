@@ -55,6 +55,8 @@ QRail::LiveboardEngine::Board::Board(const QList<QRail::VehicleEngine::Vehicle *
     m_station = station;
     m_from = from;
     m_until = until;
+    m_hydraNext = QUrl();
+    m_hydraPrevious = QUrl();
 }
 
 /**

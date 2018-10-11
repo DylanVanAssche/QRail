@@ -14,7 +14,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "routernulljourney.h"
+#include "engines/router/routernulljourney.h"
 using namespace QRail;
 RouterEngine::NullJourney *RouterEngine::NullJourney::m_instance = nullptr;
 
@@ -35,10 +35,8 @@ RouterEngine::NullJourney::NullJourney(
     const QUrl &departureStation,
     const QUrl &arrivalStation,
     const quint16 &maxTransfers,
-    const QUrl &hydraPrevious,
-    const QUrl &hydraNext,
-    QObject *parent) : QObject(routes, TArray, SArray, departureStation, arrivalStation, maxTransfers,
-                                   hydraPrevious, hydraNext, parent)
+    QObject *parent) : RouterEngine::Journey(routes, TArray, SArray, departureStation, arrivalStation,
+                                                 maxTransfers, parent)
 {
 
 }
@@ -63,9 +61,7 @@ RouterEngine::NullJourney *QRail::RouterEngine::NullJourney::getInstance()
                                      QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >(),
                                      QUrl(),
                                      QUrl(),
-                                     0,
-                                     QUrl(),
-                                     QUrl());
+                                     0);
     }
     return m_instance;
 }

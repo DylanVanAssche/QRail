@@ -28,8 +28,6 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> &routes,
                                const QUrl &departureStation,
                                const QUrl &arrivalStation,
                                const quint16 &maxTransfers,
-                               const QUrl &hydraPrevious,
-                               const QUrl &hydraNext,
                                QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
@@ -39,8 +37,8 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> &routes,
     m_departureStation = departureStation;
     m_arrivalStation = arrivalStation;
     m_maxTransfers = maxTransfers;
-    m_hydraPrevious = hydraPrevious;
-    m_hydraNext = hydraNext;
+    m_hydraPrevious = QUrl();
+    m_hydraNext = QUrl();
 }
 
 // Getters & Setters
@@ -119,8 +117,29 @@ QUrl RouterEngine::Journey::hydraPrevious() const
 
 void RouterEngine::Journey::setHydraPrevious(const QUrl &hydraPrevious)
 {
-    m_hydraPrevious = hydraPrevious;
-    emit this->hydraPreviousChanged();
+    // New hydraPrevious URI is earlier in time?
+    if (hydraPrevious.hasQuery() && this->hydraPrevious().hasQuery()) {
+        QUrlQuery queryNewHydraPrevious = QUrlQuery(hydraPrevious.query());
+        QUrlQuery queryOldHydraPrevious = QUrlQuery(this->hydraPrevious().query());
+        QDateTime timeNewHydraPrevious = QDateTime::fromString(
+                                             queryNewHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+        QDateTime timeOldHydraPrevious = QDateTime::fromString(
+                                             queryOldHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+        qDebug() << "HYDRA PREVIOUS=" << hydraPrevious << timeNewHydraPrevious << "|" <<
+                 this->hydraPrevious() <<
+                 timeOldHydraPrevious;
+        // Only accept URI that's earlier in time
+        if (timeNewHydraPrevious < timeOldHydraPrevious) {
+            m_hydraPrevious = hydraPrevious;
+            emit this->hydraPreviousChanged();
+        }
+    }
+    // Current hydraPrevious is still empty, setting it to the received hydraPrevious
+    else {
+        qDebug() << "Empty hydraPrevious";
+        m_hydraPrevious = hydraPrevious;
+        emit this->hydraPreviousChanged();
+    }
 }
 
 QUrl RouterEngine::Journey::hydraNext() const
@@ -130,6 +149,27 @@ QUrl RouterEngine::Journey::hydraNext() const
 
 void RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
 {
-    m_hydraNext = hydraNext;
-    emit this->hydraNextChanged();
+    // New hydraNext URI is further in time?
+    if (hydraNext.hasQuery() && this->hydraNext().isValid()) {
+        QUrlQuery queryNewHydraNext = QUrlQuery(hydraNext.query());
+        QUrlQuery queryOldHydraNext = QUrlQuery(this->hydraNext().query());
+        QDateTime timeNewHydraNext = QDateTime::fromString(
+                                         queryNewHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+        QDateTime timeOldHydraNext = QDateTime::fromString(
+                                         queryOldHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+
+        qDebug() << "HYDRA NEXT=" << hydraNext << timeNewHydraNext << "|" << this->hydraNext() <<
+                 timeOldHydraNext;
+        // Only accept URI that's later in time
+        if (timeNewHydraNext > timeOldHydraNext) {
+            m_hydraNext = hydraNext;
+            emit this->hydraNextChanged();
+        }
+    }
+    // Current hydraNext is still empty, setting it to the received hydraNext
+    else {
+        qDebug() << "Empty hydraNext";
+        m_hydraNext = hydraNext;
+        emit this->hydraNextChanged();
+    }
 }

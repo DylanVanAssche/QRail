@@ -34,8 +34,6 @@ private:
                          const QUrl &departureStation,
                          const QUrl &arrivalStation,
                          const quint16 &maxTransfers,
-                         const QUrl &hydraPrevious,
-                         const QUrl &hydraNext,
                          QObject *parent = nullptr);
     static RouterEngine::NullJourney *m_instance;
 };

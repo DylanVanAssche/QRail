@@ -122,6 +122,13 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         this->setMaxTransfers(maxTransfers);
         this->setRoutes(QList<QRail::RouterEngine::Route *>());
         this->initUsedPages();
+        this->setJourney(new QRail::RouterEngine::Journey());
+        this->journey()->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
+        this->journey()->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+        this->journey()->setDepartureStation(departureStation);
+        this->journey()->setArrivalStation(arrivalStation);
+        this->journey()->setMaxTransfers(maxTransfers);
+        this->journey()->setRoutes(QList<QRail::RouterEngine::Route *>());
 
         /*
          * Setup footpaths for the arrival station since CSA profile
@@ -235,6 +242,10 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     qDebug() << "\tArrival time:" << this->arrivalTime();
     qDebug() << "\tmaxTransfers:" << this->maxTransfers();
 #endif
+
+    // Update hydraPrevious and hydraNext pointers
+    this->journey()->setHydraNext(page->hydraNext());
+    this->journey()->setHydraPrevious(page->hydraPrevious());
 
     // Keep a reference to this page for later deletion
     this->addToUsedPages(page);
@@ -887,9 +898,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                                                                                  this->SArray(),
                                                                                  this->departureStationURI(),
                                                                                  this->arrivalStationURI(),
-                                                                                 this->maxTransfers(),
-                                                                                 this->hydraPrevious(),
-                                                                                 this->hydraNext());
+                                                                                 this->maxTransfers());
+        emit this->finished(journey);
 
         // Clean up pages when we're finished
         this->deleteUsedPages();
@@ -1369,4 +1379,14 @@ void QRail::RouterEngine::Planner::setSArray(const
                                              QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray)
 {
     m_SArray = SArray;
+}
+
+QRail::RouterEngine::Journey *RouterEngine::Planner::journey() const
+{
+    return m_journey;
+}
+
+void RouterEngine::Planner::setJourney(QRail::RouterEngine::Journey *journey)
+{
+    m_journey = journey;
 }

@@ -40,6 +40,8 @@ public:
                      const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > &SArray,
                      const QUrl &departureStation,
                      const QUrl &arrivalStation,
+                     const QDateTime &departureTime,
+                     const QDateTime &arrivalTime,
                      const quint16 &maxTransfers,
                      QObject *parent = nullptr);
     QList<QRail::RouterEngine::Route *> routes() const;
@@ -58,6 +60,10 @@ public:
     void setHydraPrevious(const QUrl &hydraPrevious);
     QUrl hydraNext() const;
     void setHydraNext(const QUrl &hydraNext);
+    QDateTime departureTime() const;
+    void setDepartureTime(const QDateTime &departureTime);
+    QDateTime arrivalTime() const;
+    void setArrivalTime(const QDateTime &arrivalTime);
 
 signals:
     void routesChanged();
@@ -75,10 +81,32 @@ private:
     QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > m_SArray;
     QUrl m_departureStation;
     QUrl m_arrivalStation;
+    QDateTime m_departureTime;
+    QDateTime m_arrivalTime;
     quint16 m_maxTransfers;
     QUrl m_hydraPrevious;
     QUrl m_hydraNext;
 };
+
+QDateTime Journey::departureTime() const
+{
+    return m_departureTime;
+}
+
+void Journey::setDepartureTime(const QDateTime &departureTime)
+{
+    m_departureTime = departureTime;
+}
+
+QDateTime Journey::arrivalTime() const
+{
+    return m_arrivalTime;
+}
+
+void Journey::setArrivalTime(const QDateTime &arrivalTime)
+{
+    m_arrivalTime = arrivalTime;
+}
 }
 }
 

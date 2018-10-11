@@ -27,6 +27,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QPair>
 #include <QtCore/QtGlobal>
+#include <QtCore/QUrl>
+#include <QtCore/QUrlQuery>
 #include <QtPositioning/QGeoCoordinate>
 #include <algorithm> // C++ header needed for std:sort function
 
@@ -80,6 +82,8 @@ public:
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    void getNextConnectionForJourney(QRail::RouterEngine::Journey *journey);
+    void getPreviousConnectionForJourney(QRail::RouterEngine::Journey *journey);
     QDateTime calculateArrivalTime(const QDateTime &departureTime);
     QDateTime departureTime() const;
     QDateTime arrivalTime() const;

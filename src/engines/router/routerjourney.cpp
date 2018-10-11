@@ -27,6 +27,8 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> &routes,
                                const QMap<QUrl, QList<RouterEngine::StationStopProfile *> > &SArray,
                                const QUrl &departureStation,
                                const QUrl &arrivalStation,
+                               const QDateTime &departureTime,
+                               const QDateTime &arrivalTime,
                                const quint16 &maxTransfers,
                                QObject *parent) : QObject(parent)
 {
@@ -36,6 +38,8 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> &routes,
     m_SArray = SArray;
     m_departureStation = departureStation;
     m_arrivalStation = arrivalStation;
+    m_departureTime = departureTime;
+    m_arrivalTime = arrivalTime;
     m_maxTransfers = maxTransfers;
     m_hydraPrevious = QUrl();
     m_hydraNext = QUrl();

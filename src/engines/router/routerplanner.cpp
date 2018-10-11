@@ -155,7 +155,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 
         // Jumpstart the page fetching
         this->fragmentsFactory()->getPage(this->arrivalTime(), this);
-        //qApp->processEvents();
         qDebug() << "CSA init OK";
     } else {
         qCritical() << "Invalid stations or timestamps";
@@ -200,6 +199,40 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
         qCritical() << "Departure time:" << departureTime;
         emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
     }
+}
+
+void RouterEngine::Planner::getNextConnectionForJourney(RouterEngine::Journey *journey)
+{
+    // Later arrival time is a problem! The S and T array are different since CSA runs backwards
+    // A better solution here would be great! TO DO
+    this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
+    this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+    QUrlQuery queryHydraNext = QUrlQuery(journey->hydraNext().query());
+    QDateTime timeHydraNext = QDateTime::fromString(
+                                  queryHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+    this->setDepartureTime(journey->departureTime());
+    this->setArrivalTime(timeHydraNext);
+    this->setDepartureStationURI(journey->departureStation());
+    this->setArrivalStationURI(journey->arrivalStation());
+
+    // Jumpstart the page fetching, use hydraPrevious to get the previous page of the last page
+    this->fragmentsFactory()->getPage(journey->hydraNext(), this);
+}
+
+void RouterEngine::Planner::getPreviousConnectionForJourney(RouterEngine::Journey *journey)
+{
+    this->setSArray(journey->SArray());
+    this->setTArray(journey->TArray());
+    QUrlQuery queryHydraPrevious = QUrlQuery(journey->hydraPrevious().query());
+    QDateTime timeHydraPrevious = QDateTime::fromString(
+                                      queryHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
+    this->setDepartureTime(timeHydraPrevious);
+    this->setArrivalTime(journey->arrivalTime());
+    this->setDepartureStationURI(journey->departureStation());
+    this->setArrivalStationURI(journey->arrivalStation());
+
+    // Jumpstart the page fetching, use hydraPrevious to get the previous page of the last page
+    this->fragmentsFactory()->getPage(journey->hydraPrevious(), this);
 }
 
 // Processors
@@ -892,14 +925,10 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         }
 
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
-        //emit this->finished(this->routes());
-        QRail::RouterEngine::Journey *journey = new QRail::RouterEngine::Journey(this->routes(),
-                                                                                 this->TArray(),
-                                                                                 this->SArray(),
-                                                                                 this->departureStationURI(),
-                                                                                 this->arrivalStationURI(),
-                                                                                 this->maxTransfers());
-        emit this->finished(journey);
+        this->journey()->setRoutes(this->routes());
+        this->journey()->setTArray(this->TArray());
+        this->journey()->setSArray(this->SArray());
+        emit this->finished(this->journey());
 
         // Clean up pages when we're finished
         this->deleteUsedPages();

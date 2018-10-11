@@ -87,24 +87,8 @@ void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
 
 void RouterEngine::PlannerTest::processRoutesFinished(RouterEngine::Journey *journey)
 {
-    qDebug() << "JOURNEY OK";
-}
-
-void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI)
-{
-    qDebug() << "Page received:" << pageURI.toString();
-}
-
-void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
-{
-    qDebug() << "Page requested:" << pageURI.toString();
-}
-
-/*void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
-                                                             QList<QRail::RouterEngine::Route *>
-                                                             &routes)
-{
-    qDebug() << "CSA found" << routes.size() << "possible routes";
+    qDebug() << "Journey calculation finished, found" << journey->routes().length() << "routes";
+    QList<QRail::RouterEngine::Route *> routes = journey->routes();
     foreach (QRail::RouterEngine::Route *route, routes) {
         // Verify the complete trip
         qDebug() << "Trip:" << route->departureStation()->station()->name().value(
@@ -145,8 +129,17 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
             }
         }
     }
-    qDebug() << "All routes processed";
-}*/
+}
+
+void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI)
+{
+    qDebug() << "Page received:" << pageURI.toString();
+}
+
+void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
+{
+    qDebug() << "Page requested:" << pageURI.toString();
+}
 
 void RouterEngine::PlannerTest::processRoutesStream(QRail::RouterEngine::Route *route)
 {

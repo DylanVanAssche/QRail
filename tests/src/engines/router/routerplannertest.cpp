@@ -73,7 +73,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
             << "msecs";
 
     // Extend with next page (later arrival time)
-    start = QDateTime::currentDateTime();
+    /*start = QDateTime::currentDateTime();
     planner->getNextConnectionForJourney(this->journey);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
@@ -82,10 +82,10 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     loopNext.exec();
     qInfo() << "Extending NEXT: later arrival time took"
             << start.msecsTo(QDateTime::currentDateTime())
-            << "msecs";
+            << "msecs";*/
 
     // Extend with previous page (earlier departure time)
-    start = QDateTime::currentDateTime();
+    /*start = QDateTime::currentDateTime();
     planner->getPreviousConnectionForJourney(this->journey);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
@@ -94,7 +94,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     loopPrevious.exec();
     qInfo() << "Extending PREVIOUS: later arrival time took"
             << start.msecsTo(QDateTime::currentDateTime())
-            << "msecs";
+            << "msecs";*/
 }
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()

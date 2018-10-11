@@ -87,26 +87,6 @@ private:
     QUrl m_hydraPrevious;
     QUrl m_hydraNext;
 };
-
-QDateTime Journey::departureTime() const
-{
-    return m_departureTime;
-}
-
-void Journey::setDepartureTime(const QDateTime &departureTime)
-{
-    m_departureTime = departureTime;
-}
-
-QDateTime Journey::arrivalTime() const
-{
-    return m_arrivalTime;
-}
-
-void Journey::setArrivalTime(const QDateTime &arrivalTime)
-{
-    m_arrivalTime = arrivalTime;
-}
 }
 }
 

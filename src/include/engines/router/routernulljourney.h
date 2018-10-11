@@ -17,6 +17,14 @@
 #ifndef ROUTERNULLJOURNEY_H
 #define ROUTERNULLJOURNEY_H
 
+#include <QtCore/QObject>
+#include <QtCore/QDateTime>
+#include <QtCore/QUrl>
+#include <QtCore/QMap>
+#include <QtCore/QList>
+
+#include "engines/router/routertrainprofile.h"
+#include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routerjourney.h"
 #include "qrail.h"
 
@@ -33,6 +41,8 @@ private:
                          const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > &SArray,
                          const QUrl &departureStation,
                          const QUrl &arrivalStation,
+                         const QDateTime &departureTime,
+                         const QDateTime &arrivalTime,
                          const quint16 &maxTransfers,
                          QObject *parent = nullptr);
     static RouterEngine::NullJourney *m_instance;

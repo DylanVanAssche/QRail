@@ -170,3 +170,23 @@ void RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
         emit this->hydraNextChanged();
     }
 }
+
+QDateTime RouterEngine::Journey::arrivalTime() const
+{
+    return m_arrivalTime;
+}
+
+void RouterEngine::Journey::setArrivalTime(const QDateTime &arrivalTime)
+{
+    m_arrivalTime = arrivalTime;
+}
+
+QDateTime RouterEngine::Journey::departureTime() const
+{
+    return m_departureTime;
+}
+
+void RouterEngine::Journey::setDepartureTime(const QDateTime &departureTime)
+{
+    m_departureTime = departureTime;
+}

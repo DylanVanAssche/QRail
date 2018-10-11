@@ -34,9 +34,11 @@ RouterEngine::NullJourney::NullJourney(
     const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > &SArray,
     const QUrl &departureStation,
     const QUrl &arrivalStation,
+    const QDateTime &departureTime,
+    const QDateTime &arrivalTime,
     const quint16 &maxTransfers,
     QObject *parent) : RouterEngine::Journey(routes, TArray, SArray, departureStation, arrivalStation,
-                                                 maxTransfers, parent)
+                                                 departureTime, arrivalTime, maxTransfers, parent)
 {
 
 }
@@ -61,6 +63,8 @@ RouterEngine::NullJourney *QRail::RouterEngine::NullJourney::getInstance()
                                      QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >(),
                                      QUrl(),
                                      QUrl(),
+                                     QDateTime(),
+                                     QDateTime(),
                                      0);
     }
     return m_instance;

@@ -22,6 +22,12 @@
 # - Summary of changes
 
 * Wed Oct 03 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.4-1
+- [IMPROVEMENT] Liveboard fetching reversed
+- [IMPROVEMENT] Input validation for public APIs
+- [IMPROVEMENT] Results are emitted individual
+- [NEW] Get next and previous page for Liveboard
+- [UPGRADE] Updated iRail station module
+* Wed Oct 03 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.4-1
 - [MAJOR BUGFIX] Misuse of QCoreApplication::postEvent()
 - [NEW] Streaming support for Liveboard and Router
 

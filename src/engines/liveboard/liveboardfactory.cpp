@@ -307,7 +307,10 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
             this->stream(vehicle);
 
             // If we were extending the liveboard, the fetching will stop after this is set to false
-            this->setIsExtending(false);
+            if (this->isExtending()) {
+                this->setIsExtending(false);
+                liveboardProcessingMutex.unlock();
+            }
         }
     }
     // Fetching fragment pages complete, emit the finished signal

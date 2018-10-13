@@ -21,6 +21,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sat Oct 13 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.6-1
+- [MAJOR BUGFIX] Routing pages are now deleted when the next request is started
+- [MINOR BUGFIX] Liveboard lost pages are now properly deleted
+
 * Thu Oct 11 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.5-1
 - [IMPROVEMENT] Liveboard fetching reversed
 - [IMPROVEMENT] Input validation for public APIs

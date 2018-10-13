@@ -16,7 +16,7 @@
 #
 
 TARGET = qrail
-VERSION = 0.0.5
+VERSION = 0.0.6
 
 # Uncomment this config if you want to build a static library
 CONFIG += staticlib

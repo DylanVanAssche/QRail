@@ -59,6 +59,11 @@ QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance()
     return m_instance;
 }
 
+RouterEngine::Planner::~Planner()
+{
+    this->deleteUsedPages();
+}
+
 // Invokers
 /**
  * @file routerplanner.cpp
@@ -113,6 +118,9 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     if (departureStation.isValid() && arrivalStation.isValid() && departureStation.isValid()) {
         qDebug() << "Init CSA algorithm";
         plannerProcessingMutex.lock(); // Queue requests
+        // Clean up previous pages, if any
+        this->deleteUsedPages();
+
         this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
         this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
         this->setDepartureStationURI(departureStation);
@@ -883,9 +891,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
         emit this->finished(this->routes());
 
-        // Clean up pages when we're finished
-        this->deleteUsedPages();
-
         // Next request
         plannerProcessingMutex.unlock();
     }
@@ -1318,9 +1323,9 @@ void RouterEngine::Planner::addToUsedPages(Fragments::Page *page)
 
 void RouterEngine::Planner::deleteUsedPages()
 {
-    qDebug() << "Scheduling used pages for deletion";
+    qDebug() << "Deleting previous used pages";
     foreach (QRail::Fragments::Page *page, m_usedPages) {
-        page->deleteLater();
+        delete page;
     }
 }
 

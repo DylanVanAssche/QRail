@@ -70,6 +70,7 @@ class QRAIL_SHARED_EXPORT Planner : public QObject
     Q_OBJECT
 public:
     static Planner *getInstance();
+    ~Planner();
     void getConnections(const QUrl &departureStation,
                         const QUrl &arrivalStation,
                         const QDateTime &departureTime,

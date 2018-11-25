@@ -117,7 +117,10 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 
     if (departureStation.isValid() && arrivalStation.isValid() && departureStation.isValid()) {
         qDebug() << "Init CSA algorithm";
-        plannerProcessingMutex.lock(); // Queue requests
+        if(!plannerProcessingMutex.tryLock(LOCK_TIMEOUT)) {
+            emit this->error("Planner factory is busy. Please try again later.");
+            return;
+        }
         // Clean up previous pages, if any
         this->deleteUsedPages();
 
@@ -203,6 +206,12 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
     }
 }
 
+void RouterEngine::Planner::abortCurrentOperation()
+{
+    qInfo() << "Abort registered, processing!";
+    this->setAbortRequested(true);
+}
+
 // Processors
 /**
  * @file routerplanner.cpp
@@ -224,6 +233,15 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // Lock processing to enforce the DESCENDING order of departure times
     QMutexLocker locker(&syncThreadMutex);
 
+    // Current operation aborted by the user
+    if(this->isAbortRequested()) {
+        this->setAbortRequested(false);
+        plannerProcessingMutex.unlock(); // Processing aborted
+        syncThreadMutex.unlock(); // Page processing is canceled
+        qInfo() << "Aborted successfully";
+        return;
+    }
+
     // Flag to check if we're passed the departureTime
     bool hasPassedDepartureTimeLimit = false;
 
@@ -243,9 +261,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     qDebug() << "\tArrival time:" << this->arrivalTime();
     qDebug() << "\tmaxTransfers:" << this->maxTransfers();
 #endif
-
-    // Keep a reference to this page for later deletion
-    this->addToUsedPages(page);
 
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
     // departure times order
@@ -962,6 +977,7 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     qDebug() << "Factory generated requested Linked Connection page:" << page <<
              "starting processing thread...";
     emit this->processing(page->uri());
+    this->addToUsedPages(page);
 
     /*
     * Before processing our received page we check if we the first fragment
@@ -1147,6 +1163,16 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event)
 void QRail::RouterEngine::Planner::setArrivalStationURI(const QUrl &arrivalStationURI)
 {
     m_arrivalStationURI = arrivalStationURI;
+}
+
+bool QRail::RouterEngine::Planner::isAbortRequested() const
+{
+    return m_abortRequested;
+}
+
+void QRail::RouterEngine::Planner::setAbortRequested(bool abortRequested)
+{
+    m_abortRequested = abortRequested;
 }
 
 /**

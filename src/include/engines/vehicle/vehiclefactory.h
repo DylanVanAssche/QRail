@@ -29,6 +29,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QRegularExpression>
 #include <QtCore/QRegularExpressionMatch>
+#include <QtCore/QMutex>
 
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
@@ -62,6 +63,7 @@ signals:
     void error(const QString &message);
 
 private:
+    mutable QMutex vehicleProcessingMutex;
     QMap<QString, QRail::VehicleEngine::Vehicle *> m_cache;
     QRail::Network::Manager *m_http;
     StationEngine::Factory *m_stationFactory;

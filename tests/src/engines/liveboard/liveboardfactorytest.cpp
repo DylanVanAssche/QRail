@@ -32,13 +32,25 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qDebug() << "Running LiveboardEngine::Factory test";
     QDateTime start;
 
+    // Testing abort
+    start = QDateTime::currentDateTime();
+    qInfo() << "Testing abort";
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);
+
+    // Cancel operation
+    factory->abortCurrentOperation();
+
+    QTest::qSleep(3000); // 3 seconds should be sufficient to process the abort command
+
     // Creating liveboard
     start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
         LiveboardEngine::Board::Mode::DEPARTURES);
 
-    // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
     QEventLoop loop;
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
     loop.exec();

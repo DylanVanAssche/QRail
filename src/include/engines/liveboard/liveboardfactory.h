@@ -53,6 +53,7 @@ public:
                                  QRail::LiveboardEngine::Board::Mode::DEPARTURES);
     void getNextResultsForLiveboard(QRail::LiveboardEngine::Board *board);
     void getPreviousResultsForLiveboard(QRail::LiveboardEngine::Board *board);
+    void abortCurrentOperation();
     QDateTime from() const;
     QDateTime until() const;
     QUrl stationURI() const;
@@ -89,6 +90,7 @@ private:
     QRail::Fragments::Factory *fragmentsFactory() const;
     StationEngine::Factory *stationFactory() const;
     bool m_isExtending;
+    bool m_abortRequested;
     void processPage(QRail::Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
     void parsePage(QRail::Fragments::Page *page, const bool &finished);
@@ -103,6 +105,8 @@ private:
     void deleteUsedPages();
     bool isExtending() const;
     void setIsExtending(bool isExtending);
+    bool isAbortRequested() const;
+    void setAbortRequested(bool abortRequested);
     explicit Factory(QObject *parent = nullptr);
 };
 } // namespace LiveboardEngine

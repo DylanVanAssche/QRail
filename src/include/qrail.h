@@ -26,6 +26,7 @@
 
 #define PAGE_CONTEXT_PATH "://context/page/context.json"
 #define VEHICLE_CONTEXT_PATH "://context/vehicle/context.json"
+#define LOCK_TIMEOUT 750
 
 void initQRail();
 QJsonObject pageContext();

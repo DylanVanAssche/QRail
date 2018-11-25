@@ -52,6 +52,18 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
+    // Test abort
+    planner->getConnections(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
+        QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
+        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+        4 // Max transfers
+    );
+
+    // Cancel operation
+    planner->abortCurrentOperation();
+
+    QTest::qSleep(3000); // 3 seconds should be sufficient to process the abort command
 
     QDateTime start = QDateTime::currentDateTime();
     planner->getConnections(

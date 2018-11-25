@@ -78,6 +78,7 @@ public:
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    void abortCurrentOperation();
     QDateTime calculateArrivalTime(const QDateTime &departureTime);
     QDateTime departureTime() const;
     QDateTime arrivalTime() const;
@@ -135,6 +136,9 @@ private:
     void setMaxTransfers(const qint16 &maxTransfers);
     void setDepartureStationURI(const QUrl &departureStationURI);
     void setArrivalStationURI(const QUrl &arrivalStationURI);
+    bool m_abortRequested;
+    bool isAbortRequested() const;
+    void setAbortRequested(bool abortRequested);
 };
 } // namespace RouterEngine
 } // namespace QRail

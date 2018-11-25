@@ -87,6 +87,10 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
                                                     const QLocale::Language &language)
 {
     if (uri.isValid()) {
+        if(!vehicleProcessingMutex.tryLock(LOCK_TIMEOUT)) {
+            emit this->error("Vehicle factory is busy. Please try again later.");
+            return;
+        }
         this->setLanguage(language);
         QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
         // Vehicle isn't in our cache yet, fetching...
@@ -97,7 +101,8 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
         else {
             emit this->finished(vehicle);
         }
-    } else {
+    }
+    else {
         qCritical() << "Vehicle URI invalid";
         qCritical() << "URI:" << uri;
         emit this->finished(QRail::VehicleEngine::NullVehicle::getInstance());

@@ -107,8 +107,14 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QDateTime &until,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
+    if(!liveboardProcessingMutex.tryLock(LOCK_TIMEOUT)) {
+        qDebug() << "Emiting locked error";
+        emit this->error("Liveboard factory is busy. Please try again later.");
+        return;
+    }
+
     if (uri.isValid() && from.isValid() && until.isValid()) {
-        liveboardProcessingMutex.lock(); // Processing started
+        this->setAbortRequested(false);
         this->deleteUsedPages(); // Clean up previous pages if needed
         this->setStationURI(uri);
         this->setMode(mode);
@@ -170,6 +176,22 @@ void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::B
     }
 }
 
+/**
+ * @file liveboardfactory.cpp
+ * @author Dylan Van Assche
+ * @date 25 Nov 2018
+ * @brief Cancel the current operation.
+ * @package Liveboard
+ * @public
+ * If the user wants to cancel the current operation,
+ * this method must be called before performing a new action.
+ */
+void LiveboardEngine::Factory::abortCurrentOperation()
+{
+    qInfo() << "Abort registered, processing!";
+    this->setAbortRequested(true);
+}
+
 // Helpers
 /**
  * @file liveboardfactory.cpp
@@ -189,6 +211,9 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
              "starting processing thread...";
     // Launch processing thread
     emit this->processing(page->uri());
+
+    // Queue page for deletion when Liveboard is ready
+    this->addUsedPage(page);
 
     /*
     * Before processing our received page we check if we the first fragment
@@ -225,6 +250,14 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
  */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
 {
+    // Current operation aborted by the user
+    if(this->isAbortRequested()) {
+        qInfo() << "Aborted successfully";
+        this->setAbortRequested(false);
+        liveboardProcessingMutex.unlock(); // Processing finished
+        return;
+    }
+
     // Update hydra pagination
     this->liveboard()->setHydraNext(page->hydraNext());
     this->liveboard()->setHydraPrevious(page->hydraPrevious());
@@ -314,9 +347,6 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
             }
         }
     }
-
-    // Queue page for deletion when Liveboard is ready
-    this->addUsedPage(page);
 
     // Fetching fragment pages complete, emit the finished signal
     if (finished) {
@@ -603,4 +633,14 @@ void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Fact
                                                           *fragmentsFactory)
 {
     m_fragmentsFactory = fragmentsFactory;
+}
+
+bool QRail::LiveboardEngine::Factory::isAbortRequested() const
+{
+    return m_abortRequested;
+}
+
+void QRail::LiveboardEngine::Factory::setAbortRequested(bool abortRequested)
+{
+    m_abortRequested = abortRequested;
 }

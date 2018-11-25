@@ -37,7 +37,7 @@ StationEngine::Factory::Factory(QObject *parent) : QObject(parent)
     dbDirectory.mkpath(path);
 
     // Setup DB
-    this->setDb(QRail::Database::Manager::getInstance(path + "/stations.db"));
+    this->setDb(QRail::Database::Manager::getInstance(path + "/tests.db"));
     this->initDatabase();
 
     // Init caching
@@ -588,9 +588,6 @@ bool StationEngine::Factory::initDatabase()
     QList<QStringList> stopsCSV =
         QtCSV::Reader::readToList(":/database/stations/stops.csv");
 
-    // Synchronise all QFutures at the end of the transaction
-    QFutureSynchronizer<bool> synchronizer;
-
     // Loop through the stations CSV file and insert every station into the DB
     foreach (QStringList station, stationsCSV) {
         // We remove the title line from the CSV
@@ -610,12 +607,10 @@ bool StationEngine::Factory::initDatabase()
         // Only when we have an URI match between the facilitiesCSV and stationsCSV
         // we can create a complete Station object
         if (facilityIndex > 0) {
-            synchronizer.addFuture(this->insertStationWithFacilitiesIntoDatabase(
-                                       station, facilitiesCSV.at(facilityIndex)));
+            this->insertStationWithFacilitiesIntoDatabase(station, facilitiesCSV.at(facilityIndex));
         } else {
             // qWarning() << "No facilties found for station:" << station.at(0);
-            synchronizer.addFuture(
-                this->insertStationWithoutFacilitiesIntoDatabase(station));
+            this->insertStationWithoutFacilitiesIntoDatabase(station);
         }
     }
 
@@ -625,19 +620,10 @@ bool StationEngine::Factory::initDatabase()
         if (!QString(platform.at(0)).startsWith("http")) {
             continue;
         }
-        synchronizer.addFuture(this->insertPlatformIntoDatabase(platform));
+        this->insertPlatformIntoDatabase(platform);
     }
 
     // Insertion complete, synchronize everything and end the transaction
-    foreach (QFuture<bool> future, synchronizer.futures()) {
-        success = future.result();
-        if (!success) {
-            qCritical() << "Insertion failed";
-            synchronizer.waitForFinished(); // Wait in case we have a failed insertion
-            // for the rest of the QFutures
-            break;
-        }
-    }
     this->db()->endTransaction();
 
     return success;
@@ -654,7 +640,7 @@ bool StationEngine::Factory::initDatabase()
  * @public
  * Inserts a station with facilities into the database from the CSV file.
  */
-QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
+bool StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
     const QStringList &station, const QStringList &facilities)
 {
     QSqlQuery query(this->db()->database());
@@ -795,7 +781,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
     query.bindValue(":salesCloseSunday", facilities.at(35));
     query.bindValue(":avgStopTimes", station.at(9));
     query.bindValue(":officialTransferTimes", station.at(10));
-    return this->db()->executeAsync(query);
+    return this->db()->execute(query);
 }
 
 /**
@@ -808,8 +794,7 @@ QFuture<bool> StationEngine::Factory::insertStationWithFacilitiesIntoDatabase(
  * @public
  * Inserts a station without facilities into the database from the CSV file.
  */
-QFuture<bool>
-StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QStringList &station)
+bool StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QStringList &station)
 {
     QSqlQuery query(this->db()->database());
     query.prepare("INSERT INTO stations ("
@@ -838,7 +823,7 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
     query.bindValue(":alternativeEN", station.at(5));
     query.bindValue(":avgStopTimes", station.at(9));
     query.bindValue(":officialTransferTimes", station.at(10));
-    return this->db()->executeAsync(query);
+    return this->db()->execute(query);
 }
 
 /**
@@ -851,7 +836,7 @@ StationEngine::Factory::insertStationWithoutFacilitiesIntoDatabase(const QString
  * @public
  * Inserts a platform into the database from the CSV file.
  */
-QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringList &platform)
+bool StationEngine::Factory::insertPlatformIntoDatabase(const QStringList &platform)
 {
     QSqlQuery query(this->db()->database());
     query.prepare("INSERT INTO platforms ("
@@ -886,7 +871,7 @@ QFuture<bool> StationEngine::Factory::insertPlatformIntoDatabase(const QStringLi
     query.bindValue(":alternativeDE", platform.at(7));
     query.bindValue(":alternativeEN", platform.at(8));
     query.bindValue(":platform", platform.at(9));
-    return this->db()->executeAsync(query);
+    return this->db()->execute(query);
 }
 
 // Helpers

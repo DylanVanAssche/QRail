@@ -17,7 +17,6 @@
 #ifndef LIVEBOARDFACTORY_H
 #define LIVEBOARDFACTORY_H
 
-#include <QtConcurrent/QtConcurrent>
 #include <QtCore/QDateTime>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>

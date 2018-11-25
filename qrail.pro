@@ -16,7 +16,7 @@
 #
 
 TARGET = qrail
-VERSION = 0.0.6
+VERSION = 0.0.7
 
 # Uncomment this config if you want to build a static library
 CONFIG += staticlib
@@ -36,6 +36,11 @@ QT += core \
 
 # QMake config
 CONFIG += c++11
+
+# Enable GCOV coverage reports (https://medium.com/@kelvin_sp/generating-code-coverage-with-qt-5-and-gcov-on-mac-os-4999857f4676)
+# --coverage option is synonym for: -fprofile-arcs -ftest-coverage -lgcov
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
 
 # Disable debug and warning messages while releasing for security reasons
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT \

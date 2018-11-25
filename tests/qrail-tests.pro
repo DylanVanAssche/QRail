@@ -29,6 +29,11 @@ QT += core \
     sql \
     testlib
 
+# Enable GCOV coverage reports (https://medium.com/@kelvin_sp/generating-code-coverage-with-qt-5-and-gcov-on-mac-os-4999857f4676)
+# --coverage option is synonym for: -fprofile-arcs -ftest-coverage -lgcov
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
+
 # QRail library build location
 CONFIG(debug, debug|release) {
     QRAIL_LOCATION = $$PWD/../build/debug

@@ -57,7 +57,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-        QDateTime::fromString("2018-10-05T13:00:00.000Z", Qt::ISODate), // Departure time (UTC)
+        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
         4 // Max transfers
     );
 

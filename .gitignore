@@ -41,3 +41,11 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+# Coverage
+*.gcno
+*.gcda
+coverage
+
+# Test binaries
+tests/qrail-tests

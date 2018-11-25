@@ -109,6 +109,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
 {
     if (uri.isValid() && from.isValid() && until.isValid()) {
         liveboardProcessingMutex.lock(); // Processing started
+        this->deleteUsedPages(); // Clean up previous pages if needed
         this->setStationURI(uri);
         this->setMode(mode);
         this->setFrom(from);
@@ -205,7 +206,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     } else {
         finished = true;
     }
-    QtConcurrent::run(this, &QRail::LiveboardEngine::Factory::parsePage, page, finished);
+    this->parsePage(page, finished);
 }
 
 /**
@@ -313,27 +314,23 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
             }
         }
     }
+
+    // Queue page for deletion when Liveboard is ready
+    this->addUsedPage(page);
+
     // Fetching fragment pages complete, emit the finished signal
     if (finished) {
         qDebug() << "Finished fetching liveboard pages";
 
         // Update the time boundaries of the liveboard
         // TO DO: Handle ARRIVALS and DEPARTURES mode, both timestamps are the same at the moment so this valid.
-        this->liveboard()->setFrom(
-            this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
-        this->liveboard()->setUntil(
-            this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
+        this->liveboard()->setFrom(this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
+        this->liveboard()->setUntil(this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
 
         // Emit finished signal and clean up
         emit this->finished(this->liveboard());
-        this->deleteUsedPages();
         liveboardProcessingMutex.unlock(); // Processing finished
     }
-
-    // Stream pages to client
-
-    // Queue page for deletion when Liveboard is ready
-    this->addUsedPage(page);
 }
 
 // Getters & Setters

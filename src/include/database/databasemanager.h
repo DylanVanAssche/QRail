@@ -28,6 +28,7 @@
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
 #include <QtConcurrent/QtConcurrent>
+#include <QtCore/QThreadStorage>
 
 // Select here the right DB driver for Qt
 #define DRIVER "QSQLITE"
@@ -41,16 +42,15 @@ class Manager : public QObject
 public:
     static Manager *getInstance(const QString &path);
     bool execute(QSqlQuery &query);
-    QFuture<bool> executeAsync(QSqlQuery &query);
     bool startTransaction();
     bool endTransaction();
     QSqlDatabase database() const;
 
 private:
-    QSqlDatabase m_database;
+    static QThreadStorage<QSqlDatabase> m_database;
+    static QThreadStorage<QString> m_path;
     explicit Manager(const QString &path, QObject *parent = nullptr);
     static Manager *m_instance;
-    void setDatabase(const QSqlDatabase &database);
 };
 }
 }

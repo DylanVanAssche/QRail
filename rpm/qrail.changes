@@ -21,6 +21,15 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Nov 25 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.7-1
+- [MAJOR BUGFIX] Use lazy deletion also for Liveboards
+- [MAJOR BUGFIX] Fixed for Qt 5.11, database access using a pool
+- [MAJOR BUGFIX] Disabled concurrent access
+- [CI] Enabled Travis CI Xenial environment
+- [CI] Only run tests on Qt 5.9 docker image
+- [CI] CPPCheck
+- [CI] Fixed tests due a HTTP 404 error
+
 * Sat Oct 13 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.6-1
 - [MAJOR BUGFIX] Routing pages are now deleted when the next request is started
 - [MINOR BUGFIX] Liveboard lost pages are now properly deleted
@@ -47,5 +56,5 @@
 - [IMPROVEMENT] Stability improvement of the library
 - [CI] CI builds are working again
 
-* Thu Aug 14 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.1-1
+* Tue Aug 14 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.1-1
 - [RELEASE] First public release

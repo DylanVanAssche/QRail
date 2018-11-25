@@ -60,21 +60,6 @@ void QRail::Database::ManagerTest::runDatabaseManager()
         QFAIL("ID not found in database!");
     }
     query.clear();
-
-    // Read from TABLE async
-    QVERIFY(query.prepare("SELECT name FROM people WHERE id = ?"));
-    query.addBindValue(1); // ID = 1 for Kara Zor-El
-    QFuture<bool> future = db->executeAsync(query);
-    QVERIFY(future.result()); // Block and wait until result is available
-
-    if (query.first()) {      // Only 1 result is returned, use a while loop for multiple results
-        QString result = query.value(0).toString();
-        qDebug() << result;
-        QVERIFY(result.length() > 0);
-    } else {
-        QFAIL("ID not found in database!");
-    }
-    query.clear();
 }
 
 void QRail::Database::ManagerTest::cleanDatabaseManager()

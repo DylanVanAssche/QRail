@@ -17,7 +17,6 @@
 #ifndef CSAPLANNER_H
 #define CSAPLANNER_H
 
-#include <QtConcurrent/QtConcurrent>
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
 #include <QtCore/QLocale>

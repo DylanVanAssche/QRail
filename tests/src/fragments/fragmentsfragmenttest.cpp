@@ -90,8 +90,7 @@ void QRail::Fragments::FragmentTest::runLinkedConnectionFragment()
     QCOMPARE(spyArrivalStationURIChanged.count(), 1);
 
     QSignalSpy spyDepartureTimeChanged(lcWithoutDelay, SIGNAL(departureTimeChanged()));
-    lcWithoutDelay->setDepartureTime(
-        QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate));
+    lcWithoutDelay->setDepartureTime(QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate));
     QCOMPARE(spyDepartureTimeChanged.count(), 1);
 
     QSignalSpy spyArrivalTimeChanged(lcWithoutDelay, SIGNAL(arrivalTimeChanged()));

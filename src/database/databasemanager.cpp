@@ -17,6 +17,8 @@
 #include "database/databasemanager.h"
 using namespace QRail;
 QRail::Database::Manager *QRail::Database::Manager::m_instance = nullptr;
+QThreadStorage<QSqlDatabase> QRail::Database::Manager::m_database;
+QThreadStorage<QString> QRail::Database::Manager::m_path;
 
 /**
  * @file databasemanager.cpp
@@ -35,15 +37,7 @@ QRail::Database::Manager *QRail::Database::Manager::m_instance = nullptr;
 QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent)
 {
     if (QSqlDatabase::isDriverAvailable(DRIVER)) {
-        this->setDatabase(QSqlDatabase::addDatabase(DRIVER));
-        this->database().setDatabaseName(path);
-        qDebug() << "Database name:" << this->database().databaseName();
-
-        if (!this->database().open()) {
-            qCritical() << "Connection to database failed";
-        } else {
-            qInfo() << "Database connection OK";
-        }
+        m_path.setLocalData(path);
     } else {
         qCritical() << "Missing support for SQL driver:" << DRIVER;
     }
@@ -88,29 +82,9 @@ bool QRail::Database::Manager::execute(QSqlQuery &query)
     if (this->database().isOpen() && query.exec()) {
         return true;
     } else {
-        qCritical() << "Executing querry:" << query.executedQuery() << "FAILED:" <<
-                    query.lastError().text();
+        qCritical() << "Executing query:" << query.executedQuery() << "FAILED:" << query.lastError().text() << "DB OPEN?" << this->database().isOpen();
         return false;
     }
-}
-
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 13 Aug 2018
- * @brief Executes a given QSqlQuery asynchronous
- * @param QSqlQuery query
- * @return bool success
- * @package Database
- * @public
- * Executes the given QSqlQuery query asynchronous on the active database.
- * Before the execution takes place, the connection is checked.
- * During the execution, the errors are catched and logged as CRITICAL.
- */
-QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query)
-{
-    QFuture<bool> future = QtConcurrent::run(this, &QRail::Database::Manager::execute, query);
-    return future;
 }
 
 /**
@@ -128,7 +102,8 @@ QFuture<bool> QRail::Database::Manager::executeAsync(QSqlQuery &query)
  */
 bool QRail::Database::Manager::startTransaction()
 {
-    return this->database().transaction();
+    bool result = this->database().transaction();
+    return result;
 }
 
 /**
@@ -144,22 +119,8 @@ bool QRail::Database::Manager::startTransaction()
  */
 bool QRail::Database::Manager::endTransaction()
 {
-    return this->database().commit();
-}
-
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 20 Jul 2018
- * @brief Sets the QSqlDatabase database
- * @param const QSqlDatabase &database
- * @package Database
- * @private
- * Sets the current QSqlDatabase database to the given QSqlDatabase &database.
- */
-void QRail::Database::Manager::setDatabase(const QSqlDatabase &database)
-{
-    m_database = database;
+    bool result = this->database().commit();
+    return result;
 }
 
 /**
@@ -174,5 +135,12 @@ void QRail::Database::Manager::setDatabase(const QSqlDatabase &database)
  */
 QSqlDatabase QRail::Database::Manager::database() const
 {
-    return m_database;
+    if(!m_database.hasLocalData()) {
+        qDebug() << "No local DB connection for this thread, creating one";
+        QSqlDatabase db = QSqlDatabase::addDatabase(DRIVER, QUuid::createUuid().toString());
+        db.setDatabaseName(m_path.localData());
+        db.open();
+        m_database.setLocalData(db);
+    }
+    return m_database.localData();
 }

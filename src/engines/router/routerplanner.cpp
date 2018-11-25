@@ -977,7 +977,7 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     }
 
     // Launch processing thread
-    QtConcurrent::run(this, &QRail::RouterEngine::Planner::parsePage, page);
+    this->parsePage(page);
 }
 
 // Helpers

@@ -56,6 +56,7 @@ void initQRail()
     /*
     * Init resources since we're running in library mode.
     * Without this, the resources aren't visible to QRail.
+    * Creating a station engine factory to improve the first query performance.
     */
     Q_INIT_RESOURCE(resources);
 }

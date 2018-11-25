@@ -68,10 +68,9 @@ private:
     QRail::Database::Manager *m_db;
     QMap<QUrl, StationEngine::Station *> m_cache;
     bool initDatabase();
-    QFuture<bool> insertStationWithFacilitiesIntoDatabase(const QStringList &station,
-                                                          const QStringList &facilities);
-    QFuture<bool> insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);
-    QFuture<bool> insertPlatformIntoDatabase(const QStringList &stop);
+    bool insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities);
+    bool insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);
+    bool insertPlatformIntoDatabase(const QStringList &stop);
     StationEngine::Station *fetchStationFromCache(const QUrl &uri) const;
     void addStationToCache(StationEngine::Station *station);
     QMap<QUrl, QString> getPlatformsByStationURI(const QUrl &uri);

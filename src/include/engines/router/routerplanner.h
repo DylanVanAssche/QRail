@@ -97,6 +97,8 @@ signals:
     void processing(const QUrl &pageURI);
 
 private:
+    QMap<QUrl, qint16> T_EarliestArrivalTime = QMap<QUrl, qint16>();
+    QMap<QUrl, QDateTime> S_EarliestArrivalTime = QMap<QUrl, QDateTime>();
     mutable QMutex plannerProcessingMutex;
     mutable QMutex syncThreadMutex;
     QRail::Fragments::Factory *m_fragmentsFactory;

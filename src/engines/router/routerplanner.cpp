@@ -134,6 +134,11 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         this->setRoutes(QList<QRail::RouterEngine::Route *>());
         this->initUsedPages();
 
+        T_EarliestArrivalTime.clear();
+        S_EarliestArrivalTime.clear();
+        //S_EarliestArrivalTime.insert(this->departureStationURI(), this->departureTime());
+        S_EarliestArrivalTime.insert(this->arrivalStationURI(), this->arrivalTime());
+
         /*
          * Setup footpaths for the arrival station since CSA profile
          * goes from the end to the beginning.
@@ -262,9 +267,59 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     qDebug() << "\tmaxTransfers:" << this->maxTransfers();
 #endif
 
+    // Check if the connections are reachable in the first place using Earliest Arrival Connection Scan reverse
+    qInfo() << "BEFORE number of connections:" << page->fragments().size();
+    /*
+     * ==================================================================
+     *         EARLIEST ARRIVAL CONNECTION SCAN ALGORITHM REVERSE
+     * ==================================================================
+     * To implement the Earliest Arrival Connection Scan Algorithm in an easy way with the Profile Connection Scan Algorithm
+     * we modified the orignal algorithm for connections in DESCENDING order. This way, we can add this 'filter' in front of the Profile CSA
+     * to reduce the number of connections to scan (which reduces the processing time by roughly 15 - 21 %).
+     */
+    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
+        QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+
+        /*
+         * We can reach the connection if:
+         *     - We already reached a previous connection with the same trip URI.
+         *     - The arrival time of the connection is lower than the departure time (of a previous connection) in this station.
+         */
+        if(T_EarliestArrivalTime.contains(fragment->tripURI())
+            || (S_EarliestArrivalTime.contains(fragment->arrivalStationURI()) && S_EarliestArrivalTime.value(fragment->arrivalStationURI()) > fragment->arrivalTime()))
+        {
+            qint16 count = T_EarliestArrivalTime.value(fragment->tripURI()) + 1;
+            T_EarliestArrivalTime.insert(fragment->tripURI(), count);
+
+            /*
+             * We update the timestamp in the S_EarliestArrivalTime map for the departure station of the connection if:
+             *     - The station URI doesn't exist yet.
+             *     - The timestamp for the station URI is higher than our connection's departure time.
+             */
+            if(!S_EarliestArrivalTime.contains(fragment->departureStationURI())
+               || S_EarliestArrivalTime.value(fragment->departureStationURI()) > fragment->departureTime())
+            {
+                S_EarliestArrivalTime.insert(fragment->departureStationURI(), fragment->departureTime());
+            }
+            qDebug() << "Connection is reachable:" << fragment->tripURI();
+        }
+        /*
+         * It's useless to process unreachable connections in the Profile Connection Scan Algorithm.
+         * We remove the unreachable connections from the page before the Profile CSA is applied.
+         */
+        else {
+            qDebug() << "Connection is NOT reachable:" << fragment->tripURI();
+            QList<QRail::Fragments::Fragment *> frags = page->fragments();
+            frags.removeAt(fragIndex);
+            page->setFragments(frags);
+            fragment->deleteLater();
+        }
+    }
+    qInfo() << "AFTER number of connections:" << page->fragments().size();
+
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
     // departure times order
-    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; fragIndex--) {
+    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
         // We can only process fragments which are departing after our departure time
@@ -1026,6 +1081,8 @@ QDateTime QRail::RouterEngine::Planner::calculateArrivalTime(const QDateTime &de
         arrivalTime = arrivalTime.addSecs(5 * SECONDS_TO_HOURS_MULTIPLIER);
         return arrivalTime;
     }
+
+    return arrivalTime;
 }
 
 // Getters & Setters

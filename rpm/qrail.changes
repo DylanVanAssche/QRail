@@ -21,6 +21,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Nov 29 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.8-1
+- [MINOR BUGFIX] Previous result fetching for Liveboard fixed
+- [IMPROVEMENT] Handle multiple requests in a better way
+- [IMPROVEMENT] Only scan reachable connections for routing
+- [UPGRADE] Adapted to upstream changes
+
 * Sun Nov 25 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.7-1
 - [MAJOR BUGFIX] Use lazy deletion also for Liveboards
 - [MAJOR BUGFIX] Fixed for Qt 5.11, database access using a pool

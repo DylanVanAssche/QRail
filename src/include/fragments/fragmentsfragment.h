@@ -30,6 +30,13 @@ class Fragment : public QObject
 {
     Q_OBJECT
 public:
+    enum class GTFSTypes {
+        REGULAR,
+        NOTAVAILABLE,
+        MUSTPHONE,
+        MUSTCOORDINATEWITHDRIVER,
+        UNKNOWN
+    };
     explicit Fragment(QObject *parent = nullptr);
     explicit Fragment(
         const QUrl &uri,
@@ -42,6 +49,8 @@ public:
         const QUrl &tripURI,
         const QUrl &routeURI,
         const QString &direction,
+        const GTFSTypes &pickupType,
+        const GTFSTypes &dropOffType,
         QObject *parent = nullptr
     );
     QUrl uri() const;
@@ -64,6 +73,10 @@ public:
     void setRouteURI(const QUrl &routeURI);
     QString direction() const;
     void setDirection(const QString &direction);
+    GTFSTypes pickupType() const;
+    void setPickupType(const GTFSTypes &pickupType);
+    GTFSTypes dropOffType() const;
+    void setDropOffType(const GTFSTypes &dropOffType);
 
 signals:
     void uriChanged();
@@ -76,6 +89,8 @@ signals:
     void tripURIChanged();
     void routeURIChanged();
     void directionChanged();
+    void pickupTypeChanged();
+    void dropOffTypeChanged();
 
 private:
     QUrl m_uri;
@@ -88,7 +103,8 @@ private:
     QUrl m_tripURI;
     QUrl m_routeURI;
     QString m_direction;
-    // pickUp and dropOff types as enums could be added later
+    GTFSTypes m_pickupType;
+    GTFSTypes m_dropOffType;
 };
 }
 }

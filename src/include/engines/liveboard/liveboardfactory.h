@@ -93,7 +93,7 @@ private:
     bool m_abortRequested;
     void processPage(QRail::Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
-    void parsePage(QRail::Fragments::Page *page, const bool &finished);
+    void parsePage(QRail::Fragments::Page *page, bool &finished);
     void setFragmentsFactory(QRail::Fragments::Factory *fragmentsFactory);
     void setMode(const QRail::LiveboardEngine::Board::Mode &mode);
     void setStationURI(const QUrl &stationURI);

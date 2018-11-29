@@ -36,7 +36,7 @@ QRail::Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
 /**
  * @file fragmentsfragment.cpp
  * @author Dylan Van Assche
- * @date 21 Jul 2018
+ * @date 29 Nov 2018
  * @brief Fragment constructor: arrival and departure
  * @param const QUrl &uri
  * @param const QUrl &departureStationURI
@@ -48,6 +48,8 @@ QRail::Fragments::Fragment::Fragment(QObject *parent) : QObject(parent)
  * @param const QUrl &tripURI
  * @param const QUrl &routeURI
  * @param const QString &direction
+ * @param const GTFSType &pickupType
+ * @param const GTFSType &dropOffType
  * @param QObject *parent = nullptr
  * @package Fragments
  * @public
@@ -64,6 +66,8 @@ QRail::Fragments::Fragment::Fragment(
     const QUrl &tripURI,
     const QUrl &routeURI,
     const QString &direction,
+    const GTFSTypes &pickupType,
+    const GTFSTypes &dropOffType,
     QObject *parent
 ): QObject(parent)
 {
@@ -79,6 +83,8 @@ QRail::Fragments::Fragment::Fragment(
     m_tripURI = tripURI;
     m_routeURI = routeURI;
     m_direction = direction;
+    m_pickupType = pickupType;
+    m_dropOffType = dropOffType;
 }
 
 // Getter & Setters
@@ -400,4 +406,24 @@ void QRail::Fragments::Fragment::setDirection(const QString &direction)
 {
     m_direction = direction;
     emit this->directionChanged();
+}
+
+QRail::Fragments::Fragment::GTFSTypes QRail::Fragments::Fragment::dropOffType() const
+{
+    return m_dropOffType;
+}
+
+void QRail::Fragments::Fragment::setDropOffType(const GTFSTypes &dropOffType)
+{
+    m_dropOffType = dropOffType;
+}
+
+QRail::Fragments::Fragment::GTFSTypes QRail::Fragments::Fragment::pickupType() const
+{
+    return m_pickupType;
+}
+
+void QRail::Fragments::Fragment::setPickupType(const GTFSTypes &pickupType)
+{
+    m_pickupType = pickupType;
 }

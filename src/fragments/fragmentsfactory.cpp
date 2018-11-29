@@ -131,6 +131,29 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
     }
 }
 
+Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
+{
+    if(type == GTFS_REGULAR) {
+        return QRail::Fragments::Fragment::GTFSTypes::REGULAR;
+    }
+    else if(type == GTFS_NOT_AVAILABLE) {
+        return QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE;
+    }
+    else if(type == GTFS_MUST_PHONE) {
+        return QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE;
+    }
+    else if(type == GTFS_MUST_COORDINATE_WITH_DRIVER) {
+        return QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER;
+    }
+    else if(type.isEmpty()) {
+        qWarning() << "GTFS type is empty";
+        return QRail::Fragments::Fragment::GTFSTypes::REGULAR;
+    }
+
+    qCritical() << "Unknown GTFS type, cannot parse:" << type;
+    return QRail::Fragments::Fragment::GTFSTypes::UNKNOWN;
+}
+
 // Processors
 /**
  * @file fragmentsfactory.cpp
@@ -183,6 +206,8 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
         arrivalDelay = data["arrivalDelay"].toInt();
     }
     QString direction = data["direction"].toString();
+    QString pickupType = data["gtfs:pickupType"].toString();
+    QString dropOffType = data["gtfs:dropOffType"].toString();
 
     Q_UNUSED(type); // Only connections at the moment
 
@@ -203,6 +228,8 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
             tripURI,
             routeURI,
             direction,
+            this->parseGTFSType(pickupType),
+            this->parseGTFSType(dropOffType),
             m_instance
         );
         return frag;

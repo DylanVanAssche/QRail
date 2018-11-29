@@ -67,9 +67,15 @@ void QRail::Fragments::FragmentTest::initLinkedConnectionFragment()
         QUrl("http://irail.be/stations/NMBS/008814001"),
         QUrl("http://irail.be/stations/NMBS/008813037"),
         QDateTime::fromString("2018-07-21T07:29:00.000Z", Qt::ISODate),
-        QDateTime::fromString("2018-07-21T07:31:00.000Z", Qt::ISODate), 0, 60,
+        QDateTime::fromString("2018-07-21T07:31:00.000Z", Qt::ISODate),
+        0,
+        60,
         QUrl("http://irail.be/vehicle/IC3309/20180721"),
-        QUrl("http://irail.be/vehicle/IC3309"), QString("Anvers-Central"), this);
+        QUrl("http://irail.be/vehicle/IC3309"),
+        QString("Anvers-Central"),
+        QRail::Fragments::Fragment::GTFSTypes::REGULAR,
+        QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE,
+        this);
 }
 
 void QRail::Fragments::FragmentTest::runLinkedConnectionFragment()

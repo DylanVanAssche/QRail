@@ -32,6 +32,10 @@
 #include "qrail.h"
 
 #define BASE_URL "https://graph.irail.be/sncb/connections"
+#define GTFS_REGULAR "gtfs:Regular"
+#define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
+#define GTFS_MUST_PHONE "gtfs:MustPhone"
+#define GTFS_MUST_COORDINATE_WITH_DRIVER "gtfs:MustCoordinateWithDriver"
 
 //#define VERBOSE_HTTP_STATUS // Show HTTP results
 
@@ -56,6 +60,7 @@ signals:
     void error(const QString &message);
 
 private:
+    QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;
     QRail::Fragments::Dispatcher *m_dispatcher;

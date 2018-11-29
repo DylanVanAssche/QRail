@@ -163,12 +163,13 @@ void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::B
         liveboardProcessingMutex.lock(); // Processing started
         this->setStationURI(board->station()->uri());
         this->setMode(board->mode());
-        this->setFrom(board->until());
+        this->setUntil(board->from());
         this->setLiveboard(board);
         this->initUsedPages();
         QUrlQuery query = QUrlQuery(board->hydraPrevious().query());
         QDateTime timestamp = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-        this->setUntil(timestamp);
+        qCritical() << "Extending previous timestamp=" << timestamp;
+        this->setFrom(timestamp);
         this->setIsExtending(true);
         this->fragmentsFactory()->getPage(board->hydraPrevious(), this);
     } else {
@@ -248,7 +249,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
  * If the finished parameter is set to true, the LiveboardEngine::Board is ready and
  * the finished signal is emitted.
  */
-void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, const bool &finished)
+void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bool &finished)
 {
     // Current operation aborted by the user
     if(this->isAbortRequested()) {
@@ -267,10 +268,16 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
         // Lazy construction
-        if ((this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS &&
-                fragment->arrivalStationURI() == this->stationURI()) ||
-                (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES &&
-                 fragment->departureStationURI() == this->stationURI())) {
+        if (
+             // ARRIVAL mode
+             (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS
+             && fragment->arrivalStationURI() == this->stationURI()
+             && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)
+             ||
+             // DEPARTURE mode
+             (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES
+             && fragment->departureStationURI() == this->stationURI()
+             && fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
 
             /*
             * Create stop information
@@ -339,13 +346,13 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, co
             );
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
-
-            // If we were extending the liveboard, the fetching will stop after this is set to false
-            if (this->isExtending()) {
-                this->setIsExtending(false);
-                liveboardProcessingMutex.unlock();
-            }
         }
+    }
+
+    // If we were extending the liveboard, the fetching will stop after this is set to false
+    if (this->isExtending()) {
+        this->setIsExtending(false);
+        finished = true;
     }
 
     // Fetching fragment pages complete, emit the finished signal

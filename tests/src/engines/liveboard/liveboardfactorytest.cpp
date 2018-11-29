@@ -96,12 +96,24 @@ void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngi
     qDebug() << "\tUntil:" << board->until();
     qDebug() << "\tMode:" << board->mode();
     qDebug() << "\tNumber of entries:" << board->entries().size();
+    foreach(QRail::VehicleEngine::Vehicle *entry, board->entries()) {
+        qDebug() << "\t\t"
+                 << entry->headsign()
+                 << entry->intermediaryStops().first()->arrivalTime().toString("hh:mm")
+                 << "+"
+                 << entry->intermediaryStops().first()->arrivalDelay() / 60
+                 << "|"
+                 << entry->intermediaryStops().first()->departureTime().toString("hh:mm")
+                 << "+"
+                 << entry->intermediaryStops().first()->departureDelay() / 60;
+    }
     liveboard = board;
 }
 
 void LiveboardEngine::FactoryTest::liveboardStreamReceived(QRail::VehicleEngine::Vehicle *entry)
 {
     qDebug() << "\t\t"
+             << entry->uri()
              << entry->headsign()
              << entry->intermediaryStops().first()->arrivalTime().toString("hh:mm")
              << "+"

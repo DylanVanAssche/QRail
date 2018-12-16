@@ -37,9 +37,11 @@ QMAKE_LFLAGS += --coverage
 # QRail library build location
 CONFIG(debug, debug|release) {
     QRAIL_LOCATION = $$PWD/../build/debug
+    message(QRail tests build mode: DEBUG)
 }
 else {
     QRAIL_LOCATION = $$PWD/../build/release
+    message(QRail tests build mode: RELEASE)
 }
 LIBS += $$QRAIL_LOCATION/libqrail.a
 

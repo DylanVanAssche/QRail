@@ -153,13 +153,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                 this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
                                                                        SEARCH_RADIUS,
                                                                        MAX_RESULTS);
-        QMap<QUrl, qreal> D = QMap<QUrl, qreal>();
-        for (qint32 i = 0; i < nearbyStations.length(); i++) {
-            QPair<QRail::StationEngine::Station *, qreal> stationDistancePair = nearbyStations.at(i);
-            D.insert(stationDistancePair.first->uri(), stationDistancePair.second);
-        }
-        this->setDArray(D);
-        qDebug() << "D ARRAY=" << this->DArray();
 
         // Jumpstart the page fetching
         this->fragmentsFactory()->getPage(this->arrivalTime(), this);
@@ -196,10 +189,8 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
                                            const quint16 &maxTransfers)
 {
     if (departurePosition.isValid() && arrivalPosition.isValid() && departureTime.isValid()) {
-        QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition,
-                                                                                       SEARCH_RADIUS).first->uri();
-        QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition,
-                                                                                     SEARCH_RADIUS).first->uri();
+        QUrl departureStationURI = this->stationFactory()->getNearestStationByPosition(departurePosition, SEARCH_RADIUS).first->uri();
+        QUrl arrivalStationURI = this->stationFactory()->getNearestStationByPosition(arrivalPosition, SEARCH_RADIUS).first->uri();
         this->getConnections(departureStationURI, arrivalStationURI, departureTime, maxTransfers);
     } else {
         qCritical() << "Invalid positions or timestamps";
@@ -267,8 +258,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 #endif
 
     // Check if the connections are reachable in the first place using Earliest Arrival Connection Scan reverse
-    qInfo() << "BEFORE number of connections:" << page->fragments().size();
-
+#ifdef VERBOSE_PARAMETERS
+    qDebug() << "BEFORE number of connections:" << page->fragments().size();
+#endif
     /*
      * ==================================================================
      *         EARLIEST ARRIVAL CONNECTION SCAN ALGORITHM REVERSE
@@ -293,7 +285,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         if((this->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
         || (this->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
         || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
+#ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT available:" << fragment->tripURI();
+#endif
             reachable = false;
         }
 
@@ -316,7 +310,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             {
                 S_EarliestArrivalTime.insert(fragment->departureStationURI(), fragment->departureTime());
             }
+#ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is reachable:" << fragment->tripURI();
+#endif
             reachable = true;
         }
         else {
@@ -328,14 +324,19 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          * We remove the unreachable connections from the page before the Profile CSA is applied.
          */
         if(!reachable) {
+#ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT reachable:" << fragment->tripURI();
+#endif
             QList<QRail::Fragments::Fragment *> frags = page->fragments();
             frags.removeAt(fragIndex);
             page->setFragments(frags);
             fragment->deleteLater();
         }
     }
-    qInfo() << "AFTER number of connections:" << page->fragments().size();
+
+#ifdef VERBOSE_PARAMETERS
+    qDebug() << "AFTER number of connections:" << page->fragments().size();
+#endif
 
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
     // departure times order
@@ -365,8 +366,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 *newExitTrainFragment; // Save the connection when we exit the train for a transfer
 
         // Calculate T1, the time when walking from the current stop to the destination
-        if (fragment->arrivalStationURI() == this->arrivalStationURI()
-                && this->DArray().contains(fragment->arrivalStationURI())) {
+        if (fragment->arrivalStationURI() == this->arrivalStationURI()) {
             /*
              * This connection ends at our destination.
              * We can walk now out of the station towards our destination.
@@ -377,9 +377,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
              * them by a given WALKING_SPEED before adding them to the
              * T1_walkingArrivalTime!
              */
-            T1_walkingArrivalTime = fragment->arrivalTime().addSecs(
-                        (this->DArray().value(fragment->arrivalStationURI()) / WALKING_SPEED)
-                        * SECONDS_TO_HOURS_MULTIPLIER);
+            T1_walkingArrivalTime = fragment->arrivalTime();
             T1_transfers = 0; // Walking, no transfers between arrival and destination.
         } else {
             /*
@@ -433,8 +431,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             */
             qint16 position = this->SArray().value(fragment->arrivalStationURI()).size() - 1;
 
-            QRail::RouterEngine::StationStopProfile *stopProfile = this->SArray().value(
-                        fragment->arrivalStationURI()).at(position);
+            QRail::RouterEngine::StationStopProfile *stopProfile = this->SArray().value(fragment->arrivalStationURI()).at(position);
 
             // Needs extension for footpath support
             while ((((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
@@ -812,8 +809,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // Results found, process them
     if (this->SArray().contains(this->departureStationURI())) {
         qDebug() << "Processing results: " << this->SArray().value(this->departureStationURI());
-        foreach (QRail::RouterEngine::StationStopProfile *profile,
-                 this->SArray().value(this->departureStationURI())) {
+        foreach (QRail::RouterEngine::StationStopProfile *profile, this->SArray().value(this->departureStationURI())) {
             QList<QRail::RouterEngine::RouteLeg *> legs = QList<QRail::RouterEngine::RouteLeg *>();
 
             while (profile->arrivalConnection()->arrivalStationURI() != this->arrivalStationURI()) {
@@ -1060,9 +1056,15 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     * sorted in DESCENDING order.
     *
     * If not, fetch new pages
+    *
+    * /!\ In case we encounter empty pages, a CRITICAL warning is written to
+    *     the console and the next page is fetched.
     */
-    if (page->fragments().first()->departureTime() > this->departureTime()) {
+    if (page->fragments().size() <= 0 || page->fragments().first()->departureTime() > this->departureTime()) {
         qDebug() << "Requesting another page from QRail::Fragments::Factory";
+        if(page->fragments().size() <= 0) {
+            qCritical() << "Page" << page->uri() << "is empty, no fragments available!";
+        }
         this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
         emit this->requested(page->hydraPrevious());
     }
@@ -1407,16 +1409,6 @@ void QRail::RouterEngine::Planner::setTArray(const QMap<QUrl, QRail::RouterEngin
                                              &TArray)
 {
     m_TArray = TArray;
-}
-
-QMap<QUrl, qreal> RouterEngine::Planner::DArray() const
-{
-    return m_DArray;
-}
-
-void RouterEngine::Planner::setDArray(const QMap<QUrl, qreal> &DArray)
-{
-    m_DArray = DArray;
 }
 
 void RouterEngine::Planner::addToUsedPages(Fragments::Page *page)

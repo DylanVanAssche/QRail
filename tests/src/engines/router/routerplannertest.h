@@ -23,6 +23,7 @@
 #include <QtCore/QDateTime>
 #include <QtTest/QSignalSpy>
 #include <QtTest/QtTest>
+#define REPEAT_COUNT 10
 
 namespace QRail {
 namespace RouterEngine {

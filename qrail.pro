@@ -58,12 +58,14 @@ CONFIG(debug, debug|release) {
     OBJECTS_DIR = $$PWD/build/debug/.obj
     MOC_DIR = $$PWD/build/debug/.moc
     RCC_DIR = $$PWD/build/debug/.rcc
+    message(QRail build mode: DEBUG)
 }
 else {
     DESTDIR = $$PWD/build/release
     OBJECTS_DIR = $$PWD/build/release/.obj
     MOC_DIR = $$PWD/build/release/.moc
     RCC_DIR = $$PWD/build/release/.rcc
+    message(QRail build mode: RELEASE)
 }
 
 !msvc {

@@ -80,6 +80,25 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     qInfo() << "Routing Vilvoorde -> Brugge took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
+
+    for(int i=0; i < REPEAT_COUNT; i++) {
+        QDateTime start = QDateTime::currentDateTime();
+        planner->getConnections(
+            QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
+            QUrl("http://irail.be/stations/NMBS/008892007"), // To: Gent-Sint-Pieters
+            QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+            4 // Max transfers
+        );
+
+        // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+        QEventLoop loop;
+        connect(planner, SIGNAL(finished(QList<QRail::RouterEngine::Route *>)), &loop, SLOT(quit()));
+        loop.exec();
+        qInfo() << "Iteration:" << i
+                << "Routing Vilvoorde -> Gent-Sint-Pieters took"
+                << start.msecsTo(QDateTime::currentDateTime())
+                << "msecs";
+    }
 }
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
@@ -114,10 +133,12 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
         qDebug() << "Trip:" << route->departureStation()->station()->name().value(
                      QLocale::Language::Dutch) << "->" << route->arrivalStation()->station()->name().value(
                      QLocale::Language::Dutch) << " Route:";
-        QVERIFY2(route->departureStation()->station()->name().value(QLocale::Language::Dutch) ==
-                 QString("Vilvoorde"), "Expected departure station: Vilvoorde");
-        QVERIFY2(route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) ==
-                 QString("Brugge"), "Expected arrival station: Brugge");
+        QVERIFY2(route->departureStation()->station()->name().value(QLocale::Language::Dutch) == QString("Vilvoorde")
+                 || route->departureStation()->station()->name().value(QLocale::Language::Dutch) == QString("Diegem"),
+                 "Expected departure station: Vilvoorde or Diegem");
+        QVERIFY2(route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) == QString("Brugge")
+                 || route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) == QString("Gent-Sint-Pieters"),
+                 "Expected arrival station: Brugge or Gent-Sint-Pieters");
 
         // Keep track of the transfer stations
         QStringList retrievedTransferStations;
@@ -137,13 +158,15 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE) {
                 qDebug() << "DEPARTURE:" << transfer->time().time().toString("hh:mm") <<
                          transfer->station()->name().value(QLocale::Language::Dutch);
-                QVERIFY2(transfer->station()->name().value(QLocale::Language::Dutch) == QString("Vilvoorde"),
-                         "Expected departure station: Vilvoorde");
+                QVERIFY2(route->departureStation()->station()->name().value(QLocale::Language::Dutch) == QString("Vilvoorde")
+                         || route->departureStation()->station()->name().value(QLocale::Language::Dutch) == QString("Diegem"),
+                         "Expected departure station: Vilvoorde or Diegem");
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
                 qDebug() << "ARRIVAL:" << transfer->time().time().toString("hh:mm") <<
                          transfer->station()->name().value(QLocale::Language::Dutch);
-                QVERIFY2(transfer->station()->name().value(QLocale::Language::Dutch) == QString("Brugge"),
-                         "Expected arrival station: Brugge");
+                QVERIFY2(route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) == QString("Brugge")
+                         || route->arrivalStation()->station()->name().value(QLocale::Language::Dutch) == QString("Gent-Sint-Pieters"),
+                         "Expected arrival station: Brugge or Gent-Sint-Pieters");
             } else {
                 QFAIL("Transfer object is INVALID");
             }

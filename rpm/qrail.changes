@@ -21,6 +21,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Dec 16 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.1.0-1
+- [MAJOR BUGFIX] Better guarding against empty pages
+- [MAJOR BUGFIX] Fixed static library build
+- [MAJOR BUGFIX] Fixed CSA routing failure due GTFS types
+
 * Thu Nov 29 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.0.8-1
 - [MINOR BUGFIX] Previous result fetching for Liveboard fixed
 - [IMPROVEMENT] Handle multiple requests in a better way

@@ -136,7 +136,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 
         T_EarliestArrivalTime.clear();
         S_EarliestArrivalTime.clear();
-        //S_EarliestArrivalTime.insert(this->departureStationURI(), this->departureTime());
         S_EarliestArrivalTime.insert(this->arrivalStationURI(), this->arrivalTime());
 
         /*
@@ -279,27 +278,29 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
      * to reduce the number of connections to scan (which reduces the processing time by roughly 15 - 21 %).
      */
 
+    bool reachable;
     for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
-        bool reachable = false;
+        reachable = true; // We assume that everything is reachable until we prove otherwise
 
         // Cancelations are removed or the type of the connection is changed, NOT IMPLEMENTED IN UPSTREAM YET [TODO]
 
+        /*
+         * We must be able to depart from the departure station, so the pickup type must be set to GTFSTypes::REGULAR.
+         * In order to arrive at our destination, we should be able to get off the vehicle at the arrival station (dropOff type == GTFSTypes::REGULAR).
+         * Connections that don't arrive and departure at a stop can't be used either.
+         */
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
-        if((this->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-        || (this->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-        || (fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
-            qDebug() << "Connection is available:" << fragment->tripURI();
-            reachable = true;
-        }
-        else {
+        if((this->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
+        || (this->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
+        || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
+            qDebug() << "Connection is NOT available:" << fragment->tripURI();
             reachable = false;
         }
 
         /*
-         * Connection is a GTFS:Regular connection, we should check if it's a reachable connection using Earliest Arrival CSA.
+         * Connection is available (GTFSTypes::REGULAR), we should check if it's a reachable connection using Earliest Arrival CSA.
          */
-        if(reachable
-           && (T_EarliestArrivalTime.contains(fragment->tripURI())
+        if(reachable && (T_EarliestArrivalTime.contains(fragment->tripURI())
            || (S_EarliestArrivalTime.contains(fragment->arrivalStationURI()) && S_EarliestArrivalTime.value(fragment->arrivalStationURI()) > fragment->arrivalTime())))
         {
             qint16 count = T_EarliestArrivalTime.value(fragment->tripURI()) + 1;

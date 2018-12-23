@@ -79,7 +79,6 @@ int main(int argc, char *argv[])
 
         // Run QRail::RouterEngine::Planner integration test
         routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
-        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
         // Return the status code of every test for CI/CD
         QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult |

@@ -61,10 +61,10 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
             this, SLOT(requestCompleted(QNetworkReply *)));
 
     // Create HTTP client information
-    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC",
-                                                    "0.0.2",
+    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail",
+                                                    "0.1.0",
                                                     "Sailfish OS",
-                                                    "2.2.1.18"));
+                                                    "3.0.1.11"));
     this->setAcceptHeader(QString("application/ld+json"));
 }
 

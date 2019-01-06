@@ -96,6 +96,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     *  - while no results have been found yet
     *  - until we're at the front (hasPassedDepartureTimeLimit = true)
     *
+    * OBSOLETE:
     * We use the Qt Concurrent framework to enable automatically scaling of the
     * threadpool as mentioned by the docs: The QtConcurrent namespace provides
     * high-level APIs that make it possible to write multi-threaded programs
@@ -232,7 +233,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     if(this->isAbortRequested()) {
         this->setAbortRequested(false);
         plannerProcessingMutex.unlock(); // Processing aborted
-        syncThreadMutex.unlock(); // Page processing is canceled
         qInfo() << "Aborted successfully";
         return;
     }
@@ -977,7 +977,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
         emit this->finished(this->routes());
 
-        // Next request
+        // Unlock planner mutex
         plannerProcessingMutex.unlock();
     }
 }

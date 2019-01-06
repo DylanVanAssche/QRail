@@ -209,7 +209,7 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:" << page <<
-             "starting processing thread...";
+                "starting processing thread...";
     // Launch processing thread
     emit this->processing(page->uri());
 
@@ -225,8 +225,10 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     * been retrieved.
     */
     bool finished = false;
-    if (page->fragments().last()->departureTime() < this->until() || this->isExtending()) {
-        qDebug() << "Requesting another page from QRail::Fragments::Factory";
+    QUrlQuery queryHydraNext = QUrlQuery(page->hydraNext().query());
+    QDateTime timeHydraNext = QDateTime::fromString(queryHydraNext.queryItemValue("departureTime"), Qt::ISODate);
+    if (timeHydraNext < this->until() && !this->isExtending()) {
+        qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
         this->fragmentsFactory()->getPage(page->hydraNext(), this);
         emit this->requested(page->hydraNext());
     } else {
@@ -269,15 +271,15 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 
         // Lazy construction
         if (
-             // ARRIVAL mode
-             (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS
-             && fragment->arrivalStationURI() == this->stationURI()
-             && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-             ||
-             // DEPARTURE mode
-             (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES
-             && fragment->departureStationURI() == this->stationURI()
-             && fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
+                // ARRIVAL mode
+                (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS
+                 && fragment->arrivalStationURI() == this->stationURI()
+                 && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)
+                ||
+                // DEPARTURE mode
+                (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES
+                 && fragment->departureStationURI() == this->stationURI()
+                 && fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
 
             /*
             * Create stop information
@@ -299,36 +301,36 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             QRail::VehicleEngine::Stop *entry = nullptr;
             if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
                 entry = new QRail::VehicleEngine::Stop(
-                    this->liveboard()->station(),
-                    QString("?"), // platform
-                    true,         // isPlatformNormal
-                    fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
-                    fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
-                    fragment->departureDelay(),
-                    false, // isDepartureCanceled
-                    fragment->departureTime().addSecs(-fragment->departureDelay()),
-                    fragment->departureDelay(),
-                    false, // isArrivalCanceled
-                    false, // isExtraStop
-                    QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
-                    QRail::VehicleEngine::Stop::Type::STOP
-                );
+                            this->liveboard()->station(),
+                            QString("?"), // platform
+                            true,         // isPlatformNormal
+                            fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
+                            fragment->departureDelay(),
+                            false, // isDepartureCanceled
+                            fragment->departureTime().addSecs(-fragment->departureDelay()),
+                            fragment->departureDelay(),
+                            false, // isArrivalCanceled
+                            false, // isExtraStop
+                            QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                            QRail::VehicleEngine::Stop::Type::STOP
+                            );
             } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
                 entry = new QRail::VehicleEngine::Stop(
-                    this->liveboard()->station(),
-                    QString("?"), // platform
-                    true,         // isPlatformNormal
-                    fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
-                    fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
-                    fragment->arrivalDelay(),
-                    false, // isDepartureCanceled
-                    fragment->arrivalTime().addSecs(-fragment->arrivalDelay()),
-                    fragment->arrivalDelay(),
-                    false, // isArrivalCanceled
-                    false, // isExtraStop
-                    QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
-                    QRail::VehicleEngine::Stop::Type::STOP
-                );
+                            this->liveboard()->station(),
+                            QString("?"), // platform
+                            true,         // isPlatformNormal
+                            fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
+                            fragment->arrivalDelay(),
+                            false, // isDepartureCanceled
+                            fragment->arrivalTime().addSecs(-fragment->arrivalDelay()),
+                            fragment->arrivalDelay(),
+                            false, // isArrivalCanceled
+                            false, // isExtraStop
+                            QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                            QRail::VehicleEngine::Stop::Type::STOP
+                            );
             } else {
                 qCritical() << "Unknown LiveboardEngine::Board::Mode, can't fill Liveboard::Board entries!";
             }
@@ -338,31 +340,32 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();
             intermediaryStops.append(entry);
             QRail::VehicleEngine::Vehicle *vehicle =
-                new QRail::VehicleEngine::Vehicle(
-                fragment->routeURI(),
-                fragment->tripURI(),
-                fragment->direction(),
-                intermediaryStops
-            );
+                    new QRail::VehicleEngine::Vehicle(
+                        fragment->routeURI(),
+                        fragment->tripURI(),
+                        fragment->direction(),
+                        intermediaryStops
+                        );
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
         }
     }
 
-    // If we were extending the liveboard, the fetching will stop after this is set to false
-    if (this->isExtending()) {
-        this->setIsExtending(false);
-        finished = true;
-    }
-
     // Fetching fragment pages complete, emit the finished signal
-    if (finished) {
+    if (finished || this->isExtending()) {
         qDebug() << "Finished fetching liveboard pages";
 
         // Update the time boundaries of the liveboard
         // TO DO: Handle ARRIVALS and DEPARTURES mode, both timestamps are the same at the moment so this valid.
         this->liveboard()->setFrom(this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
         this->liveboard()->setUntil(this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
+
+        /*if(this->isExtending()) {
+            this->setIsExtending(false);
+            this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
+            emit this->requested(page->hydraPrevious());
+            qDebug() << "Requesting another page from QRail::Fragments::Factory extending override";
+        }*/
 
         // Emit finished signal and clean up
         emit this->finished(this->liveboard());
@@ -395,7 +398,7 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
         QRail::Fragments::DispatcherEvent *pageEvent =
-            reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+                reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
         qDebug() << "Network event received!";
     } else {

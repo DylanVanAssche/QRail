@@ -125,6 +125,7 @@ void QRail::LiveboardEngine::Board::setHydraNext(const QUrl &hydraNext)
         // Only accept URI that's later in time
         if (timeNewHydraNext > timeOldHydraNext) {
             m_hydraNext = hydraNext;
+            qDebug() << "Hydra next NEW:" << m_hydraNext;
             emit this->hydraNextChanged();
         }
     }
@@ -157,6 +158,7 @@ void QRail::LiveboardEngine::Board::setHydraPrevious(const QUrl &hydraPrevious)
         // Only accept URI that's earlier in time
         if (timeNewHydraPrevious < timeOldHydraPrevious) {
             m_hydraPrevious = hydraPrevious;
+            qDebug() << "Hydra previous NEW:" << m_hydraPrevious;
             emit this->hydraPreviousChanged();
         }
     }
@@ -229,7 +231,12 @@ QDateTime QRail::LiveboardEngine::Board::until() const
  */
 void QRail::LiveboardEngine::Board::setUntil(const QDateTime &until)
 {
-    m_until = until;
+    if(m_until.isValid() && m_until < until) {
+        m_until = until;
+    }
+    else if(!m_until.isValid()) {
+        m_until = until;
+    }
     emit this->untilChanged();
 }
 
@@ -293,7 +300,12 @@ QDateTime QRail::LiveboardEngine::Board::from() const
  */
 void QRail::LiveboardEngine::Board::setFrom(const QDateTime &from)
 {
-    m_from = from;
+    if(m_from.isValid() && m_from > from) {
+        m_from = from;
+    }
+    else if(!m_from.isValid()) {
+        m_from = from;
+    }
     emit this->fromChanged();
 }
 

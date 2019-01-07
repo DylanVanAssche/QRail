@@ -36,7 +36,7 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setStationFactory(StationEngine::Factory::getInstance());
 
     // Connect signals
-    connect(this, SIGNAL(finished(const QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
+    connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
 }
 
 /**

@@ -36,7 +36,7 @@ private slots:
     void cleanCSAPlannerTest();
 
 public slots:
-    void processRoutesFinished(const QList<QRail::RouterEngine::Route *> &routes);
+    void processRoutesFinished(QRail::RouterEngine::Journey *journey);
     void processRoutesStream(QRail::RouterEngine::Route *route);
     void processing(const QUrl &pageURI);
     void requested(const QUrl &pageURI);

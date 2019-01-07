@@ -36,6 +36,7 @@
 #include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routertrainprofile.h"
 #include "engines/router/routertransfer.h"
+#include "engines/router/routerjourney.h"
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"
@@ -85,6 +86,8 @@ public:
     qint16 maxTransfers() const;
     QUrl departureStationURI() const;
     QUrl arrivalStationURI() const;
+    QRail::RouterEngine::Journey *journey() const;
+    void setJourney(QRail::RouterEngine::Journey *journey);
 
 protected:
     virtual void customEvent(QEvent *event);
@@ -106,15 +109,9 @@ private:
     mutable QMutex syncThreadMutex;
     QRail::Fragments::Factory *m_fragmentsFactory;
     StationEngine::Factory *m_stationFactory;
-    QUrl m_departureStationURI;
-    QUrl m_arrivalStationURI;
-    QDateTime m_departureTime;
-    QDateTime m_arrivalTime;
-    qint16 m_maxTransfers;
-    QList<QRail::RouterEngine::Route *> m_routes;
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> m_SArray;
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+    QRail::RouterEngine::Journey *m_journey;
     QList<QRail::Fragments::Page *> m_usedPages;
+    bool m_abortRequested;
     explicit Planner(QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
@@ -124,23 +121,9 @@ private:
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    QList<QRail::RouterEngine::Route *> routes() const;
-    void setRoutes(const QList<QRail::RouterEngine::Route *> &routes);
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> SArray() const;
-    void setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray);
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
-    void setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray);
-    QMap<QUrl, qreal> DArray() const;
-    void setDArray(const QMap<QUrl, qreal> &DArray);
     void addToUsedPages(QRail::Fragments::Page *page);
     void deleteUsedPages();
     void initUsedPages();
-    void setDepartureTime(const QDateTime &departureTime);
-    void setArrivalTime(const QDateTime &arrivalTime);
-    void setMaxTransfers(const qint16 &maxTransfers);
-    void setDepartureStationURI(const QUrl &departureStationURI);
-    void setArrivalStationURI(const QUrl &arrivalStationURI);
-    bool m_abortRequested;
     bool isAbortRequested() const;
     void setAbortRequested(bool abortRequested);
 };

@@ -1065,8 +1065,12 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
         if(page->fragments().size() <= 0) {
             qCritical() << "Page" << page->uri() << "is empty, no fragments available!";
         }
-        this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-        emit this->requested(page->hydraPrevious());
+
+        // Aborted, no new requests should be made
+        if(!this->isAbortRequested()) {
+            this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
+            emit this->requested(page->hydraPrevious());
+        }
     }
 
     // Launch processing thread

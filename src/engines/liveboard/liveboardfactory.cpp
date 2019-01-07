@@ -235,7 +235,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 
     // Extending requires a small change in the auto fetching system
     if(!this->isExtending()) {
-        if (timeHydraNext < this->until()) {
+        if (timeHydraNext < this->until() && !this->isAbortRequested()) {
             qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
             this->fragmentsFactory()->getPage(page->hydraNext(), this);
             emit this->requested(page->hydraNext());
@@ -370,17 +370,23 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             finished = true;
         }
         else {
-            qDebug() << "Extending couldn't find any results in this page, fetching a new one";
-            if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::PREVIOUS) {
-                this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
-                emit this->requested(page->hydraPrevious());
-            }
-            else if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::NEXT) {
-                this->fragmentsFactory()->getPage(page->hydraNext(), this);
-                emit this->requested(page->hydraNext());
+            if(this->isAbortRequested()) {
+                finished = true;
+                qDebug() << "Extending canceled due ABORT";
             }
             else {
-                qCritical() << "Unable to search further for extension, unknown direction";
+                qDebug() << "Extending couldn't find any results in this page, fetching a new one";
+                if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::PREVIOUS) {
+                    this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
+                    emit this->requested(page->hydraPrevious());
+                }
+                else if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::NEXT) {
+                    this->fragmentsFactory()->getPage(page->hydraNext(), this);
+                    emit this->requested(page->hydraNext());
+                }
+                else {
+                    qCritical() << "Unable to search further for extension, unknown direction";
+                }
             }
         }
     }

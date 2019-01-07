@@ -229,12 +229,16 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     bool finished = false;
     QUrlQuery queryHydraNext = QUrlQuery(page->hydraNext().query());
     QDateTime timeHydraNext = QDateTime::fromString(queryHydraNext.queryItemValue("departureTime"), Qt::ISODate);
-    if (timeHydraNext < this->until() && !this->isExtending()) {
-        qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
-        this->fragmentsFactory()->getPage(page->hydraNext(), this);
-        emit this->requested(page->hydraNext());
-    } else {
-        finished = true;
+
+    // Extending requires a small change in the auto fetching system
+    if(!this->isExtending()) {
+        if (timeHydraNext < this->until()) {
+            qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
+            this->fragmentsFactory()->getPage(page->hydraNext(), this);
+            emit this->requested(page->hydraNext());
+        } else {
+            finished = true;
+        }
     }
     this->parsePage(page, finished);
 }
@@ -352,12 +356,17 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
             hasResult = true;
+            qDebug() << "RESULT=" << vehicle->uri() << " headsign:" << vehicle->headsign();
         }
     }
 
     // Fetch if needed when extending
     if(this->isExtending()) {
-        if(!hasResult) {
+        if(hasResult) {
+            qDebug() << "Extending found at least 1 result, finishing...";
+            finished = true;
+        }
+        else {
             qDebug() << "Extending couldn't find any results in this page, fetching a new one";
             if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::PREVIOUS) {
                 this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
@@ -365,15 +374,11 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             }
             else if(m_extendingDirection == QRail::LiveboardEngine::Factory::Direction::NEXT) {
                 this->fragmentsFactory()->getPage(page->hydraNext(), this);
-                emit this->requested(page->hydraPrevious());
+                emit this->requested(page->hydraNext());
             }
             else {
                 qCritical() << "Unable to search further for extension, unknown direction";
             }
-        }
-        else {
-            finished = true;
-            this->setIsExtending(false);
         }
     }
 
@@ -389,6 +394,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
         // Emit finished signal and clean up
         emit this->finished(this->liveboard());
         liveboardProcessingMutex.unlock(); // Processing finished
+        this->setIsExtending(false);
     }
 }
 

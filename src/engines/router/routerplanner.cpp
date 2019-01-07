@@ -34,10 +34,9 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     // Init QRail::RouterEngine::Planner
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     this->setStationFactory(StationEngine::Factory::getInstance());
-    this->journey()->setRoutes(QList<QRail::RouterEngine::Route *>()); // Init variable
 
     // Connect signals
-    connect(this, SIGNAL(finished(const QList<QRail::RouterEngine::Route *>)), this, SLOT(unlockPlanner()));
+    connect(this, SIGNAL(finished(const QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
 }
 
 /**
@@ -204,7 +203,7 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
         qCritical() << "Departure position:" << departurePosition;
         qCritical() << "Arrival position:" << arrivalPosition;
         qCritical() << "Departure time:" << departureTime;
-        emit this->finished(QList<QRail::RouterEngine::Route *>());
+        emit this->finished(this->journey()); // NULL JOURNEY
     }
 }
 
@@ -275,7 +274,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Current operation aborted by the user
         if(this->isAbortRequested()) {
             this->setAbortRequested(false);
-            emit this->finished(QList<QRail::RouterEngine::Route*>());
+            emit this->finished(this->journey()); // NULL JOURNEY
             qInfo() << "Aborted successfully in FOR loop";
             return;
         }
@@ -368,11 +367,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
         // Init variables for the algorithm, see the paper for the explanation
         // behind T1, T2, T3 and Tmin (Tmin = Tc in the paper).
-        QDateTime T1_walkingArrivalTime, T2_stayOnTripArrivalTime, T3_transferArrivalTime,
-                Tmin_earliestArrivalTime;
+        QDateTime T1_walkingArrivalTime, T2_stayOnTripArrivalTime, T3_transferArrivalTime, Tmin_earliestArrivalTime;
         qint16 T1_transfers, T2_transfers, T3_transfers, Tmin_transfers;
-        QRail::Fragments::Fragment
-                *newExitTrainFragment; // Save the connection when we exit the train for a transfer
+        QRail::Fragments::Fragment *newExitTrainFragment; // Save the connection when we exit the train for a transfer
 
         // Calculate T1, the time when walking from the current stop to the destination
         if (fragment->arrivalStationURI() == this->journey()->arrivalStationURI()) {
@@ -445,7 +442,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             // Needs extension for footpath support
             while ((((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
                       MILISECONDS_TO_SECONDS_MULTIPLIER) < fragment->arrivalTime().toMSecsSinceEpoch()) ||
-                    stopProfile->transfers() >= this->journey()->maxTransfers()) && position > 0) {
+                    stopProfile->transfers() >= this->journey()->maxTransfers()) && position > 0)
+            {
                 position--;
                 stopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
             }
@@ -981,10 +979,11 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Emit the error signal when we haven't found any routes
         if (this->journey()->routes().size() == 0) {
             emit this->error("No routes found!");
+            emit this->finished(this->journey()); // NULL JOURNEY
         }
 
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
-        emit this->finished(this->journey()->routes());
+        emit this->finished(this->journey());
     }
 }
 

@@ -93,8 +93,8 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void finished(const QList<QRail::RouterEngine::Route *> &routes);
-    void stream(QRail::RouterEngine::Route *route);
+    void finished(const QRail::RouterEngine::Journey *journey);
+    void stream(const QRail::RouterEngine::Route *route);
     void error(const QString &message);
     void requested(const QUrl &pageURI);
     void processing(const QUrl &pageURI);

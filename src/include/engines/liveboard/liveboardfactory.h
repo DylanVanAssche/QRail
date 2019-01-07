@@ -78,6 +78,9 @@ signals:
     void finished(QRail::LiveboardEngine::Board *liveboard);
     void stream(QRail::VehicleEngine::Vehicle *entry);
 
+private slots:
+    void unlockLiveboard();
+
 private:
     mutable QMutex liveboardProcessingMutex;
     mutable QMutex liveboardAccessMutex;

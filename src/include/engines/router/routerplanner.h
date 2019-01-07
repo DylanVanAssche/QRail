@@ -96,6 +96,9 @@ signals:
     void requested(const QUrl &pageURI);
     void processing(const QUrl &pageURI);
 
+private slots:
+    void unlockPlanner();
+
 private:
     QMap<QUrl, qint16> T_EarliestArrivalTime;
     QMap<QUrl, QDateTime> S_EarliestArrivalTime;

@@ -36,6 +36,9 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
+
+    // Connect signals
+    connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
 }
 
 /**
@@ -259,14 +262,6 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
  */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bool &finished)
 {
-    // Current operation aborted by the user
-    if(this->isAbortRequested()) {
-        qInfo() << "Aborted successfully";
-        this->setAbortRequested(false);
-        liveboardProcessingMutex.unlock(); // Processing finished
-        return;
-    }
-
     // Update hydra pagination
     this->liveboard()->setHydraNext(page->hydraNext());
     this->liveboard()->setHydraPrevious(page->hydraPrevious());
@@ -275,6 +270,14 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
     bool hasResult = false;
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+
+        // Current operation aborted by the user
+        if(this->isAbortRequested()) {
+            this->setAbortRequested(false);
+            qInfo() << "Aborted successfully in FOR loop";
+            emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
+            return;
+        }
 
         // Lazy construction
         if (
@@ -386,15 +389,20 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
     if (finished) {
         qDebug() << "Finished fetching liveboard pages";
 
+        // Extending is always ended here
+        this->setIsExtending(false);
+
         // Update the time boundaries of the liveboard
         // TO DO: Handle ARRIVALS and DEPARTURES mode, both timestamps are the same at the moment so this valid.
-        this->liveboard()->setFrom(this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
-        this->liveboard()->setUntil(this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
-
-        // Emit finished signal and clean up
-        emit this->finished(this->liveboard());
-        liveboardProcessingMutex.unlock(); // Processing finished
-        this->setIsExtending(false);
+        if(this->liveboard()->entries().length() > 0) {
+            this->liveboard()->setFrom(this->liveboard()->entries().first()->intermediaryStops().first()->departureTime());
+            this->liveboard()->setUntil(this->liveboard()->entries().last()->intermediaryStops().first()->departureTime());
+            emit this->finished(this->liveboard());
+        }
+        // No entries, NullBoard!
+        else {
+            emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
+        }
     }
 }
 
@@ -429,6 +437,12 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
+}
+
+void LiveboardEngine::Factory::unlockLiveboard()
+{
+    // Make liveboard accessible again
+    liveboardProcessingMutex.unlock();
 }
 
 /**

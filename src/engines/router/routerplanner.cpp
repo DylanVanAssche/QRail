@@ -35,6 +35,9 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     this->setStationFactory(StationEngine::Factory::getInstance());
     this->setRoutes(QList<QRail::RouterEngine::Route *>()); // Init variable
+
+    // Connect signals
+    connect(this, SIGNAL(finished(const QList<QRail::RouterEngine::Route *>)), this, SLOT(unlockPlanner()));
 }
 
 /**
@@ -122,9 +125,11 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
             emit this->error("Planner factory is busy. Please try again later.");
             return;
         }
-        // Clean up previous pages, if any
+
+        // Clean up previous pages if needed
         this->deleteUsedPages();
 
+        // Init
         this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
         this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
         this->setDepartureStationURI(departureStation);
@@ -229,14 +234,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // Lock processing to enforce the DESCENDING order of departure times
     QMutexLocker locker(&syncThreadMutex);
 
-    // Current operation aborted by the user
-    if(this->isAbortRequested()) {
-        this->setAbortRequested(false);
-        plannerProcessingMutex.unlock(); // Processing aborted
-        qInfo() << "Aborted successfully";
-        return;
-    }
-
     // Flag to check if we're passed the departureTime
     bool hasPassedDepartureTimeLimit = false;
 
@@ -273,6 +270,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     bool reachable;
     for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
         reachable = true; // We assume that everything is reachable until we prove otherwise
+
+        // Current operation aborted by the user
+        if(this->isAbortRequested()) {
+            this->setAbortRequested(false);
+            emit this->finished(QList<QRail::RouterEngine::Route*>());
+            qInfo() << "Aborted successfully in FOR loop";
+            return;
+        }
 
         // Cancelations are removed or the type of the connection is changed, NOT IMPLEMENTED IN UPSTREAM YET [TODO]
 
@@ -345,8 +350,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
         // We can only process fragments which are departing after our departure time
         if (fragment->departureTime() < this->departureTime()) {
-            qDebug() << fragment->departureTime() << fragment->uri() << "in page:" << page->uri();
-            qDebug() << fragment->departureTime().isValid();
             hasPassedDepartureTimeLimit = true;
             continue;
         }
@@ -976,9 +979,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
         emit this->finished(this->routes());
-
-        // Unlock planner mutex
-        plannerProcessingMutex.unlock();
     }
 }
 
@@ -1229,6 +1229,12 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event)
     }
 }
 
+void RouterEngine::Planner::unlockPlanner()
+{
+    // Make planner accessible again
+    plannerProcessingMutex.unlock();
+}
+
 /**
  * @file routerplanner.cpp
  * @author Dylan Van Assche
@@ -1440,8 +1446,7 @@ void RouterEngine::Planner::initUsedPages()
  * @public
  * Gets the S array for the Connection Scan Algorithm (CSA) and returns it.
  */
-QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> QRail::RouterEngine::Planner::SArray()
-const
+QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> QRail::RouterEngine::Planner::SArray() const
 {
     return m_SArray;
 }
@@ -1457,8 +1462,7 @@ const
  * Sets the S array for the Connection Scan Algorithm (CSA) to the given
  * QMap<QUrl, QRail::RouterEngine::TrainProfile *> &SArray.
  */
-void QRail::RouterEngine::Planner::setSArray(const
-                                             QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray)
+void QRail::RouterEngine::Planner::setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> &SArray)
 {
     m_SArray = SArray;
 }

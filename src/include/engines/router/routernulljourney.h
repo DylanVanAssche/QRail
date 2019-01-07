@@ -14,37 +14,35 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CSAPLANNERTEST_H
-#define CSAPLANNERTEST_H
+#ifndef ROUTERNULLJOURNEY_H
+#define ROUTERNULLJOURNEY_H
 
-#include "engines/router/routerplanner.h"
-#include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
-#include <QtTest/QSignalSpy>
-#include <QtTest/QtTest>
-#define REPEAT_COUNT 10
+#include <QtCore/QUrl>
+#include <QtCore/QList>
+
+#include "engines/router/routerjourney.h"
+#include "engines/router/routerroute.h"
+#include "qrail.h"
 
 namespace QRail {
 namespace RouterEngine {
-class PlannerTest : public QObject
+class QRAIL_SHARED_EXPORT NullJourney : public RouterEngine::Journey
 {
-    Q_OBJECT
-private slots:
-    void initCSAPlannerTest();
-    void runCSAPlannerTest();
-    void cleanCSAPlannerTest();
-
-public slots:
-    void processRoutesFinished(QRail::RouterEngine::Journey *journey);
-    void processRoutesStream(QRail::RouterEngine::Route *route);
-    void processing(const QUrl &pageURI);
-    void requested(const QUrl &pageURI);
+public:
+    static NullJourney *getInstance();
 
 private:
-    QRail::RouterEngine::Planner *planner;
+    explicit NullJourney(const QList<QRail::RouterEngine::Route *> routes,
+                         const QUrl hydraNext,
+                         const QUrl hydraPrevious,
+                         const QDateTime from,
+                         const QDateTime until,
+                         QObject *parent = nullptr);
+    static RouterEngine::NullJourney *m_instance;
 };
-} // namespace RouterEngine
-} // namespace QRail
+}
+}
 
-#endif // CSAPLANNERTEST_H
+#endif // ROUTERNULLJOURNEY_H

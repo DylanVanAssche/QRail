@@ -26,10 +26,8 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     qRegisterMetaType<QList<QRail::RouterEngine::Route *>>("QList<QRail::RouterEngine::Route*>");
 
     // Connect the signals
-    connect(planner, SIGNAL(finished(QList<QRail::RouterEngine::Route *>)), this,
-            SLOT(processRoutesFinished(QList<QRail::RouterEngine::Route *>)));
-    connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this,
-            SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
+    connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this, SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
@@ -123,12 +121,10 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
     qDebug() << "Page requested:" << pageURI.toString();
 }
 
-void QRail::RouterEngine::PlannerTest::processRoutesFinished(const
-                                                             QList<QRail::RouterEngine::Route *>
-                                                             &routes)
+void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine::Journey *journey)
 {
-    qDebug() << "CSA found" << routes.size() << "possible routes";
-    foreach (QRail::RouterEngine::Route *route, routes) {
+    qDebug() << "CSA found" << journey->routes().size() << "possible routes";
+    foreach (QRail::RouterEngine::Route *route, journey->routes()) {
         // Verify the complete trip
         qDebug() << "Trip:" << route->departureStation()->station()->name().value(
                      QLocale::Language::Dutch) << "->" << route->arrivalStation()->station()->name().value(

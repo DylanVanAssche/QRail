@@ -41,6 +41,10 @@ class Factory : public QObject
 {
     Q_OBJECT
 public:
+    enum class Direction {
+        PREVIOUS,
+        NEXT,
+    };
     static QRail::LiveboardEngine::Factory *getInstance();
     void
     getLiveboardByStationURI(const QUrl &uri,
@@ -74,6 +78,9 @@ signals:
     void finished(QRail::LiveboardEngine::Board *liveboard);
     void stream(QRail::VehicleEngine::Vehicle *entry);
 
+private slots:
+    void unlockLiveboard();
+
 private:
     mutable QMutex liveboardProcessingMutex;
     mutable QMutex liveboardAccessMutex;
@@ -91,6 +98,7 @@ private:
     StationEngine::Factory *stationFactory() const;
     bool m_isExtending;
     bool m_abortRequested;
+    QRail::LiveboardEngine::Factory::Direction m_extendingDirection;
     void processPage(QRail::Fragments::Page *page);
     void setStationFactory(StationEngine::Factory *stationFactory);
     void parsePage(QRail::Fragments::Page *page, bool &finished);

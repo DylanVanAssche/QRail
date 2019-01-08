@@ -22,6 +22,8 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
+#include <QtCore/QDebug>
+#include <QtCore/QtGlobal>
 
 #include "engines/liveboard/liveboardboard.h"
 #include "engines/liveboard/liveboardnullboard.h"

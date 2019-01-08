@@ -34,6 +34,7 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     // Init QRail::RouterEngine::Planner
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     this->setStationFactory(StationEngine::Factory::getInstance());
+    this->setAbortRequested(false);
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
@@ -1226,7 +1227,12 @@ void RouterEngine::Planner::deleteUsedPages()
 {
     qDebug() << "Deleting previous used pages";
     foreach (QRail::Fragments::Page *page, m_usedPages) {
-        delete page;
+        if(page) {
+            page->deleteLater();
+        }
+        else {
+            qCritical() << "Page pointer is invalid!";
+        }
     }
 }
 

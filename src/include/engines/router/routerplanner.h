@@ -26,6 +26,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QPair>
 #include <QtCore/QtGlobal>
+#include <QtCore/QDebug>
 #include <QtPositioning/QGeoCoordinate>
 #include <algorithm> // C++ header needed for std:sort function
 

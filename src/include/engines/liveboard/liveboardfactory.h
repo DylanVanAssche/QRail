@@ -24,6 +24,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtCore/QtGlobal>
+#include <QtCore/QTimer>
 
 #include "engines/liveboard/liveboardboard.h"
 #include "engines/liveboard/liveboardnullboard.h"
@@ -82,8 +83,11 @@ signals:
 
 private slots:
     void unlockLiveboard();
+    void handleTimeout();
+    void handleFragmentFactoryError();
 
 private:
+    QTimer *progressTimeoutTimer;
     mutable QMutex liveboardProcessingMutex;
     mutable QMutex liveboardAccessMutex;
     mutable QMutex liveboardExtendingMutex;

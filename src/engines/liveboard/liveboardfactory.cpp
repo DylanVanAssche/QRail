@@ -33,12 +33,18 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
+    connect(this->fragmentsFactory(), SIGNAL(error(QString)), SLOT(handleFragmentFactoryError()));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
 
     // Abort is default false
     this->setAbortRequested(false);
+
+    // Timeout preventing
+    this->progressTimeoutTimer = new QTimer(this);
+    this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
+    connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
@@ -135,6 +141,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->initUsedPages();
         this->setIsExtending(false);
         this->fragmentsFactory()->getPage(this->from(), this);
+        this->progressTimeoutTimer->start();
     } else {
         qCritical() << "Station URI or timestamps are invalid";
         qCritical() << "URI:" << uri;
@@ -159,6 +166,7 @@ void LiveboardEngine::Factory::getNextResultsForLiveboard(LiveboardEngine::Board
         this->setIsExtending(true);
         m_extendingDirection = QRail::LiveboardEngine::Factory::Direction::NEXT;
         this->fragmentsFactory()->getPage(board->hydraNext(), this);
+        this->progressTimeoutTimer->start();
     } else {
         qCritical() << "hydraNext URI invalid, can't extend liveboard";
     }
@@ -180,6 +188,7 @@ void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::B
         this->setIsExtending(true);
         m_extendingDirection = QRail::LiveboardEngine::Factory::Direction::PREVIOUS;
         this->fragmentsFactory()->getPage(board->hydraPrevious(), this);
+        this->progressTimeoutTimer->start();
     } else {
         qCritical() << "hydraPrevious URI invalid, can't extend liveboard";
     }
@@ -216,13 +225,16 @@ void LiveboardEngine::Factory::abortCurrentOperation()
  */
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:" << page <<
-                "starting processing thread...";
+    qDebug() << "Factory generated requested Linked Connection page:"
+             << page
+             << "starting processing thread...";
+
     // Launch processing thread
     emit this->processing(page->uri());
 
-    // Queue page for deletion when Liveboard is ready
+    // Queue page for deletion when Liveboard is ready and reset timeout timer
     this->addUsedPage(page);
+    this->progressTimeoutTimer->start();
 
     /*
     * Before processing our received page we check if we the first fragment
@@ -452,6 +464,22 @@ void LiveboardEngine::Factory::unlockLiveboard()
 {
     // Make liveboard accessible again
     liveboardProcessingMutex.unlock();
+}
+
+void LiveboardEngine::Factory::handleTimeout()
+{
+    qCritical() << "Liveboard timed out, ABORTING NOW";
+    this->setAbortRequested(true);
+    emit this->error("Liveboard timed out, the operation has been aborted!");
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
+}
+
+void LiveboardEngine::Factory::handleFragmentFactoryError()
+{
+    qCritical() << "Liveboard fragment factory error, ABORTING NOW";
+    this->setAbortRequested(true);
+    emit this->error("Liveboard fragment factory error, the operation has been aborted!");
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
 }
 
 /**

@@ -41,8 +41,7 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
      * INFO:
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl, QObject *)),
-            this->http(), SLOT(getResource(QUrl, QObject *)));
+    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 }
 
 /**
@@ -110,8 +109,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     QUrlQuery parameters;
     // Qt:ISODate returns 2018-07-27T14:18:40Z while we need 2018-07-27T14:18:40.000Z
     qDebug() << departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z");
-    parameters.addQueryItem("departureTime",
-                            departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z"));
+    parameters.addQueryItem("departureTime", departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z"));
     uri.setQuery(parameters);
 
     // Use processing methods to allow other extensions in the future if needed
@@ -123,8 +121,7 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
     if (event->type() == this->http()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
-                                                        (event);
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
         this->processHTTPReply(networkEvent->reply());
     } else {
         event->ignore();
@@ -185,8 +182,7 @@ void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
  * Converts the JSON-LD into a QRail::Fragments::Fragments object and returns
  * it.
  */
-QRail::Fragments::Fragment *
-QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
+QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {
     // Parse JSON
     QUrl uri = QUrl(data["@id"].toString());
@@ -254,7 +250,8 @@ QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
  */
 void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
-    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (statusCode >= 200 && statusCode < 300) {
 #ifdef VERBOSE_HTTP_STATUS
         qDebug() << "Content-Header:"
                  << reply->header(QNetworkRequest::ContentTypeHeader).toString();
@@ -315,11 +312,8 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
             emit this->error(QString("Parsing JSON-LD data failed: ").append(parseError.errorString()));
         }
     } else {
-        qCritical() << "Network request failed! HTTP status:" << reply->attribute(
-                        QNetworkRequest::HttpStatusCodeAttribute).toString();
-        emit this->error(QString("Network request failed! HTTP status:").append(reply->attribute(
-                                                                                    QNetworkRequest::HttpStatusCodeAttribute).toString()).append(reply->attribute(
-                                                                                                QNetworkRequest::HttpReasonPhraseAttribute).toString()));
+        qCritical() << "Network request failed! HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
+        emit this->error(QString("Network request failed! HTTP status:").append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()).append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()));
     }
 
     // Clean up the reply to avoid memory leaks

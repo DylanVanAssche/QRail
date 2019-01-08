@@ -52,10 +52,8 @@ public:
     QRail::Network::Dispatcher *dispatcher() const;
 
 signals:
-    QList<QSslError> sslErrorsReceived(QNetworkReply *reply,
-                                       QList<QSslError> sslError);
-    QNetworkAccessManager::NetworkAccessibility
-    networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
+    QList<QSslError> sslErrorsReceived(QNetworkReply *reply, QList<QSslError> sslError);
+    QNetworkAccessManager::NetworkAccessibility networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
     void userAgentChanged();
     void acceptHeaderChanged();
 

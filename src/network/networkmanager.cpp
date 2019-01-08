@@ -195,8 +195,7 @@ QNetworkRequest QRail::Network::Manager::prepareRequest(const QUrl &url)
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setHeader(QNetworkRequest::ContentTypeHeader, CONTENT_TYPE);
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                         QNetworkRequest::PreferNetwork); // Load from network if cache has expired
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork); // Load from network if cache has expired
     return request;
 }
 

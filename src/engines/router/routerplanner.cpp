@@ -35,6 +35,9 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     this->setStationFactory(StationEngine::Factory::getInstance());
     this->setAbortRequested(false);
+    this->progressTimeoutTimer = new QTimer(this);
+    this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
+    connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
@@ -130,6 +133,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         this->deleteUsedPages();
 
         // Init
+        this->setAbortRequested(false);
         this->setJourney(new QRail::RouterEngine::Journey(this));
         this->journey()->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
         this->journey()->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
@@ -144,6 +148,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         S_early.insert(this->journey()->arrivalStationURI(), this->journey()->arrivalTime());
         this->journey()->setS_EarliestArrivalTime(S_early);
         this->initUsedPages();
+        this->progressTimeoutTimer->start();
 
         /*
          * Setup footpaths for the arrival station since CSA profile
@@ -1051,10 +1056,14 @@ QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstR
  */
 void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:" << page <<
-                "starting processing thread...";
+    qDebug() << "Factory generated requested Linked Connection page:"
+             << page
+             << "starting processing thread...";
     emit this->processing(page->uri());
+
+    // Add page to used pages and restart timeout timer
     this->addToUsedPages(page);
+    progressTimeoutTimer->start();
 
     /*
     * Before processing our received page we check if we the first fragment
@@ -1134,6 +1143,22 @@ void RouterEngine::Planner::unlockPlanner()
 {
     // Make planner accessible again
     plannerProcessingMutex.unlock();
+}
+
+void RouterEngine::Planner::handleTimeout()
+{
+    qCritical() << "Planner timed out, ABORTING NOW";
+    this->setAbortRequested(true);
+    emit this->error("Planner timed out, the operation has been aborted!");
+    emit this->finished(this->journey()); // NULL JOURNEY
+}
+
+void RouterEngine::Planner::handleFragmentFactoryError()
+{
+    qCritical() << "Planner fragment factory error, ABORTING NOW";
+    this->setAbortRequested(true);
+    emit this->error("Planner fragment factory error, the operation has been aborted!");
+    emit this->finished(this->journey()); // NULL JOURNEY
 }
 
 QRail::RouterEngine::Journey *QRail::RouterEngine::Planner::journey() const

@@ -42,7 +42,9 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     // Cancel operation
     factory->abortCurrentOperation();
 
-    QTest::qSleep(3000); // 3 seconds should be sufficient to process the abort command
+    QEventLoop loopAbort;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
+    loopAbort.exec();
 
     // Creating liveboard
     start = QDateTime::currentDateTime();

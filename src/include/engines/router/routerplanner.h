@@ -27,6 +27,7 @@
 #include <QtCore/QPair>
 #include <QtCore/QtGlobal>
 #include <QtCore/QDebug>
+#include <QtCore/QTimer>
 #include <QtPositioning/QGeoCoordinate>
 #include <algorithm> // C++ header needed for std:sort function
 
@@ -59,9 +60,9 @@
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
 #define MINIMUM_PROGRESS_INCREMENT 1.0         // 1.0 = 1%
 
-#define SEARCH_RADIUS 3.0 // 3.0 km
-#define MAX_RESULTS 5 // 5 results maximum
-#define WALKING_SPEED 5.0 // 5.0 km/h
+#define SEARCH_RADIUS 3.0                      // 3.0 km
+#define MAX_RESULTS 5                          // 5 results maximum
+#define WALKING_SPEED 5.0                      // 5.0 km/h
 
 // Singleton pattern
 namespace QRail {
@@ -102,10 +103,11 @@ signals:
 
 private slots:
     void unlockPlanner();
+    void handleTimeout();
+    void handleFragmentFactoryError();
 
 private:
-    QMap<QUrl, qint16> T_EarliestArrivalTime;
-    QMap<QUrl, QDateTime> S_EarliestArrivalTime;
+    QTimer *progressTimeoutTimer;
     mutable QMutex plannerProcessingMutex;
     mutable QMutex syncThreadMutex;
     QRail::Fragments::Factory *m_fragmentsFactory;

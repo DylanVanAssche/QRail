@@ -17,30 +17,29 @@
 #ifndef ROUTERNULLJOURNEY_H
 #define ROUTERNULLJOURNEY_H
 
-#include <QtCore/QObject>
+#include <QtCore/QList>
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
-#include <QtCore/QList>
+#include <QtCore/QObject>
 
 #include "engines/router/routerjourney.h"
-#include "engines/router/routerroute.h"
 #include "qrail.h"
 
 namespace QRail {
 namespace RouterEngine {
-class QRAIL_SHARED_EXPORT NullJourney : public RouterEngine::Journey
+class QRAIL_SHARED_EXPORT NullJourney : public Journey
 {
 public:
     static NullJourney *getInstance();
 
 private:
     explicit NullJourney(const QList<QRail::RouterEngine::Route *> routes,
+                         const QDateTime departureTime,
+                         const QDateTime arrivalTime,
                          const QUrl hydraNext,
                          const QUrl hydraPrevious,
-                         const QDateTime from,
-                         const QDateTime until,
                          QObject *parent = nullptr);
-    static RouterEngine::NullJourney *m_instance;
+    static NullJourney *m_instance;
 };
 }
 }

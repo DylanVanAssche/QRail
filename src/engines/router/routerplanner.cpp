@@ -209,7 +209,7 @@ void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePositi
         qCritical() << "Departure position:" << departurePosition;
         qCritical() << "Arrival position:" << arrivalPosition;
         qCritical() << "Departure time:" << departureTime;
-        emit this->finished(this->journey()); // NULL JOURNEY
+        emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
     }
 }
 
@@ -280,7 +280,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Current operation aborted by the user
         if(this->isAbortRequested()) {
             this->setAbortRequested(false);
-            emit this->finished(this->journey()); // NULL JOURNEY
+            emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
             qInfo() << "Aborted successfully in FOR loop";
             return;
         }
@@ -985,7 +985,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         // Emit the error signal when we haven't found any routes
         if (this->journey()->routes().size() == 0) {
             emit this->error("No routes found!");
-            emit this->finished(this->journey()); // NULL JOURNEY
+            emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
         }
 
         // Emit finished signal when we completely parsed and processed all Linked Connections pages
@@ -1141,8 +1141,11 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event)
 
 void RouterEngine::Planner::unlockPlanner()
 {
+    // Timeout timer isn't necessary anymore
+    this->progressTimeoutTimer->stop();
+
     // Make planner accessible again
-    plannerProcessingMutex.unlock();
+    this->plannerProcessingMutex.unlock();
 }
 
 void RouterEngine::Planner::handleTimeout()
@@ -1150,7 +1153,7 @@ void RouterEngine::Planner::handleTimeout()
     qCritical() << "Planner timed out, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Planner timed out, the operation has been aborted!");
-    emit this->finished(this->journey()); // NULL JOURNEY
+    emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
 }
 
 void RouterEngine::Planner::handleFragmentFactoryError()
@@ -1158,7 +1161,7 @@ void RouterEngine::Planner::handleFragmentFactoryError()
     qCritical() << "Planner fragment factory error, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Planner fragment factory error, the operation has been aborted!");
-    emit this->finished(this->journey()); // NULL JOURNEY
+    emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
 }
 
 QRail::RouterEngine::Journey *QRail::RouterEngine::Planner::journey() const

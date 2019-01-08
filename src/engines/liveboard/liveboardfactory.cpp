@@ -462,8 +462,11 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
 
 void LiveboardEngine::Factory::unlockLiveboard()
 {
+    // Timeout timer isn't necessary anymore
+    this->progressTimeoutTimer->stop();
+
     // Make liveboard accessible again
-    liveboardProcessingMutex.unlock();
+    this->liveboardProcessingMutex.unlock();
 }
 
 void LiveboardEngine::Factory::handleTimeout()

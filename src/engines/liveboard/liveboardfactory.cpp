@@ -37,6 +37,9 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
 
+    // Abort is default false
+    this->setAbortRequested(false);
+
     // Connect signals
     connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
 }
@@ -482,7 +485,12 @@ void LiveboardEngine::Factory::addUsedPage(Fragments::Page *page)
 void LiveboardEngine::Factory::deleteUsedPages()
 {
     foreach (QRail::Fragments::Page *page, m_usedPages) {
-        page->deleteLater();
+        if(page) {
+            page->deleteLater();
+        }
+        else {
+            qCritical() << "Page pointer is invalid!";
+        }
     }
     qDebug() << "Liveboard pages scheduled for deletion";
 }

@@ -27,7 +27,7 @@
 #define PAGE_CONTEXT_PATH "://context/page/context.json"
 #define VEHICLE_CONTEXT_PATH "://context/vehicle/context.json"
 #define LOCK_TIMEOUT 750
-#define HTTP_TIMEOUT 5000 // 5 secs between pages maximum
+#define HTTP_TIMEOUT 10000 // 10 secs between pages maximum
 
 void initQRail();
 QJsonObject pageContext();

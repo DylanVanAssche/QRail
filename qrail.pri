@@ -32,14 +32,18 @@ SOURCES += \
     $$PWD/src/engines/router/routerroutelegend.cpp \
     $$PWD/src/engines/router/routerstationstopprofile.cpp \
     $$PWD/src/engines/router/routertrainprofile.cpp \
+    $$PWD/src/engines/router/routerjourney.cpp \
+    $$PWD/src/engines/router/routernulljourney.cpp \
     $$PWD/src/engines/liveboard/liveboardfactory.cpp \
     $$PWD/src/engines/liveboard/liveboardboard.cpp \
+    $$PWD/src/engines/liveboard/liveboardnullboard.cpp \
     $$PWD/src/engines/station/stationstation.cpp \
     $$PWD/src/engines/station/stationnullstation.cpp \
     $$PWD/src/engines/station/stationfactory.cpp \
     $$PWD/src/engines/vehicle/vehiclevehicle.cpp \
     $$PWD/src/engines/vehicle/vehiclestop.cpp \
     $$PWD/src/engines/vehicle/vehiclefactory.cpp \
+    $$PWD/src/engines/vehicle/vehiclenullvehicle.cpp \
     $$PWD/src/database/databasemanager.cpp \
     $$PWD/src/network/networkmanager.cpp \
     $$PWD/src/network/networkdispatcher.cpp \
@@ -48,9 +52,6 @@ SOURCES += \
     $$PWD/src/fragments/fragmentsfactory.cpp \
     $$PWD/src/fragments/fragmentsdispatcher.cpp \
     $$PWD/src/qrail.cpp \
-    $$PWD/src/engines/vehicle/vehiclenullvehicle.cpp \
-    $$PWD/src/engines/liveboard/liveboardnullboard.cpp \
-    $$PWD/src/engines/router/routerjourney.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -80,7 +81,8 @@ HEADERS += \
     $$PWD/src/include/fragments/fragmentsfactory.h \
     $$PWD/src/include/fragments/fragmentsdispatcher.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
-    $$PWD/src/include/qrail.h
+    $$PWD/src/include/qrail.h \
+    $$PWD/src/include/engines/router/routernulljourney.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

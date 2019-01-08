@@ -39,6 +39,7 @@
 #include "engines/router/routertrainprofile.h"
 #include "engines/router/routertransfer.h"
 #include "engines/router/routerjourney.h"
+#include "engines/router/routernulljourney.h"
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"

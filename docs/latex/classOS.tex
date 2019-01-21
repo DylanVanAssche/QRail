@@ -1,5 +1,9 @@
 \hypertarget{classOS}{}\section{OS Class Reference}
 \label{classOS}\index{OS@{OS}}
+
+
+{\ttfamily \#include $<$os.\+h$>$}
+
 Inheritance diagram for OS\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,135 +13,304 @@ Inheritance diagram for OS\+:\begin{figure}[H]
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classOS_a58369b88b24b1701b020bd0971d99c03}\label{classOS_a58369b88b24b1701b020bd0971d99c03}} 
-void {\bfseries release\+Changed} ()
+void \mbox{\hyperlink{classOS_a58369b88b24b1701b020bd0971d99c03}{release\+Changed}} ()
 \item 
-\mbox{\Hypertarget{classOS_a2bb282eb19c9eaa0c787dabc434a9fca}\label{classOS_a2bb282eb19c9eaa0c787dabc434a9fca}} 
-void {\bfseries version\+Changed} ()
+void \mbox{\hyperlink{classOS_a2bb282eb19c9eaa0c787dabc434a9fca}{version\+Changed}} ()
 \item 
-\mbox{\Hypertarget{classOS_ad55c57724a077d427b89ede6e1f8b235}\label{classOS_ad55c57724a077d427b89ede6e1f8b235}} 
-void {\bfseries app\+Name\+Changed} ()
+void \mbox{\hyperlink{classOS_ad55c57724a077d427b89ede6e1f8b235}{app\+Name\+Changed}} ()
 \item 
-\mbox{\Hypertarget{classOS_a21d29e6b9eef2bccc62db0d29d56b4c5}\label{classOS_a21d29e6b9eef2bccc62db0d29d56b4c5}} 
-void {\bfseries app\+Name\+Pretty\+Changed} ()
+void \mbox{\hyperlink{classOS_a21d29e6b9eef2bccc62db0d29d56b4c5}{app\+Name\+Pretty\+Changed}} ()
 \item 
-\mbox{\Hypertarget{classOS_a39f7a3688e008fde1008e6b7e5b5ebcb}\label{classOS_a39f7a3688e008fde1008e6b7e5b5ebcb}} 
-void {\bfseries app\+Version\+Changed} ()
+void \mbox{\hyperlink{classOS_a39f7a3688e008fde1008e6b7e5b5ebcb}{app\+Version\+Changed}} ()
 \item 
-\mbox{\Hypertarget{classOS_a0ecbe56e6ec612ba6f78af5086505751}\label{classOS_a0ecbe56e6ec612ba6f78af5086505751}} 
-void {\bfseries devicepixelratio\+Changed} ()
+void \mbox{\hyperlink{classOS_a0ecbe56e6ec612ba6f78af5086505751}{devicepixelratio\+Changed}} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classOS_ac21113cbcd347809f657c6a27a0278f6}\label{classOS_ac21113cbcd347809f657c6a27a0278f6}} 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void {\bfseries create\+Notification} (Q\+String title, Q\+String text, Q\+String feedback, Q\+String category)
+\mbox{\hyperlink{classOS_aee121bb510546f335b13791c7c7b4330}{OS}} ()
 \item 
-\mbox{\Hypertarget{classOS_a949a6aa1c2f8cd63d27cd6b8869da8fc}\label{classOS_a949a6aa1c2f8cd63d27cd6b8869da8fc}} 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void {\bfseries create\+Toaster} (Q\+String text, Q\+String icon, Q\+String category)
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \mbox{\hyperlink{classOS_ac21113cbcd347809f657c6a27a0278f6}{create\+Notification}} (Q\+String title, Q\+String text, Q\+String feedback, Q\+String category)
 \item 
-\mbox{\Hypertarget{classOS_a8ab936784f48408f14ad73f10ae5afb8}\label{classOS_a8ab936784f48408f14ad73f10ae5afb8}} 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void {\bfseries close\+Notification\+By\+Category} (Q\+String category)
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \mbox{\hyperlink{classOS_a949a6aa1c2f8cd63d27cd6b8869da8fc}{create\+Toaster}} (Q\+String text, Q\+String icon, Q\+String category)
 \item 
-\mbox{\Hypertarget{classOS_a8cc3c6824e01ae679819c8c3daf7842e}\label{classOS_a8cc3c6824e01ae679819c8c3daf7842e}} 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void {\bfseries close\+Notification\+By\+Replaces\+Id} (Q\+String replaces\+Id)
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \mbox{\hyperlink{classOS_a8ab936784f48408f14ad73f10ae5afb8}{close\+Notification\+By\+Category}} (Q\+String category)
 \item 
-\mbox{\Hypertarget{classOS_a16c6da56d519e2c2bccbdeaf5c4ff29b}\label{classOS_a16c6da56d519e2c2bccbdeaf5c4ff29b}} 
-Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void {\bfseries close\+Notification\+All} ()
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \mbox{\hyperlink{classOS_a8cc3c6824e01ae679819c8c3daf7842e}{close\+Notification\+By\+Replaces\+Id}} (Q\+String replaces\+Id)
 \item 
-\mbox{\Hypertarget{classOS_a1d00cd418f5d83cc174492326f7cd604}\label{classOS_a1d00cd418f5d83cc174492326f7cd604}} 
-Q\+String {\bfseries release} ()
+Q\+\_\+\+I\+N\+V\+O\+K\+A\+B\+LE void \mbox{\hyperlink{classOS_a16c6da56d519e2c2bccbdeaf5c4ff29b}{close\+Notification\+All}} ()
 \item 
-\mbox{\Hypertarget{classOS_a4cd043becb244d8f40bdcc55c0417a71}\label{classOS_a4cd043becb244d8f40bdcc55c0417a71}} 
-Q\+String {\bfseries version} ()
+Q\+String \mbox{\hyperlink{classOS_a1d00cd418f5d83cc174492326f7cd604}{release}} ()
 \item 
-\mbox{\Hypertarget{classOS_a800e819bbb7aa20945893d138b2a1bb3}\label{classOS_a800e819bbb7aa20945893d138b2a1bb3}} 
-Q\+String {\bfseries device} ()
+Q\+String \mbox{\hyperlink{classOS_a4cd043becb244d8f40bdcc55c0417a71}{version}} ()
 \item 
-\mbox{\Hypertarget{classOS_a44dcb6a2ee199b111d98eb1e364bfef7}\label{classOS_a44dcb6a2ee199b111d98eb1e364bfef7}} 
-Q\+String {\bfseries cache\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_a800e819bbb7aa20945893d138b2a1bb3}{device}} ()
 \item 
-\mbox{\Hypertarget{classOS_ae8a69330410d1b615443920baa19cea7}\label{classOS_ae8a69330410d1b615443920baa19cea7}} 
-Q\+String {\bfseries data\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_a44dcb6a2ee199b111d98eb1e364bfef7}{cache\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_ae319d1766558e1a93f0d2736d7f898b2}\label{classOS_ae319d1766558e1a93f0d2736d7f898b2}} 
-Q\+String {\bfseries config\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_ae8a69330410d1b615443920baa19cea7}{data\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_afa7ce7d8541fbbd43d82f09f8662af44}\label{classOS_afa7ce7d8541fbbd43d82f09f8662af44}} 
-Q\+String {\bfseries photo\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_ae319d1766558e1a93f0d2736d7f898b2}{config\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a611cc2d2496f6974b5087e8e2d3085e6}\label{classOS_a611cc2d2496f6974b5087e8e2d3085e6}} 
-Q\+String {\bfseries music\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_afa7ce7d8541fbbd43d82f09f8662af44}{photo\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a88ba12fba1acd2557506942e0099634b}\label{classOS_a88ba12fba1acd2557506942e0099634b}} 
-Q\+String {\bfseries document\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_a611cc2d2496f6974b5087e8e2d3085e6}{music\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_afdfd88fe0b70d4ed51508e7dc364b1d4}\label{classOS_afdfd88fe0b70d4ed51508e7dc364b1d4}} 
-Q\+String {\bfseries video\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_a88ba12fba1acd2557506942e0099634b}{document\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a0dac0a86aca0d89d27b9596999506713}\label{classOS_a0dac0a86aca0d89d27b9596999506713}} 
-Q\+String {\bfseries download\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_afdfd88fe0b70d4ed51508e7dc364b1d4}{video\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a5f0bcd7c973d5875be519ec3a06629f2}\label{classOS_a5f0bcd7c973d5875be519ec3a06629f2}} 
-Q\+String {\bfseries log\+Location} ()
+Q\+String \mbox{\hyperlink{classOS_a0dac0a86aca0d89d27b9596999506713}{download\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a85848812c46025d92b9a061df85d9bce}\label{classOS_a85848812c46025d92b9a061df85d9bce}} 
-Q\+String {\bfseries log\+File} ()
+Q\+String \mbox{\hyperlink{classOS_a5f0bcd7c973d5875be519ec3a06629f2}{log\+Location}} ()
 \item 
-\mbox{\Hypertarget{classOS_a414805ecb488dd84a111fb2c8c6b9401}\label{classOS_a414805ecb488dd84a111fb2c8c6b9401}} 
-Q\+String {\bfseries app\+Name} ()
+Q\+String \mbox{\hyperlink{classOS_a85848812c46025d92b9a061df85d9bce}{log\+File}} ()
 \item 
-\mbox{\Hypertarget{classOS_af545da4fea44bc32a873f7021498b9fc}\label{classOS_af545da4fea44bc32a873f7021498b9fc}} 
-Q\+String {\bfseries app\+Name\+Pretty} ()
+Q\+String \mbox{\hyperlink{classOS_a414805ecb488dd84a111fb2c8c6b9401}{app\+Name}} ()
 \item 
-\mbox{\Hypertarget{classOS_ad216acfae668255c7e307e965e5e3a50}\label{classOS_ad216acfae668255c7e307e965e5e3a50}} 
-Q\+String {\bfseries app\+Version} ()
+Q\+String \mbox{\hyperlink{classOS_af545da4fea44bc32a873f7021498b9fc}{app\+Name\+Pretty}} ()
 \item 
-\mbox{\Hypertarget{classOS_abec33b96eb8c7def86f6f918dc1849c0}\label{classOS_abec33b96eb8c7def86f6f918dc1849c0}} 
-qreal {\bfseries devicepixelratio} ()
+Q\+String \mbox{\hyperlink{classOS_ad216acfae668255c7e307e965e5e3a50}{app\+Version}} ()
+\item 
+qreal \mbox{\hyperlink{classOS_abec33b96eb8c7def86f6f918dc1849c0}{devicepixelratio}} ()
 \end{DoxyCompactItemize}
 \subsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classOS_ac78395d05ca770df0e6136dca18cf682}\label{classOS_ac78395d05ca770df0e6136dca18cf682}} 
-Q\+String {\bfseries release}
+Q\+String \mbox{\hyperlink{classOS_ac78395d05ca770df0e6136dca18cf682}{release}}
 \item 
-\mbox{\Hypertarget{classOS_af9d3ad8c99dd34d874634eae3163dcc3}\label{classOS_af9d3ad8c99dd34d874634eae3163dcc3}} 
-Q\+String {\bfseries version}
+Q\+String \mbox{\hyperlink{classOS_af9d3ad8c99dd34d874634eae3163dcc3}{version}}
 \item 
+Q\+String \mbox{\hyperlink{classOS_af9d6295c5361884c9c7c25b13db70720}{app\+Name}}
+\item 
+Q\+String \mbox{\hyperlink{classOS_a5ecf65ef8f4ac491323d1590c2cb4e67}{app\+Name\+Pretty}}
+\item 
+Q\+String \mbox{\hyperlink{classOS_a8162949b8a268b409967ae356947e059}{app\+Version}}
+\item 
+Q\+String \mbox{\hyperlink{classOS_aa40d035f4f4b1f67c6c103cd3b3cfc08}{devicepixelratio}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classOS_aee121bb510546f335b13791c7c7b4330}\label{classOS_aee121bb510546f335b13791c7c7b4330}} 
+\index{OS@{OS}!OS@{OS}}
+\index{OS@{OS}!OS@{OS}}
+\subsubsection{\texorpdfstring{OS()}{OS()}}
+{\footnotesize\ttfamily O\+S\+::\+OS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classOS_a414805ecb488dd84a111fb2c8c6b9401}\label{classOS_a414805ecb488dd84a111fb2c8c6b9401}} 
+\index{OS@{OS}!appName@{appName}}
+\index{appName@{appName}!OS@{OS}}
+\subsubsection{\texorpdfstring{appName()}{appName()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_ad55c57724a077d427b89ede6e1f8b235}\label{classOS_ad55c57724a077d427b89ede6e1f8b235}} 
+\index{OS@{OS}!appNameChanged@{appNameChanged}}
+\index{appNameChanged@{appNameChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{appNameChanged}{appNameChanged}}
+{\footnotesize\ttfamily void O\+S\+::app\+Name\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_af545da4fea44bc32a873f7021498b9fc}\label{classOS_af545da4fea44bc32a873f7021498b9fc}} 
+\index{OS@{OS}!appNamePretty@{appNamePretty}}
+\index{appNamePretty@{appNamePretty}!OS@{OS}}
+\subsubsection{\texorpdfstring{appNamePretty()}{appNamePretty()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Name\+Pretty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a21d29e6b9eef2bccc62db0d29d56b4c5}\label{classOS_a21d29e6b9eef2bccc62db0d29d56b4c5}} 
+\index{OS@{OS}!appNamePrettyChanged@{appNamePrettyChanged}}
+\index{appNamePrettyChanged@{appNamePrettyChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{appNamePrettyChanged}{appNamePrettyChanged}}
+{\footnotesize\ttfamily void O\+S\+::app\+Name\+Pretty\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_ad216acfae668255c7e307e965e5e3a50}\label{classOS_ad216acfae668255c7e307e965e5e3a50}} 
+\index{OS@{OS}!appVersion@{appVersion}}
+\index{appVersion@{appVersion}!OS@{OS}}
+\subsubsection{\texorpdfstring{appVersion()}{appVersion()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a39f7a3688e008fde1008e6b7e5b5ebcb}\label{classOS_a39f7a3688e008fde1008e6b7e5b5ebcb}} 
+\index{OS@{OS}!appVersionChanged@{appVersionChanged}}
+\index{appVersionChanged@{appVersionChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{appVersionChanged}{appVersionChanged}}
+{\footnotesize\ttfamily void O\+S\+::app\+Version\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_a44dcb6a2ee199b111d98eb1e364bfef7}\label{classOS_a44dcb6a2ee199b111d98eb1e364bfef7}} 
+\index{OS@{OS}!cacheLocation@{cacheLocation}}
+\index{cacheLocation@{cacheLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{cacheLocation()}{cacheLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::cache\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a16c6da56d519e2c2bccbdeaf5c4ff29b}\label{classOS_a16c6da56d519e2c2bccbdeaf5c4ff29b}} 
+\index{OS@{OS}!closeNotificationAll@{closeNotificationAll}}
+\index{closeNotificationAll@{closeNotificationAll}!OS@{OS}}
+\subsubsection{\texorpdfstring{closeNotificationAll()}{closeNotificationAll()}}
+{\footnotesize\ttfamily void O\+S\+::close\+Notification\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a8ab936784f48408f14ad73f10ae5afb8}\label{classOS_a8ab936784f48408f14ad73f10ae5afb8}} 
+\index{OS@{OS}!closeNotificationByCategory@{closeNotificationByCategory}}
+\index{closeNotificationByCategory@{closeNotificationByCategory}!OS@{OS}}
+\subsubsection{\texorpdfstring{closeNotificationByCategory()}{closeNotificationByCategory()}}
+{\footnotesize\ttfamily void O\+S\+::close\+Notification\+By\+Category (\begin{DoxyParamCaption}\item[{Q\+String}]{category }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a8cc3c6824e01ae679819c8c3daf7842e}\label{classOS_a8cc3c6824e01ae679819c8c3daf7842e}} 
+\index{OS@{OS}!closeNotificationByReplacesId@{closeNotificationByReplacesId}}
+\index{closeNotificationByReplacesId@{closeNotificationByReplacesId}!OS@{OS}}
+\subsubsection{\texorpdfstring{closeNotificationByReplacesId()}{closeNotificationByReplacesId()}}
+{\footnotesize\ttfamily void O\+S\+::close\+Notification\+By\+Replaces\+Id (\begin{DoxyParamCaption}\item[{Q\+String}]{replaces\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_ae319d1766558e1a93f0d2736d7f898b2}\label{classOS_ae319d1766558e1a93f0d2736d7f898b2}} 
+\index{OS@{OS}!configLocation@{configLocation}}
+\index{configLocation@{configLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{configLocation()}{configLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::config\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_ac21113cbcd347809f657c6a27a0278f6}\label{classOS_ac21113cbcd347809f657c6a27a0278f6}} 
+\index{OS@{OS}!createNotification@{createNotification}}
+\index{createNotification@{createNotification}!OS@{OS}}
+\subsubsection{\texorpdfstring{createNotification()}{createNotification()}}
+{\footnotesize\ttfamily void O\+S\+::create\+Notification (\begin{DoxyParamCaption}\item[{Q\+String}]{title,  }\item[{Q\+String}]{text,  }\item[{Q\+String}]{feedback,  }\item[{Q\+String}]{category }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a949a6aa1c2f8cd63d27cd6b8869da8fc}\label{classOS_a949a6aa1c2f8cd63d27cd6b8869da8fc}} 
+\index{OS@{OS}!createToaster@{createToaster}}
+\index{createToaster@{createToaster}!OS@{OS}}
+\subsubsection{\texorpdfstring{createToaster()}{createToaster()}}
+{\footnotesize\ttfamily void O\+S\+::create\+Toaster (\begin{DoxyParamCaption}\item[{Q\+String}]{text,  }\item[{Q\+String}]{icon,  }\item[{Q\+String}]{category }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_ae8a69330410d1b615443920baa19cea7}\label{classOS_ae8a69330410d1b615443920baa19cea7}} 
+\index{OS@{OS}!dataLocation@{dataLocation}}
+\index{dataLocation@{dataLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{dataLocation()}{dataLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::data\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a800e819bbb7aa20945893d138b2a1bb3}\label{classOS_a800e819bbb7aa20945893d138b2a1bb3}} 
+\index{OS@{OS}!device@{device}}
+\index{device@{device}!OS@{OS}}
+\subsubsection{\texorpdfstring{device()}{device()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_abec33b96eb8c7def86f6f918dc1849c0}\label{classOS_abec33b96eb8c7def86f6f918dc1849c0}} 
+\index{OS@{OS}!devicepixelratio@{devicepixelratio}}
+\index{devicepixelratio@{devicepixelratio}!OS@{OS}}
+\subsubsection{\texorpdfstring{devicepixelratio()}{devicepixelratio()}}
+{\footnotesize\ttfamily qreal O\+S\+::devicepixelratio (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a0ecbe56e6ec612ba6f78af5086505751}\label{classOS_a0ecbe56e6ec612ba6f78af5086505751}} 
+\index{OS@{OS}!devicepixelratioChanged@{devicepixelratioChanged}}
+\index{devicepixelratioChanged@{devicepixelratioChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{devicepixelratioChanged}{devicepixelratioChanged}}
+{\footnotesize\ttfamily void O\+S\+::devicepixelratio\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_a88ba12fba1acd2557506942e0099634b}\label{classOS_a88ba12fba1acd2557506942e0099634b}} 
+\index{OS@{OS}!documentLocation@{documentLocation}}
+\index{documentLocation@{documentLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{documentLocation()}{documentLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::document\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a0dac0a86aca0d89d27b9596999506713}\label{classOS_a0dac0a86aca0d89d27b9596999506713}} 
+\index{OS@{OS}!downloadLocation@{downloadLocation}}
+\index{downloadLocation@{downloadLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{downloadLocation()}{downloadLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::download\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a85848812c46025d92b9a061df85d9bce}\label{classOS_a85848812c46025d92b9a061df85d9bce}} 
+\index{OS@{OS}!logFile@{logFile}}
+\index{logFile@{logFile}!OS@{OS}}
+\subsubsection{\texorpdfstring{logFile()}{logFile()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::log\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a5f0bcd7c973d5875be519ec3a06629f2}\label{classOS_a5f0bcd7c973d5875be519ec3a06629f2}} 
+\index{OS@{OS}!logLocation@{logLocation}}
+\index{logLocation@{logLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{logLocation()}{logLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::log\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a611cc2d2496f6974b5087e8e2d3085e6}\label{classOS_a611cc2d2496f6974b5087e8e2d3085e6}} 
+\index{OS@{OS}!musicLocation@{musicLocation}}
+\index{musicLocation@{musicLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{musicLocation()}{musicLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::music\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_afa7ce7d8541fbbd43d82f09f8662af44}\label{classOS_afa7ce7d8541fbbd43d82f09f8662af44}} 
+\index{OS@{OS}!photoLocation@{photoLocation}}
+\index{photoLocation@{photoLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{photoLocation()}{photoLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::photo\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a1d00cd418f5d83cc174492326f7cd604}\label{classOS_a1d00cd418f5d83cc174492326f7cd604}} 
+\index{OS@{OS}!release@{release}}
+\index{release@{release}!OS@{OS}}
+\subsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::release (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a58369b88b24b1701b020bd0971d99c03}\label{classOS_a58369b88b24b1701b020bd0971d99c03}} 
+\index{OS@{OS}!releaseChanged@{releaseChanged}}
+\index{releaseChanged@{releaseChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{releaseChanged}{releaseChanged}}
+{\footnotesize\ttfamily void O\+S\+::release\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_a4cd043becb244d8f40bdcc55c0417a71}\label{classOS_a4cd043becb244d8f40bdcc55c0417a71}} 
+\index{OS@{OS}!version@{version}}
+\index{version@{version}!OS@{OS}}
+\subsubsection{\texorpdfstring{version()}{version()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classOS_a2bb282eb19c9eaa0c787dabc434a9fca}\label{classOS_a2bb282eb19c9eaa0c787dabc434a9fca}} 
+\index{OS@{OS}!versionChanged@{versionChanged}}
+\index{versionChanged@{versionChanged}!OS@{OS}}
+\subsubsection{\texorpdfstring{versionChanged}{versionChanged}}
+{\footnotesize\ttfamily void O\+S\+::version\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classOS_afdfd88fe0b70d4ed51508e7dc364b1d4}\label{classOS_afdfd88fe0b70d4ed51508e7dc364b1d4}} 
+\index{OS@{OS}!videoLocation@{videoLocation}}
+\index{videoLocation@{videoLocation}!OS@{OS}}
+\subsubsection{\texorpdfstring{videoLocation()}{videoLocation()}}
+{\footnotesize\ttfamily Q\+String O\+S\+::video\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Property Documentation}
 \mbox{\Hypertarget{classOS_af9d6295c5361884c9c7c25b13db70720}\label{classOS_af9d6295c5361884c9c7c25b13db70720}} 
-Q\+String {\bfseries app\+Name}
-\item 
+\index{OS@{OS}!appName@{appName}}
+\index{appName@{appName}!OS@{OS}}
+\subsubsection{\texorpdfstring{appName}{appName}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Name\hspace{0.3cm}{\ttfamily [read]}}
+
 \mbox{\Hypertarget{classOS_a5ecf65ef8f4ac491323d1590c2cb4e67}\label{classOS_a5ecf65ef8f4ac491323d1590c2cb4e67}} 
-Q\+String {\bfseries app\+Name\+Pretty}
-\item 
+\index{OS@{OS}!appNamePretty@{appNamePretty}}
+\index{appNamePretty@{appNamePretty}!OS@{OS}}
+\subsubsection{\texorpdfstring{appNamePretty}{appNamePretty}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Name\+Pretty\hspace{0.3cm}{\ttfamily [read]}}
+
 \mbox{\Hypertarget{classOS_a8162949b8a268b409967ae356947e059}\label{classOS_a8162949b8a268b409967ae356947e059}} 
-Q\+String {\bfseries app\+Version}
-\item 
+\index{OS@{OS}!appVersion@{appVersion}}
+\index{appVersion@{appVersion}!OS@{OS}}
+\subsubsection{\texorpdfstring{appVersion}{appVersion}}
+{\footnotesize\ttfamily Q\+String O\+S\+::app\+Version\hspace{0.3cm}{\ttfamily [read]}}
+
 \mbox{\Hypertarget{classOS_aa40d035f4f4b1f67c6c103cd3b3cfc08}\label{classOS_aa40d035f4f4b1f67c6c103cd3b3cfc08}} 
-Q\+String {\bfseries devicepixelratio}
-\end{DoxyCompactItemize}
-\subsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classOS_a5703fdddfbee21d53e71906d509df442}\label{classOS_a5703fdddfbee21d53e71906d509df442}} 
-Q\+List$<$ Q\+Pair$<$ Q\+String, Q\+String $>$ $>$ {\bfseries extract\+File\+Data} (Q\+String location, Q\+String\+List querry\+List)
-\end{DoxyCompactItemize}
-\subsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classOS_a61a80d72fb7d8be61c14a0363e81176a}\label{classOS_a61a80d72fb7d8be61c14a0363e81176a}} 
-Q\+String {\bfseries m\+\_\+release}
-\item 
-\mbox{\Hypertarget{classOS_a483dfd8fcc3c9e240f05638f01c697fa}\label{classOS_a483dfd8fcc3c9e240f05638f01c697fa}} 
-Q\+String {\bfseries m\+\_\+version}
-\item 
-\mbox{\Hypertarget{classOS_aae83217d6785449722cae783468cb6ba}\label{classOS_aae83217d6785449722cae783468cb6ba}} 
-Q\+String {\bfseries m\+\_\+device}
-\end{DoxyCompactItemize}
+\index{OS@{OS}!devicepixelratio@{devicepixelratio}}
+\index{devicepixelratio@{devicepixelratio}!OS@{OS}}
+\subsubsection{\texorpdfstring{devicepixelratio}{devicepixelratio}}
+{\footnotesize\ttfamily qreal O\+S\+::devicepixelratio\hspace{0.3cm}{\ttfamily [read]}}
+
+\mbox{\Hypertarget{classOS_ac78395d05ca770df0e6136dca18cf682}\label{classOS_ac78395d05ca770df0e6136dca18cf682}} 
+\index{OS@{OS}!release@{release}}
+\index{release@{release}!OS@{OS}}
+\subsubsection{\texorpdfstring{release}{release}}
+{\footnotesize\ttfamily Q\+String O\+S\+::release\hspace{0.3cm}{\ttfamily [read]}}
+
+\mbox{\Hypertarget{classOS_af9d3ad8c99dd34d874634eae3163dcc3}\label{classOS_af9d3ad8c99dd34d874634eae3163dcc3}} 
+\index{OS@{OS}!version@{version}}
+\index{version@{version}!OS@{OS}}
+\subsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily Q\+String O\+S\+::version\hspace{0.3cm}{\ttfamily [read]}}
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/os.\+h\item 
-src/os.\+cpp\end{DoxyCompactItemize}
+src/\mbox{\hyperlink{os_8h}{os.\+h}}\item 
+src/\mbox{\hyperlink{os_8cpp}{os.\+cpp}}\end{DoxyCompactItemize}

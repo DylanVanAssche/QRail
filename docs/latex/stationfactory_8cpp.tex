@@ -1,8 +1,8 @@
 \hypertarget{stationfactory_8cpp}{}\section{src/engines/station/stationfactory.cpp File Reference}
-\label{stationfactory_8cpp}\index{src/engines/station/stationfactory.\+cpp@{src/engines/station/stationfactory.\+cpp}}
+\label{stationfactory_8cpp}\index{src/engines/station/stationfactory.cpp@{src/engines/station/stationfactory.cpp}}
 
 
-\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} constructor\+: empty.  
+Station\+Engine\+::\+Factory constructor\+: empty.  
 
 
 {\ttfamily \#include \char`\"{}engines/station/stationfactory.\+h\char`\"{}}\newline
@@ -10,15 +10,15 @@
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceStationEngine}{Station\+Engine}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a Station\+Engine\+::\+Factory to generate Station\+Engine\+::\+Station objects on the fly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} constructor\+: empty. 
+Station\+Engine\+::\+Factory constructor\+: empty. 
 
-Sets the \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} instance.
+Sets the \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} instance.
 
-Gets the \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} instance.
+Gets the \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} instance.
 
 Fetches the platforms of a station.
 
@@ -36,7 +36,7 @@ Init the database for stations.
 
 Retrieves a station by U\+RI.
 
-Gets a \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance.
+Gets a Station\+Engine\+::\+Factory instance.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -61,7 +61,7 @@ Dylan Van Assche
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$factory
+Station\+Engine\+::\+Factory $\ast$factory
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -71,9 +71,30 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Url \&uri\\
+{\em const} & Q\+Url \&uri \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Station\+Engine\+::\+Station $\ast$station
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Geo\+Coordinate \&position \\
+\hline
+{\em const} & qreal \&radius \\
+\hline
+{\em const} & qint32 \&max\+Results \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Q\+List$<$\+Station\+Engine\+::\+Station $\ast$station$>$ \&nearby\+Stations
+\end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
 \end{DoxyAuthor}
@@ -122,7 +143,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station
+Station\+Engine\+::\+Station $\ast$station
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -132,7 +153,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}}} & $\ast$station\\
+{\em Station\+Engine\+::\+Station} & $\ast$station\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -156,7 +177,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}} $\ast$manager
+\mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} $\ast$manager
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -166,6 +187,6 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}}} & $\ast$manager \\
+{\em \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}}} & $\ast$manager \\
 \hline
 \end{DoxyParams}

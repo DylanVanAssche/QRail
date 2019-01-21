@@ -1,0 +1,67 @@
+\hypertarget{classQRail_1_1StationEngine_1_1Factory}{}\section{Q\+Rail\+::Station\+Engine\+::Factory Class Reference}
+\label{classQRail_1_1StationEngine_1_1Factory}\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+
+
+{\ttfamily \#include $<$stationfactory.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Station\+Engine\+::Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1StationEngine_1_1Factory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}{get\+Station\+By\+U\+RI}} (const Q\+Url \&uri)
+\item 
+Q\+List$<$ Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}{get\+Stations\+In\+The\+Area\+By\+Position}} (const Q\+Geo\+Coordinate \&position, const qreal \&radius, const quint32 \&max\+Results)
+\item 
+Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}{get\+Nearest\+Station\+By\+Position}} (const Q\+Geo\+Coordinate \&position, const qreal radius)
+\item 
+Q\+List$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}{get\+Stations\+By\+Name}} (const Q\+String \&query)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}} $\ast$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}\label{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}} 
+\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}}$\ast$ Q\+Rail\+::\+Station\+Engine\+::\+Factory\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}\label{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}} 
+\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getNearestStationByPosition@{getNearestStationByPosition}}
+\index{getNearestStationByPosition@{getNearestStationByPosition}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+\subsubsection{\texorpdfstring{getNearestStationByPosition()}{getNearestStationByPosition()}}
+{\footnotesize\ttfamily Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$, qreal $>$ Station\+Engine\+::\+Factory\+::get\+Nearest\+Station\+By\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal}]{radius }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}\label{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}} 
+\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationByURI@{getStationByURI}}
+\index{getStationByURI@{getStationByURI}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+\subsubsection{\texorpdfstring{getStationByURI()}{getStationByURI()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ Station\+Engine\+::\+Factory\+::get\+Station\+By\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}\label{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}} 
+\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationsByName@{getStationsByName}}
+\index{getStationsByName@{getStationsByName}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+\subsubsection{\texorpdfstring{getStationsByName()}{getStationsByName()}}
+{\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ $>$ Station\+Engine\+::\+Factory\+::get\+Stations\+By\+Name (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{query }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}\label{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}} 
+\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationsInTheAreaByPosition@{getStationsInTheAreaByPosition}}
+\index{getStationsInTheAreaByPosition@{getStationsInTheAreaByPosition}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
+\subsubsection{\texorpdfstring{getStationsInTheAreaByPosition()}{getStationsInTheAreaByPosition()}}
+{\footnotesize\ttfamily Q\+List$<$ Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ $>$ Station\+Engine\+::\+Factory\+::get\+Stations\+In\+The\+Area\+By\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal \&}]{radius,  }\item[{const quint32 \&}]{max\+Results }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/station/\mbox{\hyperlink{stationfactory_8h}{stationfactory.\+h}}\item 
+src/engines/station/\mbox{\hyperlink{stationfactory_8cpp}{stationfactory.\+cpp}}\end{DoxyCompactItemize}

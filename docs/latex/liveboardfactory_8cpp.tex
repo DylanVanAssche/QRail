@@ -1,8 +1,8 @@
 \hypertarget{liveboardfactory_8cpp}{}\section{src/engines/liveboard/liveboardfactory.cpp File Reference}
-\label{liveboardfactory_8cpp}\index{src/engines/liveboard/liveboardfactory.\+cpp@{src/engines/liveboard/liveboardfactory.\+cpp}}
+\label{liveboardfactory_8cpp}\index{src/engines/liveboard/liveboardfactory.cpp@{src/engines/liveboard/liveboardfactory.cpp}}
 
 
-\mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} constructor.  
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} constructor.  
 
 
 {\ttfamily \#include \char`\"{}engines/liveboard/liveboardfactory.\+h\char`\"{}}\newline
@@ -10,15 +10,15 @@
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceLiveboard}{Liveboard}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} with the given parent. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} constructor. 
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} constructor. 
 
-Sets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+Sets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance.
 
-Gets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+Gets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance.
 
 Sets the from time.
 
@@ -34,25 +34,27 @@ Gets the station U\+RI.
 
 Sets the mode.
 
-Gets the Liveboard\+Engine\+::\+Board\+::\+Mode mode.
+Gets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} mode.
 
-Sets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance.
+Sets the Station\+Engine\+::\+Factory instance.
 
-Gets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance.
+Gets the Station\+Engine\+::\+Factory instance.
 
-Sets the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} instance.
+Sets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} instance.
 
-Gets the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} instance.
+Gets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} instance.
 
 Parser thread for the received pages.
 
-Handler for the received \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} pages.
+Handler for the received \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}} pages.
+
+Cancel the current operation.
 
 Retrieves a liveboard by a station U\+RI and a time range.
 
 Retrieves a liveboard by a station U\+RI.
 
-Gets a \mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} instance.
+Gets a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} instance.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -77,7 +79,7 @@ Dylan Van Assche
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} $\ast$factory
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} $\ast$factory
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -89,7 +91,7 @@ Dylan Van Assche
 \begin{DoxyParams}{Parameters}
 {\em const} & Q\+Url \&url \\
 \hline
-{\em const} & Liveboard\+Engine\+::\+Board\+::\+Mode \&mode\\
+{\em const} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -106,7 +108,24 @@ Dylan Van Assche
 \hline
 {\em const} & Q\+Date\+Time \&until \\
 \hline
-{\em const} & Liveboard\+Engine\+::\+Board\+::\+Mode \&mode\\
+{\em const} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+25 Nov 2018
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+21 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}}} & $\ast$page\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -117,18 +136,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}}} & $\ast$page\\
-\hline
-\end{DoxyParams}
-\begin{DoxyAuthor}{Author}
-Dylan Van Assche 
-\end{DoxyAuthor}
-\begin{DoxyDate}{Date}
-21 Aug 2018 
-\end{DoxyDate}
-
-\begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}}} & $\ast$page \\
+{\em \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}}} & $\ast$page \\
 \hline
 {\em const} & bool \&finished\\
 \hline
@@ -140,7 +148,7 @@ Dylan Van Assche
 21 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} $\ast$liveboard
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} $\ast$liveboard
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -150,7 +158,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}}} & $\ast$liveboard\\
+{\em \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}}} & $\ast$liveboard\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -160,7 +168,7 @@ Dylan Van Assche
 21 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$factory
+Station\+Engine\+::\+Factory $\ast$factory
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -170,7 +178,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}}} & $\ast$factory\\
+{\em Station\+Engine\+::\+Factory} & $\ast$factory\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -180,7 +188,7 @@ Dylan Van Assche
 21 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Liveboard\+Engine\+::\+Board\+::\+Mode mode
+const \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} mode
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -190,7 +198,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Liveboard\+Engine\+::\+Board\+::\+Mode \&mode\\
+{\em const} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -260,7 +268,7 @@ Dylan Van Assche
 21 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$factory
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$factory
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -270,6 +278,6 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}}} & $\ast$factory \\
+{\em \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}}} & $\ast$factory \\
 \hline
 \end{DoxyParams}

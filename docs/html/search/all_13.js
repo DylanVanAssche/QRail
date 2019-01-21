@@ -1,21 +1,11 @@
 var searchData=
 [
-  ['validatedata',['validateData',['../classVehicleEngine_1_1Factory.html#a2e2e49cee65a409309492354de57b496',1,'VehicleEngine::Factory::validateData()'],['../classFragments_1_1Factory.html#a62a60fd81fec95b794a8b27188b51824',1,'Fragments::Factory::validateData()']]],
-  ['vehicle',['Vehicle',['../classVehicleEngine_1_1Vehicle.html',1,'VehicleEngine::Vehicle'],['../classVehicleEngine_1_1Vehicle.html#a208c46e84099d0f24ebcf699aedf9ca2',1,'VehicleEngine::Vehicle::Vehicle(QObject *parent=nullptr)'],['../classVehicleEngine_1_1Vehicle.html#a637a49b74131270fdf0d73a6268e2716',1,'VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, QObject *parent=nullptr)'],['../classVehicleEngine_1_1Vehicle.html#ac3b5f107da52e20512f9fca88a9ef3b3',1,'VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, const QList&lt; VehicleEngine::Stop *&gt; &amp;intermediaryStops, QObject *parent=nullptr)']]],
-  ['vehiclealerts',['vehicleAlerts',['../classRouterEngine_1_1Route.html#a2d3c6fd345bd099e769ad06896199bc6',1,'RouterEngine::Route']]],
-  ['vehiclealertschanged',['vehicleAlertsChanged',['../classRouterEngine_1_1Route.html#a1ea5875ee80dca0f253caee323f23410',1,'RouterEngine::Route']]],
-  ['vehicleengine',['VehicleEngine',['../namespaceVehicleEngine.html',1,'']]],
-  ['vehiclefactory_2ecpp',['vehiclefactory.cpp',['../vehiclefactory_8cpp.html',1,'']]],
-  ['vehiclefactory_2eh',['vehiclefactory.h',['../vehiclefactory_8h.html',1,'']]],
-  ['vehicleinformation',['vehicleInformation',['../classRouterEngine_1_1RouteLeg.html#a086d61b828cd572797ec327710eb4088',1,'RouterEngine::RouteLeg']]],
-  ['vehicleinformationchanged',['vehicleInformationChanged',['../classRouterEngine_1_1RouteLeg.html#a11952e3a2fee4fa1d9f4fb56e69f0507',1,'RouterEngine::RouteLeg']]],
-  ['vehicleready',['vehicleReady',['../classVehicleEngine_1_1Factory.html#af23bdc01d77eb6c9feb7f79f00511c22',1,'VehicleEngine::Factory']]],
-  ['vehiclestop_2ecpp',['vehiclestop.cpp',['../vehiclestop_8cpp.html',1,'']]],
-  ['vehiclestop_2eh',['vehiclestop.h',['../vehiclestop_8h.html',1,'']]],
-  ['vehiclevehicle_2ecpp',['vehiclevehicle.cpp',['../vehiclevehicle_8cpp.html',1,'']]],
-  ['vehiclevehicle_2eh',['vehiclevehicle.h',['../vehiclevehicle_8h.html',1,'']]],
-  ['verbose_5fparameters',['VERBOSE_PARAMETERS',['../routerplanner_8h.html#a9decc45077806bdbc50c0488d45f7c1b',1,'routerplanner.h']]],
-  ['version',['version',['../classOS.html#af9d3ad8c99dd34d874634eae3163dcc3',1,'OS::version()'],['../classOS.html#a4cd043becb244d8f40bdcc55c0417a71',1,'OS::version()'],['../logger_8h.html#accb344ff518c8d35f4e2a0df6fe3a6d1',1,'version():&#160;logger.h']]],
-  ['versionchanged',['versionChanged',['../classOS.html#a2bb282eb19c9eaa0c787dabc434a9fca',1,'OS']]],
-  ['videolocation',['videoLocation',['../classOS.html#afdfd88fe0b70d4ed51508e7dc364b1d4',1,'OS']]]
+  ['unknown',['UNKNOWN',['../classQRail_1_1VehicleEngine_1_1Stop.html#af078938bc06ff906b6fc843d8c0206faa696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::VehicleEngine::Stop::UNKNOWN()'],['../classQRail_1_1VehicleEngine_1_1Stop.html#ad967ed81b19762bd582c1af07354a6d4a696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::VehicleEngine::Stop::UNKNOWN()'],['../classQRail_1_1Fragments_1_1Fragment.html#ae3c308ba6dec16f36ecc5dba59f35af3a696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::Fragments::Fragment::UNKNOWN()']]],
+  ['unsupported',['UNSUPPORTED',['../classQRail_1_1VehicleEngine_1_1Stop.html#ad967ed81b19762bd582c1af07354a6d4a40aa75f8e8cfdf7b660c5620e953229f',1,'QRail::VehicleEngine::Stop']]],
+  ['until',['until',['../classQRail_1_1LiveboardEngine_1_1Board.html#af09d8cddaaf92ba4a3a5d74ee393388b',1,'QRail::LiveboardEngine::Board::until()'],['../classQRail_1_1LiveboardEngine_1_1Factory.html#a040529d305e2cc4d19b68f48817f7a90',1,'QRail::LiveboardEngine::Factory::until()']]],
+  ['untilchanged',['untilChanged',['../classQRail_1_1LiveboardEngine_1_1Board.html#aa2d6f92cc84b2f68d7870f514e6267ef',1,'QRail::LiveboardEngine::Board::untilChanged()'],['../classQRail_1_1LiveboardEngine_1_1Factory.html#a81b9ba54949f8389e63a65c4e91e3d19',1,'QRail::LiveboardEngine::Factory::untilChanged()']]],
+  ['uri',['uri',['../classQRail_1_1RouterEngine_1_1RouteLegEnd.html#a8a2dca775ba3d184c8332cc2dfa06116',1,'QRail::RouterEngine::RouteLegEnd::uri()'],['../classQRail_1_1RouterEngine_1_1Transfer.html#a395e3c3959c104c17052d4fc783c06eb',1,'QRail::RouterEngine::Transfer::uri()'],['../classQRail_1_1StationEngine_1_1Station.html#a7ccf866501e2f547935c152b67d192f6',1,'QRail::StationEngine::Station::uri()'],['../classQRail_1_1VehicleEngine_1_1Vehicle.html#a80c5d4f38c97919e573439b94067d099',1,'QRail::VehicleEngine::Vehicle::uri()'],['../classQRail_1_1Fragments_1_1Fragment.html#ae5f38f826040cb216e345ce6eb26ebb6',1,'QRail::Fragments::Fragment::uri()'],['../classQRail_1_1Fragments_1_1Page.html#a55b83d498119763fb6218ccb0959967e',1,'QRail::Fragments::Page::uri()']]],
+  ['urichanged',['uriChanged',['../classQRail_1_1RouterEngine_1_1RouteLegEnd.html#a44cb65a3c2119ca9410522c255e10acb',1,'QRail::RouterEngine::RouteLegEnd::uriChanged()'],['../classQRail_1_1StationEngine_1_1Station.html#a25743385c35feaac93b667a9a828bde8',1,'QRail::StationEngine::Station::uriChanged()'],['../classQRail_1_1VehicleEngine_1_1Vehicle.html#ac1b3292e6977df0f9a0e4d89b4d4c58c',1,'QRail::VehicleEngine::Vehicle::uriChanged()'],['../classQRail_1_1Fragments_1_1Fragment.html#aef96a29b0a9babac79b1705be6d89346',1,'QRail::Fragments::Fragment::uriChanged()'],['../classQRail_1_1Fragments_1_1Page.html#a87f9b4f40af2e858ea3e046a2107631e',1,'QRail::Fragments::Page::uriChanged()']]],
+  ['useragent',['userAgent',['../classQRail_1_1Network_1_1Manager.html#a8163075df6f472c3ae69e0cfa67a7da7',1,'QRail::Network::Manager']]],
+  ['useragentchanged',['userAgentChanged',['../classQRail_1_1Network_1_1Manager.html#a7041109a640094b8aaeb430e6b09c9bc',1,'QRail::Network::Manager']]]
 ];

@@ -1,8 +1,8 @@
 \hypertarget{fragmentsfactory_8cpp}{}\section{src/fragments/fragmentsfactory.cpp File Reference}
-\label{fragmentsfactory_8cpp}\index{src/fragments/fragmentsfactory.\+cpp@{src/fragments/fragmentsfactory.\+cpp}}
+\label{fragmentsfactory_8cpp}\index{src/fragments/fragmentsfactory.cpp@{src/fragments/fragmentsfactory.cpp}}
 
 
-\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} constructor\+: empty.  
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} constructor\+: empty.  
 
 
 {\ttfamily \#include \char`\"{}fragments/fragmentsfactory.\+h\char`\"{}}\newline
@@ -10,19 +10,17 @@
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceFragments}{Fragments}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} to generate Linked Connections fragments on the fly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} constructor\+: empty. 
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} constructor\+: empty. 
 
-Sets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+Sets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance.
 
-Gets the \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+Gets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance.
 
 Processes the network reply.
-
-Validates J\+S\+O\+N-\/\+LD data.
 
 Parses the J\+S\+O\+N-\/\+LD fragment.
 
@@ -32,7 +30,7 @@ Requests a page by departure time.
 
 Requests a page by U\+RI.
 
-Gets a \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance.
+Gets a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -67,7 +65,9 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Url \&uri\\
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em Q\+Object} & $\ast$caller\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -78,7 +78,20 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Date\+Time \&departure\+Time\\
+{\em const} & Q\+Date\+Time \&departure\+Time \\
+\hline
+{\em Q\+Object} & $\ast$caller\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+09 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -93,23 +106,7 @@ Dylan Van Assche
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classFragments_1_1Fragment}{Fragments\+::\+Fragment}} $\ast$frag;
-\end{DoxyReturn}
-\begin{DoxyAuthor}{Author}
-Dylan Van Assche 
-\end{DoxyAuthor}
-\begin{DoxyDate}{Date}
-09 Aug 2018 
-\end{DoxyDate}
-
-\begin{DoxyParams}{Parameters}
-{\em const} & Q\+Json\+Object \&data \\
-\hline
-{\em const} & Q\+String\+List \&properties \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-bool \&valid
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$frag;
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -129,7 +126,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$manager
+const \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$manager
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -139,6 +136,6 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}}} & $\ast$http \\
+{\em \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}}} & $\ast$http \\
 \hline
 \end{DoxyParams}

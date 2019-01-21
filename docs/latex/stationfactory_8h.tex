@@ -1,13 +1,18 @@
 \hypertarget{stationfactory_8h}{}\section{src/include/engines/station/stationfactory.h File Reference}
-\label{stationfactory_8h}\index{src/include/engines/station/stationfactory.\+h@{src/include/engines/station/stationfactory.\+h}}
+\label{stationfactory_8h}\index{src/include/engines/station/stationfactory.h@{src/include/engines/station/stationfactory.h}}
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+String$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+List$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+String\+List$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Url$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Map$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+File$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Dir$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Standard\+Paths$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Future$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Pair$>$}\newline
 {\ttfamily \#include $<$Qt\+Sql/\+Q\+Sql\+Query$>$}\newline
+{\ttfamily \#include $<$Qt\+Concurrent/\+Qt\+Concurrent$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include \char`\"{}qrail.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}engines/station/stationstation.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}engines/station/stationnullstation.\+h\char`\"{}}\newline
@@ -18,24 +23,26 @@
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}}
+class \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Q\+Rail\+::\+Station\+Engine\+::\+Factory}}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceStationEngine}{Station\+Engine}}
+ \mbox{\hyperlink{namespaceQRail}{Q\+Rail}}
+\item 
+ \mbox{\hyperlink{namespaceQRail_1_1StationEngine}{Q\+Rail\+::\+Station\+Engine}}
 \end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{stationfactory_8h_a0670e0e3546fcd815d007fe1aeff321e}{D\+B\+\_\+\+P\+A\+TH}}~\char`\"{}/home/nemo/stations.\+db\char`\"{}
+\#define \mbox{\hyperlink{stationfactory_8h_a46f664ad6970d59f01a70170fc7c69b1}{S\+E\+A\+R\+C\+H\+\_\+\+R\+A\+D\+I\+U\+S\+\_\+\+N\+E\+A\+R\+E\+S\+T\+\_\+\+S\+T\+A\+T\+I\+ON}}~3.\+0
 \end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
-\mbox{\Hypertarget{stationfactory_8h_a0670e0e3546fcd815d007fe1aeff321e}\label{stationfactory_8h_a0670e0e3546fcd815d007fe1aeff321e}} 
-\index{stationfactory.\+h@{stationfactory.\+h}!D\+B\+\_\+\+P\+A\+TH@{D\+B\+\_\+\+P\+A\+TH}}
-\index{D\+B\+\_\+\+P\+A\+TH@{D\+B\+\_\+\+P\+A\+TH}!stationfactory.\+h@{stationfactory.\+h}}
-\subsubsection{\texorpdfstring{D\+B\+\_\+\+P\+A\+TH}{DB\_PATH}}
-{\footnotesize\ttfamily \#define D\+B\+\_\+\+P\+A\+TH~\char`\"{}/home/nemo/stations.\+db\char`\"{}}
+\mbox{\Hypertarget{stationfactory_8h_a46f664ad6970d59f01a70170fc7c69b1}\label{stationfactory_8h_a46f664ad6970d59f01a70170fc7c69b1}} 
+\index{stationfactory.h@{stationfactory.h}!SEARCH\_RADIUS\_NEAREST\_STATION@{SEARCH\_RADIUS\_NEAREST\_STATION}}
+\index{SEARCH\_RADIUS\_NEAREST\_STATION@{SEARCH\_RADIUS\_NEAREST\_STATION}!stationfactory.h@{stationfactory.h}}
+\subsubsection{\texorpdfstring{SEARCH\_RADIUS\_NEAREST\_STATION}{SEARCH\_RADIUS\_NEAREST\_STATION}}
+{\footnotesize\ttfamily \#define S\+E\+A\+R\+C\+H\+\_\+\+R\+A\+D\+I\+U\+S\+\_\+\+N\+E\+A\+R\+E\+S\+T\+\_\+\+S\+T\+A\+T\+I\+ON~3.\+0}
 

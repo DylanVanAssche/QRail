@@ -1,5 +1,5 @@
 \hypertarget{routerroute_8cpp}{}\section{src/engines/router/routerroute.cpp File Reference}
-\label{routerroute_8cpp}\index{src/engines/router/routerroute.\+cpp@{src/engines/router/routerroute.\+cpp}}
+\label{routerroute_8cpp}\index{src/engines/router/routerroute.cpp@{src/engines/router/routerroute.cpp}}
 
 
 Route constructor\+: full.  
@@ -10,7 +10,7 @@ Route constructor\+: full.
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceRouterEngine}{Router\+Engine}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a Router\+Engine\+::\+Null\+Journey according to the Null design pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -18,9 +18,9 @@ Route constructor\+: full.
 
 Gets the is\+Partially\+Canceled.
 
-Gets the \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} arrival\+Station.
+Gets the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} arrival\+Station.
 
-Gets the \mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} departure\+Station.
+Gets the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} departure\+Station.
 
 Gets the is\+Arrival\+Platform\+Normal.
 
@@ -72,15 +72,15 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs \\
 \hline
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers \\
 \hline
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&trip\+Alerts \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&trip\+Alerts \\
 \hline
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts \\
 \hline
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks \\
 \hline
 {\em Q\+Object} & $\ast$parent\\
 \hline
@@ -93,15 +93,15 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs \\
 \hline
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers \\
 \hline
 {\em const} & Q\+List$<$\+Message $\ast$$>$ \&trip\+Alerts \\
 \hline
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts \\
 \hline
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks \\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks \\
 \hline
 {\em Q\+Object} & $\ast$parent\\
 \hline
@@ -113,7 +113,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Q\+List$<$\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ legs
+const Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ legs
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -123,7 +123,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs\\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg $\ast$$>$ \&legs\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -133,7 +133,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Q\+List$<$\+Router\+Engine\+::\+Transfer $\ast$$>$ transfers
+const Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Transfer $\ast$$>$ transfers
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -143,7 +143,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers\\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+Transfer $\ast$$>$ \&transfers\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -153,7 +153,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ trip\+Alerts
+const Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ trip\+Alerts
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -163,7 +163,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&trip\+Alerts\\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&trip\+Alerts\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -173,7 +173,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ vehicle\+Alerts
+const Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ vehicle\+Alerts
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -183,7 +183,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts\\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&vehicle\+Alerts\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -193,7 +193,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-const Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ remarks
+const Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ remarks
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -203,7 +203,7 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+List$<$\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks\\
+{\em const} & Q\+List$<$\+Q\+Rail\+::\+Alerts\+Engine\+::\+Message $\ast$$>$ \&remarks\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -312,7 +312,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} $\ast$departure\+Station
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$departure\+Station
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -321,7 +321,7 @@ Dylan Van Assche
 09 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classRouterEngine_1_1Transfer}{Router\+Engine\+::\+Transfer}} $\ast$arrival\+Station
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$arrival\+Station
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 

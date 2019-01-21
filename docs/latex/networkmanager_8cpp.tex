@@ -1,8 +1,8 @@
 \hypertarget{networkmanager_8cpp}{}\section{src/network/networkmanager.cpp File Reference}
-\label{networkmanager_8cpp}\index{src/network/networkmanager.\+cpp@{src/network/networkmanager.\+cpp}}
+\label{networkmanager_8cpp}\index{src/network/networkmanager.cpp@{src/network/networkmanager.cpp}}
 
 
-\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade constructor.  
+\mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} facade constructor.  
 
 
 {\ttfamily \#include \char`\"{}network/networkmanager.\+h\char`\"{}}\newline
@@ -10,11 +10,15 @@
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceNetwork}{Network}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} facade to access the network using the H\+T\+TP protocol. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} facade constructor. 
+\mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} facade constructor. 
+
+Sets the \mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} instance.
+
+Gets the \mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} instance.
 
 Sets the Q\+N\+AM cache instance.
 
@@ -42,7 +46,7 @@ Post to a resource.
 
 Get a resource.
 
-Get a \mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} instance.
+Get a \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -62,7 +66,7 @@ Dylan Van Assche
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classNetwork_1_1Manager}{Network\+::\+Manager}} $\ast$manager
+\mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$manager
 \end{DoxyReturn}
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -72,7 +76,9 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Url \&url\\
+{\em const} & Q\+Url \&url \\
+\hline
+{\em Q\+Object} & $\ast$caller\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -83,7 +89,9 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Url \&url\\
+{\em const} & Q\+Url \&url \\
+\hline
+{\em Q\+Object} & $\ast$caller\\
 \hline
 \end{DoxyParams}
 \begin{DoxyAuthor}{Author}
@@ -177,6 +185,26 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
-{\em Q\+Abstract\+Network\+Cache} & $\ast$cache \\
+{\em Q\+Abstract\+Network\+Cache} & $\ast$cache\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+28 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} $\ast$
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+28 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}}} & $\ast$dispatcher \\
 \hline
 \end{DoxyParams}

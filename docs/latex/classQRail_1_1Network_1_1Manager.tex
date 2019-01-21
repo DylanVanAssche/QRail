@@ -1,0 +1,145 @@
+\hypertarget{classQRail_1_1Network_1_1Manager}{}\section{Q\+Rail\+::Network\+::Manager Class Reference}
+\label{classQRail_1_1Network_1_1Manager}\index{QRail::Network::Manager@{QRail::Network::Manager}}
+
+
+{\ttfamily \#include $<$networkmanager.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Network\+::Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1Network_1_1Manager}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}{get\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}{post\+Resource}} (const Q\+Url \&url, const Q\+Byte\+Array \&data, Q\+Object $\ast$caller)
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}{delete\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}{head\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+Q\+List$<$ Q\+Ssl\+Error $>$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a0404bf0008a42108b6e72ec5da12d02f}{ssl\+Errors\+Received}} (Q\+Network\+Reply $\ast$reply, Q\+List$<$ Q\+Ssl\+Error $>$ ssl\+Error)
+\item 
+Q\+Network\+Access\+Manager\+::\+Network\+Accessibility \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}{network\+Accessible\+Changed}} (Q\+Network\+Access\+Manager\+::\+Network\+Accessibility state)
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a7041109a640094b8aaeb430e6b09c9bc}{user\+Agent\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}{accept\+Header\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}{user\+Agent}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}{set\+User\+Agent}} (const Q\+String \&\mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}{user\+Agent}})
+\item 
+Q\+String \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}{accept\+Header}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}{set\+Accept\+Header}} (const Q\+String \&\mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}{accept\+Header}})
+\item 
+\mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} $\ast$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}{dispatcher}} () const
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a908536cf83d489afd0480a492f004def}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}\label{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!acceptHeader@{acceptHeader}}
+\index{acceptHeader@{acceptHeader}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{acceptHeader()}{acceptHeader()}}
+{\footnotesize\ttfamily Q\+String Q\+Rail\+::\+Network\+::\+Manager\+::accept\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}\label{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!acceptHeaderChanged@{acceptHeaderChanged}}
+\index{acceptHeaderChanged@{acceptHeaderChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{acceptHeaderChanged}{acceptHeaderChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::accept\+Header\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}\label{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!deleteResource@{deleteResource}}
+\index{deleteResource@{deleteResource}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{deleteResource}{deleteResource}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::delete\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}\label{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} $\ast$ Q\+Rail\+::\+Network\+::\+Manager\+::dispatcher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a908536cf83d489afd0480a492f004def}\label{classQRail_1_1Network_1_1Manager_a908536cf83d489afd0480a492f004def}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$ Q\+Rail\+::\+Network\+::\+Manager\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}\label{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!getResource@{getResource}}
+\index{getResource@{getResource}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{getResource}{getResource}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}\label{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!headResource@{headResource}}
+\index{headResource@{headResource}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{headResource}{headResource}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::head\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}\label{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!networkAccessibleChanged@{networkAccessibleChanged}}
+\index{networkAccessibleChanged@{networkAccessibleChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{networkAccessibleChanged}{networkAccessibleChanged}}
+{\footnotesize\ttfamily Q\+Network\+Access\+Manager\+::\+Network\+Accessibility Q\+Rail\+::\+Network\+::\+Manager\+::network\+Accessible\+Changed (\begin{DoxyParamCaption}\item[{Q\+Network\+Access\+Manager\+::\+Network\+Accessibility}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}\label{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!postResource@{postResource}}
+\index{postResource@{postResource}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{postResource}{postResource}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::post\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{const Q\+Byte\+Array \&}]{data,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}\label{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!setAcceptHeader@{setAcceptHeader}}
+\index{setAcceptHeader@{setAcceptHeader}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{setAcceptHeader()}{setAcceptHeader()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::set\+Accept\+Header (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{accept\+Header }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}\label{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!setUserAgent@{setUserAgent}}
+\index{setUserAgent@{setUserAgent}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{setUserAgent()}{setUserAgent()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::set\+User\+Agent (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{user\+Agent }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a0404bf0008a42108b6e72ec5da12d02f}\label{classQRail_1_1Network_1_1Manager_a0404bf0008a42108b6e72ec5da12d02f}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!sslErrorsReceived@{sslErrorsReceived}}
+\index{sslErrorsReceived@{sslErrorsReceived}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{sslErrorsReceived}{sslErrorsReceived}}
+{\footnotesize\ttfamily Q\+List$<$Q\+Ssl\+Error$>$ Q\+Rail\+::\+Network\+::\+Manager\+::ssl\+Errors\+Received (\begin{DoxyParamCaption}\item[{Q\+Network\+Reply $\ast$}]{reply,  }\item[{Q\+List$<$ Q\+Ssl\+Error $>$}]{ssl\+Error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}\label{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!userAgent@{userAgent}}
+\index{userAgent@{userAgent}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{userAgent()}{userAgent()}}
+{\footnotesize\ttfamily Q\+String Q\+Rail\+::\+Network\+::\+Manager\+::user\+Agent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a7041109a640094b8aaeb430e6b09c9bc}\label{classQRail_1_1Network_1_1Manager_a7041109a640094b8aaeb430e6b09c9bc}} 
+\index{QRail::Network::Manager@{QRail::Network::Manager}!userAgentChanged@{userAgentChanged}}
+\index{userAgentChanged@{userAgentChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
+\subsubsection{\texorpdfstring{userAgentChanged}{userAgentChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::user\+Agent\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/network/\mbox{\hyperlink{networkmanager_8h}{networkmanager.\+h}}\item 
+src/network/\mbox{\hyperlink{networkmanager_8cpp}{networkmanager.\+cpp}}\end{DoxyCompactItemize}

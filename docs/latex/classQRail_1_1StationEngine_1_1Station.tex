@@ -1,0 +1,739 @@
+\hypertarget{classQRail_1_1StationEngine_1_1Station}{}\section{Q\+Rail\+::Station\+Engine\+::Station Class Reference}
+\label{classQRail_1_1StationEngine_1_1Station}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+
+
+{\ttfamily \#include $<$stationstation.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Station\+Engine\+::Station\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classQRail_1_1StationEngine_1_1Station}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Day}} \{ \newline
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a98617021b249af0ace0f84ee92ccc7cd}{Day\+::\+M\+O\+N\+D\+AY}}, 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a5f5140afce13197a89e848004f292f14}{Day\+::\+T\+U\+E\+S\+D\+AY}}, 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631aaaebdc947e9f7d4ea362e5dc4fe7f825}{Day\+::\+W\+E\+D\+N\+E\+S\+D\+AY}}, 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a7a61b324afb4dd8b2fb4a38afc34f755}{Day\+::\+T\+H\+U\+R\+S\+D\+AY}}, 
+\newline
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a86fb6d343289267f3e9edb9b7403d936}{Day\+::\+F\+R\+I\+D\+AY}}, 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631afd5ae113ac00b67f69541bc8c7f21ef7}{Day\+::\+S\+A\+T\+U\+R\+D\+AY}}, 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a95fa12cb2100ce7081b71f7c44bc12a5}{Day\+::\+S\+U\+N\+D\+AY}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a25743385c35feaac93b667a9a828bde8}{uri\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae25f24fcd0b5dd0e531b6f706ecddbb0}{name\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_af78e11d187083959e6868d4590a2587b}{country\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a2cf29fceb09c32f8463c241c89bc4740}{position\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a2b3b24ebf7459ae4d7857b89dc8c6e7c}{address\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad258fe381fab9d10634c79ef0c436f2e}{has\+Ticket\+Vending\+Machine\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a707ec4770588c1bb293675b2766acf19}{has\+Luggage\+Lockers\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a503389bd75e4c98bc66e1c2e803c57c9}{has\+Free\+Parking\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_afb126c23f98971633f13fcf45ed400fe}{has\+Taxi\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_af8ad525183b3f1becbbd4856ca3fd5a2}{has\+Bicylce\+Spots\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a29b9d2793153da2639a8b50ea0860636}{has\+Blue\+Bike\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a36cd28ed4095e97704882db3000d7dbb}{has\+Bus\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a1e0a91d242d837ac6b87460147cc420f}{has\+Tram\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_acc096fcb18ab5c6863c223b41d009411}{has\+Metro\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab9dbccc3c22e2f85f02598e188b30e1f}{has\+Wheelchair\+Available\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab062941ecd9106dacafa586ab6902bfb}{has\+Ramp\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a10925196dc9a1414b0e1777e080cfd24}{disabled\+Parking\+Spots\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_aef8be214289efd0d14dd303018ad4fbb}{has\+Elevated\+Platform\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a1f352fe7283ca3d3d0c37bfc8f614638}{has\+Escalator\+Up\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a905a7e763de04a36cd12ea8b8b8ad47d}{has\+Escalator\+Down\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_aa4438de170a13eaeca8768b7cd7e9de0}{has\+Audio\+Induction\+Loop\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a6dda0c58b3e6e9cbb4d4868ab785b088}{opening\+Hours\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a090521d89bd6795fbf096607e8c7ad1f}{average\+Stop\+Times\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adae404be1a36e3ef4298afb7bf062f2f}{official\+Transfer\+Times\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a2e20934310ee8ab026ef4334fd99cdbd}{platforms\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_afbe822d31945d09250bcc8c7a1fcc4e7}{Station}} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a195e36d67dbdb5695ef86e02c91b47b0}{Station}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}}, const qreal \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}}, const quint32 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_af2600da9e72d362f459b71d00e6b144c}{Station}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}}, const Q\+Geo\+Address \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}{address}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}{has\+Ticket\+Vending\+Machine}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}{has\+Luggage\+Lockers}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}{has\+Free\+Parking}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}{has\+Taxi}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}{has\+Bicycle\+Spots}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}{has\+Blue\+Bike}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}{has\+Bus}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}{has\+Tram}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}{has\+Metro}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}{has\+Wheelchair\+Available}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}{has\+Ramp}}, const qint16 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}{disabled\+Parking\+Spots}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}{has\+Elevated\+Platform}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}{has\+Escalator\+Up}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}{has\+Escalator\+Down}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}{has\+Elevator\+Platform}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}{has\+Audio\+Induction\+Loop}}, const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}{opening\+Hours}}, const qreal \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}}, const quint32 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a14101dfd927e5bfd379a4121abaef363}{Station}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}}, const qreal \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}}, const quint32 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}}, const Q\+Map$<$ Q\+Url, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}{platforms}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a023b5e1eb99a74a1ec1383c7f724e200}{Station}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}}, const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}}, const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}}, const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}}, const Q\+Geo\+Address \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}{address}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}{has\+Ticket\+Vending\+Machine}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}{has\+Luggage\+Lockers}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}{has\+Free\+Parking}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}{has\+Taxi}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}{has\+Bicycle\+Spots}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}{has\+Blue\+Bike}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}{has\+Bus}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}{has\+Tram}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}{has\+Metro}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}{has\+Wheelchair\+Available}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}{has\+Ramp}}, const qint16 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}{disabled\+Parking\+Spots}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}{has\+Elevated\+Platform}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}{has\+Escalator\+Up}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}{has\+Escalator\+Down}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}{has\+Elevator\+Platform}}, const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}{has\+Audio\+Induction\+Loop}}, const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}{opening\+Hours}}, const qreal \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}}, const quint32 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}}, const Q\+Map$<$ Q\+Url, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}{platforms}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab9ae86000a0b84a224dd0ea32256bd27}{set\+Uri}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}{uri}})
+\item 
+Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_aaa0f5a430b2d1ffd520285c2f00cea53}{set\+Name}} (const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}{name}})
+\item 
+Q\+Locale\+::\+Country \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ac3c107913f4b23d9c0f2a63c20e2a3e9}{set\+Country}} (const Q\+Locale\+::\+Country \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}{country}})
+\item 
+Q\+Geo\+Coordinate \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae336cacb81a3a6832e74a6a6c7c81242}{set\+Position}} (const Q\+Geo\+Coordinate \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}{position}})
+\item 
+Q\+Geo\+Address \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}{address}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a186b3fb78bdd5dfbd169ff6d09b55d9a}{set\+Address}} (const Q\+Geo\+Address \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}{address}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}{has\+Ticket\+Vending\+Machine}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9791d7b50eed4fad65f2fe5a2ca87876}{set\+Has\+Ticket\+Vending\+Machine}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}{has\+Ticket\+Vending\+Machine}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}{has\+Luggage\+Lockers}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a55fe035b25a59286aa257113c70b6d01}{set\+Has\+Luggage\+Lockers}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}{has\+Luggage\+Lockers}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}{has\+Free\+Parking}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a19b10db4449466770ca0a210ef0b400a}{set\+Has\+Free\+Parking}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}{has\+Free\+Parking}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}{has\+Taxi}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a50c9fcc45a2f96e58e1058ab6b723dc0}{set\+Has\+Taxi}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}{has\+Taxi}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}{has\+Bicycle\+Spots}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ac6859b73232d1d6d185fdfe5a6426da7}{set\+Has\+Bicycle\+Spots}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}{has\+Bicycle\+Spots}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}{has\+Blue\+Bike}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9a0738e9df95033eef7b88a1abb1e1cb}{set\+Has\+Blue\+Bike}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}{has\+Blue\+Bike}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}{has\+Bus}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a21d3d32a85308ceecfa4588fab2d50d0}{set\+Has\+Bus}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}{has\+Bus}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}{has\+Tram}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ac60188d8fd67689dbda07bd24391ea65}{set\+Has\+Tram}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}{has\+Tram}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}{has\+Metro}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a108681c01bd97529f10fc19c40122910}{set\+Has\+Metro}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}{has\+Metro}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}{has\+Wheelchair\+Available}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a6cd5dbb113aedfd7fe6e46fdedb26e9b}{set\+Has\+Wheelchair\+Available}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}{has\+Wheelchair\+Available}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}{has\+Ramp}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4a5bd6731d4f53284f92f4eb0487944f}{set\+Has\+Ramp}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}{has\+Ramp}})
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}{disabled\+Parking\+Spots}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a2b3e193aee01e6379e8f91b27172f391}{set\+Disabled\+Parking\+Spots}} (const qint16 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}{disabled\+Parking\+Spots}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}{has\+Elevated\+Platform}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a3c7125cae3e2524e3ebab483d607c952}{set\+Has\+Elevated\+Platform}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}{has\+Elevated\+Platform}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}{has\+Escalator\+Up}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abcd22776685752bf1f2a3cfa0f84bcc0}{set\+Has\+Escalator\+Up}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}{has\+Escalator\+Up}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}{has\+Escalator\+Down}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a13d18cc2d7b1ceb4e855c686780f5fe4}{set\+Has\+Escalator\+Down}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}{has\+Escalator\+Down}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}{has\+Elevator\+Platform}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a0b35cc4aa9f9ae7dc9503c7ea0919cb1}{set\+Has\+Elevator\+Platform}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}{has\+Elevator\+Platform}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}{has\+Audio\+Induction\+Loop}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a2b37f24a1d97fbb77c0b41c44662e392}{set\+Has\+Audio\+Induction\+Loop}} (const bool \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}{has\+Audio\+Induction\+Loop}})
+\item 
+Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}{opening\+Hours}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a77c5ed806a41ad53afa4c03f96525bad}{set\+Opening\+Hours}} (const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}{opening\+Hours}})
+\item 
+qreal \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a18cdb01a71d2b17cbfdcc2a67a028a8a}{set\+Average\+Stop\+Times}} (const qreal \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}{average\+Stop\+Times}})
+\item 
+quint32 \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_a1182f0a0ab0c0d3a168bb72389d108cb}{set\+Official\+Transfer\+Times}} (const quint32 \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}{official\+Transfer\+Times}})
+\item 
+Q\+Map$<$ Q\+Url, Q\+String $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}{platforms}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ab275347465eb810b7c8f2a6e1802feb4}{set\+Platforms}} (const Q\+Map$<$ Q\+Url, Q\+String $>$ \&\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}{platforms}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Day@{Day}}
+\index{Day@{Day}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Day}{Day}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Day}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MONDAY@{MONDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!MONDAY@{MONDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a98617021b249af0ace0f84ee92ccc7cd}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a98617021b249af0ace0f84ee92ccc7cd}} 
+M\+O\+N\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TUESDAY@{TUESDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!TUESDAY@{TUESDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a5f5140afce13197a89e848004f292f14}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a5f5140afce13197a89e848004f292f14}} 
+T\+U\+E\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WEDNESDAY@{WEDNESDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!WEDNESDAY@{WEDNESDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631aaaebdc947e9f7d4ea362e5dc4fe7f825}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631aaaebdc947e9f7d4ea362e5dc4fe7f825}} 
+W\+E\+D\+N\+E\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{THURSDAY@{THURSDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!THURSDAY@{THURSDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a7a61b324afb4dd8b2fb4a38afc34f755}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a7a61b324afb4dd8b2fb4a38afc34f755}} 
+T\+H\+U\+R\+S\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FRIDAY@{FRIDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!FRIDAY@{FRIDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a86fb6d343289267f3e9edb9b7403d936}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a86fb6d343289267f3e9edb9b7403d936}} 
+F\+R\+I\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SATURDAY@{SATURDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!SATURDAY@{SATURDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631afd5ae113ac00b67f69541bc8c7f21ef7}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631afd5ae113ac00b67f69541bc8c7f21ef7}} 
+S\+A\+T\+U\+R\+D\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUNDAY@{SUNDAY}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!SUNDAY@{SUNDAY}}}\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a95fa12cb2100ce7081b71f7c44bc12a5}\label{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631a95fa12cb2100ce7081b71f7c44bc12a5}} 
+S\+U\+N\+D\+AY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_afbe822d31945d09250bcc8c7a1fcc4e7}\label{classQRail_1_1StationEngine_1_1Station_afbe822d31945d09250bcc8c7a1fcc4e7}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Station@{Station}}
+\index{Station@{Station}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a195e36d67dbdb5695ef86e02c91b47b0}\label{classQRail_1_1StationEngine_1_1Station_a195e36d67dbdb5695ef86e02c91b47b0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Station@{Station}}
+\index{Station@{Station}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{const quint32 \&}]{official\+Transfer\+Times,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_af2600da9e72d362f459b71d00e6b144c}\label{classQRail_1_1StationEngine_1_1Station_af2600da9e72d362f459b71d00e6b144c}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Station@{Station}}
+\index{Station@{Station}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const Q\+Geo\+Address \&}]{address,  }\item[{const bool \&}]{has\+Ticket\+Vending\+Machine,  }\item[{const bool \&}]{has\+Luggage\+Lockers,  }\item[{const bool \&}]{has\+Free\+Parking,  }\item[{const bool \&}]{has\+Taxi,  }\item[{const bool \&}]{has\+Bicycle\+Spots,  }\item[{const bool \&}]{has\+Blue\+Bike,  }\item[{const bool \&}]{has\+Bus,  }\item[{const bool \&}]{has\+Tram,  }\item[{const bool \&}]{has\+Metro,  }\item[{const bool \&}]{has\+Wheelchair\+Available,  }\item[{const bool \&}]{has\+Ramp,  }\item[{const qint16 \&}]{disabled\+Parking\+Spots,  }\item[{const bool \&}]{has\+Elevated\+Platform,  }\item[{const bool \&}]{has\+Escalator\+Up,  }\item[{const bool \&}]{has\+Escalator\+Down,  }\item[{const bool \&}]{has\+Elevator\+Platform,  }\item[{const bool \&}]{has\+Audio\+Induction\+Loop,  }\item[{const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&}]{opening\+Hours,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{const quint32 \&}]{official\+Transfer\+Times,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a14101dfd927e5bfd379a4121abaef363}\label{classQRail_1_1StationEngine_1_1Station_a14101dfd927e5bfd379a4121abaef363}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Station@{Station}}
+\index{Station@{Station}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{const quint32 \&}]{official\+Transfer\+Times,  }\item[{const Q\+Map$<$ Q\+Url, Q\+String $>$ \&}]{platforms,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a023b5e1eb99a74a1ec1383c7f724e200}\label{classQRail_1_1StationEngine_1_1Station_a023b5e1eb99a74a1ec1383c7f724e200}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!Station@{Station}}
+\index{Station@{Station}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{Station()}{Station()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Station\+Engine\+::\+Station\+::\+Station (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name,  }\item[{const Q\+Locale\+::\+Country \&}]{country,  }\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const Q\+Geo\+Address \&}]{address,  }\item[{const bool \&}]{has\+Ticket\+Vending\+Machine,  }\item[{const bool \&}]{has\+Luggage\+Lockers,  }\item[{const bool \&}]{has\+Free\+Parking,  }\item[{const bool \&}]{has\+Taxi,  }\item[{const bool \&}]{has\+Bicycle\+Spots,  }\item[{const bool \&}]{has\+Blue\+Bike,  }\item[{const bool \&}]{has\+Bus,  }\item[{const bool \&}]{has\+Tram,  }\item[{const bool \&}]{has\+Metro,  }\item[{const bool \&}]{has\+Wheelchair\+Available,  }\item[{const bool \&}]{has\+Ramp,  }\item[{const qint16 \&}]{disabled\+Parking\+Spots,  }\item[{const bool \&}]{has\+Elevated\+Platform,  }\item[{const bool \&}]{has\+Escalator\+Up,  }\item[{const bool \&}]{has\+Escalator\+Down,  }\item[{const bool \&}]{has\+Elevator\+Platform,  }\item[{const bool \&}]{has\+Audio\+Induction\+Loop,  }\item[{const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$$>$ \&}]{opening\+Hours,  }\item[{const qreal \&}]{average\+Stop\+Times,  }\item[{const quint32 \&}]{official\+Transfer\+Times,  }\item[{const Q\+Map$<$ Q\+Url, Q\+String $>$ \&}]{platforms,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}\label{classQRail_1_1StationEngine_1_1Station_ad0ca1a356a5b3b97a7f3506a21963a17}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!address@{address}}
+\index{address@{address}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{address()}{address()}}
+{\footnotesize\ttfamily Q\+Geo\+Address Station\+Engine\+::\+Station\+::address (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a2b3b24ebf7459ae4d7857b89dc8c6e7c}\label{classQRail_1_1StationEngine_1_1Station_a2b3b24ebf7459ae4d7857b89dc8c6e7c}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!addressChanged@{addressChanged}}
+\index{addressChanged@{addressChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{addressChanged}{addressChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::address\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}\label{classQRail_1_1StationEngine_1_1Station_a4747748868a77baad4dd01daac657fcf}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!averageStopTimes@{averageStopTimes}}
+\index{averageStopTimes@{averageStopTimes}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{averageStopTimes()}{averageStopTimes()}}
+{\footnotesize\ttfamily qreal Station\+Engine\+::\+Station\+::average\+Stop\+Times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a090521d89bd6795fbf096607e8c7ad1f}\label{classQRail_1_1StationEngine_1_1Station_a090521d89bd6795fbf096607e8c7ad1f}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!averageStopTimesChanged@{averageStopTimesChanged}}
+\index{averageStopTimesChanged@{averageStopTimesChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{averageStopTimesChanged}{averageStopTimesChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::average\+Stop\+Times\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}\label{classQRail_1_1StationEngine_1_1Station_a07e74b4f39a2fc67d20243a39226f0db}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!country@{country}}
+\index{country@{country}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{country()}{country()}}
+{\footnotesize\ttfamily Q\+Locale\+::\+Country Station\+Engine\+::\+Station\+::country (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_af78e11d187083959e6868d4590a2587b}\label{classQRail_1_1StationEngine_1_1Station_af78e11d187083959e6868d4590a2587b}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!countryChanged@{countryChanged}}
+\index{countryChanged@{countryChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{countryChanged}{countryChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::country\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}\label{classQRail_1_1StationEngine_1_1Station_a462fa31e61a725a498055b3fcba8cce5}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!disabledParkingSpots@{disabledParkingSpots}}
+\index{disabledParkingSpots@{disabledParkingSpots}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{disabledParkingSpots()}{disabledParkingSpots()}}
+{\footnotesize\ttfamily qint16 Station\+Engine\+::\+Station\+::disabled\+Parking\+Spots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a10925196dc9a1414b0e1777e080cfd24}\label{classQRail_1_1StationEngine_1_1Station_a10925196dc9a1414b0e1777e080cfd24}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!disabledParkingSpotsChanged@{disabledParkingSpotsChanged}}
+\index{disabledParkingSpotsChanged@{disabledParkingSpotsChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{disabledParkingSpotsChanged}{disabledParkingSpotsChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::disabled\+Parking\+Spots\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}\label{classQRail_1_1StationEngine_1_1Station_a4f0fe605690b460d88064bd4d36fe1ea}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasAudioInductionLoop@{hasAudioInductionLoop}}
+\index{hasAudioInductionLoop@{hasAudioInductionLoop}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasAudioInductionLoop()}{hasAudioInductionLoop()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Audio\+Induction\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_aa4438de170a13eaeca8768b7cd7e9de0}\label{classQRail_1_1StationEngine_1_1Station_aa4438de170a13eaeca8768b7cd7e9de0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasAudioInductionLoopChanged@{hasAudioInductionLoopChanged}}
+\index{hasAudioInductionLoopChanged@{hasAudioInductionLoopChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasAudioInductionLoopChanged}{hasAudioInductionLoopChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Audio\+Induction\+Loop\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}\label{classQRail_1_1StationEngine_1_1Station_adce0ee13730ec3e93866854af6e9048a}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBicycleSpots@{hasBicycleSpots}}
+\index{hasBicycleSpots@{hasBicycleSpots}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBicycleSpots()}{hasBicycleSpots()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Bicycle\+Spots (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_af8ad525183b3f1becbbd4856ca3fd5a2}\label{classQRail_1_1StationEngine_1_1Station_af8ad525183b3f1becbbd4856ca3fd5a2}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBicylceSpotsChanged@{hasBicylceSpotsChanged}}
+\index{hasBicylceSpotsChanged@{hasBicylceSpotsChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBicylceSpotsChanged}{hasBicylceSpotsChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Bicylce\+Spots\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}\label{classQRail_1_1StationEngine_1_1Station_a9c710a576b7834006ab714a3f298c6e6}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBlueBike@{hasBlueBike}}
+\index{hasBlueBike@{hasBlueBike}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBlueBike()}{hasBlueBike()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Blue\+Bike (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a29b9d2793153da2639a8b50ea0860636}\label{classQRail_1_1StationEngine_1_1Station_a29b9d2793153da2639a8b50ea0860636}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBlueBikeChanged@{hasBlueBikeChanged}}
+\index{hasBlueBikeChanged@{hasBlueBikeChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBlueBikeChanged}{hasBlueBikeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Blue\+Bike\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}\label{classQRail_1_1StationEngine_1_1Station_ab373623fb7c16bd0e4de09a2c8ab3fed}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBus@{hasBus}}
+\index{hasBus@{hasBus}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBus()}{hasBus()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Bus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a36cd28ed4095e97704882db3000d7dbb}\label{classQRail_1_1StationEngine_1_1Station_a36cd28ed4095e97704882db3000d7dbb}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasBusChanged@{hasBusChanged}}
+\index{hasBusChanged@{hasBusChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasBusChanged}{hasBusChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Bus\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}\label{classQRail_1_1StationEngine_1_1Station_a406d35e41d5d6aa21d1d6270315b0020}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasElevatedPlatform@{hasElevatedPlatform}}
+\index{hasElevatedPlatform@{hasElevatedPlatform}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasElevatedPlatform()}{hasElevatedPlatform()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Elevated\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_aef8be214289efd0d14dd303018ad4fbb}\label{classQRail_1_1StationEngine_1_1Station_aef8be214289efd0d14dd303018ad4fbb}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasElevatedPlatformChanged@{hasElevatedPlatformChanged}}
+\index{hasElevatedPlatformChanged@{hasElevatedPlatformChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasElevatedPlatformChanged}{hasElevatedPlatformChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Elevated\+Platform\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}\label{classQRail_1_1StationEngine_1_1Station_ad942fab0cd4c1bd8bac2858b767cbd8d}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasElevatorPlatform@{hasElevatorPlatform}}
+\index{hasElevatorPlatform@{hasElevatorPlatform}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasElevatorPlatform()}{hasElevatorPlatform()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Elevator\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}\label{classQRail_1_1StationEngine_1_1Station_abc49d1258d3dd4b7b3915c37eec8ce8b}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasEscalatorDown@{hasEscalatorDown}}
+\index{hasEscalatorDown@{hasEscalatorDown}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasEscalatorDown()}{hasEscalatorDown()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Escalator\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a905a7e763de04a36cd12ea8b8b8ad47d}\label{classQRail_1_1StationEngine_1_1Station_a905a7e763de04a36cd12ea8b8b8ad47d}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasEscalatorDownChanged@{hasEscalatorDownChanged}}
+\index{hasEscalatorDownChanged@{hasEscalatorDownChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasEscalatorDownChanged}{hasEscalatorDownChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Escalator\+Down\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}\label{classQRail_1_1StationEngine_1_1Station_ab89210b5f7e821c7b426022328d33871}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasEscalatorUp@{hasEscalatorUp}}
+\index{hasEscalatorUp@{hasEscalatorUp}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasEscalatorUp()}{hasEscalatorUp()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Escalator\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a1f352fe7283ca3d3d0c37bfc8f614638}\label{classQRail_1_1StationEngine_1_1Station_a1f352fe7283ca3d3d0c37bfc8f614638}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasEscalatorUpChanged@{hasEscalatorUpChanged}}
+\index{hasEscalatorUpChanged@{hasEscalatorUpChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasEscalatorUpChanged}{hasEscalatorUpChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Escalator\+Up\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}\label{classQRail_1_1StationEngine_1_1Station_adacc2051c657557f3494168e12cd9809}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasFreeParking@{hasFreeParking}}
+\index{hasFreeParking@{hasFreeParking}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasFreeParking()}{hasFreeParking()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Free\+Parking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a503389bd75e4c98bc66e1c2e803c57c9}\label{classQRail_1_1StationEngine_1_1Station_a503389bd75e4c98bc66e1c2e803c57c9}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasFreeParkingChanged@{hasFreeParkingChanged}}
+\index{hasFreeParkingChanged@{hasFreeParkingChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasFreeParkingChanged}{hasFreeParkingChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Free\+Parking\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}\label{classQRail_1_1StationEngine_1_1Station_a09182a137537232a38bc44f00e274355}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasLuggageLockers@{hasLuggageLockers}}
+\index{hasLuggageLockers@{hasLuggageLockers}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasLuggageLockers()}{hasLuggageLockers()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Luggage\+Lockers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a707ec4770588c1bb293675b2766acf19}\label{classQRail_1_1StationEngine_1_1Station_a707ec4770588c1bb293675b2766acf19}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasLuggageLockersChanged@{hasLuggageLockersChanged}}
+\index{hasLuggageLockersChanged@{hasLuggageLockersChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasLuggageLockersChanged}{hasLuggageLockersChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Luggage\+Lockers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}\label{classQRail_1_1StationEngine_1_1Station_ae3bfe0ae7f6c042e199c0d5a6e2dd669}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasMetro@{hasMetro}}
+\index{hasMetro@{hasMetro}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasMetro()}{hasMetro()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Metro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_acc096fcb18ab5c6863c223b41d009411}\label{classQRail_1_1StationEngine_1_1Station_acc096fcb18ab5c6863c223b41d009411}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasMetroChanged@{hasMetroChanged}}
+\index{hasMetroChanged@{hasMetroChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasMetroChanged}{hasMetroChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Metro\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}\label{classQRail_1_1StationEngine_1_1Station_a477fb013f192d1f7c0e6858008e42c0a}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasRamp@{hasRamp}}
+\index{hasRamp@{hasRamp}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasRamp()}{hasRamp()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Ramp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab062941ecd9106dacafa586ab6902bfb}\label{classQRail_1_1StationEngine_1_1Station_ab062941ecd9106dacafa586ab6902bfb}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasRampChanged@{hasRampChanged}}
+\index{hasRampChanged@{hasRampChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasRampChanged}{hasRampChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Ramp\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}\label{classQRail_1_1StationEngine_1_1Station_a898d71b83cb5deca0f024cbef343c373}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTaxi@{hasTaxi}}
+\index{hasTaxi@{hasTaxi}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTaxi()}{hasTaxi()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Taxi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_afb126c23f98971633f13fcf45ed400fe}\label{classQRail_1_1StationEngine_1_1Station_afb126c23f98971633f13fcf45ed400fe}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTaxiChanged@{hasTaxiChanged}}
+\index{hasTaxiChanged@{hasTaxiChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTaxiChanged}{hasTaxiChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Taxi\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}\label{classQRail_1_1StationEngine_1_1Station_a686c92468373024b437f0589192668aa}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTicketVendingMachine@{hasTicketVendingMachine}}
+\index{hasTicketVendingMachine@{hasTicketVendingMachine}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTicketVendingMachine()}{hasTicketVendingMachine()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Ticket\+Vending\+Machine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ad258fe381fab9d10634c79ef0c436f2e}\label{classQRail_1_1StationEngine_1_1Station_ad258fe381fab9d10634c79ef0c436f2e}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTicketVendingMachineChanged@{hasTicketVendingMachineChanged}}
+\index{hasTicketVendingMachineChanged@{hasTicketVendingMachineChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTicketVendingMachineChanged}{hasTicketVendingMachineChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Ticket\+Vending\+Machine\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}\label{classQRail_1_1StationEngine_1_1Station_a18cc82bbb307cdc0f1ef6db28a664fe5}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTram@{hasTram}}
+\index{hasTram@{hasTram}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTram()}{hasTram()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Tram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a1e0a91d242d837ac6b87460147cc420f}\label{classQRail_1_1StationEngine_1_1Station_a1e0a91d242d837ac6b87460147cc420f}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasTramChanged@{hasTramChanged}}
+\index{hasTramChanged@{hasTramChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasTramChanged}{hasTramChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Tram\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}\label{classQRail_1_1StationEngine_1_1Station_a5f199ba2479501715c96d41ce27bc4c8}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasWheelchairAvailable@{hasWheelchairAvailable}}
+\index{hasWheelchairAvailable@{hasWheelchairAvailable}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasWheelchairAvailable()}{hasWheelchairAvailable()}}
+{\footnotesize\ttfamily bool Station\+Engine\+::\+Station\+::has\+Wheelchair\+Available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab9dbccc3c22e2f85f02598e188b30e1f}\label{classQRail_1_1StationEngine_1_1Station_ab9dbccc3c22e2f85f02598e188b30e1f}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!hasWheelchairAvailableChanged@{hasWheelchairAvailableChanged}}
+\index{hasWheelchairAvailableChanged@{hasWheelchairAvailableChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{hasWheelchairAvailableChanged}{hasWheelchairAvailableChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::has\+Wheelchair\+Available\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}\label{classQRail_1_1StationEngine_1_1Station_a8c1f3e4a33f26db9f6ca31798b115338}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!name@{name}}
+\index{name@{name}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ Station\+Engine\+::\+Station\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae25f24fcd0b5dd0e531b6f706ecddbb0}\label{classQRail_1_1StationEngine_1_1Station_ae25f24fcd0b5dd0e531b6f706ecddbb0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!nameChanged@{nameChanged}}
+\index{nameChanged@{nameChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{nameChanged}{nameChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::name\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}\label{classQRail_1_1StationEngine_1_1Station_ad58620e2c5bf189e819165464d456d61}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!officialTransferTimes@{officialTransferTimes}}
+\index{officialTransferTimes@{officialTransferTimes}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{officialTransferTimes()}{officialTransferTimes()}}
+{\footnotesize\ttfamily quint32 Q\+Rail\+::\+Station\+Engine\+::\+Station\+::official\+Transfer\+Times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_adae404be1a36e3ef4298afb7bf062f2f}\label{classQRail_1_1StationEngine_1_1Station_adae404be1a36e3ef4298afb7bf062f2f}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!officialTransferTimesChanged@{officialTransferTimesChanged}}
+\index{officialTransferTimesChanged@{officialTransferTimesChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{officialTransferTimesChanged}{officialTransferTimesChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::official\+Transfer\+Times\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}\label{classQRail_1_1StationEngine_1_1Station_a952190a3454e31982d35cc3afd7d7d34}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!openingHours@{openingHours}}
+\index{openingHours@{openingHours}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{openingHours()}{openingHours()}}
+{\footnotesize\ttfamily Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ Station\+Engine\+::\+Station\+::opening\+Hours (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a6dda0c58b3e6e9cbb4d4868ab785b088}\label{classQRail_1_1StationEngine_1_1Station_a6dda0c58b3e6e9cbb4d4868ab785b088}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!openingHoursChanged@{openingHoursChanged}}
+\index{openingHoursChanged@{openingHoursChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{openingHoursChanged}{openingHoursChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::opening\+Hours\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}\label{classQRail_1_1StationEngine_1_1Station_abc2d6647137da855d877a7061a261bc8}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!platforms@{platforms}}
+\index{platforms@{platforms}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{platforms()}{platforms()}}
+{\footnotesize\ttfamily Q\+Map$<$ Q\+Url, Q\+String $>$ Station\+Engine\+::\+Station\+::platforms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a2e20934310ee8ab026ef4334fd99cdbd}\label{classQRail_1_1StationEngine_1_1Station_a2e20934310ee8ab026ef4334fd99cdbd}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!platformsChanged@{platformsChanged}}
+\index{platformsChanged@{platformsChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{platformsChanged}{platformsChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::platforms\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}\label{classQRail_1_1StationEngine_1_1Station_a139e180c6a82519db7b4b6249aa4b353}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!position@{position}}
+\index{position@{position}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{position()}{position()}}
+{\footnotesize\ttfamily Q\+Geo\+Coordinate Station\+Engine\+::\+Station\+::position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a2cf29fceb09c32f8463c241c89bc4740}\label{classQRail_1_1StationEngine_1_1Station_a2cf29fceb09c32f8463c241c89bc4740}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!positionChanged@{positionChanged}}
+\index{positionChanged@{positionChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{positionChanged}{positionChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::position\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a186b3fb78bdd5dfbd169ff6d09b55d9a}\label{classQRail_1_1StationEngine_1_1Station_a186b3fb78bdd5dfbd169ff6d09b55d9a}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setAddress@{setAddress}}
+\index{setAddress@{setAddress}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setAddress()}{setAddress()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Address (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Address \&}]{address }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a18cdb01a71d2b17cbfdcc2a67a028a8a}\label{classQRail_1_1StationEngine_1_1Station_a18cdb01a71d2b17cbfdcc2a67a028a8a}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setAverageStopTimes@{setAverageStopTimes}}
+\index{setAverageStopTimes@{setAverageStopTimes}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setAverageStopTimes()}{setAverageStopTimes()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Average\+Stop\+Times (\begin{DoxyParamCaption}\item[{const qreal \&}]{average\+Stop\+Times }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ac3c107913f4b23d9c0f2a63c20e2a3e9}\label{classQRail_1_1StationEngine_1_1Station_ac3c107913f4b23d9c0f2a63c20e2a3e9}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setCountry@{setCountry}}
+\index{setCountry@{setCountry}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setCountry()}{setCountry()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Country (\begin{DoxyParamCaption}\item[{const Q\+Locale\+::\+Country \&}]{country }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a2b3e193aee01e6379e8f91b27172f391}\label{classQRail_1_1StationEngine_1_1Station_a2b3e193aee01e6379e8f91b27172f391}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setDisabledParkingSpots@{setDisabledParkingSpots}}
+\index{setDisabledParkingSpots@{setDisabledParkingSpots}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setDisabledParkingSpots()}{setDisabledParkingSpots()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Disabled\+Parking\+Spots (\begin{DoxyParamCaption}\item[{const qint16 \&}]{disabled\+Parking\+Spots }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a2b37f24a1d97fbb77c0b41c44662e392}\label{classQRail_1_1StationEngine_1_1Station_a2b37f24a1d97fbb77c0b41c44662e392}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasAudioInductionLoop@{setHasAudioInductionLoop}}
+\index{setHasAudioInductionLoop@{setHasAudioInductionLoop}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasAudioInductionLoop()}{setHasAudioInductionLoop()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Audio\+Induction\+Loop (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Audio\+Induction\+Loop }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ac6859b73232d1d6d185fdfe5a6426da7}\label{classQRail_1_1StationEngine_1_1Station_ac6859b73232d1d6d185fdfe5a6426da7}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasBicycleSpots@{setHasBicycleSpots}}
+\index{setHasBicycleSpots@{setHasBicycleSpots}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasBicycleSpots()}{setHasBicycleSpots()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Bicycle\+Spots (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Bicycle\+Spots }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a9a0738e9df95033eef7b88a1abb1e1cb}\label{classQRail_1_1StationEngine_1_1Station_a9a0738e9df95033eef7b88a1abb1e1cb}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasBlueBike@{setHasBlueBike}}
+\index{setHasBlueBike@{setHasBlueBike}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasBlueBike()}{setHasBlueBike()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Blue\+Bike (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Blue\+Bike }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a21d3d32a85308ceecfa4588fab2d50d0}\label{classQRail_1_1StationEngine_1_1Station_a21d3d32a85308ceecfa4588fab2d50d0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasBus@{setHasBus}}
+\index{setHasBus@{setHasBus}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasBus()}{setHasBus()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Bus (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Bus }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a3c7125cae3e2524e3ebab483d607c952}\label{classQRail_1_1StationEngine_1_1Station_a3c7125cae3e2524e3ebab483d607c952}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasElevatedPlatform@{setHasElevatedPlatform}}
+\index{setHasElevatedPlatform@{setHasElevatedPlatform}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasElevatedPlatform()}{setHasElevatedPlatform()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Elevated\+Platform (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Elevated\+Platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a0b35cc4aa9f9ae7dc9503c7ea0919cb1}\label{classQRail_1_1StationEngine_1_1Station_a0b35cc4aa9f9ae7dc9503c7ea0919cb1}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasElevatorPlatform@{setHasElevatorPlatform}}
+\index{setHasElevatorPlatform@{setHasElevatorPlatform}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasElevatorPlatform()}{setHasElevatorPlatform()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Elevator\+Platform (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Elevator\+Platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a13d18cc2d7b1ceb4e855c686780f5fe4}\label{classQRail_1_1StationEngine_1_1Station_a13d18cc2d7b1ceb4e855c686780f5fe4}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasEscalatorDown@{setHasEscalatorDown}}
+\index{setHasEscalatorDown@{setHasEscalatorDown}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasEscalatorDown()}{setHasEscalatorDown()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Escalator\+Down (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Escalator\+Down }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_abcd22776685752bf1f2a3cfa0f84bcc0}\label{classQRail_1_1StationEngine_1_1Station_abcd22776685752bf1f2a3cfa0f84bcc0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasEscalatorUp@{setHasEscalatorUp}}
+\index{setHasEscalatorUp@{setHasEscalatorUp}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasEscalatorUp()}{setHasEscalatorUp()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Escalator\+Up (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Escalator\+Up }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a19b10db4449466770ca0a210ef0b400a}\label{classQRail_1_1StationEngine_1_1Station_a19b10db4449466770ca0a210ef0b400a}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasFreeParking@{setHasFreeParking}}
+\index{setHasFreeParking@{setHasFreeParking}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasFreeParking()}{setHasFreeParking()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Free\+Parking (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Free\+Parking }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a55fe035b25a59286aa257113c70b6d01}\label{classQRail_1_1StationEngine_1_1Station_a55fe035b25a59286aa257113c70b6d01}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasLuggageLockers@{setHasLuggageLockers}}
+\index{setHasLuggageLockers@{setHasLuggageLockers}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasLuggageLockers()}{setHasLuggageLockers()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Luggage\+Lockers (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Luggage\+Lockers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a108681c01bd97529f10fc19c40122910}\label{classQRail_1_1StationEngine_1_1Station_a108681c01bd97529f10fc19c40122910}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasMetro@{setHasMetro}}
+\index{setHasMetro@{setHasMetro}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasMetro()}{setHasMetro()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Metro (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Metro }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a4a5bd6731d4f53284f92f4eb0487944f}\label{classQRail_1_1StationEngine_1_1Station_a4a5bd6731d4f53284f92f4eb0487944f}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasRamp@{setHasRamp}}
+\index{setHasRamp@{setHasRamp}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasRamp()}{setHasRamp()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Ramp (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Ramp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a50c9fcc45a2f96e58e1058ab6b723dc0}\label{classQRail_1_1StationEngine_1_1Station_a50c9fcc45a2f96e58e1058ab6b723dc0}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasTaxi@{setHasTaxi}}
+\index{setHasTaxi@{setHasTaxi}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasTaxi()}{setHasTaxi()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Taxi (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Taxi }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a9791d7b50eed4fad65f2fe5a2ca87876}\label{classQRail_1_1StationEngine_1_1Station_a9791d7b50eed4fad65f2fe5a2ca87876}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasTicketVendingMachine@{setHasTicketVendingMachine}}
+\index{setHasTicketVendingMachine@{setHasTicketVendingMachine}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasTicketVendingMachine()}{setHasTicketVendingMachine()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Ticket\+Vending\+Machine (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Ticket\+Vending\+Machine }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ac60188d8fd67689dbda07bd24391ea65}\label{classQRail_1_1StationEngine_1_1Station_ac60188d8fd67689dbda07bd24391ea65}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasTram@{setHasTram}}
+\index{setHasTram@{setHasTram}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasTram()}{setHasTram()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Tram (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Tram }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a6cd5dbb113aedfd7fe6e46fdedb26e9b}\label{classQRail_1_1StationEngine_1_1Station_a6cd5dbb113aedfd7fe6e46fdedb26e9b}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setHasWheelchairAvailable@{setHasWheelchairAvailable}}
+\index{setHasWheelchairAvailable@{setHasWheelchairAvailable}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setHasWheelchairAvailable()}{setHasWheelchairAvailable()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Has\+Wheelchair\+Available (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Wheelchair\+Available }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_aaa0f5a430b2d1ffd520285c2f00cea53}\label{classQRail_1_1StationEngine_1_1Station_aaa0f5a430b2d1ffd520285c2f00cea53}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setName@{setName}}
+\index{setName@{setName}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setName()}{setName()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Name (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ Q\+Locale\+::\+Language, Q\+String $>$ \&}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a1182f0a0ab0c0d3a168bb72389d108cb}\label{classQRail_1_1StationEngine_1_1Station_a1182f0a0ab0c0d3a168bb72389d108cb}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setOfficialTransferTimes@{setOfficialTransferTimes}}
+\index{setOfficialTransferTimes@{setOfficialTransferTimes}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setOfficialTransferTimes()}{setOfficialTransferTimes()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::set\+Official\+Transfer\+Times (\begin{DoxyParamCaption}\item[{const quint32 \&}]{official\+Transfer\+Times }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a77c5ed806a41ad53afa4c03f96525bad}\label{classQRail_1_1StationEngine_1_1Station_a77c5ed806a41ad53afa4c03f96525bad}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setOpeningHours@{setOpeningHours}}
+\index{setOpeningHours@{setOpeningHours}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setOpeningHours()}{setOpeningHours()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Opening\+Hours (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station_ae8c109a1d5ce2bb41959e62e32392631}{Station\+Engine\+::\+Station\+::\+Day}}, Q\+Pair$<$ Q\+Time, Q\+Time $>$ $>$ \&}]{opening\+Hours }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab275347465eb810b7c8f2a6e1802feb4}\label{classQRail_1_1StationEngine_1_1Station_ab275347465eb810b7c8f2a6e1802feb4}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setPlatforms@{setPlatforms}}
+\index{setPlatforms@{setPlatforms}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setPlatforms()}{setPlatforms()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Platforms (\begin{DoxyParamCaption}\item[{const Q\+Map$<$ Q\+Url, Q\+String $>$ \&}]{platforms }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ae336cacb81a3a6832e74a6a6c7c81242}\label{classQRail_1_1StationEngine_1_1Station_ae336cacb81a3a6832e74a6a6c7c81242}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_ab9ae86000a0b84a224dd0ea32256bd27}\label{classQRail_1_1StationEngine_1_1Station_ab9ae86000a0b84a224dd0ea32256bd27}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!setUri@{setUri}}
+\index{setUri@{setUri}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{setUri()}{setUri()}}
+{\footnotesize\ttfamily void Station\+Engine\+::\+Station\+::set\+Uri (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}\label{classQRail_1_1StationEngine_1_1Station_a7ccf866501e2f547935c152b67d192f6}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!uri@{uri}}
+\index{uri@{uri}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+Url Station\+Engine\+::\+Station\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Station_a25743385c35feaac93b667a9a828bde8}\label{classQRail_1_1StationEngine_1_1Station_a25743385c35feaac93b667a9a828bde8}} 
+\index{QRail::StationEngine::Station@{QRail::StationEngine::Station}!uriChanged@{uriChanged}}
+\index{uriChanged@{uriChanged}!QRail::StationEngine::Station@{QRail::StationEngine::Station}}
+\subsubsection{\texorpdfstring{uriChanged}{uriChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Station\+Engine\+::\+Station\+::uri\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/station/\mbox{\hyperlink{stationstation_8h}{stationstation.\+h}}\item 
+src/engines/station/\mbox{\hyperlink{stationstation_8cpp}{stationstation.\+cpp}}\end{DoxyCompactItemize}

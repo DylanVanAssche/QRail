@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['validatedata',['validateData',['../classVehicleEngine_1_1Factory.html#a2e2e49cee65a409309492354de57b496',1,'VehicleEngine::Factory::validateData()'],['../classFragments_1_1Factory.html#a62a60fd81fec95b794a8b27188b51824',1,'Fragments::Factory::validateData()']]],
-  ['vehicle',['Vehicle',['../classVehicleEngine_1_1Vehicle.html#a208c46e84099d0f24ebcf699aedf9ca2',1,'VehicleEngine::Vehicle::Vehicle(QObject *parent=nullptr)'],['../classVehicleEngine_1_1Vehicle.html#a637a49b74131270fdf0d73a6268e2716',1,'VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, QObject *parent=nullptr)'],['../classVehicleEngine_1_1Vehicle.html#ac3b5f107da52e20512f9fca88a9ef3b3',1,'VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, const QList&lt; VehicleEngine::Stop *&gt; &amp;intermediaryStops, QObject *parent=nullptr)']]],
-  ['vehiclealerts',['vehicleAlerts',['../classRouterEngine_1_1Route.html#a2d3c6fd345bd099e769ad06896199bc6',1,'RouterEngine::Route']]],
-  ['vehiclealertschanged',['vehicleAlertsChanged',['../classRouterEngine_1_1Route.html#a1ea5875ee80dca0f253caee323f23410',1,'RouterEngine::Route']]],
-  ['vehicleinformation',['vehicleInformation',['../classRouterEngine_1_1RouteLeg.html#a086d61b828cd572797ec327710eb4088',1,'RouterEngine::RouteLeg']]],
-  ['vehicleinformationchanged',['vehicleInformationChanged',['../classRouterEngine_1_1RouteLeg.html#a11952e3a2fee4fa1d9f4fb56e69f0507',1,'RouterEngine::RouteLeg']]],
-  ['vehicleready',['vehicleReady',['../classVehicleEngine_1_1Factory.html#af23bdc01d77eb6c9feb7f79f00511c22',1,'VehicleEngine::Factory']]],
+  ['vehicle',['Vehicle',['../classQRail_1_1VehicleEngine_1_1Vehicle.html#a2e60c2ba58eb0c841d2d22624917ec06',1,'QRail::VehicleEngine::Vehicle::Vehicle(QObject *parent=nullptr)'],['../classQRail_1_1VehicleEngine_1_1Vehicle.html#af389f937fe809dddddd9dcf88794d177',1,'QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, QObject *parent=nullptr)'],['../classQRail_1_1VehicleEngine_1_1Vehicle.html#a58ea75f1cc275d8f800ea449b09cf339',1,'QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &amp;uri, const QUrl &amp;tripURI, const QString &amp;headsign, const QList&lt; QRail::VehicleEngine::Stop * &gt; &amp;intermediaryStops, QObject *parent=nullptr)']]],
+  ['vehiclealerts',['vehicleAlerts',['../classQRail_1_1RouterEngine_1_1Route.html#a8cc828d45bd8711e59197002f3881f90',1,'QRail::RouterEngine::Route']]],
+  ['vehiclealertschanged',['vehicleAlertsChanged',['../classQRail_1_1RouterEngine_1_1Route.html#a236daca39e2006e3f0182227079113f6',1,'QRail::RouterEngine::Route']]],
+  ['vehiclecontext',['vehicleContext',['../qrail_8h.html#ae706e18f8abc0956fb603f7cc77bbb83',1,'vehicleContext():&#160;qrail.cpp'],['../qrail_8cpp.html#ae706e18f8abc0956fb603f7cc77bbb83',1,'vehicleContext():&#160;qrail.cpp']]],
+  ['vehicleinformation',['vehicleInformation',['../classQRail_1_1RouterEngine_1_1RouteLeg.html#aab16baf53c857a981e2d9816572818ed',1,'QRail::RouterEngine::RouteLeg']]],
+  ['vehicleinformationchanged',['vehicleInformationChanged',['../classQRail_1_1RouterEngine_1_1RouteLeg.html#af30e3314b500b47610b15d5b737e550e',1,'QRail::RouterEngine::RouteLeg']]],
   ['version',['version',['../classOS.html#a4cd043becb244d8f40bdcc55c0417a71',1,'OS']]],
   ['versionchanged',['versionChanged',['../classOS.html#a2bb282eb19c9eaa0c787dabc434a9fca',1,'OS']]],
   ['videolocation',['videoLocation',['../classOS.html#afdfd88fe0b70d4ed51508e7dc364b1d4',1,'OS']]]

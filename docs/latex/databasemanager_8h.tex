@@ -1,25 +1,27 @@
 \hypertarget{databasemanager_8h}{}\section{src/include/database/databasemanager.h File Reference}
-\label{databasemanager_8h}\index{src/include/database/databasemanager.\+h@{src/include/database/databasemanager.\+h}}
+\label{databasemanager_8h}\index{src/include/database/databasemanager.h@{src/include/database/databasemanager.h}}
 {\ttfamily \#include $<$Qt\+Core/\+Qt\+Global$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Qt\+Debug$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+String$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Dir$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Uuid$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Future$>$}\newline
 {\ttfamily \#include $<$Qt\+Sql/\+Q\+Sql\+Database$>$}\newline
 {\ttfamily \#include $<$Qt\+Sql/\+Q\+Sql\+Driver$>$}\newline
 {\ttfamily \#include $<$Qt\+Sql/\+Q\+Sql\+Error$>$}\newline
 {\ttfamily \#include $<$Qt\+Sql/\+Q\+Sql\+Query$>$}\newline
-{\ttfamily \#include $<$Qt\+Concurrent/\+Qt\+Concurrent$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Thread\+Storage$>$}\newline
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Database\+::\+Manager}} class manages a given database. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceDatabase}{Database}}
+ \mbox{\hyperlink{namespaceQRail}{Q\+Rail}}
+\item 
+ \mbox{\hyperlink{namespaceQRail_1_1Database}{Q\+Rail\+::\+Database}}
 \end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
@@ -30,8 +32,8 @@ class \mbox{\hyperlink{classDatabase_1_1Manager}{Database\+::\+Manager}}
 
 \subsection{Macro Definition Documentation}
 \mbox{\Hypertarget{databasemanager_8h_a45044c35ca9fe4a00b497f05d2b818cc}\label{databasemanager_8h_a45044c35ca9fe4a00b497f05d2b818cc}} 
-\index{databasemanager.\+h@{databasemanager.\+h}!D\+R\+I\+V\+ER@{D\+R\+I\+V\+ER}}
-\index{D\+R\+I\+V\+ER@{D\+R\+I\+V\+ER}!databasemanager.\+h@{databasemanager.\+h}}
-\subsubsection{\texorpdfstring{D\+R\+I\+V\+ER}{DRIVER}}
+\index{databasemanager.h@{databasemanager.h}!DRIVER@{DRIVER}}
+\index{DRIVER@{DRIVER}!databasemanager.h@{databasemanager.h}}
+\subsubsection{\texorpdfstring{DRIVER}{DRIVER}}
 {\footnotesize\ttfamily \#define D\+R\+I\+V\+ER~\char`\"{}Q\+S\+Q\+L\+I\+TE\char`\"{}}
 

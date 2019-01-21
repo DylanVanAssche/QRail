@@ -1,0 +1,188 @@
+\hypertarget{classQRail_1_1RouterEngine_1_1Planner}{}\section{Q\+Rail\+::Router\+Engine\+::Planner Class Reference}
+\label{classQRail_1_1RouterEngine_1_1Planner}\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+
+
+{\ttfamily \#include $<$routerplanner.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Planner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1RouterEngine_1_1Planner}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}{finished}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}})
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}{stream}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$route)
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}{error}} (const Q\+String \&message)
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}{requested}} (const Q\+Url \&page\+U\+RI)
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}{processing}} (const Q\+Url \&page\+U\+RI)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}{$\sim$\+Planner}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}{get\+Connections}} (const Q\+Url \&departure\+Station, const Q\+Url \&arrival\+Station, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}}, const quint16 \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}})
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}{get\+Connections}} (const Q\+Geo\+Coordinate \&departure\+Position, const Q\+Geo\+Coordinate \&arrival\+Position, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}}, const quint16 \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}})
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}{abort\+Current\+Operation}} ()
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_aaccb9c969c39304363886cf4a75a033c}{calculate\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}{arrival\+Time}} () const
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}} () const
+\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}{departure\+Station\+U\+RI}} () const
+\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}{arrival\+Station\+U\+RI}} () const
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}{set\+Journey}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}{custom\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}\label{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!````~Planner@{$\sim$Planner}}
+\index{````~Planner@{$\sim$Planner}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{$\sim$Planner()}{~Planner()}}
+{\footnotesize\ttfamily Router\+Engine\+::\+Planner\+::$\sim$\+Planner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}\label{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!abortCurrentOperation@{abortCurrentOperation}}
+\index{abortCurrentOperation@{abortCurrentOperation}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{abortCurrentOperation()}{abortCurrentOperation()}}
+{\footnotesize\ttfamily void Router\+Engine\+::\+Planner\+::abort\+Current\+Operation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}\label{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!arrivalStationURI@{arrivalStationURI}}
+\index{arrivalStationURI@{arrivalStationURI}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{arrivalStationURI()}{arrivalStationURI()}}
+{\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::arrival\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}\label{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!arrivalTime@{arrivalTime}}
+\index{arrivalTime@{arrivalTime}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{arrivalTime()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_aaccb9c969c39304363886cf4a75a033c}\label{classQRail_1_1RouterEngine_1_1Planner_aaccb9c969c39304363886cf4a75a033c}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!calculateArrivalTime@{calculateArrivalTime}}
+\index{calculateArrivalTime@{calculateArrivalTime}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{calculateArrivalTime()}{calculateArrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::calculate\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}\label{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!customEvent@{customEvent}}
+\index{customEvent@{customEvent}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{customEvent()}{customEvent()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::custom\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}\label{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!departureStationURI@{departureStationURI}}
+\index{departureStationURI@{departureStationURI}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{departureStationURI()}{departureStationURI()}}
+{\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::departure\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}\label{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!departureTime@{departureTime}}
+\index{departureTime@{departureTime}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{departureTime()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}\label{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!error@{error}}
+\index{error@{error}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}\label{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!finished@{finished}}
+\index{finished@{finished}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{finished}{finished}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::finished (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$}]{journey }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}\label{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getConnections@{getConnections}}
+\index{getConnections@{getConnections}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getConnections()}{getConnections()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::get\+Connections (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{departure\+Station,  }\item[{const Q\+Url \&}]{arrival\+Station,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const quint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}\label{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getConnections@{getConnections}}
+\index{getConnections@{getConnections}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getConnections()}{getConnections()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Router\+Engine\+::\+Planner\+::get\+Connections (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{departure\+Position,  }\item[{const Q\+Geo\+Coordinate \&}]{arrival\+Position,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const quint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}\label{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Q\+Rail\+::\+Router\+Engine\+::\+Planner}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}\label{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!journey@{journey}}
+\index{journey@{journey}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{journey()}{journey()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::journey (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}\label{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!maxTransfers@{maxTransfers}}
+\index{maxTransfers@{maxTransfers}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{maxTransfers()}{maxTransfers()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::max\+Transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}\label{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!processing@{processing}}
+\index{processing@{processing}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{processing}{processing}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::processing (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}\label{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!requested@{requested}}
+\index{requested@{requested}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{requested}{requested}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::requested (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}\label{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!setJourney@{setJourney}}
+\index{setJourney@{setJourney}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{setJourney()}{setJourney()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::set\+Journey (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$}]{journey }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}\label{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!stream@{stream}}
+\index{stream@{stream}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{stream}{stream}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$}]{route }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/\mbox{\hyperlink{routerplanner_8h}{routerplanner.\+h}}\item 
+src/engines/router/\mbox{\hyperlink{routerplanner_8cpp}{routerplanner.\+cpp}}\end{DoxyCompactItemize}

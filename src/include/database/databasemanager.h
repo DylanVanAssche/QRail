@@ -21,13 +21,12 @@
 #include <QtCore/QtDebug>
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtCore/QDir>
+#include <QtCore/QUuid>
 #include <QtCore/QFuture>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
-#include <QtConcurrent/QtConcurrent>
 #include <QtCore/QThreadStorage>
 
 // Select here the right DB driver for Qt
@@ -36,14 +35,53 @@
 // Singleton pattern
 namespace QRail {
 namespace Database {
+/**
+ * @class Manager
+ * @brief The Database::Manager class manages a given database.
+ * Using the Database::Manager you can be sure that only 1 object is interacting with the database, thanks to the Singleton design pattern.<br>
+ * The Database::Manager allows the user to perform queries with or without transaction support in an easy way.<br>
+ * Transparant support for multiple threads is also implemented by using a QThreadStorage class.<br>
+ */
 class Manager : public QObject
 {
     Q_OBJECT
 public:
+
     static Manager *getInstance(const QString &path);
+    //! Executes a given QSqlQuery
+    /*!
+        \param query the SQL query to execute.
+        \return True if success.
+        \public
+        Executes the given QSqlQuery query on the active database.<br>
+        Before the execution takes place, the connection is checked.<br>
+        During the execution, the errors are catched and logged as CRITICAL.<br>
+    */
     bool execute(QSqlQuery &query);
+    //! Starts the transaction
+    /*!
+        \return True if success.
+        \public
+        Starts a transaction in the database.<br>
+        After you are done with your changes you should
+        call QRail::Database::Manager::endTransaction() to
+        commit your changes.
+     */
     bool startTransaction();
+    //! Ends the transaction.
+    /*!
+        \return True if success.
+        \note This method won't do anything if no transaction was running.
+        \public
+        Commits changes to the database and returns true if success.
+     */
     bool endTransaction();
+    //! Gets the current QSqlDatabase database.
+    /*!
+      \return A QSqlDatabase object.
+      \public
+      Gets the associated QSqlDatabase database object and returns it.
+    */
     QSqlDatabase database() const;
 
 private:

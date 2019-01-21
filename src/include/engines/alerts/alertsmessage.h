@@ -28,6 +28,11 @@
 
 namespace QRail {
 namespace AlertsEngine {
+/**
+ * @class Message
+ * @brief An AlertsEngine::Message contains an alerts message.<br>
+ * An alert message can contain any information related to the current public transport traffic like incidents, traffic control information, ...
+ */
 class QRAIL_SHARED_EXPORT Message : public QObject
 {
     Q_OBJECT

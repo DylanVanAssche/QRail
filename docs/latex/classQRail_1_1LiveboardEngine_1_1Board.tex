@@ -2,6 +2,11 @@
 \label{classQRail_1_1LiveboardEngine_1_1Board}\index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 
 
+An \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} contains a liveboard.  
+
+
+
+
 {\ttfamily \#include $<$liveboardboard.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Liveboard\+Engine\+::Board\+:\begin{figure}[H]
@@ -16,62 +21,67 @@ Inheritance diagram for Q\+Rail\+::Liveboard\+Engine\+::Board\+:\begin{figure}[H
 enum \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Mode}} \{ \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6ea2906f1567c46a28f5a256a77e6aca76a}{Mode\+::\+A\+R\+R\+I\+V\+A\+LS}}, 
 \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6ea560e6dfa758a32c703224545b841a386}{Mode\+::\+D\+E\+P\+A\+R\+T\+U\+R\+ES}}
  \}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The different modes in which the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} can operate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a6a08cd7c9e73e7b9892858d26066c1d8}{entries\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the entries are changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_ae142ed88bebe608a99f61d09ceacf4b5}{station\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the station has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_ae036b6efe4d807d6679a7f6b92f18b28}{from\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when from has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_aa2d6f92cc84b2f68d7870f514e6267ef}{until\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when until has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a10e65fb6aa6c56428ba4d700e3b6a67d}{mode\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the mode has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afd6981cdcbd9e49393fbb8e4a4b22157}{hydra\+Previous\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the hydra\+Previous has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a775b5fd9886b209fc9ccdcdbbd206261}{hydra\+Next\+Changed}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Emitted when the hydra\+Next has been changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a9551cfa04103fadcd7d3ed9771bab947}{Board}} (Q\+Object $\ast$parent=nullptr)
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} constructor\+: empty. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a4be1ea3d4ce8b195242b1de059884caa}{Board}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}{entries}}, \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}{station}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}{from}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}{until}}, Q\+Object $\ast$parent=nullptr)
-\item 
-Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}{entries}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a48325ac92e049047391823d2ea55c0d7}{set\+Entries}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}{entries}})
-\item 
-\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}{station}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}{set\+Station}} (\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}{station}})
-\item 
-Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}{from}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}{set\+From}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}{from}})
-\item 
-Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}{until}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}{set\+Until}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}{until}})
-\item 
-\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}{mode}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}{set\+Mode}} (const \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}{mode}})
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} constructor\+: full. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_ad79d5e4cd527fe02165f1231478b8f8b}{add\+Entry}} (\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$entry)
-\item 
+\begin{DoxyCompactList}\small\item\em Adds an entry to the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. \end{DoxyCompactList}\item 
+Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}{entries}} () const
+\begin{DoxyCompactList}\small\item\em Gets the entries of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a48325ac92e049047391823d2ea55c0d7}{set\+Entries}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}{entries}})
+\begin{DoxyCompactList}\small\item\em Sets the entries of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}{station}} () const
+\begin{DoxyCompactList}\small\item\em Gets the station of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}{set\+Station}} (\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}{station}})
+\begin{DoxyCompactList}\small\item\em Sets the station of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. \end{DoxyCompactList}\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}{from}} () const
+\begin{DoxyCompactList}\small\item\em Gets from. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}{set\+From}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}{from}})
+\begin{DoxyCompactList}\small\item\em Sets from. \end{DoxyCompactList}\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}{until}} () const
+\begin{DoxyCompactList}\small\item\em Gets until. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}{set\+Until}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}{until}})
+\begin{DoxyCompactList}\small\item\em Sets until. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}{mode}} () const
+\begin{DoxyCompactList}\small\item\em Gets the mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}{set\+Mode}} (const \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}{mode}})
+\begin{DoxyCompactList}\small\item\em Sets the mode. \end{DoxyCompactList}\item 
 Q\+Url \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a7a89e2b711234a6a0969bee75d4a567e}{hydra\+Previous}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets hydra\+Previous. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_af8c481758c476c1e3bf471e87ba31613}{set\+Hydra\+Previous}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a7a89e2b711234a6a0969bee75d4a567e}{hydra\+Previous}})
-\item 
+\begin{DoxyCompactList}\small\item\em Sets hydra\+Previous. \end{DoxyCompactList}\item 
 Q\+Url \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ed5cfc1cc0b6584bf087f936f60dcab}{hydra\+Next}} () const
-\item 
+\begin{DoxyCompactList}\small\item\em Gets hydra\+Next. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffec42bab89c4a433}{set\+Hydra\+Next}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ed5cfc1cc0b6584bf087f936f60dcab}{hydra\+Next}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sets hydra\+Next. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+An \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} contains a liveboard. 
+
+A liveboard holds all the departing or arriving vehicles (depending on the mode) in a certain station. 
 
 \subsection{Member Enumeration Documentation}
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}\label{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}} 
@@ -79,6 +89,10 @@ void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffe
 \index{Mode@{Mode}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{Mode}{Mode}}
 {\footnotesize\ttfamily enum \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+The different modes in which the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} can operate. 
 
 \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{ARRIVALS@{ARRIVALS}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}\index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!ARRIVALS@{ARRIVALS}}}\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6ea2906f1567c46a28f5a256a77e6aca76a}\label{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6ea2906f1567c46a28f5a256a77e6aca76a}} 
@@ -99,13 +113,39 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{Board()}{Board()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Board (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a4be1ea3d4ce8b195242b1de059884caa}\label{classQRail_1_1LiveboardEngine_1_1Board_a4be1ea3d4ce8b195242b1de059884caa}} 
+
+
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} constructor\+: empty. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Q\+Object parent-\/child memory management.\\
+\hline
+\end{DoxyParams}
+Constructs a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} with the given parent. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a4be1ea3d4ce8b195242b1de059884caa}\label{classQRail_1_1LiveboardEngine_1_1Board_a4be1ea3d4ce8b195242b1de059884caa}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!Board@{Board}}
 \index{Board@{Board}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{Board()}{Board()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Board (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \&}]{entries,  }\item[{\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$}]{station,  }\item[{const Q\+Date\+Time \&}]{from,  }\item[{const Q\+Date\+Time \&}]{until,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
+
+\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} constructor\+: full. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entries} & \\
+\hline
+{\em station} & \\
+\hline
+{\em from} & \\
+\hline
+{\em until} & \\
+\hline
+{\em parent} & Q\+Object parent-\/child memory management.\\
+\hline
+\end{DoxyParams}
+Constructs a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} with the given parent. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ad79d5e4cd527fe02165f1231478b8f8b}\label{classQRail_1_1LiveboardEngine_1_1Board_ad79d5e4cd527fe02165f1231478b8f8b}} 
@@ -114,17 +154,38 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{addEntry()}{addEntry()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::add\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$}]{entry }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}\label{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}} 
+
+
+Adds an entry to the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} entry.\\
+\hline
+\end{DoxyParams}
+Adds an entry (\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$) to the \mbox{\hyperlink{namespaceLiveboard}{Liveboard}} entries.~\newline
+ Using this method will automatically set the entries to the appended list and trigger the entries\+Changed signal. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}\label{classQRail_1_1LiveboardEngine_1_1Board_afbba31f8d0f67e98f9bea58ebcf1e9ac}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!entries@{entries}}
 \index{entries@{entries}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{entries()}{entries()}}
 {\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a6a08cd7c9e73e7b9892858d26066c1d8}\label{classQRail_1_1LiveboardEngine_1_1Board_a6a08cd7c9e73e7b9892858d26066c1d8}} 
+
+
+Gets the entries of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. 
+
+\begin{DoxyReturn}{Returns}
+entries a Q\+List$<$\+Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle $\ast$$>$ of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} entries.
+\end{DoxyReturn}
+Gets the list of entries and returns them. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a6a08cd7c9e73e7b9892858d26066c1d8}\label{classQRail_1_1LiveboardEngine_1_1Board_a6a08cd7c9e73e7b9892858d26066c1d8}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!entriesChanged@{entriesChanged}}
 \index{entriesChanged@{entriesChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{entriesChanged}{entriesChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::entries\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the entries are changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}\label{classQRail_1_1LiveboardEngine_1_1Board_a503aaa8cea63f129e08581a49e308479}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!from@{from}}
@@ -132,11 +193,22 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{from()}{from()}}
 {\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::from (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ae036b6efe4d807d6679a7f6b92f18b28}\label{classQRail_1_1LiveboardEngine_1_1Board_ae036b6efe4d807d6679a7f6b92f18b28}} 
+
+
+Gets from. 
+
+\begin{DoxyReturn}{Returns}
+from the departure timestamp in U\+TC.
+\end{DoxyReturn}
+Gets the departure time and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ae036b6efe4d807d6679a7f6b92f18b28}\label{classQRail_1_1LiveboardEngine_1_1Board_ae036b6efe4d807d6679a7f6b92f18b28}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!fromChanged@{fromChanged}}
 \index{fromChanged@{fromChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{fromChanged}{fromChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::from\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when from has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a0ed5cfc1cc0b6584bf087f936f60dcab}\label{classQRail_1_1LiveboardEngine_1_1Board_a0ed5cfc1cc0b6584bf087f936f60dcab}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!hydraNext@{hydraNext}}
@@ -144,11 +216,22 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{hydraNext()}{hydraNext()}}
 {\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::hydra\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a775b5fd9886b209fc9ccdcdbbd206261}\label{classQRail_1_1LiveboardEngine_1_1Board_a775b5fd9886b209fc9ccdcdbbd206261}} 
+
+
+Gets hydra\+Next. 
+
+\begin{DoxyReturn}{Returns}
+hydra\+Next the next hydra U\+RL.
+\end{DoxyReturn}
+Gets the next hydra U\+RL and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a775b5fd9886b209fc9ccdcdbbd206261}\label{classQRail_1_1LiveboardEngine_1_1Board_a775b5fd9886b209fc9ccdcdbbd206261}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!hydraNextChanged@{hydraNextChanged}}
 \index{hydraNextChanged@{hydraNextChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{hydraNextChanged}{hydraNextChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::hydra\+Next\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the hydra\+Next has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a7a89e2b711234a6a0969bee75d4a567e}\label{classQRail_1_1LiveboardEngine_1_1Board_a7a89e2b711234a6a0969bee75d4a567e}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!hydraPrevious@{hydraPrevious}}
@@ -156,11 +239,22 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{hydraPrevious()}{hydraPrevious()}}
 {\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::hydra\+Previous (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_afd6981cdcbd9e49393fbb8e4a4b22157}\label{classQRail_1_1LiveboardEngine_1_1Board_afd6981cdcbd9e49393fbb8e4a4b22157}} 
+
+
+Gets hydra\+Previous. 
+
+\begin{DoxyReturn}{Returns}
+hydra\+Previous the previous hydra U\+RL.
+\end{DoxyReturn}
+Gets the previous hydra U\+RL and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_afd6981cdcbd9e49393fbb8e4a4b22157}\label{classQRail_1_1LiveboardEngine_1_1Board_afd6981cdcbd9e49393fbb8e4a4b22157}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!hydraPreviousChanged@{hydraPreviousChanged}}
 \index{hydraPreviousChanged@{hydraPreviousChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{hydraPreviousChanged}{hydraPreviousChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::hydra\+Previous\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the hydra\+Previous has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}\label{classQRail_1_1LiveboardEngine_1_1Board_a72d581701ab9d478f7e1943d0d3effb4}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!mode@{mode}}
@@ -168,11 +262,22 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{mode()}{mode()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a10e65fb6aa6c56428ba4d700e3b6a67d}\label{classQRail_1_1LiveboardEngine_1_1Board_a10e65fb6aa6c56428ba4d700e3b6a67d}} 
+
+
+Gets the mode. 
+
+\begin{DoxyReturn}{Returns}
+mode \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Board\+::\+Mode}} state.
+\end{DoxyReturn}
+Gets the current \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Board\+::\+Mode}} mode for this \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a10e65fb6aa6c56428ba4d700e3b6a67d}\label{classQRail_1_1LiveboardEngine_1_1Board_a10e65fb6aa6c56428ba4d700e3b6a67d}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!modeChanged@{modeChanged}}
 \index{modeChanged@{modeChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{modeChanged}{modeChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::mode\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the mode has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a48325ac92e049047391823d2ea55c0d7}\label{classQRail_1_1LiveboardEngine_1_1Board_a48325ac92e049047391823d2ea55c0d7}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setEntries@{setEntries}}
@@ -180,53 +285,127 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{setEntries()}{setEntries()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Entries (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$ $>$ \&}]{entries }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}\label{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}} 
+
+
+Sets the entries of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entries} & a Q\+List$<$\+Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle $\ast$$>$ of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} entries.\\
+\hline
+\end{DoxyParams}
+Sets the list of entries to the given Q\+List$<$\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$entries. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}\label{classQRail_1_1LiveboardEngine_1_1Board_af463ed571976fe8a7c49a365b7cc2ebe}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setFrom@{setFrom}}
 \index{setFrom@{setFrom}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setFrom()}{setFrom()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+From (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{from }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffec42bab89c4a433}\label{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffec42bab89c4a433}} 
+
+
+Sets from. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & the departure timestamp in U\+TC.\\
+\hline
+\end{DoxyParams}
+Sets the departure timestamp in U\+TC to the given const Q\+Date\+Time \&from. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffec42bab89c4a433}\label{classQRail_1_1LiveboardEngine_1_1Board_a01f417e63bf4071ffec42bab89c4a433}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setHydraNext@{setHydraNext}}
 \index{setHydraNext@{setHydraNext}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setHydraNext()}{setHydraNext()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Hydra\+Next (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{hydra\+Next }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_af8c481758c476c1e3bf471e87ba31613}\label{classQRail_1_1LiveboardEngine_1_1Board_af8c481758c476c1e3bf471e87ba31613}} 
+
+
+Sets hydra\+Next. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hydra\+Next} & the next hydra U\+RL.\\
+\hline
+\end{DoxyParams}
+Sets the next hydra U\+RL and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_af8c481758c476c1e3bf471e87ba31613}\label{classQRail_1_1LiveboardEngine_1_1Board_af8c481758c476c1e3bf471e87ba31613}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setHydraPrevious@{setHydraPrevious}}
 \index{setHydraPrevious@{setHydraPrevious}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setHydraPrevious()}{setHydraPrevious()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Hydra\+Previous (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{hydra\+Previous }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}\label{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}} 
+
+
+Sets hydra\+Previous. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hydra\+Previous} & the previous hydra U\+RL.\\
+\hline
+\end{DoxyParams}
+Sets the previous hydra U\+RL and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}\label{classQRail_1_1LiveboardEngine_1_1Board_a64e85afaca570209ba08a350460315d2}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setMode@{setMode}}
 \index{setMode@{setMode}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setMode()}{setMode()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Mode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&}]{mode }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}\label{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}} 
+
+
+Sets the mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Board\+::\+Mode}} state.\\
+\hline
+\end{DoxyParams}
+Sets the current \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Board\+::\+Mode}} mode for this \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} to the given const \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}\label{classQRail_1_1LiveboardEngine_1_1Board_ad54690cca1439296875c9c7c83234bd8}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setStation@{setStation}}
 \index{setStation@{setStation}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setStation()}{setStation()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Station (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$}]{station }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}\label{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}} 
+
+
+Sets the station of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em station} & \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} object with information about the associated station.\\
+\hline
+\end{DoxyParams}
+Sets the station of the liveboard to the given \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}\label{classQRail_1_1LiveboardEngine_1_1Board_a1739cf48ec910b5ee0394d30c7ade72b}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!setUntil@{setUntil}}
 \index{setUntil@{setUntil}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{setUntil()}{setUntil()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::set\+Until (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{until }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}\label{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}} 
+
+
+Sets until. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em until} & the arrival timestamp in U\+TC.\\
+\hline
+\end{DoxyParams}
+Sets the arrival timestamp in U\+TC to the given const Q\+Date\+Time \&until. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}\label{classQRail_1_1LiveboardEngine_1_1Board_a96964c52def29a72003eb27701cafe12}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!station@{station}}
 \index{station@{station}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{station()}{station()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ae142ed88bebe608a99f61d09ceacf4b5}\label{classQRail_1_1LiveboardEngine_1_1Board_ae142ed88bebe608a99f61d09ceacf4b5}} 
+
+
+Gets the station of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}}. 
+
+\begin{DoxyReturn}{Returns}
+station \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} object with information about the associated station.
+\end{DoxyReturn}
+Gets the station of the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_ae142ed88bebe608a99f61d09ceacf4b5}\label{classQRail_1_1LiveboardEngine_1_1Board_ae142ed88bebe608a99f61d09ceacf4b5}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!stationChanged@{stationChanged}}
 \index{stationChanged@{stationChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{stationChanged}{stationChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::station\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the station has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}\label{classQRail_1_1LiveboardEngine_1_1Board_af09d8cddaaf92ba4a3a5d74ee393388b}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!until@{until}}
@@ -234,11 +413,22 @@ D\+E\+P\+A\+R\+T\+U\+R\+ES&\\
 \subsubsection{\texorpdfstring{until()}{until()}}
 {\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::until (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_aa2d6f92cc84b2f68d7870f514e6267ef}\label{classQRail_1_1LiveboardEngine_1_1Board_aa2d6f92cc84b2f68d7870f514e6267ef}} 
+
+
+Gets until. 
+
+\begin{DoxyReturn}{Returns}
+until the arrival timestamp in U\+TC.
+\end{DoxyReturn}
+Gets the arrival time and returns it. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Board_aa2d6f92cc84b2f68d7870f514e6267ef}\label{classQRail_1_1LiveboardEngine_1_1Board_aa2d6f92cc84b2f68d7870f514e6267ef}} 
 \index{QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}!untilChanged@{untilChanged}}
 \index{untilChanged@{untilChanged}!QRail::LiveboardEngine::Board@{QRail::LiveboardEngine::Board}}
 \subsubsection{\texorpdfstring{untilChanged}{untilChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::until\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when until has been changed. 
 
 
 

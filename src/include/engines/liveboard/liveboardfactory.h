@@ -40,32 +40,105 @@
 
 namespace QRail {
 namespace LiveboardEngine {
+/**
+ * @class Factory
+ * @brief An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.
+ * The factory design pattern allows you to create Board objects in an easy way. Several modes are available to fetch your Board.
+ */
 class Factory : public QObject
 {
     Q_OBJECT
 public:
-    enum class Direction {
-        PREVIOUS,
-        NEXT,
-    };
+    //! Gets a QRail::LiveboardEngine::Factory instance.
+    /*!
+        \param QObject *parent = nullptr
+        \return QRail::LiveboardEngine::Factory *factory
+        \public
+        Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
+        instance.
+     */
     static QRail::LiveboardEngine::Factory *getInstance();
-    void
-    getLiveboardByStationURI(const QUrl &uri,
-                             const QRail::LiveboardEngine::Board::Mode &mode =
-                                 QRail::LiveboardEngine::Board::Mode::DEPARTURES);
-    void
-    getLiveboardByStationURI(const QUrl &uri, const QDateTime &from,
-                             const QDateTime &until,
-                             const QRail::LiveboardEngine::Board::Mode &mode =
-                                 QRail::LiveboardEngine::Board::Mode::DEPARTURES);
+    //! Retrieves a liveboard by a station URI.
+    /*!
+        \param const QUrl &url
+        \param const QRail::LiveboardEngine::Board::Mode &mode
+        \overload
+        \public
+        Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
+        The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
+        liveboard should contain all the arrivals, departures of the station.
+        Calling this method will retrieve a QRail::LiveboardEngine::Board for the
+        current time until the current time + 0.5 hour.
+     */
+    void getLiveboardByStationURI(const QUrl &uri,
+                                  const QRail::LiveboardEngine::Board::Mode &mode = QRail::LiveboardEngine::Board::Mode::DEPARTURES);
+    //! Retrieves a liveboard by a station URI and a time range.
+    /*!
+        \param const QUrl &url
+        \param const QDateTime &from
+        \param const QDateTime &until
+        \param const QRail::LiveboardEngine::Board::Mode &mode
+        \package Liveboard
+        \overload
+        \public
+        Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
+        The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
+        liveboard should contain all the arrivals, departures of the station.
+     */
+    void getLiveboardByStationURI(const QUrl &uri, const QDateTime &from,
+                                  const QDateTime &until,
+                                  const QRail::LiveboardEngine::Board::Mode &mode = QRail::LiveboardEngine::Board::Mode::DEPARTURES);
+    //! Extend the liveboard with next results.
+    /*!
+        \param board a QRail::LiveboardEngine::Board instance which we want to extend.
+        \public
+        You can extend a generated Board with next results by supplying the board to this method.
+        The method will search until at least 1 next result has been found.
+     */
     void getNextResultsForLiveboard(QRail::LiveboardEngine::Board *board);
+    //! Extend the liveboard with previous results.
+    /*!
+        \param board a QRail::LiveboardEngine::Board instance which we want to extend.
+        \public
+        You can extend a generated Board with previous results by supplying the board to this method.
+        The method will search until at least 1 previous result has been found.
+     */
     void getPreviousResultsForLiveboard(QRail::LiveboardEngine::Board *board);
+    //! Cancel the current operation.
+    /*!
+        \public
+        If the user wants to cancel the current operation,
+        this method must be called before performing a new action.
+     */
     void abortCurrentOperation();
+    //! Gets from.
+    /*!
+        \return the departure timestamp in UTC.
+        \public
+        Gets the departure time and returns it.
+     */
     QDateTime from() const;
+    //! Gets until.
+    /*!
+        \return the arrival timestamp in UTC.
+        \public
+        Gets the arrival time and returns it.
+     */
     QDateTime until() const;
+    //! Gets the station URI.
+    /*!
+        \return The URI of the station
+        \public
+        Gets the URI of the station and returns it.
+     */
     QUrl stationURI() const;
+    //! Gets the current mode.
+    /*!
+        \return The mode of the factory
+        \public
+        Gets the current mode of the factory and returns it.
+     */
     QRail::LiveboardEngine::Board::Mode mode() const;
-    QRail::LiveboardEngine::Board *liveboard() const;
 
 protected:
     virtual void customEvent(QEvent *event);
@@ -87,6 +160,10 @@ private slots:
     void handleFragmentFactoryError();
 
 private:
+    enum class Direction {
+        PREVIOUS,
+        NEXT,
+    };
     QTimer *progressTimeoutTimer;
     mutable QMutex liveboardProcessingMutex;
     mutable QMutex liveboardAccessMutex;
@@ -121,6 +198,7 @@ private:
     void setIsExtending(bool isExtending);
     bool isAbortRequested() const;
     void setAbortRequested(bool abortRequested);
+    QRail::LiveboardEngine::Board *liveboard() const;
     explicit Factory(QObject *parent = nullptr);
 };
 } // namespace LiveboardEngine

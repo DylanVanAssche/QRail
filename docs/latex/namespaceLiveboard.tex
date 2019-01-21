@@ -10,35 +10,7 @@ Gets the until time and returns it.
 \subsection{Detailed Description}
 Gets the until time and returns it. 
 
-Sets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance to the given \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$factory.
-
-Gets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance and returns it.
-
-Sets the station U\+RI to the given Q\+Url \&station\+U\+RI.
-
-Gets the station U\+RI and returns it.
-
-Gets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} mode and returns it.
-
-Sets the Station\+Engine\+::\+Factory instance to the given Station\+Engine\+::\+Factory $\ast$stationfactory.
-
-Gets the Station\+Engine\+::\+Factory instance and returns it.
-
-Sets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} instance we\textquotesingle{}re currently using to the given \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} $\ast$liveboard.
-
-Gets the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} instance we\textquotesingle{}re currently using and returns it.
-
-Handles the incoming \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}} pages from the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}}.
-
-If the user wants to cancel the current operation, this method must be called before performing a new action.
-
-This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
-
-Retrieves a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI.
-
-Constructs a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} if none exists and returns the instance.
-
-Constructs a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} objects on the fly.
+Retrieves a liveboard by a station U\+RI and a time range.
 
 Sets the entries of the liveboard to the given Q\+List$<$\+Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle $\ast$$>$ \&entries.
 
@@ -62,15 +34,17 @@ Emits the from\+Changed signal.
 
 Emits the entries\+Changed signal.
 
-The \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. Calling this method will retrieve a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for the current time until the current time + 1 hour.
 
-The \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station.
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&url \\
+\hline
+{\em const} & Q\+Date\+Time \&from \\
+\hline
+{\em const} & Q\+Date\+Time \&until \\
+\hline
+{\em const} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode\\
+\hline
+\end{DoxyParams}
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
 
-New pages are requested if the time range isn\textquotesingle{}t fulfilled in D\+E\+S\+C\+E\+N\+D\+I\+NG order of the departure time.
-
-\begin{DoxyNote}{Note}
-If you want to retrieve the full intermediary stops of each vehicle in the \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} you can use the \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}}.
-\end{DoxyNote}
-Parses the incoming pages in a separate thread using the Qt\+Concurrent framework. If the finished parameter is set to true, the Liveboard\+Engine\+::\+Board is ready and the finished signal is emitted.
-
-Emits the station\+U\+R\+I\+Changed signal. 
+Retrieves a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI. The \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. 

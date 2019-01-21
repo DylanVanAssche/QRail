@@ -55,10 +55,10 @@ public:
     explicit Board(QObject *parent = nullptr);
     //! QRail::LiveboardEngine::Board constructor: full.
     /*!
-        \param entries
-        \param station
-        \param from
-        \param until
+        \param entries a list of entries.
+        \param station the associated station.
+        \param from the departure time.
+        \param until the arrival time.
         \param parent QObject parent-child memory management.
         \public
         Constructs a QRail::LiveboardEngine::Board with the given parent.

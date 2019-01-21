@@ -29,7 +29,7 @@ var searchData=
   ['device',['device',['../classOS.html#a800e819bbb7aa20945893d138b2a1bb3',1,'OS']]],
   ['devicepixelratio',['devicepixelratio',['../classOS.html#aa40d035f4f4b1f67c6c103cd3b3cfc08',1,'OS::devicepixelratio()'],['../classOS.html#abec33b96eb8c7def86f6f918dc1849c0',1,'OS::devicepixelratio()']]],
   ['devicepixelratiochanged',['devicepixelratioChanged',['../classOS.html#a0ecbe56e6ec612ba6f78af5086505751',1,'OS']]],
-  ['direction',['Direction',['../classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188ba',1,'QRail::LiveboardEngine::Factory::Direction()'],['../classQRail_1_1Fragments_1_1Fragment.html#a245aaaea9da4258cba1fa53335b05546',1,'QRail::Fragments::Fragment::direction()']]],
+  ['direction',['direction',['../classQRail_1_1Fragments_1_1Fragment.html#a245aaaea9da4258cba1fa53335b05546',1,'QRail::Fragments::Fragment']]],
   ['directionchanged',['directionChanged',['../classQRail_1_1Fragments_1_1Fragment.html#a011ffdebc6a0b21813e176b178bd98c1',1,'QRail::Fragments::Fragment']]],
   ['disabledparkingspots',['disabledParkingSpots',['../classQRail_1_1StationEngine_1_1Station.html#a462fa31e61a725a498055b3fcba8cce5',1,'QRail::StationEngine::Station']]],
   ['disabledparkingspotschanged',['disabledParkingSpotsChanged',['../classQRail_1_1StationEngine_1_1Station.html#a10925196dc9a1414b0e1777e080cfd24',1,'QRail::StationEngine::Station']]],

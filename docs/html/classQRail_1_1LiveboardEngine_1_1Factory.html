@@ -66,7 +66,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
@@ -76,6 +75,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>An <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">LiveboardEngine::Factory</a> allows you to generate <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">LiveboardEngine::Board</a> objects.  
+ <a href="classQRail_1_1LiveboardEngine_1_1Factory.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="liveboardfactory_8h_source.html">liveboardfactory.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for QRail::LiveboardEngine::Factory:</div>
@@ -84,13 +86,6 @@ Inheritance diagram for QRail::LiveboardEngine::Factory:</div>
   <img src="classQRail_1_1LiveboardEngine_1_1Factory.png" alt=""/>
  </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a48dd4397653344eb07eb3212c2a188ba"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188ba">Direction</a> { <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188baa315ba7a868d45a9cb131c8dca3166b51">Direction::PREVIOUS</a>, 
-<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188baa47559fb833ff58321570e5e877b467f6">Direction::NEXT</a>
- }</td></tr>
-<tr class="separator:a48dd4397653344eb07eb3212c2a188ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
 <tr class="memitem:a32f0025c70c2c793d66208f558a7a355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a32f0025c70c2c793d66208f558a7a355">fromChanged</a> ()</td></tr>
@@ -107,7 +102,7 @@ Signals</h2></td></tr>
 <tr class="separator:a81b2d8c3bde4886199fba81e09fd8cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab71b4c2d7d4f99fd4b12b0e92c0d8965"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#ab71b4c2d7d4f99fd4b12b0e92c0d8965">processing</a> (const QUrl &amp;uri)</td></tr>
 <tr class="separator:ab71b4c2d7d4f99fd4b12b0e92c0d8965"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a429744d6ed2685d62fe554dd2e84cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a3a429744d6ed2685d62fe554dd2e84cb">finished</a> (<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> *<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a6534f49a21cd36099bd2bdece775e8cc">liveboard</a>)</td></tr>
+<tr class="memitem:a3a429744d6ed2685d62fe554dd2e84cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a3a429744d6ed2685d62fe554dd2e84cb">finished</a> (<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> *liveboard)</td></tr>
 <tr class="separator:a3a429744d6ed2685d62fe554dd2e84cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a554a8d4a9cdd0e0306763a003036ef93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a554a8d4a9cdd0e0306763a003036ef93">stream</a> (<a class="el" href="classQRail_1_1VehicleEngine_1_1Vehicle.html">QRail::VehicleEngine::Vehicle</a> *entry)</td></tr>
 <tr class="separator:a554a8d4a9cdd0e0306763a003036ef93"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,29 +110,36 @@ Signals</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adc3e3cb8c87171641f33f77367074a02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#adc3e3cb8c87171641f33f77367074a02">getLiveboardByStationURI</a> (const QUrl &amp;uri, const <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e">QRail::LiveboardEngine::Board::Mode</a> &amp;<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a03deeb607999848d402a5a3af40967f4">mode</a>=<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6ea560e6dfa758a32c703224545b841a386">QRail::LiveboardEngine::Board::Mode::DEPARTURES</a>)</td></tr>
+<tr class="memdesc:adc3e3cb8c87171641f33f77367074a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a liveboard by a station URI.  <a href="#adc3e3cb8c87171641f33f77367074a02">More...</a><br /></td></tr>
 <tr class="separator:adc3e3cb8c87171641f33f77367074a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fc799d424334fe21be54a3cba0853be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a3fc799d424334fe21be54a3cba0853be">getLiveboardByStationURI</a> (const QUrl &amp;uri, const QDateTime &amp;<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a883b4e0b9af113d312c6828b64d07258">from</a>, const QDateTime &amp;<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a040529d305e2cc4d19b68f48817f7a90">until</a>, const <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e">QRail::LiveboardEngine::Board::Mode</a> &amp;<a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a03deeb607999848d402a5a3af40967f4">mode</a>=<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6ea560e6dfa758a32c703224545b841a386">QRail::LiveboardEngine::Board::Mode::DEPARTURES</a>)</td></tr>
 <tr class="separator:a3fc799d424334fe21be54a3cba0853be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad769a2f6bcfe1b411d83bd59bc4bc83b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#ad769a2f6bcfe1b411d83bd59bc4bc83b">getNextResultsForLiveboard</a> (<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> *board)</td></tr>
+<tr class="memdesc:ad769a2f6bcfe1b411d83bd59bc4bc83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the liveboard with next results.  <a href="#ad769a2f6bcfe1b411d83bd59bc4bc83b">More...</a><br /></td></tr>
 <tr class="separator:ad769a2f6bcfe1b411d83bd59bc4bc83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01901090bd5f8be7d6f7c7f52ed88db0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a01901090bd5f8be7d6f7c7f52ed88db0">getPreviousResultsForLiveboard</a> (<a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> *board)</td></tr>
+<tr class="memdesc:a01901090bd5f8be7d6f7c7f52ed88db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extend the liveboard with previous results.  <a href="#a01901090bd5f8be7d6f7c7f52ed88db0">More...</a><br /></td></tr>
 <tr class="separator:a01901090bd5f8be7d6f7c7f52ed88db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a581cb60c12dea0af977ea08c64e0c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a5a581cb60c12dea0af977ea08c64e0c8">abortCurrentOperation</a> ()</td></tr>
+<tr class="memdesc:a5a581cb60c12dea0af977ea08c64e0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel the current operation.  <a href="#a5a581cb60c12dea0af977ea08c64e0c8">More...</a><br /></td></tr>
 <tr class="separator:a5a581cb60c12dea0af977ea08c64e0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a883b4e0b9af113d312c6828b64d07258"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a883b4e0b9af113d312c6828b64d07258">from</a> () const</td></tr>
+<tr class="memdesc:a883b4e0b9af113d312c6828b64d07258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets from.  <a href="#a883b4e0b9af113d312c6828b64d07258">More...</a><br /></td></tr>
 <tr class="separator:a883b4e0b9af113d312c6828b64d07258"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a040529d305e2cc4d19b68f48817f7a90"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a040529d305e2cc4d19b68f48817f7a90">until</a> () const</td></tr>
+<tr class="memdesc:a040529d305e2cc4d19b68f48817f7a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets until.  <a href="#a040529d305e2cc4d19b68f48817f7a90">More...</a><br /></td></tr>
 <tr class="separator:a040529d305e2cc4d19b68f48817f7a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad0820a9d150f8adb8599cf5be4855d0"><td class="memItemLeft" align="right" valign="top">QUrl&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#aad0820a9d150f8adb8599cf5be4855d0">stationURI</a> () const</td></tr>
+<tr class="memdesc:aad0820a9d150f8adb8599cf5be4855d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the station URI.  <a href="#aad0820a9d150f8adb8599cf5be4855d0">More...</a><br /></td></tr>
 <tr class="separator:aad0820a9d150f8adb8599cf5be4855d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03deeb607999848d402a5a3af40967f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e">QRail::LiveboardEngine::Board::Mode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a03deeb607999848d402a5a3af40967f4">mode</a> () const</td></tr>
+<tr class="memdesc:a03deeb607999848d402a5a3af40967f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current mode.  <a href="#a03deeb607999848d402a5a3af40967f4">More...</a><br /></td></tr>
 <tr class="separator:a03deeb607999848d402a5a3af40967f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6534f49a21cd36099bd2bdece775e8cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a6534f49a21cd36099bd2bdece775e8cc">liveboard</a> () const</td></tr>
-<tr class="separator:a6534f49a21cd36099bd2bdece775e8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a08e37a6538aad6341edf7066f10a63c7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html">QRail::LiveboardEngine::Factory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a08e37a6538aad6341edf7066f10a63c7">getInstance</a> ()</td></tr>
+<tr class="memdesc:a08e37a6538aad6341edf7066f10a63c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">QRail::LiveboardEngine::Factory</a> instance.  <a href="#a08e37a6538aad6341edf7066f10a63c7">More...</a><br /></td></tr>
 <tr class="separator:a08e37a6538aad6341edf7066f10a63c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -145,34 +147,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a214c37703d996797de42151ec41f55b2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a214c37703d996797de42151ec41f55b2">customEvent</a> (QEvent *event)</td></tr>
 <tr class="separator:a214c37703d996797de42151ec41f55b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a48dd4397653344eb07eb3212c2a188ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48dd4397653344eb07eb3212c2a188ba">&#9670;&nbsp;</a></span>Direction</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188ba">QRail::LiveboardEngine::Factory::Direction</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a48dd4397653344eb07eb3212c2a188baa315ba7a868d45a9cb131c8dca3166b51"></a>PREVIOUS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a48dd4397653344eb07eb3212c2a188baa47559fb833ff58321570e5e877b467f6"></a>NEXT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">LiveboardEngine::Factory</a> allows you to generate <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">LiveboardEngine::Board</a> objects. </p>
+<p>The factory design pattern allows you to create <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">Board</a> objects in an easy way. Several modes are available to fetch your <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">Board</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5a581cb60c12dea0af977ea08c64e0c8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a581cb60c12dea0af977ea08c64e0c8">&#9670;&nbsp;</a></span>abortCurrentOperation()</h2>
 
@@ -187,6 +165,9 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Cancel the current operation. </p>
+<p>If the user wants to cancel the current operation, this method must be called before performing a new action. </p>
 
 </div>
 </div>
@@ -283,6 +264,10 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets from. </p>
+<dl class="section return"><dt>Returns</dt><dd>the departure timestamp in UTC.</dd></dl>
+<p>Gets the departure time and returns it. </p>
+
 </div>
 </div>
 <a id="a32f0025c70c2c793d66208f558a7a355"></a>
@@ -333,6 +318,16 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">QRail::LiveboardEngine::Factory</a> instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">QObject</td><td>*parent = nullptr </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">QRail::LiveboardEngine::Factory</a> *factory</dd></dl>
+<p>Constructs a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html" title="An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.">QRail::LiveboardEngine::Factory</a> if none exists and returns the instance. </p>
+
 </div>
 </div>
 <a id="adc3e3cb8c87171641f33f77367074a02"></a>
@@ -360,6 +355,16 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Retrieves a liveboard by a station URI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td>QUrl &amp;url </td></tr>
+    <tr><td class="paramname">const</td><td><a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Retrieves a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> for a station given by it's URI. The <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. Calling this method will retrieve a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> for the current time until the current time + 0.5 hour. </p>
 
 </div>
 </div>
@@ -419,6 +424,15 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Extend the liveboard with next results. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> instance which we want to extend.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>You can extend a generated <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">Board</a> with next results by supplying the board to this method. The method will search until at least 1 next result has been found. </p>
+
 </div>
 </div>
 <a id="a01901090bd5f8be7d6f7c7f52ed88db0"></a>
@@ -437,22 +451,14 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a6534f49a21cd36099bd2bdece775e8cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6534f49a21cd36099bd2bdece775e8cc">&#9670;&nbsp;</a></span>liveboard()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html">QRail::LiveboardEngine::Board</a> * QRail::LiveboardEngine::Factory::liveboard </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Extend the liveboard with previous results. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">board</td><td>a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> instance which we want to extend.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>You can extend a generated <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">Board</a> with previous results by supplying the board to this method. The method will search until at least 1 previous result has been found. </p>
 
 </div>
 </div>
@@ -470,6 +476,10 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the current mode. </p>
+<dl class="section return"><dt>Returns</dt><dd>The mode of the factory</dd></dl>
+<p>Gets the current mode of the factory and returns it. </p>
 
 </div>
 </div>
@@ -565,6 +575,10 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the station URI. </p>
+<dl class="section return"><dt>Returns</dt><dd>The URI of the station</dd></dl>
+<p>Gets the URI of the station and returns it. </p>
+
 </div>
 </div>
 <a id="ac879b9931b3168dceb8e3ad111aa774c"></a>
@@ -632,6 +646,10 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets until. </p>
+<dl class="section return"><dt>Returns</dt><dd>the arrival timestamp in UTC.</dd></dl>
+<p>Gets the arrival time and returns it. </p>
 
 </div>
 </div>

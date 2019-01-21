@@ -8,7 +8,7 @@ var searchData=
   ['line_5flength',['LINE_LENGTH',['../logger_8h.html#ad5131de0b5004c64db5e79e8aac7471e',1,'logger.h']]],
   ['link',['link',['../classQRail_1_1AlertsEngine_1_1Message.html#a230424a1a57b9616ab6057cfa0d9aeba',1,'QRail::AlertsEngine::Message']]],
   ['linkchanged',['linkChanged',['../classQRail_1_1AlertsEngine_1_1Message.html#afccc9835aa7a6ec718a23cb5f8fbc73d',1,'QRail::AlertsEngine::Message']]],
-  ['liveboard',['Liveboard',['../namespaceLiveboard.html',1,'Liveboard'],['../classQRail_1_1LiveboardEngine_1_1Factory.html#a6534f49a21cd36099bd2bdece775e8cc',1,'QRail::LiveboardEngine::Factory::liveboard()']]],
+  ['liveboard',['Liveboard',['../namespaceLiveboard.html',1,'']]],
   ['liveboardboard_2ecpp',['liveboardboard.cpp',['../liveboardboard_8cpp.html',1,'']]],
   ['liveboardboard_2eh',['liveboardboard.h',['../liveboardboard_8h.html',1,'']]],
   ['liveboardfactory_2ecpp',['liveboardfactory.cpp',['../liveboardfactory_8cpp.html',1,'']]],

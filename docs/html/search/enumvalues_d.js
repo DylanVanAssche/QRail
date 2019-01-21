@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unknown',['UNKNOWN',['../classQRail_1_1VehicleEngine_1_1Stop.html#af078938bc06ff906b6fc843d8c0206faa696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::VehicleEngine::Stop::UNKNOWN()'],['../classQRail_1_1VehicleEngine_1_1Stop.html#ad967ed81b19762bd582c1af07354a6d4a696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::VehicleEngine::Stop::UNKNOWN()'],['../classQRail_1_1Fragments_1_1Fragment.html#ae3c308ba6dec16f36ecc5dba59f35af3a696b031073e74bf2cb98e5ef201d4aa3',1,'QRail::Fragments::Fragment::UNKNOWN()']]],
-  ['unsupported',['UNSUPPORTED',['../classQRail_1_1VehicleEngine_1_1Stop.html#ad967ed81b19762bd582c1af07354a6d4a40aa75f8e8cfdf7b660c5620e953229f',1,'QRail::VehicleEngine::Stop']]]
+  ['walking',['WALKING',['../classQRail_1_1RouterEngine_1_1RouteLeg.html#af31dfcc23f2ae80f7fb0feca24cb9816a606c114184493a665cf1f6a12fbab9d3',1,'QRail::RouterEngine::RouteLeg']]],
+  ['wednesday',['WEDNESDAY',['../classQRail_1_1StationEngine_1_1Station.html#ae8c109a1d5ce2bb41959e62e32392631aaaebdc947e9f7d4ea362e5dc4fe7f825',1,'QRail::StationEngine::Station']]]
 ];

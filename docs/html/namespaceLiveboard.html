@@ -70,21 +70,7 @@ $(function() {
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Gets the until time and returns it. </p>
-<p>Sets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> instance to the given <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> *factory.</p>
-<p>Gets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> instance and returns it.</p>
-<p>Sets the station URI to the given QUrl &amp;stationURI.</p>
-<p>Gets the station URI and returns it.</p>
-<p>Gets the <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> mode and returns it.</p>
-<p>Sets the StationEngine::Factory instance to the given StationEngine::Factory *stationfactory.</p>
-<p>Gets the StationEngine::Factory instance and returns it.</p>
-<p>Sets the <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> instance we're currently using to the given <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> *liveboard.</p>
-<p>Gets the <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> instance we're currently using and returns it.</p>
-<p>Handles the incoming <a class="el" href="classQRail_1_1Fragments_1_1Page.html">QRail::Fragments::Page</a> pages from the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a>.</p>
-<p>If the user wants to cancel the current operation, this method must be called before performing a new action.</p>
-<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</p>
-<p>Retrieves a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> for a station given by it's URI.</p>
-<p>Constructs a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html">QRail::LiveboardEngine::Factory</a> if none exists and returns the instance.</p>
-<p>Constructs a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Factory.html">QRail::LiveboardEngine::Factory</a> to generate <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> objects on the fly.</p>
+<p>Retrieves a liveboard by a station URI and a time range.</p>
 <p>Sets the entries of the liveboard to the given QList&lt;QRail::VehicleEngine::Vehicle *&gt; &amp;entries.</p>
 <p>Gets the entries of the liveboard and returns it.</p>
 <p>Sets the from time to the given QDateTime &amp;from.</p>
@@ -96,12 +82,17 @@ $(function() {
 <p>Emits the modeChanged signal.</p>
 <p>Emits the fromChanged signal.</p>
 <p>Emits the entriesChanged signal.</p>
-<p>The <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. Calling this method will retrieve a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> for the current time until the current time + 1 hour.</p>
-<p>The <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode parameter determines if the the liveboard should contain all the arrivals, departures of the station.</p>
-<p>New pages are requested if the time range isn't fulfilled in DESCENDING order of the departure time.</p>
-<dl class="section note"><dt>Note</dt><dd>If you want to retrieve the full intermediary stops of each vehicle in the <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> you can use the <a class="el" href="classQRail_1_1VehicleEngine_1_1Factory.html">QRail::VehicleEngine::Factory</a>.</dd></dl>
-<p>Parses the incoming pages in a separate thread using the QtConcurrent framework. If the finished parameter is set to true, the LiveboardEngine::Board is ready and the finished signal is emitted.</p>
-<p>Emits the stationURIChanged signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">const</td><td>QUrl &amp;url </td></tr>
+    <tr><td class="paramname">const</td><td>QDateTime &amp;from </td></tr>
+    <tr><td class="paramname">const</td><td>QDateTime &amp;until </td></tr>
+    <tr><td class="paramname">const</td><td><a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</p>
+<p>Retrieves a <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html" title="An LiveboardEngine::Board contains a liveboard.">QRail::LiveboardEngine::Board</a> for a station given by it's URI. The <a class="el" href="classQRail_1_1LiveboardEngine_1_1Board.html#a0ab6d318f405895f62c6e98cb2d86c6e" title="The different modes in which the Board can operate.">QRail::LiveboardEngine::Board::Mode</a> &amp;mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['previous',['PREVIOUS',['../classQRail_1_1LiveboardEngine_1_1Factory.html#a48dd4397653344eb07eb3212c2a188baa315ba7a868d45a9cb131c8dca3166b51',1,'QRail::LiveboardEngine::Factory']]]
+  ['regular',['REGULAR',['../classQRail_1_1Fragments_1_1Fragment.html#ae3c308ba6dec16f36ecc5dba59f35af3a820ead78f0fa32544c7ba38fe7ff53d9',1,'QRail::Fragments::Fragment']]]
 ];

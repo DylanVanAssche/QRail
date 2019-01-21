@@ -18,17 +18,6 @@
 using namespace QRail;
 QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance = nullptr;
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief QRail::LiveboardEngine::Factory constructor
- * @param QObject *parent = nullptr
- * @package Liveboard
- * @private
- * Constructs a QRail::LiveboardEngine::Factory to generate
- * QRail::LiveboardEngine::Board objects on the fly.
- */
 QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
@@ -50,18 +39,6 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets a QRail::LiveboardEngine::Factory instance
- * @param QObject *parent = nullptr
- * @return QRail::LiveboardEngine::Factory *factory
- * @package Liveboard
- * @public
- * Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
- * instance.
- */
 QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance()
 {
     // Singleton pattern
@@ -73,22 +50,6 @@ QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance()
 }
 
 // Invokers
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Retrieves a liveboard by a station URI
- * @param const QUrl &url
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @overload
- * @public
- * Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
- * The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
- * liveboard should contain all the arrivals, departures of the station.
- * Calling this method will retrieve a QRail::LiveboardEngine::Board for the
- * current time until the current time + 1 hour.
- */
 void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
@@ -98,22 +59,6 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                    mode);
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Retrieves a liveboard by a station URI and a time range
- * @param const QUrl &url
- * @param const QDateTime &from
- * @param const QDateTime &until
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @overload
- * @public
- * Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
- * The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
- * liveboard should contain all the arrivals, departures of the station.
- */
 void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QDateTime &from,
                                                                const QDateTime &until,
@@ -193,17 +138,6 @@ void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::B
         qCritical() << "hydraPrevious URI invalid, can't extend liveboard";
     }
 }
-
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 25 Nov 2018
- * @brief Cancel the current operation.
- * @package Liveboard
- * @public
- * If the user wants to cancel the current operation,
- * this method must be called before performing a new action.
- */
 void LiveboardEngine::Factory::abortCurrentOperation()
 {
     qInfo() << "Abort registered, processing!";
@@ -211,18 +145,6 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 }
 
 // Helpers
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Handler for the received QRail::Fragments::Page pages.
- * @param QRail::Fragments::Page *page
- * @package Liveboard
- * @public
- * Handles the incoming QRail::Fragments::Page pages from the
- * QRail::Fragments::Factory. New pages are requested if the time range isn't
- * fulfilled in DESCENDING order of the departure time.
- */
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:"
@@ -261,20 +183,6 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     this->parsePage(page, finished);
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Parser thread for the received pages
- * @param QRail::Fragments::Page *page
- * @param const bool &finished
- * @package Liveboard
- * @note If you want to retrieve the full intermediary stops of each vehicle in the QRail::LiveboardEngine::Board you can use the QRail::VehicleEngine::Factory.
- * @public
- * Parses the incoming pages in a separate thread using the QtConcurrent framework.
- * If the finished parameter is set to true, the LiveboardEngine::Board is ready and
- * the finished signal is emitted.
- */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bool &finished)
 {
     // Update hydra pagination
@@ -428,17 +336,6 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 }
 
 // Getters & Setters
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::LiveboardEngine::Board instance
- * @return QRail::LiveboardEngine::Board *liveboard
- * @package Liveboard
- * @public
- * Gets the QRail::LiveboardEngine::Board instance we're currently using and
- * returns it.
- */
 QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() const
 {
     // Lock using QMutexLocker due concurrent access
@@ -474,7 +371,7 @@ void LiveboardEngine::Factory::handleTimeout()
     qCritical() << "Liveboard timed out, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Liveboard timed out, the operation has been aborted!");
-    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
 }
 
 void LiveboardEngine::Factory::handleFragmentFactoryError()
@@ -482,20 +379,9 @@ void LiveboardEngine::Factory::handleFragmentFactoryError()
     qCritical() << "Liveboard fragment factory error, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Liveboard fragment factory error, the operation has been aborted!");
-    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the QRail::LiveboardEngine::Board instance
- * @param QRail::LiveboardEngine::Board *liveboard
- * @package Liveboard
- * @public
- * Sets the QRail::LiveboardEngine::Board instance we're currently using to the
- * given QRail::LiveboardEngine::Board *liveboard.
- */
 void QRail::LiveboardEngine::Factory::setLiveboard(QRail::LiveboardEngine::Board *liveboard)
 {
     // Lock using QMutexLocker due concurrent access
@@ -526,16 +412,6 @@ void LiveboardEngine::Factory::deleteUsedPages()
     qDebug() << "Liveboard pages scheduled for deletion";
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the StationEngine::Factory instance
- * @return StationEngine::Factory *factory
- * @package Liveboard
- * @private
- * Gets the StationEngine::Factory instance and returns it.
- */
 StationEngine::Factory *QRail::LiveboardEngine::Factory::stationFactory() const
 {
     return m_stationFactory;
@@ -553,178 +429,61 @@ void QRail::LiveboardEngine::Factory::setIsExtending(bool isExtending)
     m_isExtending = isExtending;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the StationEngine::Factory instance
- * @param StationEngine::Factory *factory
- * @package Liveboard
- * @private
- * Sets the StationEngine::Factory instance to the given StationEngine::Factory
- * *stationfactory.
- */
 void QRail::LiveboardEngine::Factory::setStationFactory(StationEngine::Factory *stationFactory)
 {
     m_stationFactory = stationFactory;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::LiveboardEngine::Board::Mode mode
- * @return const QRail::LiveboardEngine::Board::Mode mode
- * @package Liveboard
- * @public
- * Gets the QRail::LiveboardEngine::Board::Mode mode and returns it.
- */
 QRail::LiveboardEngine::Board::Mode QRail::LiveboardEngine::Factory::mode() const
 {
     return m_mode;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the mode
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @public
- * Sets the mode of the liveboard to the given
- * QRail::LiveboardEngine::Board::Mode &mode. Emits the modeChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setMode(const QRail::LiveboardEngine::Board::Mode &mode)
 {
     m_mode = mode;
     emit this->modeChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the station URI
- * @return const QUrl stationURI
- * @package Liveboard
- * @public
- * Gets the station URI and returns it.
- */
 QUrl QRail::LiveboardEngine::Factory::stationURI() const
 {
     return m_stationURI;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the station URI
- * @param const QUrl &stationURI
- * @package Liveboard
- * @public
- * Sets the station URI to the given QUrl &stationURI.
- * Emits the stationURIChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setStationURI(const QUrl &stationURI)
 {
     m_stationURI = stationURI;
     emit this->stationURIChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the until time
- * @return const QDateTime until
- * @package Liveboard
- * @public
- * Gets the until time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Factory::until() const
 {
     return m_until;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the until time
- * @param const QDateTime &until
- * @package Liveboard
- * @public
- * Sets the until time to the given QDateTime &until.
- * Emits the untilChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setUntil(const QDateTime &until)
 {
     m_until = until;
     emit this->untilChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the from time
- * @return const QDateTime from
- * @package Liveboard
- * @public
- * Gets the from time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Factory::from() const
 {
     return m_from;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the from time
- * @param const QDateTime &from
- * @package Liveboard
- * @public
- * Sets the from time to the given QDateTime &from.
- * Emits the fromChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setFrom(const QDateTime &from)
 {
     m_from = from;
     emit this->fromChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::Fragments::Factory instance
- * @return QRail::Fragments::Factory *factory
- * @package Liveboard
- * @private
- * Gets the QRail::Fragments::Factory instance and returns it.
- */
 QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() const
 {
     return m_fragmentsFactory;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the QRail::Fragments::Factory instance
- * @param QRail::Fragments::Factory *factory
- * @package Liveboard
- * @private
- * Sets the QRail::Fragments::Factory instance to the given
- * QRail::Fragments::Factory *factory.
- */
-void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory
-                                                          *fragmentsFactory)
+void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory *fragmentsFactory)
 {
     m_fragmentsFactory = fragmentsFactory;
 }

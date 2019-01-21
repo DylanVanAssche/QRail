@@ -19,23 +19,23 @@ Inheritance diagram for Q\+Rail\+::Liveboard\+Engine\+::Factory\+:\begin{figure}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a32f0025c70c2c793d66208f558a7a355}{from\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if from has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a81b9ba54949f8389e63a65c4e91e3d19}{until\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if from has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_ac879b9931b3168dceb8e3ad111aa774c}{station\+U\+R\+I\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if the associated station U\+RI has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a77c3c40bf35560a3893a3f162156f41a}{mode\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if the mode of the factory has been changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a0c8fab5c22d9a46f00afea2fd9224421}{error}} (const Q\+String \&message)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if we encountered an error during processing. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a81b2d8c3bde4886199fba81e09fd8cdd}{requested}} (const Q\+Url \&uri)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if we requested a page. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_ab71b4c2d7d4f99fd4b12b0e92c0d8965}{processing}} (const Q\+Url \&uri)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if we started processing a page. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a3a429744d6ed2685d62fe554dd2e84cb}{finished}} (\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} $\ast$liveboard)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted if \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} is ready. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a554a8d4a9cdd0e0306763a003036ef93}{stream}} (\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$entry)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Emitted if stream has new entries. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -66,7 +66,7 @@ static \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+L
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory_a214c37703d996797de42151ec41f55b2}{custom\+Event}} (Q\+Event $\ast$event)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Dispatcher protected method, only here as a reference. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -91,17 +91,29 @@ If the user wants to cancel the current operation, this method must be called be
 \subsubsection{\texorpdfstring{customEvent()}{customEvent()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::custom\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+
+
+Dispatcher protected method, only here as a reference. 
+
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a0c8fab5c22d9a46f00afea2fd9224421}\label{classQRail_1_1LiveboardEngine_1_1Factory_a0c8fab5c22d9a46f00afea2fd9224421}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!error@{error}}
 \index{error@{error}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{error}{error}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted if we encountered an error during processing. 
+
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a3a429744d6ed2685d62fe554dd2e84cb}\label{classQRail_1_1LiveboardEngine_1_1Factory_a3a429744d6ed2685d62fe554dd2e84cb}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!finished@{finished}}
 \index{finished@{finished}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{finished}{finished}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::finished (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} $\ast$}]{liveboard }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted if \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Board}} is ready. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a883b4e0b9af113d312c6828b64d07258}\label{classQRail_1_1LiveboardEngine_1_1Factory_a883b4e0b9af113d312c6828b64d07258}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!from@{from}}
@@ -121,6 +133,10 @@ Gets the departure time and returns it. \mbox{\Hypertarget{classQRail_1_1Liveboa
 \index{fromChanged@{fromChanged}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{fromChanged}{fromChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::from\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted if from has been changed. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a08e37a6538aad6341edf7066f10a63c7}\label{classQRail_1_1LiveboardEngine_1_1Factory_a08e37a6538aad6341edf7066f10a63c7}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!getInstance@{getInstance}}
@@ -212,17 +228,29 @@ Gets the current mode of the factory and returns it. \mbox{\Hypertarget{classQRa
 \subsubsection{\texorpdfstring{modeChanged}{modeChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::mode\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted if the mode of the factory has been changed. 
+
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_ab71b4c2d7d4f99fd4b12b0e92c0d8965}\label{classQRail_1_1LiveboardEngine_1_1Factory_ab71b4c2d7d4f99fd4b12b0e92c0d8965}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!processing@{processing}}
 \index{processing@{processing}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{processing}{processing}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::processing (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted if we started processing a page. 
+
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a81b2d8c3bde4886199fba81e09fd8cdd}\label{classQRail_1_1LiveboardEngine_1_1Factory_a81b2d8c3bde4886199fba81e09fd8cdd}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!requested@{requested}}
 \index{requested@{requested}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{requested}{requested}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::requested (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted if we requested a page. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_aad0820a9d150f8adb8599cf5be4855d0}\label{classQRail_1_1LiveboardEngine_1_1Factory_aad0820a9d150f8adb8599cf5be4855d0}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!stationURI@{stationURI}}
@@ -243,11 +271,19 @@ Gets the U\+RI of the station and returns it. \mbox{\Hypertarget{classQRail_1_1L
 \subsubsection{\texorpdfstring{stationURIChanged}{stationURIChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::station\+U\+R\+I\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted if the associated station U\+RI has been changed. 
+
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a554a8d4a9cdd0e0306763a003036ef93}\label{classQRail_1_1LiveboardEngine_1_1Factory_a554a8d4a9cdd0e0306763a003036ef93}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!stream@{stream}}
 \index{stream@{stream}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{stream}{stream}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted if stream has new entries. 
 
 \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a040529d305e2cc4d19b68f48817f7a90}\label{classQRail_1_1LiveboardEngine_1_1Factory_a040529d305e2cc4d19b68f48817f7a90}} 
 \index{QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}!until@{until}}
@@ -267,6 +303,10 @@ Gets the arrival time and returns it. \mbox{\Hypertarget{classQRail_1_1Liveboard
 \index{untilChanged@{untilChanged}!QRail::LiveboardEngine::Factory@{QRail::LiveboardEngine::Factory}}
 \subsubsection{\texorpdfstring{untilChanged}{untilChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory\+::until\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted if from has been changed. 
 
 
 

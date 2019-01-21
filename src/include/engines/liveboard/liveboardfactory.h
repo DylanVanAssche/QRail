@@ -141,17 +141,27 @@ public:
     QRail::LiveboardEngine::Board::Mode mode() const;
 
 protected:
+    //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
 
 signals:
+    //! Emitted if from has been changed.
     void fromChanged();
+    //! Emitted if from has been changed.
     void untilChanged();
+    //! Emitted if the associated station URI has been changed.
     void stationURIChanged();
+    //! Emitted if the mode of the factory has been changed.
     void modeChanged();
+    //! Emitted if we encountered an error during processing.
     void error(const QString &message);
+    //! Emitted if we requested a page.
     void requested(const QUrl &uri);
+    //! Emitted if we started processing a page.
     void processing(const QUrl &uri);
+    //! Emitted if Board is ready.
     void finished(QRail::LiveboardEngine::Board *liveboard);
+    //! Emitted if stream has new entries.
     void stream(QRail::VehicleEngine::Vehicle *entry);
 
 private slots:

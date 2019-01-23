@@ -73,6 +73,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>An <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a> allows you to generate <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">StationEngine::Station</a> objects.  
+ <a href="classQRail_1_1StationEngine_1_1Factory.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="stationfactory_8h_source.html">stationfactory.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for QRail::StationEngine::Factory:</div>
@@ -99,10 +102,13 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac66b314d8a7787511a6677a24ab321ff"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">Factory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#ac66b314d8a7787511a6677a24ab321ff">getInstance</a> ()</td></tr>
-<tr class="memdesc:ac66b314d8a7787511a6677a24ab321ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> instance.  <a href="#ac66b314d8a7787511a6677a24ab321ff">More...</a><br /></td></tr>
+<tr class="memdesc:ac66b314d8a7787511a6677a24ab321ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a> instance.  <a href="#ac66b314d8a7787511a6677a24ab321ff">More...</a><br /></td></tr>
 <tr class="separator:ac66b314d8a7787511a6677a24ab321ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a> allows you to generate <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">StationEngine::Station</a> objects. </p>
+<p>The factory design pattern allows you to create <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">Station</a> objects in an easy way. Several modes are available to fetch your <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">Station</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac66b314d8a7787511a6677a24ab321ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac66b314d8a7787511a6677a24ab321ff">&#9670;&nbsp;</a></span>getInstance()</h2>
 
@@ -126,9 +132,9 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> instance. </p>
-<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a>.</dd></dl>
-<p>Constructs a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> if none exists and returns the instance. </p>
+<p>Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a> instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a>.</dd></dl>
+<p>Constructs a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html" title="An StationEngine::Factory allows you to generate StationEngine::Station objects.">StationEngine::Factory</a> if none exists and returns the instance. </p>
 
 </div>
 </div>
@@ -161,14 +167,14 @@ Static Public Member Functions</h2></td></tr>
 <p>Gets the closest station in the area. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>a GPS coordinate to define the center of the search circle. </td></tr>
-    <tr><td class="paramname">radius</td><td>the radius of the search circle in kilometres. </td></tr>
+    <tr><td class="paramname">position</td><td>A GPS coordinate to define the center of the search circle. </td></tr>
+    <tr><td class="paramname">radius</td><td>The radius of the search circle in kilometres. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A QPair with the <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> object and it's distance from the given position.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A QPair with the <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">StationEngine::Station</a> object and it's distance from the given position.</dd></dl>
 <p>Fetches nearby stations from database using the Haversine formula.<br />
- In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is returned. </p>
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html" title="An StationEngine::NullStation contains a empty station.">StationEngine::NullStation</a> instance is returned. </p>
 
 </div>
 </div>
@@ -191,13 +197,13 @@ Static Public Member Functions</h2></td></tr>
 <p>Retrieves a station by its URI. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">uri</td><td>the URI of the station you want to retrieve. </td></tr>
+    <tr><td class="paramname">uri</td><td>The URI of the station you want to retrieve. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> with all the data about the requested station.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">StationEngine::Station</a> with all the data about the requested station.</dd></dl>
 <p>Searches the database by the URI for a certain station.<br />
- In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is returned. </p>
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html" title="An StationEngine::NullStation contains a empty station.">StationEngine::NullStation</a> instance is returned. </p>
 
 </div>
 </div>
@@ -220,7 +226,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Find matching stations by their name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">query</td><td>a QString search query. </td></tr>
+    <tr><td class="paramname">query</td><td>A QString search query. </td></tr>
   </table>
   </dd>
 </dl>
@@ -265,14 +271,14 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">position</td><td>a GPS coordinate to define the center of the search circle. </td></tr>
-    <tr><td class="paramname">radius</td><td>the radius of the search circle in kilometres. </td></tr>
-    <tr><td class="paramname">maxResults</td><td>limits the amount of results this method can return. </td></tr>
+    <tr><td class="paramname">radius</td><td>The radius of the search circle in kilometres. </td></tr>
+    <tr><td class="paramname">maxResults</td><td>Limits the amount of results this method can return. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A QList&lt;QPair&lt;QRail::StationEngine::Station *, qreal&gt;&gt; with a <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> object and the distance to station.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A QList&lt;QPair&lt;QRail::StationEngine::Station *, qreal&gt;&gt; with a <a class="el" href="classQRail_1_1StationEngine_1_1Station.html" title="An StationEngine::Station contains station information.">StationEngine::Station</a> object and the distance to station.</dd></dl>
 <p>Fetches nearby stations from database using the Haversine formula (Google's solution).<br />
- In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is pushed to the QList&lt;QPair&lt;StationEngine::Station *, qreal&gt;&gt; &amp;nearbyStations. <br />
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html" title="An StationEngine::NullStation contains a empty station.">StationEngine::NullStation</a> instance is pushed to the QList&lt;QPair&lt;StationEngine::Station *, qreal&gt;&gt; &amp;nearbyStations. <br />
  If you supply invalid input data, an empty QList is returned. </p>
 
 </div>

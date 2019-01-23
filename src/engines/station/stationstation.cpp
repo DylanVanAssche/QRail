@@ -17,16 +17,6 @@
 #include "engines/station/stationstation.h"
 using namespace QRail;
 
-/**
- * @file stationstation.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief StationEngine::Station constructor: empty
- * @param QObject *parent
- * @package StationEngine
- * @public
- * Constructs a StationEngine::Station with the given parent.
- */
 StationEngine::Station::Station(QObject *parent): QObject(parent)
 {
 

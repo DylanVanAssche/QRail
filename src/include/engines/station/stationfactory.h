@@ -48,6 +48,11 @@
 
 namespace QRail {
 namespace StationEngine {
+/**
+ * @class Factory
+ * @brief An StationEngine::Factory allows you to generate StationEngine::Station objects.
+ * The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station.
+ */
 class QRAIL_SHARED_EXPORT Factory : public QObject
 {
     Q_OBJECT
@@ -61,7 +66,7 @@ public:
     static Factory *getInstance();
     //! Retrieves a station by its URI.
     /*!
-        \param uri the URI of the station you want to retrieve.
+        \param uri The URI of the station you want to retrieve.
         \return An instance of StationEngine::Station with all the data about the requested station.
         \public
         Searches the database by the URI for a certain station.<br>
@@ -71,8 +76,8 @@ public:
     //! Gets all the station in the area.
     /*!
         \param position a GPS coordinate to define the center of the search circle.
-        \param radius the radius of the search circle in kilometres.
-        \param maxResults limits the amount of results this method can return.
+        \param radius The radius of the search circle in kilometres.
+        \param maxResults Limits the amount of results this method can return.
         \return A QList<QPair<QRail::StationEngine::Station *, qreal>> with a StationEngine::Station object and the distance to station.
         \public
         Fetches nearby stations from database using the Haversine formula (Google's solution).<br>
@@ -85,8 +90,8 @@ public:
                                                                                         const quint32 &maxResults);
     //! Gets the closest station in the area.
     /*!
-        \param position a GPS coordinate to define the center of the search circle.
-        \param radius the radius of the search circle in kilometres.
+        \param position A GPS coordinate to define the center of the search circle.
+        \param radius The radius of the search circle in kilometres.
         \return A QPair with the StationEngine::Station object and it's distance from the given position.
         \public
         Fetches nearby stations from database using the Haversine formula.<br>
@@ -96,7 +101,7 @@ public:
                                                                               const qreal radius);
     //! Find matching stations by their name.
     /*!
-        \param query a QString search query.
+        \param query A QString search query.
         \return a QList<StationEngine::Station *station> of matching station with the query.
         \public
         Ideal to implement a search engine based on the station name.

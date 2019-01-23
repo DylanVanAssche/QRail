@@ -2,6 +2,11 @@
 \label{classQRail_1_1StationEngine_1_1Factory}\index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
 
 
+An \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} allows you to generate \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} objects.  
+
+
+
+
 {\ttfamily \#include $<$stationfactory.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Station\+Engine\+::Factory\+:\begin{figure}[H]
@@ -27,6 +32,11 @@ Q\+List$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\
 static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}} $\ast$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}{get\+Instance}} ()
 \begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+An \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} allows you to generate \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} objects. 
+
+The factory design pattern allows you to create \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station}} objects in an easy way. Several modes are available to fetch your \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station}}. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}\label{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}} 
@@ -54,9 +64,9 @@ Gets the closest station in the area.
 
 
 \begin{DoxyParams}{Parameters}
-{\em position} & a G\+PS coordinate to define the center of the search circle. \\
+{\em position} & A G\+PS coordinate to define the center of the search circle. \\
 \hline
-{\em radius} & the radius of the search circle in kilometres. \\
+{\em radius} & The radius of the search circle in kilometres. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -75,7 +85,7 @@ Retrieves a station by its U\+RI.
 
 
 \begin{DoxyParams}{Parameters}
-{\em uri} & the U\+RI of the station you want to retrieve. \\
+{\em uri} & The U\+RI of the station you want to retrieve. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -94,7 +104,7 @@ Find matching stations by their name.
 
 
 \begin{DoxyParams}{Parameters}
-{\em query} & a Q\+String search query. \\
+{\em query} & A Q\+String search query. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -114,9 +124,9 @@ Gets all the station in the area.
 \begin{DoxyParams}{Parameters}
 {\em position} & a G\+PS coordinate to define the center of the search circle. \\
 \hline
-{\em radius} & the radius of the search circle in kilometres. \\
+{\em radius} & The radius of the search circle in kilometres. \\
 \hline
-{\em max\+Results} & limits the amount of results this method can return. \\
+{\em max\+Results} & Limits the amount of results this method can return. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

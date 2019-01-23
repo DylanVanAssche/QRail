@@ -33,10 +33,16 @@
 
 namespace QRail {
 namespace StationEngine {
+/**
+ * @class Station
+ * @brief An StationEngine::Station contains station information.
+ * A station contains all the information about a stop.
+ */
 class QRAIL_SHARED_EXPORT Station : public QObject
 {
     Q_OBJECT
 public:
+    //! The days of the week
     enum class Day {
         MONDAY,
         TUESDAY,
@@ -46,9 +52,21 @@ public:
         SATURDAY,
         SUNDAY
     };
-    // Empty station for NullStation
+    //! Constructs a Station object.
+    /*!
+        \param parent QObject parent-child memory management.
+     */
     explicit Station(QObject *parent = nullptr);
-    // Without facilities
+    //! Constructs a Station object without facilities and no platforms.
+    /*!
+        \param uri The URI of the station.
+        \param name The name of the station.
+        \param country The country where you can find this station.
+        \param position The GPS position of it.
+        \param averageStopTimes The average amount of stops in this station.
+        \param officialTransferTimes The official time needed to transfer in this station.
+        \param parent QObject parent-child memory management.
+     */
     explicit Station(
         const QUrl &uri,
         const QMap<QLocale::Language, QString> &name,
@@ -57,7 +75,36 @@ public:
         const qreal &averageStopTimes,
         const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
-    // With facilities
+    //! Constructs a Station object with facilities and no platforms.
+    /*!
+        \param uri The URI of the station.
+        \param name The name of the station.
+        \param country The country where you can find this station.
+        \param position The GPS position of it.
+
+        \param address The address of the station.
+        \param hasTicketVendingMachine True if a ticket vending machine is available.
+        \param hasLuggageLockers True if luggage lockers are available.
+        \param hasFreeParking True if you can park your car here for free.
+        \param hasTaxi True if you can take a taxi here.
+        \param hasBicycleSpots True if the station provides bicycle spots.
+        \param hasBlueBike True if you can use the Blue Bike service here.
+        \param hasBus True if a bus stops here.
+        \param hasTram True if a tram stops here.
+        \param hasMetro True if a metro stops here.
+        \param hasWheelchairAvailable True if wheelchairs are available.
+        \param hasRamp True if a ramp is available for wheelchair users.
+        \param disabledParkingSpots True if disabled parking spots are available.
+        \param hasElevatedPlatform True if the platform is elevated.
+        \param hasEscalatorUp True if you can take the escalator up.
+        \param hasEscalatorDown True if you can take the escalator down.
+        \param hasElevatorPlatform True if the platform has an elevator.
+        \param hasAudioInductionLoop True if there's an audio induction loop.
+        \param openingHours A list of opening hours of the station services.
+        \param averageStopTimes The average amount of stops in this station.
+        \param officialTransferTimes The official time needed to transfer in this station.
+        \param parent QObject parent-child memory management.
+     */
     explicit Station(
         const QUrl &uri,
         const QMap<QLocale::Language, QString> &name,
@@ -85,7 +132,17 @@ public:
         const qreal &averageStopTimes,
         const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
-    // Without facilities and platforms
+    //! Constructs a Station object without facilities, but with platforms.
+    /*!
+        \param uri The URI of the station.
+        \param name The name of the station.
+        \param country The country where you can find this station.
+        \param position The GPS position of it.
+        \param averageStopTimes The average amount of stops in this station.
+        \param officialTransferTimes The official time needed to transfer in this station.
+        \param platforms The platforms associated with this station.
+        \param parent QObject parent-child memory management.
+     */
     explicit Station(
         const QUrl &uri,
         const QMap<QLocale::Language, QString> &name,
@@ -95,7 +152,37 @@ public:
         const quint32 &officialTransferTimes,
         const QMap<QUrl, QString> &platforms,
         QObject *parent = nullptr);
-    // With facilities and platforms
+    //! Constructs a Station object with facilities, but with platforms.
+    /*!
+        \param uri The URI of the station.
+        \param name The name of the station.
+        \param country The country where you can find this station.
+        \param position The GPS position of it.
+
+        \param address The address of the station.
+        \param hasTicketVendingMachine True if a ticket vending machine is available.
+        \param hasLuggageLockers True if luggage lockers are available.
+        \param hasFreeParking True if you can park your car here for free.
+        \param hasTaxi True if you can take a taxi here.
+        \param hasBicycleSpots True if the station provides bicycle spots.
+        \param hasBlueBike True if you can use the Blue Bike service here.
+        \param hasBus True if a bus stops here.
+        \param hasTram True if a tram stops here.
+        \param hasMetro True if a metro stops here.
+        \param hasWheelchairAvailable True if wheelchairs are available.
+        \param hasRamp True if a ramp is available for wheelchair users.
+        \param disabledParkingSpots True if disabled parking spots are available.
+        \param hasElevatedPlatform True if the platform is elevated.
+        \param hasEscalatorUp True if you can take the escalator up.
+        \param hasEscalatorDown True if you can take the escalator down.
+        \param hasElevatorPlatform True if the platform has an elevator.
+        \param hasAudioInductionLoop True if there's an audio induction loop.
+        \param openingHours A list of opening hours of the station services.
+        \param averageStopTimes The average amount of stops in this station.
+        \param officialTransferTimes The official time needed to transfer in this station.
+        \param platforms The platforms associated with this station.
+        \param parent QObject parent-child memory management.
+     */
     explicit Station(
         const QUrl &uri,
         const QMap<QLocale::Language, QString> &name,
@@ -178,30 +265,55 @@ public:
     void setPlatforms(const QMap<QUrl, QString> &platforms);
 
 signals:
+    //! Emitted if the URI has been changed.
     void uriChanged();
+    //! Emitted if the name has been changed.
     void nameChanged();
+    //! Emitted if the country has been changed.
     void countryChanged();
+    //! Emitted if the position has been changed.
     void positionChanged();
+    //! Emitted if the address has been changed.
     void addressChanged();
+    //! Emitted if the ticket vending state has been changed.
     void hasTicketVendingMachineChanged();
+    //! Emitted if the luggage locker state has been changed.
     void hasLuggageLockersChanged();
+    //! Emitted if the free parking state has been changed.
     void hasFreeParkingChanged();
+    //! Emitted if the taxi state has been changed.
     void hasTaxiChanged();
+    //! Emitted if the bicyle spots state has been changed.
     void hasBicylceSpotsChanged();
+    //! Emitted if the Blue Bike state has been changed.
     void hasBlueBikeChanged();
+    //! Emitted if the bus state has been changed.
     void hasBusChanged();
+    //! Emitted if the tram state has been changed.
     void hasTramChanged();
+    //! Emitted if the metro state has been changed.
     void hasMetroChanged();
+    //! Emitted if the wheelchair available state has been changed.
     void hasWheelchairAvailableChanged();
+    //! Emitted if the ramp state has been changed.
     void hasRampChanged();
+    //! Emitted if the disabled parking spots state has been changed.
     void disabledParkingSpotsChanged();
+    //! Emitted if the elevated platform state has been changed.
     void hasElevatedPlatformChanged();
+    //! Emitted if the escalator up state has been changed.
     void hasEscalatorUpChanged();
+    //! Emitted if the escalator down state has been changed.
     void hasEscalatorDownChanged();
+    //! Emitted if the audio induction loop state has been changed.
     void hasAudioInductionLoopChanged();
+    //! Emitted if the opening hours are changed.
     void openingHoursChanged();
+    //! Emitted if the average stop times has been changed.
     void averageStopTimesChanged();
+    //! Emitted if the official transfer times are changed.
     void officialTransferTimesChanged();
+    //! Emitted if the platforms are changed.
     void platformsChanged();
 
 private:

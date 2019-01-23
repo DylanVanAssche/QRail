@@ -26,10 +26,16 @@
 
 namespace QRail {
 namespace Fragments {
+//! A Fragments::Fragment contains a connection.
+/*!
+    \class Fragment
+    A Fragments holds a connection between 2 stations.
+ */
 class Fragment : public QObject
 {
     Q_OBJECT
 public:
+    //! The defined GTFS types by the GTFS specification.
     enum class GTFSTypes {
         REGULAR,
         NOTAVAILABLE,
@@ -37,7 +43,29 @@ public:
         MUSTCOORDINATEWITHDRIVER,
         UNKNOWN
     };
+    //! Constructs a Fragment.
+    /*!
+     * \param parent QObject parent-child memory management.
+     * \public
+     */
     explicit Fragment(QObject *parent = nullptr);
+    //! Constructs a Fragment.
+    /*!
+     * \param uri The URI of the fragment.
+     * \param departureStationURI The URI of the departure station of the connection.
+     * \param arrivalStationURI The URI of the arrival station of the connection.
+     * \param departureTime The departure time of the connection.
+     * \param arrivalTime The arrival time of the connection.
+     * \param departureDelay The departure delay of the connection.
+     * \param arrivalDelay The arrival delay of the connection.
+     * \param tripURI The URI of the trip of the vehicle.
+     * \param routeURI The URI of the route of the vehicle.
+     * \param direction The direction of the vehicle.
+     * \param pickupType The type of pickup in the departure station.
+     * \param dropOffType The type of drop off in the arrival station.
+     * \param parent QObject parent-child memory management.
+     * \public
+     */
     explicit Fragment(
         const QUrl &uri,
         const QUrl &departureStationURI,

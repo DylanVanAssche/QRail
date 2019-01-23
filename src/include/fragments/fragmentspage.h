@@ -25,6 +25,11 @@
 
 namespace QRail {
 namespace Fragments {
+//! A Fragments::Page contains a list of Fragments.
+/*!
+    \class Page
+    A Page has navigations properties to find the next and previous pages. Each page contains a list of Fragments (connections).
+ */
 class Page : public QObject
 {
     Q_OBJECT

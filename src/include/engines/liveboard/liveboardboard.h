@@ -32,10 +32,10 @@
 
 namespace QRail {
 namespace LiveboardEngine {
-/**
- * @class Board
- * @brief An LiveboardEngine::Board contains a liveboard.
- * A liveboard holds all the departing or arriving vehicles (depending on the mode) in a certain station.
+//! A LiveboardEngine::Board contains a liveboard.
+/*!
+    \class Board
+    A liveboard holds all the departing or arriving vehicles (depending on the mode) in a certain station.
  */
 class Board : public QObject
 {

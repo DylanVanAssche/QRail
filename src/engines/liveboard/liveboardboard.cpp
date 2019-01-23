@@ -146,32 +146,11 @@ void QRail::LiveboardEngine::Board::setStation(StationEngine::Station *station)
     emit this->stationChanged();
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the until time
- * @return const QDateTime until
- * @package Liveboard
- * @public
- * Gets the until time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Board::until() const
 {
     return m_until;
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the until time
- * @param const QDateTime &until
- * @package Liveboard
- * @public
- * Sets the until time to the given QDateTime &until.
- * Emits the untilChanged signal.
- */
 void QRail::LiveboardEngine::Board::setUntil(const QDateTime &until)
 {
     if(m_until.isValid() && m_until < until) {
@@ -183,64 +162,22 @@ void QRail::LiveboardEngine::Board::setUntil(const QDateTime &until)
     emit this->untilChanged();
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the mode
- * @return const QRail::LiveboardEngine::Board::Mode mode
- * @package Liveboard
- * @public
- * Gets the mode and returns it.
- */
 QRail::LiveboardEngine::Board::Mode QRail::LiveboardEngine::Board::mode() const
 {
     return m_mode;
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the mode
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @public
- * Sets the mode of the liveboard to the given QRail::LiveboardEngine::Board::Mode &mode.
- * Emits the modeChanged signal.
- */
 void QRail::LiveboardEngine::Board::setMode(const QRail::LiveboardEngine::Board::Mode &mode)
 {
     m_mode = mode;
     emit this->modeChanged();
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the from time
- * @return const QDateTime from
- * @package Liveboard
- * @public
- * Gets the from time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Board::from() const
 {
     return m_from;
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the from time
- * @param const QDateTime &from
- * @package Liveboard
- * @public
- * Sets the from time to the given QDateTime &from.
- * Emits the fromChanged signal.
- */
 void QRail::LiveboardEngine::Board::setFrom(const QDateTime &from)
 {
     if(m_from.isValid() && m_from > from) {
@@ -252,32 +189,11 @@ void QRail::LiveboardEngine::Board::setFrom(const QDateTime &from)
     emit this->fromChanged();
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the entries
- * @return const QList<QRail::VehicleEngine::Vehicle *> entries
- * @package Liveboard
- * @public
- * Gets the entries of the liveboard and returns it.
- */
 QList<QRail::VehicleEngine::Vehicle *> QRail::LiveboardEngine::Board::entries() const
 {
     return m_entries;
 }
 
-/**
- * @file liveboardboard.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the entries
- * @param const QList<QRail::VehicleEngine::Vehicle *> &entries
- * @package Liveboard
- * @public
- * Sets the entries of the liveboard to the given QList<QRail::VehicleEngine::Vehicle *> &entries.
- * Emits the entriesChanged signal.
- */
 void QRail::LiveboardEngine::Board::setEntries(const QList<QRail::VehicleEngine::Vehicle *>
                                                &entries)
 {

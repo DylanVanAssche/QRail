@@ -18,17 +18,6 @@
 using namespace QRail;
 QRail::Fragments::Factory *QRail::Fragments::Factory::m_instance = nullptr;
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief QRail::Fragments::Factory constructor: empty
- * @param QObject *parent = nullptr
- * @package Fragments
- * @private
- * Constructs a QRail::Fragments::Factory to generate Linked Connections
- * fragments on the fly.
- */
 QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Setup the QRail::Network::Manager
@@ -44,18 +33,6 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets a QRail::Fragments::Factory instance
- * @param QObject *parent = nullptr
- * @return Fragment::Factory *factory
- * @package Fragments
- * @public
- * Constructs a QRail::Fragments::Factory if none exists and returns the
- * instance.
- */
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 {
     // Singleton pattern
@@ -67,19 +44,6 @@ QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 }
 
 // Invokers
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests a page by URI
- * @param const QUrl &uri
- * @param QObject *caller
- * @package Fragments
- * @public
- * Starts the generation process of a QRail::Fragments::Page object by
- * requesting a page by URI. When the page is ready, the pageReady signal will
- * be emitted.
- */
 void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
     // Use processing methods to allow other extensions in the future if needed
@@ -89,19 +53,6 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests a page by departure time
- * @param const QDateTime &departureTime
- * @param QObject *caller
- * @package Fragments
- * @public
- * Starts the generation process of a QRail::Fragments::Page object by
- * requesting a page by departure time. When the page is ready, the pageReady
- * signal will be emitted.
- */
 void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
 {
     // Construct the URI of the page
@@ -152,17 +103,6 @@ Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
 }
 
 // Processors
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests the page by URI from the network
- * @param const QUrl &uri
- * @package Fragments
- * @private
- * Sends a request to the QRail::Network::Manager to retrieve a Linked
- * Connections page by URI.
- */
 void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Call the getResource slot due different threads
@@ -170,18 +110,6 @@ void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 }
 
 // Helpers
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Parses the JSON-LD fragment
- * @param const QJsonObject &connection
- * @return QRail::Fragments::Fragment *frag;
- * @package Fragments
- * @private
- * Converts the JSON-LD into a QRail::Fragments::Fragments object and returns
- * it.
- */
 QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {
     // Parse JSON
@@ -235,19 +163,6 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
     return nullptr;
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Processes the network reply
- * @param QNetworkReply *reply
- * @package Fragments
- * @private
- * Reads the network reply, parses it using the helper methods.
- * When the reply is completed parsed and no errors were encountered,
- * the pageReady signal is emitted.
- * In case we faced an error, the error signal is emitted with an error message.
- */
 void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -321,32 +236,11 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 }
 
 // Getters & Setters
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the QRail::Network::Manager instance
- * @return const QRail::Network::Manager *manager
- * @package Fragments
- * @private
- * Gets the QRail::Network::Manager instance and returns it.
- */
 QRail::Network::Manager *QRail::Fragments::Factory::http() const
 {
     return m_http;
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the QRail::Network::Manager instance
- * @param QRail::Network::Manager *http
- * @package Fragments
- * @private
- * Sets the QRail::Network::Manager instance to the given
- * QRail::Network::Manager *http.
- */
 void QRail::Fragments::Factory::setHttp(QRail::Network::Manager *http)
 {
     m_http = http;

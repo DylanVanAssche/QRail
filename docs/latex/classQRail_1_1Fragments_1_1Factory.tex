@@ -2,6 +2,11 @@
 \label{classQRail_1_1Fragments_1_1Factory}\index{QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 
 
+An \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Fragments\+::\+Factory}} allows you to generate Fragments\+::\+Station objects.  
+
+
+
+
 {\ttfamily \#include $<$fragmentsfactory.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Fragments\+::Factory\+:\begin{figure}[H]
@@ -14,31 +19,36 @@ Inheritance diagram for Q\+Rail\+::Fragments\+::Factory\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a1ba7147390ac01a41fd82412468d64fa}{page\+Ready}} (\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}} $\ast$page)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when a page has been become ready. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_aea317c8efb3b0edfcd937935293b5988}{get\+Resource}} (const Q\+Url \&uri, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when a resource is fetched from the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a681785e7cb92638163ad326fbb3a0c84}{error}} (const Q\+String \&message)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Emitted when an error occurred during processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_ae603b69714d209caee04f7024c39548b}{get\+Page}} (const Q\+Url \&uri, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em Fetches a Linked Connections page. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a9a1ad3f27d325db60b7221fe4124353a}{get\+Page}} (const Q\+Date\+Time \&departure\+Time, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em Fetches a Linked Connections page. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classQRail_1_1Fragments_1_1Dispatcher}{Q\+Rail\+::\+Fragments\+::\+Dispatcher}} $\ast$ \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a32781d890e698f2daed981510c72287c}{dispatcher}} () const
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$ \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a26ad4dba8c552d6a9920c5a8cbbc2af9}{get\+Instance}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a251a17b7e9ff13102ecbaa96a42a660f}{custom\+Event}} (Q\+Event $\ast$event)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1Fragments_1_1Dispatcher}{Dispatcher}} protected method, only here as a reference. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+An \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Fragments\+::\+Factory}} allows you to generate Fragments\+::\+Station objects. 
+
+The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_a251a17b7e9ff13102ecbaa96a42a660f}\label{classQRail_1_1Fragments_1_1Factory_a251a17b7e9ff13102ecbaa96a42a660f}} 
@@ -46,6 +56,10 @@ virtual void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a251a17b7e9ff13
 \index{customEvent@{customEvent}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{customEvent()}{customEvent()}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::custom\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Dispatcher}{Dispatcher}} protected method, only here as a reference. 
 
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_a32781d890e698f2daed981510c72287c}\label{classQRail_1_1Fragments_1_1Factory_a32781d890e698f2daed981510c72287c}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!dispatcher@{dispatcher}}
@@ -59,35 +73,82 @@ virtual void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory_a251a17b7e9ff13
 \subsubsection{\texorpdfstring{error}{error}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted when an error occurred during processing. 
+
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_a26ad4dba8c552d6a9920c5a8cbbc2af9}\label{classQRail_1_1Fragments_1_1Factory_a26ad4dba8c552d6a9920c5a8cbbc2af9}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!getInstance@{getInstance}}
 \index{getInstance@{getInstance}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$ Q\+Rail\+::\+Fragments\+::\+Factory\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_ae603b69714d209caee04f7024c39548b}\label{classQRail_1_1Fragments_1_1Factory_ae603b69714d209caee04f7024c39548b}} 
+
+
+Gets a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$factory
+\end{DoxyReturn}
+Constructs a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} if none exists and returns the instance. \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_ae603b69714d209caee04f7024c39548b}\label{classQRail_1_1Fragments_1_1Factory_ae603b69714d209caee04f7024c39548b}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!getPage@{getPage}}
 \index{getPage@{getPage}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{getPage()}{getPage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::get\+Page (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})}
 
+
+
+Fetches a Linked Connections page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & The U\+RI of the page you want to fetch. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_a9a1ad3f27d325db60b7221fe4124353a}\label{classQRail_1_1Fragments_1_1Factory_a9a1ad3f27d325db60b7221fe4124353a}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!getPage@{getPage}}
 \index{getPage@{getPage}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{getPage()}{getPage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::get\+Page (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})}
 
+
+
+Fetches a Linked Connections page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em departure\+Time} & The timestamp of the page (departure time). The page will contain at least this timestamp and the next connections that are following on this timestamp. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_aea317c8efb3b0edfcd937935293b5988}\label{classQRail_1_1Fragments_1_1Factory_aea317c8efb3b0edfcd937935293b5988}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!getResource@{getResource}}
 \index{getResource@{getResource}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{getResource}{getResource}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted when a resource is fetched from the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}}. 
+
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Factory_a1ba7147390ac01a41fd82412468d64fa}\label{classQRail_1_1Fragments_1_1Factory_a1ba7147390ac01a41fd82412468d64fa}} 
 \index{QRail::Fragments::Factory@{QRail::Fragments::Factory}!pageReady@{pageReady}}
 \index{pageReady@{pageReady}!QRail::Fragments::Factory@{QRail::Fragments::Factory}}
 \subsubsection{\texorpdfstring{pageReady}{pageReady}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Fragments\+::\+Factory\+::page\+Ready (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}} $\ast$}]{page }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when a page has been become ready. 
 
 
 

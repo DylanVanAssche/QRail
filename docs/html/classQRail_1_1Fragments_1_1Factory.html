@@ -75,6 +75,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>An <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">Fragments::Factory</a> allows you to generate Fragments::Station objects.  
+ <a href="classQRail_1_1Fragments_1_1Factory.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="fragmentsfactory_8h_source.html">fragmentsfactory.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for QRail::Fragments::Factory:</div>
@@ -86,17 +89,22 @@ Inheritance diagram for QRail::Fragments::Factory:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
 <tr class="memitem:a1ba7147390ac01a41fd82412468d64fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a1ba7147390ac01a41fd82412468d64fa">pageReady</a> (<a class="el" href="classQRail_1_1Fragments_1_1Page.html">QRail::Fragments::Page</a> *page)</td></tr>
+<tr class="memdesc:a1ba7147390ac01a41fd82412468d64fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a page has been become ready.  <a href="#a1ba7147390ac01a41fd82412468d64fa">More...</a><br /></td></tr>
 <tr class="separator:a1ba7147390ac01a41fd82412468d64fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea317c8efb3b0edfcd937935293b5988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#aea317c8efb3b0edfcd937935293b5988">getResource</a> (const QUrl &amp;uri, QObject *caller)</td></tr>
+<tr class="memdesc:aea317c8efb3b0edfcd937935293b5988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when a resource is fetched from the <a class="el" href="classQRail_1_1Network_1_1Manager.html" title="A Network::Manager provides you easily access to the WWW.">Network::Manager</a>.  <a href="#aea317c8efb3b0edfcd937935293b5988">More...</a><br /></td></tr>
 <tr class="separator:aea317c8efb3b0edfcd937935293b5988"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a681785e7cb92638163ad326fbb3a0c84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a681785e7cb92638163ad326fbb3a0c84">error</a> (const QString &amp;message)</td></tr>
+<tr class="memdesc:a681785e7cb92638163ad326fbb3a0c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emitted when an error occurred during processing.  <a href="#a681785e7cb92638163ad326fbb3a0c84">More...</a><br /></td></tr>
 <tr class="separator:a681785e7cb92638163ad326fbb3a0c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae603b69714d209caee04f7024c39548b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#ae603b69714d209caee04f7024c39548b">getPage</a> (const QUrl &amp;uri, QObject *caller)</td></tr>
+<tr class="memdesc:ae603b69714d209caee04f7024c39548b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches a Linked Connections page.  <a href="#ae603b69714d209caee04f7024c39548b">More...</a><br /></td></tr>
 <tr class="separator:ae603b69714d209caee04f7024c39548b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a1ad3f27d325db60b7221fe4124353a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a9a1ad3f27d325db60b7221fe4124353a">getPage</a> (const QDateTime &amp;departureTime, QObject *caller)</td></tr>
+<tr class="memdesc:a9a1ad3f27d325db60b7221fe4124353a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches a Linked Connections page.  <a href="#a9a1ad3f27d325db60b7221fe4124353a">More...</a><br /></td></tr>
 <tr class="separator:a9a1ad3f27d325db60b7221fe4124353a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32781d890e698f2daed981510c72287c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classQRail_1_1Fragments_1_1Dispatcher.html">QRail::Fragments::Dispatcher</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a32781d890e698f2daed981510c72287c">dispatcher</a> () const</td></tr>
 <tr class="separator:a32781d890e698f2daed981510c72287c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,14 +112,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a26ad4dba8c552d6a9920c5a8cbbc2af9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a26ad4dba8c552d6a9920c5a8cbbc2af9">getInstance</a> ()</td></tr>
+<tr class="memdesc:a26ad4dba8c552d6a9920c5a8cbbc2af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> instance.  <a href="#a26ad4dba8c552d6a9920c5a8cbbc2af9">More...</a><br /></td></tr>
 <tr class="separator:a26ad4dba8c552d6a9920c5a8cbbc2af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a251a17b7e9ff13102ecbaa96a42a660f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Factory.html#a251a17b7e9ff13102ecbaa96a42a660f">customEvent</a> (QEvent *event)</td></tr>
+<tr class="memdesc:a251a17b7e9ff13102ecbaa96a42a660f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classQRail_1_1Fragments_1_1Dispatcher.html" title="Dispatches all the Fragments::Factory events.">Dispatcher</a> protected method, only here as a reference.  <a href="#a251a17b7e9ff13102ecbaa96a42a660f">More...</a><br /></td></tr>
 <tr class="separator:a251a17b7e9ff13102ecbaa96a42a660f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">Fragments::Factory</a> allows you to generate Fragments::Station objects. </p>
+<p>The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a251a17b7e9ff13102ecbaa96a42a660f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a251a17b7e9ff13102ecbaa96a42a660f">&#9670;&nbsp;</a></span>customEvent()</h2>
 
@@ -135,6 +148,8 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classQRail_1_1Fragments_1_1Dispatcher.html" title="Dispatches all the Fragments::Factory events.">Dispatcher</a> protected method, only here as a reference. </p>
 
 </div>
 </div>
@@ -179,6 +194,8 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Emitted when an error occurred during processing. </p>
+
 </div>
 </div>
 <a id="a26ad4dba8c552d6a9920c5a8cbbc2af9"></a>
@@ -203,6 +220,10 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets a <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> instance. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> *factory</dd></dl>
+<p>Constructs a <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> if none exists and returns the instance. </p>
 
 </div>
 </div>
@@ -232,6 +253,16 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Fetches a Linked Connections page. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uri</td><td>The URI of the page you want to fetch. </td></tr>
+    <tr><td class="paramname">caller</td><td>The caller of this method. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The caller is needed since the dispatcher will send you a special event using the Qt event system. </dd></dl>
+
 </div>
 </div>
 <a id="a9a1ad3f27d325db60b7221fe4124353a"></a>
@@ -259,6 +290,16 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Fetches a Linked Connections page. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">departureTime</td><td>The timestamp of the page (departure time). The page will contain at least this timestamp and the next connections that are following on this timestamp. </td></tr>
+    <tr><td class="paramname">caller</td><td>The caller of this method. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The caller is needed since the dispatcher will send you a special event using the Qt event system. </dd></dl>
 
 </div>
 </div>
@@ -296,6 +337,8 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Emitted when a resource is fetched from the <a class="el" href="classQRail_1_1Network_1_1Manager.html" title="A Network::Manager provides you easily access to the WWW.">Network::Manager</a>. </p>
+
 </div>
 </div>
 <a id="a1ba7147390ac01a41fd82412468d64fa"></a>
@@ -321,6 +364,8 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Emitted when a page has been become ready. </p>
 
 </div>
 </div>

@@ -146,10 +146,10 @@ $(function() {
 <p>Constructs a Route with a list of legs and transfers.</p>
 <p>Sets the StationEngine::Factory instance to the given StationEngine::Factory *stationFactory.</p>
 <p>Gets the StationEngine::Factory instance and returns it.</p>
-<p>Sets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> instance to the given <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> *factory.</p>
-<p>Gets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> instance and returns it.</p>
+<p>Sets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> instance to the given <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> *factory.</p>
+<p>Gets the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> instance and returns it.</p>
 <p>Guesses the arrival time for a given QDateTime &amp;departureTime.</p>
-<p>Handler for the generated pages from the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a>.</p>
+<p>Handler for the generated pages from the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a>.</p>
 <p>Tries to find the first reachable connection for a given <a class="el" href="classQRail_1_1RouterEngine_1_1StationStopProfile.html">QRail::RouterEngine::StationStopProfile</a> *arrivalProfile and returns it.</p>
 <p>Retrieves the connections between 2 GPS positions with a given departure time and a maximum of transfers.</p>
 <p>Retrieves the connections between 2 stations with a given departure time and a maximum of transfers.</p>
@@ -158,8 +158,8 @@ $(function() {
 <p>Constructs a RouterEngine::NullJourney if none exists and returns the instance.</p>
 <p>Emit the finished signal when completed, the error signal is emitted in case an error comes up.</p>
 <p>Invalid input will directly emit the finished signal with an empty list.</p>
-<dl class="section note"><dt>Note</dt><dd>This method runs in a separated thread using the QtConcurrent framework. Runs the Connection Scan Algorithm (CSA) on a single <a class="el" href="classQRail_1_1Fragments_1_1Page.html">QRail::Fragments::Page</a> page. In case we need to fetch more pages, the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> is contacted to retrieve those pages while processing the current page. The order is very important, that's why only 1 page at the time may be processed.</dd></dl>
-<p>When a page is received from the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html">QRail::Fragments::Factory</a> this handler will launch a separate thread to process the page.</p>
+<dl class="section note"><dt>Note</dt><dd>This method runs in a separated thread using the QtConcurrent framework. Runs the Connection Scan Algorithm (CSA) on a single <a class="el" href="classQRail_1_1Fragments_1_1Page.html">QRail::Fragments::Page</a> page. In case we need to fetch more pages, the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> is contacted to retrieve those pages while processing the current page. The order is very important, that's why only 1 page at the time may be processed.</dd></dl>
+<p>When a page is received from the <a class="el" href="classQRail_1_1Fragments_1_1Factory.html" title="An Fragments::Factory allows you to generate Fragments::Station objects.">QRail::Fragments::Factory</a> this handler will launch a separate thread to process the page.</p>
 <p>The transfers are generated from the list of legs.</p>
 <dl class="section note"><dt>Note</dt><dd>Delays are already included in this timestamp. Gets the departure time of the route and returns it.</dd>
 <dd>

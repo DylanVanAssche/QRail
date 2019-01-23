@@ -42,21 +42,50 @@
 // Factory pattern to generate Linked Connections fragments on the fly
 namespace QRail {
 namespace Fragments {
+//! An Fragments::Factory allows you to generate Fragments::Station objects.
+/**
+ * \class Factory
+ * The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station.
+ */
 class Factory : public QObject
 {
     Q_OBJECT
 public:
+    //! Gets a QRail::Fragments::Factory instance.
+    /*!
+        \return QRail::Fragments::Factory *factory
+        \public
+        Constructs a QRail::Fragments::Factory if none exists and returns the
+        instance.
+     */
     static QRail::Fragments::Factory *getInstance();
+    //! Fetches a Linked Connections page.
+    /*!
+        \param uri The URI of the page you want to fetch.
+        \param caller The caller of this method.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
     void getPage(const QUrl &uri, QObject *caller);
+    //! Fetches a Linked Connections page.
+    /*!
+        \param departureTime The timestamp of the page (departure time).
+               The page will contain at least this timestamp and the next connections that are following on this timestamp.
+        \param caller The caller of this method.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
     void getPage(const QDateTime &departureTime, QObject *caller);
     QRail::Fragments::Dispatcher *dispatcher() const;
 
 protected:
+    //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
 
 signals:
+    //! Emitted when a page has been become ready.
     void pageReady(QRail::Fragments::Page *page);
+    //! Emitted when a resource is fetched from the Network::Manager.
     void getResource(const QUrl &uri, QObject *caller);
+    //! Emitted when an error occurred during processing.
     void error(const QString &message);
 
 private:

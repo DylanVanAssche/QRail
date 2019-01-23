@@ -40,10 +40,10 @@
 
 namespace QRail {
 namespace LiveboardEngine {
-/**
- * @class Factory
- * @brief An LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.
- * The factory design pattern allows you to create Board objects in an easy way. Several modes are available to fetch your Board.
+//! A LiveboardEngine::Factory allows you to generate LiveboardEngine::Board objects.
+/*!
+    \class Factory
+    The factory design pattern allows you to create Board objects in an easy way. Several modes are available to fetch your Board.
  */
 class Factory : public QObject
 {

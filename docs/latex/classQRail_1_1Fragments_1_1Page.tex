@@ -27,9 +27,9 @@ void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a7403651ceb8ea2d7fb8c13ae9
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_ad674b8b6a51f72b955128f03f92f7927}{Page}} (Q\+Object $\ast$parent=nullptr)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Page}} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a44651659fab3540378a14906ef6c5ca4}{Page}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a55b83d498119763fb6218ccb0959967e}{uri}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_aea27ab5b1a9aafe43afbc98ccb38f429}{timestamp}}, const Q\+Url \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_abac5d1c1b6bc72623725ac9585ed1a86}{hydra\+Next}}, const Q\+Url \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_abd9b826a513ec4f7ca3803cd52678596}{hydra\+Previous}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a24f93fc23c2f2795fc3d662aed48c7d9}{fragments}}, Q\+Object $\ast$parent=nullptr)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs a full \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Page}} object. \end{DoxyCompactList}\item 
 Q\+Url \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a55b83d498119763fb6218ccb0959967e}{uri}} () const
 \item 
 void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_ad29711549fc506722906445fd2e83bcf}{set\+U\+RI}} (const Q\+Url \&\mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a55b83d498119763fb6218ccb0959967e}{uri}})
@@ -59,12 +59,40 @@ void \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page_a0d779fadca796cc40cba14a27
 \subsubsection{\texorpdfstring{Page()}{Page()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily Q\+Rail\+::\+Fragments\+::\+Page\+::\+Page (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
+
+
+Constructs a \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Page}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classQRail_1_1Fragments_1_1Page_a44651659fab3540378a14906ef6c5ca4}\label{classQRail_1_1Fragments_1_1Page_a44651659fab3540378a14906ef6c5ca4}} 
 \index{QRail::Fragments::Page@{QRail::Fragments::Page}!Page@{Page}}
 \index{Page@{Page}!QRail::Fragments::Page@{QRail::Fragments::Page}}
 \subsubsection{\texorpdfstring{Page()}{Page()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Q\+Rail\+::\+Fragments\+::\+Page\+::\+Page (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Date\+Time \&}]{timestamp,  }\item[{const Q\+Url \&}]{hydra\+Next,  }\item[{const Q\+Url \&}]{hydra\+Previous,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ $>$ \&}]{fragments,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
+
+
+Constructs a full \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Page}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & The U\+RI of the page. \\
+\hline
+{\em timestamp} & The timestamp of the page. \\
+\hline
+{\em hydra\+Next} & The hydra next U\+RI, follow this U\+RL to get the next page. \\
+\hline
+{\em hydra\+Previous} & The hydra previous, follow this U\+RI to get the previous page. \\
+\hline
+{\em fragments} & The list of fragments associated with this page. \\
+\hline
+{\em parent} & Q\+Object parent-\/child memory management. \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Function Documentation}

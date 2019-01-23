@@ -2,6 +2,11 @@
 \label{classQRail_1_1Network_1_1Manager}\index{QRail::Network::Manager@{QRail::Network::Manager}}
 
 
+A \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} provides you easily access to the W\+WW.  
+
+
+
+
 {\ttfamily \#include $<$networkmanager.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Network\+::Manager\+:\begin{figure}[H]
@@ -14,24 +19,22 @@ Inheritance diagram for Q\+Rail\+::Network\+::Manager\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}{get\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em H\+T\+TP G\+ET request. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}{post\+Resource}} (const Q\+Url \&url, const Q\+Byte\+Array \&data, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em H\+T\+TP P\+O\+ST request. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}{delete\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
-\item 
+\begin{DoxyCompactList}\small\item\em H\+T\+TP D\+E\+L\+E\+TE request. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}{head\+Resource}} (const Q\+Url \&url, Q\+Object $\ast$caller)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em H\+T\+TP H\+E\+AD request. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
 Q\+List$<$ Q\+Ssl\+Error $>$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a0404bf0008a42108b6e72ec5da12d02f}{ssl\+Errors\+Received}} (Q\+Network\+Reply $\ast$reply, Q\+List$<$ Q\+Ssl\+Error $>$ ssl\+Error)
-\item 
+\begin{DoxyCompactList}\small\item\em S\+SL errors are emitted through this signal. \end{DoxyCompactList}\item 
 Q\+Network\+Access\+Manager\+::\+Network\+Accessibility \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}{network\+Accessible\+Changed}} (Q\+Network\+Access\+Manager\+::\+Network\+Accessibility state)
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the network accessible state has been changed. For example\+: Wi\+Fi is out of range. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a7041109a640094b8aaeb430e6b09c9bc}{user\+Agent\+Changed}} ()
-\item 
-void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}{accept\+Header\+Changed}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Emitted when the user agent has been changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,38 +42,42 @@ Q\+String \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae6
 \item 
 void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}{set\+User\+Agent}} (const Q\+String \&\mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}{user\+Agent}})
 \item 
-Q\+String \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}{accept\+Header}} () const
-\item 
-void \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}{set\+Accept\+Header}} (const Q\+String \&\mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}{accept\+Header}})
-\item 
 \mbox{\hyperlink{classQRail_1_1Network_1_1Dispatcher}{Q\+Rail\+::\+Network\+::\+Dispatcher}} $\ast$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}{dispatcher}} () const
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classQRail_1_1Network_1_1Manager_a908536cf83d489afd0480a492f004def}{get\+Instance}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+A \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} provides you easily access to the W\+WW. 
+
+The singleton design pattern allows you to create \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} objects in an easy way. Several modes are available to perform your W\+WW operations.~\newline
+ Thanks to the facade design pattern, the internals of the network library behind this facade are hidden for the user. 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}\label{classQRail_1_1Network_1_1Manager_a9917bfe2dda992fc8e31706f7cb475f6}} 
-\index{QRail::Network::Manager@{QRail::Network::Manager}!acceptHeader@{acceptHeader}}
-\index{acceptHeader@{acceptHeader}!QRail::Network::Manager@{QRail::Network::Manager}}
-\subsubsection{\texorpdfstring{acceptHeader()}{acceptHeader()}}
-{\footnotesize\ttfamily Q\+String Q\+Rail\+::\+Network\+::\+Manager\+::accept\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}\label{classQRail_1_1Network_1_1Manager_ab8a64dbadf3dbdb27c501e8b33e2eb05}} 
-\index{QRail::Network::Manager@{QRail::Network::Manager}!acceptHeaderChanged@{acceptHeaderChanged}}
-\index{acceptHeaderChanged@{acceptHeaderChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
-\subsubsection{\texorpdfstring{acceptHeaderChanged}{acceptHeaderChanged}}
-{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::accept\+Header\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
-
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}\label{classQRail_1_1Network_1_1Manager_a67ba7523afcb7f97842bb6626a81166d}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!deleteResource@{deleteResource}}
 \index{deleteResource@{deleteResource}!QRail::Network::Manager@{QRail::Network::Manager}}
 \subsubsection{\texorpdfstring{deleteResource}{deleteResource}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::delete\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
 
+
+
+H\+T\+TP D\+E\+L\+E\+TE request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The U\+RL you want to access. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}\label{classQRail_1_1Network_1_1Manager_a21b6ceec7b0c085ffc74a9a2ced44688}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!dispatcher@{dispatcher}}
 \index{dispatcher@{dispatcher}!QRail::Network::Manager@{QRail::Network::Manager}}
@@ -83,23 +90,62 @@ static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox
 \subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$ Q\+Rail\+::\+Network\+::\+Manager\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}\label{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}} 
+
+
+Gets a \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} instance. 
+
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}}.
+\end{DoxyReturn}
+Constructs a \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Network\+::\+Manager}} if none exists and returns the instance. \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}\label{classQRail_1_1Network_1_1Manager_af6dfa87af8f58dc2506ef97247c95037}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!getResource@{getResource}}
 \index{getResource@{getResource}!QRail::Network::Manager@{QRail::Network::Manager}}
 \subsubsection{\texorpdfstring{getResource}{getResource}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
 
+
+
+H\+T\+TP G\+ET request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The U\+RL you want to access. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}\label{classQRail_1_1Network_1_1Manager_adde10f409e9b77b59b145fd2609244a7}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!headResource@{headResource}}
 \index{headResource@{headResource}!QRail::Network::Manager@{QRail::Network::Manager}}
 \subsubsection{\texorpdfstring{headResource}{headResource}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::head\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
 
+
+
+H\+T\+TP H\+E\+AD request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The U\+RL you want to access. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}\label{classQRail_1_1Network_1_1Manager_af81d89d8572d74d039400ec2e05f9894}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!networkAccessibleChanged@{networkAccessibleChanged}}
 \index{networkAccessibleChanged@{networkAccessibleChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
 \subsubsection{\texorpdfstring{networkAccessibleChanged}{networkAccessibleChanged}}
 {\footnotesize\ttfamily Q\+Network\+Access\+Manager\+::\+Network\+Accessibility Q\+Rail\+::\+Network\+::\+Manager\+::network\+Accessible\+Changed (\begin{DoxyParamCaption}\item[{Q\+Network\+Access\+Manager\+::\+Network\+Accessibility}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the network accessible state has been changed. For example\+: Wi\+Fi is out of range. 
 
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}\label{classQRail_1_1Network_1_1Manager_a7f479ad3bcff90ffba6fab969294c338}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!postResource@{postResource}}
@@ -107,12 +153,22 @@ static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox
 \subsubsection{\texorpdfstring{postResource}{postResource}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::post\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{url,  }\item[{const Q\+Byte\+Array \&}]{data,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
 
-\mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}\label{classQRail_1_1Network_1_1Manager_a932a587826e2eb8c3a73bed63731357a}} 
-\index{QRail::Network::Manager@{QRail::Network::Manager}!setAcceptHeader@{setAcceptHeader}}
-\index{setAcceptHeader@{setAcceptHeader}!QRail::Network::Manager@{QRail::Network::Manager}}
-\subsubsection{\texorpdfstring{setAcceptHeader()}{setAcceptHeader()}}
-{\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::set\+Accept\+Header (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{accept\+Header }\end{DoxyParamCaption})}
 
+
+H\+T\+TP P\+O\+ST request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The U\+RL you want to access. \\
+\hline
+{\em caller} & The caller of this method. \\
+\hline
+{\em data} & The data that you want to send to the server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The caller is needed since the dispatcher will send you a special event using the Qt event system. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}\label{classQRail_1_1Network_1_1Manager_a35063d645223fad68f5b4ec56d5fbb96}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!setUserAgent@{setUserAgent}}
 \index{setUserAgent@{setUserAgent}!QRail::Network::Manager@{QRail::Network::Manager}}
@@ -125,6 +181,10 @@ static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox
 \subsubsection{\texorpdfstring{sslErrorsReceived}{sslErrorsReceived}}
 {\footnotesize\ttfamily Q\+List$<$Q\+Ssl\+Error$>$ Q\+Rail\+::\+Network\+::\+Manager\+::ssl\+Errors\+Received (\begin{DoxyParamCaption}\item[{Q\+Network\+Reply $\ast$}]{reply,  }\item[{Q\+List$<$ Q\+Ssl\+Error $>$}]{ssl\+Error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+S\+SL errors are emitted through this signal. 
+
 \mbox{\Hypertarget{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}\label{classQRail_1_1Network_1_1Manager_a8163075df6f472c3ae69e0cfa67a7da7}} 
 \index{QRail::Network::Manager@{QRail::Network::Manager}!userAgent@{userAgent}}
 \index{userAgent@{userAgent}!QRail::Network::Manager@{QRail::Network::Manager}}
@@ -136,6 +196,10 @@ static \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Manager}} $\ast$ \mbox
 \index{userAgentChanged@{userAgentChanged}!QRail::Network::Manager@{QRail::Network::Manager}}
 \subsubsection{\texorpdfstring{userAgentChanged}{userAgentChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Network\+::\+Manager\+::user\+Agent\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the user agent has been changed. 
 
 
 

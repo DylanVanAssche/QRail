@@ -1,8 +1,6 @@
 var searchData=
 [
   ['abortcurrentoperation',['abortCurrentOperation',['../classQRail_1_1LiveboardEngine_1_1Factory.html#a5a581cb60c12dea0af977ea08c64e0c8',1,'QRail::LiveboardEngine::Factory::abortCurrentOperation()'],['../classQRail_1_1RouterEngine_1_1Planner.html#a6098ae8b5db4f0c9cfe4352486ac4fc1',1,'QRail::RouterEngine::Planner::abortCurrentOperation()']]],
-  ['acceptheader',['acceptHeader',['../classQRail_1_1Network_1_1Manager.html#a9917bfe2dda992fc8e31706f7cb475f6',1,'QRail::Network::Manager']]],
-  ['acceptheaderchanged',['acceptHeaderChanged',['../classQRail_1_1Network_1_1Manager.html#ab8a64dbadf3dbdb27c501e8b33e2eb05',1,'QRail::Network::Manager']]],
   ['addentry',['addEntry',['../classQRail_1_1LiveboardEngine_1_1Board.html#ad79d5e4cd527fe02165f1231478b8f8b',1,'QRail::LiveboardEngine::Board']]],
   ['address',['address',['../classQRail_1_1StationEngine_1_1Station.html#ad0ca1a356a5b3b97a7f3506a21963a17',1,'QRail::StationEngine::Station']]],
   ['addresschanged',['addressChanged',['../classQRail_1_1StationEngine_1_1Station.html#a2b3b24ebf7459ae4d7857b89dc8c6e7c',1,'QRail::StationEngine::Station']]],

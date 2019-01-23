@@ -48,10 +48,10 @@
 
 namespace QRail {
 namespace StationEngine {
-/**
- * @class Factory
- * @brief An StationEngine::Factory allows you to generate StationEngine::Station objects.
- * The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station.
+//! A StationEngine::Factory allows you to generate StationEngine::Station objects.
+/*!
+    \class Factory
+    The factory design pattern allows you to create Station objects in an easy way. Several modes are available to fetch your Station.
  */
 class QRAIL_SHARED_EXPORT Factory : public QObject
 {

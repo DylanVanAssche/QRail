@@ -97,8 +97,10 @@ Signals</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad674b8b6a51f72b955128f03f92f7927"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Page.html#ad674b8b6a51f72b955128f03f92f7927">Page</a> (QObject *parent=nullptr)</td></tr>
+<tr class="memdesc:ad674b8b6a51f72b955128f03f92f7927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classQRail_1_1Fragments_1_1Page.html">Page</a> object.  <a href="#ad674b8b6a51f72b955128f03f92f7927">More...</a><br /></td></tr>
 <tr class="separator:ad674b8b6a51f72b955128f03f92f7927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44651659fab3540378a14906ef6c5ca4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Page.html#a44651659fab3540378a14906ef6c5ca4">Page</a> (const QUrl &amp;<a class="el" href="classQRail_1_1Fragments_1_1Page.html#a55b83d498119763fb6218ccb0959967e">uri</a>, const QDateTime &amp;<a class="el" href="classQRail_1_1Fragments_1_1Page.html#aea27ab5b1a9aafe43afbc98ccb38f429">timestamp</a>, const QUrl &amp;<a class="el" href="classQRail_1_1Fragments_1_1Page.html#abac5d1c1b6bc72623725ac9585ed1a86">hydraNext</a>, const QUrl &amp;<a class="el" href="classQRail_1_1Fragments_1_1Page.html#abd9b826a513ec4f7ca3803cd52678596">hydraPrevious</a>, const QList&lt; <a class="el" href="classQRail_1_1Fragments_1_1Fragment.html">QRail::Fragments::Fragment</a> * &gt; &amp;<a class="el" href="classQRail_1_1Fragments_1_1Page.html#a24f93fc23c2f2795fc3d662aed48c7d9">fragments</a>, QObject *parent=nullptr)</td></tr>
+<tr class="memdesc:a44651659fab3540378a14906ef6c5ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a full <a class="el" href="classQRail_1_1Fragments_1_1Page.html">Page</a> object.  <a href="#a44651659fab3540378a14906ef6c5ca4">More...</a><br /></td></tr>
 <tr class="separator:a44651659fab3540378a14906ef6c5ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55b83d498119763fb6218ccb0959967e"><td class="memItemLeft" align="right" valign="top">QUrl&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1Fragments_1_1Page.html#a55b83d498119763fb6218ccb0959967e">uri</a> () const</td></tr>
 <tr class="separator:a55b83d498119763fb6218ccb0959967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,6 +147,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classQRail_1_1Fragments_1_1Page.html">Page</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -205,6 +215,19 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructs a full <a class="el" href="classQRail_1_1Fragments_1_1Page.html">Page</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uri</td><td>The URI of the page. </td></tr>
+    <tr><td class="paramname">timestamp</td><td>The timestamp of the page. </td></tr>
+    <tr><td class="paramname">hydraNext</td><td>The hydra next URI, follow this URL to get the next page. </td></tr>
+    <tr><td class="paramname">hydraPrevious</td><td>The hydra previous, follow this URI to get the previous page. </td></tr>
+    <tr><td class="paramname">fragments</td><td>The list of fragments associated with this page. </td></tr>
+    <tr><td class="paramname">parent</td><td>QObject parent-child memory management. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

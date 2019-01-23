@@ -51,7 +51,6 @@ class Factory : public QObject
 public:
     //! Gets a QRail::LiveboardEngine::Factory instance.
     /*!
-        \param QObject *parent = nullptr
         \return QRail::LiveboardEngine::Factory *factory
         \public
         Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
@@ -60,8 +59,8 @@ public:
     static QRail::LiveboardEngine::Factory *getInstance();
     //! Retrieves a liveboard by a station URI.
     /*!
-        \param const QUrl &url
-        \param const QRail::LiveboardEngine::Board::Mode &mode
+        \param uri the URI of the liveboard.
+        \param mode selects if you want to retrieve the DEPARTURES or ARRIVALS.
         \overload
         \public
         Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
@@ -74,10 +73,10 @@ public:
                                   const QRail::LiveboardEngine::Board::Mode &mode = QRail::LiveboardEngine::Board::Mode::DEPARTURES);
     //! Retrieves a liveboard by a station URI and a time range.
     /*!
-        \param const QUrl &url
-        \param const QDateTime &from
-        \param const QDateTime &until
-        \param const QRail::LiveboardEngine::Board::Mode &mode
+        \param uri the URI of the liveboard.
+        \param from the start search time.
+        \param until the stop search time.
+        \param mode selects if you want to retrieve the DEPARTURES or ARRIVALS.
         \package Liveboard
         \overload
         \public
@@ -85,7 +84,8 @@ public:
         The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
         liveboard should contain all the arrivals, departures of the station.
      */
-    void getLiveboardByStationURI(const QUrl &uri, const QDateTime &from,
+    void getLiveboardByStationURI(const QUrl &uri,
+                                  const QDateTime &from,
                                   const QDateTime &until,
                                   const QRail::LiveboardEngine::Board::Mode &mode = QRail::LiveboardEngine::Board::Mode::DEPARTURES);
     //! Extend the liveboard with next results.

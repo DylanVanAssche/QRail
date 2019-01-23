@@ -18,39 +18,6 @@
 using namespace QRail;
 StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
 
-/**
- * @file stationnullstation.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief StationEngine::NullStation constructor
- * @param const QUrl &uri
- * @param const QMap<QLocale::Language, QString> &name
- * @param const QLocale::Country &country
- * @param const QGeoCoordinate &position
- * @param const QGeoAddress &address
- * @param const bool &hasTicketVendingMachine
- * @param const bool &hasLuggageLockers
- * @param const bool &hasFreeParking
- * @param const bool &hasTaxi
- * @param const bool &hasBicyclSpots
- * @param const bool &hasBus
- * @param const bool &hasTram
- * @param const bool &hasMetro
- * @param const bool &hasWheelchairAvailable
- * @param const bool &hasRamp
- * @param const qint16 &disabledParkingSpots
- * @param const bool &hasElevatedPlatform
- * @param const bool &hasEscalatorUp
- * @param const bool &hasEscalatorDown
- * @param const bool &hasElevatorPlatform
- * @param const bool &hasAudioInductionLoop
- * @param const QMap<StationEngine::Station::Day, QPair<QTime, QTime>> &openingHours
- * @param const qreal &averageStopTimes
- * @param QObject *parent
- * @package StationEngine
- * @private
- * Constructs a StationEngine::NullStation according to the Null design pattern.
- */
 StationEngine::NullStation::NullStation(const QUrl &uri,
                                         const QMap<QLocale::Language, QString> &name,
                                         const QLocale::Country &country,
@@ -86,16 +53,6 @@ StationEngine::NullStation::NullStation(const QUrl &uri,
 
 }
 
-/**
- * @file stationnullstation.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets a StationEngine::NullStation instance
- * @return StationEngine::NullStation *station
- * @package StationEngine
- * @public
- * Constructs a StationEngine::NullStation if none exists and returns the instance.
- */
 StationEngine::NullStation *StationEngine::NullStation::getInstance()
 {
     // Singleton pattern

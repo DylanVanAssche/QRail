@@ -148,11 +148,6 @@ Emitted if from has been changed.
 
 Gets a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} instance. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em Q\+Object} & $\ast$parent = nullptr \\
-\hline
-\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}} $\ast$factory
 \end{DoxyReturn}
@@ -168,9 +163,9 @@ Retrieves a liveboard by a station U\+RI.
 
 
 \begin{DoxyParams}{Parameters}
-{\em const} & Q\+Url \&url \\
+{\em uri} & the U\+RI of the liveboard. \\
 \hline
-{\em const} & \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.\\
+{\em mode} & selects if you want to retrieve the D\+E\+P\+A\+R\+T\+U\+R\+ES or A\+R\+R\+I\+V\+A\+LS. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.\\
 \hline
 \end{DoxyParams}
 Retrieves a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI. The \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. Calling this method will retrieve a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for the current time until the current time + 0.\+5 hour. \mbox{\Hypertarget{classQRail_1_1LiveboardEngine_1_1Factory_a3fc799d424334fe21be54a3cba0853be}\label{classQRail_1_1LiveboardEngine_1_1Factory_a3fc799d424334fe21be54a3cba0853be}} 

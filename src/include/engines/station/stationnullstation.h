@@ -34,6 +34,12 @@ namespace StationEngine {
 class QRAIL_SHARED_EXPORT NullStation: public Station
 {
 public:
+    //! Gets a StationEngine::NullStation instance
+    /*!
+        \return a StationEngine::NullStation instance.
+        \public
+        Constructs a StationEngine::NullStation if none exists and returns the instance.
+     */
     static NullStation *getInstance();
 
 private:

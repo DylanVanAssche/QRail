@@ -66,34 +66,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Constructs a StationEngine::Factory to generate StationEngine::Station objects on the fly.  
+<p>Constructs a StationEngine::Station with the given parent.  
 <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Constructs a StationEngine::Factory to generate StationEngine::Station objects on the fly. </p>
+<div class="textblock"><p>Constructs a StationEngine::Station with the given parent. </p>
 <p>Retrieves a vehicle by URI from the network iRail API.</p>
 <p>Constructs a StationEngine::Station with facilities and platforms.</p>
 <p>Constructs a StationEngine::Station with facilities.</p>
 <p>Constructs a StationEngine::Station without facilities.</p>
-<p>Constructs a StationEngine::Station with the given parent.</p>
-<p>Constructs a StationEngine::NullStation if none exists and returns the instance.</p>
-<p>Constructs a StationEngine::NullStation according to the Null design pattern.</p>
-<p>Sets the <a class="el" href="classQRail_1_1Database_1_1Manager.html" title="The Database::Manager class manages a given database.">QRail::Database::Manager</a> instance to the given <a class="el" href="classQRail_1_1Database_1_1Manager.html" title="The Database::Manager class manages a given database.">QRail::Database::Manager</a> *db.</p>
-<p>Gets the <a class="el" href="classQRail_1_1Database_1_1Manager.html" title="The Database::Manager class manages a given database.">QRail::Database::Manager</a> instance and returns it.</p>
-<p>Fetches the platforms of a station by URI from the database.</p>
-<p>Adds a station to the memory cache to avoid duplicate StationEngine::Station objects.</p>
-<p>Inserts a platform into the database from the CSV file.</p>
-<p>Inserts a station without facilities into the database from the CSV file.</p>
-<p>Inserts a station with facilities into the database from the CSV file.</p>
-<p>Init the database for stations by reading the CSV files from iRail using QtCSV.</p>
-<p>Retrieves a station by URI from the database.</p>
-<p>Constructs a StationEngine::Factory if none exists and returns the instance.</p>
-<p>In case something goes wrong, a StationEngine::NullStation instance is returned.</p>
-<dl class="section note"><dt>Note</dt><dd>The radius is defined in kilometres, with the given station as the centre of the circle. Fetches nearby stations from database using the Haversine formula (Google's solution). In case something goes wrong, a StationEngine::NullStation instance is pushed to the QList&lt;QPair&lt;StationEngine::Station *, qreal&gt;&gt; &amp;nearbyStations. When the input data is wrong, an empty QList is returned.</dd>
-<dd>
-If no station is found in the memory cache, a NULL pointer is returned. Tries to fetch a station from the memory cache and returns it.</dd></dl>
-<p>This also reduces the look up time for station (less heavy database operations).</p>
-<p>BENCHMARK: Jolla 1 saves 400-500 ms by using this caching method for a single routing calculation.</p>
-<p>The platforms are added in a QMap and returned.</p>
 <dl class="section return"><dt>Returns</dt><dd>QUrl URI</dd></dl>
 <p>Gets the URI of the station and returns it.</p>
 <dl class="params"><dt>Parameters</dt><dd>

@@ -2,13 +2,13 @@
 \label{namespaceStationEngine}\index{StationEngine@{StationEngine}}
 
 
-Constructs a Station\+Engine\+::\+Factory to generate Station\+Engine\+::\+Station objects on the fly.  
+Constructs a Station\+Engine\+::\+Station with the given parent.  
 
 
 
 
 \subsection{Detailed Description}
-Constructs a Station\+Engine\+::\+Factory to generate Station\+Engine\+::\+Station objects on the fly. 
+Constructs a Station\+Engine\+::\+Station with the given parent. 
 
 Retrieves a vehicle by U\+RI from the network i\+Rail A\+PI.
 
@@ -17,45 +17,6 @@ Constructs a Station\+Engine\+::\+Station with facilities and platforms.
 Constructs a Station\+Engine\+::\+Station with facilities.
 
 Constructs a Station\+Engine\+::\+Station without facilities.
-
-Constructs a Station\+Engine\+::\+Station with the given parent.
-
-Constructs a Station\+Engine\+::\+Null\+Station if none exists and returns the instance.
-
-Constructs a Station\+Engine\+::\+Null\+Station according to the Null design pattern.
-
-Sets the \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} instance to the given \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} $\ast$db.
-
-Gets the \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} instance and returns it.
-
-Fetches the platforms of a station by U\+RI from the database.
-
-Adds a station to the memory cache to avoid duplicate Station\+Engine\+::\+Station objects.
-
-Inserts a platform into the database from the C\+SV file.
-
-Inserts a station without facilities into the database from the C\+SV file.
-
-Inserts a station with facilities into the database from the C\+SV file.
-
-Init the database for stations by reading the C\+SV files from i\+Rail using Qt\+C\+SV.
-
-Retrieves a station by U\+RI from the database.
-
-Constructs a Station\+Engine\+::\+Factory if none exists and returns the instance.
-
-In case something goes wrong, a Station\+Engine\+::\+Null\+Station instance is returned.
-
-\begin{DoxyNote}{Note}
-The radius is defined in kilometres, with the given station as the centre of the circle. Fetches nearby stations from database using the Haversine formula (Google\textquotesingle{}s solution). In case something goes wrong, a Station\+Engine\+::\+Null\+Station instance is pushed to the Q\+List$<$Q\+Pair$<$\+Station\+Engine\+::\+Station $\ast$, qreal$>$$>$ \&nearby\+Stations. When the input data is wrong, an empty Q\+List is returned.
-
-If no station is found in the memory cache, a N\+U\+LL pointer is returned. Tries to fetch a station from the memory cache and returns it.
-\end{DoxyNote}
-This also reduces the look up time for station (less heavy database operations).
-
-B\+E\+N\+C\+H\+M\+A\+RK\+: Jolla 1 saves 400-\/500 ms by using this caching method for a single routing calculation.
-
-The platforms are added in a Q\+Map and returned.
 
 \begin{DoxyReturn}{Returns}
 Q\+Url U\+RI

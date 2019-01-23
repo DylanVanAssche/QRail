@@ -84,17 +84,22 @@ Inheritance diagram for QRail::StationEngine::Factory:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad7b0c3ee3716d2a99643c0c7b0b9a9c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classQRail_1_1StationEngine_1_1Station.html">QRail::StationEngine::Station</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#ad7b0c3ee3716d2a99643c0c7b0b9a9c0">getStationByURI</a> (const QUrl &amp;uri)</td></tr>
+<tr class="memdesc:ad7b0c3ee3716d2a99643c0c7b0b9a9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a station by its URI.  <a href="#ad7b0c3ee3716d2a99643c0c7b0b9a9c0">More...</a><br /></td></tr>
 <tr class="separator:ad7b0c3ee3716d2a99643c0c7b0b9a9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa01df9c015321d15605192969d7d363e"><td class="memItemLeft" align="right" valign="top">QList&lt; QPair&lt; <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">QRail::StationEngine::Station</a> *, qreal &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#aa01df9c015321d15605192969d7d363e">getStationsInTheAreaByPosition</a> (const QGeoCoordinate &amp;position, const qreal &amp;radius, const quint32 &amp;maxResults)</td></tr>
+<tr class="memdesc:aa01df9c015321d15605192969d7d363e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the station in the area.  <a href="#aa01df9c015321d15605192969d7d363e">More...</a><br /></td></tr>
 <tr class="separator:aa01df9c015321d15605192969d7d363e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a385cbfbc2697c39bd2c09b866bdfd4ac"><td class="memItemLeft" align="right" valign="top">QPair&lt; <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">QRail::StationEngine::Station</a> *, qreal &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#a385cbfbc2697c39bd2c09b866bdfd4ac">getNearestStationByPosition</a> (const QGeoCoordinate &amp;position, const qreal radius)</td></tr>
+<tr class="memdesc:a385cbfbc2697c39bd2c09b866bdfd4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the closest station in the area.  <a href="#a385cbfbc2697c39bd2c09b866bdfd4ac">More...</a><br /></td></tr>
 <tr class="separator:a385cbfbc2697c39bd2c09b866bdfd4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a892a259deeb2911edda868a09549b68a"><td class="memItemLeft" align="right" valign="top">QList&lt; <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">QRail::StationEngine::Station</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#a892a259deeb2911edda868a09549b68a">getStationsByName</a> (const QString &amp;query)</td></tr>
+<tr class="memdesc:a892a259deeb2911edda868a09549b68a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find matching stations by their name.  <a href="#a892a259deeb2911edda868a09549b68a">More...</a><br /></td></tr>
 <tr class="separator:a892a259deeb2911edda868a09549b68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac66b314d8a7787511a6677a24ab321ff"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">Factory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQRail_1_1StationEngine_1_1Factory.html#ac66b314d8a7787511a6677a24ab321ff">getInstance</a> ()</td></tr>
+<tr class="memdesc:ac66b314d8a7787511a6677a24ab321ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> instance.  <a href="#ac66b314d8a7787511a6677a24ab321ff">More...</a><br /></td></tr>
 <tr class="separator:ac66b314d8a7787511a6677a24ab321ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -120,6 +125,10 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a>.</dd></dl>
+<p>Constructs a <a class="el" href="classQRail_1_1StationEngine_1_1Factory.html">StationEngine::Factory</a> if none exists and returns the instance. </p>
 
 </div>
 </div>
@@ -149,6 +158,18 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the closest station in the area. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>a GPS coordinate to define the center of the search circle. </td></tr>
+    <tr><td class="paramname">radius</td><td>the radius of the search circle in kilometres. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A QPair with the <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> object and it's distance from the given position.</dd></dl>
+<p>Fetches nearby stations from database using the Haversine formula.<br />
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is returned. </p>
+
 </div>
 </div>
 <a id="ad7b0c3ee3716d2a99643c0c7b0b9a9c0"></a>
@@ -167,6 +188,17 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Retrieves a station by its URI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uri</td><td>the URI of the station you want to retrieve. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> with all the data about the requested station.</dd></dl>
+<p>Searches the database by the URI for a certain station.<br />
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is returned. </p>
+
 </div>
 </div>
 <a id="a892a259deeb2911edda868a09549b68a"></a>
@@ -184,6 +216,16 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Find matching stations by their name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>a QString search query. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a QList&lt;StationEngine::Station *station&gt; of matching station with the query.</dd></dl>
+<p>Ideal to implement a search engine based on the station name. </p>
 
 </div>
 </div>
@@ -218,6 +260,20 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets all the station in the area. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>a GPS coordinate to define the center of the search circle. </td></tr>
+    <tr><td class="paramname">radius</td><td>the radius of the search circle in kilometres. </td></tr>
+    <tr><td class="paramname">maxResults</td><td>limits the amount of results this method can return. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A QList&lt;QPair&lt;QRail::StationEngine::Station *, qreal&gt;&gt; with a <a class="el" href="classQRail_1_1StationEngine_1_1Station.html">StationEngine::Station</a> object and the distance to station.</dd></dl>
+<p>Fetches nearby stations from database using the Haversine formula (Google's solution).<br />
+ In case something goes wrong, a <a class="el" href="classQRail_1_1StationEngine_1_1NullStation.html">StationEngine::NullStation</a> instance is pushed to the QList&lt;QPair&lt;StationEngine::Station *, qreal&gt;&gt; &amp;nearbyStations. <br />
+ If you supply invalid input data, an empty QList is returned. </p>
 
 </div>
 </div>

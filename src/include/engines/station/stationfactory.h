@@ -52,16 +52,55 @@ class QRAIL_SHARED_EXPORT Factory : public QObject
 {
     Q_OBJECT
 public:
+    //! Gets a StationEngine::Factory instance.
+    /*!
+        \return An instance of StationEngine::Factory.
+        \public
+        Constructs a StationEngine::Factory if none exists and returns the instance.
+     */
     static Factory *getInstance();
+    //! Retrieves a station by its URI.
+    /*!
+        \param uri the URI of the station you want to retrieve.
+        \return An instance of StationEngine::Station with all the data about the requested station.
+        \public
+        Searches the database by the URI for a certain station.<br>
+        In case something goes wrong, a StationEngine::NullStation instance is returned.
+     */
     QRail::StationEngine::Station *getStationByURI(const QUrl &uri);
-    QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(
-                                                          const QGeoCoordinate &position,
-                                                          const qreal &radius,
-                                                          const quint32 &maxResults);
-    QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(
-        const QGeoCoordinate &position,
-        const qreal radius);
-
+    //! Gets all the station in the area.
+    /*!
+        \param position a GPS coordinate to define the center of the search circle.
+        \param radius the radius of the search circle in kilometres.
+        \param maxResults limits the amount of results this method can return.
+        \return A QList<QPair<QRail::StationEngine::Station *, qreal>> with a StationEngine::Station object and the distance to station.
+        \public
+        Fetches nearby stations from database using the Haversine formula (Google's solution).<br>
+        In case something goes wrong, a StationEngine::NullStation instance is
+        pushed to the QList<QPair<StationEngine::Station *, qreal>> &nearbyStations. <br>
+        If you supply invalid input data, an empty QList is returned.
+     */
+    QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(const QGeoCoordinate &position,
+                                                                                        const qreal &radius,
+                                                                                        const quint32 &maxResults);
+    //! Gets the closest station in the area.
+    /*!
+        \param position a GPS coordinate to define the center of the search circle.
+        \param radius the radius of the search circle in kilometres.
+        \return A QPair with the StationEngine::Station object and it's distance from the given position.
+        \public
+        Fetches nearby stations from database using the Haversine formula.<br>
+        In case something goes wrong, a StationEngine::NullStation instance is returned.
+     */
+    QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(const QGeoCoordinate &position,
+                                                                              const qreal radius);
+    //! Find matching stations by their name.
+    /*!
+        \param query a QString search query.
+        \return a QList<StationEngine::Station *station> of matching station with the query.
+        \public
+        Ideal to implement a search engine based on the station name.
+     */
     QList<QRail::StationEngine::Station *> getStationsByName(const QString &query);
 
 private:

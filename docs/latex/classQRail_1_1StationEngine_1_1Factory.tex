@@ -14,18 +14,18 @@ Inheritance diagram for Q\+Rail\+::Station\+Engine\+::Factory\+:\begin{figure}[H
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}{get\+Station\+By\+U\+RI}} (const Q\+Url \&uri)
-\item 
+\begin{DoxyCompactList}\small\item\em Retrieves a station by its U\+RI. \end{DoxyCompactList}\item 
 Q\+List$<$ Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}{get\+Stations\+In\+The\+Area\+By\+Position}} (const Q\+Geo\+Coordinate \&position, const qreal \&radius, const quint32 \&max\+Results)
-\item 
+\begin{DoxyCompactList}\small\item\em Gets all the station in the area. \end{DoxyCompactList}\item 
 Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}{get\+Nearest\+Station\+By\+Position}} (const Q\+Geo\+Coordinate \&position, const qreal radius)
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the closest station in the area. \end{DoxyCompactList}\item 
 Q\+List$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}{get\+Stations\+By\+Name}} (const Q\+String \&query)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Find matching stations by their name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}} $\ast$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory_ac66b314d8a7787511a6677a24ab321ff}{get\+Instance}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
@@ -35,31 +35,96 @@ static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}} $\ast$
 \subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
 {\footnotesize\ttfamily static \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Factory}}$\ast$ Q\+Rail\+::\+Station\+Engine\+::\+Factory\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}\label{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}} 
+
+
+Gets a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance. 
+
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}}.
+\end{DoxyReturn}
+Constructs a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} if none exists and returns the instance. \mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}\label{classQRail_1_1StationEngine_1_1Factory_a385cbfbc2697c39bd2c09b866bdfd4ac}} 
 \index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getNearestStationByPosition@{getNearestStationByPosition}}
 \index{getNearestStationByPosition@{getNearestStationByPosition}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
 \subsubsection{\texorpdfstring{getNearestStationByPosition()}{getNearestStationByPosition()}}
 {\footnotesize\ttfamily Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$, qreal $>$ Station\+Engine\+::\+Factory\+::get\+Nearest\+Station\+By\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal}]{radius }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}\label{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}} 
+
+
+Gets the closest station in the area. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & a G\+PS coordinate to define the center of the search circle. \\
+\hline
+{\em radius} & the radius of the search circle in kilometres. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Q\+Pair with the \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} object and it\textquotesingle{}s distance from the given position.
+\end{DoxyReturn}
+Fetches nearby stations from database using the Haversine formula.~\newline
+ In case something goes wrong, a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1NullStation}{Station\+Engine\+::\+Null\+Station}} instance is returned. \mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}\label{classQRail_1_1StationEngine_1_1Factory_ad7b0c3ee3716d2a99643c0c7b0b9a9c0}} 
 \index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationByURI@{getStationByURI}}
 \index{getStationByURI@{getStationByURI}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
 \subsubsection{\texorpdfstring{getStationByURI()}{getStationByURI()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ Station\+Engine\+::\+Factory\+::get\+Station\+By\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}\label{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}} 
+
+
+Retrieves a station by its U\+RI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & the U\+RI of the station you want to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} with all the data about the requested station.
+\end{DoxyReturn}
+Searches the database by the U\+RI for a certain station.~\newline
+ In case something goes wrong, a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1NullStation}{Station\+Engine\+::\+Null\+Station}} instance is returned. \mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}\label{classQRail_1_1StationEngine_1_1Factory_a892a259deeb2911edda868a09549b68a}} 
 \index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationsByName@{getStationsByName}}
 \index{getStationsByName@{getStationsByName}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
 \subsubsection{\texorpdfstring{getStationsByName()}{getStationsByName()}}
 {\footnotesize\ttfamily Q\+List$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$ $>$ Station\+Engine\+::\+Factory\+::get\+Stations\+By\+Name (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{query }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}\label{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}} 
+
+
+Find matching stations by their name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & a Q\+String search query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a Q\+List$<$\+Station\+Engine\+::\+Station $\ast$station$>$ of matching station with the query.
+\end{DoxyReturn}
+Ideal to implement a search engine based on the station name. \mbox{\Hypertarget{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}\label{classQRail_1_1StationEngine_1_1Factory_aa01df9c015321d15605192969d7d363e}} 
 \index{QRail::StationEngine::Factory@{QRail::StationEngine::Factory}!getStationsInTheAreaByPosition@{getStationsInTheAreaByPosition}}
 \index{getStationsInTheAreaByPosition@{getStationsInTheAreaByPosition}!QRail::StationEngine::Factory@{QRail::StationEngine::Factory}}
 \subsubsection{\texorpdfstring{getStationsInTheAreaByPosition()}{getStationsInTheAreaByPosition()}}
 {\footnotesize\ttfamily Q\+List$<$ Q\+Pair$<$ \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Q\+Rail\+::\+Station\+Engine\+::\+Station}} $\ast$, qreal $>$ $>$ Station\+Engine\+::\+Factory\+::get\+Stations\+In\+The\+Area\+By\+Position (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{position,  }\item[{const qreal \&}]{radius,  }\item[{const quint32 \&}]{max\+Results }\end{DoxyParamCaption})}
 
 
+
+Gets all the station in the area. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & a G\+PS coordinate to define the center of the search circle. \\
+\hline
+{\em radius} & the radius of the search circle in kilometres. \\
+\hline
+{\em max\+Results} & limits the amount of results this method can return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Q\+List$<$Q\+Pair$<$\+Q\+Rail\+::\+Station\+Engine\+::\+Station $\ast$, qreal$>$$>$ with a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} object and the distance to station.
+\end{DoxyReturn}
+Fetches nearby stations from database using the Haversine formula (Google\textquotesingle{}s solution).~\newline
+ In case something goes wrong, a \mbox{\hyperlink{classQRail_1_1StationEngine_1_1NullStation}{Station\+Engine\+::\+Null\+Station}} instance is pushed to the Q\+List$<$Q\+Pair$<$\+Station\+Engine\+::\+Station $\ast$, qreal$>$$>$ \&nearby\+Stations. ~\newline
+ If you supply invalid input data, an empty Q\+List is returned. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -114,6 +114,8 @@ public:
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    //! Guess the worst case arrival time based on the departure time.
+    QDateTime calculateArrivalTime(const QDateTime &departureTime);
     //! Cancels a current operation
     void abortCurrentOperation();
     //! Gets the departure time of the current Journey.
@@ -202,7 +204,6 @@ private:
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
-    QDateTime calculateArrivalTime(const QDateTime &departureTime);
     QRail::Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;

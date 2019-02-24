@@ -10,7 +10,7 @@ var searchData=
   ['networkmanager_2eh',['networkmanager.h',['../networkmanager_8h.html',1,'']]],
   ['notavailable',['NOTAVAILABLE',['../classQRail_1_1Fragments_1_1Fragment.html#ae3c308ba6dec16f36ecc5dba59f35af3ae91bde0dd79ec49e6be53e755f5ee50d',1,'QRail::Fragments::Fragment']]],
   ['nullboard',['NullBoard',['../classQRail_1_1LiveboardEngine_1_1NullBoard.html',1,'QRail::LiveboardEngine']]],
-  ['nulljourney',['NullJourney',['../classQRail_1_1RouterEngine_1_1NullJourney.html',1,'QRail::RouterEngine']]],
+  ['nulljourney',['NullJourney',['../classQRail_1_1RouterEngine_1_1NullJourney.html',1,'QRail::RouterEngine::NullJourney'],['../classQRail_1_1RouterEngine_1_1NullJourney.html#a8a26b7adf10b20622fd37c113fddcaf8',1,'QRail::RouterEngine::NullJourney::NullJourney()']]],
   ['nullstation',['NullStation',['../classQRail_1_1StationEngine_1_1NullStation.html',1,'QRail::StationEngine']]],
   ['nullvehicle',['NullVehicle',['../classQRail_1_1VehicleEngine_1_1NullVehicle.html',1,'QRail::VehicleEngine']]]
 ];

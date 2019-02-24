@@ -2,6 +2,11 @@
 \label{classQRail_1_1RouterEngine_1_1NullJourney}\index{QRail::RouterEngine::NullJourney@{QRail::RouterEngine::NullJourney}}
 
 
+An \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} contains a empty journey.  
+
+
+
+
 {\ttfamily \#include $<$routernulljourney.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Null\+Journey\+:\begin{figure}[H]
@@ -10,13 +15,41 @@ Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Null\+Journey\+:\begin{figu
 \includegraphics[height=3.000000cm]{classQRail_1_1RouterEngine_1_1NullJourney}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney_a8a26b7adf10b20622fd37c113fddcaf8}{Null\+Journey}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey_ac1ead02119493cf91dc47f867034108e}{routes}}, const Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey_a58b92b24d9d29ebb3cb47994b92eaa13}{departure\+Time}}, const Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey_a8a4e6733fceea2902fc3b0f5cb6b077c}{arrival\+Time}}, const Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey_af2e3a86d876b397e5a88b89aea673145}{hydra\+Next}}, const Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey_a670dbe08bcc3ce8e8003a0429661e18f}{hydra\+Previous}}, Q\+Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Null\+Journey}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney_aeb77bc5f13862ab95fd2f776f43e3661}{get\+Instance}} ()
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
 
+
+\subsection{Detailed Description}
+An \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} contains a empty journey. 
+
+A \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} holds all the necessary information about a journey for the connection between 2 stops. A journey can keep track of multiple routes to get from A to B. \begin{DoxyWarning}{Warning}
+Receiving a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Null\+Journey}} from the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library indicates that something must be terrible wrong! Check you debug output carefully. 
+\end{DoxyWarning}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1NullJourney_a8a26b7adf10b20622fd37c113fddcaf8}\label{classQRail_1_1RouterEngine_1_1NullJourney_a8a26b7adf10b20622fd37c113fddcaf8}} 
+\index{QRail::RouterEngine::NullJourney@{QRail::RouterEngine::NullJourney}!NullJourney@{NullJourney}}
+\index{NullJourney@{NullJourney}!QRail::RouterEngine::NullJourney@{QRail::RouterEngine::NullJourney}}
+\subsubsection{\texorpdfstring{NullJourney()}{NullJourney()}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Null\+Journey\+::\+Null\+Journey (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$ $>$}]{routes,  }\item[{const Q\+Date\+Time}]{departure\+Time,  }\item[{const Q\+Date\+Time}]{arrival\+Time,  }\item[{const Q\+Url}]{hydra\+Next,  }\item[{const Q\+Url}]{hydra\+Previous,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Gets a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} instance. 
+
+\begin{DoxyReturn}{Returns}
+board a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} instance.
+\end{DoxyReturn}
+Constructs a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} if none exists and returns the instance. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1NullJourney_aeb77bc5f13862ab95fd2f776f43e3661}\label{classQRail_1_1RouterEngine_1_1NullJourney_aeb77bc5f13862ab95fd2f776f43e3661}} 

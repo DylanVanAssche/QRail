@@ -2,13 +2,13 @@
 \label{namespaceRouterEngine}\index{RouterEngine@{RouterEngine}}
 
 
-Constructs a Planner to plan routes using the Connection Scan Algorithm (C\+SA).  
+Constructs a Route with a list of legs and transfers.  
 
 
 
 
 \subsection{Detailed Description}
-Constructs a Planner to plan routes using the Connection Scan Algorithm (C\+SA). 
+Constructs a Route with a list of legs and transfers. 
 
 Gets the occupancy level of the underlying route and returns it.
 
@@ -155,37 +155,6 @@ Sets the list of legs to the given Q\+List$<$\+Q\+Rail\+::\+Router\+Engine\+::\+
 Gets the list of legs and returns it.
 
 Constructs a Route with a list of legs.
-
-Constructs a Route with a list of legs and transfers.
-
-Sets the Station\+Engine\+::\+Factory instance to the given Station\+Engine\+::\+Factory $\ast$station\+Factory.
-
-Gets the Station\+Engine\+::\+Factory instance and returns it.
-
-Sets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance to the given \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} $\ast$factory.
-
-Gets the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} instance and returns it.
-
-Guesses the arrival time for a given Q\+Date\+Time \&departure\+Time.
-
-Handler for the generated pages from the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}}.
-
-Tries to find the first reachable connection for a given \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile}{Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile}} $\ast$arrival\+Profile and returns it.
-
-Retrieves the connections between 2 G\+PS positions with a given departure time and a maximum of transfers.
-
-Retrieves the connections between 2 stations with a given departure time and a maximum of transfers.
-
-Constructs a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Q\+Rail\+::\+Router\+Engine\+::\+Planner}} if none exists and returns the instance.
-
-Emit the finished signal when completed, the error signal is emitted in case an error comes up.
-
-Invalid input will directly emit the finished signal with an empty list.
-
-\begin{DoxyNote}{Note}
-This method runs in a separated thread using the Qt\+Concurrent framework. Runs the Connection Scan Algorithm (C\+SA) on a single \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Q\+Rail\+::\+Fragments\+::\+Page}} page. In case we need to fetch more pages, the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} is contacted to retrieve those pages while processing the current page. The order is very important, that\textquotesingle{}s why only 1 page at the time may be processed.
-\end{DoxyNote}
-When a page is received from the \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}} this handler will launch a separate thread to process the page.
 
 The transfers are generated from the list of legs.
 

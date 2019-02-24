@@ -18,17 +18,6 @@
 using namespace QRail;
 QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::m_instance = nullptr;
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Planner constructor
- * @param QObject *parent
- * @package RouterEngine
- * @private
- * Constructs a Planner to plan routes using the
- * Connection Scan Algorithm (CSA).
- */
 QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
 {
     // Init QRail::RouterEngine::Planner
@@ -43,18 +32,6 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets a QRail::RouterEngine::Planner instance
- * @param QObject *parent = nullptr
- * @return QRail::RouterEngine::Planner *planner
- * @package RouterEngine
- * @public
- * Constructs a QRail::RouterEngine::Planner if none exists and returns the
- * instance.
- */
 QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance()
 {
     // Singleton pattern
@@ -71,23 +48,6 @@ RouterEngine::Planner::~Planner()
 }
 
 // Invokers
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Retrieves the connections between 2 stations
- * @param const QUrl &departureStation
- * @param const QUrl &arrivalStation
- * @param const QDateTime &departureTime
- * @param const qint16 &maxTransfers
- * @package RouterEngine
- * @private
- * Retrieves the connections between 2 stations with a given departure time and
- * a maximum of transfers. Emit the finished signal when completed, the error
- * signal is emitted in case an error comes up.
- *
- * Invalid input will directly emit the finished signal with an empty list.
- */
 void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                                                   const QUrl &arrivalStation,
                                                   const QDateTime &departureTime,
@@ -178,23 +138,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     }
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 07 Oct 2018
- * @brief Retrieves the connections between 2 GPS positions
- * @param const QGeoCoordinate &departurePosition
- * @param const QGeoCoordinate &arrivalPosition
- * @param const QDateTime &departureTime
- * @param const qint16 &maxTransfers
- * @package RouterEngine
- * @private
- * Retrieves the connections between 2 GPS positions with a given departure time and
- * a maximum of transfers. Emit the finished signal when completed, the error
- * signal is emitted in case an error comes up.
- *
- * Invalid input will directly emit the finished signal with an empty list.
- */
 void RouterEngine::Planner::getConnections(const QGeoCoordinate &departurePosition,
                                            const QGeoCoordinate &arrivalPosition,
                                            const QDateTime &departureTime,
@@ -220,21 +163,6 @@ void RouterEngine::Planner::abortCurrentOperation()
 }
 
 // Processors
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Plans a single page
- * @param QRail::Fragments::Page *page
- * @package RouterEngine
- * @private
- * @note This method runs in a separated thread using the QtConcurrent
- * framework. Runs the Connection Scan Algorithm (CSA) on a single
- * QRail::Fragments::Page page. In case we need to fetch more pages, the
- * QRail::Fragments::Factory is contacted to retrieve those pages while
- * processing the current page. The order is very important, that's why only 1
- * page at the time may be processed.
- */
 void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 {
     // Lock processing to enforce the DESCENDING order of departure times
@@ -993,18 +921,6 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     }
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the first reachable connection
- * @param QRail::RouterEngine::StationStopProfile *arrivalProfile
- * @return QRail::RouterEngine::StationStopProfile *profile
- * @package RouterEngine
- * @private
- * Tries to find the first reachable connection for a given
- * QRail::RouterEngine::StationStopProfile *arrivalProfile and returns it.
- */
 QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstReachableConnection(
         QRail::RouterEngine::StationStopProfile *arrivalProfile)
 {
@@ -1042,18 +958,6 @@ QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstR
     return options.at(i);
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Received page handler
- * @param QRail::Fragments::Page *page
- * @package RouterEngine
- * @private
- * Handler for the generated pages from the QRail::Fragments::Factory.
- * When a page is received from the QRail::Fragments::Factory this handler
- * will launch a separate thread to process the page.
- */
 void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:"
@@ -1093,16 +997,6 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 }
 
 // Helpers
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Guesses the arrival time
- * @param const QDateTime &departureTime
- * @package RouterEngine
- * @public
- * Guesses the arrival time for a given QDateTime &departureTime.
- */
 QDateTime QRail::RouterEngine::Planner::calculateArrivalTime(const QDateTime &departureTime)
 {
     /*
@@ -1184,63 +1078,21 @@ void QRail::RouterEngine::Planner::setAbortRequested(bool abortRequested)
     m_abortRequested = abortRequested;
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the QRail::Fragments::Factory instance
- * @return QRail::Fragments::Factory *factory
- * @package RouterEngine
- * @public
- * Gets the QRail::Fragments::Factory instance and returns it.
- */
 QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() const
 {
     return m_fragmentsFactory;
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the QRail::Fragments::Factory instance
- * @param const QRail::Fragments::Factory *factory
- * @package RouterEngine
- * @private
- * Sets the QRail::Fragments::Factory instance to the given
- * QRail::Fragments::Factory *factory.
- */
 void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory *factory)
 {
     m_fragmentsFactory = factory;
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the StationEngine::Factory instance
- * @return StationEngine::Factory *factory
- * @package RouterEngine
- * @public
- * Gets the StationEngine::Factory instance and returns it.
- */
 StationEngine::Factory *QRail::RouterEngine::Planner::stationFactory() const
 {
     return m_stationFactory;
 }
 
-/**
- * @file routerplanner.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the StationEngine::Factory instance
- * @param const StationEngine::Factory *value
- * @package RouterEngine
- * @private
- * Sets the StationEngine::Factory instance to the given StationEngine::Factory
- * *stationFactory.
- */
 void QRail::RouterEngine::Planner::setStationFactory(StationEngine::Factory *stationFactory)
 {
     m_stationFactory = stationFactory;

@@ -68,38 +68,119 @@
 // Singleton pattern
 namespace QRail {
 namespace RouterEngine {
+//! A RouterEngine::Planner allows you to generate RouterEngine::Journey objects.
+/*!
+    \class Planner
+    The factory design pattern allows you to create Journey objects in an easy way. Several modes are available to fetch your Journey.
+ */
 class QRAIL_SHARED_EXPORT Planner : public QObject
 {
     Q_OBJECT
 public:
+    //! Gets a RouterEngine::Planner instance.
+    /*!
+        \return An instance of RouterEngine::Planner.
+        \public
+        Constructs a RouterEngine::Planner if none exists and returns the instance.
+     */
     static Planner *getInstance();
+    //! Planner object destructor
     ~Planner();
+    //! Retrieves a Journey between 2 given stops.
+    /*!
+        \param departureStation The URI of the departure stop.
+        \param arrivalStation The URI of the arrival stop.
+        \param departureTime The requested departure time.
+        \public
+        Searches for possible routes between the 2 stops using the CSA.<br>
+        In case something goes wrong, a RouterEngine::NullJourney instance is returned.
+     */
     void getConnections(const QUrl &departureStation,
                         const QUrl &arrivalStation,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    //! Retrieves a Journey between 2 given stops.
+    /*!
+        \param departurePosition The GPS location of the departure location.
+        \param arrivalPosition The GPS location of the arrival location.
+        \param departureTime The requested departure time.
+        \overload
+        \note The closest stops are used to plan a journey.
+        \public
+        Searches for possible routes between the 2 stops using the CSA.<br>
+        In case something goes wrong, a RouterEngine::NullJourney instance is returned.
+     */
     void getConnections(const QGeoCoordinate &departurePosition,
                         const QGeoCoordinate &arrivalPosition,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    //! Cancels a current operation
     void abortCurrentOperation();
-    QDateTime calculateArrivalTime(const QDateTime &departureTime);
+    //! Gets the departure time of the current Journey.
+    /*!
+        \return departureTime The requested departure time.
+        \public
+        Gets the departure time of the current Journey and returns it.
+     */
     QDateTime departureTime() const;
+    //! Gets the arrival time of the current Journey.
+    /*!
+        \return arrivalTime The requested arrival time.
+        \public
+        Gets the arrival time of the current Journey and returns it.
+     */
     QDateTime arrivalTime() const;
+    //! Gets the maximum amount of transfers for the current Journey.
+    /*!
+        \return station StationEngine::Station object with information about the associated station.
+        \note The real amount of transfers is always lower than or equal to this one.
+        \public
+        Gets the maximum amount of transfers for the current Journey and returns it.
+     */
     qint16 maxTransfers() const;
+    //! Gets the departure station URI of the current Journey.
+    /*!
+        \return departureStationURI The URI of the departure station.
+        \public
+        Gets the departure station URI of the current Journey and returns it.
+     */
     QUrl departureStationURI() const;
+    //! Gets the arrival station URI of the current Journey.
+    /*!
+        \return arrivalStationURI The URI of the arrival station.
+        \public
+        Gets the arrival station URI of the current Journey and returns it.
+     */
     QUrl arrivalStationURI() const;
+    //! Gets the current Journey.
+    /*!
+        \return journey The current Journey in the Planner.
+        \public
+        Gets current Journey and returns it.
+     */
     QRail::RouterEngine::Journey *journey() const;
+    //! Sets the current Journey.
+    /*!
+        \param journey The current Journey in the Planner.
+        \public
+        Sets current Journey.
+     */
     void setJourney(QRail::RouterEngine::Journey *journey);
 
 protected:
+    //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
 
 signals:
+    //! Emitted when the Journey calculation is finished.
     void finished(QRail::RouterEngine::Journey *journey);
+    //! Emitted when a route has been found for the Journey.
     void stream(QRail::RouterEngine::Route *route);
+    //! Emitted when something goes wrong.
     void error(const QString &message);
+    //! Emitted when a new Fragments::Page has been requested.
     void requested(const QUrl &pageURI);
+    //! Emitted when a new Fragments::Page has been received.
     void processing(const QUrl &pageURI);
 
 private slots:
@@ -121,6 +202,7 @@ private:
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
+    QDateTime calculateArrivalTime(const QDateTime &departureTime);
     QRail::Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;

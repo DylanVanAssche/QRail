@@ -1,7 +1,6 @@
 var searchData=
 [
   ['cachelocation',['cacheLocation',['../classOS.html#a44dcb6a2ee199b111d98eb1e364bfef7',1,'OS']]],
-  ['calculatearrivaltime',['calculateArrivalTime',['../classQRail_1_1RouterEngine_1_1Planner.html#aaccb9c969c39304363886cf4a75a033c',1,'QRail::RouterEngine::Planner']]],
   ['closenotificationall',['closeNotificationAll',['../classOS.html#a16c6da56d519e2c2bccbdeaf5c4ff29b',1,'OS']]],
   ['closenotificationbycategory',['closeNotificationByCategory',['../classOS.html#a8ab936784f48408f14ad73f10ae5afb8',1,'OS']]],
   ['closenotificationbyreplacesid',['closeNotificationByReplacesId',['../classOS.html#a8cc3c6824e01ae679819c8c3daf7842e',1,'OS']]],

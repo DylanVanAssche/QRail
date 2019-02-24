@@ -25,11 +25,29 @@
 
 namespace QRail {
 namespace Fragments {
+//! A Fragments::Page contains a list of Fragments.
+/*!
+    \class Page
+    A Page has navigations properties to find the next and previous pages. Each page contains a list of Fragments (connections).
+ */
 class Page : public QObject
 {
     Q_OBJECT
 public:
+    //! Constructs a Page object
+    /*!
+     * \param parent
+     */
     explicit Page(QObject *parent = nullptr);
+    //! Constructs a full Page object
+    /*!
+        \param uri The URI of the page.
+        \param timestamp The timestamp of the page.
+        \param hydraNext The hydra next URI, follow this URL to get the next page.
+        \param hydraPrevious The hydra previous, follow this URI to get the previous page.
+        \param fragments The list of fragments associated with this page.
+        \param parent QObject parent-child memory management.
+     */
     explicit Page(
         const QUrl &uri,
         const QDateTime &timestamp,

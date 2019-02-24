@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nullstation',['NullStation',['../classStationEngine_1_1NullStation.html',1,'StationEngine']]]
+  ['journey',['Journey',['../classQRail_1_1RouterEngine_1_1Journey.html',1,'QRail::RouterEngine']]]
 ];

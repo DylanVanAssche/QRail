@@ -40,28 +40,70 @@
 // Singleton pattern
 namespace QRail {
 namespace Network {
+//! A Network::Manager provides you easily access to the WWW.
+/*!
+    \class Manager
+    The singleton design pattern allows you to create Network::Manager objects in an easy way. Several modes are available to perform your WWW operations.<br>
+    Thanks to the facade design pattern, the internals of the network library behind this facade are hidden for the user.
+ */
 class Manager : public QObject
 {
     Q_OBJECT
 public:
+    //! Gets a Network::Manager instance.
+    /*!
+        \return An instance of Network::Manager.
+        \public
+        Constructs a Network::Manager if none exists and returns the instance.
+     */
     static Manager *getInstance();
     QString userAgent() const;
     void setUserAgent(const QString &userAgent);
-    QString acceptHeader() const;
-    void setAcceptHeader(const QString &acceptHeader);
     QRail::Network::Dispatcher *dispatcher() const;
 
 signals:
+    //! SSL errors are emitted through this signal.
     QList<QSslError> sslErrorsReceived(QNetworkReply *reply, QList<QSslError> sslError);
+    //! Emitted when the network accessible state has been changed. For example: WiFi is out of range.
     QNetworkAccessManager::NetworkAccessibility networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
+    //! Emitted when the user agent has been changed.
     void userAgentChanged();
-    void acceptHeaderChanged();
 
 public slots:
-    void getResource(const QUrl &url, QObject *caller);
-    void postResource(const QUrl &url, const QByteArray &data, QObject *caller);
-    void deleteResource(const QUrl &url, QObject *caller);
-    void headResource(const QUrl &url, QObject *caller);
+    //! HTTP GET request.
+    /*!
+        \param url The URL you want to access.
+        \param caller The caller of this method.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
+    void getResource(const QUrl &url,
+                     QObject *caller);
+    //! HTTP POST request.
+    /*!
+        \param url The URL you want to access.
+        \param caller The caller of this method.
+        \param data The data that you want to send to the server.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
+    void postResource(const QUrl &url,
+                      const QByteArray &data,
+                      QObject *caller);
+    //! HTTP DELETE request.
+    /*!
+        \param url The URL you want to access.
+        \param caller The caller of this method.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
+    void deleteResource(const QUrl &url,
+                        QObject *caller);
+    //! HTTP HEAD request.
+    /*!
+        \param url The URL you want to access.
+        \param caller The caller of this method.
+        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
+     */
+    void headResource(const QUrl &url,
+                      QObject *caller);
 
 private slots:
     void requestCompleted(QNetworkReply *reply);
@@ -82,6 +124,8 @@ private:
     void setDispatcher(QRail::Network::Dispatcher *dispatcher);
     static Manager *manager();
     static void setManager(const Manager *manager);
+    QString acceptHeader() const;
+    void setAcceptHeader(const QString &acceptHeader);
 };
 } // namespace Network
 } // namespace QRail

@@ -1,0 +1,120 @@
+\hypertarget{classQRail_1_1Database_1_1Manager}{}\section{Q\+Rail\+::Database\+::Manager Class Reference}
+\label{classQRail_1_1Database_1_1Manager}\index{QRail::Database::Manager@{QRail::Database::Manager}}
+
+
+The \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Database\+::\+Manager}} class manages a given database.  
+
+
+
+
+{\ttfamily \#include $<$databasemanager.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Database\+::Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1Database_1_1Manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_a80bd96eaa935d721bf0fbec1de6d0862}{execute}} (Q\+Sql\+Query \&query)
+\begin{DoxyCompactList}\small\item\em Executes a given Q\+Sql\+Query. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_a57d22c2b445cec8bbd43bf47fa2dd257}{start\+Transaction}} ()
+\begin{DoxyCompactList}\small\item\em Starts the transaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_a027f3ec1350204386c5328ec8628b276}{end\+Transaction}} ()
+\begin{DoxyCompactList}\small\item\em Ends the transaction. \end{DoxyCompactList}\item 
+Q\+Sql\+Database \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_a68d971d9a7e9a6e41d2ab06892711288}{database}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current Q\+Sql\+Database database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Manager}} $\ast$ \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_af3059373b4500f85b00ce971c9f32298}{get\+Instance}} (const Q\+String \&path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Database\+::\+Manager}} class manages a given database. 
+
+Using the \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Database\+::\+Manager}} you can be sure that only 1 object is interacting with the database, thanks to the Singleton design pattern.~\newline
+ The \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Database\+::\+Manager}} allows the user to perform queries with or without transaction support in an easy way.~\newline
+ Transparant support for multiple threads is also implemented by using a Q\+Thread\+Storage class.~\newline
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1Database_1_1Manager_a68d971d9a7e9a6e41d2ab06892711288}\label{classQRail_1_1Database_1_1Manager_a68d971d9a7e9a6e41d2ab06892711288}} 
+\index{QRail::Database::Manager@{QRail::Database::Manager}!database@{database}}
+\index{database@{database}!QRail::Database::Manager@{QRail::Database::Manager}}
+\subsubsection{\texorpdfstring{database()}{database()}}
+{\footnotesize\ttfamily Q\+Sql\+Database Q\+Rail\+::\+Database\+::\+Manager\+::database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the current Q\+Sql\+Database database. 
+
+\begin{DoxyReturn}{Returns}
+A Q\+Sql\+Database object.
+\end{DoxyReturn}
+Gets the associated Q\+Sql\+Database database object and returns it. \mbox{\Hypertarget{classQRail_1_1Database_1_1Manager_a027f3ec1350204386c5328ec8628b276}\label{classQRail_1_1Database_1_1Manager_a027f3ec1350204386c5328ec8628b276}} 
+\index{QRail::Database::Manager@{QRail::Database::Manager}!endTransaction@{endTransaction}}
+\index{endTransaction@{endTransaction}!QRail::Database::Manager@{QRail::Database::Manager}}
+\subsubsection{\texorpdfstring{endTransaction()}{endTransaction()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Database\+::\+Manager\+::end\+Transaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ends the transaction. 
+
+\begin{DoxyReturn}{Returns}
+True if success. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This method won\textquotesingle{}t do anything if no transaction was running.
+\end{DoxyNote}
+Commits changes to the database and returns true if success. \mbox{\Hypertarget{classQRail_1_1Database_1_1Manager_a80bd96eaa935d721bf0fbec1de6d0862}\label{classQRail_1_1Database_1_1Manager_a80bd96eaa935d721bf0fbec1de6d0862}} 
+\index{QRail::Database::Manager@{QRail::Database::Manager}!execute@{execute}}
+\index{execute@{execute}!QRail::Database::Manager@{QRail::Database::Manager}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Database\+::\+Manager\+::execute (\begin{DoxyParamCaption}\item[{Q\+Sql\+Query \&}]{query }\end{DoxyParamCaption})}
+
+
+
+Executes a given Q\+Sql\+Query. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & the S\+QL query to execute. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success.
+\end{DoxyReturn}
+Executes the given Q\+Sql\+Query query on the active database.~\newline
+ Before the execution takes place, the connection is checked.~\newline
+ During the execution, the errors are catched and logged as C\+R\+I\+T\+I\+C\+AL.~\newline
+ \mbox{\Hypertarget{classQRail_1_1Database_1_1Manager_af3059373b4500f85b00ce971c9f32298}\label{classQRail_1_1Database_1_1Manager_af3059373b4500f85b00ce971c9f32298}} 
+\index{QRail::Database::Manager@{QRail::Database::Manager}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::Database::Manager@{QRail::Database::Manager}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Database_1_1Manager}{Q\+Rail\+::\+Database\+::\+Manager}} $\ast$ Q\+Rail\+::\+Database\+::\+Manager\+::get\+Instance (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classQRail_1_1Database_1_1Manager_a57d22c2b445cec8bbd43bf47fa2dd257}\label{classQRail_1_1Database_1_1Manager_a57d22c2b445cec8bbd43bf47fa2dd257}} 
+\index{QRail::Database::Manager@{QRail::Database::Manager}!startTransaction@{startTransaction}}
+\index{startTransaction@{startTransaction}!QRail::Database::Manager@{QRail::Database::Manager}}
+\subsubsection{\texorpdfstring{startTransaction()}{startTransaction()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Database\+::\+Manager\+::start\+Transaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Starts the transaction. 
+
+\begin{DoxyReturn}{Returns}
+True if success.
+\end{DoxyReturn}
+Starts a transaction in the database.~\newline
+ After you are done with your changes you should call \mbox{\hyperlink{classQRail_1_1Database_1_1Manager_a027f3ec1350204386c5328ec8628b276}{Q\+Rail\+::\+Database\+::\+Manager\+::end\+Transaction()}} to commit your changes. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/database/\mbox{\hyperlink{databasemanager_8h}{databasemanager.\+h}}\item 
+src/database/\mbox{\hyperlink{databasemanager_8cpp}{databasemanager.\+cpp}}\end{DoxyCompactItemize}

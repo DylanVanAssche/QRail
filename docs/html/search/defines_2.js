@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['intra_5fstop_5ffootpath_5ftime',['INTRA_STOP_FOOTPATH_TIME',['../routerplanner_8h.html#af8b8d70d928fe8c0e479236171354ef6',1,'routerplanner.h']]]
+  ['driver',['DRIVER',['../databasemanager_8h.html#a45044c35ca9fe4a00b497f05d2b818cc',1,'databasemanager.h']]]
 ];

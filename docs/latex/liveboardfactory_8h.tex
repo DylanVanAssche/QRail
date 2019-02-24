@@ -1,39 +1,54 @@
 \hypertarget{liveboardfactory_8h}{}\section{src/include/engines/liveboard/liveboardfactory.h File Reference}
-\label{liveboardfactory_8h}\index{src/include/engines/liveboard/liveboardfactory.\+h@{src/include/engines/liveboard/liveboardfactory.\+h}}
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Url$>$}\newline
+\label{liveboardfactory_8h}\index{src/include/engines/liveboard/liveboardfactory.h@{src/include/engines/liveboard/liveboardfactory.h}}
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Date\+Time$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Mutex$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Mutex\+Locker$>$}\newline
-{\ttfamily \#include $<$Qt\+Concurrent/\+Qt\+Concurrent$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Url$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Debug$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Qt\+Global$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Timer$>$}\newline
 {\ttfamily \#include \char`\"{}engines/liveboard/liveboardboard.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}fragments/fragmentsfactory.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}fragments/fragmentspage.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}fragments/fragmentsfragment.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/liveboard/liveboardnullboard.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}engines/station/stationfactory.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}engines/vehicle/vehiclevehicle.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}engines/vehicle/vehiclestop.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}engines/vehicle/vehiclevehicle.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fragments/fragmentsfactory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fragments/fragmentsfragment.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fragments/fragmentspage.\+h\char`\"{}}\newline
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Factory}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} allows you to generate \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceLiveboardEngine}{Liveboard\+Engine}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{namespaceQRail}{Q\+Rail}}
+\item 
+ \mbox{\hyperlink{namespaceQRail_1_1LiveboardEngine}{Q\+Rail\+::\+Liveboard\+Engine}}
+\item 
+ \mbox{\hyperlink{namespaceLiveboard}{Liveboard}}
+\begin{DoxyCompactList}\small\item\em Retrieves a liveboard by a station U\+RI and a time range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{liveboardfactory_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}~3600
+\item 
+\#define \mbox{\hyperlink{liveboardfactory_8h_affb8c26e3d7615ef0bb160737c641b10}{M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT}}~1.\+0
 \end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{liveboardfactory_8h_affb8c26e3d7615ef0bb160737c641b10}\label{liveboardfactory_8h_affb8c26e3d7615ef0bb160737c641b10}} 
+\index{liveboardfactory.h@{liveboardfactory.h}!MINIMUM\_PROGRESS\_INCREMENT@{MINIMUM\_PROGRESS\_INCREMENT}}
+\index{MINIMUM\_PROGRESS\_INCREMENT@{MINIMUM\_PROGRESS\_INCREMENT}!liveboardfactory.h@{liveboardfactory.h}}
+\subsubsection{\texorpdfstring{MINIMUM\_PROGRESS\_INCREMENT}{MINIMUM\_PROGRESS\_INCREMENT}}
+{\footnotesize\ttfamily \#define M\+I\+N\+I\+M\+U\+M\+\_\+\+P\+R\+O\+G\+R\+E\+S\+S\+\_\+\+I\+N\+C\+R\+E\+M\+E\+NT~1.\+0}
+
 \mbox{\Hypertarget{liveboardfactory_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}\label{liveboardfactory_8h_a99e430ba4788dc5ce8b767a6a55f9ce6}} 
-\index{liveboardfactory.\+h@{liveboardfactory.\+h}!S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}}
-\index{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER@{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}!liveboardfactory.\+h@{liveboardfactory.\+h}}
-\subsubsection{\texorpdfstring{S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER}{SECONDS\_TO\_HOURS\_MULTIPLIER}}
+\index{liveboardfactory.h@{liveboardfactory.h}!SECONDS\_TO\_HOURS\_MULTIPLIER@{SECONDS\_TO\_HOURS\_MULTIPLIER}}
+\index{SECONDS\_TO\_HOURS\_MULTIPLIER@{SECONDS\_TO\_HOURS\_MULTIPLIER}!liveboardfactory.h@{liveboardfactory.h}}
+\subsubsection{\texorpdfstring{SECONDS\_TO\_HOURS\_MULTIPLIER}{SECONDS\_TO\_HOURS\_MULTIPLIER}}
 {\footnotesize\ttfamily \#define S\+E\+C\+O\+N\+D\+S\+\_\+\+T\+O\+\_\+\+H\+O\+U\+R\+S\+\_\+\+M\+U\+L\+T\+I\+P\+L\+I\+ER~3600}
 

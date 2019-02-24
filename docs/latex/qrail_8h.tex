@@ -1,9 +1,21 @@
 \hypertarget{qrail_8h}{}\section{src/include/qrail.h File Reference}
-\label{qrail_8h}\index{src/include/qrail.\+h@{src/include/qrail.\+h}}
+\label{qrail_8h}\index{src/include/qrail.h@{src/include/qrail.h}}
+{\ttfamily \#include $<$Qt\+Core/\+Q\+File$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+I\+O\+Device$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Document$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Object$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+String$>$}\newline
 {\ttfamily \#include $<$Qt\+Core/\+Qt\+Global$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Dir$>$}\newline
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{qrail_8h_a12b4aaf14cdf7f55057b646701d7ac00}{P\+A\+G\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+P\+A\+TH}}~\char`\"{}\+://context/page/context.\+json\char`\"{}
+\item 
+\#define \mbox{\hyperlink{qrail_8h_a4e541d59f6d76361a6bd2da999e6c2f3}{V\+E\+H\+I\+C\+L\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+P\+A\+TH}}~\char`\"{}\+://context/vehicle/context.\+json\char`\"{}
+\item 
+\#define \mbox{\hyperlink{qrail_8h_ab51d0a82c92884eb8dd5d058a91449af}{L\+O\+C\+K\+\_\+\+T\+I\+M\+E\+O\+UT}}~750
+\item 
+\#define \mbox{\hyperlink{qrail_8h_a603d7eb76ca889e39ca041e5e298337a}{H\+T\+T\+P\+\_\+\+T\+I\+M\+E\+O\+UT}}~10000
 \item 
 \#define \mbox{\hyperlink{qrail_8h_aebb10269c046c00460a53b827735f43f}{Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT}}~Q\+\_\+\+D\+E\+C\+L\+\_\+\+I\+M\+P\+O\+RT
 \end{DoxyCompactItemize}
@@ -11,22 +23,74 @@
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{qrail_8h_a6938029c575ea0029f0e07d2ba59b1e4}{init\+Q\+Rail}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Inits the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library resources. \end{DoxyCompactList}\item 
+Q\+Json\+Object \mbox{\hyperlink{qrail_8h_a3b509bbe85ae85a01c2edcd8f1e73c5d}{page\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the Linked Connections page context. \end{DoxyCompactList}\item 
+Q\+Json\+Object \mbox{\hyperlink{qrail_8h_ae706e18f8abc0956fb603f7cc77bbb83}{vehicle\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Retireves the Linked Connections vehicle context. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{qrail_8h_a603d7eb76ca889e39ca041e5e298337a}\label{qrail_8h_a603d7eb76ca889e39ca041e5e298337a}} 
+\index{qrail.h@{qrail.h}!HTTP\_TIMEOUT@{HTTP\_TIMEOUT}}
+\index{HTTP\_TIMEOUT@{HTTP\_TIMEOUT}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{HTTP\_TIMEOUT}{HTTP\_TIMEOUT}}
+{\footnotesize\ttfamily \#define H\+T\+T\+P\+\_\+\+T\+I\+M\+E\+O\+UT~10000}
+
+\mbox{\Hypertarget{qrail_8h_ab51d0a82c92884eb8dd5d058a91449af}\label{qrail_8h_ab51d0a82c92884eb8dd5d058a91449af}} 
+\index{qrail.h@{qrail.h}!LOCK\_TIMEOUT@{LOCK\_TIMEOUT}}
+\index{LOCK\_TIMEOUT@{LOCK\_TIMEOUT}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{LOCK\_TIMEOUT}{LOCK\_TIMEOUT}}
+{\footnotesize\ttfamily \#define L\+O\+C\+K\+\_\+\+T\+I\+M\+E\+O\+UT~750}
+
+\mbox{\Hypertarget{qrail_8h_a12b4aaf14cdf7f55057b646701d7ac00}\label{qrail_8h_a12b4aaf14cdf7f55057b646701d7ac00}} 
+\index{qrail.h@{qrail.h}!PAGE\_CONTEXT\_PATH@{PAGE\_CONTEXT\_PATH}}
+\index{PAGE\_CONTEXT\_PATH@{PAGE\_CONTEXT\_PATH}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{PAGE\_CONTEXT\_PATH}{PAGE\_CONTEXT\_PATH}}
+{\footnotesize\ttfamily \#define P\+A\+G\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+P\+A\+TH~\char`\"{}\+://context/page/context.\+json\char`\"{}}
+
 \mbox{\Hypertarget{qrail_8h_aebb10269c046c00460a53b827735f43f}\label{qrail_8h_aebb10269c046c00460a53b827735f43f}} 
-\index{qrail.\+h@{qrail.\+h}!Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT@{Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT}}
-\index{Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT@{Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT}!qrail.\+h@{qrail.\+h}}
-\subsubsection{\texorpdfstring{Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT}{QRAIL\_SHARED\_EXPORT}}
+\index{qrail.h@{qrail.h}!QRAIL\_SHARED\_EXPORT@{QRAIL\_SHARED\_EXPORT}}
+\index{QRAIL\_SHARED\_EXPORT@{QRAIL\_SHARED\_EXPORT}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{QRAIL\_SHARED\_EXPORT}{QRAIL\_SHARED\_EXPORT}}
 {\footnotesize\ttfamily \#define Q\+R\+A\+I\+L\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+E\+X\+P\+O\+RT~Q\+\_\+\+D\+E\+C\+L\+\_\+\+I\+M\+P\+O\+RT}
+
+\mbox{\Hypertarget{qrail_8h_a4e541d59f6d76361a6bd2da999e6c2f3}\label{qrail_8h_a4e541d59f6d76361a6bd2da999e6c2f3}} 
+\index{qrail.h@{qrail.h}!VEHICLE\_CONTEXT\_PATH@{VEHICLE\_CONTEXT\_PATH}}
+\index{VEHICLE\_CONTEXT\_PATH@{VEHICLE\_CONTEXT\_PATH}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{VEHICLE\_CONTEXT\_PATH}{VEHICLE\_CONTEXT\_PATH}}
+{\footnotesize\ttfamily \#define V\+E\+H\+I\+C\+L\+E\+\_\+\+C\+O\+N\+T\+E\+X\+T\+\_\+\+P\+A\+TH~\char`\"{}\+://context/vehicle/context.\+json\char`\"{}}
 
 
 
 \subsection{Function Documentation}
 \mbox{\Hypertarget{qrail_8h_a6938029c575ea0029f0e07d2ba59b1e4}\label{qrail_8h_a6938029c575ea0029f0e07d2ba59b1e4}} 
-\index{qrail.\+h@{qrail.\+h}!init\+Q\+Rail@{init\+Q\+Rail}}
-\index{init\+Q\+Rail@{init\+Q\+Rail}!qrail.\+h@{qrail.\+h}}
-\subsubsection{\texorpdfstring{init\+Q\+Rail()}{initQRail()}}
+\index{qrail.h@{qrail.h}!initQRail@{initQRail}}
+\index{initQRail@{initQRail}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{initQRail()}{initQRail()}}
 {\footnotesize\ttfamily void init\+Q\+Rail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Inits the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library resources. 
+
+\mbox{\Hypertarget{qrail_8h_a3b509bbe85ae85a01c2edcd8f1e73c5d}\label{qrail_8h_a3b509bbe85ae85a01c2edcd8f1e73c5d}} 
+\index{qrail.h@{qrail.h}!pageContext@{pageContext}}
+\index{pageContext@{pageContext}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{pageContext()}{pageContext()}}
+{\footnotesize\ttfamily Q\+Json\+Object page\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieves the Linked Connections page context. 
+
+\mbox{\Hypertarget{qrail_8h_ae706e18f8abc0956fb603f7cc77bbb83}\label{qrail_8h_ae706e18f8abc0956fb603f7cc77bbb83}} 
+\index{qrail.h@{qrail.h}!vehicleContext@{vehicleContext}}
+\index{vehicleContext@{vehicleContext}!qrail.h@{qrail.h}}
+\subsubsection{\texorpdfstring{vehicleContext()}{vehicleContext()}}
+{\footnotesize\ttfamily Q\+Json\+Object vehicle\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retireves the Linked Connections vehicle context. 
 

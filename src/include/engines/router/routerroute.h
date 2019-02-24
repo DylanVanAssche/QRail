@@ -27,17 +27,39 @@
 
 namespace QRail {
 namespace RouterEngine {
+//! A RouterEngine::Route contains all the information about a single route of Journey.
+/*!
+    \class Route
+    Using a Route you can describe a complete route between 2 stops with all the transfers, alerts, ...
+ */
 class QRAIL_SHARED_EXPORT Route : public QObject
 {
     Q_OBJECT
 public:
+    //! QRail::RouterEngine::Route constructor (empty).
+    /*!
+        \param parent QObject parent-child memory management.
+        \public
+        Constructs a QRail::RouterEngine::Route with the given parent.
+     */
+    explicit Route(const QList<RouteLeg *> &legs, QObject *parent = nullptr);
+    //! QRail::RouterEngine::Route constructor.
+    /*!
+        \param legs A list of RouteLeg.
+        \param transfers A list of Transfer.
+        \param tripAlerts A list of Message about the trip.
+        \param vehicleAlerts A list of Message about the vehicles.
+        \param remarks A list of Message about the remarks.
+        \param parent QObject parent-child memory management.
+        \public
+        Constructs a QRail::RouterEngine::Route with the given parent.
+     */
     explicit Route(const QList<QRail::RouterEngine::RouteLeg *> &legs,
                    const QList<QRail::RouterEngine::Transfer *> &transfers,
                    const QList<QRail::AlertsEngine::Message *> &tripAlerts,
                    const QList<QRail::AlertsEngine::Message *> &vehicleAlerts,
                    const QList<QRail::AlertsEngine::Message *> &remarks,
                    QObject *parent = nullptr);
-    explicit Route(const QList<RouteLeg *> &legs, QObject *parent = nullptr);
     QList<QRail::RouterEngine::RouteLeg *> legs() const;
     void setLegs(const QList<RouteLeg *> &legs);
     QList<QRail::RouterEngine::Transfer *> transfers() const;
@@ -65,10 +87,15 @@ public:
     bool isPartiallyCanceled() const;
 
 signals:
+    //! Emitted when one of the legs are changed.
     void legsChanged();
+    //! Emitted when the transfers are changed.
     void transfersChanged();
+    //! Emitted with the alerts for the complete trips are changed.
     void tripAlertsChanged();
+    //! Emitted when the alerts for the vehicles in the Route are changed.
     void vehicleAlertsChanged();
+    //! Emitted when any remarks are changed.
     void remarksChanged();
 
 private:

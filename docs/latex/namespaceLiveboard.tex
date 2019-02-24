@@ -2,64 +2,25 @@
 \label{namespaceLiveboard}\index{Liveboard@{Liveboard}}
 
 
+Retrieves a liveboard by a station U\+RI and a time range.  
+
+
+
+
 \subsection{Detailed Description}
-Constructs a \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} with the given parent.
+Retrieves a liveboard by a station U\+RI and a time range. 
 
-Adds an entry (\mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} $\ast$) to the \mbox{\hyperlink{namespaceLiveboard}{Liveboard}} entries. Using this method will automatically set the entries to the appended list and trigger the entries\+Changed signal.
 
-Gets the station of the liveboard and returns it.
-
-Sets the station of the liveboard to the given \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station. Emits the station\+Changed signal.
-
-Gets the until time and returns it.
-
-Sets the until time to the given Q\+Date\+Time \&until. Emits the until\+Changed signal.
-
-Gets the mode and returns it.
-
-Sets the mode of the liveboard to the given Liveboard\+Engine\+::\+Board\+::\+Mode \&mode. Emits the mode\+Changed signal.
-
-Gets the from time and returns it.
-
-Sets the from time to the given Q\+Date\+Time \&from. Emits the from\+Changed signal.
-
-Gets the entries of the liveboard and returns it.
-
-Sets the entries of the liveboard to the given Q\+List$<$\+Vehicle\+Engine\+::\+Vehicle $\ast$$>$ \&entries. Emits the entries\+Changed signal.
-
-Constructs a \mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} objects on the fly.
-
-Constructs a \mbox{\hyperlink{classLiveboardEngine_1_1Factory}{Liveboard\+Engine\+::\+Factory}} if none exists and returns the instance.
-
+\begin{DoxyParams}{Parameters}
+{\em uri} & the U\+RI of the liveboard. \\
+\hline
+{\em from} & the start search time. \\
+\hline
+{\em until} & the stop search time. \\
+\hline
+{\em mode} & selects if you want to retrieve the D\+E\+P\+A\+R\+T\+U\+R\+ES or A\+R\+R\+I\+V\+A\+LS.\\
+\hline
+\end{DoxyParams}
 This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
 
-Retrieves a \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI. The Liveboard\+Engine\+::\+Board\+::\+Mode \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. Calling this method will retrieve a \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} for the current time until the current time + 3 hours.
-
-This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
-
-Retrieves a \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI. The Liveboard\+Engine\+::\+Board\+::\+Mode \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station.
-
-Handles the incoming \mbox{\hyperlink{classFragments_1_1Page}{Fragments\+::\+Page}} pages from the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}}. New pages are requested if the time range isn\textquotesingle{}t fulfilled in D\+E\+S\+C\+E\+N\+D\+I\+NG order of the departure time.
-
-\begin{DoxyNote}{Note}
-If you want to retrieve the full intermediary stops of each vehicle in the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} you can use the \mbox{\hyperlink{classVehicleEngine_1_1Factory}{Vehicle\+Engine\+::\+Factory}}.
-\end{DoxyNote}
-Parses the incoming pages in a separate thread using the Qt\+Concurrent framework. If the finished parameter is set to true, the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} is ready and the liveboard\+Ready signal is emitted.
-
-Gets the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} instance we\textquotesingle{}re currently using and returns it.
-
-Sets the \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} instance we\textquotesingle{}re currently using to the given \mbox{\hyperlink{classLiveboardEngine_1_1Board}{Liveboard\+Engine\+::\+Board}} $\ast$liveboard.
-
-Gets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance and returns it.
-
-Sets the \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} instance to the given \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} $\ast$stationfactory.
-
-Gets the Liveboard\+Engine\+::\+Board\+::\+Mode mode and returns it.
-
-Gets the station U\+RI and returns it.
-
-Sets the station U\+RI to the given Q\+Url \&station\+U\+RI. Emits the station\+U\+R\+I\+Changed signal.
-
-Gets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance and returns it.
-
-Sets the \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} instance to the given \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}} $\ast$factory. 
+Retrieves a \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board}} for a station given by it\textquotesingle{}s U\+RI. The \mbox{\hyperlink{classQRail_1_1LiveboardEngine_1_1Board_a0ab6d318f405895f62c6e98cb2d86c6e}{Q\+Rail\+::\+Liveboard\+Engine\+::\+Board\+::\+Mode}} \&mode parameter determines if the the liveboard should contain all the arrivals, departures of the station. 

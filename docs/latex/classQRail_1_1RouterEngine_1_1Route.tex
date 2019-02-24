@@ -2,6 +2,11 @@
 \label{classQRail_1_1RouterEngine_1_1Route}\index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
 
 
+A \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Router\+Engine\+::\+Route}} contains all the information about a single route of \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}.  
+
+
+
+
 {\ttfamily \#include $<$routerroute.\+h$>$}
 
 Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Route\+:\begin{figure}[H]
@@ -14,22 +19,22 @@ Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Route\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_ad4fe4f0edd472e9d6158206e83c22d20}{legs\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when one of the legs are changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a18e2a0b5cee7cf1d0441ef811ec02423}{transfers\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the transfers are changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aa3aed0599caff195331cd992be3260b5}{trip\+Alerts\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted with the alerts for the complete trips are changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a236daca39e2006e3f0182227079113f6}{vehicle\+Alerts\+Changed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Emitted when the alerts for the vehicles in the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Route}} are changed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a4d3f6275111893e2b73611cc45c18adc}{remarks\+Changed}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Emitted when any remarks are changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}{Route}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aeddeb0a07487274ecae67b4a9aef0701}{legs}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a67674768d1b895227e8fe64d1b3f4e1f}{transfers}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_ae304c1e025a25cce45d6bbf51d0c8308}{trip\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8cc828d45bd8711e59197002f3881f90}{vehicle\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_acf7c65a4556fa8bdccff820dd8f8acfd}{remarks}}, Q\+Object $\ast$parent=nullptr)
-\item 
 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a1a97cacc398b14f41b9c755b492b6b35}{Route}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Route\+Leg}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aeddeb0a07487274ecae67b4a9aef0701}{legs}}, Q\+Object $\ast$parent=nullptr)
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} constructor (empty). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}{Route}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aeddeb0a07487274ecae67b4a9aef0701}{legs}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a67674768d1b895227e8fe64d1b3f4e1f}{transfers}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_ae304c1e025a25cce45d6bbf51d0c8308}{trip\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8cc828d45bd8711e59197002f3881f90}{vehicle\+Alerts}}, const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_acf7c65a4556fa8bdccff820dd8f8acfd}{remarks}}, Q\+Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} constructor. \end{DoxyCompactList}\item 
 Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ $>$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aeddeb0a07487274ecae67b4a9aef0701}{legs}} () const
 \item 
 void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_af472483ea371f0b6a0fc88c1ea303a49}{set\+Legs}} (const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Route\+Leg}} $\ast$ $>$ \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_aeddeb0a07487274ecae67b4a9aef0701}{legs}})
@@ -82,20 +87,53 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \end{DoxyCompactItemize}
 
 
-\subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}\label{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}} 
-\index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!Route@{Route}}
-\index{Route@{Route}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
-\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Route\+::\+Route (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ $>$ \&}]{legs,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$ $>$ \&}]{transfers,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{trip\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{vehicle\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{remarks,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+\subsection{Detailed Description}
+A \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Router\+Engine\+::\+Route}} contains all the information about a single route of \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
 
+Using a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Route}} you can describe a complete route between 2 stops with all the transfers, alerts, ... 
+
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_a1a97cacc398b14f41b9c755b492b6b35}\label{classQRail_1_1RouterEngine_1_1Route_a1a97cacc398b14f41b9c755b492b6b35}} 
 \index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!Route@{Route}}
 \index{Route@{Route}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
-\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Route\+::\+Route (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Route\+Leg}} $\ast$ $>$ \&}]{legs,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
+
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} constructor (empty). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Q\+Object parent-\/child memory management.\\
+\hline
+\end{DoxyParams}
+Constructs a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} with the given parent. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}\label{classQRail_1_1RouterEngine_1_1Route_a5063644c4df5409194b773a140189005}} 
+\index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!Route@{Route}}
+\index{Route@{Route}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
+\subsubsection{\texorpdfstring{Route()}{Route()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Route\+::\+Route (\begin{DoxyParamCaption}\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ $>$ \&}]{legs,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer}} $\ast$ $>$ \&}]{transfers,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{trip\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{vehicle\+Alerts,  }\item[{const Q\+List$<$ \mbox{\hyperlink{classQRail_1_1AlertsEngine_1_1Message}{Q\+Rail\+::\+Alerts\+Engine\+::\+Message}} $\ast$ $>$ \&}]{remarks,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em legs} & A list of \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Route\+Leg}}. \\
+\hline
+{\em transfers} & A list of \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer}{Transfer}}. \\
+\hline
+{\em trip\+Alerts} & A list of Message about the trip. \\
+\hline
+{\em vehicle\+Alerts} & A list of Message about the vehicles. \\
+\hline
+{\em remarks} & A list of Message about the remarks. \\
+\hline
+{\em parent} & Q\+Object parent-\/child memory management.\\
+\hline
+\end{DoxyParams}
+Constructs a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} with the given parent. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_a98ab7ca5c9bb67348f64eae41750f86f}\label{classQRail_1_1RouterEngine_1_1Route_a98ab7ca5c9bb67348f64eae41750f86f}} 
@@ -188,6 +226,10 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \subsubsection{\texorpdfstring{legsChanged}{legsChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Route\+::legs\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted when one of the legs are changed. 
+
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_acf7c65a4556fa8bdccff820dd8f8acfd}\label{classQRail_1_1RouterEngine_1_1Route_acf7c65a4556fa8bdccff820dd8f8acfd}} 
 \index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!remarks@{remarks}}
 \index{remarks@{remarks}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
@@ -199,6 +241,10 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \index{remarksChanged@{remarksChanged}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
 \subsubsection{\texorpdfstring{remarksChanged}{remarksChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Route\+::remarks\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when any remarks are changed. 
 
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_af472483ea371f0b6a0fc88c1ea303a49}\label{classQRail_1_1RouterEngine_1_1Route_af472483ea371f0b6a0fc88c1ea303a49}} 
 \index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!setLegs@{setLegs}}
@@ -254,6 +300,10 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \subsubsection{\texorpdfstring{transfersChanged}{transfersChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Route\+::transfers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted when the transfers are changed. 
+
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_ae304c1e025a25cce45d6bbf51d0c8308}\label{classQRail_1_1RouterEngine_1_1Route_ae304c1e025a25cce45d6bbf51d0c8308}} 
 \index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!tripAlerts@{tripAlerts}}
 \index{tripAlerts@{tripAlerts}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
@@ -266,6 +316,10 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \subsubsection{\texorpdfstring{tripAlertsChanged}{tripAlertsChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Route\+::trip\+Alerts\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
 
+
+
+Emitted with the alerts for the complete trips are changed. 
+
 \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Route_a8cc828d45bd8711e59197002f3881f90}\label{classQRail_1_1RouterEngine_1_1Route_a8cc828d45bd8711e59197002f3881f90}} 
 \index{QRail::RouterEngine::Route@{QRail::RouterEngine::Route}!vehicleAlerts@{vehicleAlerts}}
 \index{vehicleAlerts@{vehicleAlerts}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
@@ -277,6 +331,10 @@ bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route_a8daf1b60443b10ba4c730
 \index{vehicleAlertsChanged@{vehicleAlertsChanged}!QRail::RouterEngine::Route@{QRail::RouterEngine::Route}}
 \subsubsection{\texorpdfstring{vehicleAlertsChanged}{vehicleAlertsChanged}}
 {\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Route\+::vehicle\+Alerts\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the alerts for the vehicles in the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Route}} are changed. 
 
 
 

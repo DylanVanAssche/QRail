@@ -19,29 +19,41 @@ using namespace QRail;
 
 void QRail::Network::EventSourceTest::initEventSource()
 {
-    m_eventSource = new QRail::Network::EventSource(QUrl("http://localhost:8080/sncb/events/sse?lastSyncTime=2019-03-03T08:30:00.000Z"));
-    connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
-    connect(m_eventSource, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
-    //connect(m_eventSource, SIGNAL(readyStateChanged(QRail::Network::EventSource::ReadyState)), this, SLOT(processReadyState(EventSource::ReadyState)));
+    m_sse = new QRail::Network::EventSource(QUrl("http://localhost:8080/sncb/events/sse?lastSyncTime=2019-03-03T08:30:00.000Z"), QRail::Network::EventSource::Subscription::SSE);
+    connect(m_sse, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
+    connect(m_sse, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
+    m_polling = new QRail::Network::EventSource(QUrl("http://localhost:8080/sncb/events/poll?lastSyncTime=2019-03-03T08:30:00.000Z"), QRail::Network::EventSource::Subscription::POLLING);
+    connect(m_polling, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
+    connect(m_polling, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
 }
 
 void Network::EventSourceTest::runEventSource()
 {
     qDebug() << "Waiting for SSE response...";
-    QEventLoop loop;
-    connect(m_eventSource, SIGNAL(messageReceived(QString)), &loop, SLOT(quit()));
-    connect(m_eventSource, SIGNAL(errorReceived(QString)), &loop, SLOT(quit()));
-    loop.exec(); // Initial update
-    loop.exec(); // Delta update 1
-    loop.exec(); // Delta update 2
-    qDebug() << "SSE Response OK";
-}
+    QEventLoop loop1;
+    connect(m_sse, SIGNAL(messageReceived(QString)), &loop1, SLOT(quit()));
+    connect(m_sse, SIGNAL(errorReceived(QString)), &loop1, SLOT(quit()));
+    loop1.exec(); // Initial update
+    loop1.exec(); // Delta update 1
+    loop1.exec(); // Delta update 2
+    m_sse->close();
+    qDebug() << "SSE response OK";
 
+    qDebug() << "Waiting for polling response...";
+    QEventLoop loop2;
+    connect(m_polling, SIGNAL(messageReceived(QString)), &loop2, SLOT(quit()));
+    connect(m_polling, SIGNAL(errorReceived(QString)), &loop2, SLOT(quit()));
+    loop2.exec(); // Initial update
+    loop2.exec(); // Delta update 1
+    loop2.exec(); // Delta update 2
+    m_polling->close();
+    qDebug() << "Polling response OK";
+}
 
 void Network::EventSourceTest::cleanEventSource()
 {
-    m_eventSource->close();
-    delete m_eventSource;
+    delete m_sse;
+    delete m_polling;
 }
 
 void Network::EventSourceTest::processMessage(const QString msg)

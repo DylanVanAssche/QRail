@@ -131,6 +131,13 @@ void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
     this->dispatcher()->dispatchReply(reply);
 }
 
+QNetworkReply *Network::Manager::poll(const QUrl &url)
+{
+    QNetworkRequest request = this->prepareHTTPRequest(url);
+    QNetworkReply *reply = this->QNAM()->get(request);
+    return reply;
+}
+
 // Helpers
 QNetworkRequest QRail::Network::Manager::prepareHTTPRequest(const QUrl &url)
 {

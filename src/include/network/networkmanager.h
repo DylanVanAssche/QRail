@@ -116,6 +116,7 @@ public slots:
 
 private slots:
     void requestCompleted(QNetworkReply *reply);
+    QNetworkReply *poll(const QUrl &url);
 
 private:
     QNetworkAccessManager *m_QNAM;

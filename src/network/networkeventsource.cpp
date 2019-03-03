@@ -18,9 +18,12 @@
 using namespace QRail;
 using namespace Network;
 
-EventSource::EventSource(QUrl url, QObject *parent) : QObject(parent)
+EventSource::EventSource(QUrl url, Subscription subscriptionType, QObject *parent) : QObject(parent)
 {
     m_url = url;
+    m_subscriptionType = subscriptionType;
+
+    // Create a QRail::Network::Manager and open the event source
     m_manager = QRail::Network::Manager::getInstance();
     this->open();
 }
@@ -38,13 +41,42 @@ void EventSource::close()
 
 void EventSource::open()
 {
-    m_reply = m_manager->subscribe(m_url, this);
-    connect(m_reply, SIGNAL(readyRead()), this, SLOT(handleStream()));
-    connect(m_reply, SIGNAL(finished()), this, SLOT(handleStream()));
+    if(m_subscriptionType == Subscription::SSE) {
+        qDebug() << "Opening SSE stream...";
+        m_reply = m_manager->subscribe(m_url, this);
+        connect(m_reply, SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
+        connect(m_reply, SIGNAL(finished()), this, SLOT(handleSSEFinished()));
+    }
+    else if(m_subscriptionType == Subscription::POLLING) {
+        qDebug() << "Opening HTTP polling stream...";
+        this->pollPollingStream();
+    }
+    else {
+        qCritical() << "Unknown subscription type!";
+    }
     this->setReadyState(EventSource::ReadyState::CONNECTING);
 }
 
-void EventSource::handleStream()
+void EventSource::customEvent(QEvent *event)
+{
+    if (event->type() == this->m_manager->dispatcher()->eventType()) {
+        event->accept();
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
+        if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
+            this->handlePollingStream(networkEvent->reply());
+        }
+        else if(m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
+            this->handleSSEFinished();
+        }
+        else {
+            qCritical() << "Dispatching event failed, unknown handler";
+        }
+    } else {
+        event->ignore();
+    }
+}
+
+void EventSource::handleSSEStream()
 {
     // Read reply, reset retries counter and update the ready state
     QString payload = QString(m_reply->readAll());
@@ -60,7 +92,7 @@ void EventSource::handleStream()
     }
 }
 
-void EventSource::handleFinished()
+void EventSource::handleSSEFinished()
 {
     qDebug() << "Stream finished:" << m_reply->url();
     this->setReadyState(EventSource::ReadyState::CLOSED);
@@ -73,6 +105,23 @@ void EventSource::handleFinished()
     else {
         qCritical() << "Unable to reconnect, max retries reached";
         emit this->errorReceived(QString("Unable to reconnect, max retries reached"));
+    }
+}
+
+void EventSource::handlePollingStream(QNetworkReply *reply)
+{
+    qDebug() << "Received poll reply";
+    QString payload = QString(reply->readAll());
+    emit this->messageReceived(payload);
+}
+
+void EventSource::pollPollingStream()
+{
+    // Only execute polling when the connection is open.
+    if(m_readyState == EventSource::ReadyState::CLOSED) {
+        qDebug() << "Polling resource...";
+        m_manager->getResource(m_url, this);
+        QTimer::singleShot(POLL_INTERVAL, this, SLOT(pollPollingStream()));
     }
 }
 

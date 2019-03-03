@@ -20,9 +20,11 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
+#include <QtCore/QTimer>
 #include "network/networkmanager.h"
 
 #define MAX_RETRIES 3
+#define POLL_INTERVAL 10 * 1000 // 10 000 ms = 10 s
 
 namespace QRail {
 namespace Network {
@@ -36,7 +38,11 @@ public:
         OPEN,
         CLOSED
     };
-    explicit EventSource(QUrl url, QObject *parent = nullptr);
+    enum Subscription {
+        SSE,
+        POLLING
+    };
+    explicit EventSource(QUrl url, Subscription subcriptionType, QObject *parent = nullptr);
     QUrl url();
     void close();
     void open();
@@ -46,9 +52,15 @@ signals:
     void messageReceived(QString message);
     void readyStateChanged(QRail::Network::EventSource::ReadyState state);
 
+protected:
+    //! Dispatcher protected method, only here as a reference.
+    virtual void customEvent(QEvent *event);
+
 private slots:
-    void handleStream();
-    void handleFinished();
+    void handleSSEStream();
+    void handleSSEFinished();
+    void handlePollingStream(QNetworkReply *reply);
+    void pollPollingStream();
 
 private:
     QUrl m_url;
@@ -59,6 +71,7 @@ private:
     QNetworkReply *m_reply;
     ReadyState m_readyState;
     QString m_chunks;
+    Subscription m_subscriptionType;
     void setReadyState(ReadyState state);
     void parseEvents(QStringList events);
 };

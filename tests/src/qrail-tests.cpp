@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
         QRail::StationEngine::FactoryTest testSuiteStationFactory;
 
         // Run unit tests without passing arguments
-        networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
-        //networkManagerResult = QTest::qExec(&testSuitsNetworkEventSource, 0, nullptr); TODO TRAVIS CI
-        dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
+        //networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        networkManagerResult = QTest::qExec(&testSuitsNetworkEventSource, 0, nullptr); // TODO TRAVIS CI
+        /*dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
 
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
         vehicleFactoryResult = QTest::qExec(&testSuiteVehicleFactory, 0, nullptr);
 
         // Run QRail::RouterEngine::Planner integration test
-        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
+        routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);*/
 
         // Return the status code of every test for CI/CD
         QCoreApplication::exit(networkManagerResult | networkEventSourceResult | dbManagerResult | lcFragmentResult | lcPageResult |

@@ -41,7 +41,8 @@ public slots:
     void processReadyState(EventSource::ReadyState state);
 
 private:
-    QRail::Network::EventSource *m_eventSource;
+    QRail::Network::EventSource *m_sse;
+    QRail::Network::EventSource *m_polling;
 };
 }
 }

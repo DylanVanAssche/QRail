@@ -25,6 +25,7 @@
 #include "fragments/fragmentsfragmenttest.h"
 #include "fragments/fragmentspagetest.h"
 #include "network/networkmanagertest.h"
+#include "network/networkeventsourcetest.h"
 #include "qrail.h"
 
 #define WAIT_TIME 5000
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
 
         // Create test instances
         int networkManagerResult = -1;
+        int networkEventSourceResult = 0; //-1; TODO: Add SSE endpoint on a server to test this on Travis CI
         int dbManagerResult = -1;
         int lcFragmentResult = -1;
         int lcPageResult = -1;
@@ -54,6 +56,7 @@ int main(int argc, char *argv[])
         int vehicleFactoryResult = -1;
         int stationFactoryResult = -1;
         QRail::Network::ManagerTest testSuiteNetworkManager;
+        QRail::Network::EventSourceTest testSuitsNetworkEventSource;
         QRail::Database::ManagerTest testSuiteDBManager;
         QRail::Fragments::FragmentTest testSuiteLCFragment;
         QRail::Fragments::PageTest testSuiteLCPage;
@@ -64,6 +67,7 @@ int main(int argc, char *argv[])
 
         // Run unit tests without passing arguments
         networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        //networkManagerResult = QTest::qExec(&testSuitsNetworkEventSource, 0, nullptr); // TODO TRAVIS CI
         dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
@@ -81,7 +85,7 @@ int main(int argc, char *argv[])
         routerPlannerResult = QTest::qExec(&testSuiteCSAPlanner, 0, nullptr);
 
         // Return the status code of every test for CI/CD
-        QCoreApplication::exit(networkManagerResult | dbManagerResult | lcFragmentResult | lcPageResult |
+        QCoreApplication::exit(networkManagerResult | networkEventSourceResult | dbManagerResult | lcFragmentResult | lcPageResult |
                                routerPlannerResult | liveboardFactoryResult | vehicleFactoryResult | stationFactoryResult);
     });
     return app.exec();

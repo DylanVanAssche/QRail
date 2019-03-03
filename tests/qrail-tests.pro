@@ -57,7 +57,8 @@ SOURCES += src/qrail-tests.cpp \
     src/engines/router/routerplannertest.cpp \
     src/engines/liveboard/liveboardfactorytest.cpp \
     src/engines/vehicle/vehiclefactorytest.cpp \
-    src/engines/station/stationfactorytest.cpp
+    src/engines/station/stationfactorytest.cpp \
+    src/network/networkeventsourcetest.cpp
 
 HEADERS += \
     src/database/databasemanagertest.h \
@@ -67,7 +68,8 @@ HEADERS += \
     src/engines/router/routerplannertest.h \
     src/engines/liveboard/liveboardfactorytest.h \
     src/engines/vehicle/vehiclefactorytest.h \
-    src/engines/station/stationfactorytest.h
+    src/engines/station/stationfactorytest.h \
+    src/network/networkeventsourcetest.h
 
 DISTFILES += \
     rpm/qrail-tests.spec \

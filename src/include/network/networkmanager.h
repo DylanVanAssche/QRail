@@ -36,6 +36,8 @@
 #include "network/networkdispatcher.h"
 
 #define CONTENT_TYPE "application/ld+json"
+#define ACCEPT_HEADER_SSE "text/event-stream"
+#define ACCEPT_HEADER_HTTP "application/ld+json"
 
 // Singleton pattern
 namespace QRail {
@@ -76,8 +78,7 @@ public slots:
         \param caller The caller of this method.
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getResource(const QUrl &url,
-                     QObject *caller);
+    void getResource(const QUrl &url, QObject *caller);
     //! HTTP POST request.
     /*!
         \param url The URL you want to access.
@@ -85,25 +86,33 @@ public slots:
         \param data The data that you want to send to the server.
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void postResource(const QUrl &url,
-                      const QByteArray &data,
-                      QObject *caller);
+    void postResource(const QUrl &url, const QByteArray &data, QObject *caller);
     //! HTTP DELETE request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void deleteResource(const QUrl &url,
-                        QObject *caller);
+    void deleteResource(const QUrl &url, QObject *caller);
     //! HTTP HEAD request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void headResource(const QUrl &url,
-                      QObject *caller);
+    void headResource(const QUrl &url, QObject *caller);
+    //! Subscribe to a HTTP SSE resource.
+    /*!
+        \param url The URL of the SSE resource.
+        \param caller The caller of this method.
+     */
+    QNetworkReply *subscribe(const QUrl &url, QObject *caller);
+    //! Unsubscribe to a HTTP SSE resource.
+    /*!
+        \param url The URL of the SSE resource.
+        \param caller The caller of this method.
+    */
+    void unsubscribe(QNetworkReply *reply, QObject *caller);
 
 private slots:
     void requestCompleted(QNetworkReply *reply);
@@ -113,10 +122,9 @@ private:
     QAbstractNetworkCache *m_cache;
     QRail::Network::Dispatcher *m_dispatcher;
     QString m_userAgent;
-    QString m_acceptHeader;
     static Manager *m_instance;
     explicit Manager(QObject *parent = nullptr);
-    QNetworkRequest prepareRequest(const QUrl &url);
+    QNetworkRequest prepareHTTPRequest(const QUrl &url);
     QNetworkAccessManager *QNAM() const;
     void setQNAM(QNetworkAccessManager *value);
     QAbstractNetworkCache *cache() const;
@@ -124,8 +132,6 @@ private:
     void setDispatcher(QRail::Network::Dispatcher *dispatcher);
     static Manager *manager();
     static void setManager(const Manager *manager);
-    QString acceptHeader() const;
-    void setAcceptHeader(const QString &acceptHeader);
 };
 } // namespace Network
 } // namespace QRail

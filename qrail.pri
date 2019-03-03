@@ -52,6 +52,7 @@ SOURCES += \
     $$PWD/src/fragments/fragmentsfactory.cpp \
     $$PWD/src/fragments/fragmentsdispatcher.cpp \
     $$PWD/src/qrail.cpp \
+    $$PWD/src/network/networkeventsource.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -82,7 +83,8 @@ HEADERS += \
     $$PWD/src/include/fragments/fragmentsdispatcher.h \
     $$PWD/qtcsv/include/qtcsv/stringdata.h \
     $$PWD/src/include/qrail.h \
-    $$PWD/src/include/engines/router/routernulljourney.h
+    $$PWD/src/include/engines/router/routernulljourney.h \
+    $$PWD/src/include/network/networkeventsource.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

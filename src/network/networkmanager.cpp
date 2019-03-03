@@ -62,7 +62,6 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
 
     // Create HTTP client information
     this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail", "0.1.1", "Sailfish OS", "3.0.1.11"));
-    this->setAcceptHeader(QString("application/ld+json"));
 }
 
 QRail::Network::Manager *QRail::Network::Manager::getInstance()
@@ -78,7 +77,7 @@ QRail::Network::Manager *QRail::Network::Manager::getInstance()
 void QRail::Network::Manager::getResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "GET resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->get(request);
     this->dispatcher()->addTarget(reply, caller);
 }
@@ -86,7 +85,7 @@ void QRail::Network::Manager::getResource(const QUrl &url, QObject *caller)
 void QRail::Network::Manager::postResource(const QUrl &url, const QByteArray &data, QObject *caller)
 {
     qDebug() << "POST resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->post(request, data);
     this->dispatcher()->addTarget(reply, caller);
 }
@@ -94,7 +93,7 @@ void QRail::Network::Manager::postResource(const QUrl &url, const QByteArray &da
 void QRail::Network::Manager::deleteResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "DELETE resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->deleteResource(request);
     this->dispatcher()->addTarget(reply, caller);
 }
@@ -102,9 +101,29 @@ void QRail::Network::Manager::deleteResource(const QUrl &url, QObject *caller)
 void QRail::Network::Manager::headResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "HEAD resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->head(request);
     this->dispatcher()->addTarget(reply, caller);
+}
+
+QNetworkReply *Network::Manager::subscribe(const QUrl &url, QObject *caller)
+{
+    // SSE has special request headers and attributes
+    QNetworkRequest request(url);
+    request.setRawHeader(QByteArray("Accept"), QByteArray(ACCEPT_HEADER_SSE));
+    request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork); // SSE events may not be cached
+    QNetworkReply *reply = this->QNAM()->get(request);
+    this->dispatcher()->addTarget(reply, caller, true);
+    return reply;
+}
+
+void Network::Manager::unsubscribe(QNetworkReply *reply, QObject *caller)
+{
+    this->dispatcher()->removeSubscriber(caller);
+    reply->close();
+    qDebug() << "Closed stream";
 }
 
 void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
@@ -113,10 +132,10 @@ void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
 }
 
 // Helpers
-QNetworkRequest QRail::Network::Manager::prepareRequest(const QUrl &url)
+QNetworkRequest QRail::Network::Manager::prepareHTTPRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
-    request.setRawHeader(QByteArray("Accept"), this->acceptHeader().toUtf8());
+    request.setRawHeader(QByteArray("Accept"), ACCEPT_HEADER_HTTP);
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setHeader(QNetworkRequest::ContentTypeHeader, CONTENT_TYPE);
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
@@ -133,16 +152,6 @@ QString QRail::Network::Manager::userAgent() const
 void QRail::Network::Manager::setUserAgent(const QString &userAgent)
 {
     m_userAgent = userAgent;
-}
-
-QString QRail::Network::Manager::acceptHeader() const
-{
-    return m_acceptHeader;
-}
-
-void QRail::Network::Manager::setAcceptHeader(const QString &acceptHeader)
-{
-    m_acceptHeader = acceptHeader;
 }
 
 QNetworkAccessManager *QRail::Network::Manager::QNAM() const

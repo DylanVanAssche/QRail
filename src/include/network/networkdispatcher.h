@@ -67,14 +67,16 @@ class Dispatcher : public QObject
 public:
     explicit Dispatcher(QObject *parent = nullptr);
     void dispatchReply(QNetworkReply *reply);
-    void addTarget(QNetworkReply *reply, QObject *caller);
-    void removeTarget(QNetworkReply *reply);
+    void addTarget(QNetworkReply *reply, QObject *caller, bool isSubscription=false);
+    void removeTarget(QNetworkReply *reply, QObject *caller);
+    void removeSubscriber(QObject *caller);
     QObject *findTarget(QNetworkReply *reply);
     QEvent::Type eventType() const;
 
 private:
     QMutex targetListLocker;
     QMap<QNetworkReply *, QObject *> m_targets;
+    QList<QObject *> m_subscriptions;
     QEvent::Type m_eventType;
     void setEventType(const QEvent::Type &eventType);
 };

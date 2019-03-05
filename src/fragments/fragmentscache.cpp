@@ -21,7 +21,7 @@ using namespace Fragments;
 Cache::Cache(QObject *parent) : QObject(parent)
 {
     // Create LRU cache
-    m_cache = QCache(MAX_COST);
+    m_cache = QCache<QUrl, QRail::Fragments::Page*>(MAX_COST);
 
     // Disk cache directory creation
     // Get the caching directory of the application
@@ -38,16 +38,76 @@ bool Cache::cachePage(Page *page)
     return m_cache.insert(page->uri(), page);
 }
 
-void Cache::updateFragment(Fragment *fragment)
+void Cache::updateFragment(Fragment *updatedFragment)
 {
-    // lookup fragment from departureTime -> departureTime + departureDelay
-    QDateTime departureTime = fragment->departureTime().addSecs(-fragment->departureDelay());
-    QDateTime departureTimeWithDelay = fragment->departureTime();
+    // We look between the departureTime and departureTime + departureDelay for the old fragment
+    QDateTime departureTime = updatedFragment->departureTime().addSecs(-updatedFragment->departureDelay());
+    QDateTime departureTimeWithDelay = updatedFragment->departureTime();
+    QList<QUrl> pagesURI = m_cache.keys();
 
-    // remove old fragment and insert the new one if departureDelay is different
-    // return
+    foreach(QUrl pageURI, pagesURI) {
+        QUrlQuery query = QUrlQuery(pageURI);
+        QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
+        qDebug() << "Page time:" << pageTime;
+        if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
+            QRail::Fragments::Page* page = m_cache.object(pageURI);
+            QList<QRail::Fragments::Fragment *> fragments = page->fragments();
 
-    // replace fragment if only arrivalDelay or type has been changed
+            // Check if the connection is in the fragments of this page
+            for(qint32 fragCounter=0; fragCounter < fragments.length(); fragCounter++) {
+                QRail::Fragments::Fragment *fragment = fragments.at(fragCounter);
+
+                // Check if this fragment is the one we're looking for
+                if(fragment->uri() == updatedFragment->uri()) {
+                    qDebug() << "Found fragment!";
+
+                    // Departure delay changed, removing old fragment and inserting new fragment
+                    if(fragment->departureDelay() != updatedFragment->departureDelay()) {
+                        qDebug() << "Deleting old fragment, inserting new one";
+                        // Remove old fragment in the old page
+                        page->fragments().removeAt(fragCounter);
+
+                        // Insert updated fragment in the new page
+                        for(qint32 pageCounter=0; pageCounter < pagesURI.length()-1; pageCounter++) {
+                            QUrl currentPageURI = pagesURI.at(pageCounter);
+                            QUrl nextPageURI = pagesURI.at(pageCounter);
+                            QUrlQuery currentPageQuery = QUrlQuery(currentPageURI);
+                            QUrlQuery nextPageQuery = QUrlQuery(nextPageURI);
+                            QDateTime currentPageTime = QDateTime::fromString(currentPageQuery.queryItemValue("departureTime"), Qt::ISODate);
+                            QDateTime nextPageTime = QDateTime::fromString(nextPageQuery.queryItemValue("departureTime"), Qt::ISODate);
+
+                            // Look for the new page
+                            if(currentPageTime <= departureTime && departureTime < nextPageTime) {
+                                qDebug() << "Found inserting page, inserting fragment now";
+                                QRail::Fragments::Page* currentPage = m_cache.object(currentPageURI);
+                                currentPage->fragments().append(updatedFragment);
+
+                                // Keep page sorted
+                                std::sort(currentPage->fragments().begin(), currentPage->fragments().end(), [](const QRail::Fragments::Fragment * a,
+                                const QRail::Fragments::Fragment * b) -> bool {
+                                    QDateTime timeA = a->departureTime();
+                                    QDateTime timeB = b->departureTime();
+                                    return timeA < timeB;
+                                });
+                            }
+                        }
+
+                        // Update completed
+                        return;
+                    }
+
+                    // Arrival delay changed or cancelled (type changed), updating fragment in page
+                    if(fragment->arrivalDelay() != updatedFragment->arrivalDelay()) {
+                        qDebug() << "Updating old fragment";
+                        page->fragments().replace(fragCounter, updatedFragment);
+
+                        // Update completed
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
 Page *Cache::getPageByURI(QUrl uri)
@@ -59,8 +119,12 @@ Page *Cache::getPageByURI(QUrl uri)
 
     QJsonObject jsonPage = this->findPageOnDisk(uri);
     if(!jsonPage.isEmpty()) {
-        // Convert to page object
-        // return page
+        QUrl uri;
+        QDateTime timestamp;
+        QUrl hydraPrevious;
+        QUrl hydraNext;
+        QList<QRail::Fragments::Fragment *> fragments;
+        QRail::Fragments::Page* diskPage = new QRail::Fragments::Page(uri, timestamp, hydraNext, hydraPrevious, fragments);
     }
 
     // The requested page isn't cached, the Fragments::Factory will fetch it from the network
@@ -74,10 +138,15 @@ QJsonObject Cache::findPageOnDisk(QUrl uri)
     qDebug() << "Page file cache path:" << path;
     if(QDir(path).exists()) {
         qDebug() << "Page found in disk cache";
-        // Read page and return JSON
+        QFile jsonFile;
+        jsonFile.setFileName(path);
+        jsonFile.open(QIODevice::ReadOnly | QIODevice::Text);
+        QString data = jsonFile.readAll();
+        jsonFile.close();
+        QJsonDocument d = QJsonDocument::fromJson(data.toUtf8());
+        return d.object();
     }
 
     qWarning() << "Cannot find page in disk cache";
     return QJsonObject();
 }
-

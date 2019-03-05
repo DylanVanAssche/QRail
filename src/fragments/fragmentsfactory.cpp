@@ -159,7 +159,7 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
         return frag;
     }
 
-    qCritical() << "Parsing failed, throw fragment away: " << uri;
+    qCritical() << "Parsing failed, throwing fragment away: " << uri;
     return nullptr;
 }
 

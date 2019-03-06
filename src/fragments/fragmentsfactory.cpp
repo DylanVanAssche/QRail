@@ -31,6 +31,9 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
+
+    // Create page cache
+    m_pageCache = new QRail::Fragments::Cache();
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -46,11 +49,20 @@ QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 // Invokers
 void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
-    // Use processing methods to allow other extensions in the future if needed
-    this->getPageByURIFromNetworkManager(uri);
     QUrlQuery query = QUrlQuery(uri);
     QDateTime departureTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
     this->dispatcher()->addTarget(departureTime, caller);
+
+    // Page is cached, dispatching!
+    if(m_pageCache.hasPage(uri)) {
+        qDebug() << "Getting page from cache:" << uri;
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        this->dispatcher()->dispatchPage(page);
+        return;
+    }
+
+    // Page is not in cache
+    this->getPageByURIFromNetworkManager(uri);
 }
 
 void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
@@ -62,10 +74,18 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     qDebug() << departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z");
     parameters.addQueryItem("departureTime", departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z"));
     uri.setQuery(parameters);
-
-    // Use processing methods to allow other extensions in the future if needed
-    this->getPageByURIFromNetworkManager(uri);
     this->dispatcher()->addTarget(departureTime, caller);
+
+    // Page is cached, dispatching!
+    if(m_pageCache.hasPage(uri)) {
+        qDebug() << "Getting page from cache:" << uri;
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        this->dispatcher()->dispatchPage(page);
+        return;
+    }
+
+    // Page is not in cache
+    this->getPageByURIFromNetworkManager(uri);
 }
 
 void QRail::Fragments::Factory::customEvent(QEvent *event)
@@ -217,6 +237,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,
                                                                           hydraPrevious, fragments);
+                m_pageCache.cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
                 qCritical() << "Fragments context validation failed!";

@@ -28,6 +28,7 @@
 #include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
+#include "fragments/fragmentscache.h"
 #include "network/networkmanager.h"
 #include "qrail.h"
 
@@ -89,6 +90,7 @@ signals:
     void error(const QString &message);
 
 private:
+    QRail::Fragments::Cache m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;

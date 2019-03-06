@@ -40,6 +40,7 @@ public:
     bool cachePage(QRail::Fragments::Page *page);
     void updateFragment(QRail::Fragments::Fragment *fragment);
     QRail::Fragments::Page *getPageByURI(QUrl uri);
+    bool hasPage(QUrl uri);
 
 signals:
     void pageUpdated(QUrl uri);

@@ -157,6 +157,11 @@ Page *Cache::getPageByURI(QUrl uri)
     return this->getPageFromDisk(uri);
 }
 
+bool Cache::hasPage(QUrl uri)
+{
+    return m_cache.contains(uri);
+}
+
 Page *Cache::getPageFromDisk(QUrl uri)
 {
     // The page can be available on disk, but not in the RAM cache

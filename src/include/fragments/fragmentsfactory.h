@@ -30,9 +30,11 @@
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentscache.h"
 #include "network/networkmanager.h"
+#include "network/networkeventsource.h"
 #include "qrail.h"
 
 #define BASE_URL "https://graph.irail.be/sncb/connections"
+#define REAL_TIME_URL "https://graph.irail.be/sncb/events"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
@@ -88,8 +90,14 @@ signals:
     void getResource(const QUrl &uri, QObject *caller);
     //! Emitted when an error occurred during processing.
     void error(const QString &message);
+    //! Emitted when a connection has been updated.
+    void connectionChanged(const QUrl &uri);
+
+private slots:
+    void handleEventSource(QString message);
 
 private:
+    QRail::Network::EventSource m_eventSource;
     QRail::Fragments::Cache m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;

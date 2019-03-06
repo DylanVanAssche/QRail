@@ -34,6 +34,10 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
 
     // Create page cache
     m_pageCache = new QRail::Fragments::Cache();
+
+    // Create event source
+    m_eventSource = new QRail::Network::EventSource(REAL_TIME_URL, QRail::Network::EventSource::Subscription::SSE);
+    connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -97,6 +101,37 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
+}
+
+void Fragments::Factory::handleEventSource(QString message)
+{
+    qDebug() << "Received SSE message:" << message;
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+    QJsonObject obj = doc.object();
+
+    QJsonArray graph = jsonObject["@graph"].toArray();
+    foreach (QJsonValue item, graph) {
+        if (item.isObject()) {
+            QJsonObject connection = item.toObject();
+            QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+            if (frag) {
+                fragments.append(frag);
+            } else {
+                qCritical() << "Corrupt Fragment detected!";
+            }
+        } else {
+            qCritical() << "Fragment isn't a JSON object!";
+        }
+    }
+
+    // Linked Connections page
+    QString pageURI = jsonObject["@id"].toString();
+    QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+    QString hydraNext = jsonObject["hydra:next"].toString();
+    QString hydraPrevious = jsonObject["hydra:previous"].toString();
+    QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
+    // Recache page, the old version is automatically deleted.
+    m_pageCache.cachePage(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)

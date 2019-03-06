@@ -37,11 +37,11 @@ class Fragment : public QObject
 public:
     //! The defined GTFS types by the GTFS specification.
     enum class GTFSTypes {
-        REGULAR,
-        NOTAVAILABLE,
-        MUSTPHONE,
-        MUSTCOORDINATEWITHDRIVER,
-        UNKNOWN
+        REGULAR = 0,
+        NOTAVAILABLE = 1,
+        MUSTPHONE = 2,
+        MUSTCOORDINATEWITHDRIVER = 3,
+        UNKNOWN = 4
     };
     //! Constructs a Fragment.
     /*!

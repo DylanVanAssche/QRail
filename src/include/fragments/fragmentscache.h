@@ -25,6 +25,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonDocument>
+#include <QtCore/QJsonArray>
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentsfragment.h"
 #define MAX_COST 24*60*50*1000 // Allocate space for 50 Kb pages (24 hours, 60 pages/hour) = 72 Mb RAM
@@ -45,7 +46,7 @@ signals:
 
 private:
     QCache<QUrl, QRail::Fragments::Page*> m_cache;
-    QJsonObject findPageOnDisk(QUrl uri);
+    QRail::Fragments::Page *Cache::getPageFromDisk(QUrl uri);
     QDir m_cacheDir;
 };
 }

@@ -24,7 +24,6 @@ Cache::Cache(QObject *parent) : QObject(parent)
     m_cache = QCache<QUrl, QRail::Fragments::Page*>(MAX_COST);
 
     // Disk cache directory creation
-    // Get the caching directory of the application
     QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/fragments";
 
     // Create the 'fragments' folder to save our caching data
@@ -35,7 +34,41 @@ bool Cache::cachePage(Page *page)
 {
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
-    return m_cache.insert(page->uri(), page);
+    bool success = m_cache.insert(page->uri(), page);
+
+    // Cache the page on disk
+    QJsonObject obj;
+    obj.insert("uri", QJsonValue::fromVariant(page->uri.toString()));
+    obj.insert("timestamp", QJsonValue::fromVariant(page->timestamp().toString(Qt::ISODate)));
+    obj.insert("hydraPrevious", QJsonValue::fromVariant(page->hydraPrevious()).toString());
+    obj.insert("hydraNext", QJsonValue::fromVariant(page->hydraNext().toString()));
+    QJsonArray fragments;
+    foreach(QRail::Fragments::Fragment *frag, page->fragments()) {
+        QJsonObject f;
+        f.insert("uri", QJsonValue::fromVariant(frag->uri().toString()));
+        f.insert("departureStationURI", QJsonValue::fromVariant(frag->departureStationURI().toString()));
+        f.insert("arrivalStationURI", QJsonValue::fromVariant(frag->arrivalStationURI().toString()));
+        f.insert("departureTime", QJsonValue::fromVariant(frag->departureTime().toString(Qt::ISODate)));
+        f.insert("arrivalTime", QJsonValue::fromVariant(frag->arrivalTime().toString(Qt::ISODate)));
+        f.insert("departureDelay", QJsonValue::fromVariant(frag->departureDelay()));
+        f.insert("arrivalDelay", QJsonValue::fromVariant(frag->arrivalDelay()));
+        f.insert("tripURI", QJsonValue::fromVariant(frag->tripURI().toString()));
+        f.insert("routeURI", QJsonValue::fromVariant(frag->routeURI().toString(Qt::ISODate)));
+        f.insert("direction", QJsonValue::fromVariant(frag->direction()));
+        //f.insert("pickupType", QJsonValue::fromVariant(frag->pickupType()));
+        //f.insert("dropOffType", QJsonValue::fromVariant(frag->dropOffType()));
+        fragments.append(f);
+    }
+    obj.insert("fragments", fragments);
+    QJsonDocument doc = QJsonDocument(obj);
+
+    // Save QJsonDocument to disk
+    QString path = m_cacheDir.filePath(uri.toString());
+    QFile jsonFile(path);
+    jsonFile.open(QFile::WriteOnly);
+    jsonFile.write(doc.toJson());
+
+    return success;
 }
 
 void Cache::updateFragment(Fragment *updatedFragment)
@@ -117,26 +150,17 @@ Page *Cache::getPageByURI(QUrl uri)
         return m_cache::object(uri);
     }
 
-    QJsonObject jsonPage = this->findPageOnDisk(uri);
-    if(!jsonPage.isEmpty()) {
-        QUrl uri;
-        QDateTime timestamp;
-        QUrl hydraPrevious;
-        QUrl hydraNext;
-        QList<QRail::Fragments::Fragment *> fragments;
-        QRail::Fragments::Page* diskPage = new QRail::Fragments::Page(uri, timestamp, hydraNext, hydraPrevious, fragments);
-    }
-
-    // The requested page isn't cached, the Fragments::Factory will fetch it from the network
-    return nullptr;
+    // If the requested page isn't cached, the Fragments::Factory will fetch it from the network
+    return this->getPageFromDisk(uri);
 }
 
-QJsonObject Cache::findPageOnDisk(QUrl uri)
+Page *Cache::getPageFromDisk(QUrl uri)
 {
     // The page can be available on disk, but not in the RAM cache
     QString path = m_cacheDir.filePath(uri.toString());
     qDebug() << "Page file cache path:" << path;
     if(QDir(path).exists()) {
+        // Read page from disk
         qDebug() << "Page found in disk cache";
         QFile jsonFile;
         jsonFile.setFileName(path);
@@ -144,9 +168,33 @@ QJsonObject Cache::findPageOnDisk(QUrl uri)
         QString data = jsonFile.readAll();
         jsonFile.close();
         QJsonDocument d = QJsonDocument::fromJson(data.toUtf8());
-        return d.object();
+        QJsonObject obj = d.toJson();
+
+        // Convert QJsonObject to QRail::Fragments::Page *
+        QRail::Fragments::Page *page = new QRail::Fragments::Page();
+        page->setURI(QUrl(d["uri"].toString()));
+        page->setHydraNext(QUrl(d["hydraNext"].toString()));
+        page->setHydraPrevious(QUrl(d["hydraPrevious"].toString()));
+        page->setTimestamp(QDateTime::fromString(d["timestamp"].toString(), Qt::ISODate));
+        QJsonArray fragments = d["fragments"].toArray();
+        foreach(QJsonObject frag, fragments) {
+            QRail::Fragments::Fragment fragment = new QRail::Fragments::Fragment();
+            fragment.setURI(QUrl(frag["uri"].toString()));
+            fragment.setDepartureStationURI(QUrl(frag["departureStationURI"].toString()));
+            fragment.setArrivalStationURI(QUrl(frag["arrivalStationURI"].toString()));
+            fragment.setDepartureTime(QDateTime::fromString(frag["departureTime"].toString(), Qt::ISODate);
+            fragment.setArrivalTime(QDateTime::fromString(frag["arrivalTime"].toString(), Qt::ISODate));
+            fragment.setDepartureDelay(frag["departureDelay"].toInt());
+            fragment.setArrivalDelay(frag["arrivalDelay"].toInt());
+            fragment.setTripURI(QUrl(frag["tripURI"].toString()));
+            fragment.setRouteURI(QUrl(frag["routeURI"].toString()));
+            fragment.setDirection(frag["direction"].toString());
+            //fragment.setPickupType(frag["pickupType"].toString());
+            //fragment.setDropOffType(frag["dropOffType"].toString());
+        }
     }
 
+    // No page available, return NULL pointer
     qWarning() << "Cannot find page in disk cache";
-    return QJsonObject();
+    return nullptr;
 }

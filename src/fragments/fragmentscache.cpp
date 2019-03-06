@@ -27,7 +27,10 @@ Cache::Cache(QObject *parent) : QObject(parent)
     QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/fragments";
 
     // Create the 'fragments' folder to save our caching data
-    m_cacheDir.mkpath(path);
+    QDir m_cacheDir = QDir(path);
+    if(!m_cacheDir.exists()) {
+        m_cacheDir.mkpath(path);
+    }
 }
 
 bool Cache::cachePage(Page *page)

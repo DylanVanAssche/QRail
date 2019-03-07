@@ -175,11 +175,11 @@ Page *Cache::getPageFromDisk(QUrl uri)
 
         // Convert QJsonObject to QRail::Fragments::Page *
         QRail::Fragments::Page *page = new QRail::Fragments::Page();
-        page->setURI(QUrl(d["uri"].toString()));
-        page->setHydraNext(QUrl(d["hydraNext"].toString()));
-        page->setHydraPrevious(QUrl(d["hydraPrevious"].toString()));
-        page->setTimestamp(QDateTime::fromString(d["timestamp"].toString(), Qt::ISODate));
-        QJsonArray fragments = d["fragments"].toArray();
+        page->setURI(QUrl(obj["uri"].toString()));
+        page->setHydraNext(QUrl(obj["hydraNext"].toString()));
+        page->setHydraPrevious(QUrl(obj["hydraPrevious"].toString()));
+        page->setTimestamp(QDateTime::fromString(obj["timestamp"].toString(), Qt::ISODate));
+        QJsonArray fragments = obj["fragments"].toArray();
         foreach(QJsonValue item, fragments) {
             QJsonObject frag = item.toObject();
             QRail::Fragments::Fragment *fragment = new QRail::Fragments::Fragment();

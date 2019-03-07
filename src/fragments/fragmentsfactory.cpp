@@ -36,7 +36,7 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     m_pageCache = new QRail::Fragments::Cache();
 
     // Create event source
-    m_eventSource = new QRail::Network::EventSource(REAL_TIME_URL, QRail::Network::EventSource::Subscription::SSE);
+    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::SSE);
     connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
 }
 
@@ -58,9 +58,9 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache.hasPage(uri)) {
+    if(m_pageCache->hasPage(uri)) {
         qDebug() << "Getting page from cache:" << uri;
-        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        QRail::Fragments::Page *page = m_pageCache->getPageByURI(uri);
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -81,9 +81,9 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache.hasPage(uri)) {
+    if(m_pageCache->hasPage(uri)) {
         qDebug() << "Getting page from cache:" << uri;
-        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        QRail::Fragments::Page *page = m_pageCache->getPageByURI(uri);
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -107,9 +107,10 @@ void Fragments::Factory::handleEventSource(QString message)
 {
     qDebug() << "Received SSE message:" << message;
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
-    QJsonObject obj = doc.object();
+    QJsonObject jsonObject = doc.object();
 
     QJsonArray graph = jsonObject["@graph"].toArray();
+    QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
     foreach (QJsonValue item, graph) {
         if (item.isObject()) {
             QJsonObject connection = item.toObject();
@@ -131,7 +132,7 @@ void Fragments::Factory::handleEventSource(QString message)
     QString hydraPrevious = jsonObject["hydra:previous"].toString();
     QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
     // Recache page, the old version is automatically deleted.
-    m_pageCache.cachePage(page);
+    m_pageCache->cachePage(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
@@ -272,7 +273,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,
                                                                           hydraPrevious, fragments);
-                m_pageCache.cachePage(page);
+                m_pageCache->cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
                 qCritical() << "Fragments context validation failed!";

@@ -20,9 +20,6 @@ using namespace QRail;
 using namespace Fragments;
 Cache::Cache(QObject *parent) : QObject(parent)
 {
-    // Create LRU cache
-    m_cache = QCache<QUrl, QRail::Fragments::Page*>(MAX_COST);
-
     // Disk cache directory creation
     QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/fragments";
 
@@ -33,15 +30,15 @@ Cache::Cache(QObject *parent) : QObject(parent)
     }
 }
 
-bool Cache::cachePage(Page *page)
+void Cache::cachePage(Page *page)
 {
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
-    bool success = m_cache.insert(page->uri(), page);
+    m_cache.insert(page->uri(), page);
 
     // Cache the page on disk
     QJsonObject obj;
-    obj.insert("uri", QJsonValue::fromVariant(page->uri.toString()));
+    obj.insert("uri", QJsonValue::fromVariant(page->uri().toString()));
     obj.insert("timestamp", QJsonValue::fromVariant(page->timestamp().toString(Qt::ISODate)));
     obj.insert("hydraPrevious", QJsonValue::fromVariant(page->hydraPrevious()).toString());
     obj.insert("hydraNext", QJsonValue::fromVariant(page->hydraNext().toString()));
@@ -56,7 +53,7 @@ bool Cache::cachePage(Page *page)
         f.insert("departureDelay", QJsonValue::fromVariant(frag->departureDelay()));
         f.insert("arrivalDelay", QJsonValue::fromVariant(frag->arrivalDelay()));
         f.insert("tripURI", QJsonValue::fromVariant(frag->tripURI().toString()));
-        f.insert("routeURI", QJsonValue::fromVariant(frag->routeURI().toString(Qt::ISODate)));
+        f.insert("routeURI", QJsonValue::fromVariant(frag->routeURI().toString()));
         f.insert("direction", QJsonValue::fromVariant(frag->direction()));
         //f.insert("pickupType", QJsonValue::fromVariant(frag->pickupType()));
         //f.insert("dropOffType", QJsonValue::fromVariant(frag->dropOffType()));
@@ -66,12 +63,10 @@ bool Cache::cachePage(Page *page)
     QJsonDocument doc = QJsonDocument(obj);
 
     // Save QJsonDocument to disk
-    QString path = m_cacheDir.filePath(uri.toString());
+    QString path = m_cacheDir.filePath(page->uri().toString());
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
-
-    return success;
 }
 
 void Cache::updateFragment(Fragment *updatedFragment)
@@ -86,7 +81,7 @@ void Cache::updateFragment(Fragment *updatedFragment)
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
         qDebug() << "Page time:" << pageTime;
         if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
-            QRail::Fragments::Page* page = m_cache.object(pageURI);
+            QRail::Fragments::Page* page = m_cache.value(pageURI);
             QList<QRail::Fragments::Fragment *> fragments = page->fragments();
 
             // Check if the connection is in the fragments of this page
@@ -115,7 +110,7 @@ void Cache::updateFragment(Fragment *updatedFragment)
                             // Look for the new page
                             if(currentPageTime <= departureTime && departureTime < nextPageTime) {
                                 qDebug() << "Found inserting page, inserting fragment now";
-                                QRail::Fragments::Page* currentPage = m_cache.object(currentPageURI);
+                                QRail::Fragments::Page* currentPage = m_cache.value(currentPageURI);
                                 currentPage->fragments().append(updatedFragment);
 
                                 // Keep page sorted
@@ -150,7 +145,7 @@ Page *Cache::getPageByURI(QUrl uri)
 {
     // Try to get the page from the RAM cache
     if(m_cache.contains(uri)) {
-        return m_cache::object(uri);
+        return m_cache.value(uri);
     }
 
     // If the requested page isn't cached, the Fragments::Factory will fetch it from the network
@@ -176,7 +171,7 @@ Page *Cache::getPageFromDisk(QUrl uri)
         QString data = jsonFile.readAll();
         jsonFile.close();
         QJsonDocument d = QJsonDocument::fromJson(data.toUtf8());
-        QJsonObject obj = d.toJson();
+        QJsonObject obj = d.object();
 
         // Convert QJsonObject to QRail::Fragments::Page *
         QRail::Fragments::Page *page = new QRail::Fragments::Page();
@@ -185,20 +180,21 @@ Page *Cache::getPageFromDisk(QUrl uri)
         page->setHydraPrevious(QUrl(d["hydraPrevious"].toString()));
         page->setTimestamp(QDateTime::fromString(d["timestamp"].toString(), Qt::ISODate));
         QJsonArray fragments = d["fragments"].toArray();
-        foreach(QJsonObject frag, fragments) {
-            QRail::Fragments::Fragment fragment = new QRail::Fragments::Fragment();
-            fragment.setURI(QUrl(frag["uri"].toString()));
-            fragment.setDepartureStationURI(QUrl(frag["departureStationURI"].toString()));
-            fragment.setArrivalStationURI(QUrl(frag["arrivalStationURI"].toString()));
-            fragment.setDepartureTime(QDateTime::fromString(frag["departureTime"].toString(), Qt::ISODate);
-            fragment.setArrivalTime(QDateTime::fromString(frag["arrivalTime"].toString(), Qt::ISODate));
-            fragment.setDepartureDelay(frag["departureDelay"].toInt());
-            fragment.setArrivalDelay(frag["arrivalDelay"].toInt());
-            fragment.setTripURI(QUrl(frag["tripURI"].toString()));
-            fragment.setRouteURI(QUrl(frag["routeURI"].toString()));
-            fragment.setDirection(frag["direction"].toString());
-            //fragment.setPickupType(frag["pickupType"].toString());
-            //fragment.setDropOffType(frag["dropOffType"].toString());
+        foreach(QJsonValue item, fragments) {
+            QJsonObject frag = item.toObject();
+            QRail::Fragments::Fragment *fragment = new QRail::Fragments::Fragment();
+            fragment->setURI(QUrl(frag["uri"].toString()));
+            fragment->setDepartureStationURI(QUrl(frag["departureStationURI"].toString()));
+            fragment->setArrivalStationURI(QUrl(frag["arrivalStationURI"].toString()));
+            fragment->setDepartureTime(QDateTime::fromString(frag["departureTime"].toString(), Qt::ISODate));
+            fragment->setArrivalTime(QDateTime::fromString(frag["arrivalTime"].toString(), Qt::ISODate));
+            fragment->setDepartureDelay(frag["departureDelay"].toInt());
+            fragment->setArrivalDelay(frag["arrivalDelay"].toInt());
+            fragment->setTripURI(QUrl(frag["tripURI"].toString()));
+            fragment->setRouteURI(QUrl(frag["routeURI"].toString()));
+            fragment->setDirection(frag["direction"].toString());
+            //fragment->setPickupType(frag["pickupType"].toString());
+            //fragment->setDropOffType(frag["dropOffType"].toString());
         }
     }
 

@@ -18,14 +18,16 @@
 #define FRAGMENTSCACHE_H
 
 #include <QtCore/QObject>
-#include <QtCore/QCache>
+#include <QtCore/QMap>
 #include <QtCore/QUrl>
+#include <QtCore/QUrlQuery>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonArray>
+#include <QtCore/QDebug>
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentsfragment.h"
 #define MAX_COST 24*60*50*1000 // Allocate space for 50 Kb pages (24 hours, 60 pages/hour) = 72 Mb RAM
@@ -37,7 +39,7 @@ class Cache : public QObject
     Q_OBJECT
 public:
     explicit Cache(QObject *parent = nullptr);
-    bool cachePage(QRail::Fragments::Page *page);
+    void cachePage(QRail::Fragments::Page *page);
     void updateFragment(QRail::Fragments::Fragment *fragment);
     QRail::Fragments::Page *getPageByURI(QUrl uri);
     bool hasPage(QUrl uri);
@@ -46,8 +48,8 @@ signals:
     void pageUpdated(QUrl uri);
 
 private:
-    QCache<QUrl, QRail::Fragments::Page*> m_cache;
-    QRail::Fragments::Page *Cache::getPageFromDisk(QUrl uri);
+    QMap<QUrl, QRail::Fragments::Page*> m_cache;
+    QRail::Fragments::Page *getPageFromDisk(QUrl uri);
     QDir m_cacheDir;
 };
 }

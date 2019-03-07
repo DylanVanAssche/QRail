@@ -25,9 +25,7 @@ Cache::Cache(QObject *parent) : QObject(parent)
 
     // Create the 'fragments' folder to save our caching data
     QDir m_cacheDir = QDir(path);
-    if(!m_cacheDir.exists()) {
-        m_cacheDir.mkpath(path);
-    }
+    m_cacheDir.mkpath(path);
 }
 
 void Cache::cachePage(Page *page)
@@ -35,6 +33,7 @@ void Cache::cachePage(Page *page)
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
     m_cache.insert(page->uri(), page);
+    qDebug() << "Number of entries in cache:" << m_cache.count();
 
     // Cache the page on disk
     QJsonObject obj;
@@ -64,6 +63,11 @@ void Cache::cachePage(Page *page)
 
     // Save QJsonDocument to disk
     QString path = m_cacheDir.filePath(page->uri().toString());
+    QDir jsonFileDir(path);
+    jsonFileDir.mkpath(path);
+    qDebug() << "FRAGMENT file path:" << path;
+
+    path.append(FRAGMENT_FILE_NAME);
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
@@ -145,6 +149,7 @@ Page *Cache::getPageByURI(QUrl uri)
 {
     // Try to get the page from the RAM cache
     if(m_cache.contains(uri)) {
+        qDebug() << "Memory cache" << m_cache.value(uri);
         return m_cache.value(uri);
     }
 
@@ -195,6 +200,8 @@ Page *Cache::getPageFromDisk(QUrl uri)
             fragment->setDirection(frag["direction"].toString());
             //fragment->setPickupType(frag["pickupType"].toString());
             //fragment->setDropOffType(frag["dropOffType"].toString());
+            fragment->setPickupType(QRail::Fragments::Fragment::GTFSTypes::REGULAR);
+            fragment->setDropOffType(QRail::Fragments::Fragment::GTFSTypes::REGULAR);
         }
     }
 

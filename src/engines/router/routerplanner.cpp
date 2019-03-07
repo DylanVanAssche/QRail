@@ -271,10 +271,10 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT reachable:" << fragment->tripURI();
 #endif
-            QList<QRail::Fragments::Fragment *> frags = page->fragments();
+            /*QList<QRail::Fragments::Fragment *> frags = page->fragments();
             frags.removeAt(fragIndex);
             page->setFragments(frags);
-            fragment->deleteLater();
+            fragment->deleteLater();*/
         }
     }
 
@@ -961,8 +961,8 @@ QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstR
 void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:"
-             << page
-             << "starting processing thread...";
+             << page->uri()
+             << "starting processing thread..." << page->fragments().length();
     emit this->processing(page->uri());
 
     // Add page to used pages and restart timeout timer
@@ -1105,7 +1105,7 @@ void RouterEngine::Planner::addToUsedPages(Fragments::Page *page)
 
 void RouterEngine::Planner::deleteUsedPages()
 {
-    qDebug() << "Deleting previous used pages";
+    /*qDebug() << "Deleting previous used pages";
     foreach (QRail::Fragments::Page *page, m_usedPages) {
         if(page) {
             page->deleteLater();
@@ -1113,7 +1113,7 @@ void RouterEngine::Planner::deleteUsedPages()
         else {
             qCritical() << "Page pointer is invalid!";
         }
-    }
+    }*/
 }
 
 void RouterEngine::Planner::initUsedPages()

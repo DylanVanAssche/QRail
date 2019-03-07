@@ -98,7 +98,7 @@ private slots:
 
 private:
     QRail::Network::EventSource *m_eventSource;
-    QRail::Fragments::Cache *m_pageCache;
+    QRail::Fragments::Cache m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;

@@ -31,6 +31,7 @@
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentsfragment.h"
 #define MAX_COST 24*60*50*1000 // Allocate space for 50 Kb pages (24 hours, 60 pages/hour) = 72 Mb RAM
+#define FRAGMENT_FILE_NAME "/fragment.jsonld"
 
 namespace QRail {
 namespace Fragments {

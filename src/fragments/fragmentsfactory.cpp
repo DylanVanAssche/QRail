@@ -33,11 +33,11 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Create page cache
-    m_pageCache = new QRail::Fragments::Cache();
+    //m_pageCache = new QRail::Fragments::Cache();
 
     // Create event source
-    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::SSE);
-    connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
+    //m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::SSE);
+    //connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -58,9 +58,14 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache->hasPage(uri)) {
+    if(m_pageCache.hasPage(uri)) {
         qDebug() << "Getting page from cache:" << uri;
-        QRail::Fragments::Page *page = m_pageCache->getPageByURI(uri);
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        qDebug() << "PAGE:" << page->uri();
+        qDebug() << "\thydraNext:" << page->hydraNext();
+        qDebug() << "\thydraPrevious:" << page->hydraPrevious();
+        qDebug() << "\ttimestamp:" << page->timestamp();
+        qDebug() << "\tfragment:" << page->fragments().at(0)->uri();
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -81,9 +86,14 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache->hasPage(uri)) {
+    if(m_pageCache.hasPage(uri)) {
         qDebug() << "Getting page from cache:" << uri;
-        QRail::Fragments::Page *page = m_pageCache->getPageByURI(uri);
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        qDebug() << "PAGE:" << page->uri();
+        qDebug() << "\thydraNext:" << page->hydraNext();
+        qDebug() << "\thydraPrevious:" << page->hydraPrevious();
+        qDebug() << "\ttimestamp:" << page->timestamp();
+        qDebug() << "\tfragment:" << page->fragments().at(0)->uri();
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -132,7 +142,7 @@ void Fragments::Factory::handleEventSource(QString message)
     QString hydraPrevious = jsonObject["hydra:previous"].toString();
     QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
     // Recache page, the old version is automatically deleted.
-    m_pageCache->cachePage(page);
+    m_pageCache.cachePage(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
@@ -150,7 +160,7 @@ Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
         return QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER;
     }
     else if(type.isEmpty()) {
-        qWarning() << "GTFS type is empty";
+        //qWarning() << "GTFS type is empty";
         return QRail::Fragments::Fragment::GTFSTypes::REGULAR;
     }
 
@@ -273,7 +283,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,
                                                                           hydraPrevious, fragments);
-                m_pageCache->cachePage(page);
+                m_pageCache.cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
                 qCritical() << "Fragments context validation failed!";

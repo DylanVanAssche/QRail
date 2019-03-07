@@ -46,6 +46,8 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
     loopAbort.exec();
 
+    qDebug() << "---------------------------------------------- CREATING LIVEBOARD ----------------------------------------------";
+
     // Creating liveboard
     start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
@@ -60,6 +62,23 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 
+    qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
+
+    start = QDateTime::currentDateTime();
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);
+
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    QEventLoop loopCached;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopCached, SLOT(quit()));
+    loopCached.exec();
+    qInfo() << "Liveboard Vilvoorde DEPARTURES CACHED took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    qDebug() << "---------------------------------------------- NEXT RESULTS ----------------------------------------------";
+
     // Extending liveboard with next results
     start = QDateTime::currentDateTime();
     factory->getNextResultsForLiveboard(liveboard);
@@ -71,6 +90,8 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qInfo() << "Liveboard Vilvoorde DEPARTURES extending NEXT took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
+
+    qDebug() << "---------------------------------------------- PREVIOUS RESULTS ----------------------------------------------";
 
     // Extending liveboard with previous results
     start = QDateTime::currentDateTime();

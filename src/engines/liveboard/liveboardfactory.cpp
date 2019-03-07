@@ -282,7 +282,6 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
             hasResult = true;
-            qDebug() << "RESULT=" << vehicle->uri() << " headsign:" << vehicle->headsign();
         }
     }
 
@@ -348,10 +347,9 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
     qDebug() << "Factory liveboard received event";
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Fragments::DispatcherEvent *pageEvent =
-                reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-        qDebug() << "Network event received!";
+        qDebug() << "Fragment event received!";
     } else {
         event->ignore();
     }
@@ -401,7 +399,7 @@ void LiveboardEngine::Factory::addUsedPage(Fragments::Page *page)
 
 void LiveboardEngine::Factory::deleteUsedPages()
 {
-    foreach (QRail::Fragments::Page *page, m_usedPages) {
+    /*foreach (QRail::Fragments::Page *page, m_usedPages) {
         if(page) {
             page->deleteLater();
         }
@@ -409,7 +407,7 @@ void LiveboardEngine::Factory::deleteUsedPages()
             qCritical() << "Page pointer is invalid!";
         }
     }
-    qDebug() << "Liveboard pages scheduled for deletion";
+    qDebug() << "Liveboard pages scheduled for deletion";*/
 }
 
 StationEngine::Factory *QRail::LiveboardEngine::Factory::stationFactory() const

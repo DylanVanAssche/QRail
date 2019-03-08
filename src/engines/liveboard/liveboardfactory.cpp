@@ -22,7 +22,6 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
-    this->fragmentsFactory()->prefetch(QDateTime::currentDateTimeUtc(), QDateTime::currentDateTimeUtc().addDays(1));
     connect(this->fragmentsFactory(), SIGNAL(error(QString)), SLOT(handleFragmentFactoryError()));
 
     // Get StationEngine::Factory instance

@@ -21,9 +21,13 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 {
     qDebug() << "Init LiveboardEngine::Factory test";
     factory = LiveboardEngine::Factory::getInstance();
-    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
+    connect(factory,
+            SIGNAL(finished(QRail::LiveboardEngine::Board *)),
+            this,
             SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
-    connect(factory, SIGNAL(stream(QRail::VehicleEngine::Vehicle *)), this,
+    connect(factory,
+            SIGNAL(stream(QRail::VehicleEngine::Vehicle *)),
+            this,
             SLOT(liveboardStreamReceived(QRail::VehicleEngine::Vehicle *)));
 }
 
@@ -31,17 +35,6 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 {
     qDebug() << "Running LiveboardEngine::Factory test";
     QDateTime start;
-
-    qDebug() << "---------------------------------------------- PREFETCH LIVEBOARD ----------------------------------------------";
-
-    start = QDateTime::currentDateTime();
-    QEventLoop loopPrefetch;
-    connect(factory->fragmentsFactory(), SIGNAL(prefetchFinished()), &loopPrefetch, SLOT(quit()));
-    loopPrefetch.exec();
-
-    qInfo() << "Prefetching took"
-            << start.msecsTo(QDateTime::currentDateTime())
-            << "msecs";
 
     qDebug() << "---------------------------------------------- ABORT LIVEBOARD ----------------------------------------------";
 

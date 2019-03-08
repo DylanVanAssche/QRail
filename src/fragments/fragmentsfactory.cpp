@@ -58,8 +58,8 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache.hasPage(uri)) {
         QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+    if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -80,8 +80,8 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-    if(m_pageCache.hasPage(uri)) {
         QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+    if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -327,11 +327,18 @@ QRail::Fragments::Dispatcher *QRail::Fragments::Factory::dispatcher() const
     return m_dispatcher;
 }
 
-void Fragments::Factory::prefetch(const QDateTime &from, const QDateTime &until)
+bool Fragments::Factory::prefetch(const QDateTime &from, const QDateTime &until)
 {
-    m_prefetchFrom = from;
-    m_prefetchUntil = until;
-    this->getPage(from, this);
+    if(m_pageCache.isEmpty()) {
+        m_prefetchFrom = from;
+        m_prefetchUntil = until;
+        this->getPage(from, this);
+        return true;
+    }
+
+    // Cache is already prefetched
+    emit this->prefetchFinished();
+    return false;
 }
 
 void QRail::Fragments::Factory::setDispatcher(QRail::Fragments::Dispatcher *dispatcher)

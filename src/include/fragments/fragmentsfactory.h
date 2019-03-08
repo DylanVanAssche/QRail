@@ -80,7 +80,7 @@ public:
     //! Provides access to the dispatcher
     QRail::Fragments::Dispatcher *dispatcher() const;
     //! Prefetch pages in cache
-    void prefetch(const QDateTime &from, const QDateTime &until);
+    bool prefetch(const QDateTime &from, const QDateTime &until);
 
 protected:
     //! Dispatcher protected method, only here as a reference.

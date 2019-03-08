@@ -51,14 +51,14 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
     qDebug() << "---------------------------------------------- ROUTING PREFETCH ----------------------------------------------";
 
-    start = QDateTime::currentDateTime();
+    /*start = QDateTime::currentDateTime();
     QEventLoop loopPrefetch;
     connect(planner->fragmentsFactory(), SIGNAL(prefetchFinished()), &loopPrefetch, SLOT(quit()));
     loopPrefetch.exec();
 
     qInfo() << "Prefetching took"
             << start.msecsTo(QDateTime::currentDateTime())
-            << "msecs";
+            << "msecs";*/
 
     qDebug() << "---------------------------------------------- ROUTING ABORT ----------------------------------------------";
     // Test abort

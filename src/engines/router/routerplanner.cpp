@@ -22,7 +22,6 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
 {
     // Init QRail::RouterEngine::Planner
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
-    this->fragmentsFactory()->prefetch(QDateTime::currentDateTimeUtc(), QDateTime::currentDateTimeUtc().addDays(1));
     this->setStationFactory(StationEngine::Factory::getInstance());
     this->setAbortRequested(false);
     this->progressTimeoutTimer = new QTimer(this);

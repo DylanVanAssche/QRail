@@ -54,20 +54,21 @@ void Cache::cachePage(Page *page)
         f.insert("tripURI", QJsonValue::fromVariant(frag->tripURI().toString()));
         f.insert("routeURI", QJsonValue::fromVariant(frag->routeURI().toString()));
         f.insert("direction", QJsonValue::fromVariant(frag->direction()));
-        //f.insert("pickupType", QJsonValue::fromVariant(frag->pickupType()));
-        //f.insert("dropOffType", QJsonValue::fromVariant(frag->dropOffType()));
+        f.insert("pickupType", this->convertGTFSTypeToJson(frag->pickupType()));
+        f.insert("dropOffType", this->convertGTFSTypeToJson(frag->dropOffType()));
         fragments.append(f);
     }
     obj.insert("fragments", fragments);
     QJsonDocument doc = QJsonDocument(obj);
 
     // Save QJsonDocument to disk
-    QString path = m_cacheDir.filePath(page->uri().toString());
+    QString path = m_cacheDir.absolutePath();
+    path.append("/" + page->uri().toString());
     QDir jsonFileDir(path);
     jsonFileDir.mkpath(path);
-    qDebug() << "FRAGMENT file path:" << path;
+    qDebug() << "PAGE file path:" << path;
 
-    path.append(FRAGMENT_FILE_NAME);
+    path.append(PAGE_FILE_NAME);
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
@@ -162,12 +163,20 @@ bool Cache::hasPage(QUrl uri)
     return m_cache.contains(uri);
 }
 
+bool Cache::isEmpty()
+{
+    return m_cache.count() == 0;
+}
+
 Page *Cache::getPageFromDisk(QUrl uri)
 {
     // The page can be available on disk, but not in the RAM cache
-    QString path = m_cacheDir.filePath(uri.toString());
-    qDebug() << "Page file cache path:" << path;
-    if(QDir(path).exists()) {
+    QString path = m_cacheDir.absolutePath();
+    path.append("/" + uri.toString());
+    path.append(PAGE_FILE_NAME);
+    qDebug() << "PAGE file path:" << path;
+
+    if(QFileInfo::exists(path)) {
         // Read page from disk
         qDebug() << "Page found in disk cache";
         QFile jsonFile;
@@ -184,8 +193,9 @@ Page *Cache::getPageFromDisk(QUrl uri)
         page->setHydraNext(QUrl(obj["hydraNext"].toString()));
         page->setHydraPrevious(QUrl(obj["hydraPrevious"].toString()));
         page->setTimestamp(QDateTime::fromString(obj["timestamp"].toString(), Qt::ISODate));
-        QJsonArray fragments = obj["fragments"].toArray();
-        foreach(QJsonValue item, fragments) {
+        QJsonArray fragmentsJson = obj["fragments"].toArray();
+        QList<QRail::Fragments::Fragment *> fragments;
+        foreach(QJsonValue item, fragmentsJson) {
             QJsonObject frag = item.toObject();
             QRail::Fragments::Fragment *fragment = new QRail::Fragments::Fragment();
             fragment->setURI(QUrl(frag["uri"].toString()));
@@ -198,14 +208,57 @@ Page *Cache::getPageFromDisk(QUrl uri)
             fragment->setTripURI(QUrl(frag["tripURI"].toString()));
             fragment->setRouteURI(QUrl(frag["routeURI"].toString()));
             fragment->setDirection(frag["direction"].toString());
-            //fragment->setPickupType(frag["pickupType"].toString());
-            //fragment->setDropOffType(frag["dropOffType"].toString());
-            fragment->setPickupType(QRail::Fragments::Fragment::GTFSTypes::REGULAR);
-            fragment->setDropOffType(QRail::Fragments::Fragment::GTFSTypes::REGULAR);
+            fragment->setPickupType(this->convertJsonToGTFSType(frag["pickupType"]));
+            fragment->setDropOffType(this->convertJsonToGTFSType(frag["dropOffType"]));
+
+            // Add fragment to list
+            fragments.append(fragment);
         }
+        page->setFragments(fragments);
+
+        // Insert page in memory cache and return it
+        m_cache.insert(page->uri(), page);
+        return page;
     }
 
     // No page available, return NULL pointer
     qWarning() << "Cannot find page in disk cache";
     return nullptr;
+}
+
+QJsonValue Cache::convertGTFSTypeToJson(Fragment::GTFSTypes type)
+{
+    if(type == Fragment::GTFSTypes::REGULAR) {
+        return QJsonValue::fromVariant(QString("gtfs:Regular"));
+    }
+    else if(type == Fragment::GTFSTypes::NOTAVAILABLE) {
+        return QJsonValue::fromVariant(QString("gtfs:NotAvailable"));
+    }
+    else if(type == Fragment::GTFSTypes::MUSTPHONE) {
+        return QJsonValue::fromVariant(QString("gtfs:MustPhone"));
+    }
+    else if(type == Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+        return QJsonValue::fromVariant(QString("gtfs:MustCoordinateWithDriver"));
+    }
+
+    return QJsonValue::fromVariant(QString("gtfs:Unknown"));
+}
+
+Fragment::GTFSTypes Cache::convertJsonToGTFSType(QJsonValue type)
+{
+    QString t = type.toString();
+    if(t == QString("gtfs:Regular")) {
+        return QRail::Fragments::Fragment::GTFSTypes::REGULAR;
+    }
+    else if(t == QString("gtfs:NotAvailable")) {
+        return QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE;
+    }
+    else if(t == QString("gtfs:MustPhone")) {
+        return QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE;
+    }
+    else if(t == QString("gtfs:MustCoordinateWithDriver")) {
+        return QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER;
+    }
+
+    return QRail::Fragments::Fragment::GTFSTypes::UNKNOWN;
 }

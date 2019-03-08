@@ -26,7 +26,6 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     qRegisterMetaType<QList<QRail::RouterEngine::Route *>>("QList<QRail::RouterEngine::Route*>");
 
     // Connect the signals
-    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
     connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this, SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
@@ -72,6 +71,12 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
     // Cancel operation
     planner->abortCurrentOperation();
+    QEventLoop loopAbort;
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loopAbort, SLOT(quit()));
+    loopAbort.exec();
+
+    // Now we should get valid data, connect the processor with verification checks
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
 
     qDebug() << "---------------------------------------------- ROUTING NETWORK ----------------------------------------------";
 

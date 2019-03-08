@@ -26,18 +26,6 @@ QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 {
     /*
-     * WARNING:
-     *  QEvent must be allocated on the heap since the event queue will
-     *  take ownership of the QEvent object.
-     *  Accessing it after calling 'postEvents()' isn't safe!
-     * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
-     */
-
-    // Create custom event type
-    QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
-    event->setPage(page);
-
-    /*
      * Retrieve the callers of the page.
      *
      * Multiple callers can call the same
@@ -58,6 +46,15 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
+        /*
+         * WARNING:
+         *  QEvent must be allocated on the heap since the event queue will
+         *  take ownership of the QEvent object.
+         *  Accessing it after calling 'postEvents()' isn't safe!
+         * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
+         */
+        QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
+        event->setPage(page);
         QCoreApplication::postEvent(caller, event);
     }
     this->removeTargets(from, until);

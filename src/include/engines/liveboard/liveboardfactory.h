@@ -18,6 +18,8 @@
 #define LIVEBOARDFACTORY_H
 
 #include <QtCore/QDateTime>
+#include <QtCore/QDate>
+#include <QtCore/QTime>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 #include <QtCore/QObject>
@@ -140,6 +142,9 @@ public:
      */
     QRail::LiveboardEngine::Board::Mode mode() const;
 
+    //! Testing purposes
+    QRail::Fragments::Factory *fragmentsFactory() const;
+
 protected:
     //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
@@ -187,7 +192,6 @@ private:
     static QRail::LiveboardEngine::Factory *m_instance;
     QRail::Fragments::Factory *m_fragmentsFactory;
     StationEngine::Factory *m_stationFactory;
-    QRail::Fragments::Factory *fragmentsFactory() const;
     StationEngine::Factory *stationFactory() const;
     bool m_isExtending;
     bool m_abortRequested;

@@ -22,6 +22,7 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
+    this->fragmentsFactory()->prefetch(QDateTime::currentDateTimeUtc(), QDateTime::currentDateTimeUtc().addDays(1));
     connect(this->fragmentsFactory(), SIGNAL(error(QString)), SLOT(handleFragmentFactoryError()));
 
     // Get StationEngine::Factory instance
@@ -344,12 +345,11 @@ QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() cons
 
 void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
 {
-    qDebug() << "Factory liveboard received event";
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
         QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-        qDebug() << "Fragment event received!";
+        qDebug() << "Fragment page event received!";
     } else {
         event->ignore();
     }

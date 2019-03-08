@@ -40,6 +40,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     */
     QDateTime arrivalTime = planner->calculateArrivalTime(QDateTime::currentDateTimeUtc());
     QVERIFY2(arrivalTime > QDateTime::currentDateTime(), "Arrival time can't be before the departure time!");
+    QDateTime start;
 
     /*
     * CSA routing: Find all the routes between 2 stations with a given departure
@@ -49,8 +50,20 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
+    qDebug() << "---------------------------------------------- ROUTING PREFETCH ----------------------------------------------";
+
+    start = QDateTime::currentDateTime();
+    QEventLoop loopPrefetch;
+    connect(planner->fragmentsFactory(), SIGNAL(prefetchFinished()), &loopPrefetch, SLOT(quit()));
+    loopPrefetch.exec();
+
+    qInfo() << "Prefetching took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    qDebug() << "---------------------------------------------- ROUTING ABORT ----------------------------------------------";
     // Test abort
-    /*planner->getConnections(
+    planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
         QDateTime::currentDateTimeUtc(), // Departure time (UTC)
@@ -58,11 +71,11 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     );
 
     // Cancel operation
-    planner->abortCurrentOperation();*/
+    planner->abortCurrentOperation();
 
     qDebug() << "---------------------------------------------- ROUTING NETWORK ----------------------------------------------";
 
-    QDateTime start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTime();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge

@@ -66,14 +66,14 @@ int main(int argc, char *argv[])
         QRail::StationEngine::FactoryTest testSuiteStationFactory;
 
         // Run unit tests without passing arguments
-        networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
+        /*networkManagerResult = QTest::qExec(&testSuiteNetworkManager, 0, nullptr);
         //networkManagerResult = QTest::qExec(&testSuitsNetworkEventSource, 0, nullptr); // TODO TRAVIS CI
         dbManagerResult = QTest::qExec(&testSuiteDBManager, 0, nullptr);
         lcFragmentResult = QTest::qExec(&testSuiteLCFragment, 0, nullptr);
         lcPageResult = QTest::qExec(&testSuiteLCPage, 0, nullptr);
 
         // Run QRail::StationEngine::Factory integration test
-        stationFactoryResult = QTest::qExec(&testSuiteStationFactory, 0, nullptr);
+        stationFactoryResult = QTest::qExec(&testSuiteStationFactory, 0, nullptr);*/
 
         // Run QRail::LiveboardEngine::Factory integration test
         liveboardFactoryResult = QTest::qExec(&testSuiteLiveboardFactory, 0, nullptr);

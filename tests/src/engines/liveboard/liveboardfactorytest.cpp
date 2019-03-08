@@ -32,6 +32,19 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qDebug() << "Running LiveboardEngine::Factory test";
     QDateTime start;
 
+    qDebug() << "---------------------------------------------- PREFETCH LIVEBOARD ----------------------------------------------";
+
+    start = QDateTime::currentDateTime();
+    QEventLoop loopPrefetch;
+    connect(factory->fragmentsFactory(), SIGNAL(prefetchFinished()), &loopPrefetch, SLOT(quit()));
+    loopPrefetch.exec();
+
+    qInfo() << "Prefetching took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
+    qDebug() << "---------------------------------------------- ABORT LIVEBOARD ----------------------------------------------";
+
     // Testing abort
     start = QDateTime::currentDateTime();
     qInfo() << "Testing abort";

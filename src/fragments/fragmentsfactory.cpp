@@ -92,11 +92,21 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
 
 void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
+    // Process HTTP reply from QRail::Network::Manager
     if (event->type() == this->http()->dispatcher()->eventType()) {
+        qDebug() << "HTTP event for Fragments::Factory";
         event->accept();
         QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
         this->processHTTPReply(networkEvent->reply());
-    } else {
+    }
+    // Process a prefetched page from QRail::Fragments::Factory
+    else if(event->type() == this->dispatcher()->eventType()) {
+        qDebug() << "Prefetch page event for Fragments::Factory";
+        event->accept();
+        QRail::Fragments::DispatcherEvent *fragmentEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        this->processPrefetchEvent(fragmentEvent->page());
+    }
+    else {
         event->ignore();
     }
 }
@@ -269,8 +279,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
-                QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,
-                                                                          hydraPrevious, fragments);
+                QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
                 m_pageCache.cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
@@ -290,6 +299,18 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
     reply->deleteLater();
 }
 
+void Fragments::Factory::processPrefetchEvent(Fragments::Page *page)
+{
+    qDebug() << "Processing prefetched page:" << page->uri().toString();
+    if(page->timestamp() < m_prefetchUntil) {
+        this->getPage(page->hydraNext(), this);
+    }
+    else {
+        qInfo() << "Prefetching complete from:" << m_prefetchFrom << "->" << m_prefetchUntil;
+        emit this->prefetchFinished();
+    }
+}
+
 // Getters & Setters
 QRail::Network::Manager *QRail::Fragments::Factory::http() const
 {
@@ -304,6 +325,13 @@ void QRail::Fragments::Factory::setHttp(QRail::Network::Manager *http)
 QRail::Fragments::Dispatcher *QRail::Fragments::Factory::dispatcher() const
 {
     return m_dispatcher;
+}
+
+void Fragments::Factory::prefetch(const QDateTime &from, const QDateTime &until)
+{
+    m_prefetchFrom = from;
+    m_prefetchUntil = until;
+    this->getPage(from, this);
 }
 
 void QRail::Fragments::Factory::setDispatcher(QRail::Fragments::Dispatcher *dispatcher)

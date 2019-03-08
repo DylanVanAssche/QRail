@@ -18,6 +18,8 @@
 #define CSAPLANNER_H
 
 #include <QtCore/QDateTime>
+#include <QtCore/QDate>
+#include <QtCore/QTime>
 #include <QtCore/QList>
 #include <QtCore/QLocale>
 #include <QtCore/QMap>
@@ -169,6 +171,9 @@ public:
      */
     void setJourney(QRail::RouterEngine::Journey *journey);
 
+    //! Test purposes
+    QRail::Fragments::Factory *fragmentsFactory() const;
+
 protected:
     //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
@@ -204,7 +209,6 @@ private:
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
-    QRail::Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);

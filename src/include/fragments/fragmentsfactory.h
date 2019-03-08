@@ -77,7 +77,10 @@ public:
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
     void getPage(const QDateTime &departureTime, QObject *caller);
+    //! Provides access to the dispatcher
     QRail::Fragments::Dispatcher *dispatcher() const;
+    //! Prefetch pages in cache
+    void prefetch(const QDateTime &from, const QDateTime &until);
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -92,11 +95,15 @@ signals:
     void error(const QString &message);
     //! Emitted when a connection has been updated.
     void connectionChanged(const QUrl &uri);
+    //! Emitted when prefetching is complete
+    void prefetchFinished();
 
 private slots:
     void handleEventSource(QString message);
 
 private:
+    QDateTime m_prefetchFrom;
+    QDateTime m_prefetchUntil;
     QRail::Network::EventSource *m_eventSource;
     QRail::Fragments::Cache m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
@@ -106,6 +113,7 @@ private:
     void getPageByURIFromNetworkManager(const QUrl &uri);
     QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
     void processHTTPReply(QNetworkReply *reply);
+    void processPrefetchEvent(QRail::Fragments::Page *page);
     QRail::Network::Manager *http() const;
     void setHttp(QRail::Network::Manager *http);
     void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);

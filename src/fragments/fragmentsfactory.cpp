@@ -32,12 +32,12 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
      */
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
-    // Create page cache
-    //m_pageCache = new QRail::Fragments::Cache();
-
     // Create event source
-    //m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::SSE);
-    //connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
+   /* m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    connect(m_eventSource,
+            SIGNAL(messageReceived(QString)),
+            this,
+            SLOT(handleEventSource(QString)));*/
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -59,13 +59,7 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 
     // Page is cached, dispatching!
     if(m_pageCache.hasPage(uri)) {
-        //qDebug() << "Getting page from cache:" << uri;
         QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
-        /*qDebug() << "PAGE:" << page->uri();
-        qDebug() << "\thydraNext:" << page->hydraNext();
-        qDebug() << "\thydraPrevious:" << page->hydraPrevious();
-        qDebug() << "\ttimestamp:" << page->timestamp();
-        qDebug() << "\tfragment:" << page->fragments().at(0)->uri();*/
         this->dispatcher()->dispatchPage(page);
         return;
     }
@@ -87,13 +81,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
 
     // Page is cached, dispatching!
     if(m_pageCache.hasPage(uri)) {
-        //qDebug() << "Getting page from cache:" << uri;
         QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
-        /*qDebug() << "PAGE:" << page->uri();
-        qDebug() << "\thydraNext:" << page->hydraNext();
-        qDebug() << "\thydraPrevious:" << page->hydraPrevious();
-        qDebug() << "\ttimestamp:" << page->timestamp();
-        qDebug() << "\tfragment:" << page->fragments().at(0)->uri();*/
         this->dispatcher()->dispatchPage(page);
         return;
     }

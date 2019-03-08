@@ -60,17 +60,26 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     // Cancel operation
     planner->abortCurrentOperation();*/
 
+    qDebug() << "---------------------------------------------- ROUTING NETWORK ----------------------------------------------";
+
+    QDateTime start = QDateTime::currentDateTime();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
         QDateTime::currentDateTimeUtc(), // Departure time (UTC)
         4 // Max transfers
     );
+
     QEventLoop loop1;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop1, SLOT(quit()));
     loop1.exec();
+    qInfo() << "Network routing Vilvoorde -> Brugge took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
 
-    QDateTime start = QDateTime::currentDateTime();
+    qDebug() << "---------------------------------------------- CACHED ROUTING ----------------------------------------------";
+
+    start = QDateTime::currentDateTime();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
@@ -82,7 +91,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     QEventLoop loop2;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop2, SLOT(quit()));
     loop2.exec();
-    qInfo() << "Routing Vilvoorde -> Brugge took"
+    qInfo() << "Cached routing Vilvoorde -> Brugge took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 

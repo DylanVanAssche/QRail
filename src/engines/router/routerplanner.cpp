@@ -128,7 +128,6 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 
         // Jumpstart the page fetching
         this->fragmentsFactory()->getPage(this->journey()->arrivalTime(), this);
-        //qApp->processEvents();
         qDebug() << "CSA init OK";
     } else {
         qCritical() << "Invalid stations or timestamps";
@@ -1025,8 +1024,8 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event)
 {
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Fragments::DispatcherEvent *pageEvent =
-                reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        qDebug() << "Received Fragments event:" << pageEvent->page()->uri() << "with" << pageEvent->page()->fragments().count() << "fragments";
         this->processPage(pageEvent->page());
     } else {
         event->ignore();

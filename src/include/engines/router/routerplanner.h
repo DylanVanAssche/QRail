@@ -47,7 +47,7 @@
 
 // Uncomment to enable logging of CSA parts
 //#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
-//#define VERBOSE_TMIN // Enable logging of the Tmin calculation
+#define VERBOSE_TMIN // Enable logging of the Tmin calculation
 //#define VERBOSE_T_ARRAY // Enable logging of the T array after each update
 //#define VERBOSE_S_ARRAY // Enable logging of the S array after each update
 //#define VERBOSE_LEGS // Enable logging of the legs extraction

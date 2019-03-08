@@ -34,8 +34,8 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
 
     // Create custom event type
-    QRail::Fragments::DispatcherEvent event = QRail::Fragments::DispatcherEvent(this->eventType());
-    event.setPage(page);
+    QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
+    event->setPage(page);
 
     /*
      * Retrieve the callers of the page.
@@ -58,7 +58,7 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
-        QCoreApplication::sendEvent(caller, &event);
+        QCoreApplication::postEvent(caller, event);
     }
     this->removeTargets(from, until);
 }

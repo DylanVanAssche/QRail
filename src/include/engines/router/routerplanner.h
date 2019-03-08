@@ -18,6 +18,8 @@
 #define CSAPLANNER_H
 
 #include <QtCore/QDateTime>
+#include <QtCore/QDate>
+#include <QtCore/QTime>
 #include <QtCore/QList>
 #include <QtCore/QLocale>
 #include <QtCore/QMap>
@@ -47,7 +49,7 @@
 
 // Uncomment to enable logging of CSA parts
 //#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
-//#define VERBOSE_TMIN // Enable logging of the Tmin calculation
+#define VERBOSE_TMIN // Enable logging of the Tmin calculation
 //#define VERBOSE_T_ARRAY // Enable logging of the T array after each update
 //#define VERBOSE_S_ARRAY // Enable logging of the S array after each update
 //#define VERBOSE_LEGS // Enable logging of the legs extraction
@@ -169,6 +171,9 @@ public:
      */
     void setJourney(QRail::RouterEngine::Journey *journey);
 
+    //! Test purposes
+    QRail::Fragments::Factory *fragmentsFactory() const;
+
 protected:
     //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
@@ -204,7 +209,6 @@ private:
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
     StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
-    QRail::Fragments::Factory *fragmentsFactory() const;
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);

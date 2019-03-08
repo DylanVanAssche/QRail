@@ -84,18 +84,18 @@ void QRail::LiveboardEngine::Board::setHydraNext(const QUrl &hydraNext)
         QDateTime timeOldHydraNext = QDateTime::fromString(
                                          queryOldHydraNext.queryItemValue("departureTime"), Qt::ISODate);
 
-        qDebug() << "HYDRA NEXT=" << hydraNext << timeNewHydraNext << "|" << this->hydraNext() <<
-                 timeOldHydraNext;
+        /*qDebug() << "HYDRA NEXT=" << hydraNext << timeNewHydraNext << "|" << this->hydraNext() <<
+                 timeOldHydraNext;*/
         // Only accept URI that's later in time
         if (timeNewHydraNext > timeOldHydraNext) {
             m_hydraNext = hydraNext;
-            qDebug() << "Hydra next NEW:" << m_hydraNext;
+            //qDebug() << "Hydra next NEW:" << m_hydraNext;
             emit this->hydraNextChanged();
         }
     }
     // Current hydraNext is still empty, setting it to the received hydraNext
     else {
-        qDebug() << "Empty hydraNext";
+        //qDebug() << "Empty hydraNext";
         m_hydraNext = hydraNext;
         emit this->hydraNextChanged();
     }
@@ -116,19 +116,19 @@ void QRail::LiveboardEngine::Board::setHydraPrevious(const QUrl &hydraPrevious)
                                              queryNewHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
         QDateTime timeOldHydraPrevious = QDateTime::fromString(
                                              queryOldHydraPrevious.queryItemValue("departureTime"), Qt::ISODate);
-        qDebug() << "HYDRA PREVIOUS=" << hydraPrevious << timeNewHydraPrevious << "|" <<
+        /*qDebug() << "HYDRA PREVIOUS=" << hydraPrevious << timeNewHydraPrevious << "|" <<
                  this->hydraPrevious() <<
-                 timeOldHydraPrevious;
+                 timeOldHydraPrevious;*/
         // Only accept URI that's earlier in time
         if (timeNewHydraPrevious < timeOldHydraPrevious) {
             m_hydraPrevious = hydraPrevious;
-            qDebug() << "Hydra previous NEW:" << m_hydraPrevious;
+            //qDebug() << "Hydra previous NEW:" << m_hydraPrevious;
             emit this->hydraPreviousChanged();
         }
     }
     // Current hydraPrevious is still empty, setting it to the received hydraPrevious
     else {
-        qDebug() << "Empty hydraPrevious";
+        //qDebug() << "Empty hydraPrevious";
         m_hydraPrevious = hydraPrevious;
         emit this->hydraPreviousChanged();
     }

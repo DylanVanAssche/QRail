@@ -28,10 +28,13 @@
 #include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
+#include "fragments/fragmentscache.h"
 #include "network/networkmanager.h"
+#include "network/networkeventsource.h"
 #include "qrail.h"
 
 #define BASE_URL "https://graph.irail.be/sncb/connections"
+#define REAL_TIME_URL "https://graph.irail.be/sncb/events"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
@@ -74,7 +77,10 @@ public:
         \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
     void getPage(const QDateTime &departureTime, QObject *caller);
+    //! Provides access to the dispatcher
     QRail::Fragments::Dispatcher *dispatcher() const;
+    //! Prefetch pages in cache
+    bool prefetch(const QDateTime &from, const QDateTime &until);
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -87,8 +93,19 @@ signals:
     void getResource(const QUrl &uri, QObject *caller);
     //! Emitted when an error occurred during processing.
     void error(const QString &message);
+    //! Emitted when a connection has been updated.
+    void connectionChanged(const QUrl &uri);
+    //! Emitted when prefetching is complete
+    void prefetchFinished();
+
+private slots:
+    void handleEventSource(QString message);
 
 private:
+    QDateTime m_prefetchFrom;
+    QDateTime m_prefetchUntil;
+    QRail::Network::EventSource *m_eventSource;
+    QRail::Fragments::Cache m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;
@@ -96,6 +113,7 @@ private:
     void getPageByURIFromNetworkManager(const QUrl &uri);
     QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
     void processHTTPReply(QNetworkReply *reply);
+    void processPrefetchEvent(QRail::Fragments::Page *page);
     QRail::Network::Manager *http() const;
     void setHttp(QRail::Network::Manager *http);
     void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);

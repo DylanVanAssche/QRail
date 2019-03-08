@@ -49,3 +49,4 @@ coverage
 
 # Test binaries
 tests/qrail-tests
+tests/http*

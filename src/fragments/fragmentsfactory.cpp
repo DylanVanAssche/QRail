@@ -133,6 +133,7 @@ void Fragments::Factory::handleEventSource(QString message)
         }
     }
 
+    // TODO look up of the right page
     // Linked Connections page
     QUrl pageURI = QUrl(jsonObject["@id"].toString());
     QUrlQuery pageQuery = QUrlQuery(pageURI.query());
@@ -144,7 +145,7 @@ void Fragments::Factory::handleEventSource(QString message)
     m_pageCache.cachePage(page);
 
     // Emit signal
-    emit this->pageUpdated(pageURI);
+    emit this->pageUpdated(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)

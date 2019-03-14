@@ -46,6 +46,7 @@ public:
     };
     explicit Stop(QObject *parent = nullptr);
     explicit Stop(
+        QUrl fragmentURI,
         StationEngine::Station *station,
         const QString &platform,
         const bool &isPlatformNormal,
@@ -87,6 +88,7 @@ public:
     void setType(const QRail::VehicleEngine::Stop::Type &type);
     bool isExtraStop() const;
     void setIsExtraStop(const bool &isExtraStop);
+    QUrl fragmentURI() const;
 
 signals:
     void stationChanged();
@@ -104,6 +106,7 @@ signals:
     void typeChanged();
 
 private:
+    QUrl m_fragmentURI;
     StationEngine::Station *m_station;
     QString m_platform;
     bool m_isPlatformNormal;

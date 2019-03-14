@@ -87,6 +87,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->setIsExtending(false);
         this->fragmentsFactory()->getPage(this->from(), this);
         this->progressTimeoutTimer->start();
+        qDebug() << "Getting station liveboard:" << this->stationURI().toString();
     } else {
         qCritical() << "Station URI or timestamps are invalid";
         qCritical() << "URI:" << uri;
@@ -148,7 +149,8 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
     qDebug() << "Factory generated requested Linked Connection page:"
-             << page
+             << page->uri()
+             << page->timestamp()
              << "starting processing thread...";
 
     // Launch processing thread
@@ -191,6 +193,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 
     // Parse each connection fragment
     bool hasResult = false;
+    qDebug() << "Page has" << page->fragments().size() << " fragments";
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -201,6 +204,59 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
             return;
         }
+
+        /*qDebug() << "FRAGMENT" << fragment->uri().toString();
+        qDebug() << "\tdeparture station:" << fragment->departureStationURI().toString();
+        qDebug() << "\tarrival station:" << fragment->arrivalStationURI().toString();
+        qDebug() << "\tdeparture time:" << fragment->departureTime().toString(Qt::ISODate) << "+" << fragment->departureDelay() << "min";
+        qDebug() << "\tarrival time:" << fragment->arrivalTime().toString(Qt::ISODate) << "+" << fragment->arrivalDelay() << "min";
+        qDebug() << "\tdirection:" << fragment->direction();
+        if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tpickup type: REGULAR";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tpickup type: NOTAVAILABLE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tpickup type: MUSTPHONE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tpickup type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tpickup type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tpickup type: SHIT";
+        }
+
+        if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tdrop off type: REGULAR";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tdrop off type: NOTAVAILABLE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tdrop off type: MUSTPHONE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tdrop off type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tdrop off type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tdrop off type: SHIT";
+        }*/
+
+        if(fragment->departureStationURI() == this->stationURI() || fragment->arrivalStationURI() == this->stationURI()) {
+            qDebug() << "Matches station URI" << fragment->departureStationURI().toString() << "|" << fragment->arrivalStationURI().toString();
+        }
+        else {
+            qDebug() << "URI MATCH DEPARTURE FAILED:" << fragment->departureStationURI() << "VS" << this->stationURI();
+        }
+
+        qDebug() << "-----------------------------------------------------------------";
 
         // Lazy construction
         if (

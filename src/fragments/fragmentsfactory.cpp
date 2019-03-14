@@ -33,11 +33,11 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Create event source
-   /* m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
     connect(m_eventSource,
             SIGNAL(messageReceived(QString)),
             this,
-            SLOT(handleEventSource(QString)));*/
+            SLOT(handleEventSource(QString)));
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -134,13 +134,17 @@ void Fragments::Factory::handleEventSource(QString message)
     }
 
     // Linked Connections page
-    QString pageURI = jsonObject["@id"].toString();
-    QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+    QUrl pageURI = QUrl(jsonObject["@id"].toString());
+    QUrlQuery pageQuery = QUrlQuery(pageURI.query());
+    QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
     QString hydraNext = jsonObject["hydra:next"].toString();
     QString hydraPrevious = jsonObject["hydra:previous"].toString();
     QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
     // Recache page, the old version is automatically deleted.
     m_pageCache.cachePage(page);
+
+    // Emit signal
+    emit this->pageUpdated(pageURI);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
@@ -275,8 +279,9 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 }
 
                 // Linked Connections page
-                QString pageURI = jsonObject["@id"].toString();
-                QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+                QUrl pageURI = QUrl(jsonObject["@id"].toString());
+                QUrlQuery pageQuery = QUrlQuery(pageURI.query());
+                QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);

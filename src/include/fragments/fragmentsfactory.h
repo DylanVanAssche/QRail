@@ -33,7 +33,7 @@
 #include "network/networkeventsource.h"
 #include "qrail.h"
 
-#define BASE_URL "https://graph.irail.be/sncb/connections"
+#define BASE_URL "https://lc.dylanvanassche.be/sncb/connections"
 #define REAL_TIME_URL "https://graph.irail.be/sncb/events"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
@@ -97,6 +97,8 @@ signals:
     void connectionChanged(const QUrl &uri);
     //! Emitted when prefetching is complete
     void prefetchFinished();
+    //! Emitted when a page has been updated
+    void pageUpdated(QUrl uri);
 
 private slots:
     void handleEventSource(QString message);

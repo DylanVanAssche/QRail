@@ -118,15 +118,25 @@ void Fragments::Factory::handleEventSource(QString message)
     QJsonObject jsonObject = doc.object();
 
     QJsonArray graph = jsonObject["@graph"].toArray();
-    QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
     foreach (QJsonValue item, graph) {
         if (item.isObject()) {
             QJsonObject event = item.toObject();
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
-            emit this->pageUpdated(frag);
             if (frag) {
                 fragments.append(frag);
+                QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
+                QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
+                for(qint64 i=0; i < fragmentList.length(); i++) {
+                    QRail::Fragments::Fragment *item = fragmentList.at(i);
+                    if(item->uri() == frag->uri()) {
+                        fragmentList.replace(i, frag);
+                        page->setFragments(fragmentList);
+                        break;
+                    }
+                }
+                m_pageCache.cachePage(page);
+                emit this->fragmentUpdated(frag);
             } else {
                 qCritical() << "Corrupt Fragment detected!";
             }
@@ -137,14 +147,13 @@ void Fragments::Factory::handleEventSource(QString message)
 
     // TODO look up of the right page
     // Linked Connections page
-    QUrl pageURI = QUrl(jsonObject["@id"].toString());
+    /*QUrl pageURI = QUrl(jsonObject["@id"].toString());
     QUrlQuery pageQuery = QUrlQuery(pageURI.query());
     QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
     QString hydraNext = jsonObject["hydra:next"].toString();
-    QString hydraPrevious = jsonObject["hydra:previous"].toString();
-    QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
+    QString hydraPrevious = jsonObject["hydra:previous"].toString();*/
+    //QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
     // Recache page, the old version is automatically deleted.
-    m_pageCache.cachePage(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)

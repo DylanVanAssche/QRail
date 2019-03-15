@@ -158,6 +158,18 @@ Page *Cache::getPageByURI(QUrl uri)
     return this->getPageFromDisk(uri);
 }
 
+Page *Cache::getPageByFragment(Fragment *fragment)
+{
+    foreach(QRail::Fragments::Page *page, m_cache.values()) {
+        if(fragment->departureTime() < page->timestamp()) {
+            continue;
+        }
+        else {
+            return page;
+        }
+    }
+}
+
 bool Cache::hasPage(QUrl uri)
 {
     return m_cache.contains(uri);

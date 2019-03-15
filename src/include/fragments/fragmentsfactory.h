@@ -98,7 +98,7 @@ signals:
     //! Emitted when prefetching is complete
     void prefetchFinished();
     //! Emitted when a page has been updated
-    void pageUpdated(QRail::Fragments::Fragment *fragment);
+    void fragmentUpdated(QRail::Fragments::Fragment *fragment);
 
 private slots:
     void handleEventSource(QString message);

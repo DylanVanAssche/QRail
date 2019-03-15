@@ -58,6 +58,8 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008813003"), // Brussels-Central, the most events generating station of the SNCB
+        QDateTime::currentDateTimeUtc(),
+        QDateTime::currentDateTimeUtc().addSecs(3600 * 8),
         LiveboardEngine::Board::Mode::DEPARTURES);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events

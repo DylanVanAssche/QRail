@@ -150,7 +150,7 @@ Page *Cache::getPageByURI(QUrl uri)
 {
     // Try to get the page from the RAM cache
     if(m_cache.contains(uri)) {
-        qDebug() << "Memory cache" << m_cache.value(uri);
+        //qDebug() << "Memory cache" << m_cache.value(uri);
         return m_cache.value(uri);
     }
 
@@ -174,11 +174,11 @@ Page *Cache::getPageFromDisk(QUrl uri)
     QString path = m_cacheDir.absolutePath();
     path.append("/" + uri.toString());
     path.append(PAGE_FILE_NAME);
-    qDebug() << "PAGE file path:" << path;
+    //qDebug() << "PAGE file path:" << path;
 
     if(QFileInfo::exists(path)) {
         // Read page from disk
-        qDebug() << "Page found in disk cache";
+        //qDebug() << "Page found in disk cache";
         QFile jsonFile;
         jsonFile.setFileName(path);
         jsonFile.open(QIODevice::ReadOnly | QIODevice::Text);

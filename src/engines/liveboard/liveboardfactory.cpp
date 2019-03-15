@@ -149,10 +149,10 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 // Helpers
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:"
-             << page->uri()
-             << page->timestamp()
-             << "starting processing thread...";
+   // qDebug() << "Factory generated requested Linked Connection page:"
+    //         << page->uri()
+     //        << page->timestamp()
+      //       << "starting processing thread...";
 
     // Launch processing thread
     emit this->processing(page->uri());
@@ -176,7 +176,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     // Extending requires a small change in the auto fetching system
     if(!this->isExtending()) {
         if (timeHydraNext < this->until() && !this->isAbortRequested()) {
-            qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
+            //qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
             this->fragmentsFactory()->getPage(page->hydraNext(), this);
             emit this->requested(page->hydraNext());
         } else {
@@ -194,7 +194,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 
     // Parse each connection fragment
     bool hasResult = false;
-    qDebug() << "Page has" << page->fragments().size() << " fragments";
+    //qDebug() << "Page has" << page->fragments().size() << " fragments";
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -407,7 +407,7 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
         event->accept();
         QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-        qDebug() << "Fragment page event received!";
+        //qDebug() << "Fragment page event received!";
     } else {
         event->ignore();
     }
@@ -446,9 +446,11 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
         QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
 
         // Check each entry
+        QRail::VehicleEngine::Vehicle *oldVehicle = nullptr;
         for(qint64 i=0; i < entries.length(); i++) {
             QRail::VehicleEngine::Vehicle *entry = entries.at(i);
             QRail::VehicleEngine::Stop *stop = entry->intermediaryStops().first();
+            oldVehicle = entry;
 
             // Board affected, updating...
             if(fragment->uri() == stop->fragmentURI()) {
@@ -503,10 +505,19 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                             fragment->direction(),
                             intermediaryStops
                             );
+                qDebug() << "OLD VEHICLE STOP:" << oldVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << oldVehicle->intermediaryStops().first()->departureTime() << "| +" << oldVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << oldVehicle->intermediaryStops().first()->arrivalTime() << "| +" << oldVehicle->intermediaryStops().first()->arrivalDelay();
+                qDebug() << "NEW VEHICLE STOP:" << newVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << newVehicle->intermediaryStops().first()->departureTime() << "| +" << newVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << newVehicle->intermediaryStops().first()->arrivalTime() << "| +" << newVehicle->intermediaryStops().first()->arrivalDelay();
 
                 // Replace entry with the new one
-                board->entries().replace(i, newVehicle);
+                QList<QRail::VehicleEngine::Vehicle*> entriesList = board->entries();
+                entriesList.replace(i, newVehicle);
+                board->setEntries(entriesList);
                 emit board->entriesChanged();
+                emit this->finished(board);
             }
         }
     }

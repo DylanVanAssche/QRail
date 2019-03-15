@@ -73,9 +73,10 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
     factory->addBoardToWatchlist(liveboard);
     QEventLoop loopUpdateReceived;
-    //connect(factory->fragmentsFactory(), SIGNAL(pageUpdated(QRail::Fragments::Fragment*)), &loopUpdateReceived, SLOT(quit()));
-    connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
+    //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
     loopUpdateReceived.exec();
+    factory->removeBoardFromWatchlist(liveboard);
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 

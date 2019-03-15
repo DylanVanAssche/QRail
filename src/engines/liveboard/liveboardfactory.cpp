@@ -250,7 +250,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             qDebug() << "\tdrop off type: SHIT";
         }*/
 
-        if(fragment->departureStationURI() == this->stationURI() || fragment->arrivalStationURI() == this->stationURI()) {
+        /*if(fragment->departureStationURI() == this->stationURI() || fragment->arrivalStationURI() == this->stationURI()) {
             qDebug() << "Matches station URI" << fragment->departureStationURI().toString() << "|" << fragment->arrivalStationURI().toString();
         }
         else {
@@ -258,7 +258,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
         }
 
         qDebug() << "-----------------------------------------------------------------";
-
+*/
         // Lazy construction
         if (
                 // ARRIVAL mode
@@ -291,6 +291,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             QRail::VehicleEngine::Stop *entry = nullptr;
             if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
@@ -307,6 +308,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             );
             } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
@@ -331,7 +333,6 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             intermediaryStops.append(entry);
             QRail::VehicleEngine::Vehicle *vehicle =
                     new QRail::VehicleEngine::Vehicle(
-                        fragment->uri(),
                         fragment->routeURI(),
                         fragment->tripURI(),
                         fragment->direction(),
@@ -447,13 +448,15 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
         // Check each entry
         for(qint64 i=0; i < entries.length(); i++) {
             QRail::VehicleEngine::Vehicle *entry = entries.at(i);
+            QRail::VehicleEngine::Stop *stop = entry->intermediaryStops().first();
 
             // Board affected, updating...
-            if(fragment->uri() == entry->fragmentURI()) {
-                qDebug() << "Board is affected, updatin now!" << entry->fragmentURI();
-                QRail::VehicleEngine::Stop *newEntry = nullptr;
+            if(fragment->uri() == stop->fragmentURI()) {
+                qDebug() << "Board is affected, updatin now!" << stop->fragmentURI();
+                QRail::VehicleEngine::Stop *newStop = nullptr;
                 if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
-                    newEntry = new QRail::VehicleEngine::Stop(
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
                                 this->liveboard()->station(),
                                 QString("?"), // platform
                                 true,         // isPlatformNormal
@@ -469,7 +472,8 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                                 QRail::VehicleEngine::Stop::Type::STOP
                                 );
                 } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
-                    newEntry = new QRail::VehicleEngine::Stop(
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
                                 this->liveboard()->station(),
                                 QString("?"), // platform
                                 true,         // isPlatformNormal
@@ -491,10 +495,9 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
 
                 // Get vehicle information
                 QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();
-                intermediaryStops.append(entry);
+                intermediaryStops.append(newStop);
                 QRail::VehicleEngine::Vehicle *newVehicle =
                         new QRail::VehicleEngine::Vehicle(
-                            fragment->uri(),
                             fragment->routeURI(),
                             fragment->tripURI(),
                             fragment->direction(),

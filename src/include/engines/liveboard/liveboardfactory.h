@@ -179,7 +179,7 @@ private slots:
     void unlockLiveboard();
     void handleTimeout();
     void handleFragmentFactoryError();
-    void handleFragmentFactoryUpdate(QUrl pageURI);
+    void handleFragmentFactoryUpdate(QRail::Fragments::Fragment *fragment);
 
 private:
     enum class Direction {

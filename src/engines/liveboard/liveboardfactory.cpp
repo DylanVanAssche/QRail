@@ -23,7 +23,7 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     connect(this->fragmentsFactory(), SIGNAL(error(QString)), this, SLOT(handleFragmentFactoryError()));
-    connect(this->fragmentsFactory(), SIGNAL(connectionChanged(QRail::Fragments::Page*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Page*)));
+    connect(this->fragmentsFactory(), SIGNAL(pageUpdated(QRail::Fragments::Fragment*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Fragment*)));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());

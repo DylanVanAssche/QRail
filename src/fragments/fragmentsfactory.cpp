@@ -121,8 +121,11 @@ void Fragments::Factory::handleEventSource(QString message)
     QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
     foreach (QJsonValue item, graph) {
         if (item.isObject()) {
-            QJsonObject connection = item.toObject();
+            QJsonObject event = item.toObject();
+            QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
+            qDebug() << "Connection EVENTSOURCE:" << connection;
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+            emit this->pageUpdated(frag);
             if (frag) {
                 fragments.append(frag);
             } else {
@@ -143,9 +146,6 @@ void Fragments::Factory::handleEventSource(QString message)
     QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
     // Recache page, the old version is automatically deleted.
     m_pageCache.cachePage(page);
-
-    // Emit signal
-    emit this->pageUpdated(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)

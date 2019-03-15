@@ -109,10 +109,9 @@ public slots:
     QNetworkReply *subscribe(const QUrl &url, QObject *caller);
     //! Unsubscribe to a HTTP SSE resource.
     /*!
-        \param url The URL of the SSE resource.
         \param caller The caller of this method.
     */
-    void unsubscribe(QNetworkReply *reply, QObject *caller);
+    void unsubscribe(QObject *caller);
 
 private slots:
     void requestCompleted(QNetworkReply *reply);

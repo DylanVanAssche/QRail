@@ -52,6 +52,11 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
     loopAbort.exec();
 
+    qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
+    QEventLoop loopUpdateReceived;
+    connect(factory->fragmentsFactory(), SIGNAL(pageUpdated(QRail::Fragments::Fragment*)), &loopUpdateReceived, SLOT(quit()));
+    loopUpdateReceived.exec();
+
     qDebug() << "---------------------------------------------- CREATING LIVEBOARD ----------------------------------------------";
 
     // Creating liveboard

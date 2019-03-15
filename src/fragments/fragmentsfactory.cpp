@@ -113,7 +113,7 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
 
 void Fragments::Factory::handleEventSource(QString message)
 {
-    qDebug() << "Received SSE message:" << message;
+    qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = doc.object();
 
@@ -123,7 +123,6 @@ void Fragments::Factory::handleEventSource(QString message)
         if (item.isObject()) {
             QJsonObject event = item.toObject();
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
-            qDebug() << "Connection EVENTSOURCE:" << connection;
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             emit this->pageUpdated(frag);
             if (frag) {

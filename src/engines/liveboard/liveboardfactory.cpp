@@ -452,7 +452,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
 
             // Board affected, updating...
             if(fragment->uri() == stop->fragmentURI()) {
-                qDebug() << "Board is affected, updatin now!" << stop->fragmentURI();
+                qDebug() << "Board is affected, updating now!" << stop->fragmentURI();
                 QRail::VehicleEngine::Stop *newStop = nullptr;
                 if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
                     newStop = new QRail::VehicleEngine::Stop(
@@ -506,6 +506,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
 
                 // Replace entry with the new one
                 board->entries().replace(i, newVehicle);
+                emit board->entriesChanged();
             }
         }
     }

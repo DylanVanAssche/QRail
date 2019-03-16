@@ -58,7 +58,7 @@ void Network::EventSourceTest::cleanEventSource()
 
 void Network::EventSourceTest::processMessage(const QString msg)
 {
-    qInfo() << "Message:" << msg;
+    //qInfo() << "Message:" << msg;
 }
 
 void Network::EventSourceTest::processError(QString err)

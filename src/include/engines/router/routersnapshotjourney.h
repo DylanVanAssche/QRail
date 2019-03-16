@@ -31,12 +31,12 @@
 
 namespace QRail {
 namespace RouterEngine {
-class CachedJourney : public QObject
+class SnapshotJourney : public QObject
 {
     Q_OBJECT
 public:
-    //! Constructs a CachedJourney object with all the needed parameters.
-    explicit CachedJourney(QUrl pageURI,
+    //! Constructs a SnapshotJourney object with all the needed parameters.
+    explicit SnapshotJourney(QUrl pageURI,
                            QList<QRail::RouterEngine::Route *> routes,
                            QMap<QUrl, qint16> T_EarliestArrivalTime,
                            QMap<QUrl, QDateTime> S_EarliestArrivalTime,

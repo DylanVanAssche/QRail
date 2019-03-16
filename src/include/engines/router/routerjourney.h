@@ -9,7 +9,7 @@
 #include "engines/router/routerroute.h"
 #include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routertrainprofile.h"
-#include "engines/router/routercachedjourney.h"
+#include "engines/router/routersnapshotjourney.h"
 #include "fragments/fragmentspage.h"
 
 namespace QRail {
@@ -219,13 +219,13 @@ public:
      */
     void setMaxTransfers(const qint16 &maxTransfers);
 
-    //! Add a CachedJourney object to this Journey
-    void addCachedJourney(QRail::RouterEngine::CachedJourney *cachedJourney);
+    //! Add a SnapshotJourney object to this Journey
+    void addSnapshotJourney(QRail::RouterEngine::SnapshotJourney *snapshotJourney);
     //! Restore Journey before page
     void restoreBeforePage(QUrl pageURI);
 
 private:
-    QList<QRail::RouterEngine::CachedJourney *> m_cachedJourneys;
+    QList<QRail::RouterEngine::SnapshotJourney *> m_snapshotJourneys;
     QList<QRail::RouterEngine::Route *> m_routes;
     QDateTime m_departureTime;
     QDateTime m_arrivalTime;

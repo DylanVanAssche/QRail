@@ -158,6 +158,7 @@ void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
         qCritical() << "Unable to restore Journey, cached journeys list is empty!";
         return;
     }
+
     // First cached journey is affected? Reroute completely.
     if(m_cachedJourneys.at(0)->pageURI() == pageURI) {
         qDebug() << "First snapshot is affected, clearing Journey";

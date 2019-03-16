@@ -896,7 +896,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         this->journey()->setRoutes(routeList);
     }
 
-
+    // Add the current snapshot to the Journey object for rollback support
+    QRail::RouterEngine::SnapshotJourney *snapshotJourney = new QRail::RouterEngine::SnapshotJourney(page->uri(),
+                                                                                               this->journey()->routes(),
+                                                                                               this->journey()->T_EarliestArrivalTime(),
+                                                                                               this->journey()->S_EarliestArrivalTime(),
+                                                                                               this->journey()->SArray(),
+                                                                                               this->journey()->TArray());
+    this->journey()->addSnapshotJourney(snapshotJourney);
 
     /*
     * ===========================

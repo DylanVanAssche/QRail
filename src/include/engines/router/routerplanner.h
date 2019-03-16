@@ -45,6 +45,7 @@
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"
+#include "engines/router/routersnapshotjourney.h"
 #include "qrail.h"
 
 // Uncomment to enable logging of CSA parts

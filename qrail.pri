@@ -54,7 +54,7 @@ SOURCES += \
     $$PWD/src/qrail.cpp \
     $$PWD/src/network/networkeventsource.cpp \
     $$PWD/src/fragments/fragmentscache.cpp \
-    $$PWD/src/engines/router/routercachedjourney.cpp
+    $$PWD/src/engines/router/routersnapshotjourney.cpp
 
 HEADERS += \
     $$PWD/src/include/engines/alerts/alertsmessage.h \
@@ -88,7 +88,7 @@ HEADERS += \
     $$PWD/src/include/qrail.h \
     $$PWD/src/include/engines/router/routernulljourney.h \
     $$PWD/src/include/network/networkeventsource.h \
-    $$PWD/src/include/engines/router/routercachedjourney.h
+    $$PWD/src/include/engines/router/routersnapshotjourney.h
 
 DISTFILES += \
     $$PWD/rpm/qrail.changes

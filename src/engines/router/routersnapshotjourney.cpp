@@ -14,12 +14,12 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "engines/router/routercachedjourney.h"
+#include "engines/router/routersnapshotjourney.h"
 using namespace QRail;
 using namespace RouterEngine;
 
 
-CachedJourney::CachedJourney(QUrl pageURI, QList<Route *> routes, QMap<QUrl, qint16> T_EarliestArrivalTime,
+SnapshotJourney::SnapshotJourney(QUrl pageURI, QList<Route *> routes, QMap<QUrl, qint16> T_EarliestArrivalTime,
                              QMap<QUrl, QDateTime> S_EarliestArrivalTime,
                              QMap<QUrl, QList<StationStopProfile *> > SArray,
                              QMap<QUrl, TrainProfile *> TArray,
@@ -36,37 +36,37 @@ CachedJourney::CachedJourney(QUrl pageURI, QList<Route *> routes, QMap<QUrl, qin
     m_TArray = TArray;
 }
 
-QUrl CachedJourney::pageURI() const
+QUrl SnapshotJourney::pageURI() const
 {
     return m_pageURI;
 }
 
-QList<QRail::RouterEngine::Route *> CachedJourney::routes() const
+QList<QRail::RouterEngine::Route *> SnapshotJourney::routes() const
 {
     return m_routes;
 }
 
-QMap<QUrl, qint16> CachedJourney::T_EarliestArrivalTime() const
+QMap<QUrl, qint16> SnapshotJourney::T_EarliestArrivalTime() const
 {
     return m_T_EarliestArrivalTime;
 }
 
-QMap<QUrl, QDateTime> CachedJourney::S_EarliestArrivalTime() const
+QMap<QUrl, QDateTime> SnapshotJourney::S_EarliestArrivalTime() const
 {
     return m_S_EarliestArrivalTime;
 }
 
-QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > CachedJourney::SArray() const
+QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SnapshotJourney::SArray() const
 {
     return m_SArray;
 }
 
-QMap<QUrl, QRail::RouterEngine::TrainProfile *> CachedJourney::TArray() const
+QMap<QUrl, QRail::RouterEngine::TrainProfile *> SnapshotJourney::TArray() const
 {
     return m_TArray;
 }
 
-QDateTime CachedJourney::pageTimestamp() const
+QDateTime SnapshotJourney::pageTimestamp() const
 {
     return m_pageTimestamp;
 }

@@ -19,17 +19,17 @@ using namespace QRail;
 
 void QRail::Network::EventSourceTest::initEventSource()
 {
-  //  m_sse = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events?lastSyncTime=2019-03-15T07:10:00.000Z"), QRail::Network::EventSource::Scription::SSE);
-  //  connect(m_sse, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
-    //connect(m_sse, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
-    m_polling = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events?lastSyncTime=2019-03-15T07:10:00.000Z"), QRail::Network::EventSource::Subscription::POLLING);
+    m_sse = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events"), QRail::Network::EventSource::Subscription::SSE);
+    connect(m_sse, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
+    connect(m_sse, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
+    m_polling = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events"), QRail::Network::EventSource::Subscription::POLLING);
     connect(m_polling, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
     connect(m_polling, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
 }
 
 void Network::EventSourceTest::runEventSource()
 {
-/*    qDebug() << "Waiting for SSE response...";
+    qDebug() << "Waiting for SSE response...";
     QEventLoop loop1;
     connect(m_sse, SIGNAL(messageReceived(QString)), &loop1, SLOT(quit()));
     connect(m_sse, SIGNAL(errorReceived(QString)), &loop1, SLOT(quit()));
@@ -38,7 +38,7 @@ void Network::EventSourceTest::runEventSource()
     loop1.exec(); // Delta update 2
     m_sse->close();
     qDebug() << "SSE response OK";
-*/
+
     qDebug() << "Waiting for polling response...";
     QEventLoop loop2;
     connect(m_polling, SIGNAL(messageReceived(QString)), &loop2, SLOT(quit()));
@@ -52,7 +52,7 @@ void Network::EventSourceTest::runEventSource()
 
 void Network::EventSourceTest::cleanEventSource()
 {
-  //  delete m_sse;
+    delete m_sse;
     delete m_polling;
 }
 

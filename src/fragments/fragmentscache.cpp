@@ -168,6 +168,10 @@ Page *Cache::getPageByFragment(Fragment *fragment)
             return page;
         }
     }
+
+    // In case we can't a page
+    qCritical() << "Unable to find page for fragment:" << fragment->uri().toString();
+    return nullptr;
 }
 
 bool Cache::hasPage(QUrl uri)

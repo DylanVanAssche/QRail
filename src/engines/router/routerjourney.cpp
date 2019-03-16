@@ -146,6 +146,49 @@ void QRail::RouterEngine::Journey::setMaxTransfers(const qint16 &maxTransfers)
     m_maxTransfers = maxTransfers;
 }
 
+void RouterEngine::Journey::addCachedJourney(RouterEngine::CachedJourney *cachedJourney)
+{
+    m_cachedJourneys.append(cachedJourney);
+}
+
+void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
+{
+    // We can't restore anything if we don't have anything
+    if(m_cachedJourneys.length() == 0) {
+        qCritical() << "Unable to restore Journey, cached journeys list is empty!";
+        return;
+    }
+    // First cached journey is affected? Reroute completely.
+    if(m_cachedJourneys.at(0)->pageURI() == pageURI) {
+        qDebug() << "First snapshot is affected, clearing Journey";
+        this->setRoutes(QList<QRail::RouterEngine::Route *>());
+        this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *> ());
+        this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >());
+        this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
+        this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
+        return;
+    }
+
+    // Look for the page in the list and restore the Journey before that page
+    for(qint64 c=0; c < m_cachedJourneys.length(); c++) {
+        qDebug() << "Searching for previous Journey, just before our affected page";
+        QRail::RouterEngine::CachedJourney *cachedJourney = m_cachedJourneys.at(c);
+        if(cachedJourney->pageURI() == pageURI) {
+            QRail::RouterEngine::CachedJourney *previousCachedJourney = m_cachedJourneys.at(c-1);
+            this->setRoutes(previousCachedJourney->routes());
+            this->setTArray(previousCachedJourney->TArray());
+            this->setSArray(previousCachedJourney->SArray());
+            this->setT_EarliestArrivalTime(previousCachedJourney->T_EarliestArrivalTime());
+            this->setS_EarliestArrivalTime(previousCachedJourney->S_EarliestArrivalTime());
+            qDebug() << "Succesfully restored the previous Journey";
+            return;
+        }
+        previousPageURI = cachedJourney->pageURI();
+    }
+
+    qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";
+}
+
 QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const
 {
     return m_SArray;

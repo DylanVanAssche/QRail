@@ -20,6 +20,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QUrl>
+#include <QtCore/QUrlQuery>
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
 
@@ -35,16 +36,24 @@ class CachedJourney : public QObject
     Q_OBJECT
 public:
     //! Constructs a CachedJourney object with all the needed parameters.
-    explicit CachedJourney(QList<QRail::RouterEngine::Route *> routes,
+    explicit CachedJourney(QUrl pageURI,
+                           QList<QRail::RouterEngine::Route *> routes,
                            QMap<QUrl, qint16> T_EarliestArrivalTime,
                            QMap<QUrl, QDateTime> S_EarliestArrivalTime,
                            QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray,
                            QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray,
                            QObject *parent = nullptr);
-    //! Restores the current Journey to the cached one, the current Journey will be lost!
-    QRail::RouterEngine::Journey *restoreCachedJourney(QRail::RouterEngine::Journey *current);
+    QUrl pageURI() const;
+    QList<QRail::RouterEngine::Route *> routes() const;
+    QMap<QUrl, qint16> T_EarliestArrivalTime() const;
+    QMap<QUrl, QDateTime> S_EarliestArrivalTime() const;
+    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray() const;
+    QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
+    QDateTime pageTimestamp() const;
 
 private:
+    QUrl m_pageURI;
+    QDateTime m_pageTimestamp;
     QList<QRail::RouterEngine::Route *> m_routes;
     QMap<QUrl, qint16> m_T_EarliestArrivalTime;
     QMap<QUrl, QDateTime> m_S_EarliestArrivalTime;

@@ -271,6 +271,7 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
 
     // Generate QRail::VehicleEngine::Stop object
     return new QRail::VehicleEngine::Stop(
+                QUrl(stationURI),
                 this->stationFactory()->getStationByURI(stationURI), platform,
                 isPlatformNormal, hasLeft, departureTime, departureDelay,
                 isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,

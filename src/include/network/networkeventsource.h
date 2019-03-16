@@ -24,7 +24,7 @@
 #include "network/networkmanager.h"
 
 #define MAX_RETRIES 3
-#define POLL_INTERVAL 10 * 1000 // 10 000 ms = 10 s
+#define POLL_INTERVAL 30 * 1000 // 30 000 ms = 30 s
 
 namespace QRail {
 namespace Network {

@@ -55,7 +55,7 @@ QRail::VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
  * @public
  * Constructs a QRail::VehicleEngine::Stop with the given parent.
  */
-QRail::VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString &platform,
+QRail::VehicleEngine::Stop::Stop(QUrl fragmentURI, StationEngine::Station *station, const QString &platform,
                                  const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime,
                                  const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime,
                                  const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop,
@@ -63,6 +63,7 @@ QRail::VehicleEngine::Stop::Stop(StationEngine::Station *station, const QString 
                                  const QRail::VehicleEngine::Stop::Type &type, QObject *parent): QObject(parent)
 {
     // Use private members to avoid signal firing on construction
+    m_fragmentURI = fragmentURI;
     m_station = station;
     m_platform = platform;
     m_isPlatformNormal = isPlatformNormal;
@@ -494,4 +495,9 @@ void QRail::VehicleEngine::Stop::setIsExtraStop(const bool &isExtraStop)
 {
     m_isExtraStop = isExtraStop;
     emit this->isExtraStopChanged();
+}
+
+QUrl VehicleEngine::Stop::fragmentURI() const
+{
+    return m_fragmentURI;
 }

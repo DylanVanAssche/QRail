@@ -35,12 +35,13 @@ QUrl EventSource::url()
 
 void EventSource::close()
 {
-    m_manager->unsubscribe(m_reply, this);
+    m_manager->unsubscribe(this);
     this->setReadyState(EventSource::ReadyState::CLOSED);
 }
 
 void EventSource::open()
 {
+    this->setReadyState(EventSource::ReadyState::CONNECTING);
     if(m_subscriptionType == Subscription::SSE) {
         qDebug() << "Opening SSE stream...";
         m_reply = m_manager->subscribe(m_url, this);
@@ -54,7 +55,6 @@ void EventSource::open()
     else {
         qCritical() << "Unknown subscription type!";
     }
-    this->setReadyState(EventSource::ReadyState::CONNECTING);
 }
 
 void EventSource::customEvent(QEvent *event)
@@ -118,7 +118,7 @@ void EventSource::handlePollingStream(QNetworkReply *reply)
 void EventSource::pollPollingStream()
 {
     // Only execute polling when the connection is open.
-    if(m_readyState == EventSource::ReadyState::CLOSED) {
+    if(m_readyState != EventSource::ReadyState::CLOSED) {
         qDebug() << "Polling resource...";
         m_manager->getResource(m_url, this);
         QTimer::singleShot(POLL_INTERVAL, this, SLOT(pollPollingStream()));

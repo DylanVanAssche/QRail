@@ -150,12 +150,28 @@ Page *Cache::getPageByURI(QUrl uri)
 {
     // Try to get the page from the RAM cache
     if(m_cache.contains(uri)) {
-        qDebug() << "Memory cache" << m_cache.value(uri);
+        //qDebug() << "Memory cache" << m_cache.value(uri);
         return m_cache.value(uri);
     }
 
     // If the requested page isn't cached, the Fragments::Factory will fetch it from the network
     return this->getPageFromDisk(uri);
+}
+
+Page *Cache::getPageByFragment(Fragment *fragment)
+{
+    foreach(QRail::Fragments::Page *page, m_cache.values()) {
+        if(fragment->departureTime() < page->timestamp()) {
+            continue;
+        }
+        else {
+            return page;
+        }
+    }
+
+    // In case we can't a page
+    qCritical() << "Unable to find page for fragment:" << fragment->uri().toString();
+    return nullptr;
 }
 
 bool Cache::hasPage(QUrl uri)
@@ -174,11 +190,11 @@ Page *Cache::getPageFromDisk(QUrl uri)
     QString path = m_cacheDir.absolutePath();
     path.append("/" + uri.toString());
     path.append(PAGE_FILE_NAME);
-    qDebug() << "PAGE file path:" << path;
+    //qDebug() << "PAGE file path:" << path;
 
     if(QFileInfo::exists(path)) {
         // Read page from disk
-        qDebug() << "Page found in disk cache";
+        //qDebug() << "Page found in disk cache";
         QFile jsonFile;
         jsonFile.setFileName(path);
         jsonFile.open(QIODevice::ReadOnly | QIODevice::Text);

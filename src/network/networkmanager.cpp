@@ -119,10 +119,9 @@ QNetworkReply *Network::Manager::subscribe(const QUrl &url, QObject *caller)
     return reply;
 }
 
-void Network::Manager::unsubscribe(QNetworkReply *reply, QObject *caller)
+void Network::Manager::unsubscribe(QObject *caller)
 {
     this->dispatcher()->removeSubscriber(caller);
-    reply->close();
     qDebug() << "Closed stream";
 }
 

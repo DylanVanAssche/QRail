@@ -33,11 +33,11 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Create event source
-   /* m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
     connect(m_eventSource,
             SIGNAL(messageReceived(QString)),
             this,
-            SLOT(handleEventSource(QString)));*/
+            SLOT(handleEventSource(QString)));
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -113,18 +113,34 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
 
 void Fragments::Factory::handleEventSource(QString message)
 {
-    qDebug() << "Received SSE message:" << message;
+    qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = doc.object();
 
     QJsonArray graph = jsonObject["@graph"].toArray();
-    QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
     foreach (QJsonValue item, graph) {
         if (item.isObject()) {
-            QJsonObject connection = item.toObject();
+            QJsonObject event = item.toObject();
+            QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             if (frag) {
-                fragments.append(frag);
+                QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
+                if(!page) {
+                    continue;
+                }
+                QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
+                // Look for the fragment and replace it.
+                for(qint64 i=0; i < fragmentList.length(); i++) {
+                    QRail::Fragments::Fragment *item = fragmentList.at(i);
+                    if(item->uri() == frag->uri()) {
+                        fragmentList.replace(i, frag);
+                        page->setFragments(fragmentList);
+                        break;
+                    }
+                }
+                // Recache page, the old version is automatically deleted.
+                m_pageCache.cachePage(page);
+                emit this->fragmentUpdated(frag);
             } else {
                 qCritical() << "Corrupt Fragment detected!";
             }
@@ -132,15 +148,6 @@ void Fragments::Factory::handleEventSource(QString message)
             qCritical() << "Fragment isn't a JSON object!";
         }
     }
-
-    // Linked Connections page
-    QString pageURI = jsonObject["@id"].toString();
-    QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
-    QString hydraNext = jsonObject["hydra:next"].toString();
-    QString hydraPrevious = jsonObject["hydra:previous"].toString();
-    QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
-    // Recache page, the old version is automatically deleted.
-    m_pageCache.cachePage(page);
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
@@ -275,8 +282,9 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 }
 
                 // Linked Connections page
-                QString pageURI = jsonObject["@id"].toString();
-                QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+                QUrl pageURI = QUrl(jsonObject["@id"].toString());
+                QUrlQuery pageQuery = QUrlQuery(pageURI.query());
+                QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);

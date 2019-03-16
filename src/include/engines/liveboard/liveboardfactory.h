@@ -145,6 +145,12 @@ public:
     //! Testing purposes
     QRail::Fragments::Factory *fragmentsFactory() const;
 
+    //! Add a Board to the watch list
+    void addBoardToWatchlist(QRail::LiveboardEngine::Board *board);
+
+    //! Remove a Board from the watch list
+    void removeBoardFromWatchlist(QRail::LiveboardEngine::Board *board);
+
 protected:
     //! Dispatcher protected method, only here as a reference.
     virtual void customEvent(QEvent *event);
@@ -173,6 +179,7 @@ private slots:
     void unlockLiveboard();
     void handleTimeout();
     void handleFragmentFactoryError();
+    void handleFragmentFactoryUpdate(QRail::Fragments::Fragment *fragment);
 
 private:
     enum class Direction {
@@ -213,6 +220,7 @@ private:
     bool isAbortRequested() const;
     void setAbortRequested(bool abortRequested);
     QRail::LiveboardEngine::Board *liveboard() const;
+    QList<QRail::LiveboardEngine::Board *> m_watchList;
     explicit Factory(QObject *parent = nullptr);
 };
 } // namespace LiveboardEngine

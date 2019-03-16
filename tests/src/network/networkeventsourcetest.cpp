@@ -19,10 +19,10 @@ using namespace QRail;
 
 void QRail::Network::EventSourceTest::initEventSource()
 {
-    m_sse = new QRail::Network::EventSource(QUrl("http://localhost:8080/sncb/events/sse?lastSyncTime=2019-03-03T08:30:00.000Z"), QRail::Network::EventSource::Subscription::SSE);
+    m_sse = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events"), QRail::Network::EventSource::Subscription::SSE);
     connect(m_sse, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
     connect(m_sse, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
-    m_polling = new QRail::Network::EventSource(QUrl("http://localhost:8080/sncb/events/poll?lastSyncTime=2019-03-03T08:30:00.000Z"), QRail::Network::EventSource::Subscription::POLLING);
+    m_polling = new QRail::Network::EventSource(QUrl("https://lc.dylanvanassche.be/sncb/events"), QRail::Network::EventSource::Subscription::POLLING);
     connect(m_polling, SIGNAL(messageReceived(QString)), this, SLOT(processMessage(QString)));
     connect(m_polling, SIGNAL(errorReceived(QString)), this, SLOT(processError(QString)));
 }
@@ -58,7 +58,7 @@ void Network::EventSourceTest::cleanEventSource()
 
 void Network::EventSourceTest::processMessage(const QString msg)
 {
-    qInfo() << "Message:" << msg;
+    //qInfo() << "Message:" << msg;
 }
 
 void Network::EventSourceTest::processError(QString err)

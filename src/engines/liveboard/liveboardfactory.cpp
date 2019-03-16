@@ -22,7 +22,8 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
-    connect(this->fragmentsFactory(), SIGNAL(error(QString)), SLOT(handleFragmentFactoryError()));
+    connect(this->fragmentsFactory(), SIGNAL(error(QString)), this, SLOT(handleFragmentFactoryError()));
+    connect(this->fragmentsFactory(), SIGNAL(pageUpdated(QRail::Fragments::Fragment*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Fragment*)));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
@@ -87,6 +88,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->setIsExtending(false);
         this->fragmentsFactory()->getPage(this->from(), this);
         this->progressTimeoutTimer->start();
+        qDebug() << "Getting station liveboard:" << this->stationURI().toString();
     } else {
         qCritical() << "Station URI or timestamps are invalid";
         qCritical() << "URI:" << uri;
@@ -147,9 +149,10 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 // Helpers
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:"
-             << page
-             << "starting processing thread...";
+   // qDebug() << "Factory generated requested Linked Connection page:"
+    //         << page->uri()
+     //        << page->timestamp()
+      //       << "starting processing thread...";
 
     // Launch processing thread
     emit this->processing(page->uri());
@@ -173,7 +176,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     // Extending requires a small change in the auto fetching system
     if(!this->isExtending()) {
         if (timeHydraNext < this->until() && !this->isAbortRequested()) {
-            qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
+            //qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
             this->fragmentsFactory()->getPage(page->hydraNext(), this);
             emit this->requested(page->hydraNext());
         } else {
@@ -191,6 +194,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 
     // Parse each connection fragment
     bool hasResult = false;
+    //qDebug() << "Page has" << page->fragments().size() << " fragments";
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -202,6 +206,59 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             return;
         }
 
+        /*qDebug() << "FRAGMENT" << fragment->uri().toString();
+        qDebug() << "\tdeparture station:" << fragment->departureStationURI().toString();
+        qDebug() << "\tarrival station:" << fragment->arrivalStationURI().toString();
+        qDebug() << "\tdeparture time:" << fragment->departureTime().toString(Qt::ISODate) << "+" << fragment->departureDelay() << "min";
+        qDebug() << "\tarrival time:" << fragment->arrivalTime().toString(Qt::ISODate) << "+" << fragment->arrivalDelay() << "min";
+        qDebug() << "\tdirection:" << fragment->direction();
+        if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tpickup type: REGULAR";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tpickup type: NOTAVAILABLE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tpickup type: MUSTPHONE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tpickup type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tpickup type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tpickup type: SHIT";
+        }
+
+        if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tdrop off type: REGULAR";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tdrop off type: NOTAVAILABLE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tdrop off type: MUSTPHONE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tdrop off type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tdrop off type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tdrop off type: SHIT";
+        }*/
+
+        /*if(fragment->departureStationURI() == this->stationURI() || fragment->arrivalStationURI() == this->stationURI()) {
+            qDebug() << "Matches station URI" << fragment->departureStationURI().toString() << "|" << fragment->arrivalStationURI().toString();
+        }
+        else {
+            qDebug() << "URI MATCH DEPARTURE FAILED:" << fragment->departureStationURI() << "VS" << this->stationURI();
+        }
+
+        qDebug() << "-----------------------------------------------------------------";
+*/
         // Lazy construction
         if (
                 // ARRIVAL mode
@@ -234,6 +291,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             QRail::VehicleEngine::Stop *entry = nullptr;
             if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
@@ -250,6 +308,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             );
             } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
@@ -348,7 +407,7 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
         event->accept();
         QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-        qDebug() << "Fragment page event received!";
+        //qDebug() << "Fragment page event received!";
     } else {
         event->ignore();
     }
@@ -377,6 +436,91 @@ void LiveboardEngine::Factory::handleFragmentFactoryError()
     this->setAbortRequested(true);
     emit this->error("Liveboard fragment factory error, the operation has been aborted!");
     emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
+}
+
+void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fragment *fragment)
+{
+    qDebug() << "Received fragment update:" << fragment->uri().toString();
+    // For each board, check if the board is affected by the update and update the board if needed
+    foreach(QRail::LiveboardEngine::Board *board, m_watchList) {
+        QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
+
+        // Check each entry
+        QRail::VehicleEngine::Vehicle *oldVehicle = nullptr;
+        for(qint64 i=0; i < entries.length(); i++) {
+            QRail::VehicleEngine::Vehicle *entry = entries.at(i);
+            QRail::VehicleEngine::Stop *stop = entry->intermediaryStops().first();
+            oldVehicle = entry;
+
+            // Board affected, updating...
+            if(fragment->uri() == stop->fragmentURI()) {
+                qDebug() << "Board is affected, updating now!" << stop->fragmentURI();
+                QRail::VehicleEngine::Stop *newStop = nullptr;
+                if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
+                                this->liveboard()->station(),
+                                QString("?"), // platform
+                                true,         // isPlatformNormal
+                                fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                                fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
+                                fragment->departureDelay(),
+                                false, // isDepartureCanceled
+                                fragment->departureTime().addSecs(-fragment->departureDelay()),
+                                fragment->departureDelay(),
+                                false, // isArrivalCanceled
+                                false, // isExtraStop
+                                QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                                QRail::VehicleEngine::Stop::Type::STOP
+                                );
+                } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
+                                this->liveboard()->station(),
+                                QString("?"), // platform
+                                true,         // isPlatformNormal
+                                fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                                fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
+                                fragment->arrivalDelay(),
+                                false, // isDepartureCanceled
+                                fragment->arrivalTime().addSecs(-fragment->arrivalDelay()),
+                                fragment->arrivalDelay(),
+                                false, // isArrivalCanceled
+                                false, // isExtraStop
+                                QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                                QRail::VehicleEngine::Stop::Type::STOP
+                                );
+                } else {
+                    qCritical() << "Unknown LiveboardEngine::Board::Mode, can't fill Liveboard::Board entries!";
+                }
+
+
+                // Get vehicle information
+                QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();
+                intermediaryStops.append(newStop);
+                QRail::VehicleEngine::Vehicle *newVehicle =
+                        new QRail::VehicleEngine::Vehicle(
+                            fragment->routeURI(),
+                            fragment->tripURI(),
+                            fragment->direction(),
+                            intermediaryStops
+                            );
+                qDebug() << "OLD VEHICLE STOP:" << oldVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << oldVehicle->intermediaryStops().first()->departureTime() << "| +" << oldVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << oldVehicle->intermediaryStops().first()->arrivalTime() << "| +" << oldVehicle->intermediaryStops().first()->arrivalDelay();
+                qDebug() << "NEW VEHICLE STOP:" << newVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << newVehicle->intermediaryStops().first()->departureTime() << "| +" << newVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << newVehicle->intermediaryStops().first()->arrivalTime() << "| +" << newVehicle->intermediaryStops().first()->arrivalDelay();
+
+                // Replace entry with the new one
+                QList<QRail::VehicleEngine::Vehicle*> entriesList = board->entries();
+                entriesList.replace(i, newVehicle);
+                board->setEntries(entriesList);
+                emit board->entriesChanged();
+                emit this->finished(board);
+            }
+        }
+    }
 }
 
 void QRail::LiveboardEngine::Factory::setLiveboard(QRail::LiveboardEngine::Board *liveboard)
@@ -478,6 +622,19 @@ void QRail::LiveboardEngine::Factory::setFrom(const QDateTime &from)
 QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() const
 {
     return m_fragmentsFactory;
+}
+
+void LiveboardEngine::Factory::addBoardToWatchlist(LiveboardEngine::Board *board)
+{
+    m_watchList.append(board);
+}
+
+void LiveboardEngine::Factory::removeBoardFromWatchlist(LiveboardEngine::Board *board)
+{
+    bool success = m_watchList.removeOne(board);
+    if(!success) {
+        qCritical() << "Unable to remove Board" << board->station()->name().value(QLocale::Language::Dutch) << "from watch list";
+    }
 }
 
 void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory *fragmentsFactory)

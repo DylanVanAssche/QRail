@@ -57,7 +57,9 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     // Creating liveboard
     start = QDateTime::currentDateTime();
     factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        QUrl("http://irail.be/stations/NMBS/008813003"), // Brussels-Central, the most events generating station of the SNCB
+        QDateTime::currentDateTimeUtc(),
+        QDateTime::currentDateTimeUtc().addSecs(3600 * 8),
         LiveboardEngine::Board::Mode::DEPARTURES);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
@@ -67,6 +69,14 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
+
+    qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
+    factory->addBoardToWatchlist(liveboard);
+    QEventLoop loopUpdateReceived;
+    //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
+    loopUpdateReceived.exec();
+    factory->removeBoardFromWatchlist(liveboard);
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 
@@ -119,6 +129,7 @@ void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()
 
 void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board)
 {
+    liveboard = board;
     qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" <<
              board->station()->name().value(QLocale::Language::Dutch);
     qDebug() << "\tFrom:" << board->from();

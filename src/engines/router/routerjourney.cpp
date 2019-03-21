@@ -167,6 +167,8 @@ void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
         this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >());
         this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
         this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
+        this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
+        this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
         return;
     }
 
@@ -181,10 +183,11 @@ void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
             this->setSArray(previousSnapshotJourney->SArray());
             this->setT_EarliestArrivalTime(previousSnapshotJourney->T_EarliestArrivalTime());
             this->setS_EarliestArrivalTime(previousSnapshotJourney->S_EarliestArrivalTime());
+            this->setHydraNext(m_snapshotJourneys.at(c)->hydraNext());
+            this->setHydraPrevious(m_snapshotJourneys.at(c)->hydraPrevious());
             qDebug() << "Succesfully restored the previous Journey";
             return;
         }
-        previousPageURI = snapshotJourney->pageURI();
     }
 
     qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";

@@ -27,7 +27,6 @@
 #include "engines/router/routerroute.h"
 #include "engines/router/routerstationstopprofile.h"
 #include "engines/router/routertrainprofile.h"
-#include "engines/router/routerjourney.h"
 
 namespace QRail {
 namespace RouterEngine {
@@ -37,6 +36,8 @@ class SnapshotJourney : public QObject
 public:
     //! Constructs a SnapshotJourney object with all the needed parameters.
     explicit SnapshotJourney(QUrl pageURI,
+                           QUrl hydraNext,
+                           QUrl hydraPrevious,
                            QList<QRail::RouterEngine::Route *> routes,
                            QMap<QUrl, qint16> T_EarliestArrivalTime,
                            QMap<QUrl, QDateTime> S_EarliestArrivalTime,
@@ -44,6 +45,8 @@ public:
                            QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray,
                            QObject *parent = nullptr);
     QUrl pageURI() const;
+    QUrl hydraNext() const;
+    QUrl hydraPrevious() const;
     QList<QRail::RouterEngine::Route *> routes() const;
     QMap<QUrl, qint16> T_EarliestArrivalTime() const;
     QMap<QUrl, QDateTime> S_EarliestArrivalTime() const;
@@ -53,6 +56,8 @@ public:
 
 private:
     QUrl m_pageURI;
+    QUrl m_hydraNext;
+    QUrl m_hydraPrevious;
     QDateTime m_pageTimestamp;
     QList<QRail::RouterEngine::Route *> m_routes;
     QMap<QUrl, qint16> m_T_EarliestArrivalTime;

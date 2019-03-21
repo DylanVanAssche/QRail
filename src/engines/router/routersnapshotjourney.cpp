@@ -19,7 +19,10 @@ using namespace QRail;
 using namespace RouterEngine;
 
 
-SnapshotJourney::SnapshotJourney(QUrl pageURI, QList<Route *> routes, QMap<QUrl, qint16> T_EarliestArrivalTime,
+SnapshotJourney::SnapshotJourney(QUrl pageURI, 
+                             QUrl hydraNext,
+                             QUrl hydraPrevious,
+                             QList<Route *> routes, QMap<QUrl, qint16> T_EarliestArrivalTime,
                              QMap<QUrl, QDateTime> S_EarliestArrivalTime,
                              QMap<QUrl, QList<StationStopProfile *> > SArray,
                              QMap<QUrl, TrainProfile *> TArray,
@@ -27,18 +30,30 @@ SnapshotJourney::SnapshotJourney(QUrl pageURI, QList<Route *> routes, QMap<QUrl,
 {
     m_pageURI = pageURI;
     QUrlQuery pageQuery = QUrlQuery(m_pageURI.query());
-    m_pageTimestamp = QDateTime::fromString(pageQuery["departureTime"], Qt::ISODate);
+    m_pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
     qDebug() << "Page timestamp extracted:" << m_pageTimestamp.toString(Qt::ISODate);
     m_routes = routes;
     m_T_EarliestArrivalTime = T_EarliestArrivalTime;
     m_S_EarliestArrivalTime = S_EarliestArrivalTime;
     m_SArray = SArray;
     m_TArray = TArray;
+    m_hydraNext = hydraNext;
+    m_hydraPrevious = hydraPrevious;
 }
 
 QUrl SnapshotJourney::pageURI() const
 {
     return m_pageURI;
+}
+
+QUrl SnapshotJourney::hydraPrevious() const
+{
+    return m_hydraPrevious;
+}
+
+QUrl SnapshotJourney::hydraNext() const
+{
+    return m_hydraNext;
 }
 
 QList<QRail::RouterEngine::Route *> SnapshotJourney::routes() const

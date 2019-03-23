@@ -223,8 +223,11 @@ public:
     void addSnapshotJourney(QRail::RouterEngine::SnapshotJourney *snapshotJourney);
     //! Restore Journey before page
     void restoreBeforePage(QUrl pageURI);
+    QList<QUrl> usedFragments() const;
+    void addUsedFragment(QUrl frag);
 
 private:
+    QList<QUrl> m_used_fragments;
     QList<QRail::RouterEngine::SnapshotJourney *> m_snapshotJourneys;
     QList<QRail::RouterEngine::Route *> m_routes;
     QDateTime m_departureTime;

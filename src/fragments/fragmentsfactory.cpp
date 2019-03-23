@@ -140,6 +140,7 @@ void Fragments::Factory::handleEventSource(QString message)
                 }
                 // Recache page, the old version is automatically deleted.
                 m_pageCache.cachePage(page);
+                emit this->pageUpdated(page);
                 emit this->fragmentUpdated(frag);
             } else {
                 qCritical() << "Corrupt Fragment detected!";

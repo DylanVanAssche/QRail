@@ -27,6 +27,8 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->progressTimeoutTimer = new QTimer(this);
     this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
     connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
+    connect(this->fragmentsFactory(), SIGNAL(fragmentAndPageUpdated(QRail::Fragments::Fragment*,QRail::Fragments::Page*)),
+            this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*,QRail::Fragments::Page*)));
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
@@ -134,6 +136,39 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         qCritical() << "Departure station:" << departureStation;
         qCritical() << "Arrival station:" << arrivalStation;
         qCritical() << "Departure time:" << departureTime;
+    }
+}
+
+void RouterEngine::Planner::getConnections(Journey *journey)
+{
+    if(journey) {
+        this->setJourney(journey);
+        this->initUsedPages();
+        this->progressTimeoutTimer->start();
+
+        /*
+         * Setup footpaths for the arrival station since CSA profile
+         * goes from the end to the beginning.
+         *
+         * Footpaths give the user the possibility to exit at another station
+         * and walk to it's destination in case that's faster than the original
+         * arrival station.
+         */
+        QRail::StationEngine::Station *station =
+                this->stationFactory()->getStationByURI(this->journey()->arrivalStationURI());
+
+        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
+                this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
+                                                                       SEARCH_RADIUS,
+                                                                       MAX_RESULTS);
+
+        // Jumpstart the page fetching
+        this->fragmentsFactory()->getPage(this->journey()->arrivalTime(), this);
+        qDebug() << "CSA init OK";
+    }
+    else {
+        qCritical() << "Invalid Journey object (nullptr)";
+        emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
     }
 }
 
@@ -1068,6 +1103,25 @@ void RouterEngine::Planner::handleFragmentFactoryError()
     emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
 }
 
+void RouterEngine::Planner::handleFragmentAndPageFactoryUpdate(Fragments::Fragment *fragment, Fragments::Page *page)
+{
+    foreach(QRail::RouterEngine::Journey *journey, m_watchList) {
+        bool affected = false;
+        foreach(QUrl fragURI, journey->usedFragments()) {
+            if(fragURI == fragment->uri()) {
+                affected = true;
+                break;
+            }
+        }
+
+        if(affected) {
+            qDebug() << "Journey has been affected by a Fragments update. Rerouting...";
+            journey->restoreBeforePage(page->uri());
+            this->getConnections(journey);
+        }
+    }
+}
+
 QRail::RouterEngine::Journey *QRail::RouterEngine::Planner::journey() const
 {
     return m_journey;
@@ -1091,6 +1145,16 @@ void QRail::RouterEngine::Planner::setAbortRequested(bool abortRequested)
 QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() const
 {
     return m_fragmentsFactory;
+}
+
+void RouterEngine::Planner::watch(RouterEngine::Journey *journey)
+{
+    m_watchList.append(journey);
+}
+
+void RouterEngine::Planner::unwatch(RouterEngine::Journey *journey)
+{
+    m_watchList.removeAll(journey);
 }
 
 void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory *factory)

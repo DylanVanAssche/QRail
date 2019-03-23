@@ -95,6 +95,23 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
             << start.msecsTo(QDateTime::currentDateTime())
             << "msecs";
 
+    qDebug() << "---------------------------------------------- REROUTING ----------------------------------------------";
+    start = QDateTime::currentDateTime();
+    planner->getConnections(
+        QUrl("http://irail.be/stations/NMBS/008813003"), // From: Brussels-Central
+        QUrl("http://irail.be/stations/NMBS/008821006"), // To: Antwerp-Central
+        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+        4 // Max transfers
+    );
+
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    QEventLoop loop3;
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop3, SLOT(quit()));
+    loop3.exec();
+    qInfo() << "Cached routing Brussels-Central -> Antwerp-Central took"
+            << start.msecsTo(QDateTime::currentDateTime())
+            << "msecs";
+
     qDebug() << "---------------------------------------------- CACHED ROUTING ----------------------------------------------";
 
     start = QDateTime::currentDateTime();

@@ -49,9 +49,6 @@ public:
     bool hasPage(QUrl uri);
     bool isEmpty();
 
-signals:
-    void pageUpdated(QUrl uri);
-
 private:
     QMap<QUrl, QRail::Fragments::Page*> m_cache;
     QRail::Fragments::Page *getPageFromDisk(QUrl uri);

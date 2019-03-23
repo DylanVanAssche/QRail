@@ -193,6 +193,16 @@ void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
     qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";
 }
 
+QList<QUrl> RouterEngine::Journey::usedFragments() const
+{
+    return m_used_fragments;
+}
+
+void RouterEngine::Journey::addUsedFragment(QUrl frag)
+{
+    m_used_fragments.append(frag);
+}
+
 QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const
 {
     return m_SArray;

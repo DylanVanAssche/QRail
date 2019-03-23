@@ -97,8 +97,12 @@ signals:
     void connectionChanged(const QUrl &uri);
     //! Emitted when prefetching is complete
     void prefetchFinished();
-    //! Emitted when a page has been updated
+    //! Emitted when a fragment has been updated
     void fragmentUpdated(QRail::Fragments::Fragment *fragment);
+    //! Emitted when a page has been updated
+    void pageUpdated(QRail::Fragments::Page *page);
+    //! Emitted when a page and fragment are updated
+    void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QRail::Fragments::Page *page);
 
 private slots:
     void handleEventSource(QString message);

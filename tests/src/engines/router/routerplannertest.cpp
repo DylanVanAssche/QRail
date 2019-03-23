@@ -27,6 +27,7 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
 
     // Connect the signals
     connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this, SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }
@@ -87,6 +88,13 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
         QDateTime::currentDateTimeUtc(), // Departure time (UTC)
         4 // Max transfers
     );
+    /*planner->getConnections(
+        QUrl("http://irail.be/stations/NMBS/008813003"), // From: Brussel-Central
+        QUrl("http://irail.be/stations/NMBS/008844628"), // To: Eupen
+        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+        4 // Max transfers
+    );*/
+
 
     QEventLoop loop1;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop1, SLOT(quit()));
@@ -96,8 +104,6 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
             << "msecs";
 
     qDebug() << "---------------------------------------------- REROUTING ----------------------------------------------";
-    // Watch for changes
-    planner->watch(this->journey);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
     QEventLoop loop3;
@@ -180,7 +186,8 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
 
 void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine::Journey *journey)
 {
-    this->journey = journey;
+    planner->watch(journey);
+    qDebug() << "JOURNEY RECEIVED:" << journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
     QVERIFY2(journey->routes().size() > 0, "CSA couldn't find any routes, this is impossible in our integration test!");
     foreach (QRail::RouterEngine::Route *route, journey->routes()) {

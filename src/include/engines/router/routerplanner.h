@@ -206,7 +206,7 @@ private slots:
     void unlockPlanner();
     void handleTimeout();
     void handleFragmentFactoryError();
-    void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QRail::Fragments::Page *page);
+    void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
 
 private:
     QList<QRail::RouterEngine::Journey *> m_watchList;

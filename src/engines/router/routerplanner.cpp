@@ -27,8 +27,8 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->progressTimeoutTimer = new QTimer(this);
     this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
     connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    connect(this->fragmentsFactory(), SIGNAL(fragmentAndPageUpdated(QRail::Fragments::Fragment*,QRail::Fragments::Page*)),
-            this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*,QRail::Fragments::Page*)));
+    connect(this->fragmentsFactory(), SIGNAL(fragmentAndPageUpdated(QRail::Fragments::Fragment*, QUrl)),
+            this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*, QUrl)));
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
@@ -1103,21 +1103,23 @@ void RouterEngine::Planner::handleFragmentFactoryError()
     emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
 }
 
-void RouterEngine::Planner::handleFragmentAndPageFactoryUpdate(Fragments::Fragment *fragment, Fragments::Page *page)
+void RouterEngine::Planner::handleFragmentAndPageFactoryUpdate(Fragments::Fragment *fragment, QUrl pageURI)
 {
+    qDebug() << "Planner affected?" << pageURI.toString();
     foreach(QRail::RouterEngine::Journey *journey, m_watchList) {
-        bool affected = false;
-        foreach(QUrl fragURI, journey->usedFragments()) {
-            if(fragURI == fragment->uri()) {
-                affected = true;
-                break;
+        foreach(QRail::Fragments::Page *page, m_usedPages) {
+            foreach(QRail::Fragments::Fragment *frag, page->fragments()) {
+                if(frag->uri() == fragment->uri()) {
+                    qDebug() << "Journey has been affected by a Fragments update." << frag->uri() << "Rerouting...";
+                    qDebug() << page;
+                    qDebug() << page->uri();
+                    qDebug() << journey;
+                    journey->restoreBeforePage(page->uri());
+                    qDebug() << "Journey restored, start CSA...";
+                    this->getConnections(journey);
+                    break;
+                }
             }
-        }
-
-        if(affected) {
-            qDebug() << "Journey has been affected by a Fragments update. Rerouting...";
-            journey->restoreBeforePage(page->uri());
-            this->getConnections(journey);
         }
     }
 }

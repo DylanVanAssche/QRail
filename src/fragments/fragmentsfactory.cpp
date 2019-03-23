@@ -124,7 +124,7 @@ void Fragments::Factory::handleEventSource(QString message)
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             if (frag) {
-                m_pageCache.updateFragment(frag);
+                QUrl updatedPageURI = m_pageCache.updateFragment(frag);
                 //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
                 // In case we haven't downloaded this page yet, skip this update
                 //if(!page) {
@@ -143,8 +143,11 @@ void Fragments::Factory::handleEventSource(QString message)
                 }
                 // Recache page, the old version is automatically deleted.
                 m_pageCache.cachePage(page);*/
-                //emit this->pageUpdated(page);
-                emit this->fragmentUpdated(frag);
+                if(updatedPageURI.isValid()) {
+                    emit this->pageUpdated(updatedPageURI);
+                    emit this->fragmentUpdated(frag);
+                    emit this->fragmentAndPageUpdated(frag, updatedPageURI);
+                }
             }
             else {
                 qCritical() << "Corrupt Fragment detected!";

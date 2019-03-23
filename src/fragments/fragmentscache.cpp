@@ -74,12 +74,13 @@ void Cache::cachePage(Page *page)
     jsonFile.write(doc.toJson());
 }
 
-void Cache::updateFragment(Fragment *updatedFragment)
+QUrl Cache::updateFragment(Fragment *updatedFragment)
 {
     // We look between the departureTime and departureTime + departureDelay for the old fragment
     QDateTime departureTime = updatedFragment->departureTime().addSecs(-updatedFragment->departureDelay());
     QDateTime departureTimeWithDelay = updatedFragment->departureTime();
     QList<QUrl> pagesURI = m_cache.keys();
+    QUrl updatedPageURI;
 
     foreach(QUrl pageURI, pagesURI) {
         QUrlQuery query = QUrlQuery(pageURI);
@@ -102,6 +103,7 @@ void Cache::updateFragment(Fragment *updatedFragment)
                         qDebug() << "Deleting old fragment, inserting new one";
                         // Remove old fragment in the old page
                         page->fragments().removeAt(fragCounter);
+                        updatedPageURI = page->uri();
 
                         // Insert updated fragment in the new page
                         for(qint32 pageCounter=0; pageCounter < pagesURI.length()-1; pageCounter++) {
@@ -129,21 +131,24 @@ void Cache::updateFragment(Fragment *updatedFragment)
                         }
 
                         // Update completed
-                        return;
+                        return updatedPageURI;
                     }
 
                     // Arrival delay changed or cancelled (type changed), updating fragment in page
                     if(fragment->arrivalDelay() != updatedFragment->arrivalDelay()) {
                         qDebug() << "Updating old fragment";
                         page->fragments().replace(fragCounter, updatedFragment);
+                        updatedPageURI = page->uri();
 
                         // Update completed
-                        return;
+                        return updatedPageURI;
                     }
                 }
             }
         }
     }
+
+    return QUrl();
 }
 
 Page *Cache::getPageByURI(QUrl uri)

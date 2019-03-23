@@ -151,7 +151,7 @@ void RouterEngine::Journey::addSnapshotJourney(RouterEngine::SnapshotJourney *sn
     m_snapshotJourneys.append(snapshotJourney);
 }
 
-void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
+void RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
 {
     // We can't restore anything if we don't have anything
     if(m_snapshotJourneys.length() == 0) {
@@ -191,16 +191,6 @@ void RouterEngine::Journey::restoreBeforePage(QUrl pageURI)
     }
 
     qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";
-}
-
-QList<QUrl> RouterEngine::Journey::usedFragments() const
-{
-    return m_used_fragments;
-}
-
-void RouterEngine::Journey::addUsedFragment(QUrl frag)
-{
-    m_used_fragments.append(frag);
 }
 
 QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const

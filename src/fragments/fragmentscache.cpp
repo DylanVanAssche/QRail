@@ -33,7 +33,7 @@ void Cache::cachePage(Page *page)
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
     m_cache.insert(page->uri(), page);
-    qDebug() << "Number of entries in cache:" << m_cache.count();
+    //qDebug() << "Number of entries in cache:" << m_cache.count();
 
     // Cache the page on disk
     QJsonObject obj;
@@ -66,7 +66,7 @@ void Cache::cachePage(Page *page)
     path.append("/" + page->uri().toString());
     QDir jsonFileDir(path);
     jsonFileDir.mkpath(path);
-    qDebug() << "PAGE file path:" << path;
+    //qDebug() << "PAGE file path:" << path;
 
     path.append(PAGE_FILE_NAME);
     QFile jsonFile(path);
@@ -84,8 +84,8 @@ void Cache::updateFragment(Fragment *updatedFragment)
     foreach(QUrl pageURI, pagesURI) {
         QUrlQuery query = QUrlQuery(pageURI);
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-        qDebug() << "Page time:" << pageTime;
         if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
+            qDebug() << "Page time:" << pageTime;
             QRail::Fragments::Page* page = m_cache.value(pageURI);
             QList<QRail::Fragments::Fragment *> fragments = page->fragments();
 
@@ -160,7 +160,15 @@ Page *Cache::getPageByURI(QUrl uri)
 
 Page *Cache::getPageByFragment(Fragment *fragment)
 {
+    // If our fragment is already later than our last page or before our first page, don't even bother to search for the page.
+    if(m_cache.count() > 0) {
+        if(fragment->departureTime() > m_cache.last()->timestamp() || fragment->departureTime() < m_cache.first()->timestamp()) {
+            return nullptr;
+        }
+    }
+
     foreach(QRail::Fragments::Page *page, m_cache.values()) {
+        //qDebug() << "Fragment < page: " << fragment->departureTime() << "|" << page->timestamp();
         if(fragment->departureTime() < page->timestamp()) {
             continue;
         }
@@ -169,8 +177,8 @@ Page *Cache::getPageByFragment(Fragment *fragment)
         }
     }
 
-    // In case we can't a page
-    qCritical() << "Unable to find page for fragment:" << fragment->uri().toString();
+    // In case we can't find a page (page hasn't been downloaded yet)
+    //qWarning() << "Unable to find page for fragment:" << fragment->uri().toString() << "timestamp:" << fragment->departureTime();
     return nullptr;
 }
 

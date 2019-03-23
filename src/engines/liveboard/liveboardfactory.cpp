@@ -55,8 +55,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
     this->getLiveboardByStationURI(uri,
-                                   QDateTime::currentDateTime().toUTC(),
-                                   QDateTime::currentDateTime().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
+                                   QDateTime::currentDateTimeUtc(),
+                                   QDateTime::currentDateTimeUtc().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER),
                                    mode);
 }
 
@@ -295,7 +295,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->departureTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
                             fragment->departureDelay(),
                             false, // isDepartureCanceled
@@ -312,7 +312,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->arrivalTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
                             fragment->arrivalDelay(),
                             false, // isDepartureCanceled
@@ -440,7 +440,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryError()
 
 void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fragment *fragment)
 {
-    qDebug() << "Received fragment update:" << fragment->uri().toString();
+    //qDebug() << "Received fragment update:" << fragment->uri().toString();
     // For each board, check if the board is affected by the update and update the board if needed
     foreach(QRail::LiveboardEngine::Board *board, m_watchList) {
         QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
@@ -462,7 +462,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                                 this->liveboard()->station(),
                                 QString("?"), // platform
                                 true,         // isPlatformNormal
-                                fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                                fragment->departureTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                                 fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
                                 fragment->departureDelay(),
                                 false, // isDepartureCanceled
@@ -479,7 +479,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                                 this->liveboard()->station(),
                                 QString("?"), // platform
                                 true,         // isPlatformNormal
-                                fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                                fragment->arrivalTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                                 fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
                                 fragment->arrivalDelay(),
                                 false, // isDepartureCanceled

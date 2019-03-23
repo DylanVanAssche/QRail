@@ -38,7 +38,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * The arrival time must come after the departure time to be valid.
     */
     QDateTime arrivalTime = planner->calculateArrivalTime(QDateTime::currentDateTimeUtc());
-    QVERIFY2(arrivalTime > QDateTime::currentDateTime(), "Arrival time can't be before the departure time!");
+    QVERIFY2(arrivalTime > QDateTime::currentDateTimeUtc(), "Arrival time can't be before the departure time!");
     QDateTime start;
 
     /*
@@ -49,20 +49,20 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     * https://lc2irail.thesis.bertmarcelis.be/connections/008811189/008891009/departing/2018-08-02T13:00:00+00:00
     */
 
-    qDebug() << "---------------------------------------------- ROUTING PREFETCH ----------------------------------------------";
+   /* qDebug() << "---------------------------------------------- ROUTING PREFETCH ----------------------------------------------";
 
-    /*start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     QEventLoop loopPrefetch;
     connect(planner->fragmentsFactory(), SIGNAL(prefetchFinished()), &loopPrefetch, SLOT(quit()));
     loopPrefetch.exec();
 
     qInfo() << "Prefetching took"
-            << start.msecsTo(QDateTime::currentDateTime())
-            << "msecs";*/
-
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
+            << "msecs";
+*/
     qDebug() << "---------------------------------------------- ROUTING ABORT ----------------------------------------------";
     // Test abort
-    planner->getConnections(
+    /*planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
         QDateTime::currentDateTimeUtc(), // Departure time (UTC)
@@ -76,11 +76,11 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     loopAbort.exec();
 
     // Now we should get valid data, connect the processor with verification checks
-    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));*/
 
     qDebug() << "---------------------------------------------- ROUTING NETWORK ----------------------------------------------";
 
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
@@ -92,29 +92,27 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop1, SLOT(quit()));
     loop1.exec();
     qInfo() << "Network routing Vilvoorde -> Brugge took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
     qDebug() << "---------------------------------------------- REROUTING ----------------------------------------------";
-    start = QDateTime::currentDateTime();
-    planner->getConnections(
-        QUrl("http://irail.be/stations/NMBS/008813003"), // From: Brussels-Central
-        QUrl("http://irail.be/stations/NMBS/008821006"), // To: Antwerp-Central
-        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
-        4 // Max transfers
-    );
+    // Watch for changes
+    planner->watch(this->journey);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
     QEventLoop loop3;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop3, SLOT(quit()));
     loop3.exec();
-    qInfo() << "Cached routing Brussels-Central -> Antwerp-Central took"
-            << start.msecsTo(QDateTime::currentDateTime())
+    qInfo() << "Rerouting Brussels-Central -> Antwerp-Central took"
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
+
+    // Unwatch again
+    planner->unwatch(this->journey);
 
     qDebug() << "---------------------------------------------- CACHED ROUTING ----------------------------------------------";
 
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
@@ -127,11 +125,11 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop2, SLOT(quit()));
     loop2.exec();
     qInfo() << "Cached routing Vilvoorde -> Brugge took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
     /*for(int i=0; i < REPEAT_COUNT; i++) {
-        QDateTime start = QDateTime::currentDateTime();
+        QDateTime start = QDateTime::currentDateTimeUtc();
         planner->getConnections(
             QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
             QUrl("http://irail.be/stations/NMBS/008892007"), // To: Gent-Sint-Pieters
@@ -145,7 +143,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
         loop3.exec();
         qInfo() << "Iteration:" << i
                 << "Routing Vilvoorde -> Gent-Sint-Pieters took"
-                << start.msecsTo(QDateTime::currentDateTime())
+                << start.msecsTo(QDateTime::currentDateTimeUtc())
                 << "msecs";
     }*/
 }
@@ -182,6 +180,7 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
 
 void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine::Journey *journey)
 {
+    this->journey = journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
     QVERIFY2(journey->routes().size() > 0, "CSA couldn't find any routes, this is impossible in our integration test!");
     foreach (QRail::RouterEngine::Route *route, journey->routes()) {

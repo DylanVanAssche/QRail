@@ -206,7 +206,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     bool hasPassedDepartureTimeLimit = false;
 
     // Fake an infinite time by adding 1 year to the current date, this is required for the Profile Scan Algortihm to work
-    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTime().addYears(1));
+    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTimeUtc().addYears(1));
 
     // Fake an infinite number of transfers by setting it to 32767 (16 bits signed 01111111 11111111)
     qint16 INFINITE_TRANSFERS = 32767;
@@ -808,7 +808,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                             true,
                             profile->departureConnection()->departureDelay(),
                             false,
-                            profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
+                            profile->departureConnection()->departureTime() < QDateTime::currentDateTimeUtc(),
                             QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
                 QRail::RouterEngine::RouteLegEnd *arrivalLeg =
@@ -820,7 +820,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                             true,
                             profile->arrivalConnection()->departureDelay(),
                             false,
-                            profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
+                            profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTimeUtc(),
                             QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
                 // Create vehicle information
@@ -857,7 +857,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         true,
                         profile->departureConnection()->departureDelay(),
                         false,
-                        profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
+                        profile->departureConnection()->departureTime() < QDateTime::currentDateTimeUtc(),
                         QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
             QRail::RouterEngine::RouteLegEnd *arrivalLeg =
@@ -869,7 +869,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         true,
                         profile->arrivalConnection()->departureDelay(),
                         false,
-                        profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
+                        profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTimeUtc(),
                         QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED
                         );
 

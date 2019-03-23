@@ -124,11 +124,14 @@ void Fragments::Factory::handleEventSource(QString message)
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             if (frag) {
-                QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
-                if(!page) {
-                    continue;
-                }
-                QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
+                m_pageCache.updateFragment(frag);
+                //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
+                // In case we haven't downloaded this page yet, skip this update
+                //if(!page) {
+                //    continue;
+                //}
+                //qDebug() << "Changing page:" << page->uri();
+                /*QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
                 // Look for the fragment and replace it.
                 for(qint64 i=0; i < fragmentList.length(); i++) {
                     QRail::Fragments::Fragment *item = fragmentList.at(i);
@@ -139,13 +142,15 @@ void Fragments::Factory::handleEventSource(QString message)
                     }
                 }
                 // Recache page, the old version is automatically deleted.
-                m_pageCache.cachePage(page);
-                emit this->pageUpdated(page);
+                m_pageCache.cachePage(page);*/
+                //emit this->pageUpdated(page);
                 emit this->fragmentUpdated(frag);
-            } else {
+            }
+            else {
                 qCritical() << "Corrupt Fragment detected!";
             }
-        } else {
+        }
+        else {
             qCritical() << "Fragment isn't a JSON object!";
         }
     }

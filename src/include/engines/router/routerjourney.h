@@ -48,6 +48,7 @@ public:
                      const QUrl hydraNext,
                      const QUrl hydraPrevious,
                      QObject *parent = nullptr);
+
     //! Gets the possible routes of the Journey.
     /*!
         \return routes A list with all possibles routes for this journey.

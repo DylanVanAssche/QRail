@@ -341,6 +341,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             this->liveboard()->addEntry(vehicle);
             this->stream(vehicle);
             hasResult = true;
+            qDebug() << "RESULT=" << vehicle->uri() << " headsign:" << vehicle->headsign();
         }
     }
 

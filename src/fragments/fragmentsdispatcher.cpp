@@ -26,18 +26,6 @@ QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 {
     /*
-     * WARNING:
-     *  QEvent must be allocated on the heap since the event queue will
-     *  take ownership of the QEvent object.
-     *  Accessing it after calling 'postEvents()' isn't safe!
-     * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
-     */
-
-    // Create custom event type
-    QRail::Fragments::DispatcherEvent event = QRail::Fragments::DispatcherEvent(this->eventType());
-    event.setPage(page);
-
-    /*
      * Retrieve the callers of the page.
      *
      * Multiple callers can call the same
@@ -58,7 +46,16 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
-        QCoreApplication::sendEvent(caller, &event);
+        /*
+         * WARNING:
+         *  QEvent must be allocated on the heap since the event queue will
+         *  take ownership of the QEvent object.
+         *  Accessing it after calling 'postEvents()' isn't safe!
+         * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
+         */
+        QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
+        event->setPage(page);
+        QCoreApplication::postEvent(caller, event);
     }
     this->removeTargets(from, until);
 }
@@ -89,14 +86,14 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
          * If the timestamp is the same or higher or equal than the first fragment departure time
          * and it's lower than the last fragment departure time + 1 minute.
          *
-         * WARNING: We need to add 1 minute to this check to avoid a reace condition:
+         * WARNING: We need to add 1 minute to this check to avoid a race condition:
          *          If the page ends at 19:28:00.000 (departure time of the last fragment)
          *          and we request the page at 19:28:35.841 then our check needs to valid.
          *          The reason for this lies in the way the Linked Connection server fragments
          *          the data and how it's redirecting clients.
          */
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
-                && (timestamp.toMSecsSinceEpoch() < until.toMSecsSinceEpoch() + MINUTES_TO_MSECONDS_MULTIPLIER)) {
+                && (timestamp.toMSecsSinceEpoch() < (until.toMSecsSinceEpoch() + MINUTES_TO_MSECONDS_MULTIPLIER))) {
             callers.append(m_targets.value(timestamp));
         }
     }

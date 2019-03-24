@@ -1,21 +1,48 @@
 \hypertarget{qrail_8cpp}{}\section{src/qrail.cpp File Reference}
-\label{qrail_8cpp}\index{src/qrail.\+cpp@{src/qrail.\+cpp}}
+\label{qrail_8cpp}\index{src/qrail.cpp@{src/qrail.cpp}}
 
 
-Init the Q\+Rail library.  
+Reads a J\+S\+ON file.  
 
 
 {\ttfamily \#include \char`\"{}qrail.\+h\char`\"{}}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{qrail_8cpp_a6938029c575ea0029f0e07d2ba59b1e4}\label{qrail_8cpp_a6938029c575ea0029f0e07d2ba59b1e4}} 
-void {\bfseries init\+Q\+Rail} ()
-\end{DoxyCompactItemize}
+Q\+Json\+Object \mbox{\hyperlink{qrail_8cpp_ae47df9f0f42cae4334448ab57992368e}{context}} (const Q\+String \&context\+Path)
+\item 
+void \mbox{\hyperlink{qrail_8cpp_a6938029c575ea0029f0e07d2ba59b1e4}{init\+Q\+Rail}} ()
+\begin{DoxyCompactList}\small\item\em Inits the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library resources. \end{DoxyCompactList}\item 
+Q\+Json\+Object \mbox{\hyperlink{qrail_8cpp_a3b509bbe85ae85a01c2edcd8f1e73c5d}{page\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the Linked Connections page context. \end{DoxyCompactList}\item 
+Q\+Json\+Object \mbox{\hyperlink{qrail_8cpp_ae706e18f8abc0956fb603f7cc77bbb83}{vehicle\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Retireves the Linked Connections vehicle context. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Init the Q\+Rail library. 
+Reads a J\+S\+ON file. 
+
+Reads the vehicle context in J\+S\+ON.
+
+Reads the LC page context in J\+S\+ON.
+
+Init the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+String \&path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Q\+Json\+Object json
+\end{DoxyReturn}
+Reads a J\+S\+ON file, parses it and returns it as a Q\+Json\+Object.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -24,5 +51,64 @@ Dylan Van Assche
 16 Aug 2018 
 \end{DoxyDate}
 \begin{DoxyWarning}{Warning}
-Do not run any code without calling this function first! Q\+Rail won\textquotesingle{}t work without it. Init the Q\+Rail library assets. 
+Do not run any code without calling this function first! \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} won\textquotesingle{}t work without it. Init the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library assets.
 \end{DoxyWarning}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Json\+Object page\+Context
+\end{DoxyReturn}
+Reads the LC page context J\+S\+ON file and returns it.
+
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Q\+Json\+Object vehicle\+Context
+\end{DoxyReturn}
+Reads the i\+Rail vehicle context J\+S\+ON file and returns it. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{qrail_8cpp_ae47df9f0f42cae4334448ab57992368e}\label{qrail_8cpp_ae47df9f0f42cae4334448ab57992368e}} 
+\index{qrail.cpp@{qrail.cpp}!context@{context}}
+\index{context@{context}!qrail.cpp@{qrail.cpp}}
+\subsubsection{\texorpdfstring{context()}{context()}}
+{\footnotesize\ttfamily Q\+Json\+Object context (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{context\+Path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{qrail_8cpp_a6938029c575ea0029f0e07d2ba59b1e4}\label{qrail_8cpp_a6938029c575ea0029f0e07d2ba59b1e4}} 
+\index{qrail.cpp@{qrail.cpp}!initQRail@{initQRail}}
+\index{initQRail@{initQRail}!qrail.cpp@{qrail.cpp}}
+\subsubsection{\texorpdfstring{initQRail()}{initQRail()}}
+{\footnotesize\ttfamily void init\+Q\+Rail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Inits the \mbox{\hyperlink{namespaceQRail}{Q\+Rail}} library resources. 
+
+\mbox{\Hypertarget{qrail_8cpp_a3b509bbe85ae85a01c2edcd8f1e73c5d}\label{qrail_8cpp_a3b509bbe85ae85a01c2edcd8f1e73c5d}} 
+\index{qrail.cpp@{qrail.cpp}!pageContext@{pageContext}}
+\index{pageContext@{pageContext}!qrail.cpp@{qrail.cpp}}
+\subsubsection{\texorpdfstring{pageContext()}{pageContext()}}
+{\footnotesize\ttfamily Q\+Json\+Object page\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieves the Linked Connections page context. 
+
+\mbox{\Hypertarget{qrail_8cpp_ae706e18f8abc0956fb603f7cc77bbb83}\label{qrail_8cpp_ae706e18f8abc0956fb603f7cc77bbb83}} 
+\index{qrail.cpp@{qrail.cpp}!vehicleContext@{vehicleContext}}
+\index{vehicleContext@{vehicleContext}!qrail.cpp@{qrail.cpp}}
+\subsubsection{\texorpdfstring{vehicleContext()}{vehicleContext()}}
+{\footnotesize\ttfamily Q\+Json\+Object vehicle\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retireves the Linked Connections vehicle context. 
+

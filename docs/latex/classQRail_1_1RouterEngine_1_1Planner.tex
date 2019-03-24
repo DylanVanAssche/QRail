@@ -1,0 +1,314 @@
+\hypertarget{classQRail_1_1RouterEngine_1_1Planner}{}\section{Q\+Rail\+::Router\+Engine\+::Planner Class Reference}
+\label{classQRail_1_1RouterEngine_1_1Planner}\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+
+
+A \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} allows you to generate \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Router\+Engine\+::\+Journey}} objects.  
+
+
+
+
+{\ttfamily \#include $<$routerplanner.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Planner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1RouterEngine_1_1Planner}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}{finished}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}})
+\begin{DoxyCompactList}\small\item\em Emitted when the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} calculation is finished. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}{stream}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$route)
+\begin{DoxyCompactList}\small\item\em Emitted when a route has been found for the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}{error}} (const Q\+String \&message)
+\begin{DoxyCompactList}\small\item\em Emitted when something goes wrong. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}{requested}} (const Q\+Url \&page\+U\+RI)
+\begin{DoxyCompactList}\small\item\em Emitted when a new \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Fragments\+::\+Page}} has been requested. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}{processing}} (const Q\+Url \&page\+U\+RI)
+\begin{DoxyCompactList}\small\item\em Emitted when a new \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Fragments\+::\+Page}} has been received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}{$\sim$\+Planner}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}} object destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}{get\+Connections}} (const Q\+Url \&departure\+Station, const Q\+Url \&arrival\+Station, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}}, const quint16 \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}})
+\begin{DoxyCompactList}\small\item\em Retrieves a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} between 2 given stops. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}{get\+Connections}} (const Q\+Geo\+Coordinate \&departure\+Position, const Q\+Geo\+Coordinate \&arrival\+Position, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}}, const quint16 \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}})
+\begin{DoxyCompactList}\small\item\em Retrieves a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} between 2 given stops. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}{abort\+Current\+Operation}} ()
+\begin{DoxyCompactList}\small\item\em Cancels a current operation. \end{DoxyCompactList}\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}{departure\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Gets the departure time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}{arrival\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Gets the arrival time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+qint16 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}{max\+Transfers}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum amount of transfers for the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}{departure\+Station\+U\+RI}} () const
+\begin{DoxyCompactList}\small\item\em Gets the departure station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}{arrival\+Station\+U\+RI}} () const
+\begin{DoxyCompactList}\small\item\em Gets the arrival station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}{set\+Journey}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}{journey}})
+\begin{DoxyCompactList}\small\item\em Sets the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}{custom\+Event}} (Q\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em Dispatcher protected method, only here as a reference. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} allows you to generate \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Router\+Engine\+::\+Journey}} objects. 
+
+The factory design pattern allows you to create \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} objects in an easy way. Several modes are available to fetch your \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}\label{classQRail_1_1RouterEngine_1_1Planner_a3ef159b1f214b7e7f2aecb94d1a2bbed}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!````~Planner@{$\sim$Planner}}
+\index{````~Planner@{$\sim$Planner}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{$\sim$Planner()}{~Planner()}}
+{\footnotesize\ttfamily Router\+Engine\+::\+Planner\+::$\sim$\+Planner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}} object destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}\label{classQRail_1_1RouterEngine_1_1Planner_a6098ae8b5db4f0c9cfe4352486ac4fc1}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!abortCurrentOperation@{abortCurrentOperation}}
+\index{abortCurrentOperation@{abortCurrentOperation}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{abortCurrentOperation()}{abortCurrentOperation()}}
+{\footnotesize\ttfamily void Router\+Engine\+::\+Planner\+::abort\+Current\+Operation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Cancels a current operation. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}\label{classQRail_1_1RouterEngine_1_1Planner_ad9d45f498635d0310c699d9154c68b38}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!arrivalStationURI@{arrivalStationURI}}
+\index{arrivalStationURI@{arrivalStationURI}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{arrivalStationURI()}{arrivalStationURI()}}
+{\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::arrival\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the arrival station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+arrival\+Station\+U\+RI The U\+RI of the arrival station.
+\end{DoxyReturn}
+Gets the arrival station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}\label{classQRail_1_1RouterEngine_1_1Planner_adf7dbcaa92080558d1146422967d2cde}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!arrivalTime@{arrivalTime}}
+\index{arrivalTime@{arrivalTime}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{arrivalTime()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the arrival time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+arrival\+Time The requested arrival time.
+\end{DoxyReturn}
+Gets the arrival time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}\label{classQRail_1_1RouterEngine_1_1Planner_a2a6a93bae30063f03c439c8761e462fa}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!customEvent@{customEvent}}
+\index{customEvent@{customEvent}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{customEvent()}{customEvent()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::custom\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Dispatcher protected method, only here as a reference. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}\label{classQRail_1_1RouterEngine_1_1Planner_a6cd264c862d10323717ca3b978797d2e}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!departureStationURI@{departureStationURI}}
+\index{departureStationURI@{departureStationURI}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{departureStationURI()}{departureStationURI()}}
+{\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::departure\+Station\+U\+RI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the departure station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+departure\+Station\+U\+RI The U\+RI of the departure station.
+\end{DoxyReturn}
+Gets the departure station U\+RI of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}\label{classQRail_1_1RouterEngine_1_1Planner_af4816b0cc2e734bacb89d14c682ea7c5}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!departureTime@{departureTime}}
+\index{departureTime@{departureTime}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{departureTime()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the departure time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+departure\+Time The requested departure time.
+\end{DoxyReturn}
+Gets the departure time of the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}\label{classQRail_1_1RouterEngine_1_1Planner_af6fce3843991fb2ab155fba9bfd3e6b4}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!error@{error}}
+\index{error@{error}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when something goes wrong. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}\label{classQRail_1_1RouterEngine_1_1Planner_ada19d57ce540325d6de9c29521ca6dfd}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!finished@{finished}}
+\index{finished@{finished}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{finished}{finished}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::finished (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$}]{journey }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} calculation is finished. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}\label{classQRail_1_1RouterEngine_1_1Planner_aad16ab26f3de5ffd3193c97479b84a95}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getConnections@{getConnections}}
+\index{getConnections@{getConnections}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getConnections()}{getConnections()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::get\+Connections (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{departure\+Station,  }\item[{const Q\+Url \&}]{arrival\+Station,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const quint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+
+
+Retrieves a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} between 2 given stops. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em departure\+Station} & The U\+RI of the departure stop. \\
+\hline
+{\em arrival\+Station} & The U\+RI of the arrival stop. \\
+\hline
+{\em departure\+Time} & The requested departure time.\\
+\hline
+\end{DoxyParams}
+Searches for possible routes between the 2 stops using the C\+SA.~\newline
+ In case something goes wrong, a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} instance is returned. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}\label{classQRail_1_1RouterEngine_1_1Planner_ade8a2f54fea0e510bc379a5d537c67ea}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getConnections@{getConnections}}
+\index{getConnections@{getConnections}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getConnections()}{getConnections()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Router\+Engine\+::\+Planner\+::get\+Connections (\begin{DoxyParamCaption}\item[{const Q\+Geo\+Coordinate \&}]{departure\+Position,  }\item[{const Q\+Geo\+Coordinate \&}]{arrival\+Position,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const quint16 \&}]{max\+Transfers }\end{DoxyParamCaption})}
+
+
+
+Retrieves a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} between 2 given stops. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em departure\+Position} & The G\+PS location of the departure location. \\
+\hline
+{\em arrival\+Position} & The G\+PS location of the arrival location. \\
+\hline
+{\em departure\+Time} & The requested departure time. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The closest stops are used to plan a journey.
+\end{DoxyNote}
+Searches for possible routes between the 2 stops using the C\+SA.~\newline
+ In case something goes wrong, a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1NullJourney}{Router\+Engine\+::\+Null\+Journey}} instance is returned. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}\label{classQRail_1_1RouterEngine_1_1Planner_a75095e9f6b6c02097fefef1654bf9b27}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Q\+Rail\+::\+Router\+Engine\+::\+Planner}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} instance. 
+
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}}.
+\end{DoxyReturn}
+Constructs a \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Router\+Engine\+::\+Planner}} if none exists and returns the instance. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}\label{classQRail_1_1RouterEngine_1_1Planner_af3ae9c83f09d8dadabe6d0e24b22401e}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!journey@{journey}}
+\index{journey@{journey}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{journey()}{journey()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::journey (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+journey The current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} in the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}}.
+\end{DoxyReturn}
+Gets current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}\label{classQRail_1_1RouterEngine_1_1Planner_ab9a0ae139db0618220d8d069e983c394}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!maxTransfers@{maxTransfers}}
+\index{maxTransfers@{maxTransfers}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{maxTransfers()}{maxTransfers()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::max\+Transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum amount of transfers for the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+\begin{DoxyReturn}{Returns}
+station \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} object with information about the associated station. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The real amount of transfers is always lower than or equal to this one.
+\end{DoxyNote}
+Gets the maximum amount of transfers for the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} and returns it. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}\label{classQRail_1_1RouterEngine_1_1Planner_a2ea8cbe8a514124729079cd793ff8454}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!processing@{processing}}
+\index{processing@{processing}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{processing}{processing}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::processing (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when a new \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Fragments\+::\+Page}} has been received. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}\label{classQRail_1_1RouterEngine_1_1Planner_a048be5d38aa731894e585aa4ceb4bc68}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!requested@{requested}}
+\index{requested@{requested}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{requested}{requested}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::requested (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{page\+U\+RI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when a new \mbox{\hyperlink{classQRail_1_1Fragments_1_1Page}{Fragments\+::\+Page}} has been requested. 
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}\label{classQRail_1_1RouterEngine_1_1Planner_af4aefc8b116590f0641da489e0c8832a}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!setJourney@{setJourney}}
+\index{setJourney@{setJourney}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{setJourney()}{setJourney()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::set\+Journey (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Q\+Rail\+::\+Router\+Engine\+::\+Journey}} $\ast$}]{journey }\end{DoxyParamCaption})}
+
+
+
+Sets the current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em journey} & The current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}} in the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Planner}{Planner}}.\\
+\hline
+\end{DoxyParams}
+Sets current \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. \mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}\label{classQRail_1_1RouterEngine_1_1Planner_a0221f287017cfb3a24826d1ce349120c}} 
+\index{QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}!stream@{stream}}
+\index{stream@{stream}!QRail::RouterEngine::Planner@{QRail::RouterEngine::Planner}}
+\subsubsection{\texorpdfstring{stream}{stream}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Planner\+::stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Route}{Q\+Rail\+::\+Router\+Engine\+::\+Route}} $\ast$}]{route }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when a route has been found for the \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Journey}{Journey}}. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/\mbox{\hyperlink{routerplanner_8h}{routerplanner.\+h}}\item 
+src/engines/router/\mbox{\hyperlink{routerplanner_8cpp}{routerplanner.\+cpp}}\end{DoxyCompactItemize}

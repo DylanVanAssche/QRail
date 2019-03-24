@@ -21,6 +21,16 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Feb 24 2019 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.1.2-1
+- [DOCS] Fixed Doxygen documentation
+
+* Tue Jan 08 2019 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.1.1-1
+- [MAJOR BUGFIX] Heavily improved abort operation
+- [MAJOR BUGFIX] Heavily improved next and previous results in Liveboard
+- [IMPROVEMENT] Refactor process mutex unlocking
+- [IMPROVEMENT] Use Journey object for route extraction
+- [IMPROVEMENT] Improve error and timeouts handling
+
 * Sun Dec 16 2018 Dylan Van Assche <dylan.van.assche@protonmail.com> 0.1.0-1
 - [MAJOR BUGFIX] Better guarding against empty pages
 - [MAJOR BUGFIX] Fixed static library build

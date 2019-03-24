@@ -38,8 +38,7 @@ QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent)
      * INFO:
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
-    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl,
-                                                                                       QObject *)));
+    connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Setup StationEngine::Factory
     this->setStationFactory(StationEngine::Factory::getInstance());
@@ -125,13 +124,14 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
  */
 void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
 {
-    if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200) {
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (statusCode >= 200 && statusCode < 300) {
 #ifdef VERBOSE_HTTP_STATUS
         qDebug() << "Content-Header:" << reply->header(QNetworkRequest::ContentTypeHeader).toString();
         qDebug() << "Content-Length:" << reply->header(QNetworkRequest::ContentLengthHeader).toULongLong()
                  << "bytes";
         qDebug() << "HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() <<
-                 reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
+                    reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString();
         qDebug() << "Cache:" << reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
 #endif
         // Read HTTP reply
@@ -140,7 +140,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
         // Try to parse the data as JSON-LD
         QJsonParseError parseError;
         QJsonDocument jsonData =
-            QJsonDocument::fromJson(replyData.toUtf8(), &parseError);
+                QJsonDocument::fromJson(replyData.toUtf8(), &parseError);
         if (parseError.error == QJsonParseError::NoError) {
             QJsonObject jsonObject = jsonData.object();
 
@@ -148,7 +148,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
                     vehicleContext() == jsonObject["@context"].toObject()) {
                 // Vehicle intermediary stops
                 QList<QRail::VehicleEngine::Stop *> intermediaryStops =
-                    QList<QRail::VehicleEngine::Stop *>();
+                        QList<QRail::VehicleEngine::Stop *>();
                 QJsonArray graph = jsonObject["@graph"].toArray();
                 QString tripDate;
                 for (qint16 i = 0; i < graph.size(); i++) {
@@ -161,8 +161,8 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
                     if (i == 0) {
                         stop->setType(QRail::VehicleEngine::Stop::Type::DEPARTURE);
                         tripDate =
-                            item["departureConnection"]
-                            .toString(); // Remove http://irail.be/connections/8891173/
+                                item["departureConnection"]
+                                .toString(); // Remove http://irail.be/connections/8891173/
                         // We need to escape the C compiler and the RegEx: '\\'
                         QRegularExpression re("^(http:\\/\\/\\w+\\.\\w+\\/\\w+\\/\\d{7})\\/"
                                               "(\\d{8})\\/(.\\d{3})");
@@ -190,13 +190,11 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
                 * the last stop and retrieve the name of it without querying other
                 * resources.
                 */
-                QRail::VehicleEngine::Vehicle *vehicle =
-                    new QRail::VehicleEngine::Vehicle(
-                    reply->url(), // Vehicle URI
-                    QUrl(reply->url().toString().append("/" + tripDate)),
-                    intermediaryStops.last()->station()->name().value(
-                        this->language()),
-                    intermediaryStops);
+                QRail::VehicleEngine::Vehicle *vehicle = new QRail::VehicleEngine::Vehicle(
+                            reply->url(), // Vehicle URI
+                            QUrl(reply->url().toString().append("/" + tripDate)),
+                            intermediaryStops.last()->station()->name().value(this->language()),
+                            intermediaryStops);
 
                 /*
                 * Add the vehicle to cache for faster responses in the future and less
@@ -217,16 +215,9 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
         }
 
     } else {
-        qCritical() << "Network request failed! HTTP status:"
-                    << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                    .toString();
+        qCritical() << "Network request failed! HTTP status:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
         qCritical() << "\tReply:" << (QString)reply->readAll();
-        emit this->error(
-            QString("Network request failed! HTTP status:")
-            .append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                    .toString())
-            .append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                    .toString()));
+        emit this->error(QString("Network request failed! HTTP status:").append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()).append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()));
     }
 
     // Clean up the reply to avoid memory leaks
@@ -238,8 +229,7 @@ void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
 {
     if (event->type() == this->http()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>
-                                                        (event);
+        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
         this->processHTTPReply(networkEvent->reply());
     } else {
         event->ignore();
@@ -258,7 +248,7 @@ void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
  * Generates QRail::VehicleEngine::Stop from JSON-LD and returns it.
  */
 QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
-    const QJsonObject &stop)
+        const QJsonObject &stop)
 {
     // Parse JSON-LD data
     QString platform = stop["platforminfo"].toObject()["name"].toString();
@@ -266,14 +256,12 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
     bool hasLeft = stop["left"].toBool();
     qint16 departureDelay = (qint16)stop["departureDelay"].toInt();
     QDateTime departureTime;
-    departureTime.setTime_t(
-        stop["scheduledDepartureTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    departureTime.setTime_t(stop["scheduledDepartureTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
     departureTime = departureTime.addSecs(departureDelay);
     bool isDepartureCanceled = stop["departureCanceled"].toBool();
     qint16 arrivalDelay = (qint16)stop["arrivalDelay"].toInt();
     QDateTime arrivalTime;
-    arrivalTime.setTime_t(
-        stop["scheduledArrivalTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
+    arrivalTime.setTime_t(stop["scheduledArrivalTime"].toString().toUInt()); // Qt 5.9 deprecated: https://doc.qt.io/qt-5/qdatetime.html#fromSecsSinceEpoch
     arrivalTime = arrivalTime.addSecs(arrivalDelay);
     bool isArrivalCanceled = stop["arrivalCanceled"].toBool();
     bool isExtraStop = stop["isExtraStop"].toBool();
@@ -283,10 +271,11 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
 
     // Generate QRail::VehicleEngine::Stop object
     return new QRail::VehicleEngine::Stop(
-               this->stationFactory()->getStationByURI(stationURI), platform,
-               isPlatformNormal, hasLeft, departureTime, departureDelay,
-               isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,
-               isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type);
+                QUrl(stationURI),
+                this->stationFactory()->getStationByURI(stationURI), platform,
+                isPlatformNormal, hasLeft, departureTime, departureDelay,
+                isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,
+                isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type);
 }
 
 /**

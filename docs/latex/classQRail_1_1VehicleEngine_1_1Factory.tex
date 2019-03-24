@@ -1,0 +1,97 @@
+\hypertarget{classQRail_1_1VehicleEngine_1_1Factory}{}\section{Q\+Rail\+::Vehicle\+Engine\+::Factory Class Reference}
+\label{classQRail_1_1VehicleEngine_1_1Factory}\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+
+
+{\ttfamily \#include $<$vehiclefactory.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Vehicle\+Engine\+::Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1VehicleEngine_1_1Factory}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_a88fae81da6b6ffeb8a28ab6ca3169a00}{finished}} (\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$vehicle)
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_a1708c8ee333b8c0a8cf97acce537fb45}{get\+Resource}} (const Q\+Url \&uri, Q\+Object $\ast$caller)
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_af52581bd7bba4a6da7905a4fed843f29}{error}} (const Q\+String \&message)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_aa55bf780ff5d9c9097178b9f529096c5}{get\+Vehicle\+By\+U\+RI}} (const Q\+Url \&uri, const Q\+Locale\+::\+Language \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_aa6e62fec814a5e6f6362062aae2eb86e}{language}})
+\item 
+Q\+Locale\+::\+Language \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_aa6e62fec814a5e6f6362062aae2eb86e}{language}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_ac3eb925f008fbe65aa63ac4e1891cbb2}{set\+Language}} (const Q\+Locale\+::\+Language \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_aa6e62fec814a5e6f6362062aae2eb86e}{language}})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} $\ast$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_a24cf481e93425f2285db3e0a7ce16656}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory_a0ee4d43fba0cfaa5174215af68eb3ad0}{custom\+Event}} (Q\+Event $\ast$event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_a0ee4d43fba0cfaa5174215af68eb3ad0}\label{classQRail_1_1VehicleEngine_1_1Factory_a0ee4d43fba0cfaa5174215af68eb3ad0}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!customEvent@{customEvent}}
+\index{customEvent@{customEvent}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{customEvent()}{customEvent()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::custom\+Event (\begin{DoxyParamCaption}\item[{Q\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_af52581bd7bba4a6da7905a4fed843f29}\label{classQRail_1_1VehicleEngine_1_1Factory_af52581bd7bba4a6da7905a4fed843f29}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!error@{error}}
+\index{error@{error}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::error (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_a88fae81da6b6ffeb8a28ab6ca3169a00}\label{classQRail_1_1VehicleEngine_1_1Factory_a88fae81da6b6ffeb8a28ab6ca3169a00}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!finished@{finished}}
+\index{finished@{finished}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{finished}{finished}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::finished (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$}]{vehicle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_a24cf481e93425f2285db3e0a7ce16656}\label{classQRail_1_1VehicleEngine_1_1Factory_a24cf481e93425f2285db3e0a7ce16656}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} $\ast$ Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_a1708c8ee333b8c0a8cf97acce537fb45}\label{classQRail_1_1VehicleEngine_1_1Factory_a1708c8ee333b8c0a8cf97acce537fb45}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!getResource@{getResource}}
+\index{getResource@{getResource}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{getResource}{getResource}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::get\+Resource (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{Q\+Object $\ast$}]{caller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_aa55bf780ff5d9c9097178b9f529096c5}\label{classQRail_1_1VehicleEngine_1_1Factory_aa55bf780ff5d9c9097178b9f529096c5}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!getVehicleByURI@{getVehicleByURI}}
+\index{getVehicleByURI@{getVehicleByURI}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{getVehicleByURI()}{getVehicleByURI()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::get\+Vehicle\+By\+U\+RI (\begin{DoxyParamCaption}\item[{const Q\+Url \&}]{uri,  }\item[{const Q\+Locale\+::\+Language \&}]{language }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_aa6e62fec814a5e6f6362062aae2eb86e}\label{classQRail_1_1VehicleEngine_1_1Factory_aa6e62fec814a5e6f6362062aae2eb86e}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!language@{language}}
+\index{language@{language}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{language()}{language()}}
+{\footnotesize\ttfamily Q\+Locale\+::\+Language Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::language (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Factory_ac3eb925f008fbe65aa63ac4e1891cbb2}\label{classQRail_1_1VehicleEngine_1_1Factory_ac3eb925f008fbe65aa63ac4e1891cbb2}} 
+\index{QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}!setLanguage@{setLanguage}}
+\index{setLanguage@{setLanguage}!QRail::VehicleEngine::Factory@{QRail::VehicleEngine::Factory}}
+\subsubsection{\texorpdfstring{setLanguage()}{setLanguage()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory\+::set\+Language (\begin{DoxyParamCaption}\item[{const Q\+Locale\+::\+Language \&}]{language }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/vehicle/\mbox{\hyperlink{vehiclefactory_8h}{vehiclefactory.\+h}}\item 
+src/engines/vehicle/\mbox{\hyperlink{vehiclefactory_8cpp}{vehiclefactory.\+cpp}}\end{DoxyCompactItemize}

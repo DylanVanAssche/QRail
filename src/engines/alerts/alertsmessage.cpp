@@ -17,22 +17,6 @@
 #include "engines/alerts/alertsmessage.h"
 using namespace QRail;
 
-/**
- * @file alertsmessage.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief QRail::AlertsEngine::Message constructor: full
- * @param const QString &header
- * @param const QString &description
- * @param const QString &lead
- * @param const QUrl &link
- * @param QObject *parent
- * @package AlertsEngine
- * @public
- * Constructs a Message to store the information about
- * a disturbance, remark or anything else that might be
- * usefull for the user.
- */
 QRail::AlertsEngine::Message::Message(const QString &header, const QString &description,
                                       const QString &lead, const QUrl &link, QObject *parent): QObject(parent)
 {
@@ -43,20 +27,6 @@ QRail::AlertsEngine::Message::Message(const QString &header, const QString &desc
     m_link = link;
 }
 
-/**
- * @file alertsmessage.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief QRail::AlertsEngine::Message constructor: minimum
- * @param const QString &header
- * @param const QString &description
- * @param QObject *parent
- * @package AlertsEngine
- * @public
- * Constructs a Message to store the information about
- * a disturbance, remark or anything else that might be
- * usefull for the user.
- */
 QRail::AlertsEngine::Message::Message(const QString &header, const QString &description,
                                       QObject *parent): QObject(parent)
 {
@@ -67,47 +37,17 @@ QRail::AlertsEngine::Message::Message(const QString &header, const QString &desc
     m_link = QUrl();
 }
 
-/**
- * @file alertsmessage.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the header
- * @return const QString header
- * @package AlertsEngine
- * @public
- * Gets the header of the message and returns it.
- */
 QString QRail::AlertsEngine::Message::header() const
 {
     return m_header;
 }
 
-/**
- * @file alertsmessage.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the header
- * @param const QString &header
- * @package AlertsEngine
- * @public
- * Sets the header of the message to the given QString &header
- */
 void QRail::AlertsEngine::Message::setHeader(const QString &header)
 {
     m_header = header;
     emit this->headerChanged();
 }
 
-/**
- * @file alertsmessage.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the description
- * @return const QString description
- * @package AlertsEngine
- * @public
- * Gets the description of the message and returns it.
- */
 QString QRail::AlertsEngine::Message::description() const
 {
     return m_description;

@@ -1,93 +1,147 @@
 \hypertarget{namespaceVehicleEngine}{}\section{Vehicle\+Engine Namespace Reference}
-\label{namespaceVehicleEngine}\index{Vehicle\+Engine@{Vehicle\+Engine}}
-\subsection*{Data Structures}
-\begin{DoxyCompactItemize}
-\item 
-class \mbox{\hyperlink{classVehicleEngine_1_1Factory}{Factory}}
-\item 
-class \mbox{\hyperlink{classVehicleEngine_1_1Stop}{Stop}}
-\item 
-class \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle}}
-\end{DoxyCompactItemize}
+\label{namespaceVehicleEngine}\index{VehicleEngine@{VehicleEngine}}
+
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} objects on the fly.  
+
+
 
 
 \subsection{Detailed Description}
-Constructs a \mbox{\hyperlink{classStationEngine_1_1Factory}{Station\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} objects on the fly.
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} objects on the fly. 
 
-Constructs a \mbox{\hyperlink{classVehicleEngine_1_1Stop}{Vehicle\+Engine\+::\+Stop}} with the given parent.
-
-Gets the station for this stop and returns it.
-
-Sets the station for this stop to the given \mbox{\hyperlink{classStationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$station. Emits the station\+Changed signal.
-
-Gets the platform for this stop and returns it.
-
-Sets the platform for this stop to the given Q\+String \&platform. Emits the platform\+Changed signal.
-
-Gets the is\+Platform\+Normal and returns it.
-
-Sets the is\+Platform\+Normal to the given bool \&is\+Platform\+Normal. Emits the is\+Platform\+Normal\+Changed signal.
-
-Gets the has\+Left and returns it.
-
-Sets the has\+Left to the given bool \&has\+Left. Emits the has\+Left\+Changed signal.
-
-Gets the departure time for this stop and returns it.
-
-Sets the departure time for this stop to the given Q\+Date\+Time \&departure\+Time. Emits the departure\+Time\+Changed signal.
-
-Gets the departure delay for this stop and returns it.
-
-Sets the departure delay for this stop to the given qint16 departure\+Delay. Emits the departure\+Delay\+Changed signal.
-
-Gets the is\+Departure\+Canceled and returns it.
-
-Sets the is\+Departure\+Canceled for this stop to the given bool \&is\+Departure\+Canceled. Emits the is\+Departure\+Canceled\+Changed signal.
-
-Gets the arrival time for this stop and returns it.
-
-Sets the arrival time for this stop to the given Q\+Date\+Time \&arrival\+Time. Emits the arrival\+Time\+Changed signal.
-
-Gets the arrival delay for this stop and returns it.
-
-Gets the arrival delay for this stop and returns it. Emits the arrival\+Delay\+Changed signal.
-
-Gets the is\+Arrival\+Canceled and returns it.
-
-Sets the is\+Arrival\+Canceled for this stop to the given bool \&is\+Arrival\+Canceled. Emits the is\+Arrival\+Canceled\+Changed signal.
-
-Gets the occupancy level and returns it.
-
-Sets the occupancy level for this stop to the given Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level \&occupancy\+Level. Emits the occupancy\+Level\+Changed signal.
-
-Gets the type and returns it.
-
-Sets the type to the given Vehicle\+Engine\+::\+Stop\+::\+Type \&type Emits the type\+Changed signal.
-
-Gets the is\+Extra\+Stop and returns it.
-
-Sets the is\+Extra\+Stop to the given bool \&is\+Extra\+Stop. Emits the is\+Extra\+Stop\+Changed signal.
-
-Constructs a \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself.
-
-Constructs a \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself without intermediary stops.
-
-Constructs a \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself with intermediary stops.
-
-Gets the U\+RI of the vehicle and returns it.
-
-Sets the U\+RI of the vehicle to the given Q\+Url \&uri Emit the uri\+Changed signal.
-
-Gets the U\+RI of the current trip and returns it.
-
-Sets the U\+RI of the current trip to the given Q\+Url \&trip\+U\+RI Emit the trip\+U\+R\+I\+Changed signal.
-
-Gets the headsign of the vehicle and returns it.
-
-Sets the headsign of the vehicle to the given Q\+String \&headsign Emit the headsign\+Changed signal.
+Sets the intermediary stops of the vehicle to the given Q\+List$<$\+Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop $\ast$$>$ \&intermediary\+Stops.
 
 Gets the intermediary stops of the vehicle and returns it.
 
-Sets the intermediary stops of the vehicle to the given Q\+List$<$\+Vehicle\+Engine\+::\+Stop $\ast$$>$ \&intermediary\+Stops. Emit the intermediary\+Stops\+Changed signal.
+Sets the headsign of the vehicle to the given Q\+String \&headsign Emit the headsign\+Changed signal.
 
-Constructs a \mbox{\hyperlink{classVehicleEngine_1_1Factory}{Vehicle\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classVehicleEngine_1_1Vehicle}{Vehicle\+Engine\+::\+Vehicle}} objects on the fly. 
+Gets the headsign of the vehicle and returns it.
+
+Sets the U\+RI of the current trip to the given Q\+Url \&trip\+U\+RI Emit the trip\+U\+R\+I\+Changed signal.
+
+Gets the U\+RI of the current trip and returns it.
+
+Sets the U\+RI of the vehicle to the given Q\+Url \&uri Emit the uri\+Changed signal.
+
+Gets the U\+RI of the vehicle and returns it.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself with intermediary stops.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself without intermediary stops.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} to store information about the vehicle itself.
+
+Sets the is\+Extra\+Stop to the given bool \&is\+Extra\+Stop.
+
+Gets the is\+Extra\+Stop and returns it.
+
+Sets the type to the given \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \&type Emits the type\+Changed signal.
+
+Gets the type and returns it.
+
+Sets the occupancy level for this stop to the given \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \&occupancy\+Level.
+
+Gets the occupancy level and returns it.
+
+Sets the is\+Arrival\+Canceled for this stop to the given bool \&is\+Arrival\+Canceled.
+
+Gets the is\+Arrival\+Canceled and returns it.
+
+Gets the arrival delay for this stop and returns it.
+
+Sets the arrival time for this stop to the given Q\+Date\+Time \&arrival\+Time.
+
+Gets the arrival time for this stop and returns it.
+
+Sets the is\+Departure\+Canceled for this stop to the given bool \&is\+Departure\+Canceled.
+
+Gets the is\+Departure\+Canceled and returns it.
+
+Sets the departure delay for this stop to the given qint16 departure\+Delay.
+
+Gets the departure delay for this stop and returns it.
+
+Sets the departure time for this stop to the given Q\+Date\+Time \&departure\+Time.
+
+Gets the departure time for this stop and returns it.
+
+Sets the has\+Left to the given bool \&has\+Left.
+
+Gets the has\+Left and returns it.
+
+Sets the is\+Platform\+Normal to the given bool \&is\+Platform\+Normal.
+
+Gets the is\+Platform\+Normal and returns it.
+
+Sets the platform for this stop to the given Q\+String \&platform.
+
+Gets the platform for this stop and returns it.
+
+Sets the station for this stop to the given Station\+Engine\+::\+Station $\ast$station.
+
+Gets the station for this stop and returns it.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop}} with the given parent.
+
+Constructs a Vehicle\+Engine\+::\+Null\+Vehicle if none exists and returns the instance.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1NullVehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Null\+Vehicle}} according to the Null design pattern.
+
+Sets the language to the given const Q\+Locale\+::\+Language \&language.
+
+Gets the language and returns it.
+
+Sets the Station\+Engine\+::\+Factory instance to the given Station\+Engine\+::\+Factory $\ast$station\+Factory.
+
+Gets the Station\+Engine\+::\+Factory instance and returns it.
+
+Sets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance to the given \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$http.
+
+Gets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance and returns it.
+
+Strips the vehicle ID from the U\+RI and returns it.
+
+Adds a vehicle to the cache.
+
+Tries to fetch a vehicle from the cache.
+
+Generates \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} from J\+S\+O\+N-\/\+LD and returns it.
+
+Generates \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop}} from J\+S\+O\+N-\/\+LD and returns it.
+
+Reads the Q\+Network\+Reply $\ast$reply and validates it before the processing begins.
+
+Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} if none exists and returns the instance.
+
+After the validation, the reply is processed and a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} is generated with it\textquotesingle{}s \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop}} list.
+
+In case the vehicle can\textquotesingle{}t be retrieved from the cache, a nullptr is returned.
+
+In case the U\+RI of the vehicle already exists in the cache, the entry is updated with the new vehicle.
+
+Emits the station\+Changed signal.
+
+Emits the platform\+Changed signal.
+
+Emits the is\+Platform\+Normal\+Changed signal.
+
+Emits the has\+Left\+Changed signal.
+
+Emits the departure\+Time\+Changed signal.
+
+Emits the departure\+Delay\+Changed signal.
+
+Emits the is\+Departure\+Canceled\+Changed signal.
+
+Emits the arrival\+Time\+Changed signal.
+
+Emits the arrival\+Delay\+Changed signal.
+
+Emits the is\+Arrival\+Canceled\+Changed signal.
+
+Emits the occupancy\+Level\+Changed signal.
+
+Emits the is\+Extra\+Stop\+Changed signal.
+
+Emit the intermediary\+Stops\+Changed signal. 

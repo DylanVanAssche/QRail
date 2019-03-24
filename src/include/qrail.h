@@ -27,9 +27,13 @@
 #define PAGE_CONTEXT_PATH "://context/page/context.json"
 #define VEHICLE_CONTEXT_PATH "://context/vehicle/context.json"
 #define LOCK_TIMEOUT 750
+#define HTTP_TIMEOUT 10000 // 10 secs between pages maximum
 
+//! Inits the QRail library resources.
 void initQRail();
+//! Retrieves the Linked Connections page context.
 QJsonObject pageContext();
+//! Retireves the Linked Connections vehicle context.
 QJsonObject vehicleContext();
 
 #ifdef QRAIL_STATIC_LIB

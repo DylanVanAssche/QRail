@@ -14,26 +14,14 @@
  *   You should have received a copy of the GNU General Public License
  *   along with QRail.  If not, see <http://www.gnu.org/licenses/>.
  */
+/** @file */
 #include "database/databasemanager.h"
+
 using namespace QRail;
 QRail::Database::Manager *QRail::Database::Manager::m_instance = nullptr;
 QThreadStorage<QSqlDatabase> QRail::Database::Manager::m_database;
 QThreadStorage<QString> QRail::Database::Manager::m_path;
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 20 Jul 2018
- * @brief Manager facade constructor
- * @param QObject *parent
- * @param QString path
- * @package Database
- * @public
- * Constructs a Manager facade to access the database using the SQL language.
- * The Manager facade makes database access in Qt abstract from the underlying
- * database (SQLite, MySQL, ORACLE, ...). Any errors during initialisation of
- * the database are catched and logged as CRITICAL.
- */
 QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject(parent)
 {
     if (QSqlDatabase::isDriverAvailable(DRIVER)) {
@@ -43,16 +31,6 @@ QRail::Database::Manager::Manager(const QString &path, QObject *parent): QObject
     }
 }
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Gets a QRail::Database::Manager instance
- * @return QRail::Database::Manager *manager
- * @package Database
- * @public
- * Constructs a QRail::Database::Manager instance if none exists and returns it.
- */
 QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &path)
 {
     // NICE-TO-HAVE: Allow access to multiple databases by checking the path of
@@ -64,19 +42,6 @@ QRail::Database::Manager *QRail::Database::Manager::getInstance(const QString &p
     return m_instance;
 }
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 20 Jul 2018
- * @brief Executes a given QSqlQuery
- * @param QSqlQuery query
- * @return bool success
- * @package Database
- * @public
- * Executes the given QSqlQuery query on the active database.
- * Before the execution takes place, the connection is checked.
- * During the execution, the errors are catched and logged as CRITICAL.
- */
 bool QRail::Database::Manager::execute(QSqlQuery &query)
 {
     if (this->database().isOpen() && query.exec()) {
@@ -87,52 +52,18 @@ bool QRail::Database::Manager::execute(QSqlQuery &query)
     }
 }
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 9 Aug 2018
- * @brief Starts the transaction
- * @return bool success
- * @package Database
- * @public
- * Starts a transaction in the database.
- * After you are done with your changes you should
- * call QRail::Database::Manager::endTransaction() to
- * commit your changes.
- */
 bool QRail::Database::Manager::startTransaction()
 {
     bool result = this->database().transaction();
     return result;
 }
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 9 Aug 2018
- * @brief Ends the transaction
- * @return bool success
- * @package Database
- * @warning This method won't do anything if no transaction was running.
- * @public
- * Commits changes to the database and returns true if success.
- */
 bool QRail::Database::Manager::endTransaction()
 {
     bool result = this->database().commit();
     return result;
 }
 
-/**
- * @file databasemanager.cpp
- * @author Dylan Van Assche
- * @date 20 Jul 2018
- * @brief Gets the current QSqlDatabase database
- * @return QSqlDatabase database
- * @package Database
- * @public
- * Gets the QSqlDatabase database and returns it.
- */
 QSqlDatabase QRail::Database::Manager::database() const
 {
     if(!m_database.hasLocalData()) {

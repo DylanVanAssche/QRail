@@ -34,27 +34,40 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
      */
 
     // Create custom event type
-    QRail::Network::DispatcherEvent event = QRail::Network::DispatcherEvent(this->eventType());
-    event.setReply(reply);
+    QRail::Network::DispatcherEvent *event = new QRail::Network::DispatcherEvent(this->eventType());
+    event->setReply(reply);
 
     // Retrieve the caller of the reply
     QObject *caller = this->findTarget(reply);
 
     // Post the event to the event queue and remove the reply from the targets list
-    QCoreApplication::sendEvent(caller, &event);
-    this->removeTarget(reply);
+    QCoreApplication::postEvent(caller, event);
+    this->removeTarget(reply, caller);
 }
 
-void QRail::Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller)
+void QRail::Network::Dispatcher::addTarget(QNetworkReply *reply, QObject *caller, bool isSubscription)
 {
     QMutexLocker locker(&targetListLocker);
     m_targets.insert(reply, caller);
+    if(isSubscription) {
+        m_subscriptions.append(caller);
+    }
 }
 
-void QRail::Network::Dispatcher::removeTarget(QNetworkReply *reply)
+void QRail::Network::Dispatcher::removeTarget(QNetworkReply *reply, QObject *caller)
 {
     QMutexLocker locker(&targetListLocker);
-    m_targets.remove(reply);
+    if(m_subscriptions.contains(caller)) {
+        qDebug() << "Subscription:" << caller << "skip removal";
+    }
+    else {
+        m_targets.remove(reply);
+    }
+}
+
+void Network::Dispatcher::removeSubscriber(QObject *caller)
+{
+    m_subscriptions.removeAll(caller);
 }
 
 QObject *QRail::Network::Dispatcher::findTarget(QNetworkReply *reply)

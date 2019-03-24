@@ -29,9 +29,21 @@
 
 namespace QRail {
 namespace LiveboardEngine {
+//! An LiveboardEngine::NullBoard contains a empty liveboard.
+/*!
+    \class NullBoard
+    A liveboard holds all the departing or arriving vehicles (depending on the mode) in a certain station.
+    \warning Receiving a NullBoard from the QRail library indicates that something must be terrible wrong! Check you debug output carefully.
+ */
 class QRAIL_SHARED_EXPORT NullBoard : public LiveboardEngine::Board
 {
 public:
+    //! Gets a LiveboardEngine::NullBoard instance.
+    /*!
+        \return board a LiveboardEngine::NullBoard instance.
+        \public
+        Constructs a LiveboardEngine::NullBoard if none exists and returns the instance.
+     */
     static NullBoard *getInstance();
 
 private:

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qrail_5fshared_5fexport',['QRAIL_SHARED_EXPORT',['../qrail_8h.html#aebb10269c046c00460a53b827735f43f',1,'qrail.h']]]
+  ['intra_5fstop_5ffootpath_5ftime',['INTRA_STOP_FOOTPATH_TIME',['../routerplanner_8h.html#af8b8d70d928fe8c0e479236171354ef6',1,'routerplanner.h']]]
 ];

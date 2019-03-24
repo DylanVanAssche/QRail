@@ -1,8 +1,8 @@
 \hypertarget{vehiclefactory_8cpp}{}\section{src/engines/vehicle/vehiclefactory.cpp File Reference}
-\label{vehiclefactory_8cpp}\index{src/engines/vehicle/vehiclefactory.\+cpp@{src/engines/vehicle/vehiclefactory.\+cpp}}
+\label{vehiclefactory_8cpp}\index{src/engines/vehicle/vehiclefactory.cpp@{src/engines/vehicle/vehiclefactory.cpp}}
 
 
-\mbox{\hyperlink{classVehicleEngine_1_1Factory}{Vehicle\+Engine\+::\+Factory}} constructor.  
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} constructor.  
 
 
 {\ttfamily \#include \char`\"{}engines/vehicle/vehiclefactory.\+h\char`\"{}}\newline
@@ -10,11 +10,41 @@
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceVehicleEngine}{Vehicle\+Engine}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} to generate \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} objects on the fly. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespaceStationEngine}{Station\+Engine}}
+\begin{DoxyCompactList}\small\item\em Retrieves a vehicle by U\+RI from the network i\+Rail A\+PI. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\mbox{\hyperlink{classVehicleEngine_1_1Factory}{Vehicle\+Engine\+::\+Factory}} constructor. 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} constructor. 
+
+Sets the language.
+
+Gets the language.
+
+Sets the Station\+Engine\+::\+Factory instance.
+
+Gets the Station\+Engine\+::\+Factory instance.
+
+Sets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance.
+
+Gets the \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} instance.
+
+Strips the vehicle ID from it\textquotesingle{}s U\+RI.
+
+Adds a vehicle to the cache.
+
+Tries to fetch a vehicle from the cache.
+
+Generates \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} from J\+S\+O\+N-\/\+LD.
+
+Generates \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop}} from J\+S\+O\+N-\/\+LD.
+
+Processes a received H\+T\+TP reply.
+
+Retrieves a vehicle by U\+RI.
+
+Gets a \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} instance.
 
 \begin{DoxyAuthor}{Author}
 Dylan Van Assche 
@@ -24,6 +54,154 @@ Dylan Van Assche
 \end{DoxyDate}
 
 \begin{DoxyParams}{Parameters}
+{\em Q\+Object} & $\ast$parent = nullptr\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
 {\em Q\+Object} & $\ast$parent = nullptr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Factory}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Factory}} $\ast$factory
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Network\+Reply} & $\ast$reply\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Json\+Object \&stop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop}} $\ast$stop
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Json\+Object \&occupancy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} level
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}} $\ast$vehicle
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri \\
+\hline
+{\em \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Vehicle}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Vehicle}}} & $\ast$vehicle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+31 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Url \&uri\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}} $\ast$http
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classQRail_1_1Network_1_1Manager}{Q\+Rail\+::\+Network\+::\+Manager}}} & $\ast$http\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+\begin{DoxyReturn}{Returns}
+Station\+Engine\+::\+Factory $\ast$station\+Factory
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em Station\+Engine\+::\+Factory} & $\ast$station\+Factory\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Dylan Van Assche 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+27 Aug 2018 
+\end{DoxyDate}
+
+\begin{DoxyParams}{Parameters}
+{\em const} & Q\+Locale\+::\+Language \&language \\
 \hline
 \end{DoxyParams}

@@ -61,24 +61,9 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
             this, SLOT(requestCompleted(QNetworkReply *)));
 
     // Create HTTP client information
-    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail-LC",
-                                                    "0.0.2",
-                                                    "Sailfish OS",
-                                                    "2.2.1.18"));
-    this->setAcceptHeader(QString("application/ld+json"));
+    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail", "0.1.1", "Sailfish OS", "3.0.1.11"));
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 9 Aug 2018
- * @brief Get a QRail::Network::Manager instance
- * @param QObject *parent = nullptr
- * @return QRail::Network::Manager *manager
- * @package Network
- * @public
- * Constructs a QRail::Network::Manager if none exists and returns the instance.
- */
 QRail::Network::Manager *QRail::Network::Manager::getInstance()
 {
     if (m_instance == nullptr) {
@@ -89,88 +74,55 @@ QRail::Network::Manager *QRail::Network::Manager::getInstance()
 }
 
 // Invokers
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Get a resource
- * @param const QUrl &url
- * @param QObject *caller
- * @package Network
- * @public
- * Retrieves a certain resource from the given QUrl &url using a GET request.
- * The result as a QNetworkReply *reply will be available through the Qt event system.
- * Implement the customEvent() method in your QObject to receive the data.
- */
 void QRail::Network::Manager::getResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "GET resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->get(request);
     this->dispatcher()->addTarget(reply, caller);
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Post to a resource
- * @param const QUrl &url
- * @param QObject *caller
- * @package Network
- * @public
- * Posts data to a certain resource from the given QUrl url using a POST request.
- * The result as a QNetworkReply *reply will be available through the Qt event system.
- * Implement the customEvent() method in your QObject to receive the data.
- */
 void QRail::Network::Manager::postResource(const QUrl &url, const QByteArray &data, QObject *caller)
 {
     qDebug() << "POST resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->post(request, data);
     this->dispatcher()->addTarget(reply, caller);
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Delete a resource
- * @param const QUrl &url
- * @param QObject *caller
- * @package Network
- * @public
- * Deletes a certain resource from the given QUrl url using a DELETE request.
- * The result as a QNetworkReply *reply will be available through the Qt event system.
- * Implement the customEvent() method in your QObject to receive the data.
- */
 void QRail::Network::Manager::deleteResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "DELETE resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->deleteResource(request);
     this->dispatcher()->addTarget(reply, caller);
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Head a resource
- * @param const QUrl &url
- * @param QObject *caller
- * @package Network
- * @public
- * Retrieves the headers of the resource from the given QUrl url using a HEAD request.
- * The result as a QNetworkReply *reply will be available through the Qt event system.
- * Implement the customEvent() method in your QObject to receive the data.
- */
 void QRail::Network::Manager::headResource(const QUrl &url, QObject *caller)
 {
     qDebug() << "HEAD resource:" << url;
-    QNetworkRequest request = this->prepareRequest(url);
+    QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->head(request);
     this->dispatcher()->addTarget(reply, caller);
+}
+
+QNetworkReply *Network::Manager::subscribe(const QUrl &url, QObject *caller)
+{
+    // SSE has special request headers and attributes
+    QNetworkRequest request(url);
+    request.setRawHeader(QByteArray("Accept"), QByteArray(ACCEPT_HEADER_SSE));
+    request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork); // SSE events may not be cached
+    QNetworkReply *reply = this->QNAM()->get(request);
+    this->dispatcher()->addTarget(reply, caller, true);
+    return reply;
+}
+
+void Network::Manager::unsubscribe(QObject *caller)
+{
+    this->dispatcher()->removeSubscriber(caller);
+    qDebug() << "Closed stream";
 }
 
 void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
@@ -178,177 +130,61 @@ void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
     this->dispatcher()->dispatchReply(reply);
 }
 
+QNetworkReply *Network::Manager::poll(const QUrl &url)
+{
+    QNetworkRequest request = this->prepareHTTPRequest(url);
+    QNetworkReply *reply = this->QNAM()->get(request);
+    return reply;
+}
+
 // Helpers
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Prepare the HTTP request
- * @param const QUrl &url
- * @return QNetworkRequest request
- * @package Network
- * @public
- * Everytime a HTTP request has been made by the user it needs several default headers to complete it's mission.
- * The prepareRequest method just does that, it adds the Accept, User-Agent header to the request and allows redirects.
- */
-QNetworkRequest QRail::Network::Manager::prepareRequest(const QUrl &url)
+QNetworkRequest QRail::Network::Manager::prepareHTTPRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
-    request.setRawHeader(QByteArray("Accept"), this->acceptHeader().toUtf8());
+    request.setRawHeader(QByteArray("Accept"), ACCEPT_HEADER_HTTP);
     request.setHeader(QNetworkRequest::UserAgentHeader, this->userAgent());
     request.setHeader(QNetworkRequest::ContentTypeHeader, CONTENT_TYPE);
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
-    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                         QNetworkRequest::PreferNetwork); // Load from network if cache has expired
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork); // Load from network if cache has expired
     return request;
 }
 
 // Getter & Setters
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Gets the current user agent
- * @return const QString userAgent
- * @package Network
- * @public
- * Retrieves the current user agent used to make requests in this HTTP instance.
- */
 QString QRail::Network::Manager::userAgent() const
 {
     return m_userAgent;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Sets the current user agent
- * @param const QString &userAgent
- * @package Network
- * @public
- * Changes the current user agent to the given QString.
- */
 void QRail::Network::Manager::setUserAgent(const QString &userAgent)
 {
     m_userAgent = userAgent;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Get the current accept header
- * @return const QString acceptHeader
- * @package Network
- * @public
- * Retrieves the current accept header used to make requests in this HTTP instance.
- */
-QString QRail::Network::Manager::acceptHeader() const
-{
-    return m_acceptHeader;
-}
-
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 17 Jul 2018
- * @brief Sets the current accept header
- * @param const QString &acceptHeader
- * @package Network
- * @public
- * Changes the current accept header to the given QString.
- */
-void QRail::Network::Manager::setAcceptHeader(const QString &acceptHeader)
-{
-    m_acceptHeader = acceptHeader;
-}
-
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Gets the QNAM instance
- * @return QNetworkAccessManager *QNAM
- * @package Network
- * @public
- * Gets the QNetworkAccessManager instance.
- */
 QNetworkAccessManager *QRail::Network::Manager::QNAM() const
 {
     return m_QNAM;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Sets the QNAM instance
- * @param QNetworkAccessManager *value
- * @package Network
- * @public
- * Sets the QNetworkAccessManager instance.
- */
 void QRail::Network::Manager::setQNAM(QNetworkAccessManager *value)
 {
     m_QNAM = value;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Gets the QNAM cache instance
- * @return QAbstractNetworkCache *cache
- * @package Network
- * @public
- * Gets the QAbstractNetworkCache instance.
- */
 QAbstractNetworkCache *QRail::Network::Manager::cache() const
 {
     return m_cache;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 21 Jul 2018
- * @brief Sets the QNAM cache instance
- * @param QAbstractNetworkCache *cache
- * @package Network
- * @public
- * Sets the QAbstractNetworkCache instance.
- */
 void QRail::Network::Manager::setCache(QAbstractNetworkCache *cache)
 {
     m_cache = cache;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 28 Aug 2018
- * @brief Gets the QRail::Network::Dispatcher instance
- * @return QRail::Network::Dispatcher *
- * @package Network
- * @public
- * Gets the QRail::Network::Dispatcher instance.
- */
 QRail::Network::Dispatcher *QRail::Network::Manager::dispatcher() const
 {
     return m_dispatcher;
 }
 
-/**
- * @file networkmanager.cpp
- * @author Dylan Van Assche
- * @date 28 Aug 2018
- * @brief Sets the QRail::Network::Dispatcher instance
- * @param QRail::Network::Dispatcher *dispatcher
- * @package Network
- * @public
- * Sets the QRail::Network::Dispatcher instance.
- */
 void QRail::Network::Manager::setDispatcher(QRail::Network::Dispatcher *dispatcher)
 {
     m_dispatcher = dispatcher;

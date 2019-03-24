@@ -38,6 +38,9 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
             SIGNAL(messageReceived(QString)),
             this,
             SLOT(handleEventSource(QString)));
+
+    // Create page cache
+    this->setPageCache(new QRail::Fragments::Cache());
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
@@ -58,7 +61,7 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
     if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
@@ -80,7 +83,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+        QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
     if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
@@ -113,6 +116,12 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
 
 void Fragments::Factory::handleEventSource(QString message)
 {
+    // Move updating to separate thread
+    QtConcurrent::run(this, &QRail::Fragments::Factory::handleEventSourceThread, message);
+}
+
+void Fragments::Factory::handleEventSourceThread(QString message)
+{
     qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = doc.object();
@@ -124,7 +133,7 @@ void Fragments::Factory::handleEventSource(QString message)
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             if (frag) {
-                QUrl updatedPageURI = m_pageCache.updateFragment(frag);
+                QUrl updatedPageURI = this->pageCache()->updateFragment(frag);
                 //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
                 // In case we haven't downloaded this page yet, skip this update
                 //if(!page) {
@@ -157,6 +166,18 @@ void Fragments::Factory::handleEventSource(QString message)
             qCritical() << "Fragment isn't a JSON object!";
         }
     }
+}
+
+QRail::Fragments::Cache* QRail::Fragments::Factory::pageCache() const
+{
+    QMutexLocker lock(&m_cache_mutex);
+    return m_pageCache;
+}
+
+void QRail::Fragments::Factory::setPageCache(QRail::Fragments::Cache* pageCache)
+{
+    QMutexLocker lock(&m_cache_mutex);
+    m_pageCache = pageCache;
 }
 
 Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
@@ -233,8 +254,7 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
             routeURI,
             direction,
             this->parseGTFSType(pickupType),
-            this->parseGTFSType(dropOffType),
-            m_instance
+            this->parseGTFSType(dropOffType)
         );
         return frag;
     }
@@ -297,7 +317,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
-                m_pageCache.cachePage(page);
+                this->pageCache()->cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
                 qCritical() << "Fragments context validation failed!";
@@ -346,7 +366,7 @@ QRail::Fragments::Dispatcher *QRail::Fragments::Factory::dispatcher() const
 
 bool Fragments::Factory::prefetch(const QDateTime &from, const QDateTime &until)
 {
-    if(m_pageCache.isEmpty()) {
+    if(this->pageCache()->isEmpty()) {
         m_prefetchFrom = from;
         m_prefetchUntil = until;
         this->getPage(from, this);

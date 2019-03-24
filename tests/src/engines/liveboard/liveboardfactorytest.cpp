@@ -71,12 +71,12 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
             << "msecs";
 
     qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
-    factory->addBoardToWatchlist(liveboard);
+    factory->watch(liveboard);
     QEventLoop loopUpdateReceived;
     //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
     loopUpdateReceived.exec();
-    factory->removeBoardFromWatchlist(liveboard);
+    factory->unwatch(liveboard);
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 

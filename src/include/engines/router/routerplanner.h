@@ -185,6 +185,8 @@ public:
     void watch(QRail::RouterEngine::Journey *journey);
     //! Unwatch a Journey for updates
     void unwatch(QRail::RouterEngine::Journey *journey);
+    //! Unwatch all Journies for updates
+    void unwatchAll();
 
 protected:
     //! Dispatcher protected method, only here as a reference.

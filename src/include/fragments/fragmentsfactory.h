@@ -24,6 +24,9 @@
 #include <QtCore/QJsonParseError>
 #include <QtCore/QObject>
 #include <QtCore/QRegularExpression>
+#include <QtConcurrent/QtConcurrent>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 #include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
@@ -81,6 +84,9 @@ public:
     QRail::Fragments::Dispatcher *dispatcher() const;
     //! Prefetch pages in cache
     bool prefetch(const QDateTime &from, const QDateTime &until);
+    //! Mutex access to page cache
+    QRail::Fragments::Cache* pageCache() const;
+    void setPageCache(QRail::Fragments::Cache* pageCache);
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -108,10 +114,12 @@ private slots:
     void handleEventSource(QString message);
 
 private:
+    mutable QMutex m_cache_mutex;
+    void handleEventSourceThread(QString message);
     QDateTime m_prefetchFrom;
     QDateTime m_prefetchUntil;
     QRail::Network::EventSource *m_eventSource;
-    QRail::Fragments::Cache m_pageCache;
+    QRail::Fragments::Cache* m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;

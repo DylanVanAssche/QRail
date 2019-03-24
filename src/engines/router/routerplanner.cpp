@@ -236,6 +236,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
      */
 
     bool reachable;
+    QList<QRail::Fragments::Fragment *> reduced_fragments = page->fragments();
     for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
         reachable = true; // We assume that everything is reachable until we prove otherwise
 
@@ -305,10 +306,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT reachable:" << fragment->tripURI();
 #endif
-            /*QList<QRail::Fragments::Fragment *> frags = page->fragments();
-            frags.removeAt(fragIndex);
-            page->setFragments(frags);
-            fragment->deleteLater();*/
+            reduced_fragments.removeAt(fragIndex);
         }
     }
 
@@ -318,8 +316,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
     // departure times order
-    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
-        QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+    for (qint16 fragIndex = reduced_fragments.size() - 1; fragIndex >= 0; --fragIndex) {
+        QRail::Fragments::Fragment *fragment = reduced_fragments.at(fragIndex);
 
         // We can only process fragments which are departing after our departure time
         if (fragment->departureTime() < this->journey()->departureTime()) {
@@ -1157,6 +1155,11 @@ void RouterEngine::Planner::watch(RouterEngine::Journey *journey)
 void RouterEngine::Planner::unwatch(RouterEngine::Journey *journey)
 {
     m_watchList.removeAll(journey);
+}
+
+void RouterEngine::Planner::unwatchAll()
+{
+    m_watchList.clear();
 }
 
 void QRail::RouterEngine::Planner::setFragmentsFactory(QRail::Fragments::Factory *factory)

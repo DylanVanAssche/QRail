@@ -517,6 +517,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                 QList<QRail::VehicleEngine::Vehicle*> entriesList = board->entries();
                 entriesList.replace(i, newVehicle);
                 board->setEntries(entriesList);
+                emit this->stream(newVehicle);
                 emit board->entriesChanged();
                 emit this->finished(board);
             }
@@ -625,12 +626,17 @@ QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() c
     return m_fragmentsFactory;
 }
 
-void LiveboardEngine::Factory::addBoardToWatchlist(LiveboardEngine::Board *board)
+void LiveboardEngine::Factory::unwatchAll()
+{
+    m_watchList.clear();
+}
+
+void LiveboardEngine::Factory::watch(LiveboardEngine::Board *board)
 {
     m_watchList.append(board);
 }
 
-void LiveboardEngine::Factory::removeBoardFromWatchlist(LiveboardEngine::Board *board)
+void LiveboardEngine::Factory::unwatch(LiveboardEngine::Board *board)
 {
     bool success = m_watchList.removeOne(board);
     if(!success) {

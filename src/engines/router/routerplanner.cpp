@@ -1134,22 +1134,6 @@ void QRail::RouterEngine::Planner::setJourney(QRail::RouterEngine::Journey *jour
     m_journey = journey;
 }
 
-void RouterEngine::Planner::handleTimeout()
-{
-    qCritical() << "Planner timed out, ABORTING NOW";
-    this->setAbortRequested(true);
-    emit this->error("Planner timed out, the operation has been aborted!");
-    emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
-}
-
-void RouterEngine::Planner::handleFragmentFactoryError()
-{
-    qCritical() << "Planner fragment factory error, ABORTING NOW";
-    this->setAbortRequested(true);
-    emit this->error("Planner fragment factory error, the operation has been aborted!");
-    emit this->finished(QRail::RouterEngine::NullJourney::getInstance());
-}
-
 bool QRail::RouterEngine::Planner::isAbortRequested() const
 {
     return m_abortRequested;

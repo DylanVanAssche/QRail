@@ -18,22 +18,12 @@
 using namespace QRail;
 QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance = nullptr;
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief QRail::LiveboardEngine::Factory constructor
- * @param QObject *parent = nullptr
- * @package Liveboard
- * @private
- * Constructs a QRail::LiveboardEngine::Factory to generate
- * QRail::LiveboardEngine::Board objects on the fly.
- */
 QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
-    connect(this->fragmentsFactory(), SIGNAL(error(QString)), SLOT(handleFragmentFactoryError()));
+    connect(this->fragmentsFactory(), SIGNAL(error(QString)), this, SLOT(handleFragmentFactoryError()));
+    connect(this->fragmentsFactory(), SIGNAL(fragmentUpdated(QRail::Fragments::Fragment*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Fragment*)));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
@@ -50,18 +40,6 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets a QRail::LiveboardEngine::Factory instance
- * @param QObject *parent = nullptr
- * @return QRail::LiveboardEngine::Factory *factory
- * @package Liveboard
- * @public
- * Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
- * instance.
- */
 QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance()
 {
     // Singleton pattern
@@ -73,47 +51,15 @@ QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance()
 }
 
 // Invokers
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Retrieves a liveboard by a station URI
- * @param const QUrl &url
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @overload
- * @public
- * Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
- * The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
- * liveboard should contain all the arrivals, departures of the station.
- * Calling this method will retrieve a QRail::LiveboardEngine::Board for the
- * current time until the current time + 1 hour.
- */
 void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
     this->getLiveboardByStationURI(uri,
-                                   QDateTime::currentDateTime().toUTC(),
-                                   QDateTime::currentDateTime().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
+                                   QDateTime::currentDateTimeUtc(),
+                                   QDateTime::currentDateTimeUtc().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER),
                                    mode);
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Retrieves a liveboard by a station URI and a time range
- * @param const QUrl &url
- * @param const QDateTime &from
- * @param const QDateTime &until
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @overload
- * @public
- * Retrieves a QRail::LiveboardEngine::Board for a station given by it's URI.
- * The QRail::LiveboardEngine::Board::Mode &mode parameter determines if the the
- * liveboard should contain all the arrivals, departures of the station.
- */
 void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QDateTime &from,
                                                                const QDateTime &until,
@@ -142,6 +88,7 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->setIsExtending(false);
         this->fragmentsFactory()->getPage(this->from(), this);
         this->progressTimeoutTimer->start();
+        qDebug() << "Getting station liveboard:" << this->stationURI().toString();
     } else {
         qCritical() << "Station URI or timestamps are invalid";
         qCritical() << "URI:" << uri;
@@ -193,17 +140,6 @@ void LiveboardEngine::Factory::getPreviousResultsForLiveboard(LiveboardEngine::B
         qCritical() << "hydraPrevious URI invalid, can't extend liveboard";
     }
 }
-
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 25 Nov 2018
- * @brief Cancel the current operation.
- * @package Liveboard
- * @public
- * If the user wants to cancel the current operation,
- * this method must be called before performing a new action.
- */
 void LiveboardEngine::Factory::abortCurrentOperation()
 {
     qInfo() << "Abort registered, processing!";
@@ -211,23 +147,12 @@ void LiveboardEngine::Factory::abortCurrentOperation()
 }
 
 // Helpers
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Handler for the received QRail::Fragments::Page pages.
- * @param QRail::Fragments::Page *page
- * @package Liveboard
- * @public
- * Handles the incoming QRail::Fragments::Page pages from the
- * QRail::Fragments::Factory. New pages are requested if the time range isn't
- * fulfilled in DESCENDING order of the departure time.
- */
 void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
 {
-    qDebug() << "Factory generated requested Linked Connection page:"
-             << page
-             << "starting processing thread...";
+   // qDebug() << "Factory generated requested Linked Connection page:"
+    //         << page->uri()
+     //        << page->timestamp()
+      //       << "starting processing thread...";
 
     // Launch processing thread
     emit this->processing(page->uri());
@@ -251,7 +176,7 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     // Extending requires a small change in the auto fetching system
     if(!this->isExtending()) {
         if (timeHydraNext < this->until() && !this->isAbortRequested()) {
-            qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
+            //qDebug() << "Requesting another page from QRail::Fragments::Factory automatically";
             this->fragmentsFactory()->getPage(page->hydraNext(), this);
             emit this->requested(page->hydraNext());
         } else {
@@ -261,20 +186,6 @@ void QRail::LiveboardEngine::Factory::processPage(QRail::Fragments::Page *page)
     this->parsePage(page, finished);
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Parser thread for the received pages
- * @param QRail::Fragments::Page *page
- * @param const bool &finished
- * @package Liveboard
- * @note If you want to retrieve the full intermediary stops of each vehicle in the QRail::LiveboardEngine::Board you can use the QRail::VehicleEngine::Factory.
- * @public
- * Parses the incoming pages in a separate thread using the QtConcurrent framework.
- * If the finished parameter is set to true, the LiveboardEngine::Board is ready and
- * the finished signal is emitted.
- */
 void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bool &finished)
 {
     // Update hydra pagination
@@ -283,6 +194,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 
     // Parse each connection fragment
     bool hasResult = false;
+    //qDebug() << "Page has" << page->fragments().size() << " fragments";
     for (qint16 fragIndex = 0; fragIndex < page->fragments().size(); fragIndex++) {
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
@@ -294,6 +206,59 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             return;
         }
 
+        /*qDebug() << "FRAGMENT" << fragment->uri().toString();
+        qDebug() << "\tdeparture station:" << fragment->departureStationURI().toString();
+        qDebug() << "\tarrival station:" << fragment->arrivalStationURI().toString();
+        qDebug() << "\tdeparture time:" << fragment->departureTime().toString(Qt::ISODate) << "+" << fragment->departureDelay() << "min";
+        qDebug() << "\tarrival time:" << fragment->arrivalTime().toString(Qt::ISODate) << "+" << fragment->arrivalDelay() << "min";
+        qDebug() << "\tdirection:" << fragment->direction();
+        if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tpickup type: REGULAR";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tpickup type: NOTAVAILABLE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tpickup type: MUSTPHONE";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tpickup type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->pickupType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tpickup type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tpickup type: SHIT";
+        }
+
+        if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            qDebug() << "\tdrop off type: REGULAR";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::NOTAVAILABLE) {
+            qDebug() << "\tdrop off type: NOTAVAILABLE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTPHONE) {
+            qDebug() << "\tdrop off type: MUSTPHONE";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER) {
+            qDebug() << "\tdrop off type: MUSTCOORDINATEWITHDRIVER";
+        }
+        else if(fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::UNKNOWN) {
+            qDebug() << "\tdrop off type: UNKNOWN";
+        }
+        else {
+            qDebug() << "\tdrop off type: SHIT";
+        }*/
+
+        /*if(fragment->departureStationURI() == this->stationURI() || fragment->arrivalStationURI() == this->stationURI()) {
+            qDebug() << "Matches station URI" << fragment->departureStationURI().toString() << "|" << fragment->arrivalStationURI().toString();
+        }
+        else {
+            qDebug() << "URI MATCH DEPARTURE FAILED:" << fragment->departureStationURI() << "VS" << this->stationURI();
+        }
+
+        qDebug() << "-----------------------------------------------------------------";
+*/
         // Lazy construction
         if (
                 // ARRIVAL mode
@@ -326,10 +291,11 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
             QRail::VehicleEngine::Stop *entry = nullptr;
             if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->departureTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
                             fragment->departureDelay(),
                             false, // isDepartureCanceled
@@ -342,10 +308,11 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             );
             } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
                 entry = new QRail::VehicleEngine::Stop(
+                            fragment->uri(),
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->arrivalTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
                             fragment->arrivalDelay(),
                             false, // isDepartureCanceled
@@ -428,17 +395,6 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
 }
 
 // Getters & Setters
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::LiveboardEngine::Board instance
- * @return QRail::LiveboardEngine::Board *liveboard
- * @package Liveboard
- * @public
- * Gets the QRail::LiveboardEngine::Board instance we're currently using and
- * returns it.
- */
 QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() const
 {
     // Lock using QMutexLocker due concurrent access
@@ -448,13 +404,11 @@ QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() cons
 
 void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
 {
-    qDebug() << "Factory liveboard received event";
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
-        QRail::Fragments::DispatcherEvent *pageEvent =
-                reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
         this->processPage(pageEvent->page());
-        qDebug() << "Network event received!";
+        //qDebug() << "Fragment page event received!";
     } else {
         event->ignore();
     }
@@ -474,7 +428,7 @@ void LiveboardEngine::Factory::handleTimeout()
     qCritical() << "Liveboard timed out, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Liveboard timed out, the operation has been aborted!");
-    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
 }
 
 void LiveboardEngine::Factory::handleFragmentFactoryError()
@@ -482,20 +436,94 @@ void LiveboardEngine::Factory::handleFragmentFactoryError()
     qCritical() << "Liveboard fragment factory error, ABORTING NOW";
     this->setAbortRequested(true);
     emit this->error("Liveboard fragment factory error, the operation has been aborted!");
-    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance()); // NULL JOURNEY
+    emit this->finished(QRail::LiveboardEngine::NullBoard::getInstance());
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the QRail::LiveboardEngine::Board instance
- * @param QRail::LiveboardEngine::Board *liveboard
- * @package Liveboard
- * @public
- * Sets the QRail::LiveboardEngine::Board instance we're currently using to the
- * given QRail::LiveboardEngine::Board *liveboard.
- */
+void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fragment *fragment)
+{
+    //qDebug() << "Received fragment update:" << fragment->uri().toString();
+    // For each board, check if the board is affected by the update and update the board if needed
+    foreach(QRail::LiveboardEngine::Board *board, m_watchList) {
+        QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
+
+        // Check each entry
+        QRail::VehicleEngine::Vehicle *oldVehicle = nullptr;
+        for(qint64 i=0; i < entries.length(); i++) {
+            QRail::VehicleEngine::Vehicle *entry = entries.at(i);
+            QRail::VehicleEngine::Stop *stop = entry->intermediaryStops().first();
+            oldVehicle = entry;
+
+            // Board affected, updating...
+            if(fragment->uri() == stop->fragmentURI()) {
+                qDebug() << "Board is affected, updating now!" << stop->fragmentURI();
+                QRail::VehicleEngine::Stop *newStop = nullptr;
+                if (this->mode() == QRail::LiveboardEngine::Board::Mode::DEPARTURES) {
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
+                                this->liveboard()->station(),
+                                QString("?"), // platform
+                                true,         // isPlatformNormal
+                                fragment->departureTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
+                                fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
+                                fragment->departureDelay(),
+                                false, // isDepartureCanceled
+                                fragment->departureTime().addSecs(-fragment->departureDelay()),
+                                fragment->departureDelay(),
+                                false, // isArrivalCanceled
+                                false, // isExtraStop
+                                QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                                QRail::VehicleEngine::Stop::Type::STOP
+                                );
+                } else if (this->mode() == QRail::LiveboardEngine::Board::Mode::ARRIVALS) {
+                    newStop = new QRail::VehicleEngine::Stop(
+                                fragment->uri(),
+                                this->liveboard()->station(),
+                                QString("?"), // platform
+                                true,         // isPlatformNormal
+                                fragment->arrivalTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
+                                fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
+                                fragment->arrivalDelay(),
+                                false, // isDepartureCanceled
+                                fragment->arrivalTime().addSecs(-fragment->arrivalDelay()),
+                                fragment->arrivalDelay(),
+                                false, // isArrivalCanceled
+                                false, // isExtraStop
+                                QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED,
+                                QRail::VehicleEngine::Stop::Type::STOP
+                                );
+                } else {
+                    qCritical() << "Unknown LiveboardEngine::Board::Mode, can't fill Liveboard::Board entries!";
+                }
+
+
+                // Get vehicle information
+                QList<QRail::VehicleEngine::Stop *> intermediaryStops = QList<QRail::VehicleEngine::Stop *>();
+                intermediaryStops.append(newStop);
+                QRail::VehicleEngine::Vehicle *newVehicle =
+                        new QRail::VehicleEngine::Vehicle(
+                            fragment->routeURI(),
+                            fragment->tripURI(),
+                            fragment->direction(),
+                            intermediaryStops
+                            );
+                qDebug() << "OLD VEHICLE STOP:" << oldVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << oldVehicle->intermediaryStops().first()->departureTime() << "| +" << oldVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << oldVehicle->intermediaryStops().first()->arrivalTime() << "| +" << oldVehicle->intermediaryStops().first()->arrivalDelay();
+                qDebug() << "NEW VEHICLE STOP:" << newVehicle->intermediaryStops().first()->fragmentURI();
+                qDebug() << "\tDeparture time:" << newVehicle->intermediaryStops().first()->departureTime() << "| +" << newVehicle->intermediaryStops().first()->departureDelay();
+                qDebug() << "\tArrival time:" << newVehicle->intermediaryStops().first()->arrivalTime() << "| +" << newVehicle->intermediaryStops().first()->arrivalDelay();
+
+                // Replace entry with the new one
+                QList<QRail::VehicleEngine::Vehicle*> entriesList = board->entries();
+                entriesList.replace(i, newVehicle);
+                board->setEntries(entriesList);
+                emit board->entriesChanged();
+                emit this->finished(board);
+            }
+        }
+    }
+}
+
 void QRail::LiveboardEngine::Factory::setLiveboard(QRail::LiveboardEngine::Board *liveboard)
 {
     // Lock using QMutexLocker due concurrent access
@@ -515,7 +543,7 @@ void LiveboardEngine::Factory::addUsedPage(Fragments::Page *page)
 
 void LiveboardEngine::Factory::deleteUsedPages()
 {
-    foreach (QRail::Fragments::Page *page, m_usedPages) {
+    /*foreach (QRail::Fragments::Page *page, m_usedPages) {
         if(page) {
             page->deleteLater();
         }
@@ -523,19 +551,9 @@ void LiveboardEngine::Factory::deleteUsedPages()
             qCritical() << "Page pointer is invalid!";
         }
     }
-    qDebug() << "Liveboard pages scheduled for deletion";
+    qDebug() << "Liveboard pages scheduled for deletion";*/
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the StationEngine::Factory instance
- * @return StationEngine::Factory *factory
- * @package Liveboard
- * @private
- * Gets the StationEngine::Factory instance and returns it.
- */
 StationEngine::Factory *QRail::LiveboardEngine::Factory::stationFactory() const
 {
     return m_stationFactory;
@@ -553,178 +571,74 @@ void QRail::LiveboardEngine::Factory::setIsExtending(bool isExtending)
     m_isExtending = isExtending;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the StationEngine::Factory instance
- * @param StationEngine::Factory *factory
- * @package Liveboard
- * @private
- * Sets the StationEngine::Factory instance to the given StationEngine::Factory
- * *stationfactory.
- */
 void QRail::LiveboardEngine::Factory::setStationFactory(StationEngine::Factory *stationFactory)
 {
     m_stationFactory = stationFactory;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::LiveboardEngine::Board::Mode mode
- * @return const QRail::LiveboardEngine::Board::Mode mode
- * @package Liveboard
- * @public
- * Gets the QRail::LiveboardEngine::Board::Mode mode and returns it.
- */
 QRail::LiveboardEngine::Board::Mode QRail::LiveboardEngine::Factory::mode() const
 {
     return m_mode;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the mode
- * @param const QRail::LiveboardEngine::Board::Mode &mode
- * @package Liveboard
- * @public
- * Sets the mode of the liveboard to the given
- * QRail::LiveboardEngine::Board::Mode &mode. Emits the modeChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setMode(const QRail::LiveboardEngine::Board::Mode &mode)
 {
     m_mode = mode;
     emit this->modeChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the station URI
- * @return const QUrl stationURI
- * @package Liveboard
- * @public
- * Gets the station URI and returns it.
- */
 QUrl QRail::LiveboardEngine::Factory::stationURI() const
 {
     return m_stationURI;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the station URI
- * @param const QUrl &stationURI
- * @package Liveboard
- * @public
- * Sets the station URI to the given QUrl &stationURI.
- * Emits the stationURIChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setStationURI(const QUrl &stationURI)
 {
     m_stationURI = stationURI;
     emit this->stationURIChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the until time
- * @return const QDateTime until
- * @package Liveboard
- * @public
- * Gets the until time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Factory::until() const
 {
     return m_until;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the until time
- * @param const QDateTime &until
- * @package Liveboard
- * @public
- * Sets the until time to the given QDateTime &until.
- * Emits the untilChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setUntil(const QDateTime &until)
 {
     m_until = until;
     emit this->untilChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the from time
- * @return const QDateTime from
- * @package Liveboard
- * @public
- * Gets the from time and returns it.
- */
 QDateTime QRail::LiveboardEngine::Factory::from() const
 {
     return m_from;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the from time
- * @param const QDateTime &from
- * @package Liveboard
- * @public
- * Sets the from time to the given QDateTime &from.
- * Emits the fromChanged signal.
- */
 void QRail::LiveboardEngine::Factory::setFrom(const QDateTime &from)
 {
     m_from = from;
     emit this->fromChanged();
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Gets the QRail::Fragments::Factory instance
- * @return QRail::Fragments::Factory *factory
- * @package Liveboard
- * @private
- * Gets the QRail::Fragments::Factory instance and returns it.
- */
 QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() const
 {
     return m_fragmentsFactory;
 }
 
-/**
- * @file liveboardfactory.cpp
- * @author Dylan Van Assche
- * @date 21 Aug 2018
- * @brief Sets the QRail::Fragments::Factory instance
- * @param QRail::Fragments::Factory *factory
- * @package Liveboard
- * @private
- * Sets the QRail::Fragments::Factory instance to the given
- * QRail::Fragments::Factory *factory.
- */
-void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory
-                                                          *fragmentsFactory)
+void LiveboardEngine::Factory::addBoardToWatchlist(LiveboardEngine::Board *board)
+{
+    m_watchList.append(board);
+}
+
+void LiveboardEngine::Factory::removeBoardFromWatchlist(LiveboardEngine::Board *board)
+{
+    bool success = m_watchList.removeOne(board);
+    if(!success) {
+        qCritical() << "Unable to remove Board" << board->station()->name().value(QLocale::Language::Dutch) << "from watch list";
+    }
+}
+
+void QRail::LiveboardEngine::Factory::setFragmentsFactory(QRail::Fragments::Factory *fragmentsFactory)
 {
     m_fragmentsFactory = fragmentsFactory;
 }

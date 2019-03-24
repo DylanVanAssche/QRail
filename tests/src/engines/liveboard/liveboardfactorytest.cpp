@@ -21,9 +21,13 @@ void LiveboardEngine::FactoryTest::initLiveboardFactoryTest()
 {
     qDebug() << "Init LiveboardEngine::Factory test";
     factory = LiveboardEngine::Factory::getInstance();
-    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), this,
+    connect(factory,
+            SIGNAL(finished(QRail::LiveboardEngine::Board *)),
+            this,
             SLOT(liveboardReceived(QRail::LiveboardEngine::Board *)));
-    connect(factory, SIGNAL(stream(QRail::VehicleEngine::Vehicle *)), this,
+    connect(factory,
+            SIGNAL(stream(QRail::VehicleEngine::Vehicle *)),
+            this,
             SLOT(liveboardStreamReceived(QRail::VehicleEngine::Vehicle *)));
 }
 
@@ -32,8 +36,10 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qDebug() << "Running LiveboardEngine::Factory test";
     QDateTime start;
 
-    // Testing abort
-    start = QDateTime::currentDateTime();
+    qDebug() << "---------------------------------------------- ABORT LIVEBOARD ----------------------------------------------";
+
+    /*// Testing abort
+    start = QDateTime::currentDateTimeUtc();
     qInfo() << "Testing abort";
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
@@ -42,12 +48,18 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     // Cancel operation
     factory->abortCurrentOperation();
 
-    QTest::qSleep(3000); // 3 seconds should be sufficient to process the abort command
+    QEventLoop loopAbort;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
+    loopAbort.exec();*/
+
+    qDebug() << "---------------------------------------------- CREATING LIVEBOARD ----------------------------------------------";
 
     // Creating liveboard
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getLiveboardByStationURI(
-        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        QUrl("http://irail.be/stations/NMBS/008813003"), // Brussels-Central, the most events generating station of the SNCB
+        QDateTime::currentDateTimeUtc(),
+        QDateTime::currentDateTimeUtc().addSecs(3600 * 8),
         LiveboardEngine::Board::Mode::DEPARTURES);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
@@ -55,11 +67,36 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
     loop.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
+    qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
+    factory->addBoardToWatchlist(liveboard);
+    QEventLoop loopUpdateReceived;
+    //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
+    loopUpdateReceived.exec();
+    factory->removeBoardFromWatchlist(liveboard);
+
+    qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
+
+    start = QDateTime::currentDateTimeUtc();
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);
+
+    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    QEventLoop loopCached;
+    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopCached, SLOT(quit()));
+    loopCached.exec();
+    qInfo() << "Liveboard Vilvoorde DEPARTURES CACHED took"
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
+            << "msecs";
+
+    qDebug() << "---------------------------------------------- NEXT RESULTS ----------------------------------------------";
+
     // Extending liveboard with next results
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getNextResultsForLiveboard(liveboard);
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
@@ -67,11 +104,13 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopNext, SLOT(quit()));
     loopNext.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES extending NEXT took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
+    qDebug() << "---------------------------------------------- PREVIOUS RESULTS ----------------------------------------------";
+
     // Extending liveboard with previous results
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getPreviousResultsForLiveboard(liveboard);
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
@@ -79,7 +118,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopPrevious, SLOT(quit()));
     loopPrevious.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES extending PREVIOUS took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 }
 
@@ -90,6 +129,7 @@ void QRail::LiveboardEngine::FactoryTest::cleanLiveboardFactoryTest()
 
 void QRail::LiveboardEngine::FactoryTest::liveboardReceived(QRail::LiveboardEngine::Board *board)
 {
+    liveboard = board;
     qDebug() << "Received liveboard from QRail::LiveboardEngine::Factory for station" <<
              board->station()->name().value(QLocale::Language::Dutch);
     qDebug() << "\tFrom:" << board->from();

@@ -146,6 +146,53 @@ void QRail::RouterEngine::Journey::setMaxTransfers(const qint16 &maxTransfers)
     m_maxTransfers = maxTransfers;
 }
 
+void RouterEngine::Journey::addSnapshotJourney(RouterEngine::SnapshotJourney *snapshotJourney)
+{
+    m_snapshotJourneys.append(snapshotJourney);
+}
+
+void RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
+{
+    // We can't restore anything if we don't have anything
+    if(m_snapshotJourneys.length() == 0) {
+        qCritical() << "Unable to restore Journey, cached journeys list is empty!";
+        return;
+    }
+
+    // First cached journey is affected? Reroute completely.
+    if(m_snapshotJourneys.at(0)->pageURI() == pageURI) {
+        qDebug() << "First snapshot is affected, clearing Journey";
+        this->setRoutes(QList<QRail::RouterEngine::Route *>());
+        this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *> ());
+        this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >());
+        this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
+        this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
+        this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
+        this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
+        return;
+    }
+
+    // Look for the page in the list and restore the Journey before that page
+    for(qint64 c=0; c < m_snapshotJourneys.length(); c++) {
+        qDebug() << "Searching for previous Journey, just before our affected page";
+        QRail::RouterEngine::SnapshotJourney *snapshotJourney = m_snapshotJourneys.at(c);
+        if(snapshotJourney->pageURI() == pageURI) {
+            QRail::RouterEngine::SnapshotJourney *previousSnapshotJourney = m_snapshotJourneys.at(c-1);
+            this->setRoutes(previousSnapshotJourney->routes());
+            this->setTArray(previousSnapshotJourney->TArray());
+            this->setSArray(previousSnapshotJourney->SArray());
+            this->setT_EarliestArrivalTime(previousSnapshotJourney->T_EarliestArrivalTime());
+            this->setS_EarliestArrivalTime(previousSnapshotJourney->S_EarliestArrivalTime());
+            this->setHydraNext(m_snapshotJourneys.at(c)->hydraNext());
+            this->setHydraPrevious(m_snapshotJourneys.at(c)->hydraPrevious());
+            qDebug() << "Succesfully restored the previous Journey";
+            return;
+        }
+    }
+
+    qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";
+}
+
 QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const
 {
     return m_SArray;

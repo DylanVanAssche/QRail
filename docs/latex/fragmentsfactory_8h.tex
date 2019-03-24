@@ -1,36 +1,72 @@
 \hypertarget{fragmentsfactory_8h}{}\section{src/include/fragments/fragmentsfactory.h File Reference}
-\label{fragmentsfactory_8h}\index{src/include/fragments/fragmentsfactory.\+h@{src/include/fragments/fragmentsfactory.\+h}}
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Document$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Parse\+Error$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Object$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Array$>$}\newline
-{\ttfamily \#include $<$Qt\+Core/\+Q\+Regular\+Expression$>$}\newline
+\label{fragmentsfactory_8h}\index{src/include/fragments/fragmentsfactory.h@{src/include/fragments/fragmentsfactory.h}}
 {\ttfamily \#include $<$Qt\+Core/\+Q\+Debug$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Array$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Document$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Object$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Json\+Parse\+Error$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Object$>$}\newline
+{\ttfamily \#include $<$Qt\+Core/\+Q\+Regular\+Expression$>$}\newline
+{\ttfamily \#include \char`\"{}fragments/fragmentsdispatcher.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fragments/fragmentsfragment.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fragments/fragmentspage.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}network/networkmanager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}qrail.\+h\char`\"{}}\newline
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classFragments_1_1Factory}{Fragments\+::\+Factory}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Q\+Rail\+::\+Fragments\+::\+Factory}}
+\begin{DoxyCompactList}\small\item\em An \mbox{\hyperlink{classQRail_1_1Fragments_1_1Factory}{Fragments\+::\+Factory}} allows you to generate Fragments\+::\+Station objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceFragments}{Fragments}}
+ \mbox{\hyperlink{namespaceQRail}{Q\+Rail}}
+\item 
+ \mbox{\hyperlink{namespaceQRail_1_1Fragments}{Q\+Rail\+::\+Fragments}}
 \end{DoxyCompactItemize}
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{fragmentsfactory_8h_acbb11c1e34784cf1e3147029f942bfd6}{B\+A\+S\+E\+\_\+\+U\+RL}}~\char`\"{}https\+://graph.\+irail.\+be/sncb/connections\char`\"{}
+\item 
+\#define \mbox{\hyperlink{fragmentsfactory_8h_ad475debe3222bf6e1aaea2c8a4c99839}{G\+T\+F\+S\+\_\+\+R\+E\+G\+U\+L\+AR}}~\char`\"{}gtfs\+:\+Regular\char`\"{}
+\item 
+\#define \mbox{\hyperlink{fragmentsfactory_8h_a65a97d0b889145480bf93e55afbf2ea4}{G\+T\+F\+S\+\_\+\+N\+O\+T\+\_\+\+A\+V\+A\+I\+L\+A\+B\+LE}}~\char`\"{}gtfs\+:\+Not\+Available\char`\"{}
+\item 
+\#define \mbox{\hyperlink{fragmentsfactory_8h_a3e4ced03618763aa196b01d7c7bc7369}{G\+T\+F\+S\+\_\+\+M\+U\+S\+T\+\_\+\+P\+H\+O\+NE}}~\char`\"{}gtfs\+:\+Must\+Phone\char`\"{}
+\item 
+\#define \mbox{\hyperlink{fragmentsfactory_8h_a540cfe40a9d2627b74ac138bd39bbf08}{G\+T\+F\+S\+\_\+\+M\+U\+S\+T\+\_\+\+C\+O\+O\+R\+D\+I\+N\+A\+T\+E\+\_\+\+W\+I\+T\+H\+\_\+\+D\+R\+I\+V\+ER}}~\char`\"{}gtfs\+:\+Must\+Coordinate\+With\+Driver\char`\"{}
 \end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
 \mbox{\Hypertarget{fragmentsfactory_8h_acbb11c1e34784cf1e3147029f942bfd6}\label{fragmentsfactory_8h_acbb11c1e34784cf1e3147029f942bfd6}} 
-\index{fragmentsfactory.\+h@{fragmentsfactory.\+h}!B\+A\+S\+E\+\_\+\+U\+RL@{B\+A\+S\+E\+\_\+\+U\+RL}}
-\index{B\+A\+S\+E\+\_\+\+U\+RL@{B\+A\+S\+E\+\_\+\+U\+RL}!fragmentsfactory.\+h@{fragmentsfactory.\+h}}
-\subsubsection{\texorpdfstring{B\+A\+S\+E\+\_\+\+U\+RL}{BASE\_URL}}
+\index{fragmentsfactory.h@{fragmentsfactory.h}!BASE\_URL@{BASE\_URL}}
+\index{BASE\_URL@{BASE\_URL}!fragmentsfactory.h@{fragmentsfactory.h}}
+\subsubsection{\texorpdfstring{BASE\_URL}{BASE\_URL}}
 {\footnotesize\ttfamily \#define B\+A\+S\+E\+\_\+\+U\+RL~\char`\"{}https\+://graph.\+irail.\+be/sncb/connections\char`\"{}}
+
+\mbox{\Hypertarget{fragmentsfactory_8h_a540cfe40a9d2627b74ac138bd39bbf08}\label{fragmentsfactory_8h_a540cfe40a9d2627b74ac138bd39bbf08}} 
+\index{fragmentsfactory.h@{fragmentsfactory.h}!GTFS\_MUST\_COORDINATE\_WITH\_DRIVER@{GTFS\_MUST\_COORDINATE\_WITH\_DRIVER}}
+\index{GTFS\_MUST\_COORDINATE\_WITH\_DRIVER@{GTFS\_MUST\_COORDINATE\_WITH\_DRIVER}!fragmentsfactory.h@{fragmentsfactory.h}}
+\subsubsection{\texorpdfstring{GTFS\_MUST\_COORDINATE\_WITH\_DRIVER}{GTFS\_MUST\_COORDINATE\_WITH\_DRIVER}}
+{\footnotesize\ttfamily \#define G\+T\+F\+S\+\_\+\+M\+U\+S\+T\+\_\+\+C\+O\+O\+R\+D\+I\+N\+A\+T\+E\+\_\+\+W\+I\+T\+H\+\_\+\+D\+R\+I\+V\+ER~\char`\"{}gtfs\+:\+Must\+Coordinate\+With\+Driver\char`\"{}}
+
+\mbox{\Hypertarget{fragmentsfactory_8h_a3e4ced03618763aa196b01d7c7bc7369}\label{fragmentsfactory_8h_a3e4ced03618763aa196b01d7c7bc7369}} 
+\index{fragmentsfactory.h@{fragmentsfactory.h}!GTFS\_MUST\_PHONE@{GTFS\_MUST\_PHONE}}
+\index{GTFS\_MUST\_PHONE@{GTFS\_MUST\_PHONE}!fragmentsfactory.h@{fragmentsfactory.h}}
+\subsubsection{\texorpdfstring{GTFS\_MUST\_PHONE}{GTFS\_MUST\_PHONE}}
+{\footnotesize\ttfamily \#define G\+T\+F\+S\+\_\+\+M\+U\+S\+T\+\_\+\+P\+H\+O\+NE~\char`\"{}gtfs\+:\+Must\+Phone\char`\"{}}
+
+\mbox{\Hypertarget{fragmentsfactory_8h_a65a97d0b889145480bf93e55afbf2ea4}\label{fragmentsfactory_8h_a65a97d0b889145480bf93e55afbf2ea4}} 
+\index{fragmentsfactory.h@{fragmentsfactory.h}!GTFS\_NOT\_AVAILABLE@{GTFS\_NOT\_AVAILABLE}}
+\index{GTFS\_NOT\_AVAILABLE@{GTFS\_NOT\_AVAILABLE}!fragmentsfactory.h@{fragmentsfactory.h}}
+\subsubsection{\texorpdfstring{GTFS\_NOT\_AVAILABLE}{GTFS\_NOT\_AVAILABLE}}
+{\footnotesize\ttfamily \#define G\+T\+F\+S\+\_\+\+N\+O\+T\+\_\+\+A\+V\+A\+I\+L\+A\+B\+LE~\char`\"{}gtfs\+:\+Not\+Available\char`\"{}}
+
+\mbox{\Hypertarget{fragmentsfactory_8h_ad475debe3222bf6e1aaea2c8a4c99839}\label{fragmentsfactory_8h_ad475debe3222bf6e1aaea2c8a4c99839}} 
+\index{fragmentsfactory.h@{fragmentsfactory.h}!GTFS\_REGULAR@{GTFS\_REGULAR}}
+\index{GTFS\_REGULAR@{GTFS\_REGULAR}!fragmentsfactory.h@{fragmentsfactory.h}}
+\subsubsection{\texorpdfstring{GTFS\_REGULAR}{GTFS\_REGULAR}}
+{\footnotesize\ttfamily \#define G\+T\+F\+S\+\_\+\+R\+E\+G\+U\+L\+AR~\char`\"{}gtfs\+:\+Regular\char`\"{}}
 

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['db_5fpath',['DB_PATH',['../stationfactory_8h.html#a0670e0e3546fcd815d007fe1aeff321e',1,'stationfactory.h']]],
-  ['driver',['DRIVER',['../databasemanager_8h.html#a45044c35ca9fe4a00b497f05d2b818cc',1,'databasemanager.h']]]
+  ['content_5ftype',['CONTENT_TYPE',['../networkmanager_8h.html#a5c988fd3cd44b01dbbecdf58dedd8016',1,'networkmanager.h']]]
 ];

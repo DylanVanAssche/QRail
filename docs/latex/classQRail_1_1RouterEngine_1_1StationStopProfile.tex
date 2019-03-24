@@ -1,0 +1,158 @@
+\hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile}{}\section{Q\+Rail\+::Router\+Engine\+::Station\+Stop\+Profile Class Reference}
+\label{classQRail_1_1RouterEngine_1_1StationStopProfile}\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+
+
+{\ttfamily \#include $<$routerstationstopprofile.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Station\+Stop\+Profile\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1RouterEngine_1_1StationStopProfile}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a1028dba9cb5c7e49355508df15e33be5}{departure\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a691947e7f6e977e3221e9183b6a54202}{arrival\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a8f1943060a94c2d15f181312d3efb8b5}{departure\+Connection\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a5af26da1d8cce37a0a6210772f285c94}{arrival\+Connection\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a32fef2d12e32ac0c2d8f62d631cfd547}{transfers\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ae528f7c8cecbb94459a2355efc1063bf}{Station\+Stop\+Profile}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ab7191d0c2f01f52d360d0dc638857c23}{departure\+Time}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b79ffa346928ae6362892f00539b2d8}{arrival\+Time}}, \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a53d2c7657b133546264a89cb309999bb}{departure\+Connection}}, \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ae06073b8f69ae105c0219234ebba77b8}{arrival\+Connection}}, const qint16 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ac63915d0c5d865e3fdf02654d4ca53bc}{transfers}}, Q\+Object $\ast$parent=nullptr)
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ab7191d0c2f01f52d360d0dc638857c23}{departure\+Time}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a2b84f467941aed7b3218dc6543a7c587}{set\+Departure\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ab7191d0c2f01f52d360d0dc638857c23}{departure\+Time}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b79ffa346928ae6362892f00539b2d8}{arrival\+Time}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a671aec103e271ea3b964c7eec3cb2d5a}{set\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b79ffa346928ae6362892f00539b2d8}{arrival\+Time}})
+\item 
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a53d2c7657b133546264a89cb309999bb}{departure\+Connection}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a2dc446970e1fe208e6e78504db798a4b}{set\+Departure\+Connection}} (\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a53d2c7657b133546264a89cb309999bb}{departure\+Connection}})
+\item 
+\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ae06073b8f69ae105c0219234ebba77b8}{arrival\+Connection}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a76b755a606e7e1f5df8bbeb662c7d7cd}{set\+Arrival\+Connection}} (\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ae06073b8f69ae105c0219234ebba77b8}{arrival\+Connection}})
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ac63915d0c5d865e3fdf02654d4ca53bc}{transfers}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b7261d44216081b3d05e5f06278ff95}{set\+Transfers}} (const qint16 \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1StationStopProfile_ac63915d0c5d865e3fdf02654d4ca53bc}{transfers}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_ae528f7c8cecbb94459a2355efc1063bf}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_ae528f7c8cecbb94459a2355efc1063bf}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!StationStopProfile@{StationStopProfile}}
+\index{StationStopProfile@{StationStopProfile}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{StationStopProfile()}{StationStopProfile()}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::\+Station\+Stop\+Profile (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const Q\+Date\+Time \&}]{arrival\+Time,  }\item[{\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$}]{departure\+Connection,  }\item[{\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$}]{arrival\+Connection,  }\item[{const qint16}]{transfers,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_ae06073b8f69ae105c0219234ebba77b8}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_ae06073b8f69ae105c0219234ebba77b8}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!arrivalConnection@{arrivalConnection}}
+\index{arrivalConnection@{arrivalConnection}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{arrivalConnection()}{arrivalConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::arrival\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a5af26da1d8cce37a0a6210772f285c94}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a5af26da1d8cce37a0a6210772f285c94}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!arrivalConnectionChanged@{arrivalConnectionChanged}}
+\index{arrivalConnectionChanged@{arrivalConnectionChanged}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{arrivalConnectionChanged}{arrivalConnectionChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::arrival\+Connection\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b79ffa346928ae6362892f00539b2d8}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b79ffa346928ae6362892f00539b2d8}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!arrivalTime@{arrivalTime}}
+\index{arrivalTime@{arrivalTime}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{arrivalTime()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a691947e7f6e977e3221e9183b6a54202}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a691947e7f6e977e3221e9183b6a54202}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!arrivalTimeChanged@{arrivalTimeChanged}}
+\index{arrivalTimeChanged@{arrivalTimeChanged}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{arrivalTimeChanged}{arrivalTimeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::arrival\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a53d2c7657b133546264a89cb309999bb}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a53d2c7657b133546264a89cb309999bb}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!departureConnection@{departureConnection}}
+\index{departureConnection@{departureConnection}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{departureConnection()}{departureConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::departure\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a8f1943060a94c2d15f181312d3efb8b5}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a8f1943060a94c2d15f181312d3efb8b5}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!departureConnectionChanged@{departureConnectionChanged}}
+\index{departureConnectionChanged@{departureConnectionChanged}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{departureConnectionChanged}{departureConnectionChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::departure\+Connection\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_ab7191d0c2f01f52d360d0dc638857c23}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_ab7191d0c2f01f52d360d0dc638857c23}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!departureTime@{departureTime}}
+\index{departureTime@{departureTime}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{departureTime()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a1028dba9cb5c7e49355508df15e33be5}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a1028dba9cb5c7e49355508df15e33be5}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!departureTimeChanged@{departureTimeChanged}}
+\index{departureTimeChanged@{departureTimeChanged}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{departureTimeChanged}{departureTimeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::departure\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a76b755a606e7e1f5df8bbeb662c7d7cd}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a76b755a606e7e1f5df8bbeb662c7d7cd}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!setArrivalConnection@{setArrivalConnection}}
+\index{setArrivalConnection@{setArrivalConnection}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{setArrivalConnection()}{setArrivalConnection()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::set\+Arrival\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$}]{arrival\+Connection }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a671aec103e271ea3b964c7eec3cb2d5a}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a671aec103e271ea3b964c7eec3cb2d5a}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!setArrivalTime@{setArrivalTime}}
+\index{setArrivalTime@{setArrivalTime}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{setArrivalTime()}{setArrivalTime()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::set\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a2dc446970e1fe208e6e78504db798a4b}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a2dc446970e1fe208e6e78504db798a4b}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!setDepartureConnection@{setDepartureConnection}}
+\index{setDepartureConnection@{setDepartureConnection}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{setDepartureConnection()}{setDepartureConnection()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::set\+Departure\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1Fragments_1_1Fragment}{Q\+Rail\+::\+Fragments\+::\+Fragment}} $\ast$}]{departure\+Connection }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a2b84f467941aed7b3218dc6543a7c587}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a2b84f467941aed7b3218dc6543a7c587}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!setDepartureTime@{setDepartureTime}}
+\index{setDepartureTime@{setDepartureTime}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{setDepartureTime()}{setDepartureTime()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::set\+Departure\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b7261d44216081b3d05e5f06278ff95}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a5b7261d44216081b3d05e5f06278ff95}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!setTransfers@{setTransfers}}
+\index{setTransfers@{setTransfers}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{setTransfers()}{setTransfers()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::set\+Transfers (\begin{DoxyParamCaption}\item[{const qint16 \&}]{transfers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_ac63915d0c5d865e3fdf02654d4ca53bc}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_ac63915d0c5d865e3fdf02654d4ca53bc}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!transfers@{transfers}}
+\index{transfers@{transfers}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{transfers()}{transfers()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::transfers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1StationStopProfile_a32fef2d12e32ac0c2d8f62d631cfd547}\label{classQRail_1_1RouterEngine_1_1StationStopProfile_a32fef2d12e32ac0c2d8f62d631cfd547}} 
+\index{QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}!transfersChanged@{transfersChanged}}
+\index{transfersChanged@{transfersChanged}!QRail::RouterEngine::StationStopProfile@{QRail::RouterEngine::StationStopProfile}}
+\subsubsection{\texorpdfstring{transfersChanged}{transfersChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Station\+Stop\+Profile\+::transfers\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/\mbox{\hyperlink{routerstationstopprofile_8h}{routerstationstopprofile.\+h}}\item 
+src/engines/router/\mbox{\hyperlink{routerstationstopprofile_8cpp}{routerstationstopprofile.\+cpp}}\end{DoxyCompactItemize}

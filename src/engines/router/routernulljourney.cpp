@@ -17,23 +17,6 @@
 #include "engines/router/routernulljourney.h"
 using namespace QRail;
 RouterEngine::NullJourney *RouterEngine::NullJourney::m_instance = nullptr;
-
-/**
- * @file routernulljourney.cpp
- * @author Dylan Van Assche
- * @date 08 Jan 2019
- * @brief RouterEngine::NullJourney constructor
- * @param const QList<QRail::RouterEngine::Route *> routes
- * @param const QDateTime departureTime
- * @param const QDateTime arrivalTime
- * @param const QDateTime &until
- * @param const QUrl hydraNext
- * @param const QUrl hydraPrevious
- * @param QObject *parent
- * @package RouterEngine
- * @private
- * Constructs a RouterEngine::NullJourney according to the Null design pattern.
- */
 QRail::RouterEngine::NullJourney::NullJourney(const QList<QRail::RouterEngine::Route *> routes,
                                               const QDateTime departureTime,
                                               const QDateTime arrivalTime,
@@ -49,16 +32,6 @@ QRail::RouterEngine::NullJourney::NullJourney(const QList<QRail::RouterEngine::R
 
 }
 
-/**
- * @file routernulljourney.cpp
- * @author Dylan Van Assche
- * @date 08 Jan 2019
- * @brief Gets a RouterEngine::NullJourney instance
- * @return RouterEngine::NullJourney *board
- * @package RouterEngine
- * @public
- * Constructs a RouterEngine::NullJourney if none exists and returns the instance.
- */
 QRail::RouterEngine::NullJourney *QRail::RouterEngine::NullJourney::getInstance()
 {
     // Singleton pattern

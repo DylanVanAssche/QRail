@@ -1,0 +1,431 @@
+\hypertarget{classQRail_1_1VehicleEngine_1_1Stop}{}\section{Q\+Rail\+::Vehicle\+Engine\+::Stop Class Reference}
+\label{classQRail_1_1VehicleEngine_1_1Stop}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+
+
+{\ttfamily \#include $<$vehiclestop.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Vehicle\+Engine\+::Stop\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1VehicleEngine_1_1Stop}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Type}} \{ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faad5f52d91ac49fd146727f4710767dd08}{Type\+::\+A\+R\+R\+I\+V\+AL}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faae7cc381a17e714e7ba15ef6f9858304e}{Type\+::\+D\+E\+P\+A\+R\+T\+U\+RE}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa615a46af313786fc4e349f34118be111}{Type\+::\+S\+T\+OP}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa696b031073e74bf2cb98e5ef201d4aa3}{Type\+::\+U\+N\+K\+N\+O\+WN}}
+ \}
+\item 
+enum \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Occupancy\+Level}} \{ \newline
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a40aa75f8e8cfdf7b660c5620e953229f}{Occupancy\+Level\+::\+U\+N\+S\+U\+P\+P\+O\+R\+T\+ED}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a696b031073e74bf2cb98e5ef201d4aa3}{Occupancy\+Level\+::\+U\+N\+K\+N\+O\+WN}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a41bc94cbd8eebea13ce0491b2ac11b88}{Occupancy\+Level\+::\+L\+OW}}, 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ac87f3be66ffc3c0d4249f1c2cc5f3cce}{Occupancy\+Level\+::\+M\+E\+D\+I\+UM}}, 
+\newline
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ab89de3b4b81c4facfac906edf29aec8c}{Occupancy\+Level\+::\+H\+I\+GH}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a1258c85863b7b97abaf17cfb8e501291}{station\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac86de140f12def7670c8b93ea1cb7fc8}{platform\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aa70577966878f55565b8b4f8f09e0622}{is\+Platform\+Normal\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a359a480758ad5a3a4ab5370cd1e2309b}{has\+Left\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aaa9b2c588be0e401fdaaaa064ceb54fb}{departure\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a407f8c397421dfae0375ebe3a859f5f0}{departure\+Delay\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_acd4661344cc6b1059aa92a619286ae8a}{is\+Departure\+Canceled\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a786a1947c63eac489569f7bf24196d96}{arrival\+Time\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a0f5bddbd48b71e1b00272c7b6684e89f}{arrival\+Delay\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a7bab4fe67bbb63a15d14d3cfca38dfe4}{is\+Arrival\+Canceled\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a719fb40f24b3c7353887c7b9c2af2300}{is\+Extra\+Stop\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a77370a1e3f2383882ab2112fa9f23510}{occupancy\+Level\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a4930b684f8b240cac0157edc5e2d0a08}{type\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a6cec2d0d24b71a12da7c50feaa015f8b}{Stop}} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac2ec37e26949dacae494aa26e16118c3}{Stop}} (\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a9a481db5e15c322b04f4b2857d6f210e}{station}}, const Q\+String \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeac459a67a5a85d5972c7f0256e85a68}{platform}}, const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a879cdef01cdd3fbe3f735e52c6de23b0}{is\+Platform\+Normal}}, const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a7e349af1d43bbf153a156992df8491c1}{has\+Left}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a4ed1b04b9d3d2fe4ac907854cc3e67c2}{departure\+Time}}, const qint16 \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a6ef54344f808db033bda9da30d74bac4}{departure\+Delay}}, const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a887692087d13ec4cd93c60560be9c72a}{is\+Departure\+Canceled}}, const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a09c5419b7717b2849613cb500ce4b029}{arrival\+Time}}, const qint16 \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a95e36a003e044cf7c454843bb9ea3f2c}{arrival\+Delay}}, const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a432b40594e1ceb559bb1a5bcc19cbcd3}{is\+Arrival\+Canceled}}, const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeebc79d39ddfed82ea2c44f0e7cd0a95}{is\+Extra\+Stop}}, const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac43fa877d20d44b9a46ac1e584423f48}{occupancy\+Level}}, const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_abe8f35c16d98f1ea6bd95a525f90c0aa}{type}}, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a9a481db5e15c322b04f4b2857d6f210e}{station}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac7c7af1d3b4b77228eddabe566900633}{set\+Station}} (\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a9a481db5e15c322b04f4b2857d6f210e}{station}})
+\item 
+Q\+String \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeac459a67a5a85d5972c7f0256e85a68}{platform}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a317e658aed106459047de9aa3d0ed46c}{set\+Platform}} (const Q\+String \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeac459a67a5a85d5972c7f0256e85a68}{platform}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a879cdef01cdd3fbe3f735e52c6de23b0}{is\+Platform\+Normal}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a947512bd45c72143639d21f4374ad1c6}{set\+Is\+Platform\+Normal}} (const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a879cdef01cdd3fbe3f735e52c6de23b0}{is\+Platform\+Normal}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a7e349af1d43bbf153a156992df8491c1}{has\+Left}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeb6115d7cb0bda10f5f0e0344072e65d}{set\+Has\+Left}} (const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a7e349af1d43bbf153a156992df8491c1}{has\+Left}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a4ed1b04b9d3d2fe4ac907854cc3e67c2}{departure\+Time}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aed792855c60317feb444902e791f8cc6}{set\+Departure\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a4ed1b04b9d3d2fe4ac907854cc3e67c2}{departure\+Time}})
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a6ef54344f808db033bda9da30d74bac4}{departure\+Delay}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a212e1fe15c7cd8a2fb2770b97908ed11}{set\+Departure\+Delay}} (const qint16 \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a6ef54344f808db033bda9da30d74bac4}{departure\+Delay}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a887692087d13ec4cd93c60560be9c72a}{is\+Departure\+Canceled}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aade4a076fb3e828564595d94e0775ce6}{set\+Is\+Departure\+Canceled}} (const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a887692087d13ec4cd93c60560be9c72a}{is\+Departure\+Canceled}})
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a09c5419b7717b2849613cb500ce4b029}{arrival\+Time}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a48d2b47e09125ef86756b065ed6c2b28}{set\+Arrival\+Time}} (const Q\+Date\+Time \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a09c5419b7717b2849613cb500ce4b029}{arrival\+Time}})
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a95e36a003e044cf7c454843bb9ea3f2c}{arrival\+Delay}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a5564ebcc9e704af94b04ef396c58e0e9}{set\+Arrival\+Delay}} (const qint16 \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a95e36a003e044cf7c454843bb9ea3f2c}{arrival\+Delay}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a432b40594e1ceb559bb1a5bcc19cbcd3}{is\+Arrival\+Canceled}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a72a89bf34475e28bb88e312d4b678e9a}{set\+Is\+Arrival\+Canceled}} (const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a432b40594e1ceb559bb1a5bcc19cbcd3}{is\+Arrival\+Canceled}})
+\item 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac43fa877d20d44b9a46ac1e584423f48}{occupancy\+Level}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aaf19045fbbb3acf711deff03f86d9042}{set\+Occupancy\+Level}} (const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ac43fa877d20d44b9a46ac1e584423f48}{occupancy\+Level}})
+\item 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_abe8f35c16d98f1ea6bd95a525f90c0aa}{type}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a6312361e41e4fcf40f509a008cee3361}{set\+Type}} (const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_abe8f35c16d98f1ea6bd95a525f90c0aa}{type}})
+\item 
+bool \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeebc79d39ddfed82ea2c44f0e7cd0a95}{is\+Extra\+Stop}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_a371e763f4d513b91fdb03228a5d3032b}{set\+Is\+Extra\+Stop}} (const bool \&\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_aeebc79d39ddfed82ea2c44f0e7cd0a95}{is\+Extra\+Stop}})
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!OccupancyLevel@{OccupancyLevel}}
+\index{OccupancyLevel@{OccupancyLevel}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{OccupancyLevel}{OccupancyLevel}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNSUPPORTED@{UNSUPPORTED}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!UNSUPPORTED@{UNSUPPORTED}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a40aa75f8e8cfdf7b660c5620e953229f}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a40aa75f8e8cfdf7b660c5620e953229f}} 
+U\+N\+S\+U\+P\+P\+O\+R\+T\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNKNOWN@{UNKNOWN}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!UNKNOWN@{UNKNOWN}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a696b031073e74bf2cb98e5ef201d4aa3}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a696b031073e74bf2cb98e5ef201d4aa3}} 
+U\+N\+K\+N\+O\+WN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOW@{LOW}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!LOW@{LOW}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a41bc94cbd8eebea13ce0491b2ac11b88}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4a41bc94cbd8eebea13ce0491b2ac11b88}} 
+L\+OW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MEDIUM@{MEDIUM}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!MEDIUM@{MEDIUM}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ac87f3be66ffc3c0d4249f1c2cc5f3cce}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ac87f3be66ffc3c0d4249f1c2cc5f3cce}} 
+M\+E\+D\+I\+UM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HIGH@{HIGH}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!HIGH@{HIGH}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ab89de3b4b81c4facfac906edf29aec8c}\label{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4ab89de3b4b81c4facfac906edf29aec8c}} 
+H\+I\+GH&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}\label{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!Type@{Type}}
+\index{Type@{Type}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARRIVAL@{ARRIVAL}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!ARRIVAL@{ARRIVAL}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faad5f52d91ac49fd146727f4710767dd08}\label{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faad5f52d91ac49fd146727f4710767dd08}} 
+A\+R\+R\+I\+V\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DEPARTURE@{DEPARTURE}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!DEPARTURE@{DEPARTURE}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faae7cc381a17e714e7ba15ef6f9858304e}\label{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faae7cc381a17e714e7ba15ef6f9858304e}} 
+D\+E\+P\+A\+R\+T\+U\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STOP@{STOP}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!STOP@{STOP}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa615a46af313786fc4e349f34118be111}\label{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa615a46af313786fc4e349f34118be111}} 
+S\+T\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNKNOWN@{UNKNOWN}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!UNKNOWN@{UNKNOWN}}}\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa696b031073e74bf2cb98e5ef201d4aa3}\label{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206faa696b031073e74bf2cb98e5ef201d4aa3}} 
+U\+N\+K\+N\+O\+WN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a6cec2d0d24b71a12da7c50feaa015f8b}\label{classQRail_1_1VehicleEngine_1_1Stop_a6cec2d0d24b71a12da7c50feaa015f8b}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ac2ec37e26949dacae494aa26e16118c3}\label{classQRail_1_1VehicleEngine_1_1Stop_ac2ec37e26949dacae494aa26e16118c3}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$}]{station,  }\item[{const Q\+String \&}]{platform,  }\item[{const bool \&}]{is\+Platform\+Normal,  }\item[{const bool \&}]{has\+Left,  }\item[{const Q\+Date\+Time \&}]{departure\+Time,  }\item[{const qint16 \&}]{departure\+Delay,  }\item[{const bool \&}]{is\+Departure\+Canceled,  }\item[{const Q\+Date\+Time \&}]{arrival\+Time,  }\item[{const qint16 \&}]{arrival\+Delay,  }\item[{const bool \&}]{is\+Arrival\+Canceled,  }\item[{const bool \&}]{is\+Extra\+Stop,  }\item[{const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \&}]{occupancy\+Level,  }\item[{const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \&}]{type,  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a95e36a003e044cf7c454843bb9ea3f2c}\label{classQRail_1_1VehicleEngine_1_1Stop_a95e36a003e044cf7c454843bb9ea3f2c}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!arrivalDelay@{arrivalDelay}}
+\index{arrivalDelay@{arrivalDelay}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{arrivalDelay()}{arrivalDelay()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::arrival\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a0f5bddbd48b71e1b00272c7b6684e89f}\label{classQRail_1_1VehicleEngine_1_1Stop_a0f5bddbd48b71e1b00272c7b6684e89f}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!arrivalDelayChanged@{arrivalDelayChanged}}
+\index{arrivalDelayChanged@{arrivalDelayChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{arrivalDelayChanged}{arrivalDelayChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::arrival\+Delay\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a09c5419b7717b2849613cb500ce4b029}\label{classQRail_1_1VehicleEngine_1_1Stop_a09c5419b7717b2849613cb500ce4b029}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!arrivalTime@{arrivalTime}}
+\index{arrivalTime@{arrivalTime}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{arrivalTime()}{arrivalTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::arrival\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a786a1947c63eac489569f7bf24196d96}\label{classQRail_1_1VehicleEngine_1_1Stop_a786a1947c63eac489569f7bf24196d96}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!arrivalTimeChanged@{arrivalTimeChanged}}
+\index{arrivalTimeChanged@{arrivalTimeChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{arrivalTimeChanged}{arrivalTimeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::arrival\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a6ef54344f808db033bda9da30d74bac4}\label{classQRail_1_1VehicleEngine_1_1Stop_a6ef54344f808db033bda9da30d74bac4}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!departureDelay@{departureDelay}}
+\index{departureDelay@{departureDelay}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{departureDelay()}{departureDelay()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::departure\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a407f8c397421dfae0375ebe3a859f5f0}\label{classQRail_1_1VehicleEngine_1_1Stop_a407f8c397421dfae0375ebe3a859f5f0}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!departureDelayChanged@{departureDelayChanged}}
+\index{departureDelayChanged@{departureDelayChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{departureDelayChanged}{departureDelayChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::departure\+Delay\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a4ed1b04b9d3d2fe4ac907854cc3e67c2}\label{classQRail_1_1VehicleEngine_1_1Stop_a4ed1b04b9d3d2fe4ac907854cc3e67c2}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!departureTime@{departureTime}}
+\index{departureTime@{departureTime}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{departureTime()}{departureTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::departure\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aaa9b2c588be0e401fdaaaa064ceb54fb}\label{classQRail_1_1VehicleEngine_1_1Stop_aaa9b2c588be0e401fdaaaa064ceb54fb}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!departureTimeChanged@{departureTimeChanged}}
+\index{departureTimeChanged@{departureTimeChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{departureTimeChanged}{departureTimeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::departure\+Time\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a7e349af1d43bbf153a156992df8491c1}\label{classQRail_1_1VehicleEngine_1_1Stop_a7e349af1d43bbf153a156992df8491c1}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!hasLeft@{hasLeft}}
+\index{hasLeft@{hasLeft}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{hasLeft()}{hasLeft()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::has\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a359a480758ad5a3a4ab5370cd1e2309b}\label{classQRail_1_1VehicleEngine_1_1Stop_a359a480758ad5a3a4ab5370cd1e2309b}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!hasLeftChanged@{hasLeftChanged}}
+\index{hasLeftChanged@{hasLeftChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{hasLeftChanged}{hasLeftChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::has\+Left\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a432b40594e1ceb559bb1a5bcc19cbcd3}\label{classQRail_1_1VehicleEngine_1_1Stop_a432b40594e1ceb559bb1a5bcc19cbcd3}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isArrivalCanceled@{isArrivalCanceled}}
+\index{isArrivalCanceled@{isArrivalCanceled}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isArrivalCanceled()}{isArrivalCanceled()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Arrival\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a7bab4fe67bbb63a15d14d3cfca38dfe4}\label{classQRail_1_1VehicleEngine_1_1Stop_a7bab4fe67bbb63a15d14d3cfca38dfe4}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isArrivalCanceledChanged@{isArrivalCanceledChanged}}
+\index{isArrivalCanceledChanged@{isArrivalCanceledChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isArrivalCanceledChanged}{isArrivalCanceledChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Arrival\+Canceled\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a887692087d13ec4cd93c60560be9c72a}\label{classQRail_1_1VehicleEngine_1_1Stop_a887692087d13ec4cd93c60560be9c72a}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isDepartureCanceled@{isDepartureCanceled}}
+\index{isDepartureCanceled@{isDepartureCanceled}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isDepartureCanceled()}{isDepartureCanceled()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Departure\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_acd4661344cc6b1059aa92a619286ae8a}\label{classQRail_1_1VehicleEngine_1_1Stop_acd4661344cc6b1059aa92a619286ae8a}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isDepartureCanceledChanged@{isDepartureCanceledChanged}}
+\index{isDepartureCanceledChanged@{isDepartureCanceledChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isDepartureCanceledChanged}{isDepartureCanceledChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Departure\+Canceled\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aeebc79d39ddfed82ea2c44f0e7cd0a95}\label{classQRail_1_1VehicleEngine_1_1Stop_aeebc79d39ddfed82ea2c44f0e7cd0a95}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isExtraStop@{isExtraStop}}
+\index{isExtraStop@{isExtraStop}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isExtraStop()}{isExtraStop()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Extra\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a719fb40f24b3c7353887c7b9c2af2300}\label{classQRail_1_1VehicleEngine_1_1Stop_a719fb40f24b3c7353887c7b9c2af2300}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isExtraStopChanged@{isExtraStopChanged}}
+\index{isExtraStopChanged@{isExtraStopChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isExtraStopChanged}{isExtraStopChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Extra\+Stop\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a879cdef01cdd3fbe3f735e52c6de23b0}\label{classQRail_1_1VehicleEngine_1_1Stop_a879cdef01cdd3fbe3f735e52c6de23b0}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isPlatformNormal@{isPlatformNormal}}
+\index{isPlatformNormal@{isPlatformNormal}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isPlatformNormal()}{isPlatformNormal()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Platform\+Normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aa70577966878f55565b8b4f8f09e0622}\label{classQRail_1_1VehicleEngine_1_1Stop_aa70577966878f55565b8b4f8f09e0622}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!isPlatformNormalChanged@{isPlatformNormalChanged}}
+\index{isPlatformNormalChanged@{isPlatformNormalChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{isPlatformNormalChanged}{isPlatformNormalChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::is\+Platform\+Normal\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ac43fa877d20d44b9a46ac1e584423f48}\label{classQRail_1_1VehicleEngine_1_1Stop_ac43fa877d20d44b9a46ac1e584423f48}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!occupancyLevel@{occupancyLevel}}
+\index{occupancyLevel@{occupancyLevel}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{occupancyLevel()}{occupancyLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::occupancy\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a77370a1e3f2383882ab2112fa9f23510}\label{classQRail_1_1VehicleEngine_1_1Stop_a77370a1e3f2383882ab2112fa9f23510}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!occupancyLevelChanged@{occupancyLevelChanged}}
+\index{occupancyLevelChanged@{occupancyLevelChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{occupancyLevelChanged}{occupancyLevelChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::occupancy\+Level\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aeac459a67a5a85d5972c7f0256e85a68}\label{classQRail_1_1VehicleEngine_1_1Stop_aeac459a67a5a85d5972c7f0256e85a68}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!platform@{platform}}
+\index{platform@{platform}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{platform()}{platform()}}
+{\footnotesize\ttfamily Q\+String Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ac86de140f12def7670c8b93ea1cb7fc8}\label{classQRail_1_1VehicleEngine_1_1Stop_ac86de140f12def7670c8b93ea1cb7fc8}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!platformChanged@{platformChanged}}
+\index{platformChanged@{platformChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{platformChanged}{platformChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::platform\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a5564ebcc9e704af94b04ef396c58e0e9}\label{classQRail_1_1VehicleEngine_1_1Stop_a5564ebcc9e704af94b04ef396c58e0e9}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setArrivalDelay@{setArrivalDelay}}
+\index{setArrivalDelay@{setArrivalDelay}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setArrivalDelay()}{setArrivalDelay()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Arrival\+Delay (\begin{DoxyParamCaption}\item[{const qint16 \&}]{arrival\+Delay }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a48d2b47e09125ef86756b065ed6c2b28}\label{classQRail_1_1VehicleEngine_1_1Stop_a48d2b47e09125ef86756b065ed6c2b28}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setArrivalTime@{setArrivalTime}}
+\index{setArrivalTime@{setArrivalTime}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setArrivalTime()}{setArrivalTime()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Arrival\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{arrival\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a212e1fe15c7cd8a2fb2770b97908ed11}\label{classQRail_1_1VehicleEngine_1_1Stop_a212e1fe15c7cd8a2fb2770b97908ed11}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setDepartureDelay@{setDepartureDelay}}
+\index{setDepartureDelay@{setDepartureDelay}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setDepartureDelay()}{setDepartureDelay()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Departure\+Delay (\begin{DoxyParamCaption}\item[{const qint16 \&}]{departure\+Delay }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aed792855c60317feb444902e791f8cc6}\label{classQRail_1_1VehicleEngine_1_1Stop_aed792855c60317feb444902e791f8cc6}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setDepartureTime@{setDepartureTime}}
+\index{setDepartureTime@{setDepartureTime}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setDepartureTime()}{setDepartureTime()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Departure\+Time (\begin{DoxyParamCaption}\item[{const Q\+Date\+Time \&}]{departure\+Time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aeb6115d7cb0bda10f5f0e0344072e65d}\label{classQRail_1_1VehicleEngine_1_1Stop_aeb6115d7cb0bda10f5f0e0344072e65d}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setHasLeft@{setHasLeft}}
+\index{setHasLeft@{setHasLeft}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setHasLeft()}{setHasLeft()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Has\+Left (\begin{DoxyParamCaption}\item[{const bool \&}]{has\+Left }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a72a89bf34475e28bb88e312d4b678e9a}\label{classQRail_1_1VehicleEngine_1_1Stop_a72a89bf34475e28bb88e312d4b678e9a}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setIsArrivalCanceled@{setIsArrivalCanceled}}
+\index{setIsArrivalCanceled@{setIsArrivalCanceled}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setIsArrivalCanceled()}{setIsArrivalCanceled()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Is\+Arrival\+Canceled (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+Arrival\+Canceled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aade4a076fb3e828564595d94e0775ce6}\label{classQRail_1_1VehicleEngine_1_1Stop_aade4a076fb3e828564595d94e0775ce6}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setIsDepartureCanceled@{setIsDepartureCanceled}}
+\index{setIsDepartureCanceled@{setIsDepartureCanceled}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setIsDepartureCanceled()}{setIsDepartureCanceled()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Is\+Departure\+Canceled (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+Departure\+Canceled }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a371e763f4d513b91fdb03228a5d3032b}\label{classQRail_1_1VehicleEngine_1_1Stop_a371e763f4d513b91fdb03228a5d3032b}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setIsExtraStop@{setIsExtraStop}}
+\index{setIsExtraStop@{setIsExtraStop}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setIsExtraStop()}{setIsExtraStop()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Is\+Extra\+Stop (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+Extra\+Stop }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a947512bd45c72143639d21f4374ad1c6}\label{classQRail_1_1VehicleEngine_1_1Stop_a947512bd45c72143639d21f4374ad1c6}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setIsPlatformNormal@{setIsPlatformNormal}}
+\index{setIsPlatformNormal@{setIsPlatformNormal}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setIsPlatformNormal()}{setIsPlatformNormal()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Is\+Platform\+Normal (\begin{DoxyParamCaption}\item[{const bool \&}]{is\+Platform\+Normal }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_aaf19045fbbb3acf711deff03f86d9042}\label{classQRail_1_1VehicleEngine_1_1Stop_aaf19045fbbb3acf711deff03f86d9042}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setOccupancyLevel@{setOccupancyLevel}}
+\index{setOccupancyLevel@{setOccupancyLevel}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setOccupancyLevel()}{setOccupancyLevel()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Occupancy\+Level (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \&}]{occupancy\+Level }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a317e658aed106459047de9aa3d0ed46c}\label{classQRail_1_1VehicleEngine_1_1Stop_a317e658aed106459047de9aa3d0ed46c}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setPlatform@{setPlatform}}
+\index{setPlatform@{setPlatform}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setPlatform()}{setPlatform()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Platform (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{platform }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_ac7c7af1d3b4b77228eddabe566900633}\label{classQRail_1_1VehicleEngine_1_1Stop_ac7c7af1d3b4b77228eddabe566900633}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setStation@{setStation}}
+\index{setStation@{setStation}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setStation()}{setStation()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Station (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$}]{station }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a6312361e41e4fcf40f509a008cee3361}\label{classQRail_1_1VehicleEngine_1_1Stop_a6312361e41e4fcf40f509a008cee3361}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!setType@{setType}}
+\index{setType@{setType}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{setType()}{setType()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::set\+Type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a9a481db5e15c322b04f4b2857d6f210e}\label{classQRail_1_1VehicleEngine_1_1Stop_a9a481db5e15c322b04f4b2857d6f210e}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!station@{station}}
+\index{station@{station}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{station()}{station()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a1258c85863b7b97abaf17cfb8e501291}\label{classQRail_1_1VehicleEngine_1_1Stop_a1258c85863b7b97abaf17cfb8e501291}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!stationChanged@{stationChanged}}
+\index{stationChanged@{stationChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{stationChanged}{stationChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::station\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_abe8f35c16d98f1ea6bd95a525f90c0aa}\label{classQRail_1_1VehicleEngine_1_1Stop_abe8f35c16d98f1ea6bd95a525f90c0aa}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!type@{type}}
+\index{type@{type}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_af078938bc06ff906b6fc843d8c0206fa}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Type}} Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1VehicleEngine_1_1Stop_a4930b684f8b240cac0157edc5e2d0a08}\label{classQRail_1_1VehicleEngine_1_1Stop_a4930b684f8b240cac0157edc5e2d0a08}} 
+\index{QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}!typeChanged@{typeChanged}}
+\index{typeChanged@{typeChanged}!QRail::VehicleEngine::Stop@{QRail::VehicleEngine::Stop}}
+\subsubsection{\texorpdfstring{typeChanged}{typeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::type\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/vehicle/\mbox{\hyperlink{vehiclestop_8h}{vehiclestop.\+h}}\item 
+src/engines/vehicle/\mbox{\hyperlink{vehiclestop_8cpp}{vehiclestop.\+cpp}}\end{DoxyCompactItemize}

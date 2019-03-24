@@ -1,0 +1,274 @@
+\hypertarget{classQRail_1_1RouterEngine_1_1Transfer}{}\section{Q\+Rail\+::Router\+Engine\+::Transfer Class Reference}
+\label{classQRail_1_1RouterEngine_1_1Transfer}\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+
+
+{\ttfamily \#include $<$routertransfer.\+h$>$}
+
+Inheritance diagram for Q\+Rail\+::Router\+Engine\+::Transfer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQRail_1_1RouterEngine_1_1Transfer}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Type}} \{ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ad5f52d91ac49fd146727f4710767dd08}{Type\+::\+A\+R\+R\+I\+V\+AL}}, 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ae7cc381a17e714e7ba15ef6f9858304e}{Type\+::\+D\+E\+P\+A\+R\+T\+U\+RE}}, 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6aeb5ddb3b6096fb90ff720d9c3e2a6628}{Type\+::\+T\+R\+A\+N\+S\+F\+ER}}, 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6accc0377a8afbf50e7094f5c23a8af223}{Type\+::\+I\+N\+V\+A\+L\+ID}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a119d4fc68a9f4530aed848256477bd85}{departure\+Leg\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a091453e0df3e53521e9fdb5c3f5afb01}{arrival\+Leg\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a759f8ef7d2ebc5d3377e0a3d6d22c068}{departure\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a8d8d0e3c03ff32d921f672da6a4856d4}{arrival\+Changed}} ()
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a2acb2ce4b06bbc6fae9ebdc8580f36cc}{type\+Changed}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a1887de7a5b517e613c79a52d3b0edaf9}{Transfer}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a3013385c1e0d26a15bcb542f614453e1}{departure\+Leg}}=nullptr, \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_ad939a95d1c7eb938f585892e099a5ce2}{arrival\+Leg}}=nullptr, Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a3013385c1e0d26a15bcb542f614453e1}{departure\+Leg}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a6859f11de7d52221dedf2992c0574e01}{set\+Departure\+Leg}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a3013385c1e0d26a15bcb542f614453e1}{departure\+Leg}})
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_ad939a95d1c7eb938f585892e099a5ce2}{arrival\+Leg}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a0fd3d974fc24be429574228d714403ce}{set\+Arrival\+Leg}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_ad939a95d1c7eb938f585892e099a5ce2}{arrival\+Leg}})
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a005159d3475c72f6425e67ae1a7e2d9d}{departure}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_aa2fc712b52826e04886c083fd54b12eb}{set\+Departure}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a005159d3475c72f6425e67ae1a7e2d9d}{departure}})
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_aba50a1ebdec084c649ccf4fe227d13ba}{arrival}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a75048b3bc70006d55561281efa569acc}{set\+Arrival}} (\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_aba50a1ebdec084c649ccf4fe227d13ba}{arrival}})
+\item 
+\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Type}} \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a61514c74c7f14ae9626aa4308c95d016}{type}} () const
+\item 
+void \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a336a593cb84d879794a7ab7275ef6b08}{set\+Type}} (const \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Type}} \&\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a61514c74c7f14ae9626aa4308c95d016}{type}})
+\item 
+Q\+Url \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a395e3c3959c104c17052d4fc783c06eb}{uri}} () const
+\item 
+\mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_aa16ed17bef90a4ecdcb7b6c03651b9dd}{station}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_ae6dc48066916082dbd30fa1de56cd66c}{time}} () const
+\item 
+qint16 \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a0b1d68480dc01278e10db8cc6ecd9de4}{delay}} () const
+\item 
+Q\+Date\+Time \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a2b54319da738a744f3e1d232e6960979}{delayed\+Time}} () const
+\item 
+Q\+String \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a17256666f753e0be8601273905a36973}{platform}} () const
+\item 
+bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a2e8de8ed602b5d3eb5bcb38457b36b90}{is\+Canceled}} () const
+\item 
+bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_ac7d6d4da7413183dffa0ebf1103f0df7}{is\+Normal\+Platform}} () const
+\item 
+bool \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a73fe1fc5e15b7ea46dd8fc736c3245c6}{is\+Passed}} () const
+\item 
+\mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a7d2b205630953a366947eacffff3f824}{occupancy\+Level}} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}\label{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!Type@{Type}}
+\index{Type@{Type}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARRIVAL@{ARRIVAL}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!ARRIVAL@{ARRIVAL}}}\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ad5f52d91ac49fd146727f4710767dd08}\label{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ad5f52d91ac49fd146727f4710767dd08}} 
+A\+R\+R\+I\+V\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DEPARTURE@{DEPARTURE}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!DEPARTURE@{DEPARTURE}}}\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ae7cc381a17e714e7ba15ef6f9858304e}\label{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6ae7cc381a17e714e7ba15ef6f9858304e}} 
+D\+E\+P\+A\+R\+T\+U\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TRANSFER@{TRANSFER}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!TRANSFER@{TRANSFER}}}\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6aeb5ddb3b6096fb90ff720d9c3e2a6628}\label{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6aeb5ddb3b6096fb90ff720d9c3e2a6628}} 
+T\+R\+A\+N\+S\+F\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID@{INVALID}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!INVALID@{INVALID}}}\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6accc0377a8afbf50e7094f5c23a8af223}\label{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6accc0377a8afbf50e7094f5c23a8af223}} 
+I\+N\+V\+A\+L\+ID&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a1887de7a5b517e613c79a52d3b0edaf9}\label{classQRail_1_1RouterEngine_1_1Transfer_a1887de7a5b517e613c79a52d3b0edaf9}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!Transfer@{Transfer}}
+\index{Transfer@{Transfer}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{Transfer()}{Transfer()}}
+{\footnotesize\ttfamily Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Transfer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$}]{departure\+Leg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$}]{arrival\+Leg = {\ttfamily nullptr},  }\item[{Q\+Object $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_aba50a1ebdec084c649ccf4fe227d13ba}\label{classQRail_1_1RouterEngine_1_1Transfer_aba50a1ebdec084c649ccf4fe227d13ba}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!arrival@{arrival}}
+\index{arrival@{arrival}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{arrival()}{arrival()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::arrival (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a8d8d0e3c03ff32d921f672da6a4856d4}\label{classQRail_1_1RouterEngine_1_1Transfer_a8d8d0e3c03ff32d921f672da6a4856d4}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!arrivalChanged@{arrivalChanged}}
+\index{arrivalChanged@{arrivalChanged}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{arrivalChanged}{arrivalChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::arrival\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_ad939a95d1c7eb938f585892e099a5ce2}\label{classQRail_1_1RouterEngine_1_1Transfer_ad939a95d1c7eb938f585892e099a5ce2}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!arrivalLeg@{arrivalLeg}}
+\index{arrivalLeg@{arrivalLeg}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{arrivalLeg()}{arrivalLeg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::arrival\+Leg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a091453e0df3e53521e9fdb5c3f5afb01}\label{classQRail_1_1RouterEngine_1_1Transfer_a091453e0df3e53521e9fdb5c3f5afb01}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!arrivalLegChanged@{arrivalLegChanged}}
+\index{arrivalLegChanged@{arrivalLegChanged}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{arrivalLegChanged}{arrivalLegChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::arrival\+Leg\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a0b1d68480dc01278e10db8cc6ecd9de4}\label{classQRail_1_1RouterEngine_1_1Transfer_a0b1d68480dc01278e10db8cc6ecd9de4}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!delay@{delay}}
+\index{delay@{delay}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{delay()}{delay()}}
+{\footnotesize\ttfamily qint16 Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a2b54319da738a744f3e1d232e6960979}\label{classQRail_1_1RouterEngine_1_1Transfer_a2b54319da738a744f3e1d232e6960979}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!delayedTime@{delayedTime}}
+\index{delayedTime@{delayedTime}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{delayedTime()}{delayedTime()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::delayed\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a005159d3475c72f6425e67ae1a7e2d9d}\label{classQRail_1_1RouterEngine_1_1Transfer_a005159d3475c72f6425e67ae1a7e2d9d}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!departure@{departure}}
+\index{departure@{departure}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{departure()}{departure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::departure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a759f8ef7d2ebc5d3377e0a3d6d22c068}\label{classQRail_1_1RouterEngine_1_1Transfer_a759f8ef7d2ebc5d3377e0a3d6d22c068}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!departureChanged@{departureChanged}}
+\index{departureChanged@{departureChanged}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{departureChanged}{departureChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::departure\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a3013385c1e0d26a15bcb542f614453e1}\label{classQRail_1_1RouterEngine_1_1Transfer_a3013385c1e0d26a15bcb542f614453e1}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!departureLeg@{departureLeg}}
+\index{departureLeg@{departureLeg}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{departureLeg()}{departureLeg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::departure\+Leg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a119d4fc68a9f4530aed848256477bd85}\label{classQRail_1_1RouterEngine_1_1Transfer_a119d4fc68a9f4530aed848256477bd85}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!departureLegChanged@{departureLegChanged}}
+\index{departureLegChanged@{departureLegChanged}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{departureLegChanged}{departureLegChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::departure\+Leg\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a2e8de8ed602b5d3eb5bcb38457b36b90}\label{classQRail_1_1RouterEngine_1_1Transfer_a2e8de8ed602b5d3eb5bcb38457b36b90}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!isCanceled@{isCanceled}}
+\index{isCanceled@{isCanceled}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{isCanceled()}{isCanceled()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::is\+Canceled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_ac7d6d4da7413183dffa0ebf1103f0df7}\label{classQRail_1_1RouterEngine_1_1Transfer_ac7d6d4da7413183dffa0ebf1103f0df7}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!isNormalPlatform@{isNormalPlatform}}
+\index{isNormalPlatform@{isNormalPlatform}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{isNormalPlatform()}{isNormalPlatform()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::is\+Normal\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a73fe1fc5e15b7ea46dd8fc736c3245c6}\label{classQRail_1_1RouterEngine_1_1Transfer_a73fe1fc5e15b7ea46dd8fc736c3245c6}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!isPassed@{isPassed}}
+\index{isPassed@{isPassed}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{isPassed()}{isPassed()}}
+{\footnotesize\ttfamily bool Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::is\+Passed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a7d2b205630953a366947eacffff3f824}\label{classQRail_1_1RouterEngine_1_1Transfer_a7d2b205630953a366947eacffff3f824}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!occupancyLevel@{occupancyLevel}}
+\index{occupancyLevel@{occupancyLevel}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{occupancyLevel()}{occupancyLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1VehicleEngine_1_1Stop_ad967ed81b19762bd582c1af07354a6d4}{Q\+Rail\+::\+Vehicle\+Engine\+::\+Stop\+::\+Occupancy\+Level}} Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::occupancy\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a17256666f753e0be8601273905a36973}\label{classQRail_1_1RouterEngine_1_1Transfer_a17256666f753e0be8601273905a36973}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!platform@{platform}}
+\index{platform@{platform}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{platform()}{platform()}}
+{\footnotesize\ttfamily Q\+String Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a75048b3bc70006d55561281efa569acc}\label{classQRail_1_1RouterEngine_1_1Transfer_a75048b3bc70006d55561281efa569acc}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!setArrival@{setArrival}}
+\index{setArrival@{setArrival}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{setArrival()}{setArrival()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::set\+Arrival (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$}]{arrival }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a0fd3d974fc24be429574228d714403ce}\label{classQRail_1_1RouterEngine_1_1Transfer_a0fd3d974fc24be429574228d714403ce}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!setArrivalLeg@{setArrivalLeg}}
+\index{setArrivalLeg@{setArrivalLeg}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{setArrivalLeg()}{setArrivalLeg()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::set\+Arrival\+Leg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$}]{arrival\+Leg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_aa2fc712b52826e04886c083fd54b12eb}\label{classQRail_1_1RouterEngine_1_1Transfer_aa2fc712b52826e04886c083fd54b12eb}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!setDeparture@{setDeparture}}
+\index{setDeparture@{setDeparture}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{setDeparture()}{setDeparture()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::set\+Departure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLegEnd}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg\+End}} $\ast$}]{departure }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a6859f11de7d52221dedf2992c0574e01}\label{classQRail_1_1RouterEngine_1_1Transfer_a6859f11de7d52221dedf2992c0574e01}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!setDepartureLeg@{setDepartureLeg}}
+\index{setDepartureLeg@{setDepartureLeg}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{setDepartureLeg()}{setDepartureLeg()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::set\+Departure\+Leg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQRail_1_1RouterEngine_1_1RouteLeg}{Q\+Rail\+::\+Router\+Engine\+::\+Route\+Leg}} $\ast$}]{departure\+Leg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a336a593cb84d879794a7ab7275ef6b08}\label{classQRail_1_1RouterEngine_1_1Transfer_a336a593cb84d879794a7ab7275ef6b08}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!setType@{setType}}
+\index{setType@{setType}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{setType()}{setType()}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::set\+Type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Type}} \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_aa16ed17bef90a4ecdcb7b6c03651b9dd}\label{classQRail_1_1RouterEngine_1_1Transfer_aa16ed17bef90a4ecdcb7b6c03651b9dd}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!station@{station}}
+\index{station@{station}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{station()}{station()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1StationEngine_1_1Station}{Station\+Engine\+::\+Station}} $\ast$ Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::station (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_ae6dc48066916082dbd30fa1de56cd66c}\label{classQRail_1_1RouterEngine_1_1Transfer_ae6dc48066916082dbd30fa1de56cd66c}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!time@{time}}
+\index{time@{time}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{time()}{time()}}
+{\footnotesize\ttfamily Q\+Date\+Time Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a61514c74c7f14ae9626aa4308c95d016}\label{classQRail_1_1RouterEngine_1_1Transfer_a61514c74c7f14ae9626aa4308c95d016}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!type@{type}}
+\index{type@{type}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classQRail_1_1RouterEngine_1_1Transfer_a5a0b372acbdfb9381fb937bf163edfa6}{Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::\+Type}} Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a2acb2ce4b06bbc6fae9ebdc8580f36cc}\label{classQRail_1_1RouterEngine_1_1Transfer_a2acb2ce4b06bbc6fae9ebdc8580f36cc}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!typeChanged@{typeChanged}}
+\index{typeChanged@{typeChanged}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{typeChanged}{typeChanged}}
+{\footnotesize\ttfamily void Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::type\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classQRail_1_1RouterEngine_1_1Transfer_a395e3c3959c104c17052d4fc783c06eb}\label{classQRail_1_1RouterEngine_1_1Transfer_a395e3c3959c104c17052d4fc783c06eb}} 
+\index{QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}!uri@{uri}}
+\index{uri@{uri}!QRail::RouterEngine::Transfer@{QRail::RouterEngine::Transfer}}
+\subsubsection{\texorpdfstring{uri()}{uri()}}
+{\footnotesize\ttfamily Q\+Url Q\+Rail\+::\+Router\+Engine\+::\+Transfer\+::uri (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/engines/router/\mbox{\hyperlink{routertransfer_8h}{routertransfer.\+h}}\item 
+src/engines/router/\mbox{\hyperlink{routertransfer_8cpp}{routertransfer.\+cpp}}\end{DoxyCompactItemize}

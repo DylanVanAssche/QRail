@@ -27,12 +27,25 @@
 
 namespace QRail {
 namespace RouterEngine {
+//! An RouterEngine::NullJourney contains a empty journey.
+/*!
+    \class NullJourney
+    A Journey holds all the necessary information about a journey for the connection between 2 stops.
+    A journey can keep track of multiple routes to get from A to B.
+    \warning Receiving a NullJourney from the QRail library indicates that something must be terrible wrong! Check you debug output carefully.
+ */
 class QRAIL_SHARED_EXPORT NullJourney : public Journey
 {
 public:
     static NullJourney *getInstance();
 
 private:
+    //! Gets a RouterEngine::NullJourney instance.
+    /*!
+        \return board a RouterEngine::NullJourney instance.
+        \public
+        Constructs a RouterEngine::NullJourney if none exists and returns the instance.
+     */
     explicit NullJourney(const QList<QRail::RouterEngine::Route *> routes,
                          const QDateTime departureTime,
                          const QDateTime arrivalTime,

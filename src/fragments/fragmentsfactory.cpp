@@ -18,17 +18,6 @@
 using namespace QRail;
 QRail::Fragments::Factory *QRail::Fragments::Factory::m_instance = nullptr;
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief QRail::Fragments::Factory constructor: empty
- * @param QObject *parent = nullptr
- * @package Fragments
- * @private
- * Constructs a QRail::Fragments::Factory to generate Linked Connections
- * fragments on the fly.
- */
 QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
 {
     // Setup the QRail::Network::Manager
@@ -42,20 +31,15 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
      * https://stackoverflow.com/questions/3268073/qobject-cannot-create-children-for-a-parent-that-is-in-a-different-thread
      */
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
+
+    // Create event source
+    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    connect(m_eventSource,
+            SIGNAL(messageReceived(QString)),
+            this,
+            SLOT(handleEventSource(QString)));
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets a QRail::Fragments::Factory instance
- * @param QObject *parent = nullptr
- * @return Fragment::Factory *factory
- * @package Fragments
- * @public
- * Constructs a QRail::Fragments::Factory if none exists and returns the
- * instance.
- */
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 {
     // Singleton pattern
@@ -67,41 +51,23 @@ QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
 }
 
 // Invokers
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests a page by URI
- * @param const QUrl &uri
- * @param QObject *caller
- * @package Fragments
- * @public
- * Starts the generation process of a QRail::Fragments::Page object by
- * requesting a page by URI. When the page is ready, the pageReady signal will
- * be emitted.
- */
 void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
-    // Use processing methods to allow other extensions in the future if needed
-    this->getPageByURIFromNetworkManager(uri);
     QUrlQuery query = QUrlQuery(uri);
     QDateTime departureTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
     this->dispatcher()->addTarget(departureTime, caller);
+
+    // Page is cached, dispatching!
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+    if(page) {
+        this->dispatcher()->dispatchPage(page);
+        return;
+    }
+
+    // Page is not in cache
+    this->getPageByURIFromNetworkManager(uri);
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests a page by departure time
- * @param const QDateTime &departureTime
- * @param QObject *caller
- * @package Fragments
- * @public
- * Starts the generation process of a QRail::Fragments::Page object by
- * requesting a page by departure time. When the page is ready, the pageReady
- * signal will be emitted.
- */
 void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject *caller)
 {
     // Construct the URI of the page
@@ -111,20 +77,85 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     qDebug() << departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z");
     parameters.addQueryItem("departureTime", departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z"));
     uri.setQuery(parameters);
-
-    // Use processing methods to allow other extensions in the future if needed
-    this->getPageByURIFromNetworkManager(uri);
     this->dispatcher()->addTarget(departureTime, caller);
+
+    // Page is cached, dispatching!
+        QRail::Fragments::Page *page = m_pageCache.getPageByURI(uri);
+    if(page) {
+        this->dispatcher()->dispatchPage(page);
+        return;
+    }
+
+    // Page is not in cache
+    this->getPageByURIFromNetworkManager(uri);
 }
 
 void QRail::Fragments::Factory::customEvent(QEvent *event)
 {
+    // Process HTTP reply from QRail::Network::Manager
     if (event->type() == this->http()->dispatcher()->eventType()) {
+        qDebug() << "HTTP event for Fragments::Factory";
         event->accept();
         QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
         this->processHTTPReply(networkEvent->reply());
-    } else {
+    }
+    // Process a prefetched page from QRail::Fragments::Factory
+    else if(event->type() == this->dispatcher()->eventType()) {
+        qDebug() << "Prefetch page event for Fragments::Factory";
+        event->accept();
+        QRail::Fragments::DispatcherEvent *fragmentEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
+        this->processPrefetchEvent(fragmentEvent->page());
+    }
+    else {
         event->ignore();
+    }
+}
+
+void Fragments::Factory::handleEventSource(QString message)
+{
+    qDebug() << "Received Event Source message:" << message.length() << "chars";
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+    QJsonObject jsonObject = doc.object();
+
+    QJsonArray graph = jsonObject["@graph"].toArray();
+    foreach (QJsonValue item, graph) {
+        if (item.isObject()) {
+            QJsonObject event = item.toObject();
+            QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
+            QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+            if (frag) {
+                QUrl updatedPageURI = m_pageCache.updateFragment(frag);
+                //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
+                // In case we haven't downloaded this page yet, skip this update
+                //if(!page) {
+                //    continue;
+                //}
+                //qDebug() << "Changing page:" << page->uri();
+                /*QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
+                // Look for the fragment and replace it.
+                for(qint64 i=0; i < fragmentList.length(); i++) {
+                    QRail::Fragments::Fragment *item = fragmentList.at(i);
+                    if(item->uri() == frag->uri()) {
+                        fragmentList.replace(i, frag);
+                        page->setFragments(fragmentList);
+                        break;
+                    }
+                }
+                // Recache page, the old version is automatically deleted.
+                m_pageCache.cachePage(page);*/
+                if(updatedPageURI.isValid()) {
+                    emit this->pageUpdated(updatedPageURI);
+                    emit this->fragmentUpdated(frag);
+                    emit this->fragmentAndPageUpdated(frag, updatedPageURI);
+                }
+            }
+            else {
+                qCritical() << "Corrupt Fragment detected!";
+            }
+        }
+        else {
+            qCritical() << "Fragment isn't a JSON object!";
+        }
     }
 }
 
@@ -143,7 +174,7 @@ Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
         return QRail::Fragments::Fragment::GTFSTypes::MUSTCOORDINATEWITHDRIVER;
     }
     else if(type.isEmpty()) {
-        qWarning() << "GTFS type is empty";
+        //qWarning() << "GTFS type is empty";
         return QRail::Fragments::Fragment::GTFSTypes::REGULAR;
     }
 
@@ -152,17 +183,6 @@ Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
 }
 
 // Processors
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Requests the page by URI from the network
- * @param const QUrl &uri
- * @package Fragments
- * @private
- * Sends a request to the QRail::Network::Manager to retrieve a Linked
- * Connections page by URI.
- */
 void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Call the getResource slot due different threads
@@ -170,18 +190,6 @@ void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 }
 
 // Helpers
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Parses the JSON-LD fragment
- * @param const QJsonObject &connection
- * @return QRail::Fragments::Fragment *frag;
- * @package Fragments
- * @private
- * Converts the JSON-LD into a QRail::Fragments::Fragments object and returns
- * it.
- */
 QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {
     // Parse JSON
@@ -231,23 +239,10 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
         return frag;
     }
 
-    qCritical() << "Parsing failed, throw fragment away: " << uri;
+    qCritical() << "Parsing failed, throwing fragment away: " << uri;
     return nullptr;
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Processes the network reply
- * @param QNetworkReply *reply
- * @package Fragments
- * @private
- * Reads the network reply, parses it using the helper methods.
- * When the reply is completed parsed and no errors were encountered,
- * the pageReady signal is emitted.
- * In case we faced an error, the error signal is emitted with an error message.
- */
 void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -296,12 +291,13 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
                 }
 
                 // Linked Connections page
-                QString pageURI = jsonObject["@id"].toString();
-                QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+                QUrl pageURI = QUrl(jsonObject["@id"].toString());
+                QUrlQuery pageQuery = QUrlQuery(pageURI.query());
+                QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
-                QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,
-                                                                          hydraPrevious, fragments);
+                QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
+                m_pageCache.cachePage(page);
                 this->dispatcher()->dispatchPage(page);
             } else {
                 qCritical() << "Fragments context validation failed!";
@@ -320,33 +316,24 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
     reply->deleteLater();
 }
 
+void Fragments::Factory::processPrefetchEvent(Fragments::Page *page)
+{
+    qDebug() << "Processing prefetched page:" << page->uri().toString();
+    if(page->timestamp() < m_prefetchUntil) {
+        this->getPage(page->hydraNext(), this);
+    }
+    else {
+        qInfo() << "Prefetching complete from:" << m_prefetchFrom << "->" << m_prefetchUntil;
+        emit this->prefetchFinished();
+    }
+}
+
 // Getters & Setters
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Gets the QRail::Network::Manager instance
- * @return const QRail::Network::Manager *manager
- * @package Fragments
- * @private
- * Gets the QRail::Network::Manager instance and returns it.
- */
 QRail::Network::Manager *QRail::Fragments::Factory::http() const
 {
     return m_http;
 }
 
-/**
- * @file fragmentsfactory.cpp
- * @author Dylan Van Assche
- * @date 09 Aug 2018
- * @brief Sets the QRail::Network::Manager instance
- * @param QRail::Network::Manager *http
- * @package Fragments
- * @private
- * Sets the QRail::Network::Manager instance to the given
- * QRail::Network::Manager *http.
- */
 void QRail::Fragments::Factory::setHttp(QRail::Network::Manager *http)
 {
     m_http = http;
@@ -355,6 +342,20 @@ void QRail::Fragments::Factory::setHttp(QRail::Network::Manager *http)
 QRail::Fragments::Dispatcher *QRail::Fragments::Factory::dispatcher() const
 {
     return m_dispatcher;
+}
+
+bool Fragments::Factory::prefetch(const QDateTime &from, const QDateTime &until)
+{
+    if(m_pageCache.isEmpty()) {
+        m_prefetchFrom = from;
+        m_prefetchUntil = until;
+        this->getPage(from, this);
+        return true;
+    }
+
+    // Cache is already prefetched
+    emit this->prefetchFinished();
+    return false;
 }
 
 void QRail::Fragments::Factory::setDispatcher(QRail::Fragments::Dispatcher *dispatcher)

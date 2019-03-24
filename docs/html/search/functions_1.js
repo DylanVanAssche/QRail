@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['board',['Board',['../classLiveboardEngine_1_1Board.html#a70370a5f86db87e9edb9ca23de58b38b',1,'LiveboardEngine::Board::Board(QObject *parent=nullptr)'],['../classLiveboardEngine_1_1Board.html#ae1f97006ef5590a3b4c6b27f48c83c1f',1,'LiveboardEngine::Board::Board(const QList&lt; VehicleEngine::Vehicle *&gt; &amp;entries, StationEngine::Station *station, const QDateTime &amp;from, const QDateTime &amp;until, QObject *parent=nullptr)']]]
+  ['board',['Board',['../classQRail_1_1LiveboardEngine_1_1Board.html#a9551cfa04103fadcd7d3ed9771bab947',1,'QRail::LiveboardEngine::Board::Board(QObject *parent=nullptr)'],['../classQRail_1_1LiveboardEngine_1_1Board.html#a4be1ea3d4ce8b195242b1de059884caa',1,'QRail::LiveboardEngine::Board::Board(const QList&lt; QRail::VehicleEngine::Vehicle * &gt; &amp;entries, StationEngine::Station *station, const QDateTime &amp;from, const QDateTime &amp;until, QObject *parent=nullptr)']]]
 ];

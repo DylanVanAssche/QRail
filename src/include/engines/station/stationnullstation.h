@@ -31,9 +31,21 @@
 
 namespace QRail {
 namespace StationEngine {
+/**
+ * @class NullStation
+ * @brief An StationEngine::NullStation contains a empty station.
+ * A station contains all the information about a stop.
+ * \warning Receiving a NullStation from the QRail library indicates that something must be terrible wrong! Check you debug output carefully.
+ */
 class QRAIL_SHARED_EXPORT NullStation: public Station
 {
 public:
+    //! Gets a StationEngine::NullStation instance
+    /*!
+        \return a StationEngine::NullStation instance.
+        \public
+        Constructs a StationEngine::NullStation if none exists and returns the instance.
+     */
     static NullStation *getInstance();
 
 private:

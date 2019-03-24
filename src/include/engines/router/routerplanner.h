@@ -209,8 +209,11 @@ private slots:
     void handleTimeout();
     void handleFragmentFactoryError();
     void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
+    void processUpdate();
 
 private:
+    QUrl pageUpdateURI;
+    QDateTime fragmentUpdateTimestamp;
     QList<QRail::RouterEngine::Journey *> m_watchList;
     QTimer *progressTimeoutTimer;
     mutable QMutex plannerProcessingMutex;

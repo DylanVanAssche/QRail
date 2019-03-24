@@ -166,6 +166,9 @@ void Fragments::Factory::handleEventSourceThread(QString message)
             qCritical() << "Fragment isn't a JSON object!";
         }
     }
+
+    // Processing complete, let the listeners know that
+    emit this->updateProcessed();
 }
 
 QRail::Fragments::Cache* QRail::Fragments::Factory::pageCache() const

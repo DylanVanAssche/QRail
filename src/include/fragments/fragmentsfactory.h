@@ -109,6 +109,8 @@ signals:
     void pageUpdated(QUrl pageURI);
     //! Emitted when a page and fragment are updated
     void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QUrl page);
+    //! Emitted when an update has been successfully processed
+    void updateProcessed();
 
 private slots:
     void handleEventSource(QString message);

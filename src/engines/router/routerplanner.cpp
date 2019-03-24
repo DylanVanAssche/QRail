@@ -26,12 +26,13 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setAbortRequested(false);
     this->progressTimeoutTimer = new QTimer(this);
     this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
-    connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
-    connect(this->fragmentsFactory(), SIGNAL(fragmentAndPageUpdated(QRail::Fragments::Fragment*, QUrl)),
-            this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*, QUrl)));
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
+    connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
+    connect(this->fragmentsFactory(), SIGNAL(fragmentAndPageUpdated(QRail::Fragments::Fragment*, QUrl)),
+            this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*, QUrl)));
+    connect(this->fragmentsFactory(), SIGNAL(updateProcessed()), this, SLOT(processUpdate()));
 }
 
 QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance()
@@ -1108,18 +1109,41 @@ void RouterEngine::Planner::handleFragmentAndPageFactoryUpdate(Fragments::Fragme
         foreach(QRail::Fragments::Page *page, m_usedPages) {
             foreach(QRail::Fragments::Fragment *frag, page->fragments()) {
                 if(frag->uri() == fragment->uri()) {
-                    qDebug() << "Journey has been affected by a Fragments update." << frag->uri() << "Rerouting...";
-                    qDebug() << page;
-                    qDebug() << page->uri();
-                    qDebug() << journey;
-                    journey->restoreBeforePage(page->uri());
-                    qDebug() << "Journey restored, start CSA...";
-                    this->getConnections(journey);
+                    qDebug() << "Journey has been affected by a Fragments update." << frag->uri();
+                    this->setJourney(journey); // TODO
+
+                    // Check if fragment is before our current update fragment, we only have to reroute from the earliest update
+                    if(fragmentUpdateTimestamp.isValid()) {
+                        if(fragmentUpdateTimestamp > fragment->departureTime()) {
+                            qDebug() << "Updating fragmentUpdateTimestamp:" << fragmentUpdateTimestamp.toString(Qt::ISODate) << "->" << fragment->departureTime().toString(Qt::ISODate);
+                            fragmentUpdateTimestamp = fragment->departureTime();
+                            pageUpdateURI = page->uri();
+                        }
+                    }
+                    // No date has been set yet
+                    else {
+                        qDebug() << "Init fragmentUpdateTimestamp" << fragment->departureTime().toString(Qt::ISODate);
+                        fragmentUpdateTimestamp = fragment->departureTime();
+                    }
                     break;
                 }
             }
         }
     }
+}
+
+void RouterEngine::Planner::processUpdate()
+{
+    // Restore journey to previous snapshot
+    qDebug() << "Restoring journey to snapshot:" << pageUpdateURI;
+    this->journey()->restoreBeforePage(pageUpdateURI);
+
+    // Reroute using the restored journey
+    qDebug() << "Journey restored, start CSA...";
+    this->getConnections(this->journey());
+
+    // Unset fragmentUpdateTimestamp
+    fragmentUpdateTimestamp = QDateTime();
 }
 
 QRail::RouterEngine::Journey *QRail::RouterEngine::Planner::journey() const

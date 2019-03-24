@@ -45,6 +45,7 @@
 #include "engines/station/stationfactory.h"
 #include "engines/station/stationstation.h"
 #include "fragments/fragmentsfactory.h"
+#include "engines/router/routersnapshotjourney.h"
 #include "qrail.h"
 
 // Uncomment to enable logging of CSA parts
@@ -101,6 +102,14 @@ public:
                         const QUrl &arrivalStation,
                         const QDateTime &departureTime,
                         const quint16 &maxTransfers);
+    //! Retrieves a Journey between 2 given stops.
+    /*!
+        \param journey A Journey object that you want to reroute.
+        \public
+        You can rollback a Journey to a given snapshot in time by using the Journey::restoreJourney method.
+        Afterwards, the modified Journey object can be rerouted using this method.
+     */
+    void getConnections(QRail::RouterEngine::Journey *journey);
     //! Retrieves a Journey between 2 given stops.
     /*!
         \param departurePosition The GPS location of the departure location.
@@ -170,9 +179,12 @@ public:
         Sets current Journey.
      */
     void setJourney(QRail::RouterEngine::Journey *journey);
-
     //! Test purposes
     QRail::Fragments::Factory *fragmentsFactory() const;
+    //! Watch a Journey for updates
+    void watch(QRail::RouterEngine::Journey *journey);
+    //! Unwatch a Journey for updates
+    void unwatch(QRail::RouterEngine::Journey *journey);
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -194,8 +206,10 @@ private slots:
     void unlockPlanner();
     void handleTimeout();
     void handleFragmentFactoryError();
+    void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
 
 private:
+    QList<QRail::RouterEngine::Journey *> m_watchList;
     QTimer *progressTimeoutTimer;
     mutable QMutex plannerProcessingMutex;
     mutable QMutex syncThreadMutex;

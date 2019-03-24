@@ -43,14 +43,11 @@ class Cache : public QObject
 public:
     explicit Cache(QObject *parent = nullptr);
     void cachePage(QRail::Fragments::Page *page);
-    void updateFragment(QRail::Fragments::Fragment *fragment);
+    QUrl updateFragment(QRail::Fragments::Fragment *fragment);
     QRail::Fragments::Page *getPageByURI(QUrl uri);
     QRail::Fragments::Page *getPageByFragment(QRail::Fragments::Fragment *fragment);
     bool hasPage(QUrl uri);
     bool isEmpty();
-
-signals:
-    void pageUpdated(QUrl uri);
 
 private:
     QMap<QUrl, QRail::Fragments::Page*> m_cache;

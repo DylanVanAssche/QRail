@@ -38,8 +38,8 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     qDebug() << "---------------------------------------------- ABORT LIVEBOARD ----------------------------------------------";
 
-    // Testing abort
-    start = QDateTime::currentDateTime();
+    /*// Testing abort
+    start = QDateTime::currentDateTimeUtc();
     qInfo() << "Testing abort";
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
@@ -50,12 +50,12 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     QEventLoop loopAbort;
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
-    loopAbort.exec();
+    loopAbort.exec();*/
 
     qDebug() << "---------------------------------------------- CREATING LIVEBOARD ----------------------------------------------";
 
     // Creating liveboard
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008813003"), // Brussels-Central, the most events generating station of the SNCB
         QDateTime::currentDateTimeUtc(),
@@ -67,7 +67,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loop, SLOT(quit()));
     loop.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
     qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
@@ -80,7 +80,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
         LiveboardEngine::Board::Mode::DEPARTURES);
@@ -90,13 +90,13 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopCached, SLOT(quit()));
     loopCached.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES CACHED took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
     qDebug() << "---------------------------------------------- NEXT RESULTS ----------------------------------------------";
 
     // Extending liveboard with next results
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getNextResultsForLiveboard(liveboard);
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
@@ -104,13 +104,13 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopNext, SLOT(quit()));
     loopNext.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES extending NEXT took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
     qDebug() << "---------------------------------------------- PREVIOUS RESULTS ----------------------------------------------";
 
     // Extending liveboard with previous results
-    start = QDateTime::currentDateTime();
+    start = QDateTime::currentDateTimeUtc();
     factory->getPreviousResultsForLiveboard(liveboard);
 
     // Start an eventloop to wait for the routesFound signal to allow benchmarking of asynchronous events
@@ -118,7 +118,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopPrevious, SLOT(quit()));
     loopPrevious.exec();
     qInfo() << "Liveboard Vilvoorde DEPARTURES extending PREVIOUS took"
-            << start.msecsTo(QDateTime::currentDateTime())
+            << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 }
 

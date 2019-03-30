@@ -1138,6 +1138,10 @@ void RouterEngine::Planner::processUpdate()
     qDebug() << "Restoring journey to snapshot:" << pageUpdateURI;
     this->journey()->restoreBeforePage(pageUpdateURI);
 
+    // Cancel any running operation
+    qDebug() << "Aborting any previous running CSA operations...";
+    this->abortCurrentOperation();
+
     // Reroute using the restored journey
     qDebug() << "Journey restored, start CSA...";
     this->getConnections(this->journey());

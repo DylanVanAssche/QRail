@@ -212,6 +212,7 @@ private slots:
     void processUpdate();
 
 private:
+    bool m_isRunning;
     QUrl pageUpdateURI;
     QDateTime fragmentUpdateTimestamp;
     QList<QRail::RouterEngine::Journey *> m_watchList;

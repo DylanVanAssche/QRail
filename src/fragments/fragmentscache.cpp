@@ -76,16 +76,20 @@ void Cache::cachePage(Page *page)
 
 QUrl Cache::updateFragment(Fragment *updatedFragment)
 {
+    qDebug() << "Updating fragment";
     // We look between the departureTime and departureTime + departureDelay for the old fragment
     QDateTime departureTime = updatedFragment->departureTime().addSecs(-updatedFragment->departureDelay());
     QDateTime departureTimeWithDelay = updatedFragment->departureTime();
     QList<QUrl> pagesURI = m_cache.keys();
     QUrl updatedPageURI;
 
-    foreach(QUrl pageURI, pagesURI) {
+    for(qint64 pageCounter=0; pageCounter < pagesURI.length()-1; pageCounter++) {
+        QUrl pageURI = pagesURI[pageCounter];
         QUrlQuery query = QUrlQuery(pageURI);
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-        if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
+        qDebug() << pageTime << "|" << departureTime << "|" << departureTimeWithDelay;
+        //if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
+        if(pageTime >= departureTime) {
             qDebug() << "Page time:" << pageTime;
             QRail::Fragments::Page* page = m_cache.value(pageURI);
             QList<QRail::Fragments::Fragment *> fragments = page->fragments();

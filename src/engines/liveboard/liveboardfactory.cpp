@@ -444,6 +444,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
     //qDebug() << "Received fragment update:" << fragment->uri().toString();
     // For each board, check if the board is affected by the update and update the board if needed
     foreach(QRail::LiveboardEngine::Board *board, m_watchList) {
+        bool isUpdated = false;
         QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
 
         // Check each entry
@@ -519,8 +520,12 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                 board->setEntries(entriesList);
                 emit this->stream(newVehicle);
                 emit board->entriesChanged();
-                emit this->finished(board);
+                isUpdated = true;
             }
+        }
+
+        if(isUpdated) {
+            emit this->finished(board);
         }
     }
 }

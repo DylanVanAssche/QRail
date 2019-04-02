@@ -26,6 +26,7 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setAbortRequested(false);
     this->progressTimeoutTimer = new QTimer(this);
     this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
+    m_isRunning = false;
 
     // Connect signals
     connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(unlockPlanner()));
@@ -84,6 +85,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
     * https://stackoverflow.com/questions/7114421/qtconcurrentrun-emit-signal#41110098
     * Docs: https://doc.qt.io/qt-5.6/qtconcurrent.html
     */
+    m_isRunning = true;
 
     if (departureStation.isValid() && arrivalStation.isValid() && departureStation.isValid()) {
         qDebug() << "Init CSA algorithm";
@@ -143,6 +145,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
 void RouterEngine::Planner::getConnections(Journey *journey)
 {
     if(journey) {
+        m_isRunning = true;
         this->setJourney(journey);
         this->initUsedPages();
         this->progressTimeoutTimer->start();
@@ -1138,9 +1141,16 @@ void RouterEngine::Planner::processUpdate()
     qDebug() << "Restoring journey to snapshot:" << pageUpdateURI;
     this->journey()->restoreBeforePage(pageUpdateURI);
 
-    // Cancel any running operation
-    qDebug() << "Aborting any previous running CSA operations...";
-    this->abortCurrentOperation();
+    // Cancel any running operation if needed
+    if(m_isRunning) {
+        qDebug() << "Aborting any previous running CSA operations...";
+        this->abortCurrentOperation();
+
+        // Wait until operation has been canceled
+        QEventLoop loopAbort;
+        connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loopAbort, SLOT(quit()));
+        loopAbort.exec();
+    }
 
     // Reroute using the restored journey
     qDebug() << "Journey restored, start CSA...";

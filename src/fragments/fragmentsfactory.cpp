@@ -61,7 +61,7 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-        QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
+    QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
     if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
@@ -83,7 +83,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     this->dispatcher()->addTarget(departureTime, caller);
 
     // Page is cached, dispatching!
-        QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
+    QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
     if(page) {
         this->dispatcher()->dispatchPage(page);
         return;
@@ -125,6 +125,7 @@ void Fragments::Factory::handleEventSourceThread(QString message)
     qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = doc.object();
+    qDebug() << jsonObject["@graph"].toArray();
 
     QJsonArray graph = jsonObject["@graph"].toArray();
     foreach (QJsonValue item, graph) {
@@ -133,6 +134,7 @@ void Fragments::Factory::handleEventSourceThread(QString message)
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
             QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
             if (frag) {
+                qDebug() << "Is object OK";
                 QUrl updatedPageURI = this->pageCache()->updateFragment(frag);
                 //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
                 // In case we haven't downloaded this page yet, skip this update

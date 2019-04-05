@@ -58,7 +58,7 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri, QObject *caller)
 {
     QUrlQuery query = QUrlQuery(uri);
     QDateTime departureTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-    this->dispatcher()->addTarget(departureTime, caller);
+    this->dispatcher()->addTarget(departureTime.toUTC(), caller);
 
     // Page is cached, dispatching!
     QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
@@ -80,7 +80,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime, QObject 
     qDebug() << departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z");
     parameters.addQueryItem("departureTime", departureTime.toString(Qt::ISODate).replace(QRegularExpression("Z"), ".000Z"));
     uri.setQuery(parameters);
-    this->dispatcher()->addTarget(departureTime, caller);
+    this->dispatcher()->addTarget(departureTime.toUTC(), caller);
 
     // Page is cached, dispatching!
     QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);

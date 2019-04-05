@@ -76,8 +76,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->deleteUsedPages(); // Clean up previous pages if needed
         this->setStationURI(uri);
         this->setMode(mode);
-        this->setFrom(from);
-        this->setUntil(until);
+        this->setFrom(from.toUTC());
+        this->setUntil(until.toUTC());
         this->setLiveboard(new QRail::LiveboardEngine::Board(this));
         this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
         this->liveboard()->setFrom(this->from());

@@ -1148,7 +1148,7 @@ void RouterEngine::Planner::processUpdate()
 
         // Wait until operation has been canceled
         QEventLoop loopAbort;
-        connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loopAbort, SLOT(quit()));
+        connect(this, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loopAbort, SLOT(quit()));
         loopAbort.exec();
     }
 

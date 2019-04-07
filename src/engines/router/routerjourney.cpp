@@ -40,6 +40,29 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> routes,
     m_hydraPrevious = hydraPrevious;
 }
 
+RouterEngine::Journey::~Journey()
+{
+    foreach(auto r, m_routes) {
+        if(r) {
+            r->deleteLater();
+        }
+    }
+
+    foreach(auto t, m_TArray.values()) {
+        if(t) {
+            t->deleteLater();
+        }
+    }
+
+    foreach(auto s1, m_SArray.values()) {
+        foreach(auto s2, s1) {
+            if(s2) {
+                s2->deleteLater();
+            }
+        }
+    }
+}
+
 QList<QRail::RouterEngine::Route *> QRail::RouterEngine::Journey::routes() const
 {
     return m_routes;

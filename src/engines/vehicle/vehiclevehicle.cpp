@@ -87,6 +87,15 @@ QRail::VehicleEngine::Vehicle::Vehicle(const QUrl &uri, const QUrl &tripURI,
     m_intermediaryStops = intermediaryStops;
 }
 
+VehicleEngine::Vehicle::~Vehicle()
+{
+    foreach(auto i, m_intermediaryStops) {
+        if(i) {
+            i->deleteLater();
+        }
+    }
+}
+
 // Getters & Setters
 /**
  * @file vehiclevehicle.cpp

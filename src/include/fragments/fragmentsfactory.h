@@ -31,7 +31,7 @@
 #include "network/networkmanager.h"
 #include "qrail.h"
 
-#define BASE_URL "https://graph.irail.be/sncb/connections"
+#define BASE_URL "https://lc.dylanvanassche.be/sncb/connections" //"https://graph.irail.be/sncb/connections"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"

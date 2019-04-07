@@ -37,6 +37,7 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     this->setAbortRequested(false);
     this->progressTimeoutTimer = new QTimer(this);
     this->progressTimeoutTimer->setInterval(HTTP_TIMEOUT);
+    this->setJourney(nullptr);
     connect(this->progressTimeoutTimer, SIGNAL(timeout()), this, SLOT(handleTimeout()));
 
     // Connect signals
@@ -244,7 +245,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     bool hasPassedDepartureTimeLimit = false;
 
     // Fake an infinite time by adding 1 year to the current date, this is required for the Profile Scan Algortihm to work
-    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTime().addYears(1));
+    QDateTime INFINITE_TIME = QDateTime(QDateTime::currentDateTimeUtc().addYears(1));
 
     // Fake an infinite number of transfers by setting it to 32767 (16 bits signed 01111111 11111111)
     qint16 INFINITE_TRANSFERS = 32767;
@@ -294,8 +295,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          */
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
         if((this->journey()->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-        || (this->journey()->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-        || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
+                || (this->journey()->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
+                || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT available:" << fragment->tripURI();
 #endif
@@ -306,26 +307,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          * Connection is available (GTFSTypes::REGULAR), we should check if it's a reachable connection using Earliest Arrival CSA.
          */
         if(reachable && (this->journey()->T_EarliestArrivalTime().contains(fragment->tripURI())
-           || (this->journey()->S_EarliestArrivalTime().contains(fragment->arrivalStationURI())
-               && this->journey()->S_EarliestArrivalTime().value(fragment->arrivalStationURI()) > fragment->arrivalTime())))
+                         || (this->journey()->S_EarliestArrivalTime().contains(fragment->arrivalStationURI())
+                             && this->journey()->S_EarliestArrivalTime().value(fragment->arrivalStationURI()) > fragment->arrivalTime())))
         {
-            qint16 count = this->journey()->T_EarliestArrivalTime().value(fragment->tripURI()) + 1;
+            qint16 count = this->journey()->T_EarliestArrivalTime().value(fragment->tripURI(), 0) + 1;
             QMap<QUrl, qint16> T_early = this->journey()->T_EarliestArrivalTime();
             T_early.insert(fragment->tripURI(), count);
             this->journey()->setT_EarliestArrivalTime(T_early);
 
-            /*
-             * We update the timestamp in the this->journey()->S_EarliestArrivalTime map for the departure station of the connection if:
-             *     - The station URI doesn't exist yet.
-             *     - The timestamp for the station URI is higher than our connection's departure time.
-             */
-            if(!this->journey()->S_EarliestArrivalTime().contains(fragment->departureStationURI())
-                    || this->journey()->S_EarliestArrivalTime().value(fragment->departureStationURI()) > fragment->departureTime())
-            {
-                QMap<QUrl, QDateTime> S_early = this->journey()->S_EarliestArrivalTime();
-                S_early.insert(fragment->departureStationURI(), fragment->departureTime());
-                this->journey()->setS_EarliestArrivalTime(S_early);
-            }
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is reachable:" << fragment->tripURI();
 #endif
@@ -333,6 +322,19 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         }
         else {
             reachable = false;
+        }
+
+        /*
+         * We update the timestamp in the this->journey()->S_EarliestArrivalTime map for the departure station of the connection if:
+         *     - The station URI doesn't exist yet.
+         *     - The timestamp for the station URI is higher than our connection's departure time.
+         */
+        if(!this->journey()->S_EarliestArrivalTime().contains(fragment->departureStationURI())
+                || this->journey()->S_EarliestArrivalTime().value(fragment->departureStationURI()) > fragment->departureTime())
+        {
+            QMap<QUrl, QDateTime> S_early = this->journey()->S_EarliestArrivalTime();
+            S_early.insert(fragment->departureStationURI(), fragment->departureTime());
+            this->journey()->setS_EarliestArrivalTime(S_early);
         }
 
         /*
@@ -360,9 +362,12 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
 
         // We can only process fragments which are departing after our departure time
-        if (fragment->departureTime() < this->journey()->departureTime()) {
+        if (fragment->departureTime() <= this->journey()->departureTime()) {
             hasPassedDepartureTimeLimit = true;
             continue;
+        }
+        else {
+            qDebug() << "hasPassedDepartureTimeLimit? " << fragment->departureTime() << "|" << this->journey()->departureTime();
         }
 
         /*
@@ -592,7 +597,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                      this->journey()->arrivalStationURI()) &&
                     T3_transferArrivalTime == T2_stayOnTripArrivalTime &&
                     this->journey()->SArray().contains(this->journey()->TArray().value(
-                                                fragment->tripURI())->arrivalConnection()->arrivalStationURI()) &&
+                                                           fragment->tripURI())->arrivalConnection()->arrivalStationURI()) &&
                     this->journey()->SArray().contains(fragment->arrivalStationURI())) {
                 /*
                 * When the arrival time is the same, the number of transfer should also
@@ -669,9 +674,18 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                                 Tmin_transfers
                                 );
                     QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->journey()->TArray();
+                    // Memory management
+                    QRail::RouterEngine::TrainProfile *old = T.value(fragment->tripURI(), nullptr);
+                    if(old) {
+                        delete old;
+                    }
                     T.insert(fragment->tripURI(), newTrainProfile);
                     this->journey()->setTArray(T);
                 }
+
+                // Memory managment
+                delete newStationStopProfile;
+                delete currentStationStopProfile;
             }
 
             // We found a faster way, update the T array
@@ -683,9 +697,15 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                             Tmin_transfers
                             );
                 QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->journey()->TArray();
+                // Memory management
+                QRail::RouterEngine::TrainProfile *old = T.value(fragment->tripURI(), nullptr);
+                if(old) {
+                    delete old;
+                }
                 T.insert(fragment->tripURI(), fasterTrainProfile);
                 this->journey()->setTArray(T);
             }
+        // Not existing, no replacement, only insertion (no memory leaks)
         } else {
             QRail::RouterEngine::TrainProfile *nonExistingTrainProfile =
                     new QRail::RouterEngine::TrainProfile(
@@ -727,6 +747,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     );
 
         // Entry already exists in the S array
+        bool updatedStationStopProfileUsed = false;
         if (this->journey()->SArray().contains(fragment->departureStationURI())) {
             qint16 numberOfPairs = this->journey()->SArray().value(fragment->departureStationURI()).size();
             QRail::RouterEngine::StationStopProfile *existingStationStopProfile = this->journey()->SArray().value(
@@ -754,9 +775,14 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
                                 fragment->departureStationURI());
                     // Replace profile when departure times are equal
+                    QRail::RouterEngine::StationStopProfile *old = SProfiles.at(numberOfPairs - 1);
+                    if(old) {
+                        delete old; // Memory management
+                    }
                     SProfiles.replace(numberOfPairs - 1, updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->journey()->setSArray(S);
+                    updatedStationStopProfileUsed = true;
                 }
                 // We're iterating over DESCENDING departure times, inserting the
                 // StationStopProfile at the back
@@ -768,6 +794,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     SProfiles.append(updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->journey()->setSArray(S);
+                    updatedStationStopProfileUsed = true;
                 }
             }
         }
@@ -781,6 +808,12 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             stationStopProfileList.append(updatedStationStopProfile);
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->journey()->setSArray(S);
+            updatedStationStopProfileUsed = true;
+        }
+
+        // Memory management
+        if(!updatedStationStopProfileUsed) {
+            delete updatedStationStopProfile;
         }
 
         /*
@@ -846,7 +879,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                             true,
                             profile->departureConnection()->departureDelay(),
                             false,
-                            profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
+                            profile->departureConnection()->departureTime() < QDateTime::currentDateTimeUtc(),
                             QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
                 QRail::RouterEngine::RouteLegEnd *arrivalLeg =
@@ -858,7 +891,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                             true,
                             profile->arrivalConnection()->departureDelay(),
                             false,
-                            profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
+                            profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTimeUtc(),
                             QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
                 // Create vehicle information
@@ -895,7 +928,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         true,
                         profile->departureConnection()->departureDelay(),
                         false,
-                        profile->departureConnection()->departureTime() < QDateTime::currentDateTime(),
+                        profile->departureConnection()->departureTime() < QDateTime::currentDateTimeUtc(),
                         QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED);
 
             QRail::RouterEngine::RouteLegEnd *arrivalLeg =
@@ -907,7 +940,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         true,
                         profile->arrivalConnection()->departureDelay(),
                         false,
-                        profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTime(),
+                        profile->arrivalConnection()->arrivalTime() < QDateTime::currentDateTimeUtc(),
                         QRail::VehicleEngine::Stop::OccupancyLevel::UNSUPPORTED
                         );
 
@@ -1261,6 +1294,10 @@ void RouterEngine::Planner::deleteUsedPages()
         else {
             qCritical() << "Page pointer is invalid!";
         }
+    }
+
+    if(this->journey()) {
+        this->journey()->deleteLater();
     }
 }
 

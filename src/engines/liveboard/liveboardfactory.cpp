@@ -93,8 +93,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
                                                                const QRail::LiveboardEngine::Board::Mode &mode)
 {
     this->getLiveboardByStationURI(uri,
-                                   QDateTime::currentDateTime().toUTC(),
-                                   QDateTime::currentDateTime().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER).toUTC(),
+                                   QDateTime::currentDateTimeUtc(),
+                                   QDateTime::currentDateTimeUtc().addSecs(0.5 * SECONDS_TO_HOURS_MULTIPLIER),
                                    mode);
 }
 
@@ -130,8 +130,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->deleteUsedPages(); // Clean up previous pages if needed
         this->setStationURI(uri);
         this->setMode(mode);
-        this->setFrom(from);
-        this->setUntil(until);
+        this->setFrom(from.toUTC());
+        this->setUntil(until.toUTC());
         this->setLiveboard(new QRail::LiveboardEngine::Board(this));
         this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
         this->liveboard()->setFrom(this->from());
@@ -329,7 +329,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->departureTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->departureTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->departureTime().addSecs(-fragment->departureDelay()), // Delays are included, remove them
                             fragment->departureDelay(),
                             false, // isDepartureCanceled
@@ -345,7 +345,7 @@ void QRail::LiveboardEngine::Factory::parsePage(QRail::Fragments::Page *page, bo
                             this->liveboard()->station(),
                             QString("?"), // platform
                             true,         // isPlatformNormal
-                            fragment->arrivalTime() >= QDateTime::currentDateTime(), // hasLeft
+                            fragment->arrivalTime() >= QDateTime::currentDateTimeUtc(), // hasLeft
                             fragment->arrivalTime().addSecs(-fragment->arrivalDelay()), // Delays are included, remove them
                             fragment->arrivalDelay(),
                             false, // isDepartureCanceled

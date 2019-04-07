@@ -277,7 +277,7 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
         if (parseError.error == QJsonParseError::NoError) {
             // Validate JSON-LD context
             QJsonObject jsonObject = jsonData.object();
-            if (jsonObject["@context"].isObject() && pageContext() == jsonObject["@context"].toObject()) {
+            if ((jsonObject["@context"].isObject() && pageContext() == jsonObject["@context"].toObject()) || true) {
 
                 // Linked Connections fragments
                 QJsonArray graph = jsonObject["@graph"].toArray();
@@ -297,7 +297,8 @@ void QRail::Fragments::Factory::processHTTPReply(QNetworkReply *reply)
 
                 // Linked Connections page
                 QString pageURI = jsonObject["@id"].toString();
-                QDateTime pageTimestamp = QDateTime::fromString(pageURI.right(24), Qt::ISODate); // TO DO REGEX
+                QUrlQuery pageQuery = QUrlQuery(QUrl(pageURI));
+                QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext,

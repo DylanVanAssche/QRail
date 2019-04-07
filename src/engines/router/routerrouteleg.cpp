@@ -44,6 +44,21 @@ QRail::RouterEngine::RouteLeg::RouteLeg(const QRail::RouterEngine::RouteLeg::Typ
     m_arrival = arrival;
 }
 
+RouterEngine::RouteLeg::~RouteLeg()
+{
+    if(m_vehicleInformation) {
+        m_vehicleInformation->deleteLater();
+    }
+
+    if(m_departure) {
+        m_departure->deleteLater();
+    }
+
+    if(m_arrival) {
+        m_arrival->deleteLater();
+    }
+}
+
 /**
  * @file routerrouteleg.cpp
  * @author Dylan Van Assche

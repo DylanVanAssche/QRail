@@ -41,6 +41,13 @@ QRail::RouterEngine::TrainProfile::TrainProfile(const QDateTime &arrivalTime,
     this->setTransfers(transfers);
 }
 
+RouterEngine::TrainProfile::~TrainProfile()
+{
+    /*if(m_arrivalConnection) {
+        m_arrivalConnection->deleteLater();
+    }*/
+}
+
 // Getters & Setters
 /**
  * @file routertrainprofile.cpp

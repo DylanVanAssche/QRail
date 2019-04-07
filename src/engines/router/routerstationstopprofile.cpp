@@ -47,6 +47,17 @@ QRail::RouterEngine::StationStopProfile::StationStopProfile(const QDateTime &dep
     m_transfers = transfers;
 }
 
+RouterEngine::StationStopProfile::~StationStopProfile()
+{
+    /*if(m_departureConnection) {
+        m_departureConnection->deleteLater();
+    }
+
+    if(m_arrivalConnection) {
+        m_arrivalConnection->deleteLater();
+    }*/
+}
+
 // Getters & Setters
 /**
  * @file routerstationstopprofile.cpp

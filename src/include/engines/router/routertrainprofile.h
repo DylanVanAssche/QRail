@@ -33,6 +33,7 @@ public:
         const qint16 transfers,
         QObject *parent = nullptr
     );
+    ~TrainProfile();
     QDateTime arrivalTime() const;
     void setArrivalTime(const QDateTime &arrivalTime);
     QRail::Fragments::Fragment *arrivalConnection() const;

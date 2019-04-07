@@ -38,6 +38,7 @@ public:
         const QList<QRail::Fragments::Fragment *> &fragments,
         QObject *parent = nullptr
     );
+    ~Page();
     QUrl uri() const;
     void setURI(const QUrl &uri);
     QDateTime timestamp() const;

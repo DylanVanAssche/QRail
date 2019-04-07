@@ -34,14 +34,14 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
      */
 
     // Create custom event type
-    QRail::Network::DispatcherEvent event = QRail::Network::DispatcherEvent(this->eventType());
-    event.setReply(reply);
+    QRail::Network::DispatcherEvent *event = new QRail::Network::DispatcherEvent(this->eventType());
+    event->setReply(reply);
 
     // Retrieve the caller of the reply
     QObject *caller = this->findTarget(reply);
 
     // Post the event to the event queue and remove the reply from the targets list
-    QCoreApplication::sendEvent(caller, &event);
+    QCoreApplication::sendEvent(caller, event);
     this->removeTarget(reply);
 }
 

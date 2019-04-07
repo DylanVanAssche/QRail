@@ -35,6 +35,7 @@ public:
         const qint16 transfers,
         QObject *parent = nullptr
     );
+    ~StationStopProfile();
     QDateTime departureTime() const;
     void setDepartureTime(const QDateTime &departureTime);
     QDateTime arrivalTime() const;

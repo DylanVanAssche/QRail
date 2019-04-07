@@ -4,62 +4,63 @@
     "hydra": "http://www.w3.org/ns/hydra/core#",
     "gtfs": "http://vocab.gtfs.org/terms#",
     "Connection": "lc:Connection",
+    "CancelledConnection": "lc:CancelledConnection",
     "arrivalTime": {
-        "@id": "lc:arrivalTime",
-        "@type": "xsd:dateTime"
+      "@id": "lc:arrivalTime",
+      "@type": "xsd:dateTime"
     },
     "departureTime": {
-        "@id": "lc:departureTime",
-        "@type": "xsd:dateTime"
+      "@id": "lc:departureTime",
+      "@type": "xsd:dateTime"
     },
     "arrivalStop": {
-        "@type": "@id",
-        "@id": "lc:arrivalStop"
+      "@type": "@id",
+      "@id": "lc:arrivalStop"
     },
     "departureStop": {
-        "@type": "@id",
-        "@id": "lc:departureStop"
+      "@type": "@id",
+      "@id": "lc:departureStop"
     },
     "departureDelay": {
-        "@id": "lc:departureDelay",
-        "@type": "xsd:integer"
+      "@id": "lc:departureDelay",
+      "@type": "xsd:integer"
     },
     "arrivalDelay": {
-        "@id": "lc:arrivalDelay",
-        "@type": "xsd:integer"
+      "@id": "lc:arrivalDelay",
+      "@type": "xsd:integer"
     },
     "direction": {
-        "@id": "gtfs:headsign",
-        "@type": "xsd:string"
+      "@id": "gtfs:headsign",
+      "@type": "xsd:string"
     },
     "gtfs:trip": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "gtfs:route": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "gtfs:pickupType": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "gtfs:dropOffType": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "gtfs:Regular": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "gtfs:NotAvailable": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "hydra:next": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "hydra:previous": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "hydra:property": {
-        "@type": "@id"
+      "@type": "@id"
     },
     "hydra:variableRepresentation": {
-        "@type": "@id"
+      "@type": "@id"
     }
 }

@@ -23,6 +23,7 @@ public:
                      const QUrl hydraNext,
                      const QUrl hydraPrevious,
                      QObject *parent = nullptr);
+    ~Journey();
     QList<QRail::RouterEngine::Route *> routes() const;
     void setRoutes(const QList<QRail::RouterEngine::Route *> &routes);
     QUrl hydraNext() const;

@@ -42,6 +42,7 @@ public:
         QRail::RouterEngine::RouteLeg *arrivalLeg = nullptr,
         QObject *parent = nullptr
     );
+    ~Transfer();
     QRail::RouterEngine::RouteLeg *departureLeg() const;
     void setDepartureLeg(QRail::RouterEngine::RouteLeg *departureLeg);
     QRail::RouterEngine::RouteLeg *arrivalLeg() const;

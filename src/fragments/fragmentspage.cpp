@@ -64,6 +64,15 @@ QRail::Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const 
     m_fragments = fragments;
 }
 
+Fragments::Page::~Page()
+{
+    foreach(auto f, m_fragments) {
+        if(f) {
+            f->deleteLater();
+        }
+    }
+}
+
 /**
  * @file fragmentspage.cpp
  * @author Dylan Van Assche

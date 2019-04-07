@@ -236,7 +236,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
      */
 
     bool reachable;
-    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
+    QList<QRail::Fragments::Fragment *> frags = page->fragments();
+    for (qint16 fragIndex = frags.size() - 1; fragIndex >= 0; --fragIndex) {
         reachable = true; // We assume that everything is reachable until we prove otherwise
 
         // Current operation aborted by the user
@@ -254,7 +255,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          * In order to arrive at our destination, we should be able to get off the vehicle at the arrival station (dropOff type == GTFSTypes::REGULAR).
          * Connections that don't arrive and departure at a stop can't be used either.
          */
-        QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+        QRail::Fragments::Fragment *fragment = frags.at(fragIndex);
         if((this->journey()->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
         || (this->journey()->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
         || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
@@ -269,32 +270,33 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
          */
         if(reachable && (this->journey()->T_EarliestArrivalTime().contains(fragment->tripURI())
            || (this->journey()->S_EarliestArrivalTime().contains(fragment->arrivalStationURI())
-               && this->journey()->S_EarliestArrivalTime().value(fragment->arrivalStationURI()) > fragment->arrivalTime())))
+               && this->journey()->S_EarliestArrivalTime().value(fragment->arrivalStationURI()) >= fragment->arrivalTime())))
         {
-            qint16 count = this->journey()->T_EarliestArrivalTime().value(fragment->tripURI()) + 1;
+            qint16 count = this->journey()->T_EarliestArrivalTime().value(fragment->tripURI(), 0) + 1;
             QMap<QUrl, qint16> T_early = this->journey()->T_EarliestArrivalTime();
             T_early.insert(fragment->tripURI(), count);
             this->journey()->setT_EarliestArrivalTime(T_early);
-
-            /*
-             * We update the timestamp in the this->journey()->S_EarliestArrivalTime map for the departure station of the connection if:
-             *     - The station URI doesn't exist yet.
-             *     - The timestamp for the station URI is higher than our connection's departure time.
-             */
-            if(!this->journey()->S_EarliestArrivalTime().contains(fragment->departureStationURI())
-                    || this->journey()->S_EarliestArrivalTime().value(fragment->departureStationURI()) > fragment->departureTime())
-            {
-                QMap<QUrl, QDateTime> S_early = this->journey()->S_EarliestArrivalTime();
-                S_early.insert(fragment->departureStationURI(), fragment->departureTime());
-                this->journey()->setS_EarliestArrivalTime(S_early);
-            }
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is reachable:" << fragment->tripURI();
 #endif
             reachable = true;
+            continue;
         }
         else {
             reachable = false;
+        }
+
+        /*
+         * We update the timestamp in the this->journey()->S_EarliestArrivalTime map for the departure station of the connection if:
+         *     - The station URI doesn't exist yet.
+         *     - The timestamp for the station URI is higher than our connection's departure time.
+         */
+        if(!this->journey()->S_EarliestArrivalTime().contains(fragment->departureStationURI())
+                || this->journey()->S_EarliestArrivalTime().value(fragment->departureStationURI()) > fragment->departureTime())
+        {
+            QMap<QUrl, QDateTime> S_early = this->journey()->S_EarliestArrivalTime();
+            S_early.insert(fragment->departureStationURI(), fragment->departureTime());
+            this->journey()->setS_EarliestArrivalTime(S_early);
         }
 
         /*
@@ -305,10 +307,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 #ifdef VERBOSE_PARAMETERS
             qDebug() << "Connection is NOT reachable:" << fragment->tripURI();
 #endif
-            /*QList<QRail::Fragments::Fragment *> frags = page->fragments();
-            frags.removeAt(fragIndex);
-            page->setFragments(frags);
-            fragment->deleteLater();*/
+            frags.removeOne(fragment);
         }
     }
 
@@ -318,11 +317,11 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
     // Run the CSA Profile Scan Algorithm on the given page, looping in DESCENDING
     // departure times order
-    for (qint16 fragIndex = page->fragments().size() - 1; fragIndex >= 0; --fragIndex) {
-        QRail::Fragments::Fragment *fragment = page->fragments().at(fragIndex);
+    for (qint16 fragIndex = frags.size() - 1; fragIndex >= 0; --fragIndex) {
+        QRail::Fragments::Fragment *fragment = frags.at(fragIndex);
 
         // We can only process fragments which are departing after our departure time
-        if (fragment->departureTime() < this->journey()->departureTime()) {
+        if (fragment->departureTime() <= this->journey()->departureTime()) {
             hasPassedDepartureTimeLimit = true;
             continue;
         }

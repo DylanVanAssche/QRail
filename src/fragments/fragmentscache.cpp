@@ -106,9 +106,9 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         updatedPageURI = page->uri();
 
                         // Insert updated fragment in the new page
-                        for(qint32 pageCounter=0; pageCounter < pagesURI.length()-1; pageCounter++) {
+                        for(qint32 pageCounter=0; pageCounter < pagesURI.length() - 1; pageCounter++) {
                             QUrl currentPageURI = pagesURI.at(pageCounter);
-                            QUrl nextPageURI = pagesURI.at(pageCounter);
+                            QUrl nextPageURI = pagesURI.at(pageCounter + 1);
                             QUrlQuery currentPageQuery = QUrlQuery(currentPageURI);
                             QUrlQuery nextPageQuery = QUrlQuery(nextPageURI);
                             QDateTime currentPageTime = QDateTime::fromString(currentPageQuery.queryItemValue("departureTime"), Qt::ISODate);

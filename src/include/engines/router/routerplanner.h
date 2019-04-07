@@ -109,7 +109,8 @@ public:
         You can rollback a Journey to a given snapshot in time by using the Journey::restoreJourney method.
         Afterwards, the modified Journey object can be rerouted using this method.
      */
-    void getConnections(QRail::RouterEngine::Journey *journey);
+    void getConnections(QRail::RouterEngine::Journey *journey,
+                        QDateTime pageTimestamp);
     //! Retrieves a Journey between 2 given stops.
     /*!
         \param departurePosition The GPS location of the departure location.
@@ -203,6 +204,8 @@ signals:
     void requested(const QUrl &pageURI);
     //! Emitted when a new Fragments::Page has been received.
     void processing(const QUrl &pageURI);
+
+    void updateReceived(qint64 time);
 
 private slots:
     void unlockPlanner();

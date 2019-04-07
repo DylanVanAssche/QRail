@@ -83,6 +83,36 @@ void QRail::RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
     }
 }
 
+RouterEngine::Journey::~Journey()
+{
+    foreach(auto r, m_routes) {
+        if(r) {
+            r->deleteLater();
+        }
+    }
+
+    foreach(auto t, m_TArray.values()) {
+        if(t) {
+            t->deleteLater();
+        }
+    }
+
+    foreach(auto s1, m_SArray.values()) {
+        foreach(auto s2, s1) {
+            if(s2) {
+                s2->deleteLater();
+            }
+        }
+    }
+
+    foreach(auto sj, m_snapshotJourneys) {
+        if(sj) {
+            sj->deleteLater();
+        }
+    }
+}
+
+
 QUrl QRail::RouterEngine::Journey::hydraPrevious() const
 {
     return m_hydraPrevious;
@@ -149,19 +179,25 @@ void QRail::RouterEngine::Journey::setMaxTransfers(const qint16 &maxTransfers)
 void RouterEngine::Journey::addSnapshotJourney(RouterEngine::SnapshotJourney *snapshotJourney)
 {
     m_snapshotJourneys.append(snapshotJourney);
+    qDebug() << "Added snapshot:" << snapshotJourney->pageURI();
+    qDebug() << "Number of snapshots:" << m_snapshotJourneys.length();
 }
 
-void RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
+QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
 {
     // We can't restore anything if we don't have anything
     if(m_snapshotJourneys.length() == 0) {
         qCritical() << "Unable to restore Journey, cached journeys list is empty!";
-        return;
+        return QDateTime();
     }
+
+    QUrlQuery pageQuery = QUrlQuery(pageURI);
+    QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
 
     // First cached journey is affected? Reroute completely.
     if(m_snapshotJourneys.at(0)->pageURI() == pageURI) {
         qDebug() << "First snapshot is affected, clearing Journey";
+        m_snapshotJourneys.removeOne(m_snapshotJourneys.at(0));
         this->setRoutes(QList<QRail::RouterEngine::Route *>());
         this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *> ());
         this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >());
@@ -169,14 +205,17 @@ void RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
         this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
         this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
         this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
-        return;
+        this->cleanSnapshots(m_snapshotJourneys.at(0)->pageTimestamp());
+        return pageTimestamp;
     }
 
     // Look for the page in the list and restore the Journey before that page
+    qDebug() << "Searching for previous Journey, just before our affected page:" << pageURI;
     for(qint64 c=0; c < m_snapshotJourneys.length(); c++) {
-        qDebug() << "Searching for previous Journey, just before our affected page";
         QRail::RouterEngine::SnapshotJourney *snapshotJourney = m_snapshotJourneys.at(c);
+        qDebug() << snapshotJourney->pageURI().toString();
         if(snapshotJourney->pageURI() == pageURI) {
+            m_snapshotJourneys.removeOne(snapshotJourney);
             QRail::RouterEngine::SnapshotJourney *previousSnapshotJourney = m_snapshotJourneys.at(c-1);
             this->setRoutes(previousSnapshotJourney->routes());
             this->setTArray(previousSnapshotJourney->TArray());
@@ -186,11 +225,28 @@ void RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
             this->setHydraNext(m_snapshotJourneys.at(c)->hydraNext());
             this->setHydraPrevious(m_snapshotJourneys.at(c)->hydraPrevious());
             qDebug() << "Succesfully restored the previous Journey";
-            return;
+            this->cleanSnapshots(snapshotJourney->pageTimestamp());
+            return pageTimestamp;
         }
     }
 
     qCritical() << "Page couldn't be found in the cached journeys. This might NEVER happen!";
+    return QDateTime();
+}
+
+void RouterEngine::Journey::cleanSnapshots(QDateTime snapshotTime)
+{
+    foreach(auto s, m_snapshotJourneys) {
+        if(s->pageTimestamp() <= snapshotTime) {
+            m_snapshotJourneys.removeAll(s);
+            s->deleteLater();
+        }
+    }
+}
+
+qint64 RouterEngine::Journey::snapshotCount()
+{
+    return m_snapshotJourneys.length();
 }
 
 QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const

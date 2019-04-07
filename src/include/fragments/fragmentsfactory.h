@@ -37,7 +37,8 @@
 #include "qrail.h"
 
 #define BASE_URL "https://lc.dylanvanassche.be/sncb/connections"
-#define REAL_TIME_URL "https://lc.dylanvanassche.be/sncb/events"
+#define REAL_TIME_URL "https://lc.dylanvanassche.be/sncb/events/poll"
+#define REAL_TIME_URL_SSE "https://lc.dylanvanassche.be/sncb/events/sse"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
@@ -110,7 +111,8 @@ signals:
     //! Emitted when a page and fragment are updated
     void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QUrl page);
     //! Emitted when an update has been successfully processed
-    void updateProcessed();
+    void updateProcessed(qint64 timestamp);
+    void updateReceived(qint64 timestamp);
 
 private slots:
     void handleEventSource(QString message);

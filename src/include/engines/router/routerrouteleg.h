@@ -47,6 +47,7 @@ public:
         QRail::RouterEngine::RouteLegEnd *arrival,
         QObject *parent = nullptr
     );
+    ~RouteLeg();
     QRail::RouterEngine::RouteLeg::Type type() const;
     void setType(const QRail::RouterEngine::RouteLeg::Type &type);
     QRail::VehicleEngine::Vehicle *vehicleInformation() const;

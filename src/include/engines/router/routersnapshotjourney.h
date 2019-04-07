@@ -44,6 +44,7 @@ public:
                            QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray,
                            QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray,
                            QObject *parent = nullptr);
+    ~SnapshotJourney();
     QUrl pageURI() const;
     QUrl hydraNext() const;
     QUrl hydraPrevious() const;

@@ -177,6 +177,9 @@ signals:
     void finished(QRail::LiveboardEngine::Board *liveboard);
     //! Emitted if stream has new entries.
     void stream(QRail::VehicleEngine::Vehicle *entry);
+    // Benchmark
+    void updateReceived(qint64 timestamp);
+    void updateProcessed(qint64 timestamp);
 
 private slots:
     void unlockLiveboard();

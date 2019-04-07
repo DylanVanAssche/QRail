@@ -33,7 +33,8 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Create event source
-    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    //m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL), QRail::Network::EventSource::Subscription::POLLING);
+    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::SSE);
     connect(m_eventSource,
             SIGNAL(messageReceived(QString)),
             this,
@@ -122,6 +123,7 @@ void Fragments::Factory::handleEventSource(QString message)
 
 void Fragments::Factory::handleEventSourceThread(QString message)
 {
+    emit this->updateReceived(QDateTime::currentMSecsSinceEpoch());
     qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = doc.object();
@@ -136,6 +138,7 @@ void Fragments::Factory::handleEventSourceThread(QString message)
             if (frag) {
                 qDebug() << "Is object OK";
                 QUrl updatedPageURI = this->pageCache()->updateFragment(frag);
+                qDebug() << "Updated page URI:" << updatedPageURI;
                 //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
                 // In case we haven't downloaded this page yet, skip this update
                 //if(!page) {
@@ -170,7 +173,7 @@ void Fragments::Factory::handleEventSourceThread(QString message)
     }
 
     // Processing complete, let the listeners know that
-    emit this->updateProcessed();
+    emit this->updateProcessed(QDateTime::currentMSecsSinceEpoch());
 }
 
 QRail::Fragments::Cache* QRail::Fragments::Factory::pageCache() const

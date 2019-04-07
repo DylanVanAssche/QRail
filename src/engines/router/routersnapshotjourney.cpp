@@ -22,7 +22,8 @@ using namespace RouterEngine;
 SnapshotJourney::SnapshotJourney(QUrl pageURI, 
                              QUrl hydraNext,
                              QUrl hydraPrevious,
-                             QList<Route *> routes, QMap<QUrl, qint16> T_EarliestArrivalTime,
+                             QList<Route *> routes,
+                             QMap<QUrl, qint16> T_EarliestArrivalTime,
                              QMap<QUrl, QDateTime> S_EarliestArrivalTime,
                              QMap<QUrl, QList<StationStopProfile *> > SArray,
                              QMap<QUrl, TrainProfile *> TArray,
@@ -39,6 +40,29 @@ SnapshotJourney::SnapshotJourney(QUrl pageURI,
     m_TArray = TArray;
     m_hydraNext = hydraNext;
     m_hydraPrevious = hydraPrevious;
+}
+
+SnapshotJourney::~SnapshotJourney()
+{
+    foreach(auto r, m_routes) {
+        if(r) {
+            delete r;
+        }
+    }
+
+    foreach(auto t, m_TArray.values()) {
+        if(t) {
+            delete t;
+        }
+    }
+
+    foreach(auto s, m_SArray.values()) {
+        foreach(auto p, s) {
+            if(p) {
+                delete p;
+            }
+        }
+    }
 }
 
 QUrl SnapshotJourney::pageURI() const

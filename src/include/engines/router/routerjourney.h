@@ -48,6 +48,7 @@ public:
                      const QUrl hydraNext,
                      const QUrl hydraPrevious,
                      QObject *parent = nullptr);
+    ~Journey();
 
     //! Gets the possible routes of the Journey.
     /*!
@@ -223,7 +224,11 @@ public:
     //! Add a SnapshotJourney object to this Journey
     void addSnapshotJourney(QRail::RouterEngine::SnapshotJourney *snapshotJourney);
     //! Restore Journey before page
-    void restoreBeforePage(const QUrl pageURI);
+    QDateTime restoreBeforePage(const QUrl pageURI);
+    //! Clean all snapshots
+    void cleanSnapshots(QDateTime snapshotTime);
+    // Debug
+    qint64 snapshotCount();
 
 private:
     QList<QRail::RouterEngine::SnapshotJourney *> m_snapshotJourneys;

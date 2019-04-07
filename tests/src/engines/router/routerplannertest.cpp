@@ -63,7 +63,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 */
     qDebug() << "---------------------------------------------- ROUTING ABORT ----------------------------------------------";
     // Test abort
-    planner->getConnections(
+    /*planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
         QDateTime::currentDateTimeUtc(), // Departure time (UTC)
@@ -77,7 +77,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     loopAbort.exec();
 
     // Now we should get valid data, connect the processor with verification checks
-    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey *)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey *)));*/
 
     qDebug() << "---------------------------------------------- ROUTING NETWORK ----------------------------------------------";
 
@@ -134,7 +134,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
             << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 
-    for(int i=0; i < REPEAT_COUNT; i++) {
+    /*for(int i=0; i < REPEAT_COUNT; i++) {
         QDateTime start = QDateTime::currentDateTimeUtc();
         planner->getConnections(
             QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
@@ -151,7 +151,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
                 << "Routing Vilvoorde -> Gent-Sint-Pieters took"
                 << start.msecsTo(QDateTime::currentDateTimeUtc())
                 << "msecs";
-    }
+    }*/
 }
 
 void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()

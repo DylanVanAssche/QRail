@@ -1142,7 +1142,7 @@ void QRail::RouterEngine::Planner::setAbortRequested(bool abortRequested)
 {
     m_abortRequested = abortRequested;
 }
-
+ 
 QRail::Fragments::Factory *QRail::RouterEngine::Planner::fragmentsFactory() const
 {
     return m_fragmentsFactory;

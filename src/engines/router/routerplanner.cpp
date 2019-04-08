@@ -102,14 +102,14 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
         // Init
         this->setAbortRequested(false);
         this->setJourney(new QRail::RouterEngine::Journey(this));
-        this->journey()->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *>());
-        this->journey()->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>>());
+        this->journey()->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> >());
+        this->journey()->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
         this->journey()->setDepartureStationURI(departureStation);
         this->journey()->setArrivalStationURI(arrivalStation);
         this->journey()->setDepartureTime(departureTime);
         this->journey()->setArrivalTime(this->calculateArrivalTime(this->journey()->departureTime()));
         this->journey()->setMaxTransfers(maxTransfers);
-        this->journey()->setRoutes(QList<QRail::RouterEngine::Route *>());
+        this->journey()->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route> >());
         this->journey()->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
         QMap<QUrl, QDateTime> S_early = QMap<QUrl, QDateTime>();
         S_early.insert(this->journey()->arrivalStationURI(), this->journey()->arrivalTime());
@@ -125,11 +125,9 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
          * and walk to it's destination in case that's faster than the original
          * arrival station.
          */
-        QRail::StationEngine::Station *station =
-                this->stationFactory()->getStationByURI(this->journey()->arrivalStationURI());
+        QRail::StationEngine::Station *station = this->stationFactory()->getStationByURI(this->journey()->arrivalStationURI());
 
-        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
-                this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
+        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations = this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
                                                                        SEARCH_RADIUS,
                                                                        MAX_RESULTS);
 
@@ -412,7 +410,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             */
             qint16 position = this->journey()->SArray().value(fragment->arrivalStationURI()).size() - 1;
 
-            QRail::RouterEngine::StationStopProfile *stopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
+            QSharedPointer<QRail::RouterEngine::StationStopProfile> stopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
 
             // Needs extension for footpath support
             while ((((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
@@ -585,38 +583,33 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 */
 
                 // Current situation
-                QRail::RouterEngine::StationStopProfile *currentStationStopProfile =
-                        new QRail::RouterEngine::StationStopProfile(
+                QSharedPointer<QRail::RouterEngine::StationStopProfile> currentStationStopProfile (new QRail::RouterEngine::StationStopProfile(
                             fragment->departureTime(),
                             Tmin_earliestArrivalTime,
                             fragment,
                             currentExitTrainFragment,
                             Tmin_transfers
-                            );
-                QRail::RouterEngine::StationStopProfile *currentFirstReachableProfile =
-                        this->getFirstReachableConnection(currentStationStopProfile);
+                            ));
+                QSharedPointer<QRail::RouterEngine::StationStopProfile> currentFirstReachableProfile = this->getFirstReachableConnection(currentStationStopProfile);
                 qint64 currentTransferDuration = -1;
 
                 // Only when we found a reachable connection
                 if (currentFirstReachableProfile) {
-                    currentTransferDuration = currentExitTrainFragment->arrivalTime().secsTo(
-                                currentFirstReachableProfile->departureTime());
+                    currentTransferDuration = currentExitTrainFragment->arrivalTime().secsTo(currentFirstReachableProfile->departureTime());
                 } else {
                     qCritical() << "Unable to get first reachable connection!";
                     emit this->error("Unable to retrieve the first reachable connection!");
                 }
 
                 // New situation
-                QRail::RouterEngine::StationStopProfile *newStationStopProfile =
-                        new QRail::RouterEngine::StationStopProfile(
+                QSharedPointer<QRail::RouterEngine::StationStopProfile> newStationStopProfile (new QRail::RouterEngine::StationStopProfile(
                             fragment->departureTime(),
                             Tmin_earliestArrivalTime,
                             fragment,
                             newExitTrainFragment,
                             Tmin_transfers
-                            );
-                QRail::RouterEngine::StationStopProfile *newFirstReachableProfile =
-                        this->getFirstReachableConnection(newStationStopProfile);
+                            ));
+                QSharedPointer<QRail::RouterEngine::StationStopProfile> newFirstReachableProfile = this->getFirstReachableConnection(newStationStopProfile);
                 qint64 newTransferDuration = -1;
 
                 // Only when we found a reachable connection
@@ -631,53 +624,37 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                 // Comparing: is the new situation better?
                 if (currentTransferDuration > 0 && newTransferDuration > 0
                         && newTransferDuration > currentTransferDuration) {
-                    QRail::RouterEngine::TrainProfile *newTrainProfile =
-                            new QRail::RouterEngine::TrainProfile(
+                    QSharedPointer<QRail::RouterEngine::TrainProfile> newTrainProfile (new QRail::RouterEngine::TrainProfile(
                                 Tmin_earliestArrivalTime,
                                 newExitTrainFragment,
                                 Tmin_transfers
-                                );
-                    QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->journey()->TArray();
-                    // Memory management
-                    /*QRail::RouterEngine::TrainProfile *old = T.value(fragment->tripURI(), nullptr);
-                    if(old) {
-                        delete old;
-                    }*/
+                                ));
+                    QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > T = this->journey()->TArray();
                     T.insert(fragment->tripURI(), newTrainProfile);
                     this->journey()->setTArray(T);
                 }
-                // Memory managment
-                delete newStationStopProfile;
-                delete currentStationStopProfile;
             }
 
             // We found a faster way, update the T array
             if (Tmin_earliestArrivalTime < this->journey()->TArray().value(fragment->tripURI())->arrivalTime()) {
-                QRail::RouterEngine::TrainProfile *fasterTrainProfile =
-                        new QRail::RouterEngine::TrainProfile(
+                QSharedPointer<QRail::RouterEngine::TrainProfile> fasterTrainProfile (new QRail::RouterEngine::TrainProfile(
                             Tmin_earliestArrivalTime,
                             newExitTrainFragment,
                             Tmin_transfers
-                            );
-                QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->journey()->TArray();
-                // Memory management
-                /*QRail::RouterEngine::TrainProfile *old = T.value(fragment->tripURI(), nullptr);
-                if(old) {
-                    delete old;
-                }*/
+                            ));
+                QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > T = this->journey()->TArray();
                 T.insert(fragment->tripURI(), fasterTrainProfile);
                 this->journey()->setTArray(T);
             }
         }
         // Not existing, no replacement, only insertion (no memory leaks)
         else {
-            QRail::RouterEngine::TrainProfile *nonExistingTrainProfile =
-                    new QRail::RouterEngine::TrainProfile(
+            QSharedPointer<QRail::RouterEngine::TrainProfile> nonExistingTrainProfile(new QRail::RouterEngine::TrainProfile(
                         Tmin_earliestArrivalTime,
                         newExitTrainFragment,
                         Tmin_transfers
-                        );
-            QMap<QUrl, QRail::RouterEngine::TrainProfile *> T = this->journey()->TArray();
+                        ));
+            QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > T = this->journey()->TArray();
             T.insert(fragment->tripURI(), nonExistingTrainProfile);
             this->journey()->setTArray(T);
         }
@@ -701,21 +678,18 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         * the S array (departures are sorted by DESCENDING departure times).
         */
 
-        QRail::RouterEngine::StationStopProfile *updatedStationStopProfile =
-                new QRail::RouterEngine::StationStopProfile(
+        QSharedPointer<QRail::RouterEngine::StationStopProfile> updatedStationStopProfile(new QRail::RouterEngine::StationStopProfile(
                     fragment->departureTime(),
                     Tmin_earliestArrivalTime,
                     fragment,
                     this->journey()->TArray().value(fragment->tripURI())->arrivalConnection(),
                     Tmin_transfers
-                    );
+                    ));
 
         // Entry already exists in the S array
-        bool updatedStationStopProfileUsed = false;
         if (this->journey()->SArray().contains(fragment->departureStationURI())) {
             qint16 numberOfPairs = this->journey()->SArray().value(fragment->departureStationURI()).size();
-            QRail::RouterEngine::StationStopProfile *existingStationStopProfile = this->journey()->SArray().value(
-                        fragment->departureStationURI()).at(numberOfPairs - 1);
+            QSharedPointer<QRail::RouterEngine::StationStopProfile> existingStationStopProfile = this->journey()->SArray().value(fragment->departureStationURI()).at(numberOfPairs - 1);
             if (updatedStationStopProfile->arrivalTime() < existingStationStopProfile->arrivalTime()) {
                 // Replace existing StationStopProfile at the back when departure times are equal
                 if (updatedStationStopProfile->departureTime() == existingStationStopProfile->departureTime()) {
@@ -735,51 +709,35 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                     * 1, updatedStationStopProfile); ^
                     */
 
-                    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->journey()->SArray();
-                    QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
-                                fragment->departureStationURI());
+                    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > S = this->journey()->SArray();
+                    QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > SProfiles = S.value(fragment->departureStationURI());
                     // Replace profile when departure times are equal
-                    /*QRail::RouterEngine::StationStopProfile *old = SProfiles.at(numberOfPairs - 1);
-                                        if(old) {
-                                            delete old; // Memory management
-                                        }*/
                     SProfiles.replace(numberOfPairs - 1, updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->journey()->setSArray(S);
-                    updatedStationStopProfileUsed = true;
                 }
                 // We're iterating over DESCENDING departure times, inserting the
                 // StationStopProfile at the back
                 else {
-                    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->journey()->SArray();
-                    QList<QRail::RouterEngine::StationStopProfile *> SProfiles = S.value(
-                                fragment->departureStationURI());
+                    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > S = this->journey()->SArray();
+                    QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > SProfiles = S.value(fragment->departureStationURI());
                     // Add profile when we have different departure times
                     SProfiles.append(updatedStationStopProfile);
                     S.insert(fragment->departureStationURI(), SProfiles);
                     this->journey()->setSArray(S);
-                    updatedStationStopProfileUsed = true;
                 }
             }
         }
         // New entry in the S array
         else {
-            QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *>> S = this->journey()->SArray();
-            QList<QRail::RouterEngine::StationStopProfile *> stationStopProfileList =
-                    QList<QRail::RouterEngine::StationStopProfile *>();
+            QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > S = this->journey()->SArray();
+            QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > stationStopProfileList = QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> >();
 
             // Add new entry if it doesn't exist yet
             stationStopProfileList.append(updatedStationStopProfile);
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->journey()->setSArray(S);
-            updatedStationStopProfileUsed = true;
         }
-
-        // Memory management
-        if(!updatedStationStopProfileUsed) {
-            delete updatedStationStopProfile;
-        }
-
         /*
          * Inserting possible footpaths into the S array.
          * if (c_deptime, Tc) is non-dominated in profile of S[c_depstop] then:
@@ -819,7 +777,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     // Results found, process them
     if (this->journey()->SArray().contains(this->journey()->departureStationURI())) {
         qDebug() << "Processing results: " << this->journey()->SArray().value(this->journey()->departureStationURI());
-        foreach (QRail::RouterEngine::StationStopProfile *profile, this->journey()->SArray().value(this->journey()->departureStationURI())) {
+        foreach (QSharedPointer<QRail::RouterEngine::StationStopProfile> profile, this->journey()->SArray().value(this->journey()->departureStationURI())) {
             QList<QRail::RouterEngine::RouteLeg *> legs = QList<QRail::RouterEngine::RouteLeg *>();
 
             while (profile->arrivalConnection()->arrivalStationURI() != this->journey()->arrivalStationURI()) {
@@ -926,11 +884,11 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
                         );
             legs.append(routeLeg);
 
-            QRail::RouterEngine::Route *route = new QRail::RouterEngine::Route(legs);
+            QSharedPointer<QRail::RouterEngine::Route> route(new QRail::RouterEngine::Route(legs));
 
             // Avoid duplicates
             bool newRoute = true;
-            foreach (QRail::RouterEngine::Route *r, this->journey()->routes()) {
+            foreach (QSharedPointer<QRail::RouterEngine::Route> r, this->journey()->routes()) {
                 // Routes with the same arrival and departure times are duplicates
                 if (route->departureTime() == r->departureTime()
                         && route->arrivalTime() == r->arrivalTime()) {
@@ -942,7 +900,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 
             if (newRoute) {
                 emit this->stream(route);
-                QList<QRail::RouterEngine::Route *> routeList = this->journey()->routes();
+                QList<QSharedPointer<QRail::RouterEngine::Route> > routeList = this->journey()->routes();
                 routeList.append(route);
                 this->journey()->setRoutes(routeList);
             }
@@ -956,9 +914,9 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
         *
         * REMARK: C++11 support needed for lambda expressions
         */
-        QList<QRail::RouterEngine::Route *> routeList = this->journey()->routes();
-        std::sort(routeList.begin(), routeList.end(), [](const QRail::RouterEngine::Route * a,
-                  const QRail::RouterEngine::Route * b) -> bool {
+        QList<QSharedPointer<QRail::RouterEngine::Route > > routeList = this->journey()->routes();
+        std::sort(routeList.begin(), routeList.end(), [](const QSharedPointer<QRail::RouterEngine::Route> a,
+                  const QSharedPointer<QRail::RouterEngine::Route> b) -> bool {
             QDateTime timeA = a->departureTime();
             QDateTime timeB = b->departureTime();
             return timeA < timeB;
@@ -1002,8 +960,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
     }
 }
 
-QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstReachableConnection(
-        QRail::RouterEngine::StationStopProfile *arrivalProfile)
+QSharedPointer<QRail::RouterEngine::StationStopProfile> QRail::RouterEngine::Planner::getFirstReachableConnection(
+        QSharedPointer<QRail::RouterEngine::StationStopProfile> arrivalProfile)
 {
     /*
     * Find the next hop, this is the first reachable hop.
@@ -1014,8 +972,7 @@ QRail::RouterEngine::StationStopProfile *QRail::RouterEngine::Planner::getFirstR
     * between the arrival times. ERROR: When no reachable connections are found
     * we return a nullptr. This circumvents the 'index out of range' error.
     */
-    QList<QRail::RouterEngine::StationStopProfile *> options = this->journey()->SArray().value(
-                arrivalProfile->arrivalConnection()->arrivalStationURI());
+    QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > options = this->journey()->SArray().value(arrivalProfile->arrivalConnection()->arrivalStationURI());
     qint16 i = options.size() - 1;
 
 #ifdef VERBOSE_FIRST_REACHABLE_CONNECTION
@@ -1286,10 +1243,10 @@ void RouterEngine::Planner::deleteUsedPages()
     }*/
 
     // Clean up journey if not watching
-    if(this->journey() && !m_watchList.contains(this->journey())) {
+    /*if(this->journey() && !m_watchList.contains(this->journey())) {
         delete this->journey();
         this->setJourney(nullptr);
-    }
+    }*/
 }
 
 void RouterEngine::Planner::initUsedPages()

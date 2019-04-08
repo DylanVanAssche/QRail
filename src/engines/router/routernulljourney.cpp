@@ -17,7 +17,7 @@
 #include "engines/router/routernulljourney.h"
 using namespace QRail;
 RouterEngine::NullJourney *RouterEngine::NullJourney::m_instance = nullptr;
-QRail::RouterEngine::NullJourney::NullJourney(const QList<QRail::RouterEngine::Route *> routes,
+QRail::RouterEngine::NullJourney::NullJourney(const QList<QSharedPointer<QRail::RouterEngine::Route> > routes,
                                               const QDateTime departureTime,
                                               const QDateTime arrivalTime,
                                               const QUrl hydraNext,
@@ -38,7 +38,7 @@ QRail::RouterEngine::NullJourney *QRail::RouterEngine::NullJourney::getInstance(
     if (m_instance == nullptr) {
         qDebug() << "Generating new NullJourney";
         m_instance = new NullJourney(
-                    QList<QRail::RouterEngine::Route *>(),
+                    QList<QSharedPointer<QRail::RouterEngine::Route> >(),
                     QDateTime(),
                     QDateTime(),
                     QUrl(),

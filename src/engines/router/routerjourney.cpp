@@ -19,14 +19,14 @@ using namespace QRail;
 
 QRail::RouterEngine::Journey::Journey(QObject *parent) : QObject(parent)
 {
-    m_routes = QList<QRail::RouterEngine::Route *>();
+    m_routes = QList<QSharedPointer<QRail::RouterEngine::Route >>();
     m_departureTime = QDateTime();
     m_arrivalTime = QDateTime();
     m_hydraNext = QUrl();
     m_hydraPrevious = QUrl();
 }
 
-RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> routes,
+RouterEngine::Journey::Journey(const QList<QSharedPointer<RouterEngine::Route >> routes,
                                const QDateTime departureTime,
                                const QDateTime arrivalTime,
                                const QUrl hydraNext,
@@ -40,12 +40,12 @@ RouterEngine::Journey::Journey(const QList<RouterEngine::Route *> routes,
     m_hydraPrevious = hydraPrevious;
 }
 
-QList<QRail::RouterEngine::Route *> QRail::RouterEngine::Journey::routes() const
+QList<QSharedPointer<QRail::RouterEngine::Route >> QRail::RouterEngine::Journey::routes() const
 {
     return m_routes;
 }
 
-void QRail::RouterEngine::Journey::setRoutes(const QList<QRail::RouterEngine::Route *> &routes)
+void QRail::RouterEngine::Journey::setRoutes(const QList<QSharedPointer<QRail::RouterEngine::Route >> &routes)
 {
     m_routes = routes;
 }
@@ -85,7 +85,7 @@ void QRail::RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
 
 RouterEngine::Journey::~Journey()
 {
-    foreach(auto r, m_routes) {
+    /*foreach(auto r, m_routes) {
         if(r) {
             r->deleteLater();
         }
@@ -109,7 +109,7 @@ RouterEngine::Journey::~Journey()
         if(sj) {
             sj->deleteLater();
         }
-    }
+    }*/
 }
 
 
@@ -198,9 +198,9 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
     if(m_snapshotJourneys.at(0)->pageURI() == pageURI) {
         qDebug() << "First snapshot is affected, clearing Journey";
         m_snapshotJourneys.removeOne(m_snapshotJourneys.at(0));
-        this->setRoutes(QList<QRail::RouterEngine::Route *>());
-        this->setTArray(QMap<QUrl, QRail::RouterEngine::TrainProfile *> ());
-        this->setSArray(QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> >());
+        this->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route >>());
+        this->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > ());
+        this->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
         this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
         this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
         this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
@@ -236,8 +236,10 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
 
 void RouterEngine::Journey::cleanSnapshots(QDateTime snapshotTime)
 {
+    // Only call this method when the previous journey was restored, otherwise no profiles are deleted!
     foreach(auto s, m_snapshotJourneys) {
         if(s->pageTimestamp() <= snapshotTime) {
+            // Delete snapshot
             m_snapshotJourneys.removeAll(s);
             s->deleteLater();
         }
@@ -249,22 +251,22 @@ qint64 RouterEngine::Journey::snapshotCount()
     return m_snapshotJourneys.length();
 }
 
-QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > QRail::RouterEngine::Journey::SArray() const
+QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > QRail::RouterEngine::Journey::SArray() const
 {
     return m_SArray;
 }
 
-void QRail::RouterEngine::Journey::setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > &SArray)
+void QRail::RouterEngine::Journey::setSArray(const QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > &SArray)
 {
     m_SArray = SArray;
 }
 
-QMap<QUrl, QRail::RouterEngine::TrainProfile *> QRail::RouterEngine::Journey::TArray() const
+QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > QRail::RouterEngine::Journey::TArray() const
 {
     return m_TArray;
 }
 
-void QRail::RouterEngine::Journey::setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray)
+void QRail::RouterEngine::Journey::setTArray(const QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > &TArray)
 {
     m_TArray = TArray;
 }

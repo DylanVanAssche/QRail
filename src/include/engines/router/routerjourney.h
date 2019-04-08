@@ -5,6 +5,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QUrl>
 #include <QtCore/QUrlQuery>
+#include <QtCore/QSharedPointer>
 
 #include "engines/router/routerroute.h"
 #include "engines/router/routerstationstopprofile.h"
@@ -42,7 +43,7 @@ public:
         \public
         Constructs a QRail::RouterEngine::Journey with the given parent.
      */
-    explicit Journey(const QList<QRail::RouterEngine::Route *> routes,
+    explicit Journey(const QList<QSharedPointer<QRail::RouterEngine::Route> > routes,
                      const QDateTime departureTime,
                      const QDateTime arrivalTime,
                      const QUrl hydraNext,
@@ -56,14 +57,14 @@ public:
         \public
         Gets the list of routes for the Journey and returns it.
      */
-    QList<QRail::RouterEngine::Route *> routes() const;
+    QList<QSharedPointer<QRail::RouterEngine::Route> > routes() const;
     //! Sets the possible routes of the Journey.
     /*!
         \param routes A list with all possibles routes for this journey.
         \public
         Sets the list of routes for the Journey.
      */
-    void setRoutes(const QList<QRail::RouterEngine::Route *> &routes);
+    void setRoutes(const QList<QSharedPointer<QRail::RouterEngine::Route> > &routes);
     //! Gets the next hydra URI of the Journey.
     /*!
         \return hydraNext The URI with the next page URI.
@@ -182,28 +183,28 @@ public:
         \public
         Gets the T array for the Profile CSA of the Journey and returns it.
      */
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
+    QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > TArray() const;
     //! Sets the T array for the Profile CSA of the Journey.
     /*!
         \return TArray T array for Profile CSA.
         \public
         Sets the T array for the Profile CSA of the Journey.
      */
-    void setTArray(const QMap<QUrl, QRail::RouterEngine::TrainProfile *> &TArray);
+    void setTArray(const QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > &TArray);
     //! Gets the S array for the Profile CSA of the Journey.
     /*!
         \return SArray T array for Profile CSA.
         \public
         Gets the S array for the Profile CSA of the Journey and returns it.
      */
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray() const;
+    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > SArray() const;
     //! Sets the S array for the Profile CSA of the Journey.
     /*!
         \param SArray T array for Profile CSA.
         \public
         Sets the S array for the Profile CSA of the Journey.
      */
-    void setSArray(const QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > &SArray);
+    void setSArray(const QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > &SArray);
     //! Gets the maximum amount of transfers for the Journey.
     /*!
         \return station StationEngine::Station object with information about the associated station.
@@ -232,7 +233,7 @@ public:
 
 private:
     QList<QRail::RouterEngine::SnapshotJourney *> m_snapshotJourneys;
-    QList<QRail::RouterEngine::Route *> m_routes;
+    QList<QSharedPointer<QRail::RouterEngine::Route> > m_routes;
     QDateTime m_departureTime;
     QDateTime m_arrivalTime;
     qint16 m_maxTransfers;
@@ -242,8 +243,8 @@ private:
     QUrl m_arrivalStationURI;
     QMap<QUrl, qint16> m_T_EarliestArrivalTime;
     QMap<QUrl, QDateTime> m_S_EarliestArrivalTime;
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > m_SArray;
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > m_SArray;
+    QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > m_TArray;
 };
 }
 }

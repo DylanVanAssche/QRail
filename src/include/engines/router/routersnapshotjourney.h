@@ -23,6 +23,7 @@
 #include <QtCore/QUrlQuery>
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
+#include <QtCore/QSharedPointer>
 
 #include "engines/router/routerroute.h"
 #include "engines/router/routerstationstopprofile.h"
@@ -38,21 +39,21 @@ public:
     explicit SnapshotJourney(QUrl pageURI,
                            QUrl hydraNext,
                            QUrl hydraPrevious,
-                           QList<QRail::RouterEngine::Route *> routes,
+                           QList<QSharedPointer<QRail::RouterEngine::Route >> routes,
                            QMap<QUrl, qint16> T_EarliestArrivalTime,
                            QMap<QUrl, QDateTime> S_EarliestArrivalTime,
-                           QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray,
-                           QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray,
+                           QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > SArray,
+                           QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > TArray,
                            QObject *parent = nullptr);
     ~SnapshotJourney();
     QUrl pageURI() const;
     QUrl hydraNext() const;
     QUrl hydraPrevious() const;
-    QList<QRail::RouterEngine::Route *> routes() const;
+    QList<QSharedPointer<QRail::RouterEngine::Route >> routes() const;
     QMap<QUrl, qint16> T_EarliestArrivalTime() const;
     QMap<QUrl, QDateTime> S_EarliestArrivalTime() const;
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SArray() const;
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> TArray() const;
+    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > SArray() const;
+    QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > TArray() const;
     QDateTime pageTimestamp() const;
 
 private:
@@ -60,11 +61,11 @@ private:
     QUrl m_hydraNext;
     QUrl m_hydraPrevious;
     QDateTime m_pageTimestamp;
-    QList<QRail::RouterEngine::Route *> m_routes;
+    QList<QSharedPointer<QRail::RouterEngine::Route >> m_routes;
     QMap<QUrl, qint16> m_T_EarliestArrivalTime;
     QMap<QUrl, QDateTime> m_S_EarliestArrivalTime;
-    QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > m_SArray;
-    QMap<QUrl, QRail::RouterEngine::TrainProfile *> m_TArray;
+    QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > m_SArray;
+    QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > m_TArray;
 };
 }}
 

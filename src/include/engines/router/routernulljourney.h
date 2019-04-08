@@ -46,7 +46,7 @@ private:
         \public
         Constructs a RouterEngine::NullJourney if none exists and returns the instance.
      */
-    explicit NullJourney(const QList<QRail::RouterEngine::Route *> routes,
+    explicit NullJourney(const QList<QSharedPointer<QRail::RouterEngine::Route> > routes,
                          const QDateTime departureTime,
                          const QDateTime arrivalTime,
                          const QUrl hydraNext,

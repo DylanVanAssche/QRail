@@ -46,6 +46,7 @@ public:
         const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
         QObject *parent = nullptr
     );
+    ~Vehicle();
     QUrl uri() const;
     void setUri(const QUrl &uri);
     QString headsign() const;

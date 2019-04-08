@@ -31,6 +31,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtPositioning/QGeoCoordinate>
+#include <QtCore/QSharedPointer>
 #include <algorithm> // C++ header needed for std:sort function
 
 #include "engines/alerts/alertsmessage.h"
@@ -197,7 +198,7 @@ signals:
     //! Emitted when the Journey calculation is finished.
     void finished(QRail::RouterEngine::Journey *journey);
     //! Emitted when a route has been found for the Journey.
-    void stream(QRail::RouterEngine::Route *route);
+    void stream(QSharedPointer<QRail::RouterEngine::Route> route);
     //! Emitted when something goes wrong.
     void error(const QString &message);
     //! Emitted when a new Fragments::Page has been requested.
@@ -231,7 +232,7 @@ private:
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
-    StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
+    QSharedPointer<StationStopProfile> getFirstReachableConnection(QSharedPointer<StationStopProfile> arrivalProfile);
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);

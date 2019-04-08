@@ -22,11 +22,11 @@ using namespace RouterEngine;
 SnapshotJourney::SnapshotJourney(QUrl pageURI, 
                              QUrl hydraNext,
                              QUrl hydraPrevious,
-                             QList<Route *> routes,
+                             QList<QSharedPointer<QRail::RouterEngine::Route> > routes,
                              QMap<QUrl, qint16> T_EarliestArrivalTime,
                              QMap<QUrl, QDateTime> S_EarliestArrivalTime,
-                             QMap<QUrl, QList<StationStopProfile *> > SArray,
-                             QMap<QUrl, TrainProfile *> TArray,
+                             QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > SArray,
+                             QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > TArray,
                              QObject *parent) : QObject(parent)
 {
     m_pageURI = pageURI;
@@ -44,7 +44,7 @@ SnapshotJourney::SnapshotJourney(QUrl pageURI,
 
 SnapshotJourney::~SnapshotJourney()
 {
-    foreach(auto r, m_routes) {
+    /*foreach(auto r, m_routes) {
         if(r) {
             delete r;
         }
@@ -62,7 +62,7 @@ SnapshotJourney::~SnapshotJourney()
                 delete p;
             }
         }
-    }
+    }*/
 }
 
 QUrl SnapshotJourney::pageURI() const
@@ -80,7 +80,7 @@ QUrl SnapshotJourney::hydraNext() const
     return m_hydraNext;
 }
 
-QList<QRail::RouterEngine::Route *> SnapshotJourney::routes() const
+QList<QSharedPointer<QRail::RouterEngine::Route> > SnapshotJourney::routes() const
 {
     return m_routes;
 }
@@ -95,12 +95,12 @@ QMap<QUrl, QDateTime> SnapshotJourney::S_EarliestArrivalTime() const
     return m_S_EarliestArrivalTime;
 }
 
-QMap<QUrl, QList<QRail::RouterEngine::StationStopProfile *> > SnapshotJourney::SArray() const
+QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > SnapshotJourney::SArray() const
 {
     return m_SArray;
 }
 
-QMap<QUrl, QRail::RouterEngine::TrainProfile *> SnapshotJourney::TArray() const
+QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > SnapshotJourney::TArray() const
 {
     return m_TArray;
 }

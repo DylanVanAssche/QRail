@@ -72,6 +72,7 @@ void Cache::cachePage(Page *page)
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
+    jsonFile.close();
 }
 
 QUrl Cache::updateFragment(Fragment *updatedFragment)

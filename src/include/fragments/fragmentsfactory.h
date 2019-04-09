@@ -37,7 +37,7 @@
 #include "qrail.h"
 
 #define BASE_URL "https://lc.dylanvanassche.be/sncb/connections"
-#define REAL_TIME_URL "https://lc.dylanvanassche.be/sncb/events/poll"
+#define REAL_TIME_URL_POLL "https://lc.dylanvanassche.be/sncb/events/poll"
 #define REAL_TIME_URL_SSE "https://lc.dylanvanassche.be/sncb/events/sse"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"

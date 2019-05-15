@@ -41,7 +41,7 @@ void QRail::Network::Dispatcher::dispatchReply(QNetworkReply *reply)
     QObject *caller = this->findTarget(reply);
 
     // Post the event to the event queue and remove the reply from the targets list
-    QCoreApplication::postEvent(caller, event);
+    QCoreApplication::sendEvent(caller, event);
     this->removeTarget(reply, caller);
 }
 

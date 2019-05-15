@@ -146,10 +146,13 @@ public:
     QRail::Fragments::Factory *fragmentsFactory() const;
 
     //! Add a Board to the watch list
-    void addBoardToWatchlist(QRail::LiveboardEngine::Board *board);
+    void watch(QRail::LiveboardEngine::Board *board);
 
     //! Remove a Board from the watch list
-    void removeBoardFromWatchlist(QRail::LiveboardEngine::Board *board);
+    void unwatch(QRail::LiveboardEngine::Board *board);
+
+    //! Remove all Boards from the watch list
+    void unwatchAll();
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -174,6 +177,9 @@ signals:
     void finished(QRail::LiveboardEngine::Board *liveboard);
     //! Emitted if stream has new entries.
     void stream(QRail::VehicleEngine::Vehicle *entry);
+    // Benchmark
+    void updateReceived(qint64 timestamp);
+    void updateProcessed(qint64 timestamp);
 
 private slots:
     void unlockLiveboard();

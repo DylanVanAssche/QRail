@@ -72,21 +72,24 @@ void Cache::cachePage(Page *page)
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
+    jsonFile.close();
 }
 
 QUrl Cache::updateFragment(Fragment *updatedFragment)
 {
+    qDebug() << "Updating fragment";
     // We look between the departureTime and departureTime + departureDelay for the old fragment
     QDateTime departureTime = updatedFragment->departureTime().addSecs(-updatedFragment->departureDelay());
     QDateTime departureTimeWithDelay = updatedFragment->departureTime();
     QList<QUrl> pagesURI = m_cache.keys();
     QUrl updatedPageURI;
 
-    foreach(QUrl pageURI, pagesURI) {
+    for(qint64 pageCounter=0; pageCounter < pagesURI.length(); pageCounter++) {
+        QUrl pageURI = pagesURI[pageCounter];
         QUrlQuery query = QUrlQuery(pageURI);
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-        if(pageTime >= departureTime && pageTime < departureTimeWithDelay) {
-            qDebug() << "Page time:" << pageTime;
+        if(pageTime <= departureTimeWithDelay) { // just the page before the departure time must be considered too! This can be optimized...
+            qDebug() << "PAGE TIME:" << pageTime << "| DEP:" << departureTime << "| DEP+DEL:" << departureTimeWithDelay;
             QRail::Fragments::Page* page = m_cache.value(pageURI);
             QList<QRail::Fragments::Fragment *> fragments = page->fragments();
 
@@ -102,10 +105,21 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                     if(fragment->departureDelay() != updatedFragment->departureDelay()) {
                         qDebug() << "Deleting old fragment, inserting new one";
                         // Remove old fragment in the old page
-                        page->fragments().removeAt(fragCounter);
+                        qDebug() << "----------PAGE HAS BEFORE:" << page->fragments().count() << " FRAGMENTS";
+                        QList<QRail::Fragments::Fragment *> pageFrags = page->fragments();
+                        QRail::Fragments::Fragment *frag = pageFrags.at(fragCounter);
+                        pageFrags.removeAt(fragCounter);
+                        // Memory managment
+                        if(frag) {
+                            delete frag;
+                        }
+                        page->setFragments(pageFrags);
                         updatedPageURI = page->uri();
+                        qDebug() << "----------PAGE HAS NOW:" << page->fragments().count() << " FRAGMENTS";
+                        this->cachePage(page);
 
                         // Insert updated fragment in the new page
+                        qDebug() << "Inserting updated fragment in other page...";
                         for(qint32 pageCounter=0; pageCounter < pagesURI.length() - 1; pageCounter++) {
                             QUrl currentPageURI = pagesURI.at(pageCounter);
                             QUrl nextPageURI = pagesURI.at(pageCounter + 1);
@@ -113,20 +127,31 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                             QUrlQuery nextPageQuery = QUrlQuery(nextPageURI);
                             QDateTime currentPageTime = QDateTime::fromString(currentPageQuery.queryItemValue("departureTime"), Qt::ISODate);
                             QDateTime nextPageTime = QDateTime::fromString(nextPageQuery.queryItemValue("departureTime"), Qt::ISODate);
+                            qDebug() << currentPageTime << "<=" << departureTime << "<" << nextPageTime;
 
                             // Look for the new page
                             if(currentPageTime <= departureTime && departureTime < nextPageTime) {
                                 qDebug() << "Found inserting page, inserting fragment now";
                                 QRail::Fragments::Page* currentPage = m_cache.value(currentPageURI);
-                                currentPage->fragments().append(updatedFragment);
+                                qDebug() << "----------CURRENT PAGE HAS BEFORE:" << currentPage->fragments().count() << " FRAGMENTS";
+                                QList<QRail::Fragments::Fragment *> currentPageFrags = currentPage->fragments();
+                                currentPageFrags.append(updatedFragment);
 
                                 // Keep page sorted
-                                std::sort(currentPage->fragments().begin(), currentPage->fragments().end(), [](const QRail::Fragments::Fragment * a,
+                                std::sort(currentPageFrags.begin(), currentPageFrags.end(), [](const QRail::Fragments::Fragment * a,
                                 const QRail::Fragments::Fragment * b) -> bool {
                                     QDateTime timeA = a->departureTime();
                                     QDateTime timeB = b->departureTime();
                                     return timeA < timeB;
                                 });
+                                qDebug() << "Sorting OK";
+
+                                currentPage->setFragments(currentPageFrags);
+                                qDebug() << "----------CURRENT PAGE HAS NOW:" << currentPage->fragments().count() << " FRAGMENTS";
+
+                                this->cachePage(currentPage);
+                                qDebug() << "Caching OK";
+                                break;
                             }
                         }
 
@@ -137,8 +162,15 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                     // Arrival delay changed or cancelled (type changed), updating fragment in page
                     if(fragment->arrivalDelay() != updatedFragment->arrivalDelay()) {
                         qDebug() << "Updating old fragment";
-                        page->fragments().replace(fragCounter, updatedFragment);
+                        QList<QRail::Fragments::Fragment *> pageFrags = page->fragments();
+                        QRail::Fragments::Fragment * frag = pageFrags.at(fragCounter);
+                        pageFrags.replace(fragCounter, updatedFragment);
+                        // Memory managment
+                        if(frag) {
+                            delete frag;
+                        }
                         updatedPageURI = page->uri();
+                        this->cachePage(page);
 
                         // Update completed
                         return updatedPageURI;

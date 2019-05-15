@@ -23,10 +23,10 @@ void QRail::RouterEngine::PlannerTest::initCSAPlannerTest()
     planner = QRail::RouterEngine::Planner::getInstance();
 
     // Let the Qt meta object system know how it should handle our custom QObjects
-    qRegisterMetaType<QList<QRail::RouterEngine::Route *>>("QList<QRail::RouterEngine::Route*>");
+    qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
 
     // Connect the signals
-    connect(planner, SIGNAL(stream(QRail::RouterEngine::Route *)), this, SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
+    connect(planner, SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)), this, SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
@@ -169,9 +169,9 @@ void QRail::RouterEngine::PlannerTest::cleanCSAPlannerTest()
                this,
                SLOT(requested(QUrl)));
     disconnect(planner,
-               SIGNAL(stream(QRail::RouterEngine::Route *)),
+               SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)),
                this,
-               SLOT(processRoutesStream(QRail::RouterEngine::Route *)));
+               SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
 }
 
 void QRail::RouterEngine::PlannerTest::processing(const QUrl &pageURI)
@@ -190,7 +190,7 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine
     qDebug() << "JOURNEY RECEIVED:" << journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
     QVERIFY2(journey->routes().size() > 0, "CSA couldn't find any routes, this is impossible in our integration test!");
-    foreach (QRail::RouterEngine::Route *route, journey->routes()) {
+    foreach (QSharedPointer<QRail::RouterEngine::Route> route, journey->routes()) {
         // Verify the complete trip
         qDebug() << "Trip:"
                  << route->departureStation()->station()->name().value(QLocale::Language::Dutch)
@@ -244,7 +244,7 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine
     qDebug() << "All routes processed";
 }
 
-void RouterEngine::PlannerTest::processRoutesStream(QRail::RouterEngine::Route *route)
+void RouterEngine::PlannerTest::processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route)
 {
     // Log the complete trip to the console and verify it
     foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {

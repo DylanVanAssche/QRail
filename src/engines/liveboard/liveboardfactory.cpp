@@ -24,6 +24,8 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
     connect(this->fragmentsFactory(), SIGNAL(error(QString)), this, SLOT(handleFragmentFactoryError()));
     connect(this->fragmentsFactory(), SIGNAL(fragmentUpdated(QRail::Fragments::Fragment*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Fragment*)));
+    connect(this->fragmentsFactory(), SIGNAL(updateProcessed(qint64)), this, SIGNAL(updateProcessed(qint64)));
+    connect(this->fragmentsFactory(), SIGNAL(updateReceived(qint64)), this, SIGNAL(updateReceived(qint64)));
 
     // Get StationEngine::Factory instance
     this->setStationFactory(StationEngine::Factory::getInstance());
@@ -76,8 +78,8 @@ void QRail::LiveboardEngine::Factory::getLiveboardByStationURI(const QUrl &uri,
         this->deleteUsedPages(); // Clean up previous pages if needed
         this->setStationURI(uri);
         this->setMode(mode);
-        this->setFrom(from);
-        this->setUntil(until);
+        this->setFrom(from.toUTC());
+        this->setUntil(until.toUTC());
         this->setLiveboard(new QRail::LiveboardEngine::Board(this));
         this->liveboard()->setEntries(QList<QRail::VehicleEngine::Vehicle *>());
         this->liveboard()->setFrom(this->from());
@@ -444,6 +446,7 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
     //qDebug() << "Received fragment update:" << fragment->uri().toString();
     // For each board, check if the board is affected by the update and update the board if needed
     foreach(QRail::LiveboardEngine::Board *board, m_watchList) {
+        bool isUpdated = false;
         QList<QRail::VehicleEngine::Vehicle *> entries = board->entries();
 
         // Check each entry
@@ -517,9 +520,14 @@ void LiveboardEngine::Factory::handleFragmentFactoryUpdate(QRail::Fragments::Fra
                 QList<QRail::VehicleEngine::Vehicle*> entriesList = board->entries();
                 entriesList.replace(i, newVehicle);
                 board->setEntries(entriesList);
+                emit this->stream(newVehicle);
                 emit board->entriesChanged();
-                emit this->finished(board);
+                isUpdated = true;
             }
+        }
+
+        if(isUpdated) {
+            emit this->finished(board);
         }
     }
 }
@@ -625,12 +633,17 @@ QRail::Fragments::Factory *QRail::LiveboardEngine::Factory::fragmentsFactory() c
     return m_fragmentsFactory;
 }
 
-void LiveboardEngine::Factory::addBoardToWatchlist(LiveboardEngine::Board *board)
+void LiveboardEngine::Factory::unwatchAll()
+{
+    m_watchList.clear();
+}
+
+void LiveboardEngine::Factory::watch(LiveboardEngine::Board *board)
 {
     m_watchList.append(board);
 }
 
-void LiveboardEngine::Factory::removeBoardFromWatchlist(LiveboardEngine::Board *board)
+void LiveboardEngine::Factory::unwatch(LiveboardEngine::Board *board)
 {
     bool success = m_watchList.removeOne(board);
     if(!success) {

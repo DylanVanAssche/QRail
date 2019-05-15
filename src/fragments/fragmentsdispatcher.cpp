@@ -35,8 +35,8 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      * all timestamps in this range are
      * valid.
      */
-    QDateTime from = page->fragments().first()->departureTime();
-    QDateTime until = page->fragments().last()->departureTime();
+    QDateTime from = page->fragments().first()->departureTime().toUTC();
+    QDateTime until = page->fragments().last()->departureTime().toUTC();
     QList<QObject *> callerList = this->findTargets(from, until);
 
     // We should have retrieved some callers to dispatch the page to
@@ -81,6 +81,9 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
 {
     QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
+    qDebug() << "TARGETS=" << m_targets.keys();
+    qDebug() << "FROM=" << from;
+    qDebug() << "UNTIL=" << until;
     foreach (QDateTime timestamp, m_targets.keys()) {
         /*
          * If the timestamp is the same or higher or equal than the first fragment departure time

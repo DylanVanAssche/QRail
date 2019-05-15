@@ -47,6 +47,39 @@ QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &
     m_remarks = remarks;
 }
 
+RouterEngine::Route::~Route()
+{
+    foreach(auto l, m_legs) {
+        if(l) {
+            l->deleteLater();
+        }
+    }
+
+    foreach(auto t, m_transfers) {
+        if(t) {
+            t->deleteLater();
+        }
+    }
+
+    foreach(auto ta, m_tripAlerts) {
+        if(ta) {
+            ta->deleteLater();
+        }
+    }
+
+    foreach(auto va, m_vehicleAlerts) {
+        if(va) {
+            va->deleteLater();
+        }
+    }
+
+    foreach(auto r, m_remarks) {
+        if(r) {
+            r->deleteLater();
+        }
+    }
+}
+
 /**
  * @file routerroute.cpp
  * @author Dylan Van Assche

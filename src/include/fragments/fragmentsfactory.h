@@ -24,6 +24,9 @@
 #include <QtCore/QJsonParseError>
 #include <QtCore/QObject>
 #include <QtCore/QRegularExpression>
+#include <QtConcurrent/QtConcurrent>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 #include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
@@ -34,7 +37,8 @@
 #include "qrail.h"
 
 #define BASE_URL "https://lc.dylanvanassche.be/sncb/connections"
-#define REAL_TIME_URL "https://lc.dylanvanassche.be/sncb/events"
+#define REAL_TIME_URL_POLL "https://lc.dylanvanassche.be/sncb/events/poll"
+#define REAL_TIME_URL_SSE "https://lc.dylanvanassche.be/sncb/events/sse"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
@@ -81,6 +85,9 @@ public:
     QRail::Fragments::Dispatcher *dispatcher() const;
     //! Prefetch pages in cache
     bool prefetch(const QDateTime &from, const QDateTime &until);
+    //! Mutex access to page cache
+    QRail::Fragments::Cache* pageCache() const;
+    void setPageCache(QRail::Fragments::Cache* pageCache);
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -103,15 +110,20 @@ signals:
     void pageUpdated(QUrl pageURI);
     //! Emitted when a page and fragment are updated
     void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QUrl page);
+    //! Emitted when an update has been successfully processed
+    void updateProcessed(qint64 timestamp);
+    void updateReceived(qint64 timestamp);
 
 private slots:
     void handleEventSource(QString message);
 
 private:
+    mutable QMutex m_cache_mutex;
+    void handleEventSourceThread(QString message);
     QDateTime m_prefetchFrom;
     QDateTime m_prefetchUntil;
     QRail::Network::EventSource *m_eventSource;
-    QRail::Fragments::Cache m_pageCache;
+    QRail::Fragments::Cache* m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;

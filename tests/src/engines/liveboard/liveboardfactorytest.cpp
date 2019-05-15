@@ -69,14 +69,9 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
             << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
-
-    /*qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
-    factory->addBoardToWatchlist(liveboard);
-    QEventLoop loopUpdateReceived;
-    //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
-    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
-    loopUpdateReceived.exec();
-    factory->removeBoardFromWatchlist(liveboard);*/
+  
+    qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
+    factory->watch(liveboard);
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 

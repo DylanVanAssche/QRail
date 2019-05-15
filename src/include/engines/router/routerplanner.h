@@ -31,6 +31,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtPositioning/QGeoCoordinate>
+#include <QtCore/QSharedPointer>
 #include <algorithm> // C++ header needed for std:sort function
 
 #include "engines/alerts/alertsmessage.h"
@@ -109,7 +110,8 @@ public:
         You can rollback a Journey to a given snapshot in time by using the Journey::restoreJourney method.
         Afterwards, the modified Journey object can be rerouted using this method.
      */
-    void getConnections(QRail::RouterEngine::Journey *journey);
+    void getConnections(QRail::RouterEngine::Journey *journey,
+                        QDateTime pageTimestamp);
     //! Retrieves a Journey between 2 given stops.
     /*!
         \param departurePosition The GPS location of the departure location.
@@ -185,6 +187,8 @@ public:
     void watch(QRail::RouterEngine::Journey *journey);
     //! Unwatch a Journey for updates
     void unwatch(QRail::RouterEngine::Journey *journey);
+    //! Unwatch all Journies for updates
+    void unwatchAll();
 
 protected:
     //! Dispatcher protected method, only here as a reference.
@@ -194,7 +198,7 @@ signals:
     //! Emitted when the Journey calculation is finished.
     void finished(QRail::RouterEngine::Journey *journey);
     //! Emitted when a route has been found for the Journey.
-    void stream(QRail::RouterEngine::Route *route);
+    void stream(QSharedPointer<QRail::RouterEngine::Route> route);
     //! Emitted when something goes wrong.
     void error(const QString &message);
     //! Emitted when a new Fragments::Page has been requested.
@@ -202,13 +206,19 @@ signals:
     //! Emitted when a new Fragments::Page has been received.
     void processing(const QUrl &pageURI);
 
+    void updateReceived(qint64 time);
+
 private slots:
     void unlockPlanner();
     void handleTimeout();
     void handleFragmentFactoryError();
     void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
+    void processUpdate();
 
 private:
+    bool m_isRunning;
+    QUrl pageUpdateURI;
+    QDateTime fragmentUpdateTimestamp;
     QList<QRail::RouterEngine::Journey *> m_watchList;
     QTimer *progressTimeoutTimer;
     mutable QMutex plannerProcessingMutex;
@@ -222,7 +232,7 @@ private:
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);
-    StationStopProfile *getFirstReachableConnection(StationStopProfile *arrivalProfile);
+    QSharedPointer<StationStopProfile> getFirstReachableConnection(QSharedPointer<StationStopProfile> arrivalProfile);
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);

@@ -21,6 +21,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
 #include <QtTest/QSignalSpy>
 #include <QtTest/QtTest>
 #define REPEAT_COUNT 10
@@ -37,7 +38,7 @@ private slots:
 
 public slots:
     void processRoutesFinished(QRail::RouterEngine::Journey *journey);
-    void processRoutesStream(QRail::RouterEngine::Route *route);
+    void processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route);
     void processing(const QUrl &pageURI);
     void requested(const QUrl &pageURI);
 

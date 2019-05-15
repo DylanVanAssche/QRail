@@ -85,7 +85,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+        QDateTime::fromString("2019-03-31T14:00:00.000Z", Qt::ISODate), // Departure time (UTC)
         4 // Max transfers
     );
     /*planner->getConnections(
@@ -105,7 +105,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
 
     qDebug() << "---------------------------------------------- REROUTING ----------------------------------------------";
 
-    // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
+    /*// Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events
     QEventLoop loop3;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop3, SLOT(quit()));
     loop3.exec();
@@ -114,7 +114,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
             << "msecs";
 
     // Unwatch again
-    planner->unwatch(this->journey);
+    planner->unwatch(this->journey);*/
 
     qDebug() << "---------------------------------------------- CACHED ROUTING ----------------------------------------------";
 
@@ -186,7 +186,7 @@ void QRail::RouterEngine::PlannerTest::requested(const QUrl &pageURI)
 
 void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine::Journey *journey)
 {
-    planner->watch(journey);
+    //planner->watch(journey);
     qDebug() << "JOURNEY RECEIVED:" << journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
     QVERIFY2(journey->routes().size() > 0, "CSA couldn't find any routes, this is impossible in our integration test!");

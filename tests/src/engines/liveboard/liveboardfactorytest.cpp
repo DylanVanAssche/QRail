@@ -38,7 +38,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     qDebug() << "---------------------------------------------- ABORT LIVEBOARD ----------------------------------------------";
 
-    /*// Testing abort
+    // Testing abort
     start = QDateTime::currentDateTimeUtc();
     qInfo() << "Testing abort";
     factory->getLiveboardByStationURI(
@@ -50,7 +50,7 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
 
     QEventLoop loopAbort;
     connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopAbort, SLOT(quit()));
-    loopAbort.exec();*/
+    loopAbort.exec();
 
     qDebug() << "---------------------------------------------- CREATING LIVEBOARD ----------------------------------------------";
 
@@ -69,20 +69,20 @@ void QRail::LiveboardEngine::FactoryTest::runLiveboardFactoryTest()
     qInfo() << "Liveboard Vilvoorde DEPARTURES took"
             << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
-
+  
     qDebug() << "---------------------------------------------- UPDATE RECEIVED LIVEBOARD ----------------------------------------------";
     factory->watch(liveboard);
-    QEventLoop loopUpdateReceived;
-    //connect(liveboard, SIGNAL(entriesChanged()), &loopUpdateReceived, SLOT(quit()));
-    connect(factory, SIGNAL(finished(QRail::LiveboardEngine::Board *)), &loopUpdateReceived, SLOT(quit()));
-    loopUpdateReceived.exec();
-    factory->unwatch(liveboard);
 
     qDebug() << "---------------------------------------------- CACHED LIVEBOARD ----------------------------------------------";
 
     start = QDateTime::currentDateTimeUtc();
-    factory->getLiveboardByStationURI(
+    /*factory->getLiveboardByStationURI(
         QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde
+        LiveboardEngine::Board::Mode::DEPARTURES);*/
+    factory->getLiveboardByStationURI(
+        QUrl("http://irail.be/stations/NMBS/008811189"), // Vilvoorde, the most events generating station of the SNCB
+        QDateTime::currentDateTimeUtc(),
+        QDateTime::currentDateTimeUtc().addSecs(3600 * 8),
         LiveboardEngine::Board::Mode::DEPARTURES);
 
     // Start an eventloop to wait for the finished signal to allow benchmarking of asynchronous events

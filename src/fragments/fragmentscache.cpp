@@ -120,7 +120,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
 
                         // Insert updated fragment in the new page
                         qDebug() << "Inserting updated fragment in other page...";
-                        for(qint32 pageCounter=0; pageCounter < pagesURI.length()-1; pageCounter++) {
+                        for(qint32 pageCounter=0; pageCounter < pagesURI.length() - 1; pageCounter++) {
                             QUrl currentPageURI = pagesURI.at(pageCounter);
                             QUrl nextPageURI = pagesURI.at(pageCounter + 1);
                             QUrlQuery currentPageQuery = QUrlQuery(currentPageURI);

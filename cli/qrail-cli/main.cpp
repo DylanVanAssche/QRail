@@ -2,6 +2,8 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
+#include "qrail.h"
+using namespace QRail;
 
 int main(int argc, char *argv[])
 {
@@ -37,4 +39,19 @@ int main(int argc, char *argv[])
     qInfo() << "\tArrival station:" << arrivalStation;
     qInfo() << "\tDeparture time:" << departureTime;
     qInfo() << "\tMode:" << mode;
+
+    // Setup QRail
+    initQRail();
+
+    // Launch query
+    planner = QRail::RouterEngine::Planner::getInstance();
+
+    // Let the Qt meta object system know how it should handle our custom QObjects
+    qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
+
+    // Connect the signals
+    connect(planner, SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)), this, SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
+    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));
+    connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
+    connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
 }

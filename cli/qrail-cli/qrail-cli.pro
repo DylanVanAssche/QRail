@@ -20,9 +20,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp
 
-unix:!macx: LIBS += -L$$PWD/../../build/debug/ -lqrail
+# QRail library build location
+CONFIG(debug, debug|release) {
+    QRAIL_LOCATION = $$PWD/../../build/debug
+}
+else {
+    QRAIL_LOCATION = $$PWD/../../build/release
+}
+LIBS += $$QRAIL_LOCATION/libqrail.a
 
-INCLUDEPATH += $$PWD/../../build/debug
-DEPENDPATH += $$PWD/../../build/debug
-
-unix:!macx: PRE_TARGETDEPS += $$PWD/../../build/debug/libqrail.a
+## Headers include path of the QRail library
+INCLUDEPATH += $$PWD/../../src/include \
+    $$PWD/../../qtcsv/include

@@ -2,8 +2,8 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QDebug>
-#include "qrail.h"
-using namespace QRail;
+
+#include "router.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument("departure-station", QCoreApplication::translate("main", "Departure station URI."));
     parser.addPositionalArgument("arrival-station", QCoreApplication::translate("main", "Arrival station URI."));
     parser.addPositionalArgument("departure-time", QCoreApplication::translate("main", "Departure time in ISO string format."));
+    parser.addPositionalArgument("max-transfers", QCoreApplication::translate("main", "The maximum amount of transfers that are allowed for the journey."));
     QCommandLineOption switchToSSE("sse", QCoreApplication::translate("main", "Switch to SSE mode, default polling mode"));
     parser.addOption(switchToSSE);
 
@@ -25,33 +26,23 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     const QStringList args = parser.positionalArguments();
-    if(args.length() != 3) {
-        qCritical() << "Usage: ./qrail-cli <DEPARTURE STATION> <ARRIVAL STATION> <DEPARTURE TIME>. See ./qrail-cli -h for more information";
+    if(args.length() != 4) {
+        qCritical() << "Usage: ./qrail-cli <DEPARTURE STATION> <ARRIVAL STATION> <DEPARTURE TIME> <MAX TRANSFERS>. See ./qrail-cli -h for more information";
         return 1;
     }
     const QString departureStation = args.at(0);
     const QString arrivalStation = args.at(1);
     const QString departureTime = args.at(2);
+    const QString maxTransfers = args.at(3);
     const QString mode = parser.isSet(switchToSSE)? "sse": "polling";
 
     qInfo() << "Starting QRail with the following parameters:";
     qInfo() << "\tDeparture station:" << departureStation;
     qInfo() << "\tArrival station:" << arrivalStation;
     qInfo() << "\tDeparture time:" << departureTime;
+    qInfo() << "\tMax transfers:" << maxTransfers;
     qInfo() << "\tMode:" << mode;
 
-    // Setup QRail
-    initQRail();
-
-    // Launch query
-    planner = QRail::RouterEngine::Planner::getInstance();
-
-    // Let the Qt meta object system know how it should handle our custom QObjects
-    qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
-
-    // Connect the signals
-    connect(planner, SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)), this, SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
-    connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));
-    connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
-    connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
+    router* r = new router();
+    r->route(departureStation, arrivalStation, departureTime, maxTransfers);
 }

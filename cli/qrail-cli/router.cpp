@@ -12,6 +12,7 @@ router::router(QObject *parent) : QObject(parent)
 
 void router::route(QString from, QString to, QString departureTime, QString maxTransfers)
 {
+    planner->unwatchAll();
     // Connect the signals
     connect(planner, SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)), this, SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));

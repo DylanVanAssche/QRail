@@ -127,6 +127,7 @@ void EventSource::pollPollingStream()
 
 void EventSource::parseEvents(QStringList events)
 {
+    qDebug() << "Parsing events from stream...";
     // Split each event entry
     foreach(QString event, events) {
         QStringList eventParts = event.split("\n");

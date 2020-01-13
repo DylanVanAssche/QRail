@@ -33,7 +33,7 @@ void Cache::cachePage(Page *page)
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
     m_cache.insert(page->uri(), page);
-    //qDebug() << "Number of entries in cache:" << m_cache.count();
+    qDebug() << "Number of entries in cache:" << m_cache.count();
 
     // Cache the page on disk
     QJsonObject obj;
@@ -42,6 +42,8 @@ void Cache::cachePage(Page *page)
     obj.insert("hydraPrevious", QJsonValue::fromVariant(page->hydraPrevious()).toString());
     obj.insert("hydraNext", QJsonValue::fromVariant(page->hydraNext().toString()));
     QJsonArray fragments;
+    qDebug() << "Fragments:";
+    qDebug() << page->fragments();
     foreach(QRail::Fragments::Fragment *frag, page->fragments()) {
         QJsonObject f;
         f.insert("uri", QJsonValue::fromVariant(frag->uri().toString()));
@@ -60,19 +62,21 @@ void Cache::cachePage(Page *page)
     }
     obj.insert("fragments", fragments);
     QJsonDocument doc = QJsonDocument(obj);
+    qDebug() << "Fragment updated";
 
     // Save QJsonDocument to disk
     QString path = m_cacheDir.absolutePath();
     path.append("/" + page->uri().toString());
     QDir jsonFileDir(path);
     jsonFileDir.mkpath(path);
-    //qDebug() << "PAGE file path:" << path;
+    qDebug() << "Fragment opened as:" << path;
 
     path.append(PAGE_FILE_NAME);
     QFile jsonFile(path);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
     jsonFile.close();
+    qDebug() << "Fragment written as:" << path;
 }
 
 QUrl Cache::updateFragment(Fragment *updatedFragment)
@@ -115,6 +119,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         }
                         page->setFragments(pageFrags);
                         updatedPageURI = page->uri();
+                        qDebug() << "Departure delay update";
                         qDebug() << "----------PAGE HAS NOW:" << page->fragments().count() << " FRAGMENTS";
                         this->cachePage(page);
 
@@ -147,6 +152,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                                 qDebug() << "Sorting OK";
 
                                 currentPage->setFragments(currentPageFrags);
+                                qDebug() << "Inserted into page";
                                 qDebug() << "----------CURRENT PAGE HAS NOW:" << currentPage->fragments().count() << " FRAGMENTS";
 
                                 this->cachePage(currentPage);
@@ -169,7 +175,10 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         if(frag) {
                             delete frag;
                         }
-                        updatedPageURI = page->uri();
+                        updatedPageURI = page->uri();                     
+                        qDebug() << "Arrival delay update";
+                        page->setFragments(pageFrags);
+                        qDebug() << "fragments=" << page->fragments();
                         this->cachePage(page);
 
                         // Update completed

@@ -18,10 +18,10 @@
 using namespace QRail;
 QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::m_instance = nullptr;
 
-QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
+QRail::RouterEngine::Planner::Planner(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent) : QObject(parent)
 {
     // Init QRail::RouterEngine::Planner
-    this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
+    this->setFragmentsFactory(QRail::Fragments::Factory::getInstance(subscriptionType));
     this->setStationFactory(StationEngine::Factory::getInstance());
     this->setAbortRequested(false);
     this->progressTimeoutTimer = new QTimer(this);
@@ -38,12 +38,12 @@ QRail::RouterEngine::Planner::Planner(QObject *parent) : QObject(parent)
     connect(this->fragmentsFactory(), SIGNAL(updateReceived(qint64)), this, SIGNAL(updateReceived(qint64)));
 }
 
-QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance()
+QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription subscriptionType)
 {
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new QRail::RouterEngine::Planner";
-        m_instance = new Planner();
+        m_instance = new Planner(subscriptionType);
     }
     return m_instance;
 }

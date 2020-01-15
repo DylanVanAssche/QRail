@@ -44,7 +44,7 @@
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
 #define GTFS_MUST_COORDINATE_WITH_DRIVER "gtfs:MustCoordinateWithDriver"
 
-//#define VERBOSE_HTTP_STATUS // Show HTTP results
+#define VERBOSE_HTTP_STATUS // Show HTTP results
 
 // Factory pattern to generate Linked Connections fragments on the fly
 namespace QRail {
@@ -65,7 +65,7 @@ public:
         Constructs a QRail::Fragments::Factory if none exists and returns the
         instance.
      */
-    static QRail::Fragments::Factory *getInstance();
+    static QRail::Fragments::Factory *getInstance(QRail::Network::EventSource::Subscription subscriptionType);
     //! Fetches a Linked Connections page.
     /*!
         \param uri The URI of the page you want to fetch.
@@ -135,7 +135,7 @@ private:
     QRail::Network::Manager *http() const;
     void setHttp(QRail::Network::Manager *http);
     void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);
-    explicit Factory(QObject *parent = nullptr);
+    explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
 };
 } // namespace Fragments
 } // namespace QRail

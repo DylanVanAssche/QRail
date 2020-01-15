@@ -12,7 +12,7 @@ class router : public QObject
 {
     Q_OBJECT
 public:
-    explicit router(QObject *parent = nullptr);
+    explicit router(QString mode, QObject *parent = nullptr);
     void route(QString from, QString to, QString departureTime, QString maxTransfers);
 
 public slots:

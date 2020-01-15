@@ -1,11 +1,18 @@
 #include "router.h"
 
-router::router(QObject *parent) : QObject(parent)
+router::router(QString mode, QObject *parent) : QObject(parent)
 {
     // Setup QRail
     initQRail();
     // Launch query
-    planner = QRail::RouterEngine::Planner::getInstance();
+    if(mode == "polling") {
+        qDebug() << "Polling subscription set";
+        planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::POLLING);
+    }
+    else {
+        qDebug() << "SSE subscription set";
+        planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::SSE);
+    }
     // Let the Qt meta object system know how it should handle our custom QObjects
     qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
 }

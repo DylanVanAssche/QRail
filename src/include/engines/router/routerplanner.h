@@ -87,7 +87,7 @@ public:
         \public
         Constructs a RouterEngine::Planner if none exists and returns the instance.
      */
-    static Planner *getInstance();
+    static Planner *getInstance(QRail::Network::EventSource::Subscription subscriptionType = QRail::Network::EventSource::Subscription::POLLING);
     //! Planner object destructor
     ~Planner();
     //! Retrieves a Journey between 2 given stops.
@@ -228,7 +228,7 @@ private:
     QRail::RouterEngine::Journey *m_journey;
     QList<QRail::Fragments::Page *> m_usedPages;
     bool m_abortRequested;
-    explicit Planner(QObject *parent = nullptr);
+    explicit Planner(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
     void processPage(QRail::Fragments::Page *page);

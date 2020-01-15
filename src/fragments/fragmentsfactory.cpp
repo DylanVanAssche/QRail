@@ -18,7 +18,7 @@
 using namespace QRail;
 QRail::Fragments::Factory *QRail::Fragments::Factory::m_instance = nullptr;
 
-QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
+QRail::Fragments::Factory::Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent) : QObject(parent)
 {
     // Setup the QRail::Network::Manager
     this->setHttp(QRail::Network::Manager::getInstance());
@@ -33,8 +33,13 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(getResource(QUrl, QObject *)), this->http(), SLOT(getResource(QUrl, QObject *)));
 
     // Create event source
-    m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_POLL), QRail::Network::EventSource::Subscription::POLLING);
-    //m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::SSE);
+    if(subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
+        m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_POLL), QRail::Network::EventSource::Subscription::POLLING);
+    }
+    else {
+        m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::SSE);
+    }
+
     connect(m_eventSource,
             SIGNAL(messageReceived(QString)),
             this,
@@ -44,12 +49,12 @@ QRail::Fragments::Factory::Factory(QObject *parent) : QObject(parent)
     this->setPageCache(new QRail::Fragments::Cache());
 }
 
-QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance()
+QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance(QRail::Network::EventSource::Subscription subscriptionType)
 {
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new Factory";
-        m_instance = new QRail::Fragments::Factory();
+        m_instance = new QRail::Fragments::Factory(subscriptionType);
     }
     return m_instance;
 }
@@ -118,7 +123,6 @@ void QRail::Fragments::Factory::customEvent(QEvent *event)
 void Fragments::Factory::handleEventSource(QString message)
 {
     // Move updating to separate thread
-    //QtConcurrent::run(this, &QRail::Fragments::Factory::handleEventSourceThread, message);
     this->handleEventSourceThread(message);
 }
 
@@ -140,24 +144,7 @@ void Fragments::Factory::handleEventSourceThread(QString message)
                 qDebug() << "Is object OK";
                 QUrl updatedPageURI = QUrl(this->pageCache()->updateFragment(frag));
                 qDebug() << "Updated page URI:" << updatedPageURI;
-                //QRail::Fragments::Page *page = m_pageCache.getPageByFragment(frag);
-                // In case we haven't downloaded this page yet, skip this update
-                //if(!page) {
-                //    continue;
-                //}
-                //qDebug() << "Changing page:" << page->uri();
-                /*QList<QRail::Fragments::Fragment *> fragmentList = page->fragments();
-                // Look for the fragment and replace it.
-                for(qint64 i=0; i < fragmentList.length(); i++) {
-                    QRail::Fragments::Fragment *item = fragmentList.at(i);
-                    if(item->uri() == frag->uri()) {
-                        fragmentList.replace(i, frag);
-                        page->setFragments(fragmentList);
-                        break;
-                    }
-                }
-                // Recache page, the old version is automatically deleted.
-                m_pageCache.cachePage(page);*/
+
                 if(updatedPageURI.isValid()) {
                     emit this->pageUpdated(updatedPageURI);
                     emit this->fragmentUpdated(frag);

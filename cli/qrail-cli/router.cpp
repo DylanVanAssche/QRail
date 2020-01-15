@@ -20,11 +20,13 @@ router::router(QString mode, QObject *parent) : QObject(parent)
 void router::route(QString from, QString to, QString departureTime, QString maxTransfers)
 {
     planner->unwatchAll();
+    timestamp = QDateTime::currentDateTime();
     // Connect the signals
     connect(planner, SIGNAL(stream(QSharedPointer<QRail::RouterEngine::Route>)), this, SLOT(processRoutesStream(QSharedPointer<QRail::RouterEngine::Route>)));
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), this, SLOT(processRoutesFinished(QRail::RouterEngine::Journey*)));
     connect(planner, SIGNAL(processing(QUrl)), this, SLOT(processing(QUrl)));
     connect(planner, SIGNAL(requested(QUrl)), this, SLOT(requested(QUrl)));
+    connect(planner, SIGNAL(updateReceived(qint64)), this, SLOT(updateReceived(qint64)));
 
     QDateTime start = QDateTime::currentDateTimeUtc();
     planner->getConnections(
@@ -47,7 +49,7 @@ void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
     planner->watch(journey);
     qDebug() << "JOURNEY RECEIVED:" << journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
-    foreach (QSharedPointer<QRail::RouterEngine::Route> route, journey->routes()) {
+    /*foreach (QSharedPointer<QRail::RouterEngine::Route> route, journey->routes()) {
         // Verify the complete trip
         qDebug() << "Trip:"
                  << route->departureStation()->station()->name().value(QLocale::Language::Dutch)
@@ -78,14 +80,18 @@ void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
                 qCritical() << "Transfer object is INVALID";
             }
         }
-    }
-    qDebug() << "All routes processed";
+    }*/
+    qint64 diff = timestamp.msecsTo(QDateTime::currentDateTime());
+    qDebug() << "All routes processed:" << diff << "ms";
+    timestamp = QDateTime::currentDateTime();
 }
 
 void router::processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route)
 {
     // Log the complete trip to the console and verify it
-    foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
+    qint64 diff = timestamp.msecsTo(QDateTime::currentDateTime());
+    qDebug() << diff << "ms";
+    /*foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
         if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
             qDebug() << "TRANSFER:"
                      << "Changing vehicle at"
@@ -100,7 +106,7 @@ void router::processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> rout
                      << transfer->time().time().toString("hh:mm")
                      << transfer->station()->name().value(QLocale::Language::Dutch);
         }
-    }
+    }*/
 }
 
 void router::processing(const QUrl &pageURI)
@@ -110,5 +116,11 @@ void router::processing(const QUrl &pageURI)
 
 void router::requested(const QUrl &pageURI)
 {
-    qDebug() << "Page requested:" << pageURI.toString();
+    //qDebug() << "Page requested:" << pageURI.toString();
+}
+
+void router::updateReceived(qint64 time)
+{
+    qDebug() << "Update process started:" << time;
+    timestamp = QDateTime::currentDateTime();
 }

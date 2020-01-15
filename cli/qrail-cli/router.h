@@ -20,9 +20,11 @@ public slots:
     void processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route);
     void processing(const QUrl &pageURI);
     void requested(const QUrl &pageURI);
+    void updateReceived(qint64 time);
 
 private:
     QRail::RouterEngine::Planner *planner;
+    QDateTime timestamp;
 };
 
 #endif // ROUTER_H

@@ -194,28 +194,25 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
     QUrlQuery pageQuery = QUrlQuery(pageURI);
     QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
 
-    // First cached journey is affected? Reroute completely.
-    if(m_snapshotJourneys.at(0)->pageURI() == pageURI) {
-        qDebug() << "First snapshot is affected, clearing Journey";
-        m_snapshotJourneys.removeOne(m_snapshotJourneys.at(0));
-        this->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route >>());
-        this->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > ());
-        this->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
-        this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
-        this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
-        this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
-        this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
-        this->cleanSnapshots(m_snapshotJourneys.at(0)->pageTimestamp());
-        return pageTimestamp;
-    }
-
     // Look for the page in the list and restore the Journey before that page
     qDebug() << "Searching for previous Journey, just before our affected page:" << pageURI;
     for(qint64 c=0; c < m_snapshotJourneys.length(); c++) {
         QRail::RouterEngine::SnapshotJourney *snapshotJourney = m_snapshotJourneys.at(c);
         qDebug() << snapshotJourney->pageURI().toString();
-        if(snapshotJourney->pageURI() == pageURI) {
-            m_snapshotJourneys.removeOne(snapshotJourney);
+        if(snapshotJourney->pageURI() == pageURI) {           
+            // There's no journey before the first page used in the journey
+            if(c == 0) {
+                qWarning() << "No journey exist before the first page, rerouting completely!";
+                this->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route >>());
+                this->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > ());
+                this->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
+                this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
+                this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
+                this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
+                this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
+                this->cleanSnapshots(m_snapshotJourneys.at(0)->pageTimestamp());
+                return pageTimestamp;
+            }
             QRail::RouterEngine::SnapshotJourney *previousSnapshotJourney = m_snapshotJourneys.at(c-1);
             this->setRoutes(previousSnapshotJourney->routes());
             this->setTArray(previousSnapshotJourney->TArray());

@@ -49,7 +49,7 @@ void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
     planner->watch(journey);
     qDebug() << "JOURNEY RECEIVED:" << journey;
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
-    /*foreach (QSharedPointer<QRail::RouterEngine::Route> route, journey->routes()) {
+    foreach (QSharedPointer<QRail::RouterEngine::Route> route, journey->routes()) {
         // Verify the complete trip
         qDebug() << "Trip:"
                  << route->departureStation()->station()->name().value(QLocale::Language::Dutch)
@@ -66,21 +66,25 @@ void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
                 qDebug() << "TRANSFER:"
                          << "Changing vehicle at"
                          << transfer->time().time().toString("hh:mm")
-                         << transfer->station()->name().value(QLocale::Language::Dutch);
+                         << transfer->station()->name().value(QLocale::Language::Dutch)
+                         << "Arriving with:" << transfer->arrivalLeg()->vehicleInformation()->uri()
+                         << "Departuring with:" << transfer->departureLeg()->vehicleInformation()->uri();
                 retrievedTransferStations << transfer->station()->name().value(QLocale::Language::Dutch);
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE) {
                 qDebug() << "DEPARTURE:"
                          << transfer->time().time().toString("hh:mm")
-                         << transfer->station()->name().value(QLocale::Language::Dutch);
+                         << transfer->station()->name().value(QLocale::Language::Dutch)
+                         << transfer->departureLeg()->vehicleInformation()->uri();
             } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
                 qDebug() << "ARRIVAL:"
                          << transfer->time().time().toString("hh:mm")
-                         << transfer->station()->name().value(QLocale::Language::Dutch);
+                         << transfer->station()->name().value(QLocale::Language::Dutch)
+                         << transfer->arrivalLeg()->vehicleInformation()->uri();
             } else {
                 qCritical() << "Transfer object is INVALID";
             }
         }
-    }*/
+    }
     qint64 diff = timestamp.msecsTo(QDateTime::currentDateTime());
     qDebug() << "All routes processed:" << diff << "ms";
     timestamp = QDateTime::currentDateTime();

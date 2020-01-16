@@ -43,6 +43,7 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
     if (callerList.isEmpty()) {
         qCritical() << "No callers found for dispatching page:" << page->uri();
     }
+    qDebug() << "Dispatching to callers";
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
@@ -54,9 +55,13 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
          * INFO: https://doc.qt.io/qt-5/qcoreapplication.html#postEvent
          */
         QRail::Fragments::DispatcherEvent *event = new QRail::Fragments::DispatcherEvent(this->eventType());
+        qDebug() << "Generated event";
         event->setPage(page);
+        qDebug() << "Page attached";
         QCoreApplication::postEvent(caller, event);
+        qDebug() << "Event posted";
     }
+    qDebug() << "Cleaning up targets";
     this->removeTargets(from, until);
 }
 
@@ -100,6 +105,7 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
             callers.append(m_targets.value(timestamp));
         }
     }
+    qDebug() << "Callers generated";
     return callers;
 }
 

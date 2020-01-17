@@ -115,7 +115,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         pageFrags.removeAt(fragCounter);
                         // Memory managment
                         if(frag) {
-                            delete frag;
+                            //delete frag;
                         }
                         page->setFragments(pageFrags);
                         updatedPageURI = page->uri();
@@ -173,7 +173,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         pageFrags.replace(fragCounter, updatedFragment);
                         // Memory managment
                         if(frag) {
-                            delete frag;
+                            //delete frag;
                         }
                         updatedPageURI = page->uri();                     
                         qDebug() << "Arrival delay update";

@@ -219,8 +219,8 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
             this->setSArray(previousSnapshotJourney->SArray());
             this->setT_EarliestArrivalTime(previousSnapshotJourney->T_EarliestArrivalTime());
             this->setS_EarliestArrivalTime(previousSnapshotJourney->S_EarliestArrivalTime());
-            this->setHydraNext(m_snapshotJourneys.at(c)->hydraNext());
-            this->setHydraPrevious(m_snapshotJourneys.at(c)->hydraPrevious());
+            this->setHydraNext(previousSnapshotJourney->hydraNext());
+            this->setHydraPrevious(previousSnapshotJourney->hydraPrevious());
             qDebug() << "Succesfully restored the previous Journey";
             this->cleanSnapshots(snapshotJourney->pageTimestamp());
             return pageTimestamp;

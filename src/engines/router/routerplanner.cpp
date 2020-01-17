@@ -354,7 +354,7 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
              */
             T1_walkingArrivalTime = INFINITE_TIME;
             T1_transfers = INFINITE_TRANSFERS;
-            qDebug() << T1_walkingArrivalTime << "INFINITE";
+            qDebug() << T1_walkingArrivalTime << "T1 INFINITE";
         }
 
         // Calculate T2, the earliest time to arrive at our destination when we
@@ -365,6 +365,8 @@ void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
             * at the destination. The number of transfers stays the same (between
             * this connection and the destination) as we remain seated.
             */
+            qDebug() << "Trying to fetch fragment here";
+            qDebug() << this->journey()->TArray().value(fragment->tripURI())->arrivalConnection();
             T2_stayOnTripArrivalTime = this->journey()->TArray().value(fragment->tripURI())->arrivalTime();
             T2_transfers = this->journey()->TArray().value(fragment->tripURI())->transfers();
             qDebug() << "T2 selected this->journey()->TArray().contains(fragment->tripURI())";

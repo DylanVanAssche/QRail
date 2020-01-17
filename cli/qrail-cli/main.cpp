@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion("0.0.1");
 
     QCommandLineParser parser;
-    parser.setApplicationDescription("Test helper");
+    parser.setApplicationDescription("CLI QRail application. Plan your route using Linked Connections.");
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("departure-station", QCoreApplication::translate("main", "Departure station URI."));

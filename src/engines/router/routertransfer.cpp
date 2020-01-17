@@ -62,7 +62,7 @@ QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departure
 
 RouterEngine::Transfer::~Transfer()
 {
-    if(m_departure) {
+    /*if(m_departure) {
         m_departure->deleteLater();
     }
 
@@ -76,7 +76,7 @@ RouterEngine::Transfer::~Transfer()
 
     if(m_arrivalLeg) {
         m_arrivalLeg->deleteLater();
-    }
+    }*/
 }
 
 // Getters & Setters

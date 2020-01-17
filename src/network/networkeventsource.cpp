@@ -99,7 +99,7 @@ void EventSource::handlePollingFinished()
     emit this->messageReceived(payload);
 
     //Delete reply
-    m_reply->deleteLater();
+    //m_reply->deleteLater();
 }
 
 void EventSource::pollPollingStream()

@@ -46,7 +46,7 @@ QRail::RouterEngine::RouteLeg::RouteLeg(const QRail::RouterEngine::RouteLeg::Typ
 
 RouterEngine::RouteLeg::~RouteLeg()
 {
-    if(m_vehicleInformation) {
+    /*if(m_vehicleInformation) {
         m_vehicleInformation->deleteLater();
     }
 
@@ -56,7 +56,7 @@ RouterEngine::RouteLeg::~RouteLeg()
 
     if(m_arrival) {
         m_arrival->deleteLater();
-    }
+    }*/
 }
 
 /**

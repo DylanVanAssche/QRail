@@ -93,7 +93,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
         QUrlQuery query = QUrlQuery(pageURI);
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
         if(pageTime <= departureTimeWithDelay) { // just the page before the departure time must be considered too! This can be optimized...
-            qDebug() << "PAGE TIME:" << pageTime << "| DEP:" << departureTime << "| DEP+DEL:" << departureTimeWithDelay;
+            //qDebug() << "PAGE TIME:" << pageTime << "| DEP:" << departureTime << "| DEP+DEL:" << departureTimeWithDelay;
             QRail::Fragments::Page* page = m_cache.value(pageURI);
             QList<QRail::Fragments::Fragment *> fragments = page->fragments();
 
@@ -103,7 +103,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
 
                 // Check if this fragment is the one we're looking for
                 if(fragment->uri() == updatedFragment->uri()) {
-                    qDebug() << "Found fragment!";
+                    //qDebug() << "Found fragment!";
 
                     // Departure delay changed, removing old fragment and inserting new fragment
                     if(fragment->departureDelay() != updatedFragment->departureDelay()) {

@@ -49,7 +49,7 @@ QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &
 
 RouterEngine::Route::~Route()
 {
-    foreach(auto l, m_legs) {
+    /*foreach(auto l, m_legs) {
         if(l) {
             l->deleteLater();
         }
@@ -77,7 +77,7 @@ RouterEngine::Route::~Route()
         if(r) {
             r->deleteLater();
         }
-    }
+    }*/
 }
 
 /**

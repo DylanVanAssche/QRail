@@ -404,7 +404,7 @@ QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() cons
     return m_liveboard;
 }
 
-void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
+/*void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
 {
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
@@ -414,7 +414,7 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
-}
+}*/
 
 void LiveboardEngine::Factory::unlockLiveboard()
 {

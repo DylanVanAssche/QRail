@@ -190,9 +190,9 @@ public:
     //! Unwatch all Journies for updates
     void unwatchAll();
 
-protected:
+/*protected:
     //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
+    virtual void customEvent(QEvent *event);*/
 
 signals:
     //! Emitted when the Journey calculation is finished.
@@ -214,6 +214,7 @@ private slots:
     void handleFragmentFactoryError();
     void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
     void processUpdate();
+    void processPage(QRail::Fragments::Page *page);
 
 private:
     bool m_isRunning;
@@ -231,7 +232,6 @@ private:
     explicit Planner(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
     void parsePage(QRail::Fragments::Page *page);
-    void processPage(QRail::Fragments::Page *page);
     QSharedPointer<StationStopProfile> getFirstReachableConnection(QSharedPointer<StationStopProfile> arrivalProfile);
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;

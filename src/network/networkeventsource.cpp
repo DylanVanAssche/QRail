@@ -35,7 +35,7 @@ QUrl EventSource::url()
 
 void EventSource::close()
 {
-    m_manager->unsubscribe(this);
+    m_reply->abort();
     this->setReadyState(EventSource::ReadyState::CLOSED);
 }
 
@@ -44,35 +44,17 @@ void EventSource::open()
     this->setReadyState(EventSource::ReadyState::CONNECTING);
     if(m_subscriptionType == Subscription::SSE) {
         qDebug() << "Opening SSE stream...";
-        m_reply = m_manager->subscribe(m_url, this);
+        m_reply = m_manager->subscribe(m_url);
         connect(m_reply, SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
         connect(m_reply, SIGNAL(finished()), this, SLOT(handleSSEFinished()));
     }
     else if(m_subscriptionType == Subscription::POLLING) {
         qDebug() << "Opening HTTP polling stream...";
-        this->pollPollingStream();
+        m_reply = m_manager->getResource(m_url);
+        connect(m_reply, SIGNAL(finished()), this, SLOT(handlePollingFinished()));
     }
     else {
         qCritical() << "Unknown subscription type!";
-    }
-}
-
-void EventSource::customEvent(QEvent *event)
-{
-    if (event->type() == this->m_manager->dispatcher()->eventType()) {
-        event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
-        if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
-            this->handlePollingStream(networkEvent->reply());
-        }
-        else if(m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
-            this->handleSSEFinished();
-        }
-        else {
-            qCritical() << "Dispatching event failed, unknown handler";
-        }
-    } else {
-        event->ignore();
     }
 }
 
@@ -108,11 +90,17 @@ void EventSource::handleSSEFinished()
     }
 }
 
-void EventSource::handlePollingStream(QNetworkReply *reply)
+void EventSource::handlePollingFinished()
 {
     qDebug() << "Received poll reply";
-    QString payload = QString(reply->readAll());
+    QString payload = QString(m_reply->readAll());
     emit this->messageReceived(payload);
+
+    qDebug() << "Queue polling request";
+    this->pollPollingStream();
+
+    // Delete reply
+    m_reply->deleteLater();
 }
 
 void EventSource::pollPollingStream()
@@ -120,7 +108,7 @@ void EventSource::pollPollingStream()
     // Only execute polling when the connection is open.
     if(m_readyState != EventSource::ReadyState::CLOSED) {
         qDebug() << "Polling resource...";
-        m_manager->getResource(m_url, this);
+        m_reply = m_manager->getResource(m_url);
         QTimer::singleShot(POLL_INTERVAL, this, SLOT(pollPollingStream()));
     }
 }

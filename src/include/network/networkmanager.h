@@ -33,8 +33,6 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QSslError>
 
-#include "network/networkdispatcher.h"
-
 #define CONTENT_TYPE "application/ld+json"
 #define ACCEPT_HEADER_SSE "text/event-stream"
 #define ACCEPT_HEADER_HTTP "application/ld+json"
@@ -61,7 +59,6 @@ public:
     static Manager *getInstance();
     QString userAgent() const;
     void setUserAgent(const QString &userAgent);
-    QRail::Network::Dispatcher *dispatcher() const;
 
 signals:
     //! SSL errors are emitted through this signal.
@@ -70,57 +67,49 @@ signals:
     QNetworkAccessManager::NetworkAccessibility networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
     //! Emitted when the user agent has been changed.
     void userAgentChanged();
+    void requestCompleted(QNetworkReply *reply);
 
 public slots:
     //! HTTP GET request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getResource(const QUrl &url, QObject *caller);
+    QNetworkReply *getResource(const QUrl &url);
     //! HTTP POST request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
         \param data The data that you want to send to the server.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void postResource(const QUrl &url, const QByteArray &data, QObject *caller);
+    QNetworkReply *postResource(const QUrl &url, const QByteArray &data);
     //! HTTP DELETE request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void deleteResource(const QUrl &url, QObject *caller);
+    QNetworkReply *deleteResource(const QUrl &url);
     //! HTTP HEAD request.
     /*!
         \param url The URL you want to access.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void headResource(const QUrl &url, QObject *caller);
+    QNetworkReply *headResource(const QUrl &url);
     //! Subscribe to a HTTP SSE resource.
     /*!
         \param url The URL of the SSE resource.
         \param caller The caller of this method.
      */
-    QNetworkReply *subscribe(const QUrl &url, QObject *caller);
+    QNetworkReply *subscribe(const QUrl &url);
     //! Unsubscribe to a HTTP SSE resource.
     /*!
         \param caller The caller of this method.
     */
-    void unsubscribe(QObject *caller);
-
-private slots:
-    void requestCompleted(QNetworkReply *reply);
-    QNetworkReply *poll(const QUrl &url);
+    void unsubscribe();
 
 private:
     QNetworkAccessManager *m_QNAM;
     QAbstractNetworkCache *m_cache;
-    QRail::Network::Dispatcher *m_dispatcher;
     QString m_userAgent;
     static Manager *m_instance;
     explicit Manager(QObject *parent = nullptr);
@@ -129,7 +118,6 @@ private:
     void setQNAM(QNetworkAccessManager *value);
     QAbstractNetworkCache *cache() const;
     void setCache(QAbstractNetworkCache *cache);
-    void setDispatcher(QRail::Network::Dispatcher *dispatcher);
     static Manager *manager();
     static void setManager(const Manager *manager);
 };

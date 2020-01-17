@@ -25,6 +25,8 @@ QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
 
 void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
 {
+    qDebug() << "dispatchPage()";
+
     /*
      * Retrieve the callers of the page.
      *
@@ -37,13 +39,14 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
      */
     QDateTime from = page->fragments().first()->departureTime().toUTC();
     QDateTime until = page->fragments().last()->departureTime().toUTC();
+    qDebug() << "Page properties to find targets" << from << until;
     QList<QObject *> callerList = this->findTargets(from, until);
 
     // We should have retrieved some callers to dispatch the page to
     if (callerList.isEmpty()) {
         qCritical() << "No callers found for dispatching page:" << page->uri();
     }
-    qDebug() << "Dispatching to callers";
+    qDebug() << "Dispatching to callers" << callerList;
 
     // Post the event to the event queue
     foreach (QObject *caller, callerList) {
@@ -59,8 +62,9 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
         event->setPage(page);
         qDebug() << "Page attached";
         QCoreApplication::postEvent(caller, event);
-        qDebug() << "Event posted";
+        qDebug() << "Event dispatched";
     }
+
     qDebug() << "Cleaning up targets";
     this->removeTargets(from, until);
 }
@@ -77,14 +81,13 @@ void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
 
 void QRail::Fragments::Dispatcher::addTarget(const QDateTime &departureTime, QObject *caller)
 {
-    QMutexLocker locker(&targetListLocker);
     m_targets.insert(departureTime, caller);
+    qDebug() << "Dispatcher added target:" << departureTime.toUTC() << caller;
 }
 
 QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from,
                                                            const QDateTime &until)
 {
-    QMutexLocker locker(&targetListLocker);
     QList<QObject *> callers = QList<QObject *>();
     qDebug() << "TARGETS=" << m_targets.keys();
     qDebug() << "FROM=" << from;
@@ -112,13 +115,13 @@ QList<QObject *> QRail::Fragments::Dispatcher::findTargets(const QDateTime &from
 void QRail::Fragments::Dispatcher::removeTargets(const QDateTime &from,
                                                  const QDateTime &until)
 {
-    QMutexLocker locker(&targetListLocker);
     foreach (QDateTime timestamp, m_targets.keys()) {
         if ((timestamp.toMSecsSinceEpoch() >= from.toMSecsSinceEpoch())
                 && (timestamp.toMSecsSinceEpoch() <= until.toMSecsSinceEpoch())) {
             m_targets.remove(timestamp);
         }
     }
+    qDebug() << "Targets removed";
 }
 
 QEvent::Type QRail::Fragments::Dispatcher::eventType() const

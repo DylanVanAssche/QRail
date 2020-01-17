@@ -52,14 +52,14 @@ signals:
     void messageReceived(QString message);
     void readyStateChanged(QRail::Network::EventSource::ReadyState state);
 
-protected:
+/*protected:
     //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
+    virtual void customEvent(QEvent *event);*/
 
 private slots:
     void handleSSEStream();
     void handleSSEFinished();
-    void handlePollingStream(QNetworkReply *reply);
+    void handlePollingFinished();
     void pollPollingStream();
 
 private:

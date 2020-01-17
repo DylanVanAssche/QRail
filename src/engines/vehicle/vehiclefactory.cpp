@@ -225,7 +225,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
 }
 
 // Helpers
-void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
+/*void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
 {
     if (event->type() == this->http()->dispatcher()->eventType()) {
         event->accept();
@@ -234,7 +234,7 @@ void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
-}
+}*/
 
 /**
  * @file vehiclefactory.cpp

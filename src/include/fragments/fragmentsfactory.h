@@ -28,7 +28,6 @@
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
-#include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentscache.h"
@@ -70,28 +69,18 @@ public:
     /*!
         \param uri The URI of the page you want to fetch.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getPage(const QUrl &uri, QObject *caller);
+    void getPage(const QUrl &uri);
     //! Fetches a Linked Connections page.
     /*!
         \param departureTime The timestamp of the page (departure time).
                The page will contain at least this timestamp and the next connections that are following on this timestamp.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getPage(const QDateTime &departureTime, QObject *caller);
-    //! Provides access to the dispatcher
-    QRail::Fragments::Dispatcher *dispatcher() const;
-    //! Prefetch pages in cache
-    bool prefetch(const QDateTime &from, const QDateTime &until);
+    void getPage(const QDateTime &departureTime);
     //! Mutex access to page cache
     QRail::Fragments::Cache* pageCache() const;
     void setPageCache(QRail::Fragments::Cache* pageCache);
-
-protected:
-    //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
 
 signals:
     //! Emitted when a page has been become ready.
@@ -102,8 +91,6 @@ signals:
     void error(const QString &message);
     //! Emitted when a connection has been updated.
     void connectionChanged(const QUrl &uri);
-    //! Emitted when prefetching is complete
-    void prefetchFinished();
     //! Emitted when a fragment has been updated
     void fragmentUpdated(QRail::Fragments::Fragment *fragment);
     //! Emitted when a page has been updated
@@ -116,25 +103,18 @@ signals:
 
 private slots:
     void handleEventSource(QString message);
+    void processHTTPReply();
 
 private:
     mutable QMutex m_cache_mutex;
-    void handleEventSourceThread(QString message);
-    QDateTime m_prefetchFrom;
-    QDateTime m_prefetchUntil;
     QRail::Network::EventSource *m_eventSource;
     QRail::Fragments::Cache* m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;
-    QRail::Fragments::Dispatcher *m_dispatcher;
+    QNetworkReply *m_reply;
     void getPageByURIFromNetworkManager(const QUrl &uri);
     QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
-    void processHTTPReply(QNetworkReply *reply);
-    void processPrefetchEvent(QRail::Fragments::Page *page);
-    QRail::Network::Manager *http() const;
-    void setHttp(QRail::Network::Manager *http);
-    void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);
     explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
 };
 } // namespace Fragments

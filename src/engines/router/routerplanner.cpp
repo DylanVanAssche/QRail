@@ -36,6 +36,7 @@ QRail::RouterEngine::Planner::Planner(QRail::Network::EventSource::Subscription 
             this, SLOT(handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment*, QUrl)));
     connect(this->fragmentsFactory(), SIGNAL(updateProcessed(qint64)), this, SLOT(processUpdate()));
     connect(this->fragmentsFactory(), SIGNAL(updateReceived(qint64)), this, SIGNAL(updateReceived(qint64)));
+    connect(this->fragmentsFactory(), SIGNAL(pageReady(QRail::Fragments::Page*)), this, SLOT(processPage(QRail::Fragments::Page*)));
 }
 
 QRail::RouterEngine::Planner *QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription subscriptionType)
@@ -132,7 +133,7 @@ void QRail::RouterEngine::Planner::getConnections(const QUrl &departureStation,
                                                                                                                                      MAX_RESULTS);
 
         // Jumpstart the page fetching
-        this->fragmentsFactory()->getPage(this->journey()->arrivalTime(), this);
+        this->fragmentsFactory()->getPage(this->journey()->arrivalTime());
         qDebug() << "CSA init OK";
     } else {
         qCritical() << "Invalid stations or timestamps";
@@ -150,26 +151,10 @@ void RouterEngine::Planner::getConnections(Journey *journey, QDateTime pageTimes
         this->initUsedPages();
         this->progressTimeoutTimer->start();
 
-        /*
-         * Setup footpaths for the arrival station since CSA profile
-         * goes from the end to the beginning.
-         *
-         * Footpaths give the user the possibility to exit at another station
-         * and walk to it's destination in case that's faster than the original
-         * arrival station.
-         */
-        QRail::StationEngine::Station *station =
-                this->stationFactory()->getStationByURI(this->journey()->arrivalStationURI());
-
-        QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations =
-                this->stationFactory()->getStationsInTheAreaByPosition(station->position(),
-                                                                       SEARCH_RADIUS,
-                                                                       MAX_RESULTS);
-
         // Jumpstart the page fetching
         qDebug() << "************************ REROUTING JOURNEY *****************************";
 
-        this->fragmentsFactory()->getPage(pageTimestamp, this);
+        this->fragmentsFactory()->getPage(pageTimestamp);
         qDebug() << "CSA init OK";
     }
     else {
@@ -1025,7 +1010,7 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
 
         // Aborted, no new requests should be made
         if(!this->isAbortRequested()) {
-            this->fragmentsFactory()->getPage(page->hydraPrevious(), this);
+            this->fragmentsFactory()->getPage(page->hydraPrevious());
             emit this->requested(page->hydraPrevious());
         }
     }
@@ -1059,8 +1044,10 @@ QDateTime QRail::RouterEngine::Planner::calculateArrivalTime(const QDateTime &de
 }
 
 // Getters & Setters
-void QRail::RouterEngine::Planner::customEvent(QEvent *event)
+/*void QRail::RouterEngine::Planner::customEvent(QEvent *event)
 {
+    qDebug() << "Evaluating event";
+    qDebug() << event->type();
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
         QRail::Fragments::DispatcherEvent *pageEvent = reinterpret_cast<QRail::Fragments::DispatcherEvent *>(event);
@@ -1071,7 +1058,7 @@ void QRail::RouterEngine::Planner::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
-}
+}*/
 
 void RouterEngine::Planner::unlockPlanner()
 {

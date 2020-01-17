@@ -46,8 +46,5 @@ int main(int argc, char *argv[])
     router* r = new router(mode);
     r->route(departureStation, arrivalStation, departureTime, maxTransfers);
 
-    while(1) {
-    app.processEvents();
-    }
     app.exec();
 }

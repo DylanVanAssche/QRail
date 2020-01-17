@@ -32,9 +32,11 @@ QRail::Fragments::Factory::Factory(QRail::Network::EventSource::Subscription sub
 
     // Create event source
     if(subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
+        qDebug() << "Instantiated EventSource POLL";
         m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_POLL), QRail::Network::EventSource::Subscription::POLLING);
     }
     else {
+        qDebug() << "Instantiated EventSource SSE";
         m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::SSE);
     }
 
@@ -237,6 +239,7 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
 
 void QRail::Fragments::Factory::processHTTPReply()
 {
+    qDebug() << "Processing HTTP reply";
     int statusCode = m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (statusCode >= 200 && statusCode < 300) {
 #ifdef VERBOSE_HTTP_STATUS
@@ -290,11 +293,11 @@ void QRail::Fragments::Factory::processHTTPReply()
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
 
-                // Page is ready for CSA/Liveboard
-                emit this->pageReady(page);
-
                 // Cache page for updates
                 this->pageCache()->cachePage(page);
+
+                // Page is ready for CSA/Liveboard
+                emit this->pageReady(page);
             } else {
                 qCritical() << "Fragments context validation failed!";
                 emit this->error(QString("Fragments context validation failed!"));
@@ -308,6 +311,6 @@ void QRail::Fragments::Factory::processHTTPReply()
         emit this->error(QString("Network request failed! HTTP status:").append(m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()).append(m_reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()));
     }
 
-    // Clean up the reply to avoid memory leaks
-    m_reply->deleteLater();
+    // Delete reply
+    //m_reply->deleteLater();
 }

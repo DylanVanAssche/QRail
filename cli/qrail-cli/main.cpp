@@ -43,8 +43,10 @@ int main(int argc, char *argv[])
     qInfo() << "\tMax transfers:" << maxTransfers;
     qInfo() << "\tMode:" << mode;
 
-    router* r = new router(mode);
-    r->route(departureStation, arrivalStation, departureTime, maxTransfers);
+    router* r = new router(departureStation, arrivalStation, departureTime, maxTransfers, mode);
+
+    // We need to use the event loop for deleteLater();
+    QTimer::singleShot(0, r, SLOT(route()));
 
     app.exec();
 }

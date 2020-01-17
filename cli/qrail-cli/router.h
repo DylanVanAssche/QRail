@@ -12,8 +12,7 @@ class router : public QObject
 {
     Q_OBJECT
 public:
-    explicit router(QString mode, QObject *parent = nullptr);
-    void route(QString from, QString to, QString departureTime, QString maxTransfers);
+    explicit router(QString departureStation, QString arrivalStation, QString departureTime, QString maxTransfers, QString mode, QObject *parent = nullptr);
 
 public slots:
     void processRoutesFinished(QRail::RouterEngine::Journey *journey);
@@ -21,10 +20,15 @@ public slots:
     void processing(const QUrl &pageURI);
     void requested(const QUrl &pageURI);
     void updateReceived(qint64 time);
+    void route();
 
 private:
     QRail::RouterEngine::Planner *planner;
     QDateTime timestamp;
+    QString m_from;
+    QString m_to;
+    QString m_departureTime;
+    QString m_maxTransfers;
 };
 
 #endif // ROUTER_H

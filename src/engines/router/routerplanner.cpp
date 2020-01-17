@@ -190,6 +190,7 @@ void RouterEngine::Planner::abortCurrentOperation()
 // Processors
 void QRail::RouterEngine::Planner::parsePage(QRail::Fragments::Page *page)
 {
+    qDebug() << "parsePage()";
     // Lock processing to enforce the DESCENDING order of departure times
     QMutexLocker locker(&syncThreadMutex);
 
@@ -992,6 +993,10 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
     this->addToUsedPages(page);
     progressTimeoutTimer->start();
 
+    // Launch processing of page
+    qDebug() << "Start parsing";
+    this->parsePage(page);
+
     /*
     * Before processing our received page we check if we the first fragment
     * passed our departure time. We can do this because the departure times are
@@ -1014,9 +1019,6 @@ void QRail::RouterEngine::Planner::processPage(QRail::Fragments::Page *page)
             emit this->requested(page->hydraPrevious());
         }
     }
-
-    // Launch processing thread
-    this->parsePage(page);
 }
 
 // Helpers

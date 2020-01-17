@@ -86,7 +86,7 @@ signals:
     //! Emitted when a page has been become ready.
     void pageReady(QRail::Fragments::Page *page);
     //! Emitted when a resource is fetched from the Network::Manager.
-    void getResource(const QUrl &uri, QObject *caller);
+    void getResource(const QUrl &uri);
     //! Emitted when an error occurred during processing.
     void error(const QString &message);
     //! Emitted when a connection has been updated.

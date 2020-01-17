@@ -63,6 +63,7 @@ private slots:
     void pollPollingStream();
 
 private:
+    QTimer *m_timer;
     QUrl m_url;
     QString m_lastEventId;
     qint16 m_retries;

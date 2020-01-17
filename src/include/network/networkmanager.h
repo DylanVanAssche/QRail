@@ -67,7 +67,6 @@ signals:
     QNetworkAccessManager::NetworkAccessibility networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility state);
     //! Emitted when the user agent has been changed.
     void userAgentChanged();
-    void requestCompleted(QNetworkReply *reply);
 
 public slots:
     //! HTTP GET request.
@@ -106,6 +105,9 @@ public slots:
         \param caller The caller of this method.
     */
     void unsubscribe();
+
+private slots:
+    void finished(QNetworkReply *);
 
 private:
     QNetworkAccessManager *m_QNAM;

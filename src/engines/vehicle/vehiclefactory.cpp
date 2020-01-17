@@ -221,7 +221,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
     }
 
     // Clean up the reply to avoid memory leaks
-    reply->deleteLater();
+    //reply->deleteLater();
 }
 
 // Helpers

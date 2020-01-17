@@ -41,6 +41,7 @@ void EventSource::close()
 
 void EventSource::open()
 {
+    qDebug() << "Opening EventSource";
     this->setReadyState(EventSource::ReadyState::CONNECTING);
     if(m_subscriptionType == Subscription::SSE) {
         qDebug() << "Opening SSE stream...";
@@ -50,8 +51,9 @@ void EventSource::open()
     }
     else if(m_subscriptionType == Subscription::POLLING) {
         qDebug() << "Opening HTTP polling stream...";
-        m_reply = m_manager->getResource(m_url);
-        connect(m_reply, SIGNAL(finished()), this, SLOT(handlePollingFinished()));
+        m_timer = new QTimer(this);
+        connect(m_timer, SIGNAL(timeout()), this, SLOT(pollPollingStream()));
+        m_timer->start(POLL_INTERVAL);
     }
     else {
         qCritical() << "Unknown subscription type!";
@@ -96,10 +98,7 @@ void EventSource::handlePollingFinished()
     QString payload = QString(m_reply->readAll());
     emit this->messageReceived(payload);
 
-    qDebug() << "Queue polling request";
-    this->pollPollingStream();
-
-    // Delete reply
+    //Delete reply
     m_reply->deleteLater();
 }
 
@@ -109,7 +108,10 @@ void EventSource::pollPollingStream()
     if(m_readyState != EventSource::ReadyState::CLOSED) {
         qDebug() << "Polling resource...";
         m_reply = m_manager->getResource(m_url);
-        QTimer::singleShot(POLL_INTERVAL, this, SLOT(pollPollingStream()));
+        connect(m_reply, SIGNAL(finished()), this, SLOT(handlePollingFinished()));
+    }
+    else {
+        qDebug() << "EventSource is closed, unable to poll";
     }
 }
 

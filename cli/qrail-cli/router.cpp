@@ -1,6 +1,6 @@
 #include "router.h"
 
-router::router(QString mode, QObject *parent) : QObject(parent)
+router::router(QString departureStation, QString arrivalStation, QString departureTime, QString maxTransfers, QString mode, QObject *parent) : QObject(parent)
 {
     // Setup QRail
     initQRail();
@@ -15,9 +15,14 @@ router::router(QString mode, QObject *parent) : QObject(parent)
     }
     // Let the Qt meta object system know how it should handle our custom QObjects
     qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
+
+    m_from = departureStation;
+    m_to = arrivalStation;
+    m_departureTime = departureTime;
+    m_maxTransfers = maxTransfers;
 }
 
-void router::route(QString from, QString to, QString departureTime, QString maxTransfers)
+void router::route()
 {
     planner->unwatchAll();
     timestamp = QDateTime::currentDateTime();
@@ -30,16 +35,16 @@ void router::route(QString from, QString to, QString departureTime, QString maxT
 
     QDateTime start = QDateTime::currentDateTimeUtc();
     planner->getConnections(
-        QUrl(from), // From: Vilvoorde
-        QUrl(to), // To: Brugge
-        QDateTime::fromString(departureTime, Qt::ISODate), // Departure time (UTC)
-        maxTransfers.toInt() // Max transfers
+        QUrl(m_from), // From: Vilvoorde
+        QUrl(m_to), // To: Brugge
+        QDateTime::fromString(m_departureTime, Qt::ISODate), // Departure time (UTC)
+        m_maxTransfers.toInt() // Max transfers
     );
 
     QEventLoop loop1;
     connect(planner, SIGNAL(finished(QRail::RouterEngine::Journey*)), &loop1, SLOT(quit()));
     loop1.exec();
-    qInfo() << "Network routing" << from << "->" << to << "took"
+    qInfo() << "Network routing" << m_from << "->" << m_to << "took"
             << start.msecsTo(QDateTime::currentDateTimeUtc())
             << "msecs";
 }

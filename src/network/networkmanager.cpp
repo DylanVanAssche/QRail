@@ -54,6 +54,7 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
             this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
     connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)),
             this, SIGNAL(sslErrorsReceived(QNetworkReply *, QList<QSslError>)));
+    connect(this->QNAM(), SIGNAL(finished(QNetworkReply*)), this, SLOT(finished(QNetworkReply *)));
 
     // Create HTTP client information
     this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail", "0.2.0", "Linux", "cli"));
@@ -116,6 +117,11 @@ QNetworkReply *QRail::Network::Manager::subscribe(const QUrl &url)
 void QRail::Network::Manager::unsubscribe()
 {
     qDebug() << "Closed stream";
+}
+
+void Network::Manager::finished(QNetworkReply *reply)
+{
+    qDebug() << "QNAM REPLY:" << reply->url();
 }
 
 // Helpers

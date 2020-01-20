@@ -49,7 +49,6 @@ public:
                      const QUrl hydraNext,
                      const QUrl hydraPrevious,
                      QObject *parent = nullptr);
-    ~Journey();
 
     //! Gets the possible routes of the Journey.
     /*!

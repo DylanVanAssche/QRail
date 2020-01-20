@@ -88,8 +88,6 @@ public:
         Constructs a RouterEngine::Planner if none exists and returns the instance.
      */
     static Planner *getInstance(QRail::Network::EventSource::Subscription subscriptionType = QRail::Network::EventSource::Subscription::POLLING);
-    //! Planner object destructor
-    ~Planner();
     //! Retrieves a Journey between 2 given stops.
     /*!
         \param departureStation The URI of the departure stop.
@@ -212,9 +210,9 @@ private slots:
     void unlockPlanner();
     void handleTimeout();
     void handleFragmentFactoryError();
-    void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
+    void handleFragmentAndPageFactoryUpdate(QSharedPointer<QRail::Fragments::Fragment> fragment, QUrl pageURI);
     void processUpdate();
-    void processPage(QRail::Fragments::Page *page);
+    void processPage(QSharedPointer<QRail::Fragments::Page> page);
 
 private:
     bool m_isRunning;
@@ -227,16 +225,16 @@ private:
     QRail::Fragments::Factory *m_fragmentsFactory;
     StationEngine::Factory *m_stationFactory;
     QRail::RouterEngine::Journey *m_journey;
-    QList<QRail::Fragments::Page *> m_usedPages;
+    QList<QSharedPointer<QRail::Fragments::Page>> m_usedPages;
     bool m_abortRequested;
     explicit Planner(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
-    void parsePage(QRail::Fragments::Page *page);
+    void parsePage(QSharedPointer<QRail::Fragments::Page> page);
     QSharedPointer<StationStopProfile> getFirstReachableConnection(QSharedPointer<StationStopProfile> arrivalProfile);
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    void addToUsedPages(QRail::Fragments::Page *page);
+    void addToUsedPages(QSharedPointer<QRail::Fragments::Page> page);
     void deleteUsedPages();
     void initUsedPages();
     bool isAbortRequested() const;

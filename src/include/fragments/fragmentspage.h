@@ -21,6 +21,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDateTime>
 #include <QtCore/QList>
+#include <QtCore/QSharedPointer>
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
@@ -53,7 +54,7 @@ public:
         const QDateTime &timestamp,
         const QUrl &hydraNext,
         const QUrl &hydraPrevious,
-        const QList<QRail::Fragments::Fragment *> &fragments,
+        const QList<QSharedPointer<QRail::Fragments::Fragment>> &fragments,
         QObject *parent = nullptr
     );
     QUrl uri() const;
@@ -64,8 +65,8 @@ public:
     void setHydraNext(const QUrl &hydraNext);
     QUrl hydraPrevious() const;
     void setHydraPrevious(const QUrl &hydraPrevious);
-    QList<QRail::Fragments::Fragment *> fragments() const;
-    void setFragments(const QList<QRail::Fragments::Fragment *> &fragments);
+    QList<QSharedPointer<QRail::Fragments::Fragment>> fragments() const;
+    void setFragments(const QList<QSharedPointer<QRail::Fragments::Fragment>> &fragments);
 
 signals:
     void uriChanged();
@@ -79,7 +80,7 @@ private:
     QDateTime m_timestamp;
     QUrl m_hydraNext;
     QUrl m_hydraPrevious;
-    QList<QRail::Fragments::Fragment *> m_fragments;
+    QList<QSharedPointer<QRail::Fragments::Fragment>> m_fragments;
 };
 }
 }

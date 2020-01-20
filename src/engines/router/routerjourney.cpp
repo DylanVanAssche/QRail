@@ -83,35 +83,6 @@ void QRail::RouterEngine::Journey::setHydraNext(const QUrl &hydraNext)
     }
 }
 
-RouterEngine::Journey::~Journey()
-{
-    /*foreach(auto r, m_routes) {
-        if(r) {
-            r->deleteLater();
-        }
-    }
-
-    foreach(auto t, m_TArray.values()) {
-        if(t) {
-            t->deleteLater();
-        }
-    }
-
-    foreach(auto s1, m_SArray.values()) {
-        foreach(auto s2, s1) {
-            if(s2) {
-                s2->deleteLater();
-            }
-        }
-    }
-
-    foreach(auto sj, m_snapshotJourneys) {
-        if(sj) {
-            sj->deleteLater();
-        }
-    }*/
-}
-
 
 QUrl QRail::RouterEngine::Journey::hydraPrevious() const
 {

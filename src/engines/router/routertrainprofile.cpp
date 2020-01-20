@@ -31,7 +31,7 @@ using namespace QRail;
  * Constructs a QRail::RouterEngine::TrainProfile for the T array in the Connection Scan Algorithm.
  */
 QRail::RouterEngine::TrainProfile::TrainProfile(const QDateTime &arrivalTime,
-                                                QRail::Fragments::Fragment *arrivalConnection,
+                                                QSharedPointer<QRail::Fragments::Fragment> arrivalConnection,
                                                 const qint16 transfers,
                                                 QObject *parent) : QObject(parent)
 {
@@ -80,7 +80,7 @@ void QRail::RouterEngine::TrainProfile::setArrivalTime(const QDateTime &arrivalT
  * @public
  * Gets the arrival connection for the next transfer or arrival.
  */
-QRail::Fragments::Fragment *QRail::RouterEngine::TrainProfile::arrivalConnection() const
+QSharedPointer<QRail::Fragments::Fragment> QRail::RouterEngine::TrainProfile::arrivalConnection() const
 {
     return m_arrivalConnection;
 }
@@ -94,8 +94,7 @@ QRail::Fragments::Fragment *QRail::RouterEngine::TrainProfile::arrivalConnection
  * @public
  * Sets the arrival connection for the next transfer or arrival to the given Fragment *arrivalConnection.
  */
-void QRail::RouterEngine::TrainProfile::setArrivalConnection(QRail::Fragments::Fragment
-                                                             *arrivalConnection)
+void QRail::RouterEngine::TrainProfile::setArrivalConnection(QSharedPointer<QRail::Fragments::Fragment> arrivalConnection)
 {
     m_arrivalConnection = arrivalConnection;
     emit this->arrivalConnectionChanged();

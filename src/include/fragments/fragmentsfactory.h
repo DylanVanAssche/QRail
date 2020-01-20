@@ -27,6 +27,7 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
+#include <QtCore/QSharedPointer>
 
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
@@ -84,7 +85,7 @@ public:
 
 signals:
     //! Emitted when a page has been become ready.
-    void pageReady(QRail::Fragments::Page *page);
+    void pageReady(QSharedPointer<QRail::Fragments::Page> page);
     //! Emitted when a resource is fetched from the Network::Manager.
     void getResource(const QUrl &uri);
     //! Emitted when an error occurred during processing.
@@ -92,11 +93,11 @@ signals:
     //! Emitted when a connection has been updated.
     void connectionChanged(const QUrl &uri);
     //! Emitted when a fragment has been updated
-    void fragmentUpdated(QRail::Fragments::Fragment *fragment);
+    void fragmentUpdated(QSharedPointer<QRail::Fragments::Fragment> fragment);
     //! Emitted when a page has been updated
     void pageUpdated(QUrl pageURI);
     //! Emitted when a page and fragment are updated
-    void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QUrl page);
+    void fragmentAndPageUpdated(QSharedPointer<QRail::Fragments::Fragment> fragment, QUrl page);
     //! Emitted when an update has been successfully processed
     void updateProcessed(qint64 timestamp);
     void updateReceived(qint64 timestamp);
@@ -112,9 +113,9 @@ private:
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;
-    QNetworkReply *m_reply;
+    QSharedPointer<QNetworkReply> m_reply;
     void getPageByURIFromNetworkManager(const QUrl &uri);
-    QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
+    QSharedPointer<QRail::Fragments::Fragment> generateFragmentFromJSON(const QJsonObject &data);
     explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
 };
 } // namespace Fragments

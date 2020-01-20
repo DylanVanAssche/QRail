@@ -64,7 +64,7 @@ void QRail::Fragments::Factory::getPage(const QUrl &uri)
     //this->dispatcher()->addTarget(departureTime.toUTC(), caller);
 
     // Page is cached, dispatching!
-    QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
+    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
     if(page) {
         //this->dispatcher()->dispatchPage(page);
         emit this->pageReady(page);
@@ -90,7 +90,7 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime)
     //qDebug() << "Dispatcher added target:" << departureTime.toUTC() << caller;
 
     // Page is cached, dispatching!
-    QRail::Fragments::Page *page = this->pageCache()->getPageByURI(uri);
+    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
     if(page) {
         //this->dispatcher()->dispatchPage(page);
         qDebug() << "Retrieving page from cache...:" << uri;
@@ -116,7 +116,7 @@ void Fragments::Factory::handleEventSource(QString message)
         if (item.isObject()) {
             QJsonObject event = item.toObject();
             QJsonObject connection = event["sosa:hasResult"].toObject()["Connection"].toObject();
-            QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+            QSharedPointer<QRail::Fragments::Fragment> frag = this->generateFragmentFromJSON(connection);
             if (frag) {
                 qDebug() << "Is object OK";
                 QUrl updatedPageURI = QUrl(this->pageCache()->updateFragment(frag));
@@ -180,12 +180,12 @@ Fragments::Fragment::GTFSTypes Fragments::Factory::parseGTFSType(QString type)
 void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Async HTTP slot calling
-    m_reply = m_http->getResource(uri);
-    connect(m_reply, SIGNAL(finished()), this, SLOT(processHTTPReply()));
+    m_reply = QSharedPointer<QNetworkReply>(m_http->getResource(uri));
+    connect(m_reply.data(), SIGNAL(finished()), this, SLOT(processHTTPReply()));
 }
 
 // Helpers
-QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
+QSharedPointer<QRail::Fragments::Fragment> QRail::Fragments::Factory::generateFragmentFromJSON(const QJsonObject &data)
 {
     // Parse JSON
     QUrl uri = QUrl(data["@id"].toString());
@@ -216,7 +216,7 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
             && routeURI.isValid() && !direction.isEmpty()) {
 
         // Create Linked Connection Fragment and return it
-        QRail::Fragments::Fragment *frag = new QRail::Fragments::Fragment(
+        QSharedPointer<QRail::Fragments::Fragment> frag = QSharedPointer<QRail::Fragments::Fragment>(new QRail::Fragments::Fragment(
                     uri,
                     departureStationURI,
                     arrivalStationURI,
@@ -229,7 +229,7 @@ QRail::Fragments::Fragment *QRail::Fragments::Factory::generateFragmentFromJSON(
                     direction,
                     this->parseGTFSType(pickupType),
                     this->parseGTFSType(dropOffType)
-                    );
+                    ));
         return frag;
     }
 
@@ -259,7 +259,7 @@ void QRail::Fragments::Factory::processHTTPReply()
         QString replyData = (QString)m_reply->readAll();
 
         // HTTP 200 OK, create LCPage and LCFragment list
-        QList<QRail::Fragments::Fragment *> fragments = QList<QRail::Fragments::Fragment *>();
+        QList<QSharedPointer<QRail::Fragments::Fragment>> fragments = QList<QSharedPointer<QRail::Fragments::Fragment>>();
 
         // Try to parse the data as JSON-LD
         QJsonParseError parseError;
@@ -274,7 +274,7 @@ void QRail::Fragments::Factory::processHTTPReply()
                 foreach (QJsonValue item, graph) {
                     if (item.isObject()) {
                         QJsonObject connection = item.toObject();
-                        QRail::Fragments::Fragment *frag = this->generateFragmentFromJSON(connection);
+                        QSharedPointer<QRail::Fragments::Fragment> frag = this->generateFragmentFromJSON(connection);
                         if (frag) {
                             fragments.append(frag);
                         } else {
@@ -291,7 +291,7 @@ void QRail::Fragments::Factory::processHTTPReply()
                 QDateTime pageTimestamp = QDateTime::fromString(pageQuery.queryItemValue("departureTime"), Qt::ISODate);
                 QString hydraNext = jsonObject["hydra:next"].toString();
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
-                QRail::Fragments::Page *page = new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments);
+                QSharedPointer<QRail::Fragments::Page> page = QSharedPointer<QRail::Fragments::Page>(new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments));
 
                 // Cache page for updates
                 this->pageCache()->cachePage(page);
@@ -310,7 +310,4 @@ void QRail::Fragments::Factory::processHTTPReply()
         qCritical() << "Network request failed! HTTP status:" << m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
         emit this->error(QString("Network request failed! HTTP status:").append(m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()).append(m_reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()));
     }
-
-    // Delete reply
-    //m_reply->deleteLater();
 }

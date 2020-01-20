@@ -63,19 +63,19 @@ QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departure
 RouterEngine::Transfer::~Transfer()
 {
     /*if(m_departure) {
-        m_departure->deleteLater();
+        delete m_departure;
     }
 
     if(m_arrival) {
-        m_arrival->deleteLater();
+        delete m_arrival;
     }
 
     if(m_departureLeg) {
-        m_departureLeg->deleteLater();
+        delete m_departureLeg;
     }
 
     if(m_arrivalLeg) {
-        m_arrivalLeg->deleteLater();
+        delete m_arrivalLeg;
     }*/
 }
 

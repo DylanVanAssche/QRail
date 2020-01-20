@@ -45,9 +45,9 @@ void EventSource::open()
     this->setReadyState(EventSource::ReadyState::CONNECTING);
     if(m_subscriptionType == Subscription::SSE) {
         qDebug() << "Opening SSE stream...";
-        m_reply = m_manager->subscribe(m_url);
-        connect(m_reply, SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
-        connect(m_reply, SIGNAL(finished()), this, SLOT(handleSSEFinished()));
+        m_reply = QSharedPointer<QNetworkReply>(m_manager->subscribe(m_url));
+        connect(m_reply.data(), SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
+        connect(m_reply.data(), SIGNAL(finished()), this, SLOT(handleSSEFinished()));
     }
     else if(m_subscriptionType == Subscription::POLLING) {
         qDebug() << "Opening HTTP polling stream...";
@@ -97,9 +97,6 @@ void EventSource::handlePollingFinished()
     qDebug() << "Received poll reply";
     QString payload = QString(m_reply->readAll());
     emit this->messageReceived(payload);
-
-    //Delete reply
-    //m_reply->deleteLater();
 }
 
 void EventSource::pollPollingStream()
@@ -107,8 +104,8 @@ void EventSource::pollPollingStream()
     // Only execute polling when the connection is open.
     if(m_readyState != EventSource::ReadyState::CLOSED) {
         qDebug() << "Polling resource...";
-        m_reply = m_manager->getResource(m_url);
-        connect(m_reply, SIGNAL(finished()), this, SLOT(handlePollingFinished()));
+        m_reply = QSharedPointer<QNetworkReply>(m_manager->getResource(m_url));
+        connect(m_reply.data(), SIGNAL(finished()), this, SLOT(handlePollingFinished()));
     }
     else {
         qDebug() << "EventSource is closed, unable to poll";

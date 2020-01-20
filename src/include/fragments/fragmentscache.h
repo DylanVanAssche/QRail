@@ -42,16 +42,16 @@ class Cache : public QObject
     Q_OBJECT
 public:
     explicit Cache(QObject *parent = nullptr);
-    void cachePage(QRail::Fragments::Page *page);
-    QUrl updateFragment(QRail::Fragments::Fragment *fragment);
-    QRail::Fragments::Page *getPageByURI(QUrl uri);
-    QRail::Fragments::Page *getPageByFragment(QRail::Fragments::Fragment *fragment);
+    void cachePage(QSharedPointer<QRail::Fragments::Page> page);
+    QUrl updateFragment(QSharedPointer<QRail::Fragments::Fragment> fragment);
+    QSharedPointer<QRail::Fragments::Page> getPageByURI(QUrl uri);
+    QSharedPointer<QRail::Fragments::Page> getPageByFragment(QSharedPointer<QRail::Fragments::Fragment> fragment);
     bool hasPage(QUrl uri);
     bool isEmpty();
 
 private:
-    QMap<QUrl, QRail::Fragments::Page*> m_cache;
-    QRail::Fragments::Page *getPageFromDisk(QUrl uri);
+    QMap<QUrl, QSharedPointer<QRail::Fragments::Page>> m_cache;
+    QSharedPointer<QRail::Fragments::Page> getPageFromDisk(QUrl uri);
     QDir m_cacheDir;
     QJsonValue convertGTFSTypeToJson(QRail::Fragments::Fragment::GTFSTypes type);
     QRail::Fragments::Fragment::GTFSTypes convertJsonToGTFSType(QJsonValue type);

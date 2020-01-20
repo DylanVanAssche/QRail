@@ -28,7 +28,7 @@ Cache::Cache(QObject *parent) : QObject(parent)
     m_cacheDir.mkpath(path);
 }
 
-void Cache::cachePage(Page *page)
+void Cache::cachePage(QSharedPointer<QRail::Fragments::Page> page)
 {
     // Add the page to the LRU cache and return true if success
     qDebug() << "Inserted page:" << page->uri();
@@ -44,7 +44,7 @@ void Cache::cachePage(Page *page)
     QJsonArray fragments;
     qDebug() << "Fragments:";
     qDebug() << page->fragments();
-    foreach(QRail::Fragments::Fragment *frag, page->fragments()) {
+    foreach(QSharedPointer<QRail::Fragments::Fragment> frag, page->fragments()) {
         QJsonObject f;
         f.insert("uri", QJsonValue::fromVariant(frag->uri().toString()));
         f.insert("departureStationURI", QJsonValue::fromVariant(frag->departureStationURI().toString()));
@@ -79,7 +79,7 @@ void Cache::cachePage(Page *page)
     qDebug() << "Fragment written as:" << path;
 }
 
-QUrl Cache::updateFragment(Fragment *updatedFragment)
+QUrl Cache::updateFragment(QSharedPointer<QRail::Fragments::Fragment> updatedFragment)
 {
     qDebug() << "Updating fragment";
     // We look between the departureTime and departureTime + departureDelay for the old fragment
@@ -94,12 +94,12 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
         QDateTime pageTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
         if(pageTime <= departureTimeWithDelay) { // just the page before the departure time must be considered too! This can be optimized...
             //qDebug() << "PAGE TIME:" << pageTime << "| DEP:" << departureTime << "| DEP+DEL:" << departureTimeWithDelay;
-            QRail::Fragments::Page* page = m_cache.value(pageURI);
-            QList<QRail::Fragments::Fragment *> fragments = page->fragments();
+            QSharedPointer<QRail::Fragments::Page> page = m_cache.value(pageURI);
+            QList<QSharedPointer<QRail::Fragments::Fragment>> fragments = page->fragments();
 
             // Check if the connection is in the fragments of this page
             for(qint32 fragCounter=0; fragCounter < fragments.length(); fragCounter++) {
-                QRail::Fragments::Fragment *fragment = fragments.at(fragCounter);
+                QSharedPointer<QRail::Fragments::Fragment> fragment = fragments.at(fragCounter);
 
                 // Check if this fragment is the one we're looking for
                 if(fragment->uri() == updatedFragment->uri()) {
@@ -110,13 +110,9 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                         qDebug() << "Deleting old fragment, inserting new one";
                         // Remove old fragment in the old page
                         qDebug() << "----------PAGE HAS BEFORE:" << page->fragments().count() << " FRAGMENTS";
-                        QList<QRail::Fragments::Fragment *> pageFrags = page->fragments();
-                        QRail::Fragments::Fragment *frag = pageFrags.at(fragCounter);
+                        QList<QSharedPointer<QRail::Fragments::Fragment>> pageFrags = page->fragments();
+                        QSharedPointer<QRail::Fragments::Fragment> frag = pageFrags.at(fragCounter);
                         pageFrags.removeAt(fragCounter);
-                        // Memory managment
-                        if(frag) {
-                            //delete frag;
-                        }
                         page->setFragments(pageFrags);
                         updatedPageURI = page->uri();
                         qDebug() << "Departure delay update";
@@ -137,14 +133,14 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                             // Look for the new page
                             if(currentPageTime <= departureTime && departureTime < nextPageTime) {
                                 qDebug() << "Found inserting page, inserting fragment now";
-                                QRail::Fragments::Page* currentPage = m_cache.value(currentPageURI);
+                                QSharedPointer<QRail::Fragments::Page> currentPage = m_cache.value(currentPageURI);
                                 qDebug() << "----------CURRENT PAGE HAS BEFORE:" << currentPage->fragments().count() << " FRAGMENTS";
-                                QList<QRail::Fragments::Fragment *> currentPageFrags = currentPage->fragments();
+                                QList<QSharedPointer<QRail::Fragments::Fragment>> currentPageFrags = currentPage->fragments();
                                 currentPageFrags.append(updatedFragment);
 
                                 // Keep page sorted
-                                std::sort(currentPageFrags.begin(), currentPageFrags.end(), [](const QRail::Fragments::Fragment * a,
-                                const QRail::Fragments::Fragment * b) -> bool {
+                                std::sort(currentPageFrags.begin(), currentPageFrags.end(), [](const QSharedPointer<QRail::Fragments::Fragment> a,
+                                const QSharedPointer<QRail::Fragments::Fragment> b) -> bool {
                                     QDateTime timeA = a->departureTime();
                                     QDateTime timeB = b->departureTime();
                                     return timeA < timeB;
@@ -168,13 +164,9 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
                     // Arrival delay changed or cancelled (type changed), updating fragment in page
                     if(fragment->arrivalDelay() != updatedFragment->arrivalDelay()) {
                         qDebug() << "Updating old fragment";
-                        QList<QRail::Fragments::Fragment *> pageFrags = page->fragments();
-                        QRail::Fragments::Fragment * frag = pageFrags.at(fragCounter);
+                        QList<QSharedPointer<QRail::Fragments::Fragment>> pageFrags = page->fragments();
+                        QSharedPointer<QRail::Fragments::Fragment> frag = pageFrags.at(fragCounter);
                         pageFrags.replace(fragCounter, updatedFragment);
-                        // Memory managment
-                        if(frag) {
-                            //delete frag;
-                        }
                         updatedPageURI = page->uri();                     
                         qDebug() << "Arrival delay update";
                         page->setFragments(pageFrags);
@@ -192,7 +184,7 @@ QUrl Cache::updateFragment(Fragment *updatedFragment)
     return QUrl();
 }
 
-Page *Cache::getPageByURI(QUrl uri)
+QSharedPointer<QRail::Fragments::Page> Cache::getPageByURI(QUrl uri)
 {
     // Try to get the page from the RAM cache
     if(m_cache.contains(uri)) {
@@ -204,7 +196,7 @@ Page *Cache::getPageByURI(QUrl uri)
     return this->getPageFromDisk(uri);
 }
 
-Page *Cache::getPageByFragment(Fragment *fragment)
+QSharedPointer<QRail::Fragments::Page> Cache::getPageByFragment(QSharedPointer<QRail::Fragments::Fragment> fragment)
 {
     // If our fragment is already later than our last page or before our first page, don't even bother to search for the page.
     if(m_cache.count() > 0) {
@@ -213,7 +205,7 @@ Page *Cache::getPageByFragment(Fragment *fragment)
         }
     }
 
-    foreach(QRail::Fragments::Page *page, m_cache.values()) {
+    foreach(QSharedPointer<QRail::Fragments::Page> page, m_cache.values()) {
         //qDebug() << "Fragment < page: " << fragment->departureTime() << "|" << page->timestamp();
         if(fragment->departureTime() < page->timestamp()) {
             continue;
@@ -224,7 +216,7 @@ Page *Cache::getPageByFragment(Fragment *fragment)
     }
 
     // In case we can't find a page (page hasn't been downloaded yet)
-    //qWarning() << "Unable to find page for fragment:" << fragment->uri().toString() << "timestamp:" << fragment->departureTime();
+    qWarning() << "Unable to find page for fragment in cache:" << fragment->uri().toString() << "timestamp:" << fragment->departureTime();
     return nullptr;
 }
 
@@ -238,7 +230,7 @@ bool Cache::isEmpty()
     return m_cache.count() == 0;
 }
 
-Page *Cache::getPageFromDisk(QUrl uri)
+QSharedPointer<QRail::Fragments::Page> Cache::getPageFromDisk(QUrl uri)
 {
     // The page can be available on disk, but not in the RAM cache
     QString path = m_cacheDir.absolutePath();
@@ -258,16 +250,16 @@ Page *Cache::getPageFromDisk(QUrl uri)
         QJsonObject obj = d.object();
 
         // Convert QJsonObject to QRail::Fragments::Page *
-        QRail::Fragments::Page *page = new QRail::Fragments::Page();
+        QSharedPointer<QRail::Fragments::Page> page = QSharedPointer<QRail::Fragments::Page>(new QRail::Fragments::Page());
         page->setURI(QUrl(obj["uri"].toString()));
         page->setHydraNext(QUrl(obj["hydraNext"].toString()));
         page->setHydraPrevious(QUrl(obj["hydraPrevious"].toString()));
         page->setTimestamp(QDateTime::fromString(obj["timestamp"].toString(), Qt::ISODate));
         QJsonArray fragmentsJson = obj["fragments"].toArray();
-        QList<QRail::Fragments::Fragment *> fragments;
+        QList<QSharedPointer<QRail::Fragments::Fragment>> fragments;
         foreach(QJsonValue item, fragmentsJson) {
             QJsonObject frag = item.toObject();
-            QRail::Fragments::Fragment *fragment = new QRail::Fragments::Fragment();
+            QSharedPointer<QRail::Fragments::Fragment> fragment = QSharedPointer<QRail::Fragments::Fragment>(new QRail::Fragments::Fragment());
             fragment->setURI(QUrl(frag["uri"].toString()));
             fragment->setDepartureStationURI(QUrl(frag["departureStationURI"].toString()));
             fragment->setArrivalStationURI(QUrl(frag["arrivalStationURI"].toString()));

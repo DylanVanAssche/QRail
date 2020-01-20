@@ -79,7 +79,7 @@ private:
     QRail::VehicleEngine::Vehicle *fetchVehicleFromCache(const QUrl &uri);
     void addVehicleToCache(const QUrl &uri, QRail::VehicleEngine::Vehicle *vehicle);
     QString stripIDFromVehicleURI(const QUrl &uri);
-    void processHTTPReply(QNetworkReply *reply);
+    void processHTTPReply(QSharedPointer<QNetworkReply> reply);
     static QRail::VehicleEngine::Factory *m_instance;
     explicit Factory(QObject *parent = nullptr);
 };

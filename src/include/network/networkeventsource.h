@@ -21,6 +21,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 #include <QtCore/QTimer>
+#include <QtCore/QSharedPointer>
 #include "network/networkmanager.h"
 
 #define MAX_RETRIES 3
@@ -69,7 +70,7 @@ private:
     qint16 m_retries;
     qint64 m_retryTime;
     QRail::Network::Manager *m_manager;
-    QNetworkReply *m_reply;
+    QSharedPointer<QNetworkReply> m_reply;
     ReadyState m_readyState;
     QString m_chunks;
     Subscription m_subscriptionType;

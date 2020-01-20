@@ -23,7 +23,7 @@ QRail::Fragments::Dispatcher::Dispatcher(QObject *parent) : QObject(parent)
     this->setEventType(static_cast<QEvent::Type>(QEvent::registerEventType()));
 }
 
-void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
+void QRail::Fragments::Dispatcher::dispatchPage(QSharedPointer<QRail::Fragments::Page> page)
 {
     qDebug() << "dispatchPage()";
 
@@ -69,12 +69,12 @@ void QRail::Fragments::Dispatcher::dispatchPage(QRail::Fragments::Page *page)
     this->removeTargets(from, until);
 }
 
-QRail::Fragments::Page *QRail::Fragments::DispatcherEvent::page() const
+QSharedPointer<QRail::Fragments::Page> QRail::Fragments::DispatcherEvent::page() const
 {
     return m_page;
 }
 
-void QRail::Fragments::DispatcherEvent::setPage(QRail::Fragments::Page *page)
+void QRail::Fragments::DispatcherEvent::setPage(QSharedPointer<QRail::Fragments::Page> page)
 {
     m_page = page;
 }

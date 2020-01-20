@@ -42,29 +42,6 @@ SnapshotJourney::SnapshotJourney(QUrl pageURI,
     m_hydraPrevious = hydraPrevious;
 }
 
-SnapshotJourney::~SnapshotJourney()
-{
-    /*foreach(auto r, m_routes) {
-        if(r) {
-            delete r;
-        }
-    }
-
-    foreach(auto t, m_TArray.values()) {
-        if(t) {
-            delete t;
-        }
-    }
-
-    foreach(auto s, m_SArray.values()) {
-        foreach(auto p, s) {
-            if(p) {
-                delete p;
-            }
-        }
-    }*/
-}
-
 QUrl SnapshotJourney::pageURI() const
 {
     return m_pageURI;

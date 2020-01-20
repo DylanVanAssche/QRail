@@ -122,7 +122,7 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
  * QRail::VehicleEngine::Vehicle is generated with it's
  * QRail::VehicleEngine::Stop list.
  */
-void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
+void QRail::VehicleEngine::Factory::processHTTPReply(QSharedPointer<QNetworkReply> reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (statusCode >= 200 && statusCode < 300) {
@@ -219,23 +219,9 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QNetworkReply *reply)
         qCritical() << "\tReply:" << (QString)reply->readAll();
         emit this->error(QString("Network request failed! HTTP status:").append(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()).append(reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()));
     }
-
-    // Clean up the reply to avoid memory leaks
-    //reply->deleteLater();
 }
 
 // Helpers
-/*void QRail::VehicleEngine::Factory::customEvent(QEvent *event)
-{
-    if (event->type() == this->http()->dispatcher()->eventType()) {
-        event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
-        this->processHTTPReply(networkEvent->reply());
-    } else {
-        event->ignore();
-    }
-}*/
-
 /**
  * @file vehiclefactory.cpp
  * @author Dylan Van Assche

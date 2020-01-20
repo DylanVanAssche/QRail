@@ -51,31 +51,31 @@ RouterEngine::Route::~Route()
 {
     /*foreach(auto l, m_legs) {
         if(l) {
-            l->deleteLater();
+            delete l;
         }
     }
 
     foreach(auto t, m_transfers) {
         if(t) {
-            t->deleteLater();
+            delete t;
         }
     }
 
     foreach(auto ta, m_tripAlerts) {
         if(ta) {
-            ta->deleteLater();
+            delete ta;
         }
     }
 
     foreach(auto va, m_vehicleAlerts) {
         if(va) {
-            va->deleteLater();
+            delete va;
         }
     }
 
     foreach(auto r, m_remarks) {
         if(r) {
-            r->deleteLater();
+            delete r;
         }
     }*/
 }

@@ -72,7 +72,7 @@ public:
         Searches the database by the URI for a certain station.<br>
         In case something goes wrong, a StationEngine::NullStation instance is returned.
      */
-    QRail::StationEngine::Station *getStationByURI(const QUrl &uri);
+    QSharedPointer<StationEngine::Station> getStationByURI(const QUrl &uri);
     //! Gets all the station in the area.
     /*!
         \param position a GPS coordinate to define the center of the search circle.
@@ -85,7 +85,7 @@ public:
         pushed to the QList<QPair<StationEngine::Station *, qreal>> &nearbyStations. <br>
         If you supply invalid input data, an empty QList is returned.
      */
-    QList<QPair<QRail::StationEngine::Station *, qreal>> getStationsInTheAreaByPosition(const QGeoCoordinate &position,
+    QList<QPair<QSharedPointer<StationEngine::Station>, qreal>> getStationsInTheAreaByPosition(const QGeoCoordinate &position,
                                                                                         const qreal &radius,
                                                                                         const quint32 &maxResults);
     //! Gets the closest station in the area.
@@ -97,7 +97,7 @@ public:
         Fetches nearby stations from database using the Haversine formula.<br>
         In case something goes wrong, a StationEngine::NullStation instance is returned.
      */
-    QPair<QRail::StationEngine::Station *, qreal> getNearestStationByPosition(const QGeoCoordinate &position,
+    QPair<QSharedPointer<StationEngine::Station>, qreal> getNearestStationByPosition(const QGeoCoordinate &position,
                                                                               const qreal radius);
     //! Find matching stations by their name.
     /*!
@@ -106,17 +106,17 @@ public:
         \public
         Ideal to implement a search engine based on the station name.
      */
-    QList<QRail::StationEngine::Station *> getStationsByName(const QString &query);
+    QList<QSharedPointer<StationEngine::Station>> getStationsByName(const QString &query);
 
 private:
     QRail::Database::Manager *m_db;
-    QMap<QUrl, StationEngine::Station *> m_cache;
+    QMap<QUrl, QSharedPointer<StationEngine::Station>> m_cache;
     bool initDatabase();
     bool insertStationWithFacilitiesIntoDatabase(const QStringList &station, const QStringList &facilities);
     bool insertStationWithoutFacilitiesIntoDatabase(const QStringList &station);
     bool insertPlatformIntoDatabase(const QStringList &stop);
-    StationEngine::Station *fetchStationFromCache(const QUrl &uri) const;
-    void addStationToCache(StationEngine::Station *station);
+    QSharedPointer<StationEngine::Station> fetchStationFromCache(const QUrl &uri) const;
+    void addStationToCache(QSharedPointer<StationEngine::Station> station);
     QMap<QUrl, QString> getPlatformsByStationURI(const QUrl &uri);
     QRail::Database::Manager *db() const;
     void setDb(QRail::Database::Manager *db);

@@ -38,7 +38,7 @@ using namespace QRail;
  */
 QRail::RouterEngine::RouteLegEnd::RouteLegEnd(const QUrl &uri,
                                               const QDateTime &time,
-                                              StationEngine::Station *station,
+                                              QSharedPointer<StationEngine::Station> station,
                                               const QString &platform,
                                               const bool &isNormalPlatform,
                                               const qint16 &delay,
@@ -133,7 +133,7 @@ void QRail::RouterEngine::RouteLegEnd::setTime(const QDateTime &time)
  * @public
  * Gets the station of the leg end and returns it.
  */
-StationEngine::Station *QRail::RouterEngine::RouteLegEnd::station() const
+QSharedPointer<StationEngine::Station> QRail::RouterEngine::RouteLegEnd::station() const
 {
     return m_station;
 }
@@ -149,7 +149,7 @@ StationEngine::Station *QRail::RouterEngine::RouteLegEnd::station() const
  * Sets the station of the leg end to the given StationEngine::Station &station.
  * Emits the stationChanged signal.
  */
-void QRail::RouterEngine::RouteLegEnd::setStation(StationEngine::Station *station)
+void QRail::RouterEngine::RouteLegEnd::setStation(QSharedPointer<StationEngine::Station> station)
 {
     m_station = station;
     emit this->stationChanged();

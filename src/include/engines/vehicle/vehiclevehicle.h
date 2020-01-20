@@ -21,6 +21,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtCore/QMetaType>
+#include <QtCore/QSharedPointer>
 
 #include "qrail.h"
 #include "engines/vehicle/vehiclestop.h"
@@ -43,16 +44,15 @@ public:
         const QUrl &uri,
         const QUrl &tripURI,
         const QString &headsign,
-        const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+        const QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops,
         QObject *parent = nullptr
     );
-    ~Vehicle();
     QUrl uri() const;
     void setUri(const QUrl &uri);
     QString headsign() const;
     void setHeadsign(const QString &headsign);
-    QList<QRail::VehicleEngine::Stop *> intermediaryStops() const;
-    void setIntermediaryStops(const QList<QRail::VehicleEngine::Stop *> &intermediaryStops);
+    QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops() const;
+    void setIntermediaryStops(const QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops);
     QUrl tripURI() const;
     void setTripURI(const QUrl &tripURI);
 
@@ -66,7 +66,7 @@ private:
     QUrl m_uri;
     QUrl m_tripURI;
     QString m_headsign;
-    QList<QRail::VehicleEngine::Stop *> m_intermediaryStops;
+    QList<QSharedPointer<QRail::VehicleEngine::Stop>> m_intermediaryStops;
 };
 }
 }

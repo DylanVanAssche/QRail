@@ -30,7 +30,7 @@ StationEngine::Factory::Factory(QObject *parent) : QObject(parent)
     this->initDatabase();
 
     // Init caching
-    m_cache = QMap<QUrl, StationEngine::Station *>();
+    m_cache = QMap<QUrl, QSharedPointer<StationEngine::Station>>();
 }
 
 StationEngine::Factory *StationEngine::Factory::getInstance()
@@ -43,7 +43,7 @@ StationEngine::Factory *StationEngine::Factory::getInstance()
     return m_instance;
 }
 
-StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
+QSharedPointer<StationEngine::Station> StationEngine::Factory::getStationByURI(const QUrl &uri)
 {
     if (!uri.isValid()) {
         qCritical() << "Station URI is invalid";
@@ -52,7 +52,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
     }
 
     // Init StationEngine::Station variable
-    StationEngine::Station *station;
+    QSharedPointer<StationEngine::Station> station;
 
     // Try to get the station from the cache
     station = this->fetchStationFromCache(uri);
@@ -250,7 +250,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                                 QTime::fromString(query.value(42).toString(), "hh:mm"))
                             );
 
-                station = new StationEngine::Station(
+                station = QSharedPointer<StationEngine::Station>(new StationEngine::Station(
                             uri,
                             name,
                             country,
@@ -277,9 +277,9 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                             averageStopTimes,
                             officialTransferTimes,
                             platforms
-                            );
+                            ));
             } else {
-                station = new StationEngine::Station(
+                station = QSharedPointer<StationEngine::Station>(new StationEngine::Station(
                             uri,
                             name,
                             country,
@@ -287,7 +287,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
                             averageStopTimes,
                             officialTransferTimes,
                             platforms
-                            );
+                            ));
             }
 
             // Add station to cache
@@ -303,7 +303,7 @@ StationEngine::Station *StationEngine::Factory::getStationByURI(const QUrl &uri)
     return station;
 }
 
-QList<QPair<QRail::StationEngine::Station *, qreal>> StationEngine::Factory::getStationsInTheAreaByPosition(const QGeoCoordinate &position,
+QList<QPair<QSharedPointer<StationEngine::Station>, qreal>> StationEngine::Factory::getStationsInTheAreaByPosition(const QGeoCoordinate &position,
                                                                                                             const qreal &radius,
                                                                                                             const quint32 &maxResults)
 {
@@ -312,7 +312,7 @@ QList<QPair<QRail::StationEngine::Station *, qreal>> StationEngine::Factory::get
      * INFO: https://stackoverflow.com/questions/2234204/latitude-longitude-find-nearest-latitude-longitude-complex-sql-or-complex-calc
      */
     Q_UNUSED(maxResults); // bypass compiler for now
-    QList<QPair<QRail::StationEngine::Station *, qreal>> nearbyStations = QList<QPair<QRail::StationEngine::Station *, qreal>>();
+    QList<QPair<QSharedPointer<QRail::StationEngine::Station>, qreal>> nearbyStations = QList<QPair<QSharedPointer<QRail::StationEngine::Station>, qreal>>();
     // Avoid SQL query when data is invalid
     if (!position.isValid() || radius < 0.0) {
         qCritical() << "Position or radius is wrong";
@@ -355,7 +355,7 @@ QList<QPair<QRail::StationEngine::Station *, qreal>> StationEngine::Factory::get
                                         * qSin(differenceLongitude / 2)));
         qreal distance = 2 * 6372.8 * computation; // Earth radius in km
         if (distance < radius) {
-            QPair<QRail::StationEngine::Station *, qreal> stationDistancePair;
+            QPair<QSharedPointer<QRail::StationEngine::Station>, qreal> stationDistancePair;
             stationDistancePair.first = this->getStationByURI(uri);
             stationDistancePair.second = distance;
             nearbyStations.append(stationDistancePair);
@@ -363,8 +363,8 @@ QList<QPair<QRail::StationEngine::Station *, qreal>> StationEngine::Factory::get
     }
 
     std::sort(nearbyStations.begin(), nearbyStations.end(), [](
-              QPair<QRail::StationEngine::Station *, qreal > a,
-              QPair<QRail::StationEngine::Station *, qreal > b) -> bool {
+              QPair<QSharedPointer<QRail::StationEngine::Station>, qreal > a,
+              QPair<QSharedPointer<QRail::StationEngine::Station>, qreal > b) -> bool {
         qreal distanceA = a.second;
         qreal distanceB = b.second;
         return distanceA < distanceB;
@@ -373,7 +373,7 @@ QList<QPair<QRail::StationEngine::Station *, qreal>> StationEngine::Factory::get
     return nearbyStations;
 }
 
-QPair<StationEngine::Station *, qreal> StationEngine::Factory::getNearestStationByPosition(
+QPair<QSharedPointer<StationEngine::Station>, qreal> StationEngine::Factory::getNearestStationByPosition(
         const QGeoCoordinate &position,
         const qreal radius)
 {
@@ -381,7 +381,7 @@ QPair<StationEngine::Station *, qreal> StationEngine::Factory::getNearestStation
     return this->getStationsInTheAreaByPosition(position, radius, 1).first();
 }
 
-QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsByName(
+QList<QSharedPointer<StationEngine::Station>> StationEngine::Factory::getStationsByName(
         const QString &name)
 {
 
@@ -415,7 +415,7 @@ QList<QRail::StationEngine::Station *> StationEngine::Factory::getStationsByName
     }
     this->db()->execute(query);
 
-    QList<QRail::StationEngine::Station *> stations = QList<QRail::StationEngine::Station *>();
+    QList<QSharedPointer<QRail::StationEngine::Station>> stations = QList<QSharedPointer<QRail::StationEngine::Station>>();
     while (query.next()) {
         QUrl uri = query.value(0).toUrl();
         stations.append(this->getStationByURI(uri));
@@ -778,7 +778,7 @@ bool StationEngine::Factory::insertPlatformIntoDatabase(const QStringList &platf
 }
 
 // Helpers
-StationEngine::Station *StationEngine::Factory::fetchStationFromCache(const QUrl &uri) const
+QSharedPointer<StationEngine::Station> StationEngine::Factory::fetchStationFromCache(const QUrl &uri) const
 {
     if (m_cache.contains(uri)) {
         return this->m_cache.value(uri);
@@ -786,7 +786,7 @@ StationEngine::Station *StationEngine::Factory::fetchStationFromCache(const QUrl
     return nullptr;
 }
 
-void StationEngine::Factory::addStationToCache(StationEngine::Station *station)
+void StationEngine::Factory::addStationToCache(QSharedPointer<StationEngine::Station> station)
 {
     this->m_cache.insert(station->uri(), station);
 }

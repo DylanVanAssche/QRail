@@ -46,7 +46,7 @@ public:
         \public
         Constructs a StationEngine::NullStation if none exists and returns the instance.
      */
-    static NullStation *getInstance();
+    static QSharedPointer<StationEngine::NullStation> getInstance();
 
 private:
     explicit NullStation(
@@ -76,7 +76,7 @@ private:
         const qreal &averageStopTimes,
         const quint32 &officialTransferTimes,
         QObject *parent = nullptr);
-    static StationEngine::NullStation *m_instance;
+        static QSharedPointer<StationEngine::NullStation> m_instance;
 };
 }
 }

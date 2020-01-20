@@ -44,7 +44,7 @@ QRail::VehicleEngine::Factory::Factory(QObject *parent) : QObject(parent)
     this->setStationFactory(StationEngine::Factory::getInstance());
 
     // Init caching
-    m_cache = QMap<QString, QRail::VehicleEngine::Vehicle *>();
+    m_cache = QMap<QString, QSharedPointer<QRail::VehicleEngine::Vehicle>>();
 }
 
 /**
@@ -91,7 +91,7 @@ void QRail::VehicleEngine::Factory::getVehicleByURI(const QUrl &uri,
             return;
         }
         this->setLanguage(language);
-        QRail::VehicleEngine::Vehicle *vehicle = this->fetchVehicleFromCache(uri);
+        QSharedPointer<QRail::VehicleEngine::Vehicle> vehicle = this->fetchVehicleFromCache(uri);
         // Vehicle isn't in our cache yet, fetching...
         if (!vehicle) {
             emit this->getResource(uri, this);
@@ -147,14 +147,13 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QSharedPointer<QNetworkRepl
             if (jsonObject["@context"].isObject() &&
                     vehicleContext() == jsonObject["@context"].toObject()) {
                 // Vehicle intermediary stops
-                QList<QRail::VehicleEngine::Stop *> intermediaryStops =
-                        QList<QRail::VehicleEngine::Stop *>();
+                QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops = QList<QSharedPointer<QRail::VehicleEngine::Stop>>();
                 QJsonArray graph = jsonObject["@graph"].toArray();
                 QString tripDate;
                 for (qint16 i = 0; i < graph.size(); i++) {
                     // Generate QRail::VehicleEngine::Stop objects for the vehicle
                     QJsonObject item = graph.at(i).toObject();
-                    QRail::VehicleEngine::Stop *stop = this->generateStopFromJSON(item);
+                    QSharedPointer<QRail::VehicleEngine::Stop> stop = this->generateStopFromJSON(item);
 
                     // The first and last QRail::VehicleEngine::Stop objects are the
                     // departure and arrival stops of the vehicle
@@ -190,11 +189,11 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QSharedPointer<QNetworkRepl
                 * the last stop and retrieve the name of it without querying other
                 * resources.
                 */
-                QRail::VehicleEngine::Vehicle *vehicle = new QRail::VehicleEngine::Vehicle(
+                QSharedPointer<QRail::VehicleEngine::Vehicle> vehicle = QSharedPointer<QRail::VehicleEngine::Vehicle>(new QRail::VehicleEngine::Vehicle(
                             reply->url(), // Vehicle URI
                             QUrl(reply->url().toString().append("/" + tripDate)),
                             intermediaryStops.last()->station()->name().value(this->language()),
-                            intermediaryStops);
+                            intermediaryStops));
 
                 /*
                 * Add the vehicle to cache for faster responses in the future and less
@@ -233,7 +232,7 @@ void QRail::VehicleEngine::Factory::processHTTPReply(QSharedPointer<QNetworkRepl
  * @private
  * Generates QRail::VehicleEngine::Stop from JSON-LD and returns it.
  */
-QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
+QSharedPointer<QRail::VehicleEngine::Stop> QRail::VehicleEngine::Factory::generateStopFromJSON(
         const QJsonObject &stop)
 {
     // Parse JSON-LD data
@@ -256,12 +255,12 @@ QRail::VehicleEngine::Stop *QRail::VehicleEngine::Factory::generateStopFromJSON(
     QUrl stationURI = QUrl(stop["stationinfo"].toObject()["@id"].toString());
 
     // Generate QRail::VehicleEngine::Stop object
-    return new QRail::VehicleEngine::Stop(
+    return QSharedPointer<QRail::VehicleEngine::Stop>(new QRail::VehicleEngine::Stop(
                 QUrl(stationURI),
                 this->stationFactory()->getStationByURI(stationURI), platform,
                 isPlatformNormal, hasLeft, departureTime, departureDelay,
                 isDepartureCanceled, arrivalTime, arrivalDelay, isArrivalCanceled,
-                isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type);
+                isExtraStop, this->generateOccupancyLevelFromJSON(occupancyLevel), type));
 }
 
 /**
@@ -305,7 +304,7 @@ QRail::VehicleEngine::Factory::generateOccupancyLevelFromJSON(const QJsonObject 
  * Tries to fetch a vehicle from the cache.
  * In case the vehicle can't be retrieved from the cache, a nullptr is returned.
  */
-VehicleEngine::Vehicle *VehicleEngine::Factory::fetchVehicleFromCache(const QUrl &uri)
+QSharedPointer<VehicleEngine::Vehicle> VehicleEngine::Factory::fetchVehicleFromCache(const QUrl &uri)
 {
     QString id = this->stripIDFromVehicleURI(uri);
 #ifdef VERBOSE_CACHE
@@ -337,7 +336,7 @@ VehicleEngine::Vehicle *VehicleEngine::Factory::fetchVehicleFromCache(const QUrl
  * In case the URI of the vehicle already exists in the cache, the entry is
  * updated with the new vehicle.
  */
-void VehicleEngine::Factory::addVehicleToCache(const QUrl &uri, VehicleEngine::Vehicle *vehicle)
+void VehicleEngine::Factory::addVehicleToCache(const QUrl &uri, QSharedPointer<VehicleEngine::Vehicle> vehicle)
 {
     QString id = this->stripIDFromVehicleURI(uri);
     m_cache.insert(id, vehicle);

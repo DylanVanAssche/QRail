@@ -55,7 +55,7 @@ QRail::VehicleEngine::Stop::Stop(QObject *parent) : QObject(parent)
  * @public
  * Constructs a QRail::VehicleEngine::Stop with the given parent.
  */
-QRail::VehicleEngine::Stop::Stop(QUrl fragmentURI, StationEngine::Station *station, const QString &platform,
+QRail::VehicleEngine::Stop::Stop(QUrl fragmentURI, QSharedPointer<StationEngine::Station> station, const QString &platform,
                                  const bool &isPlatformNormal, const bool &hasLeft, const QDateTime &departureTime,
                                  const qint16 &departureDelay, const bool &isDepartureCanceled, const QDateTime &arrivalTime,
                                  const qint16 &arrivalDelay, const bool &isArrivalCanceled, const bool &isExtraStop,
@@ -90,7 +90,7 @@ QRail::VehicleEngine::Stop::Stop(QUrl fragmentURI, StationEngine::Station *stati
  * @public
  * Gets the station for this stop and returns it.
  */
-StationEngine::Station *QRail::VehicleEngine::Stop::station() const
+QSharedPointer<StationEngine::Station> QRail::VehicleEngine::Stop::station() const
 {
     return m_station;
 }
@@ -106,7 +106,7 @@ StationEngine::Station *QRail::VehicleEngine::Stop::station() const
  * Sets the station for this stop to the given StationEngine::Station *station.
  * Emits the stationChanged signal.
  */
-void QRail::VehicleEngine::Stop::setStation(StationEngine::Station *station)
+void QRail::VehicleEngine::Stop::setStation(QSharedPointer<StationEngine::Station> station)
 {
     m_station = station;
     emit this->stationChanged();

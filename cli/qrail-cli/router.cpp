@@ -66,7 +66,7 @@ void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
         QStringList retrievedTransferStations;
 
         // Log the complete trip to the console and verify it
-        foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
+        foreach (QSharedPointer<QRail::RouterEngine::Transfer> transfer, route->transfers()) {
             if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
                 qDebug() << "TRANSFER:"
                          << "Changing vehicle at"

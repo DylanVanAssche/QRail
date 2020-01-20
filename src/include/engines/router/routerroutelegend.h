@@ -25,6 +25,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
 #include "engines/station/stationstation.h"
 #include "engines/vehicle/vehiclevehicle.h"
 
@@ -37,7 +38,7 @@ public:
     explicit RouteLegEnd(
         const QUrl &uri,
         const QDateTime &time,
-        StationEngine::Station *station,
+        QSharedPointer<StationEngine::Station> station,
         const QString &platform,
         const bool &isNormalPlatform,
         const qint16 &delay,
@@ -50,8 +51,8 @@ public:
     void setUri(const QUrl &uri);
     QDateTime time() const;
     void setTime(const QDateTime &time);
-    StationEngine::Station *station() const;
-    void setStation(StationEngine::Station *station);
+    QSharedPointer<StationEngine::Station> station() const;
+    void setStation(QSharedPointer<StationEngine::Station> station);
     QString platform() const;
     void setPlatform(const QString &platform);
     bool isNormalPlatform() const;
@@ -80,7 +81,7 @@ signals:
 private:
     QUrl m_uri;
     QDateTime m_time;
-    StationEngine::Station *m_station;
+    QSharedPointer<StationEngine::Station> m_station;
     QString m_platform;
     bool m_isNormalPlatform;
     qint16 m_delay;

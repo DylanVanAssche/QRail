@@ -170,7 +170,7 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
     for(qint64 c=0; c < m_snapshotJourneys.length(); c++) {
         QRail::RouterEngine::SnapshotJourney *snapshotJourney = m_snapshotJourneys.at(c);
         qDebug() << snapshotJourney->pageURI().toString();
-        if(snapshotJourney->pageURI() == pageURI) {           
+        if(snapshotJourney->pageURI() == pageURI) {
             // There's no journey before the first page used in the journey
             if(c == 0) {
                 qWarning() << "No journey exist before the first page, rerouting completely!";

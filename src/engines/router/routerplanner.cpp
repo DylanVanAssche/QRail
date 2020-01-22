@@ -224,12 +224,13 @@ void QRail::RouterEngine::Planner::parsePage(QSharedPointer<QRail::Fragments::Pa
          * Connections that don't arrive and departure at a stop can't be used either.
          */
         QSharedPointer<QRail::Fragments::Fragment> fragment = frags.at(fragIndex);
-        if((this->journey()->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-                || (this->journey()->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)
-                || (fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR)) {
-#ifdef VERBOSE_PARAMETERS
-            qDebug() << "Connection is NOT available:" << fragment->tripURI();
-#endif
+        // You must be able to hop on a train at your departure station. The train must pick up passengers there. If not, discard fragment
+        if(this->journey()->departureStationURI() == fragment->departureStationURI() && fragment->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+            reachable = false;
+        }
+
+        // You must be able to get off a train at your arrival station. The train must drop off passengers there. If not, discard fragment
+        if(this->journey()->arrivalStationURI() == fragment->arrivalStationURI() && fragment->dropOffType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
             reachable = false;
         }
 
@@ -362,7 +363,8 @@ void QRail::RouterEngine::Planner::parsePage(QSharedPointer<QRail::Fragments::Pa
         }
 
         // Calculate T3, the time of arrival when taking the best possible transfer in this station.
-        if (this->journey()->SArray().contains(fragment->arrivalStationURI())) {
+        // We can only get of the train if the train drops off passengers at this station.
+        if (this->journey()->SArray().contains(fragment->arrivalStationURI()) && fragment->dropOffType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
             /*
             * If there are connections departing from this station,
             * get the one which departs after we arrive, but arrive as soon as
@@ -381,20 +383,29 @@ void QRail::RouterEngine::Planner::parsePage(QSharedPointer<QRail::Fragments::Pa
 
             QSharedPointer<QRail::RouterEngine::StationStopProfile> stopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
 
-            // Needs extension for footpath support
+            // Search for the best possible transfer in this station
+            // We can only transfer to a new train if that train stops at the station and picks up passengers here.
             while ((((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
                       MILISECONDS_TO_SECONDS_MULTIPLIER) < fragment->arrivalTime().toMSecsSinceEpoch()) ||
                     stopProfile->transfers() >= this->journey()->maxTransfers()) && position > 0)
             {
                 position--;
-                stopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
+                QSharedPointer<QRail::RouterEngine::StationStopProfile> possibleNewStopProfile = this->journey()->SArray().value(fragment->arrivalStationURI()).at(position);
+                if(possibleNewStopProfile->departureConnection()->pickupType() == QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+                    stopProfile = possibleNewStopProfile;
+                }
             }
 
             qDebug() << "T3 selected";
+            bool valid = true;
+            if(stopProfile->departureConnection()->pickupType() != QRail::Fragments::Fragment::GTFSTypes::REGULAR) {
+                valid = false;
+                qDebug() << "Initial stop profile is invalid, the chosen profile doesn't have a pick up type == REGULAR";
+            }
 
             if (((stopProfile->departureTime().toMSecsSinceEpoch() - INTRA_STOP_FOOTPATH_TIME *
                   MILISECONDS_TO_SECONDS_MULTIPLIER) >= fragment->arrivalTime().toMSecsSinceEpoch()) &&
-                    (stopProfile->transfers() <= this->journey()->maxTransfers())) {
+                    (stopProfile->transfers() <= this->journey()->maxTransfers()) && valid) {
                 /*
                 * If a result appears in this list then we know the earliest arrival
                 * time when transferring here. We prefer to remain seated on a train
@@ -526,18 +537,6 @@ void QRail::RouterEngine::Planner::parsePage(QSharedPointer<QRail::Fragments::Pa
         * journey.
         */
         if (this->journey()->TArray().contains(fragment->tripURI())) {
-            qDebug() << "this->journey()->TArray().contains(fragment->tripURI())";
-            qDebug() << this->journey()->TArray().value(fragment->tripURI());
-            qDebug() << "1)" << this->journey()->TArray().value(fragment->tripURI())->arrivalTime();
-            qDebug() << "2)" << this->journey()->arrivalStationURI();
-            qDebug() << "3)" << T3_transferArrivalTime;
-            qDebug() << "4)" << T2_stayOnTripArrivalTime;
-            qDebug() << "S-Array" << this->journey()->SArray().size();
-            qDebug() << "T-Array element for S array" << this->journey()->TArray().value(fragment->tripURI());
-            qDebug() << "5)" << this->journey()->TArray().value(fragment->tripURI())->arrivalTime();
-            qDebug() << "5)" << this->journey()->TArray().value(fragment->tripURI())->transfers();
-            qDebug() << "5)" << this->journey()->TArray().value(fragment->tripURI())->arrivalConnection();
-            qDebug() << "6)" << this->journey()->SArray().contains(fragment->arrivalStationURI());
             if ((Tmin_earliestArrivalTime == this->journey()->TArray().value(fragment->tripURI())->arrivalTime()) &&
                     (this->journey()->TArray().value(fragment->tripURI())->arrivalConnection()->arrivalStationURI() !=
                      this->journey()->arrivalStationURI()) &&
@@ -730,15 +729,6 @@ void QRail::RouterEngine::Planner::parsePage(QSharedPointer<QRail::Fragments::Pa
             S.insert(fragment->departureStationURI(), stationStopProfileList);
             this->journey()->setSArray(S);
         }
-        /*
-         * Inserting possible footpaths into the S array.
-         * if (c_deptime, Tc) is non-dominated in profile of S[c_depstop] then:
-         *      for all footpaths f with f_arrstop = c_depstop do:
-         *          incorporate (c_deptime - f_dur, Tc) into profile of S[f_depstop];
-         *
-         * WARNING: We can't guarantee any longer that the non-domination as mentioned earlier is guaranteed!
-         *          We need to run a check before actually executing the profile insertion.
-         */
 
 #ifdef VERBOSE_S_ARRAY
         qDebug() << "S-ARRAY";
@@ -1037,13 +1027,13 @@ QDateTime QRail::RouterEngine::Planner::calculateArrivalTime(const QDateTime &de
     QDateTime arrivalTime = QDateTime(departureTime);
 
     if (time.hour() > 22 || time.hour() < 1) {
-        arrivalTime = arrivalTime.addSecs(8 * SECONDS_TO_HOURS_MULTIPLIER);
+        arrivalTime = arrivalTime.addSecs(12 * SECONDS_TO_HOURS_MULTIPLIER);
         return arrivalTime;
     } else if (time.hour() > 18 || time.hour() < 4) {
-        arrivalTime = arrivalTime.addSecs(6 * SECONDS_TO_HOURS_MULTIPLIER);
+        arrivalTime = arrivalTime.addSecs(8 * SECONDS_TO_HOURS_MULTIPLIER);
         return arrivalTime;
     } else {
-        arrivalTime = arrivalTime.addSecs(5 * SECONDS_TO_HOURS_MULTIPLIER);
+        arrivalTime = arrivalTime.addSecs(6 * SECONDS_TO_HOURS_MULTIPLIER);
         return arrivalTime;
     }
 

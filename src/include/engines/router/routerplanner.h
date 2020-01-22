@@ -59,7 +59,7 @@
 
 // Constants
 #define TRANSFER_EQUIVALENT_TRAVEL_TIME 240    // 240 seconds = 4 minutes
-#define INTRA_STOP_FOOTPATH_TIME 300           // 300 seconds = 5 minutes
+#define INTRA_STOP_FOOTPATH_TIME 360           // 360 seconds = 6 minutes
 #define MAX_TRANSFER_TIME 3600                 // 3600 seconds = 1 hour
 #define MILISECONDS_TO_SECONDS_MULTIPLIER 1000 // 1000 miliseconds = 1 second
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour

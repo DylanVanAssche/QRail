@@ -66,23 +66,26 @@ void router::processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> rout
         if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
             qDebug() << "TRANSFER:"
                      << "Changing vehicle at"
-                     << transfer->delayedTime().time().toString("hh:mm")
-                     << "delay:" << ((transfer->delayedTime().toSecsSinceEpoch() - transfer->time().toSecsSinceEpoch())/60) << "min"
-                     << transfer->station()->name().value(QLocale::Language::Dutch)
+                     << transfer->departureLeg()->departure()->station()->name().value(QLocale::Language::Dutch)
+                     << transfer->arrivalLeg()->arrival()->time().toUTC().toString("hh:mm")
+                     << "delay:" << transfer->arrivalLeg()->arrival()->delay()/60 << "min"
+                     << "-->"
+                     << transfer->departureLeg()->departure()->time().toUTC().toString("hh:mm")
+                     << "delay:" << transfer->departureLeg()->departure()->delay()/60 << "min"
                      << "vehicles:"
                      << transfer->arrivalLeg()->vehicleInformation()->uri().toString()
                      << "-->"
                      << transfer->departureLeg()->vehicleInformation()->uri().toString();
         } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE) {
             qDebug() << "DEPARTURE:"
-                     << transfer->delayedTime().time().toString("hh:mm")
+                     << transfer->time().toUTC().toString("hh:mm") << "UTC"
                      << "delay:" << ((transfer->delayedTime().toSecsSinceEpoch() - transfer->time().toSecsSinceEpoch())/60) << "min"
                      << transfer->station()->name().value(QLocale::Language::Dutch)
                      << "vehicle:"
                      << transfer->departureLeg()->vehicleInformation()->uri().toString();
         } else if (transfer->type() == QRail::RouterEngine::Transfer::Type::ARRIVAL) {
             qDebug() << "ARRIVAL:"
-                     << transfer->delayedTime().time().toString("hh:mm")
+                     << transfer->time().toUTC().toString("hh:mm") << "UTC"
                      << "delay:" << ((transfer->delayedTime().toSecsSinceEpoch() - transfer->time().toSecsSinceEpoch())/60) << "min"
                      << transfer->station()->name().value(QLocale::Language::Dutch)
                      << "vehicle:"

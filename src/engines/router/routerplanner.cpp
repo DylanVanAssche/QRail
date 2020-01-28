@@ -1135,13 +1135,6 @@ void RouterEngine::Planner::processUpdate()
     qDebug() << "Restoring journey to snapshot:" << pageUpdateURI.toString();
     QDateTime timestamp = this->journey()->restoreBeforePage(pageUpdateURI);
 
-    // Cancel any running operation if needed
-    /*if(m_isRunning) {
-        qDebug() << "Aborting any previous running CSA operations...";
-        this->abortCurrentOperation();
-        qDebug() << "Aborted CSA";
-    }*/
-
     // Reroute using the restored journey
     qDebug() << "Journey restored, start CSA from page timestamp:" << timestamp;
     this->setAbortRequested(false);

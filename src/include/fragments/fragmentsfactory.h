@@ -117,6 +117,7 @@ private:
     void getPageByURIFromNetworkManager(const QUrl &uri);
     QSharedPointer<QRail::Fragments::Fragment> generateFragmentFromJSON(const QJsonObject &data);
     explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
+    QRail::Network::EventSource::Subscription m_subscriptionType;
 };
 } // namespace Fragments
 } // namespace QRail

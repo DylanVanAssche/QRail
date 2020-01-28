@@ -41,7 +41,8 @@ public:
     };
     enum Subscription {
         SSE,
-        POLLING
+        POLLING,
+        NONE // No rollback
     };
     explicit EventSource(QUrl url, Subscription subcriptionType, QObject *parent = nullptr);
     QUrl url();

@@ -9,10 +9,15 @@ router::router(QString departureStation, QString arrivalStation, QString departu
         qDebug() << "Polling subscription set";
         planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::POLLING);
     }
-    else {
+    else if(mode == "pushing") {
         qDebug() << "SSE subscription set";
         planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::SSE);
     }
+    else {
+        qDebug() << "Reference mode: rollback CSA disabled";
+        planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::NONE);
+    }
+
     // Let the Qt meta object system know how it should handle our custom QObjects
     qRegisterMetaType<QList<QSharedPointer<QRail::RouterEngine::Route> > >("QList<QRail::RouterEngine::Route*>");
 

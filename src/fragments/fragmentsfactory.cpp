@@ -31,19 +31,26 @@ QRail::Fragments::Factory::Factory(QRail::Network::EventSource::Subscription sub
     connect(this, SIGNAL(getResource(QUrl)), m_http, SLOT(getResource(QUrl)));
 
     // Create event source
-    if(subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
+    m_subscriptionType = subscriptionType;
+    if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
         qDebug() << "Instantiated EventSource POLL";
         m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_POLL), QRail::Network::EventSource::Subscription::POLLING);
+        connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
+
+        // Create page cache
+        this->setPageCache(new QRail::Fragments::Cache());
     }
-    else {
+    else if (m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
         qDebug() << "Instantiated EventSource SSE";
         m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::SSE);
+        connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
+
+        // Create page cache
+        this->setPageCache(new QRail::Fragments::Cache());
     }
-
-    connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
-
-    // Create page cache
-    this->setPageCache(new QRail::Fragments::Cache());
+    else {
+        qDebug() << "Instantiated EventSource NONE: rollback disabled";
+    }
 }
 
 QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance(QRail::Network::EventSource::Subscription subscriptionType)
@@ -59,17 +66,15 @@ QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance(QRail::Network
 // Invokers
 void QRail::Fragments::Factory::getPage(const QUrl &uri)
 {
-    QUrlQuery query = QUrlQuery(uri);
-    QDateTime departureTime = QDateTime::fromString(query.queryItemValue("departureTime"), Qt::ISODate);
-    //this->dispatcher()->addTarget(departureTime.toUTC(), caller);
-
     // Page is cached, dispatching!
-    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
-    if(page) {
-        //this->dispatcher()->dispatchPage(page);
-        emit this->pageReady(page);
-        qDebug() << "Retrieving page from cache...:" << uri;
-        return;
+    if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
+        QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
+        if(page) {
+            //this->dispatcher()->dispatchPage(page);
+            emit this->pageReady(page);
+            qDebug() << "Retrieving page from cache...:" << uri;
+            return;
+        }
     }
 
     // Page is not in cache
@@ -90,12 +95,14 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime)
     //qDebug() << "Dispatcher added target:" << departureTime.toUTC() << caller;
 
     // Page is cached, dispatching!
-    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
-    if(page) {
-        //this->dispatcher()->dispatchPage(page);
-        qDebug() << "Retrieving page from cache...:" << uri;
-        emit this->pageReady(page);
-        return;
+    if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
+        QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
+        if(page) {
+            //this->dispatcher()->dispatchPage(page);
+            qDebug() << "Retrieving page from cache...:" << uri;
+            emit this->pageReady(page);
+            return;
+        }
     }
 
     // Page is not in cache
@@ -217,19 +224,19 @@ QSharedPointer<QRail::Fragments::Fragment> QRail::Fragments::Factory::generateFr
 
         // Create Linked Connection Fragment and return it
         QSharedPointer<QRail::Fragments::Fragment> frag = QSharedPointer<QRail::Fragments::Fragment>(new QRail::Fragments::Fragment(
-                    uri,
-                    departureStationURI,
-                    arrivalStationURI,
-                    departureTime,
-                    arrivalTime,
-                    departureDelay,
-                    arrivalDelay,
-                    tripURI,
-                    routeURI,
-                    direction,
-                    this->parseGTFSType(pickupType),
-                    this->parseGTFSType(dropOffType)
-                    ));
+                                                                                                         uri,
+                                                                                                         departureStationURI,
+                                                                                                         arrivalStationURI,
+                                                                                                         departureTime,
+                                                                                                         arrivalTime,
+                                                                                                         departureDelay,
+                                                                                                         arrivalDelay,
+                                                                                                         tripURI,
+                                                                                                         routeURI,
+                                                                                                         direction,
+                                                                                                         this->parseGTFSType(pickupType),
+                                                                                                         this->parseGTFSType(dropOffType)
+                                                                                                         ));
         return frag;
     }
 
@@ -293,8 +300,10 @@ void QRail::Fragments::Factory::processHTTPReply()
                 QString hydraPrevious = jsonObject["hydra:previous"].toString();
                 QSharedPointer<QRail::Fragments::Page> page = QSharedPointer<QRail::Fragments::Page>(new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments));
 
-                // Cache page for updates
-                this->pageCache()->cachePage(page);
+                // Cache page for updates when enabled
+                if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
+                    this->pageCache()->cachePage(page);
+                }
 
                 // Page is ready for CSA/Liveboard
                 emit this->pageReady(page);

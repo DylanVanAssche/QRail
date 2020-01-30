@@ -2,11 +2,6 @@
 BENCHMARK_TIME=900 # seconds
 INTERFACE="enp1s0f1" #network interface filtering
 
-echo "Creating directories..."
-mkdir -p transfers/0/nonrush/pushing
-mkdir -p transfers/1/nonrush/pushing
-mkdir -p transfers/2/nonrush/pushing
-
 function run_bench() {
     echo "Benchmark started at `date` for $PID ($1)"
     mkdir -p $1
@@ -27,6 +22,11 @@ function run_bench() {
 
 DATE=2019-11-28T10:00:00.000Z # 11h00 Belgian time
 cd .. # Binary 1 level higher
+
+echo "Creating directories..."
+mkdir -p transfers/0/nonrush/pushing
+mkdir -p transfers/1/nonrush/pushing
+mkdir -p transfers/2/nonrush/pushing
 
 echo "Hasselt -> Sint-Truiden"
 ./qrail-cli http://irail.be/stations/NMBS/008831005 http://irail.be/stations/NMBS/008831807 $DATE 4 --sse > transfers/0/nonrush/pushing/hasselt-sintruiden.txt 2>&1 & # Hasselt -> Sint-Truiden, 0 transfers

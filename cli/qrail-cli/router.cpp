@@ -9,7 +9,7 @@ router::router(QString departureStation, QString arrivalStation, QString departu
         qDebug() << "Polling subscription set";
         planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::POLLING);
     }
-    else if(mode == "pushing") {
+    else if(mode == "sse") {
         qDebug() << "SSE subscription set";
         planner = QRail::RouterEngine::Planner::getInstance(QRail::Network::EventSource::Subscription::SSE);
     }

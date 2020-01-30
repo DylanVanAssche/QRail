@@ -26,6 +26,7 @@ function run_bench() {
 }
 
 DATE=2019-11-28T10:00:00.000Z # 11h00 Belgian time
+cd .. # Binary 1 level higher
 
 echo "Hasselt -> Sint-Truiden"
 ./qrail-cli http://irail.be/stations/NMBS/008831005 http://irail.be/stations/NMBS/008831807 $DATE 4 --polling > transfers/0/nonrush/polling/hasselt-sintruiden.txt 2>&1 & # Hasselt -> Sint-Truiden, 0 transfers

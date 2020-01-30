@@ -230,6 +230,8 @@ public:
     // Debug
     qint64 snapshotCount();
 
+    void resetJourney();
+
 private:
     QList<QRail::RouterEngine::SnapshotJourney *> m_snapshotJourneys;
     QList<QSharedPointer<QRail::RouterEngine::Route> > m_routes;

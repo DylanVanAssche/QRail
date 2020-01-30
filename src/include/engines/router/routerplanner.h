@@ -203,8 +203,9 @@ signals:
     void requested(const QUrl &pageURI);
     //! Emitted when a new Fragments::Page has been received.
     void processing(const QUrl &pageURI);
-
     void updateReceived(qint64 time);
+    void updateProcessed();
+    void startReroute();
 
 private slots:
     void unlockPlanner();
@@ -213,8 +214,11 @@ private slots:
     void handleFragmentAndPageFactoryUpdate(QSharedPointer<QRail::Fragments::Fragment> fragment, QUrl pageURI);
     void processUpdate();
     void processPage(QSharedPointer<QRail::Fragments::Page> page);
+    void reroute();
 
 private:
+    QTimer *m_timer;
+    QRail::Network::EventSource::Subscription m_subscriptionType;
     bool m_isRunning;
     QUrl pageUpdateURI;
     QDateTime fragmentUpdateTimestamp;
@@ -234,9 +238,6 @@ private:
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    void addToUsedPages(QSharedPointer<QRail::Fragments::Page> page);
-    void deleteUsedPages();
-    void initUsedPages();
     bool isAbortRequested() const;
     void setAbortRequested(bool abortRequested);
 };

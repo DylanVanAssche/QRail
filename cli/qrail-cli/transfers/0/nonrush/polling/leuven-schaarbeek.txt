@@ -1,0 +1,279 @@
+Starting QRail with the following parameters:
+	Departure station: "http://irail.be/stations/NMBS/008833001"
+	Arrival station: "http://irail.be/stations/NMBS/008811007"
+	Departure time (UTC): "2019-11-28T19:35:00.000Z"
+	Current time (UTC): "2020-01-29T19:53:04Z"
+	Max transfers: "4"
+	Mode: "polling"
+	Verbose: false
+Polling subscription set
+CSA found 10 possible routes
+All routes processed: 685 ms
+Update received
+CSA found 10 possible routes
+All routes processed: 3858 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2024 ms
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2318 ms
+Update received
+CSA found 10 possible routes
+All routes processed: 4970 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 931 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 695 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1945 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1537 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1719 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 9 possible routes
+All routes processed: 922 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 9 possible routes
+All routes processed: 2726 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 9 possible routes
+All routes processed: 4597 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 9 possible routes
+All routes processed: 1284 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2987 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2275 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2697 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1615 ms
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1846 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1113 ms
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1630 ms
+Update received
+CSA found 10 possible routes
+All routes processed: 1489 ms
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1222 ms
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1544 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 2246 ms
+Update received
+Update received
+CSA found 11 possible routes
+All routes processed: 2087 ms
+Update received
+CSA found 11 possible routes
+All routes processed: 1736 ms
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+Update received
+CSA found 10 possible routes
+All routes processed: 1727 ms

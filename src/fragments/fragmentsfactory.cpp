@@ -48,8 +48,16 @@ QRail::Fragments::Factory::Factory(QRail::Network::EventSource::Subscription sub
         // Create page cache
         this->setPageCache(new QRail::Fragments::Cache());
     }
-    else {
+    else if (m_subscriptionType == QRail::Network::EventSource::Subscription::NONE) {
         qDebug() << "Instantiated EventSource NONE: rollback disabled";
+        m_eventSource = new QRail::Network::EventSource(QUrl(REAL_TIME_URL_SSE), QRail::Network::EventSource::Subscription::NONE);
+        connect(m_eventSource, SIGNAL(messageReceived(QString)), this, SLOT(handleEventSource(QString)));
+
+        // Create page cache
+        this->setPageCache(new QRail::Fragments::Cache());
+    }
+    else {
+        qCritical() << "Unknown subscription type!";
     }
 }
 
@@ -67,14 +75,13 @@ QRail::Fragments::Factory *QRail::Fragments::Factory::getInstance(QRail::Network
 void QRail::Fragments::Factory::getPage(const QUrl &uri)
 {
     // Page is cached, dispatching!
-    if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
-        QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
-        if(page) {
-            //this->dispatcher()->dispatchPage(page);
-            emit this->pageReady(page);
-            qDebug() << "Retrieving page from cache...:" << uri;
-            return;
-        }
+    qDebug() << "Requesting page from cache...";
+    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
+    if(page && m_subscriptionType != QRail::Network::EventSource::Subscription::NONE) {
+        //this->dispatcher()->dispatchPage(page);
+        qDebug() << "Page retrieved from cache:" << uri;
+        emit this->pageReady(page);
+        return;
     }
 
     // Page is not in cache
@@ -95,14 +102,13 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime)
     //qDebug() << "Dispatcher added target:" << departureTime.toUTC() << caller;
 
     // Page is cached, dispatching!
-    if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
-        QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
-        if(page) {
-            //this->dispatcher()->dispatchPage(page);
-            qDebug() << "Retrieving page from cache...:" << uri;
-            emit this->pageReady(page);
-            return;
-        }
+    qDebug() << "Requesting page from cache...";
+    QSharedPointer<QRail::Fragments::Page> page = this->pageCache()->getPageByURI(uri);
+    if(page && m_subscriptionType != QRail::Network::EventSource::Subscription::NONE) {
+        //this->dispatcher()->dispatchPage(page);
+        qDebug() << "Page retrieved from cache:" << uri;
+        emit this->pageReady(page);
+        return;
     }
 
     // Page is not in cache
@@ -112,6 +118,9 @@ void QRail::Fragments::Factory::getPage(const QDateTime &departureTime)
 
 void Fragments::Factory::handleEventSource(QString message)
 {
+    if(m_subscriptionType == QRail::Network::EventSource::Subscription::NONE) {
+        return;
+    }
     emit this->updateReceived(QDateTime::currentMSecsSinceEpoch());
     qDebug() << "Received Event Source message:" << message.length() << "chars";
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
@@ -188,6 +197,8 @@ void QRail::Fragments::Factory::getPageByURIFromNetworkManager(const QUrl &uri)
 {
     // Async HTTP slot calling
     m_reply = QSharedPointer<QNetworkReply>(m_http->getResource(uri));
+    qDebug() << "getPageByURIFromNetworkManager reply:";
+    qDebug() << m_reply;
     connect(m_reply.data(), SIGNAL(finished()), this, SLOT(processHTTPReply()));
 }
 
@@ -301,9 +312,8 @@ void QRail::Fragments::Factory::processHTTPReply()
                 QSharedPointer<QRail::Fragments::Page> page = QSharedPointer<QRail::Fragments::Page>(new QRail::Fragments::Page(pageURI, pageTimestamp, hydraNext, hydraPrevious, fragments));
 
                 // Cache page for updates when enabled
-                if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING || m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
-                    this->pageCache()->cachePage(page);
-                }
+                qDebug() << "Caching page";
+                this->pageCache()->cachePage(page);
 
                 // Page is ready for CSA/Liveboard
                 emit this->pageReady(page);

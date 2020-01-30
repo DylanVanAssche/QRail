@@ -174,14 +174,7 @@ QDateTime RouterEngine::Journey::restoreBeforePage(const QUrl pageURI)
             // There's no journey before the first page used in the journey
             if(c == 0) {
                 qWarning() << "No journey exist before the first page, rerouting completely!";
-                this->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route >>());
-                this->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > ());
-                this->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
-                this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
-                this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
-                this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
-                this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
-                this->cleanSnapshots(m_snapshotJourneys.at(0)->pageTimestamp());
+                resetJourney();
                 return pageTimestamp;
             }
             QRail::RouterEngine::SnapshotJourney *previousSnapshotJourney = m_snapshotJourneys.at(c-1);
@@ -217,6 +210,18 @@ void RouterEngine::Journey::cleanSnapshots(QDateTime snapshotTime)
 qint64 RouterEngine::Journey::snapshotCount()
 {
     return m_snapshotJourneys.length();
+}
+
+void RouterEngine::Journey::resetJourney()
+{
+    this->setRoutes(QList<QSharedPointer<QRail::RouterEngine::Route >>());
+    this->setTArray(QMap<QUrl, QSharedPointer<QRail::RouterEngine::TrainProfile> > ());
+    this->setSArray(QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > >());
+    this->setT_EarliestArrivalTime(QMap<QUrl, qint16>());
+    this->setS_EarliestArrivalTime(QMap<QUrl, QDateTime>());
+    this->setHydraNext(m_snapshotJourneys.at(0)->hydraNext());
+    this->setHydraPrevious(m_snapshotJourneys.at(0)->hydraPrevious());
+    this->cleanSnapshots(m_snapshotJourneys.at(0)->pageTimestamp());
 }
 
 QMap<QUrl, QList<QSharedPointer<QRail::RouterEngine::StationStopProfile> > > QRail::RouterEngine::Journey::SArray() const

@@ -55,6 +55,9 @@ void EventSource::open()
         connect(m_timer, SIGNAL(timeout()), this, SLOT(pollPollingStream()));
         m_timer->start(POLL_INTERVAL);
     }
+    else if(m_subscriptionType == Subscription::NONE) {
+        qDebug() << "None subscription, doing nothing...";
+    }
     else {
         qCritical() << "Unknown subscription type!";
     }

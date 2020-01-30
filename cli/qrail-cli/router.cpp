@@ -26,6 +26,7 @@ router::router(QString departureStation, QString arrivalStation, QString departu
     m_departureTime = departureTime;
     m_maxTransfers = maxTransfers;
     m_verbose = verbose;
+    m_ready = false;
 }
 
 void router::route()
@@ -48,15 +49,22 @@ void router::route()
     );
 }
 
-void router::updateReceived()
+void router::startReroute()
 {
-    qInfo() << "Update received";
+    qInfo() << "Start reroute";
     m_started_at = QDateTime::currentDateTime();
 }
 
+void router::updateReceived() {
+    qInfo() << "Update received ";
+}
 void router::processRoutesFinished(QRail::RouterEngine::Journey *journey)
 {
-    planner->watch(journey);
+    // Start benchmarking updates when initial routing is complete
+    if(!m_ready) {
+        connect(planner, SIGNAL(startReroute()), this, SLOT(startReroute()));
+        m_ready = true;
+    }
     qDebug() << "CSA found" << journey->routes().size() << "possible routes";
     qint64 diff = m_started_at.msecsTo(QDateTime::currentDateTime());
     qDebug() << "All routes processed:" << diff << "ms";

@@ -75,6 +75,8 @@ QNetworkReply *QRail::Network::Manager::getResource(const QUrl &url)
     qDebug() << "GET resource:" << url;
     QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->get(request);
+    qDebug() << "Reply:";
+    qDebug() << reply;
     return reply;
 }
 

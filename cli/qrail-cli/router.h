@@ -24,6 +24,7 @@ public slots:
     void processRoutesFinished(QRail::RouterEngine::Journey *journey);
     void processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route);
     void route();
+    void startReroute();
     void updateReceived();
 
 private:
@@ -34,6 +35,7 @@ private:
     QString m_departureTime;
     QString m_maxTransfers;
     bool m_verbose;
+    bool m_ready;
 };
 
 #endif // ROUTER_H

@@ -60,7 +60,6 @@ public:
                    const QList<QSharedPointer<QRail::AlertsEngine::Message>> vehicleAlerts,
                    const QList<QSharedPointer<QRail::AlertsEngine::Message>> remarks,
                    QObject *parent = nullptr);
-    ~Route();
     QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs() const;
     void setLegs(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs);
     QList<QSharedPointer<QRail::RouterEngine::Transfer>> transfers() const;

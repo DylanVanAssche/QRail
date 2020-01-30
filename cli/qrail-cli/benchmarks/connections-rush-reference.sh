@@ -24,39 +24,39 @@ DATE=2019-11-28T07:00:00.000Z # 08h00 Belgian time
 cd .. # Binary 1 level higher
 
 echo "Creating directories..."
-mkdir -p connections/0/nonrush/reference
-mkdir -p connections/1/nonrush/reference
-mkdir -p connections/2/nonrush/reference
+mkdir -p connections/0/rush/reference
+mkdir -p connections/1/rush/reference
+mkdir -p connections/2/rush/reference
 
 echo "Leuven -> Diest"
-./qrail-cli http://irail.be/stations/NMBS/008833001 http://irail.be/stations/NMBS/008831401 $DATE 4 > connections/0/nonrush/reference/leuven-diest.txt 2>&1 & # Leuven -> Diest, 2 connections
+./qrail-cli http://irail.be/stations/NMBS/008833001 http://irail.be/stations/NMBS/008831401 $DATE 4 > connections/0/rush/reference/leuven-diest.txt 2>&1 & # Leuven -> Diest, 2 connections
 PID=$!
-run_bench "connections/0/nonrush/reference/leuven-diest"
+run_bench "connections/0/rush/reference/leuven-diest"
 
 echo "Mechelen -> Brussels-Congres"
-./qrail-cli http://irail.be/stations/NMBS/008822004 http://irail.be/stations/NMBS/008813045 $DATE 4 > connections/1/nonrush/reference/mechelen-brusselscongres.txt 2>&1 & # Mechelen -> Brussels-Congres, 6 connections
+./qrail-cli http://irail.be/stations/NMBS/008822004 http://irail.be/stations/NMBS/008813045 $DATE 4 > connections/1/rush/reference/mechelen-brusselscongres.txt 2>&1 & # Mechelen -> Brussels-Congres, 6 connections
 PID=$!
-run_bench "connections/1/nonrush/reference/mechelen-brusselscongres"
+run_bench "connections/1/rush/reference/mechelen-brusselscongres"
 
 echo "Antwerp-Central -> Lommel"
-./qrail-cli http://irail.be/stations/NMBS/008821006 http://irail.be/stations/NMBS/008832565 $DATE 4 > connections/1/nonrush/reference/antwerpcentral-lommel.txt 2>&1 & # Antwerp-Central -> Lommel, 7 connections
+./qrail-cli http://irail.be/stations/NMBS/008821006 http://irail.be/stations/NMBS/008832565 $DATE 4 > connections/1/rush/reference/antwerpcentral-lommel.txt 2>&1 & # Antwerp-Central -> Lommel, 7 connections
 PID=$!
-run_bench "connections/1/nonrush/reference/antwerpcentral-lommel"
+run_bench "connections/1/rush/reference/antwerpcentral-lommel"
 
 echo "Charleroi-Sud -> Ronet"
-./qrail-cli http://irail.be/stations/NMBS/008872009 http://irail.be/stations/NMBS/008861119 $DATE 4 > connections/2/nonrush/reference/charleroisud-ronet.txt 2>&1 & # Charleroi-Sud -> Ronet, 13 connections
+./qrail-cli http://irail.be/stations/NMBS/008872009 http://irail.be/stations/NMBS/008861119 $DATE 4 > connections/2/rush/reference/charleroisud-ronet.txt 2>&1 & # Charleroi-Sud -> Ronet, 13 connections
 PID=$!
-run_bench "connections/2/nonrush/reference/charleroisud-ronet"
+run_bench "connections/2/rush/reference/charleroisud-ronet"
 
 echo "Luttre -> Brussels-Congres"
-./qrail-cli http://irail.be/stations/NMBS/008871308 http://irail.be/stations/NMBS/008813045 $DATE 4 > connections/2/nonrush/reference/luttre-brusselscongres.txt 2>&1 & # Lutte -> Brussels-Congres, 15 connections
+./qrail-cli http://irail.be/stations/NMBS/008871308 http://irail.be/stations/NMBS/008813045 $DATE 4 > connections/2/rush/reference/luttre-brusselscongres.txt 2>&1 & # Lutte -> Brussels-Congres, 15 connections
 PID=$!
-run_bench "connections/2/nonrush/reference/luttre-brusselscongres"
+run_bench "connections/2/rush/reference/luttre-brusselscongres"
 
 echo "Asse -> Antwerp-Berchem"
-./qrail-cli http://irail.be/stations/NMBS/008812070 http://irail.be/stations/NMBS/008821121 $DATE 4 > connections/0/nonrush/reference/asse-antwerpberchem.txt 2>&1 & # Asse -> Antwerp-Berchem, 17 connections
+./qrail-cli http://irail.be/stations/NMBS/008812070 http://irail.be/stations/NMBS/008821121 $DATE 4 > connections/0/rush/reference/asse-antwerpberchem.txt 2>&1 & # Asse -> Antwerp-Berchem, 17 connections
 PID=$!
-run_bench "connections/0/nonrush/reference/brusselssouth-linkebeek"
+run_bench "connections/0/rush/reference/brusselssouth-linkebeek"
 
 
 echo "Benchmark ended: `date`"

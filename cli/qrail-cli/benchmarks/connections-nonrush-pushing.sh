@@ -33,6 +33,11 @@ echo "Leuven -> Diest"
 PID=$!
 run_bench "connections/0/nonrush/pushing/leuven-diest"
 
+echo "Asse -> Antwerp-Berchem"
+./qrail-cli http://irail.be/stations/NMBS/008812070 http://irail.be/stations/NMBS/008821121 $DATE 4 --sse > connections/0/nonrush/pushing/asse-antwerpberchem.txt 2>&1 & # Asse -> Antwerp-Berchem, 17 connections
+PID=$!
+run_bench "connections/0/nonrush/pushing/asse-antwerpberchem"
+
 echo "Mechelen -> Brussels-Congres"
 ./qrail-cli http://irail.be/stations/NMBS/008822004 http://irail.be/stations/NMBS/008813045 $DATE 4 --sse > connections/1/nonrush/pushing/mechelen-brusselscongres.txt 2>&1 & # Mechelen -> Brussels-Congres, 6 connections
 PID=$!
@@ -52,11 +57,5 @@ echo "Luttre -> Brussels-Congres"
 ./qrail-cli http://irail.be/stations/NMBS/008871308 http://irail.be/stations/NMBS/008813045 $DATE 4 --sse > connections/2/nonrush/pushing/luttre-brusselscongres.txt 2>&1 & # Lutte -> Brussels-Congres, 15 connections
 PID=$!
 run_bench "connections/2/nonrush/pushing/luttre-brusselscongres"
-
-echo "Asse -> Antwerp-Berchem"
-./qrail-cli http://irail.be/stations/NMBS/008812070 http://irail.be/stations/NMBS/008821121 $DATE 4 --sse > connections/0/nonrush/pushing/asse-antwerpberchem.txt 2>&1 & # Asse -> Antwerp-Berchem, 17 connections
-PID=$!
-run_bench "connections/0/nonrush/pushing/asse-antwerpberchem"
-
 
 echo "Benchmark ended: `date`"

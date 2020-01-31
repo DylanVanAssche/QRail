@@ -56,7 +56,7 @@ run_bench "connections/2/rush/polling/luttre-brusselscongres"
 echo "Asse -> Antwerp-Berchem"
 ./qrail-cli http://irail.be/stations/NMBS/008812070 http://irail.be/stations/NMBS/008821121 $DATE 4 --polling > connections/0/rush/polling/asse-antwerpberchem.txt 2>&1 & # Asse -> Antwerp-Berchem, 17 connections
 PID=$!
-run_bench "connections/0/rush/polling/brusselssouth-linkebeek"
+run_bench "connections/0/rush/polling/asse-antwerpberchem"
 
 
 echo "Benchmark ended: `date`"

@@ -20,7 +20,7 @@ function run_bench() {
     echo "Benchmark completed"
 }
 
-DATE=2019-11-28T10:00:00.000Z # 11h00 Belgian time
+DATE=2019-11-28T07:00:00.000Z # 08h00 Belgian time
 cd .. # Binary 1 level higher
 
 echo "Creating directories..."

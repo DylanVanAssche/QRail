@@ -19,6 +19,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
@@ -30,8 +31,8 @@ public:
     explicit StationStopProfile(
         const QDateTime &departureTime,
         const QDateTime &arrivalTime,
-        QRail::Fragments::Fragment *departureConnection,
-        QRail::Fragments::Fragment *arrivalConnection,
+        QSharedPointer<QRail::Fragments::Fragment> departureConnection,
+        QSharedPointer<QRail::Fragments::Fragment> arrivalConnection,
         const qint16 transfers,
         QObject *parent = nullptr
     );
@@ -39,10 +40,10 @@ public:
     void setDepartureTime(const QDateTime &departureTime);
     QDateTime arrivalTime() const;
     void setArrivalTime(const QDateTime &arrivalTime);
-    QRail::Fragments::Fragment *departureConnection() const;
-    void setDepartureConnection(QRail::Fragments::Fragment *departureConnection);
-    QRail::Fragments::Fragment *arrivalConnection() const;
-    void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
+    QSharedPointer<QRail::Fragments::Fragment> departureConnection() const;
+    void setDepartureConnection(QSharedPointer<QRail::Fragments::Fragment> departureConnection);
+    QSharedPointer<QRail::Fragments::Fragment> arrivalConnection() const;
+    void setArrivalConnection(QSharedPointer<QRail::Fragments::Fragment> arrivalConnection);
     qint16 transfers() const;
     void setTransfers(const qint16 &transfers);
 
@@ -54,10 +55,10 @@ signals:
     void transfersChanged();
 
 private:
-    QDateTime m_departureTime; // TODO: really needed? fetch them from fragments to reduce memory footprint?
+    QDateTime m_departureTime;
     QDateTime m_arrivalTime;
-    QRail::Fragments::Fragment *m_departureConnection;
-    QRail::Fragments::Fragment *m_arrivalConnection;
+    QSharedPointer<QRail::Fragments::Fragment> m_departureConnection;
+    QSharedPointer<QRail::Fragments::Fragment> m_arrivalConnection;
     qint16 m_transfers;
 };
 }

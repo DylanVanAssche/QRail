@@ -42,7 +42,7 @@ public:
         \public
         Constructs a QRail::RouterEngine::Route with the given parent.
      */
-    explicit Route(const QList<RouteLeg *> &legs, QObject *parent = nullptr);
+    explicit Route(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs, QObject *parent = nullptr);
     //! QRail::RouterEngine::Route constructor.
     /*!
         \param legs A list of RouteLeg.
@@ -54,23 +54,22 @@ public:
         \public
         Constructs a QRail::RouterEngine::Route with the given parent.
      */
-    explicit Route(const QList<QRail::RouterEngine::RouteLeg *> &legs,
-                   const QList<QRail::RouterEngine::Transfer *> &transfers,
-                   const QList<QRail::AlertsEngine::Message *> &tripAlerts,
-                   const QList<QRail::AlertsEngine::Message *> &vehicleAlerts,
-                   const QList<QRail::AlertsEngine::Message *> &remarks,
+    explicit Route(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs,
+                   const QList<QSharedPointer<QRail::RouterEngine::Transfer>> transfers,
+                   const QList<QSharedPointer<QRail::AlertsEngine::Message>> tripAlerts,
+                   const QList<QSharedPointer<QRail::AlertsEngine::Message>> vehicleAlerts,
+                   const QList<QSharedPointer<QRail::AlertsEngine::Message>> remarks,
                    QObject *parent = nullptr);
-    ~Route();
-    QList<QRail::RouterEngine::RouteLeg *> legs() const;
-    void setLegs(const QList<RouteLeg *> &legs);
-    QList<QRail::RouterEngine::Transfer *> transfers() const;
-    void setTransfers(const QList<QRail::RouterEngine::Transfer *> &transfers);
-    QList<QRail::AlertsEngine::Message *> tripAlerts() const;
-    void setTripAlerts(const QList<QRail::AlertsEngine::Message *> &tripAlerts);
-    QList<QRail::AlertsEngine::Message *> vehicleAlerts() const;
-    void setVehicleAlerts(const QList<QRail::AlertsEngine::Message *> &vehicleAlerts);
-    QList<QRail::AlertsEngine::Message *> remarks() const;
-    void setRemarks(const QList<QRail::AlertsEngine::Message *> &remarks);
+    QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs() const;
+    void setLegs(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs);
+    QList<QSharedPointer<QRail::RouterEngine::Transfer>> transfers() const;
+    void setTransfers(const QList<QSharedPointer<QRail::RouterEngine::Transfer>> transfers);
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> tripAlerts() const;
+    void setTripAlerts(const QList<QSharedPointer<QRail::AlertsEngine::Message>> tripAlerts);
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> vehicleAlerts() const;
+    void setVehicleAlerts(const QList<QSharedPointer<QRail::AlertsEngine::Message>> vehicleAlerts);
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> remarks() const;
+    void setRemarks(const QList<QSharedPointer<QRail::AlertsEngine::Message>> remarks);
     qint64 duration() const;
     qint64 durationWithDelays() const;
     QDateTime departureTime() const;
@@ -83,8 +82,8 @@ public:
     bool isDeparturePlatformNormal() const;
     QString arrivalPlatform() const;
     bool isArrivalPlatformNormal() const;
-    QRail::RouterEngine::Transfer *departureStation() const;
-    QRail::RouterEngine::Transfer *arrivalStation() const;
+    QSharedPointer<QRail::RouterEngine::Transfer> departureStation() const;
+    QSharedPointer<QRail::RouterEngine::Transfer> arrivalStation() const;
     bool isPartiallyCanceled() const;
 
 signals:
@@ -100,11 +99,11 @@ signals:
     void remarksChanged();
 
 private:
-    QList<QRail::RouterEngine::RouteLeg *> m_legs;
-    QList<QRail::RouterEngine::Transfer *> m_transfers;
-    QList<QRail::AlertsEngine::Message *> m_tripAlerts;
-    QList<QRail::AlertsEngine::Message *> m_vehicleAlerts;
-    QList<QRail::AlertsEngine::Message *> m_remarks;
+    QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> m_legs;
+    QList<QSharedPointer<QRail::RouterEngine::Transfer>> m_transfers;
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> m_tripAlerts;
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> m_vehicleAlerts;
+    QList<QSharedPointer<QRail::AlertsEngine::Message>> m_remarks;
 };
 } // namespace RouterEngine
 } // namespace QRail

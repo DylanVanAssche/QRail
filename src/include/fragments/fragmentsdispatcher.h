@@ -43,11 +43,11 @@ public:
     DispatcherEvent(const QEvent::Type &type) : QEvent(type)
     {
     }
-    QRail::Fragments::Page *page() const;
-    void setPage(QRail::Fragments::Page *value);
+    QSharedPointer<QRail::Fragments::Page> page() const;
+    void setPage(QSharedPointer<QRail::Fragments::Page> value);
 
 private:
-    QRail::Fragments::Page *m_page;
+    QSharedPointer<QRail::Fragments::Page> m_page;
 };
 
 //! Dispatches all the Fragments::Factory events.
@@ -61,7 +61,7 @@ class Dispatcher : public QObject
     Q_OBJECT
 public:
     explicit Dispatcher(QObject *parent = nullptr);
-    void dispatchPage(QRail::Fragments::Page *page);
+    void dispatchPage(QSharedPointer<QRail::Fragments::Page> page);
     void addTarget(const QDateTime &departureTime, QObject *caller);
     void removeTargets(const QDateTime &from, const QDateTime &until);
     QList<QObject *> findTargets(const QDateTime &from, const QDateTime &until);

@@ -50,16 +50,16 @@
 #include "qrail.h"
 
 // Uncomment to enable logging of CSA parts
-//#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
+#define VERBOSE_PARAMETERS // Enable logging of the routing and page parameters
 #define VERBOSE_TMIN // Enable logging of the Tmin calculation
 //#define VERBOSE_T_ARRAY // Enable logging of the T array after each update
 //#define VERBOSE_S_ARRAY // Enable logging of the S array after each update
-//#define VERBOSE_LEGS // Enable logging of the legs extraction
+#define VERBOSE_LEGS // Enable logging of the legs extraction
 //#define VERBOSE_FIRST_REACHABLE_CONNECTION // Enable logging of the first reachable connection options
 
 // Constants
 #define TRANSFER_EQUIVALENT_TRAVEL_TIME 240    // 240 seconds = 4 minutes
-#define INTRA_STOP_FOOTPATH_TIME 300           // 300 seconds = 5 minutes
+#define INTRA_STOP_FOOTPATH_TIME 360           // 360 seconds = 6 minutes
 #define MAX_TRANSFER_TIME 3600                 // 3600 seconds = 1 hour
 #define MILISECONDS_TO_SECONDS_MULTIPLIER 1000 // 1000 miliseconds = 1 second
 #define SECONDS_TO_HOURS_MULTIPLIER 3600       // 3600 seconds = 1 hour
@@ -87,9 +87,7 @@ public:
         \public
         Constructs a RouterEngine::Planner if none exists and returns the instance.
      */
-    static Planner *getInstance();
-    //! Planner object destructor
-    ~Planner();
+    static Planner *getInstance(QRail::Network::EventSource::Subscription subscriptionType = QRail::Network::EventSource::Subscription::POLLING);
     //! Retrieves a Journey between 2 given stops.
     /*!
         \param departureStation The URI of the departure stop.
@@ -190,9 +188,9 @@ public:
     //! Unwatch all Journies for updates
     void unwatchAll();
 
-protected:
+/*protected:
     //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
+    virtual void customEvent(QEvent *event);*/
 
 signals:
     //! Emitted when the Journey calculation is finished.
@@ -205,17 +203,22 @@ signals:
     void requested(const QUrl &pageURI);
     //! Emitted when a new Fragments::Page has been received.
     void processing(const QUrl &pageURI);
-
     void updateReceived(qint64 time);
+    void updateProcessed();
+    void startReroute();
 
 private slots:
     void unlockPlanner();
     void handleTimeout();
     void handleFragmentFactoryError();
-    void handleFragmentAndPageFactoryUpdate(QRail::Fragments::Fragment *fragment, QUrl pageURI);
+    void handleFragmentAndPageFactoryUpdate(QSharedPointer<QRail::Fragments::Fragment> fragment, QUrl pageURI);
     void processUpdate();
+    void processPage(QSharedPointer<QRail::Fragments::Page> page);
+    void reroute();
 
 private:
+    QTimer *m_timer;
+    QRail::Network::EventSource::Subscription m_subscriptionType;
     bool m_isRunning;
     QUrl pageUpdateURI;
     QDateTime fragmentUpdateTimestamp;
@@ -226,19 +229,15 @@ private:
     QRail::Fragments::Factory *m_fragmentsFactory;
     StationEngine::Factory *m_stationFactory;
     QRail::RouterEngine::Journey *m_journey;
-    QList<QRail::Fragments::Page *> m_usedPages;
+    QList<QSharedPointer<QRail::Fragments::Page>> m_usedPages;
     bool m_abortRequested;
-    explicit Planner(QObject *parent = nullptr);
+    explicit Planner(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
     static QRail::RouterEngine::Planner *m_instance;
-    void parsePage(QRail::Fragments::Page *page);
-    void processPage(QRail::Fragments::Page *page);
+    void parsePage(QSharedPointer<QRail::Fragments::Page> page);
     QSharedPointer<StationStopProfile> getFirstReachableConnection(QSharedPointer<StationStopProfile> arrivalProfile);
     void setFragmentsFactory(QRail::Fragments::Factory *value);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    void addToUsedPages(QRail::Fragments::Page *page);
-    void deleteUsedPages();
-    void initUsedPages();
     bool isAbortRequested() const;
     void setAbortRequested(bool abortRequested);
 };

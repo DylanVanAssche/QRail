@@ -32,17 +32,17 @@ namespace VehicleEngine {
 class QRAIL_SHARED_EXPORT NullVehicle : public QRail::VehicleEngine::Vehicle
 {
 public:
-    static NullVehicle *getInstance();
+    static QSharedPointer<NullVehicle> getInstance();
 
 private:
     explicit NullVehicle(
         const QUrl &uri,
         const QUrl &tripURI,
         const QString &headsign,
-        const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+        const QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops,
         QObject *parent = nullptr
     );
-    static VehicleEngine::NullVehicle *m_instance;
+    static QSharedPointer<VehicleEngine::NullVehicle> m_instance;
 };
 }
 }

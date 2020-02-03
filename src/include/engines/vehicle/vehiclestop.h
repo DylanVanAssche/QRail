@@ -21,6 +21,7 @@
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
 #include <QtCore/QMetaType>
+#include <QtCore/QSharedPointer>
 
 #include "qrail.h"
 #include "engines/station/stationstation.h"
@@ -47,7 +48,7 @@ public:
     explicit Stop(QObject *parent = nullptr);
     explicit Stop(
         QUrl fragmentURI,
-        StationEngine::Station *station,
+        QSharedPointer<StationEngine::Station> station,
         const QString &platform,
         const bool &isPlatformNormal,
         const bool &hasLeft,
@@ -62,8 +63,8 @@ public:
         const QRail::VehicleEngine::Stop::Type &type,
         QObject *parent = nullptr
     );
-    StationEngine::Station *station() const;
-    void setStation(StationEngine::Station *station);
+    QSharedPointer<StationEngine::Station> station() const;
+    void setStation(QSharedPointer<StationEngine::Station> station);
     QString platform() const;
     void setPlatform(const QString &platform);
     bool isPlatformNormal() const;
@@ -107,7 +108,7 @@ signals:
 
 private:
     QUrl m_fragmentURI;
-    StationEngine::Station *m_station;
+    QSharedPointer<StationEngine::Station> m_station;
     QString m_platform;
     bool m_isPlatformNormal;
     bool m_hasLeft;

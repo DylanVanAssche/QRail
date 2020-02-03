@@ -16,7 +16,7 @@
  */
 #include "engines/station/stationnullstation.h"
 using namespace QRail;
-StationEngine::NullStation *StationEngine::NullStation::m_instance = nullptr;
+QSharedPointer<StationEngine::NullStation> StationEngine::NullStation::m_instance = nullptr;
 
 StationEngine::NullStation::NullStation(const QUrl &uri,
                                         const QMap<QLocale::Language, QString> &name,
@@ -53,12 +53,12 @@ StationEngine::NullStation::NullStation(const QUrl &uri,
 
 }
 
-StationEngine::NullStation *StationEngine::NullStation::getInstance()
+QSharedPointer<StationEngine::NullStation> StationEngine::NullStation::getInstance()
 {
     // Singleton pattern
-    if (m_instance == nullptr) {
+    if (m_instance) {
         qDebug() << "Generating new NullStation";
-        m_instance = new StationEngine::NullStation(
+        m_instance = QSharedPointer<StationEngine::NullStation>(new StationEngine::NullStation(
             QUrl(),
             QMap<QLocale::Language, QString>(),
             QLocale::Country::Belgium,
@@ -84,7 +84,7 @@ StationEngine::NullStation *StationEngine::NullStation::getInstance()
             QMap<StationEngine::Station::Day, QPair<QTime, QTime> >(),
             0.0,
             0
-        );
+        ));
     }
     return m_instance;
 }

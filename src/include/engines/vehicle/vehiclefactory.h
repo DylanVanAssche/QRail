@@ -58,13 +58,13 @@ protected:
     virtual void customEvent(QEvent *event);
 
 signals:
-    void finished(QRail::VehicleEngine::Vehicle *vehicle);
+    void finished(QSharedPointer<QRail::VehicleEngine::Vehicle> vehicle);
     void getResource(const QUrl &uri, QObject *caller);
     void error(const QString &message);
 
 private:
     mutable QMutex vehicleProcessingMutex;
-    QMap<QString, QRail::VehicleEngine::Vehicle *> m_cache;
+    QMap<QString, QSharedPointer<QRail::VehicleEngine::Vehicle>> m_cache;
     QRail::Network::Manager *m_http;
     StationEngine::Factory *m_stationFactory;
     QLocale::Language m_language;
@@ -73,13 +73,13 @@ private:
     void setHttp(QRail::Network::Manager *http);
     StationEngine::Factory *stationFactory() const;
     void setStationFactory(StationEngine::Factory *stationFactory);
-    QRail::VehicleEngine::Stop *generateStopFromJSON(const QJsonObject &stop);
+    QSharedPointer<QRail::VehicleEngine::Stop> generateStopFromJSON(const QJsonObject &stop);
     QRail::VehicleEngine::Stop::OccupancyLevel
     generateOccupancyLevelFromJSON(const QJsonObject &occupancy) const;
-    QRail::VehicleEngine::Vehicle *fetchVehicleFromCache(const QUrl &uri);
-    void addVehicleToCache(const QUrl &uri, QRail::VehicleEngine::Vehicle *vehicle);
+    QSharedPointer<QRail::VehicleEngine::Vehicle> fetchVehicleFromCache(const QUrl &uri);
+    void addVehicleToCache(const QUrl &uri, QSharedPointer<QRail::VehicleEngine::Vehicle> vehicle);
     QString stripIDFromVehicleURI(const QUrl &uri);
-    void processHTTPReply(QNetworkReply *reply);
+    void processHTTPReply(QSharedPointer<QNetworkReply> reply);
     static QRail::VehicleEngine::Factory *m_instance;
     explicit Factory(QObject *parent = nullptr);
 };

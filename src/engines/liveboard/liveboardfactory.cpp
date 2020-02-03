@@ -18,10 +18,10 @@
 using namespace QRail;
 QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::m_instance = nullptr;
 
-QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
+QRail::LiveboardEngine::Factory::Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent) : QObject(parent)
 {
     // Get QRail::Fragments::Factory instance
-    this->setFragmentsFactory(QRail::Fragments::Factory::getInstance());
+    this->setFragmentsFactory(QRail::Fragments::Factory::getInstance(subscriptionType));
     connect(this->fragmentsFactory(), SIGNAL(error(QString)), this, SLOT(handleFragmentFactoryError()));
     connect(this->fragmentsFactory(), SIGNAL(fragmentUpdated(QRail::Fragments::Fragment*)), this, SLOT(handleFragmentFactoryUpdate(QRail::Fragments::Fragment*)));
     connect(this->fragmentsFactory(), SIGNAL(updateProcessed(qint64)), this, SIGNAL(updateProcessed(qint64)));
@@ -42,12 +42,12 @@ QRail::LiveboardEngine::Factory::Factory(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(finished(QRail::LiveboardEngine::Board*)), this, SLOT(unlockLiveboard()));
 }
 
-QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance()
+QRail::LiveboardEngine::Factory *QRail::LiveboardEngine::Factory::getInstance(QRail::Network::EventSource::Subscription subscriptionType)
 {
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new QRail::LiveboardEngine::Factory";
-        m_instance = new QRail::LiveboardEngine::Factory();
+        m_instance = new QRail::LiveboardEngine::Factory(subscriptionType);
     }
     return m_instance;
 }
@@ -404,7 +404,7 @@ QRail::LiveboardEngine::Board *QRail::LiveboardEngine::Factory::liveboard() cons
     return m_liveboard;
 }
 
-void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
+/*void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
 {
     if (event->type() == this->fragmentsFactory()->dispatcher()->eventType()) {
         event->accept();
@@ -414,7 +414,7 @@ void QRail::LiveboardEngine::Factory::customEvent(QEvent *event)
     } else {
         event->ignore();
     }
-}
+}*/
 
 void LiveboardEngine::Factory::unlockLiveboard()
 {

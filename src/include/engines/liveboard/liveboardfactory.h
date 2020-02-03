@@ -58,7 +58,7 @@ public:
         Constructs a QRail::LiveboardEngine::Factory if none exists and returns the
         instance.
      */
-    static QRail::LiveboardEngine::Factory *getInstance();
+    static QRail::LiveboardEngine::Factory *getInstance(QRail::Network::EventSource::Subscription subscriptionType = QRail::Network::EventSource::Subscription::POLLING);
     //! Retrieves a liveboard by a station URI.
     /*!
         \param uri the URI of the liveboard.
@@ -227,7 +227,7 @@ private:
     void setAbortRequested(bool abortRequested);
     QRail::LiveboardEngine::Board *liveboard() const;
     QList<QRail::LiveboardEngine::Board *> m_watchList;
-    explicit Factory(QObject *parent = nullptr);
+    explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
 };
 } // namespace LiveboardEngine
 } // namespace QRail

@@ -42,21 +42,20 @@ public:
     };
     explicit RouteLeg(
         const QRail::RouterEngine::RouteLeg::Type &type,
-        QRail::VehicleEngine::Vehicle *vehicleInformation,
-        QRail::RouterEngine::RouteLegEnd *departure,
-        QRail::RouterEngine::RouteLegEnd *arrival,
+        QSharedPointer<QRail::VehicleEngine::Vehicle> vehicleInformation,
+        QSharedPointer<QRail::RouterEngine::RouteLegEnd> departure,
+        QSharedPointer<QRail::RouterEngine::RouteLegEnd> arrival,
         QObject *parent = nullptr
     );
-    ~RouteLeg();
     QRail::RouterEngine::RouteLeg::Type type() const;
     void setType(const QRail::RouterEngine::RouteLeg::Type &type);
-    QRail::VehicleEngine::Vehicle *vehicleInformation() const;
-    void setVehicleInformation(QRail::VehicleEngine::Vehicle *vehicleInformation);
-    QRail::RouterEngine::RouteLegEnd *departure() const;
-    void setDeparture(QRail::RouterEngine::RouteLegEnd *departure);
-    QRail::RouterEngine::RouteLegEnd *arrival() const;
-    void setArrival(QRail::RouterEngine::RouteLegEnd *arrival);
-    StationEngine::Station *station() const;
+    QSharedPointer<QRail::VehicleEngine::Vehicle> vehicleInformation() const;
+    void setVehicleInformation(QSharedPointer<QRail::VehicleEngine::Vehicle> vehicleInformation);
+    QSharedPointer<QRail::RouterEngine::RouteLegEnd> departure() const;
+    void setDeparture(QSharedPointer<QRail::RouterEngine::RouteLegEnd> departure);
+    QSharedPointer<QRail::RouterEngine::RouteLegEnd> arrival() const;
+    void setArrival(QSharedPointer<QRail::RouterEngine::RouteLegEnd> arrival);
+    QSharedPointer<StationEngine::Station> station() const;
 
 signals:
     void typeChanged();
@@ -68,9 +67,9 @@ signals:
 
 private:
     QRail::RouterEngine::RouteLeg::Type m_type;
-    QRail::VehicleEngine::Vehicle *m_vehicleInformation;
-    QRail::RouterEngine::RouteLegEnd *m_departure;
-    QRail::RouterEngine::RouteLegEnd *m_arrival;
+    QSharedPointer<QRail::VehicleEngine::Vehicle> m_vehicleInformation;
+    QSharedPointer<QRail::RouterEngine::RouteLegEnd> m_departure;
+    QSharedPointer<QRail::RouterEngine::RouteLegEnd> m_arrival;
 
     Q_ENUM(Type)
 };

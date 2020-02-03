@@ -19,6 +19,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
 #include "fragments/fragmentsfragment.h"
 
 namespace QRail {
@@ -29,14 +30,14 @@ class TrainProfile : public QObject
 public:
     explicit TrainProfile(
         const QDateTime &arrivalTime,
-        QRail::Fragments::Fragment *arrivalConnection,
+        QSharedPointer<QRail::Fragments::Fragment> arrivalConnection,
         const qint16 transfers,
         QObject *parent = nullptr
     );
     QDateTime arrivalTime() const;
     void setArrivalTime(const QDateTime &arrivalTime);
-    QRail::Fragments::Fragment *arrivalConnection() const;
-    void setArrivalConnection(QRail::Fragments::Fragment *arrivalConnection);
+    QSharedPointer<QRail::Fragments::Fragment> arrivalConnection() const;
+    void setArrivalConnection(QSharedPointer<QRail::Fragments::Fragment> arrivalConnection);
     qint16 transfers() const;
     void setTransfers(const qint16 &transfers);
 
@@ -47,7 +48,7 @@ signals:
 
 private:
     QDateTime m_arrivalTime;
-    QRail::Fragments::Fragment *m_arrivalConnection;
+    QSharedPointer<QRail::Fragments::Fragment> m_arrivalConnection;
     qint16 m_transfers;
 };
 }

@@ -34,16 +34,13 @@ SOURCES += \
     $$PWD/src/engines/router/routertrainprofile.cpp \
     $$PWD/src/engines/router/routerjourney.cpp \
     $$PWD/src/engines/router/routernulljourney.cpp \
-    $$PWD/src/engines/liveboard/liveboardfactory.cpp \
-    $$PWD/src/engines/liveboard/liveboardboard.cpp \
-    $$PWD/src/engines/liveboard/liveboardnullboard.cpp \
     $$PWD/src/engines/station/stationstation.cpp \
     $$PWD/src/engines/station/stationnullstation.cpp \
     $$PWD/src/engines/station/stationfactory.cpp \
     $$PWD/src/engines/vehicle/vehiclevehicle.cpp \
-    $$PWD/src/engines/vehicle/vehiclestop.cpp \
-    $$PWD/src/engines/vehicle/vehiclefactory.cpp \
     $$PWD/src/engines/vehicle/vehiclenullvehicle.cpp \
+    $$PWD/src/engines/vehicle/vehiclefactory.cpp \
+    $$PWD/src/engines/vehicle/vehiclestop.cpp \
     $$PWD/src/database/databasemanager.cpp \
     $$PWD/src/network/networkmanager.cpp \
     $$PWD/src/network/networkdispatcher.cpp \
@@ -66,16 +63,13 @@ HEADERS += \
     $$PWD/src/include/engines/router/routerstationstopprofile.h \
     $$PWD/src/include/engines/router/routertrainprofile.h \
     $$PWD/src/include/engines/router/routerjourney.h \
-    $$PWD/src/include/engines/liveboard/liveboardfactory.h \
-    $$PWD/src/include/engines/liveboard/liveboardboard.h \
-    $$PWD/src/include/engines/liveboard/liveboardnullboard.h \
-    $$PWD/src/include/engines/vehicle/vehiclevehicle.h \
-    $$PWD/src/include/engines/vehicle/vehiclestop.h \
-    $$PWD/src/include/engines/vehicle/vehiclefactory.h \
-    $$PWD/src/include/engines/vehicle/vehiclenullvehicle.h \
     $$PWD/src/include/engines/station/stationstation.h \
     $$PWD/src/include/engines/station/stationnullstation.h \
     $$PWD/src/include/engines/station/stationfactory.h \
+    $$PWD/src/include/engines/vehicle/vehiclevehicle.h \
+    $$PWD/src/include/engines/vehicle/vehiclenullvehicle.h \
+    $$PWD/src/include/engines/vehicle/vehiclefactory.h \
+    $$PWD/src/include/engines/vehicle/vehiclestop.h \
     $$PWD/src/include/database/databasemanager.h \
     $$PWD/src/include/network/networkmanager.h \
     $$PWD/src/include/network/networkdispatcher.h \

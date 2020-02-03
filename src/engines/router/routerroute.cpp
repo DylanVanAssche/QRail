@@ -32,11 +32,11 @@ using namespace QRail;
  * @public
  * Constructs a Route with a list of legs and transfers
  */
-QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &legs,
-                                  const QList<QRail::RouterEngine::Transfer *> &transfers,
-                                  const QList<QRail::AlertsEngine::Message *> &tripAlerts,
-                                  const QList<QRail::AlertsEngine::Message *> &vehicleAlerts,
-                                  const QList<QRail::AlertsEngine::Message *> &remarks,
+QRail::RouterEngine::Route::Route(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg >> legs,
+                                  const QList<QSharedPointer<QRail::RouterEngine::Transfer >> transfers,
+                                  const QList<QSharedPointer<QRail::AlertsEngine::Message >> tripAlerts,
+                                  const QList<QSharedPointer<QRail::AlertsEngine::Message >> vehicleAlerts,
+                                  const QList<QSharedPointer<QRail::AlertsEngine::Message >> remarks,
                                   QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
@@ -45,39 +45,6 @@ QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &
     m_tripAlerts = tripAlerts;
     m_vehicleAlerts = vehicleAlerts;
     m_remarks = remarks;
-}
-
-RouterEngine::Route::~Route()
-{
-    foreach(auto l, m_legs) {
-        if(l) {
-            l->deleteLater();
-        }
-    }
-
-    foreach(auto t, m_transfers) {
-        if(t) {
-            t->deleteLater();
-        }
-    }
-
-    foreach(auto ta, m_tripAlerts) {
-        if(ta) {
-            ta->deleteLater();
-        }
-    }
-
-    foreach(auto va, m_vehicleAlerts) {
-        if(va) {
-            va->deleteLater();
-        }
-    }
-
-    foreach(auto r, m_remarks) {
-        if(r) {
-            r->deleteLater();
-        }
-    }
 }
 
 /**
@@ -95,42 +62,40 @@ RouterEngine::Route::~Route()
  * @public
  * Constructs a Route with a list of legs. The transfers are generated from the list of legs.
  */
-QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &legs,
-                                  QObject *parent) : QObject(parent)
+QRail::RouterEngine::Route::Route(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs, QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
     m_legs = legs;
 
     // Calculate Transfer for easy data access
-    m_transfers = QList<QRail::RouterEngine::Transfer *>();
+    m_transfers = QList<QSharedPointer<QRail::RouterEngine::Transfer>>();
 
     // Departure RouteLegEnd
-    m_transfers.append(new QRail::RouterEngine::Transfer(
+    m_transfers.append(QSharedPointer<QRail::RouterEngine::Transfer>(new QRail::RouterEngine::Transfer(
                            this->legs().first(),
                            nullptr,
                            this)
-                      );
+                      ));
 
     // Intermediate legs (transfers)
     for (qint16 i = 1; i < this->legs().size(); i++) {
-        m_transfers.append(new QRail::RouterEngine::Transfer(
+        m_transfers.append(QSharedPointer<QRail::RouterEngine::Transfer>(new QRail::RouterEngine::Transfer(
                                this->legs().at(i),
                                this->legs().at(i - 1),
                                this)
-                          );
+                          ));
     }
 
     // Arrival RouteLegEnd
-    m_transfers.append(new QRail::RouterEngine::Transfer(
+    m_transfers.append(QSharedPointer<QRail::RouterEngine::Transfer>(new QRail::RouterEngine::Transfer(
                            nullptr,
                            this->legs().last(),
                            this)
-                      );
+                      ));
 
-    m_tripAlerts = QList<QRail::AlertsEngine::Message *>();
-    m_vehicleAlerts =
-        QList<QRail::AlertsEngine::Message *>(); // TODO: Bert Marcelis implements this one as a 2D array
-    m_remarks = QList<QRail::AlertsEngine::Message *>();
+    m_tripAlerts = QList<QSharedPointer<QRail::AlertsEngine::Message>>();
+    m_vehicleAlerts = QList<QSharedPointer<QRail::AlertsEngine::Message>>();
+    m_remarks = QList<QSharedPointer<QRail::AlertsEngine::Message>>();
 }
 
 /**
@@ -143,7 +108,7 @@ QRail::RouterEngine::Route::Route(const QList<QRail::RouterEngine::RouteLeg *> &
  * @public
  * Gets the list of legs and returns it.
  */
-QList<QRail::RouterEngine::RouteLeg *> QRail::RouterEngine::Route::legs() const
+QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> QRail::RouterEngine::Route::legs() const
 {
     return m_legs;
 }
@@ -158,7 +123,7 @@ QList<QRail::RouterEngine::RouteLeg *> QRail::RouterEngine::Route::legs() const
  * @public
  * Sets the list of legs to the given QList<QRail::RouterEngine::RouteLeg *> &legs.
  */
-void QRail::RouterEngine::Route::setLegs(const QList<QRail::RouterEngine::RouteLeg *> &legs)
+void QRail::RouterEngine::Route::setLegs(const QList<QSharedPointer<QRail::RouterEngine::RouteLeg>> legs)
 {
     m_legs = legs;
     emit this->legsChanged();
@@ -174,7 +139,7 @@ void QRail::RouterEngine::Route::setLegs(const QList<QRail::RouterEngine::RouteL
  * @public
  * Gets the list of transfers and returns it.
  */
-QList<QRail::RouterEngine::Transfer *> QRail::RouterEngine::Route::transfers() const
+QList<QSharedPointer<QRail::RouterEngine::Transfer>> QRail::RouterEngine::Route::transfers() const
 {
     return m_transfers;
 }
@@ -189,8 +154,7 @@ QList<QRail::RouterEngine::Transfer *> QRail::RouterEngine::Route::transfers() c
  * @public
  * Sets the list of transfers to the given QList<QRail::RouterEngine::Transfer *> &transfers.
  */
-void QRail::RouterEngine::Route::setTransfers(const QList<QRail::RouterEngine::Transfer *>
-                                              &transfers)
+void QRail::RouterEngine::Route::setTransfers(const QList<QSharedPointer<QRail::RouterEngine::Transfer>> transfers)
 {
     m_transfers = transfers;
     emit this->transfersChanged();
@@ -206,7 +170,7 @@ void QRail::RouterEngine::Route::setTransfers(const QList<QRail::RouterEngine::T
  * @public
  * Gets the list of trip alerts and returns it.
  */
-QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::tripAlerts() const
+QList<QSharedPointer<QRail::AlertsEngine::Message>> QRail::RouterEngine::Route::tripAlerts() const
 {
     return m_tripAlerts;
 }
@@ -221,8 +185,7 @@ QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::tripAlerts() c
  * @public
  * Sets the list of trip alerts to the given QList<QRail::AlertsEngine::Message *> &tripAlerts.
  */
-void QRail::RouterEngine::Route::setTripAlerts(const QList<QRail::AlertsEngine::Message *>
-                                               &tripAlerts)
+void QRail::RouterEngine::Route::setTripAlerts(const QList<QSharedPointer<QRail::AlertsEngine::Message>> tripAlerts)
 {
     m_tripAlerts = tripAlerts;
     emit this->tripAlertsChanged();
@@ -238,7 +201,7 @@ void QRail::RouterEngine::Route::setTripAlerts(const QList<QRail::AlertsEngine::
  * @public
  * Gets the list of vehicle alerts and returns it.
  */
-QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::vehicleAlerts() const
+QList<QSharedPointer<QRail::AlertsEngine::Message>> QRail::RouterEngine::Route::vehicleAlerts() const
 {
     return m_vehicleAlerts;
 }
@@ -253,8 +216,7 @@ QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::vehicleAlerts(
  * @public
  * Sets the list of vehicle alerts to the given QList<QRail::AlertsEngine::Message *> &vehicleAlerts.
  */
-void QRail::RouterEngine::Route::setVehicleAlerts(const QList<QRail::AlertsEngine::Message *>
-                                                  &vehicleAlerts)
+void QRail::RouterEngine::Route::setVehicleAlerts(const QList<QSharedPointer<QRail::AlertsEngine::Message>> vehicleAlerts)
 {
     m_vehicleAlerts = vehicleAlerts;
     emit this->vehicleAlertsChanged();
@@ -270,7 +232,7 @@ void QRail::RouterEngine::Route::setVehicleAlerts(const QList<QRail::AlertsEngin
  * @public
  * Gets the list of remarks and returns it.
  */
-QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::remarks() const
+QList<QSharedPointer<QRail::AlertsEngine::Message>> QRail::RouterEngine::Route::remarks() const
 {
     return m_remarks;
 }
@@ -285,7 +247,7 @@ QList<QRail::AlertsEngine::Message *> QRail::RouterEngine::Route::remarks() cons
  * @public
  * Sets the list of remarks to the given QList<QRail::AlertsEngine::Message *> &remarks.
  */
-void QRail::RouterEngine::Route::setRemarks(const QList<QRail::AlertsEngine::Message *> &remarks)
+void QRail::RouterEngine::Route::setRemarks(const QList<QSharedPointer<QRail::AlertsEngine::Message>> remarks)
 {
     m_remarks = remarks;
     emit this->remarksChanged();
@@ -470,7 +432,7 @@ bool QRail::RouterEngine::Route::isArrivalPlatformNormal() const
  * @public
  * Gets the departure station QRail::RouterEngine::Transfer and returns it.
  */
-QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::departureStation() const
+QSharedPointer<QRail::RouterEngine::Transfer> QRail::RouterEngine::Route::departureStation() const
 {
     return this->transfers().first();
 }
@@ -485,7 +447,7 @@ QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::departureStation() co
  * @public
  * Gets the arrival station QRail::RouterEngine::Transfer and returns it.
  */
-QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::arrivalStation() const
+QSharedPointer<QRail::RouterEngine::Transfer> QRail::RouterEngine::Route::arrivalStation() const
 {
     return this->transfers().last();
 }
@@ -502,7 +464,7 @@ QRail::RouterEngine::Transfer *QRail::RouterEngine::Route::arrivalStation() cons
  */
 bool QRail::RouterEngine::Route::isPartiallyCanceled() const
 {
-    foreach (RouteLeg *leg, this->legs()) {
+    foreach (QSharedPointer<QRail::RouterEngine::RouteLeg> leg, this->legs()) {
         if (leg->departure()->isCanceled()) {
             return true;
         }

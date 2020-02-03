@@ -23,10 +23,10 @@ QRail::Fragments::Page::Page(QObject *parent) : QObject(parent)
 }
 
 QRail::Fragments::Page::Page(const QUrl &uri, const QDateTime &timestamp, const QUrl &hydraNext,
-                             const QUrl &hydraPrevious, const QList<Fragment *> &fragments, QObject *parent): QObject(parent)
+                             const QUrl &hydraPrevious, const QList<QSharedPointer<QRail::Fragments::Fragment>> &fragments, QObject *parent): QObject(parent)
 {
     // Enforce Page as the parent of all it's children, Qt will delete them when the Page is destroyed
-    foreach (QRail::Fragments::Fragment *frag, fragments) {
+    foreach (QSharedPointer<QRail::Fragments::Fragment> frag, fragments) {
         frag->setParent(this);
     }
 
@@ -83,12 +83,12 @@ void QRail::Fragments::Page::setHydraPrevious(const QUrl &hydraPrevious)
     emit this->hydraPreviousChanged();
 }
 
-QList<QRail::Fragments::Fragment *> QRail::Fragments::Page::fragments() const
+QList<QSharedPointer<QRail::Fragments::Fragment>> QRail::Fragments::Page::fragments() const
 {
     return m_fragments;
 }
 
-void QRail::Fragments::Page::setFragments(const QList<QRail::Fragments::Fragment *> &fragments)
+void QRail::Fragments::Page::setFragments(const QList<QSharedPointer<QRail::Fragments::Fragment>> &fragments)
 {
     m_fragments = fragments;
     emit this->fragmentsChanged();

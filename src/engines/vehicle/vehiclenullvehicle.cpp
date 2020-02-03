@@ -16,7 +16,7 @@
  */
 #include "engines/vehicle/vehiclenullvehicle.h"
 using namespace QRail;
-VehicleEngine::NullVehicle *VehicleEngine::NullVehicle::m_instance = nullptr;
+QSharedPointer<VehicleEngine::NullVehicle> VehicleEngine::NullVehicle::m_instance = nullptr;
 
 /**
  * @file vehiclenullvehicle.cpp
@@ -34,7 +34,7 @@ VehicleEngine::NullVehicle *VehicleEngine::NullVehicle::m_instance = nullptr;
 QRail::VehicleEngine::NullVehicle::NullVehicle(const QUrl &uri,
                                                const QUrl &tripURI,
                                                const QString &headsign,
-                                               const QList<QRail::VehicleEngine::Stop *> &intermediaryStops,
+                                               const QList<QSharedPointer<QRail::VehicleEngine::Stop>> intermediaryStops,
                                                QObject *parent) : Vehicle(uri, tripURI, headsign, intermediaryStops, parent)
 {
 
@@ -50,17 +50,17 @@ QRail::VehicleEngine::NullVehicle::NullVehicle(const QUrl &uri,
  * @public
  * Constructs a VehicleEngine::NullVehicle if none exists and returns the instance.
  */
-QRail::VehicleEngine::NullVehicle *QRail::VehicleEngine::NullVehicle::getInstance()
+QSharedPointer<QRail::VehicleEngine::NullVehicle> QRail::VehicleEngine::NullVehicle::getInstance()
 {
     // Singleton pattern
     if (m_instance == nullptr) {
         qDebug() << "Generating new NullVehicle";
-        m_instance = new VehicleEngine::NullVehicle(
+        m_instance = QSharedPointer<VehicleEngine::NullVehicle>(new VehicleEngine::NullVehicle(
             QUrl(),
             QUrl(),
             QString(),
-            QList<QRail::VehicleEngine::Stop *>()
-        );
+            QList<QSharedPointer<QRail::VehicleEngine::Stop>>()
+        ));
     }
     return m_instance;
 }

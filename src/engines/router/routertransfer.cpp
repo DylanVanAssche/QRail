@@ -29,8 +29,8 @@ using namespace QRail;
  * @public
  * Constructs a QRail::RouterEngine::Transfer for the journey extraction.
  */
-QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departureLeg,
-                                        QRail::RouterEngine::RouteLeg *arrivalLeg,
+QRail::RouterEngine::Transfer::Transfer(QSharedPointer<QRail::RouterEngine::RouteLeg> departureLeg,
+                                        QSharedPointer<QRail::RouterEngine::RouteLeg> arrivalLeg,
                                         QObject *parent) : QObject(parent)
 {
     // Use private members to avoid signal firing on construction
@@ -60,25 +60,6 @@ QRail::RouterEngine::Transfer::Transfer(QRail::RouterEngine::RouteLeg *departure
     }
 }
 
-RouterEngine::Transfer::~Transfer()
-{
-    if(m_departure) {
-        m_departure->deleteLater();
-    }
-
-    if(m_arrival) {
-        m_arrival->deleteLater();
-    }
-
-    if(m_departureLeg) {
-        m_departureLeg->deleteLater();
-    }
-
-    if(m_arrivalLeg) {
-        m_arrivalLeg->deleteLater();
-    }
-}
-
 // Getters & Setters
 /**
  * @file routertransfer.cpp
@@ -90,7 +71,7 @@ RouterEngine::Transfer::~Transfer()
  * @public
  * Gets the departure leg and returns it.
  */
-QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::departureLeg() const
+QSharedPointer<QRail::RouterEngine::RouteLeg> QRail::RouterEngine::Transfer::departureLeg() const
 {
     return m_departureLeg;
 }
@@ -106,7 +87,7 @@ QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::departureLeg() con
  * Sets the departure leg to the given QRail::RouterEngine::RouteLeg *departureLeg.
  * Emits the departureLegChanged signal.
  */
-void QRail::RouterEngine::Transfer::setDepartureLeg(QRail::RouterEngine::RouteLeg *departureLeg)
+void QRail::RouterEngine::Transfer::setDepartureLeg(QSharedPointer<QRail::RouterEngine::RouteLeg> departureLeg)
 {
     m_departureLeg = departureLeg;
     emit this->departureLegChanged();
@@ -122,7 +103,7 @@ void QRail::RouterEngine::Transfer::setDepartureLeg(QRail::RouterEngine::RouteLe
  * @public
  * Gets the arrival leg and returns it.
  */
-QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::arrivalLeg() const
+QSharedPointer<QRail::RouterEngine::RouteLeg> QRail::RouterEngine::Transfer::arrivalLeg() const
 {
     return m_arrivalLeg;
 }
@@ -138,7 +119,7 @@ QRail::RouterEngine::RouteLeg *QRail::RouterEngine::Transfer::arrivalLeg() const
  * Sets the arrival leg to the given QRail::RouterEngine::RouteLeg *arrivalLeg.
  * Emits the arrivalLegChanged signal.
  */
-void QRail::RouterEngine::Transfer::setArrivalLeg(QRail::RouterEngine::RouteLeg *arrivalLeg)
+void QRail::RouterEngine::Transfer::setArrivalLeg(QSharedPointer<QRail::RouterEngine::RouteLeg> arrivalLeg)
 {
     m_arrivalLeg = arrivalLeg;
     emit this->arrivalLegChanged();
@@ -154,7 +135,7 @@ void QRail::RouterEngine::Transfer::setArrivalLeg(QRail::RouterEngine::RouteLeg 
  * @public
  * Gets the departure and returns it.
  */
-QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::departure() const
+QSharedPointer<QRail::RouterEngine::RouteLegEnd> QRail::RouterEngine::Transfer::departure() const
 {
     return m_departure;
 }
@@ -170,7 +151,7 @@ QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::departure() con
  * Sets the departure to the given QRail::RouterEngine::RouteLegEnd *departure.
  * Emits the departureChanged signal.
  */
-void QRail::RouterEngine::Transfer::setDeparture(QRail::RouterEngine::RouteLegEnd *departure)
+void QRail::RouterEngine::Transfer::setDeparture(QSharedPointer<QRail::RouterEngine::RouteLegEnd> departure)
 {
     m_departure = departure;
     emit this->departureChanged();
@@ -186,7 +167,7 @@ void QRail::RouterEngine::Transfer::setDeparture(QRail::RouterEngine::RouteLegEn
  * @public
  * Gets the arrival and returns it.
  */
-QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::arrival() const
+QSharedPointer<QRail::RouterEngine::RouteLegEnd> QRail::RouterEngine::Transfer::arrival() const
 {
     return m_arrival;
 }
@@ -202,7 +183,7 @@ QRail::RouterEngine::RouteLegEnd *QRail::RouterEngine::Transfer::arrival() const
  * Sets the arrival to the given QRail::RouterEngine::RouteLegEnd *arrival.
  * Emits the arrivalChanged signal.
  */
-void QRail::RouterEngine::Transfer::setArrival(RouteLegEnd *arrival)
+void QRail::RouterEngine::Transfer::setArrival(QSharedPointer<QRail::RouterEngine::RouteLegEnd> arrival)
 {
     m_arrival = arrival;
     emit this->arrivalChanged();
@@ -274,7 +255,7 @@ QUrl QRail::RouterEngine::Transfer::uri() const
  * @public
  * Gets the station of the underlying route and returns it.
  */
-StationEngine::Station *QRail::RouterEngine::Transfer::station() const
+QSharedPointer<StationEngine::Station> QRail::RouterEngine::Transfer::station() const
 {
     if (this->type() == QRail::RouterEngine::Transfer::Type::DEPARTURE
             || this->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {

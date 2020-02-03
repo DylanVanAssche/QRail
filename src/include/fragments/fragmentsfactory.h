@@ -27,8 +27,8 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
+#include <QtCore/QSharedPointer>
 
-#include "fragments/fragmentsdispatcher.h"
 #include "fragments/fragmentsfragment.h"
 #include "fragments/fragmentspage.h"
 #include "fragments/fragmentscache.h"
@@ -36,15 +36,15 @@
 #include "network/networkeventsource.h"
 #include "qrail.h"
 
-#define BASE_URL "https://lc.dylanvanassche.be/sncb/connections"
-#define REAL_TIME_URL_POLL "https://lc.dylanvanassche.be/sncb/events/poll"
-#define REAL_TIME_URL_SSE "https://lc.dylanvanassche.be/sncb/events/sse"
+#define BASE_URL "http://lc.dylanvanassche.be/sncb/connections"
+#define REAL_TIME_URL_POLL "http://lc.dylanvanassche.be/sncb/events"
+#define REAL_TIME_URL_SSE "http://lc.dylanvanassche.be/sncb/events/sse"
 #define GTFS_REGULAR "gtfs:Regular"
 #define GTFS_NOT_AVAILABLE "gtfs:NotAvailable"
 #define GTFS_MUST_PHONE "gtfs:MustPhone"
 #define GTFS_MUST_COORDINATE_WITH_DRIVER "gtfs:MustCoordinateWithDriver"
 
-//#define VERBOSE_HTTP_STATUS // Show HTTP results
+#define VERBOSE_HTTP_STATUS // Show HTTP results
 
 // Factory pattern to generate Linked Connections fragments on the fly
 namespace QRail {
@@ -65,77 +65,59 @@ public:
         Constructs a QRail::Fragments::Factory if none exists and returns the
         instance.
      */
-    static QRail::Fragments::Factory *getInstance();
+    static QRail::Fragments::Factory *getInstance(QRail::Network::EventSource::Subscription subscriptionType);
     //! Fetches a Linked Connections page.
     /*!
         \param uri The URI of the page you want to fetch.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getPage(const QUrl &uri, QObject *caller);
+    void getPage(const QUrl &uri);
     //! Fetches a Linked Connections page.
     /*!
         \param departureTime The timestamp of the page (departure time).
                The page will contain at least this timestamp and the next connections that are following on this timestamp.
         \param caller The caller of this method.
-        \note The caller is needed since the dispatcher will send you a special event using the Qt event system.
      */
-    void getPage(const QDateTime &departureTime, QObject *caller);
-    //! Provides access to the dispatcher
-    QRail::Fragments::Dispatcher *dispatcher() const;
-    //! Prefetch pages in cache
-    bool prefetch(const QDateTime &from, const QDateTime &until);
+    void getPage(const QDateTime &departureTime);
     //! Mutex access to page cache
     QRail::Fragments::Cache* pageCache() const;
     void setPageCache(QRail::Fragments::Cache* pageCache);
 
-protected:
-    //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
-
 signals:
     //! Emitted when a page has been become ready.
-    void pageReady(QRail::Fragments::Page *page);
+    void pageReady(QSharedPointer<QRail::Fragments::Page> page);
     //! Emitted when a resource is fetched from the Network::Manager.
-    void getResource(const QUrl &uri, QObject *caller);
+    void getResource(const QUrl &uri);
     //! Emitted when an error occurred during processing.
     void error(const QString &message);
     //! Emitted when a connection has been updated.
     void connectionChanged(const QUrl &uri);
-    //! Emitted when prefetching is complete
-    void prefetchFinished();
     //! Emitted when a fragment has been updated
-    void fragmentUpdated(QRail::Fragments::Fragment *fragment);
+    void fragmentUpdated(QSharedPointer<QRail::Fragments::Fragment> fragment);
     //! Emitted when a page has been updated
     void pageUpdated(QUrl pageURI);
     //! Emitted when a page and fragment are updated
-    void fragmentAndPageUpdated(QRail::Fragments::Fragment *fragment, QUrl page);
+    void fragmentAndPageUpdated(QSharedPointer<QRail::Fragments::Fragment> fragment, QUrl page);
     //! Emitted when an update has been successfully processed
     void updateProcessed(qint64 timestamp);
     void updateReceived(qint64 timestamp);
 
 private slots:
     void handleEventSource(QString message);
+    void processHTTPReply();
 
 private:
     mutable QMutex m_cache_mutex;
-    void handleEventSourceThread(QString message);
-    QDateTime m_prefetchFrom;
-    QDateTime m_prefetchUntil;
     QRail::Network::EventSource *m_eventSource;
     QRail::Fragments::Cache* m_pageCache;
     QRail::Fragments::Fragment::GTFSTypes parseGTFSType(QString type);
     static QRail::Fragments::Factory *m_instance;
     QRail::Network::Manager *m_http;
-    QRail::Fragments::Dispatcher *m_dispatcher;
+    QSharedPointer<QNetworkReply> m_reply;
     void getPageByURIFromNetworkManager(const QUrl &uri);
-    QRail::Fragments::Fragment *generateFragmentFromJSON(const QJsonObject &data);
-    void processHTTPReply(QNetworkReply *reply);
-    void processPrefetchEvent(QRail::Fragments::Page *page);
-    QRail::Network::Manager *http() const;
-    void setHttp(QRail::Network::Manager *http);
-    void setDispatcher(QRail::Fragments::Dispatcher *dispatcher);
-    explicit Factory(QObject *parent = nullptr);
+    QSharedPointer<QRail::Fragments::Fragment> generateFragmentFromJSON(const QJsonObject &data);
+    explicit Factory(QRail::Network::EventSource::Subscription subscriptionType, QObject *parent = nullptr);
+    QRail::Network::EventSource::Subscription m_subscriptionType;
 };
 } // namespace Fragments
 } // namespace QRail

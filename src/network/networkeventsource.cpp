@@ -35,44 +35,31 @@ QUrl EventSource::url()
 
 void EventSource::close()
 {
-    m_manager->unsubscribe(this);
+    m_reply->abort();
     this->setReadyState(EventSource::ReadyState::CLOSED);
 }
 
 void EventSource::open()
 {
+    qDebug() << "Opening EventSource";
     this->setReadyState(EventSource::ReadyState::CONNECTING);
     if(m_subscriptionType == Subscription::SSE) {
         qDebug() << "Opening SSE stream...";
-        m_reply = m_manager->subscribe(m_url, this);
-        connect(m_reply, SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
-        connect(m_reply, SIGNAL(finished()), this, SLOT(handleSSEFinished()));
+        m_reply = QSharedPointer<QNetworkReply>(m_manager->subscribe(m_url));
+        connect(m_reply.data(), SIGNAL(readyRead()), this, SLOT(handleSSEStream()));
+        connect(m_reply.data(), SIGNAL(finished()), this, SLOT(handleSSEFinished()));
     }
     else if(m_subscriptionType == Subscription::POLLING) {
         qDebug() << "Opening HTTP polling stream...";
-        this->pollPollingStream();
+        m_timer = new QTimer(this);
+        connect(m_timer, SIGNAL(timeout()), this, SLOT(pollPollingStream()));
+        m_timer->start(POLL_INTERVAL);
+    }
+    else if(m_subscriptionType == Subscription::NONE) {
+        qDebug() << "None subscription, doing nothing...";
     }
     else {
         qCritical() << "Unknown subscription type!";
-    }
-}
-
-void EventSource::customEvent(QEvent *event)
-{
-    if (event->type() == this->m_manager->dispatcher()->eventType()) {
-        event->accept();
-        QRail::Network::DispatcherEvent *networkEvent = reinterpret_cast<QRail::Network::DispatcherEvent *>(event);
-        if(m_subscriptionType == QRail::Network::EventSource::Subscription::POLLING) {
-            this->handlePollingStream(networkEvent->reply());
-        }
-        else if(m_subscriptionType == QRail::Network::EventSource::Subscription::SSE) {
-            this->handleSSEFinished();
-        }
-        else {
-            qCritical() << "Dispatching event failed, unknown handler";
-        }
-    } else {
-        event->ignore();
     }
 }
 
@@ -108,10 +95,10 @@ void EventSource::handleSSEFinished()
     }
 }
 
-void EventSource::handlePollingStream(QNetworkReply *reply)
+void EventSource::handlePollingFinished()
 {
     qDebug() << "Received poll reply";
-    QString payload = QString(reply->readAll());
+    QString payload = QString(m_reply->readAll());
     emit this->messageReceived(payload);
 }
 
@@ -120,13 +107,17 @@ void EventSource::pollPollingStream()
     // Only execute polling when the connection is open.
     if(m_readyState != EventSource::ReadyState::CLOSED) {
         qDebug() << "Polling resource...";
-        m_manager->getResource(m_url, this);
-        QTimer::singleShot(POLL_INTERVAL, this, SLOT(pollPollingStream()));
+        m_reply = QSharedPointer<QNetworkReply>(m_manager->getResource(m_url));
+        connect(m_reply.data(), SIGNAL(finished()), this, SLOT(handlePollingFinished()));
+    }
+    else {
+        qDebug() << "EventSource is closed, unable to poll";
     }
 }
 
 void EventSource::parseEvents(QStringList events)
 {
+    qDebug() << "Parsing events from stream...";
     // Split each event entry
     foreach(QString event, events) {
         QStringList eventParts = event.split("\n");

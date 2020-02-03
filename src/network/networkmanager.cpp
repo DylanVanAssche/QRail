@@ -33,9 +33,6 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
     // Initiate a new QNetworkAccessManager with cache
     this->setQNAM(new QNetworkAccessManager(this));
 
-    // Init the dispatcher
-    this->setDispatcher(new QRail::Network::Dispatcher(this));
-
     // Init cache
     QNetworkConfigurationManager QNAMConfig;
     this->QNAM()->setConfiguration(QNAMConfig.defaultConfiguration());
@@ -44,7 +41,7 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
     // Get the caching directory of the application
     QString path = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/network";
 
-    // Create the 'network' folder to save our caching data
+    // Create the 'network' folder to save our caching network data
     QDir cacheDirectory;
     cacheDirectory.mkpath(path);
 
@@ -57,11 +54,10 @@ QRail::Network::Manager::Manager(QObject *parent): QObject(parent)
             this, SIGNAL(networkAccessibleChanged(QNetworkAccessManager::NetworkAccessibility)));
     connect(this->QNAM(), SIGNAL(sslErrors(QNetworkReply *, QList<QSslError>)),
             this, SIGNAL(sslErrorsReceived(QNetworkReply *, QList<QSslError>)));
-    connect(this->QNAM(), SIGNAL(finished(QNetworkReply *)),
-            this, SLOT(requestCompleted(QNetworkReply *)));
+    connect(this->QNAM(), SIGNAL(finished(QNetworkReply*)), this, SLOT(finished(QNetworkReply *)));
 
     // Create HTTP client information
-    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail", "0.1.1", "Sailfish OS", "3.0.1.11"));
+    this->setUserAgent(QString("%1/%2 (%3/%4)").arg("QRail", "0.2.0", "Linux", "cli"));
 }
 
 QRail::Network::Manager *QRail::Network::Manager::getInstance()
@@ -74,39 +70,41 @@ QRail::Network::Manager *QRail::Network::Manager::getInstance()
 }
 
 // Invokers
-void QRail::Network::Manager::getResource(const QUrl &url, QObject *caller)
+QNetworkReply *QRail::Network::Manager::getResource(const QUrl &url)
 {
     qDebug() << "GET resource:" << url;
     QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->get(request);
-    this->dispatcher()->addTarget(reply, caller);
+    qDebug() << "Reply:";
+    qDebug() << reply;
+    return reply;
 }
 
-void QRail::Network::Manager::postResource(const QUrl &url, const QByteArray &data, QObject *caller)
+QNetworkReply *QRail::Network::Manager::postResource(const QUrl &url, const QByteArray &data)
 {
     qDebug() << "POST resource:" << url;
     QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->post(request, data);
-    this->dispatcher()->addTarget(reply, caller);
+    return reply;
 }
 
-void QRail::Network::Manager::deleteResource(const QUrl &url, QObject *caller)
+QNetworkReply *QRail::Network::Manager::deleteResource(const QUrl &url)
 {
     qDebug() << "DELETE resource:" << url;
     QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->deleteResource(request);
-    this->dispatcher()->addTarget(reply, caller);
+    return reply;
 }
 
-void QRail::Network::Manager::headResource(const QUrl &url, QObject *caller)
+QNetworkReply *QRail::Network::Manager::headResource(const QUrl &url)
 {
     qDebug() << "HEAD resource:" << url;
     QNetworkRequest request = this->prepareHTTPRequest(url);
     QNetworkReply *reply = this->QNAM()->head(request);
-    this->dispatcher()->addTarget(reply, caller);
+    return reply;
 }
 
-QNetworkReply *Network::Manager::subscribe(const QUrl &url, QObject *caller)
+QNetworkReply *QRail::Network::Manager::subscribe(const QUrl &url)
 {
     // SSE has special request headers and attributes
     QNetworkRequest request(url);
@@ -115,26 +113,17 @@ QNetworkReply *Network::Manager::subscribe(const QUrl &url, QObject *caller)
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork); // SSE events may not be cached
     QNetworkReply *reply = this->QNAM()->get(request);
-    this->dispatcher()->addTarget(reply, caller, true);
     return reply;
 }
 
-void Network::Manager::unsubscribe(QObject *caller)
+void QRail::Network::Manager::unsubscribe()
 {
-    this->dispatcher()->removeSubscriber(caller);
     qDebug() << "Closed stream";
 }
 
-void QRail::Network::Manager::requestCompleted(QNetworkReply *reply)
+void Network::Manager::finished(QNetworkReply *reply)
 {
-    this->dispatcher()->dispatchReply(reply);
-}
-
-QNetworkReply *Network::Manager::poll(const QUrl &url)
-{
-    QNetworkRequest request = this->prepareHTTPRequest(url);
-    QNetworkReply *reply = this->QNAM()->get(request);
-    return reply;
+    qDebug() << "QNAM REPLY:" << reply->url();
 }
 
 // Helpers
@@ -178,14 +167,4 @@ QAbstractNetworkCache *QRail::Network::Manager::cache() const
 void QRail::Network::Manager::setCache(QAbstractNetworkCache *cache)
 {
     m_cache = cache;
-}
-
-QRail::Network::Dispatcher *QRail::Network::Manager::dispatcher() const
-{
-    return m_dispatcher;
-}
-
-void QRail::Network::Manager::setDispatcher(QRail::Network::Dispatcher *dispatcher)
-{
-    m_dispatcher = dispatcher;
 }

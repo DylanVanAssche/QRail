@@ -21,6 +21,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 #include <QtCore/QTimer>
+#include <QtCore/QSharedPointer>
 #include "network/networkmanager.h"
 
 #define MAX_RETRIES 3
@@ -40,7 +41,8 @@ public:
     };
     enum Subscription {
         SSE,
-        POLLING
+        POLLING,
+        NONE // No rollback
     };
     explicit EventSource(QUrl url, Subscription subcriptionType, QObject *parent = nullptr);
     QUrl url();
@@ -52,23 +54,24 @@ signals:
     void messageReceived(QString message);
     void readyStateChanged(QRail::Network::EventSource::ReadyState state);
 
-protected:
+/*protected:
     //! Dispatcher protected method, only here as a reference.
-    virtual void customEvent(QEvent *event);
+    virtual void customEvent(QEvent *event);*/
 
 private slots:
     void handleSSEStream();
     void handleSSEFinished();
-    void handlePollingStream(QNetworkReply *reply);
+    void handlePollingFinished();
     void pollPollingStream();
 
 private:
+    QTimer *m_timer;
     QUrl m_url;
     QString m_lastEventId;
     qint16 m_retries;
     qint64 m_retryTime;
     QRail::Network::Manager *m_manager;
-    QNetworkReply *m_reply;
+    QSharedPointer<QNetworkReply> m_reply;
     ReadyState m_readyState;
     QString m_chunks;
     Subscription m_subscriptionType;

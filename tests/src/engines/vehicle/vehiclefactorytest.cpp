@@ -58,7 +58,7 @@ void QRail::VehicleEngine::FactoryTest::vehicleReady(QRail::VehicleEngine::Vehic
     qDebug() << "\tTrip URI:" << vehicle->tripURI();
     qDebug() << "\tHeadsign:" << vehicle->headsign();
     qDebug() << "\tStops:";
-    foreach (QRail::VehicleEngine::Stop *stop, vehicle->intermediaryStops()) {
+    foreach (QSharedPointer<QRail::VehicleEngine::Stop> stop, vehicle->intermediaryStops()) {
         qDebug() << "\t\t" << stop->arrivalTime().toString("hh:mm") << stop->station()->name().value(
                      QLocale::Language::Dutch);
     }

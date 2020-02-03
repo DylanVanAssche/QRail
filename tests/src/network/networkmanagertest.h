@@ -34,9 +34,6 @@ private slots:
     void runNetworkManager();
     void cleanNetworkManager();
 
-protected:
-    virtual void customEvent(QEvent *event);
-
 private:
     QRail::Network::Manager *http;
     void processHTTPReply(QNetworkReply *reply);

@@ -85,7 +85,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-        QDateTime::fromString("2020-01-15T14:00:00.000Z", Qt::ISODate), // Departure time (UTC)
+        QDateTime::fromString("2019-11-28T14:00:00.000Z", Qt::ISODate), // Departure time (UTC)
         4 // Max transfers
     );
     /*planner->getConnections(
@@ -122,7 +122,7 @@ void QRail::RouterEngine::PlannerTest::runCSAPlannerTest()
     planner->getConnections(
         QUrl("http://irail.be/stations/NMBS/008811189"), // From: Vilvoorde
         QUrl("http://irail.be/stations/NMBS/008891009"), // To: Brugge
-        QDateTime::currentDateTimeUtc(), // Departure time (UTC)
+        QDateTime::fromString("2019-11-28T14:00:00.000Z", Qt::ISODate), // Departure time (UTC)
         4 // Max transfers
     );
 
@@ -215,7 +215,7 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine
                                  << "Brussel-Centraal";
 
         // Log the complete trip to the console and verify it
-        foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
+        foreach (QSharedPointer<QRail::RouterEngine::Transfer> transfer, route->transfers()) {
             if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
                 qDebug() << "TRANSFER:"
                          << "Changing vehicle at"
@@ -247,7 +247,7 @@ void QRail::RouterEngine::PlannerTest::processRoutesFinished(QRail::RouterEngine
 void RouterEngine::PlannerTest::processRoutesStream(QSharedPointer<QRail::RouterEngine::Route> route)
 {
     // Log the complete trip to the console and verify it
-    foreach (QRail::RouterEngine::Transfer *transfer, route->transfers()) {
+    foreach (QSharedPointer<QRail::RouterEngine::Transfer> transfer, route->transfers()) {
         if (transfer->type() == QRail::RouterEngine::Transfer::Type::TRANSFER) {
             qDebug() << "TRANSFER:"
                      << "Changing vehicle at"

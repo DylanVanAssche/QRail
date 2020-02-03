@@ -27,15 +27,15 @@ void StationEngine::FactoryTest::initStationFactoryTest()
 void StationEngine::FactoryTest::runStationFactoryTest()
 {
     qDebug() << "Running StationEngine::FactoryTest";
-    QRail::StationEngine::Station *station = factory->getStationByURI(QUrl("http://irail.be/stations/NMBS/008811189"));
+    QSharedPointer<QRail::StationEngine::Station> station = factory->getStationByURI(QUrl("http://irail.be/stations/NMBS/008811189"));
     QVERIFY2(station->name().value(QLocale::Language::Dutch) == QString("Vilvoorde"), "Station factory returned wrong station for URI 008811189");
     qDebug() << "Station 008811189 is" << station->name().value(QLocale::Language::Dutch);
 
-    QList<QRail::StationEngine::Station *> stations = factory->getStationsByName("Bruss");
+    QList<QSharedPointer<QRail::StationEngine::Station>> stations = factory->getStationsByName("Bruss");
     QVERIFY2(stations.count() > 0, "Fuzzy search must show at least 1 station");
 
     qDebug() << "Found" << stations.count() << " stations using fuzzy match:";
-    foreach (QRail::StationEngine::Station *station, stations) {
+    foreach (QSharedPointer<QRail::StationEngine::Station> station, stations) {
         qDebug() << "\t" << station->name().value(QLocale::Language::Dutch);
     }
 }

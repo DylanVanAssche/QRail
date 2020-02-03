@@ -28,7 +28,6 @@ namespace QRail {
 namespace LiveboardEngine {
 class FactoryTest : public QObject
 {
-    Q_OBJECT
 public slots:
     void liveboardReceived(QRail::LiveboardEngine::Board *board);
     void liveboardStreamReceived(QRail::VehicleEngine::Vehicle *vehicle);

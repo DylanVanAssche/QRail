@@ -54,9 +54,6 @@ public:
     QLocale::Language language() const;
     void setLanguage(const QLocale::Language &language);
 
-protected:
-    virtual void customEvent(QEvent *event);
-
 signals:
     void finished(QSharedPointer<QRail::VehicleEngine::Vehicle> vehicle);
     void getResource(const QUrl &uri, QObject *caller);

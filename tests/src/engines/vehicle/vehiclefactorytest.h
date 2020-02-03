@@ -33,7 +33,6 @@ namespace QRail {
 namespace VehicleEngine {
 class FactoryTest : public QObject
 {
-    Q_OBJECT
 public slots:
     void vehicleReady(QRail::VehicleEngine::Vehicle *vehicle);
 
